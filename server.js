@@ -34,12 +34,12 @@ app.get('/task/:id', (req, res) => {
         task,
       });
     } else {
-      res.status(404).json({
+      return res.status(404).json({
         message: 'Not found.',
       });
     }
   } else {
-    res.status(400).json({
+    return res.status(400).json({
       message: 'Bad request.',
     });
   }
@@ -66,14 +66,14 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      res.status(204);
+      return res.status(204);
     } else {
-      res.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
       });
     }
   } else {
-    res.status(400).json({
+    return res.status(400).json({
       message: 'Bad request',
     });
   }
@@ -97,7 +97,7 @@ app.post('/task/create/:title/:description', (req, res) => {
 
   tasksContainer.tasks.push(task);
 
-  res.status(201).json({
+  return res.status(201).json({
     message: 'Resource created',
   });
 });
@@ -121,16 +121,16 @@ app.delete('/task/delete/:id', (req, res) => {
     if (task !== null) {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
-      res.status(200).json({
+      return res.status(200).json({
         message: 'Updated successfully',
       });
     } else {
-      res.status(404).json({
+      return es.status(404).json({
         message: 'Not found',
       });
     }
   } else {
-    res.status(400).json({
+    return res.status(400).json({
       message: 'Bad request',
     });
   }
