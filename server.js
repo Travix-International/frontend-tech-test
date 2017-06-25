@@ -1,7 +1,23 @@
 'use strict';
 
+const path = require('path');
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
+const webpack = require('webpack');
+const config = require('./webpack.config.dev');
+const compiler = webpack(config);
+let lastTaskId = tasksContainer.tasks.length + 1;
+
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
+  publicPath: config.output.publicPath
+}));
+
+app.use(require('webpack-hot-middleware')(compiler));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 /**
  * GET /tasks
@@ -27,7 +43,7 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
@@ -90,14 +106,16 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: lastTaskId,
     title: req.params.title,
     description: req.params.description,
   };
+  lastTaskId++;
 
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
+    task,
     message: 'Resource created',
   });
 });
@@ -116,16 +134,15 @@ app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
   
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+    if (taskIndex !== null) {
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
       });
     }
