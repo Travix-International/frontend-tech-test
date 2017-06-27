@@ -145,7 +145,7 @@ export const loadList = () => ({
  */
 export const loadItem = id => ({
   types: [at.TASK_LOAD_ITEM, at.TASK_LOAD_ITEM_SUCCESS, at.TASK_LOAD_ITEM_FAIL],
-  promise: ajaxClient => ajaxClient(`/task/${id}`)
+  promise: ajaxClient => ajaxClient(`/tasks/${id}`)
 });
 
 /**
@@ -155,7 +155,7 @@ export const loadItem = id => ({
  */
 export const create = (title, description) => ({
   types: [at.TASK_CREATE, at.TASK_CREATE_SUCCESS, at.TASK_CREATE_FAIL],
-  promise: ajaxClient => ajaxClient(`/task/create/${encodeURIComponent(title)}/${encodeURIComponent(description)}`, 'POST')
+  promise: ajaxClient => ajaxClient(`/tasks`, 'POST', {title, description})
 });
 
 /**
@@ -167,7 +167,7 @@ export const create = (title, description) => ({
 export const update = (id, title, description) => ({
   types: [at.TASK_UPDATE, at.TASK_UPDATE_SUCCESS, at.TASK_UPDATE_FAIL],
   id,
-  promise: ajaxClient => ajaxClient(`/task/update/${id}/${encodeURIComponent(title)}/${encodeURIComponent(description)}`, 'PUT')
+  promise: ajaxClient => ajaxClient(`/tasks/${id}`, 'PUT', {title, description})
 });
 
 /**
@@ -177,5 +177,5 @@ export const update = (id, title, description) => ({
 export const remove = id => ({
   types: [at.TASK_REMOVE, at.TASK_REMOVE_SUCCESS, at.TASK_REMOVE_FAIL],
   id,
-  promise: ajaxClient => ajaxClient(`/task/delete/${id}`, 'DELETE')
+  promise: ajaxClient => ajaxClient(`/tasks/${id}`, 'DELETE')
 });
