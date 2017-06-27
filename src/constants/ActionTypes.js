@@ -1,0 +1,15 @@
+export const TASK_LOAD_LIST = 'task/LOAD_LIST';
+export const TASK_LOAD_LIST_SUCCESS = 'task/LOAD_LIST_SUCCESS';
+export const TASK_LOAD_LIST_FAIL = 'task/LOAD_LIST_FAIL';
+export const TASK_LOAD_ITEM = 'task/LOAD_ITEM';
+export const TASK_LOAD_ITEM_SUCCESS = 'task/LOAD_ITEM_SUCCESS';
+export const TASK_LOAD_ITEM_FAIL = 'task/LOAD_ITEM_FAIL';
+export const TASK_CREATE = 'task/CREATE';
+export const TASK_CREATE_SUCCESS = 'task/CREATE_SUCCESS';
+export const TASK_CREATE_FAIL = 'task/CREATE_FAIL';
+export const TASK_UPDATE = 'task/UPDATE';
+export const TASK_UPDATE_SUCCESS = 'task/UPDATE_SUCCESS';
+export const TASK_UPDATE_FAIL = 'task/UPDATE_FAIL';
+export const TASK_REMOVE = 'task/REMOVE';
+export const TASK_REMOVE_SUCCESS = 'task/REMOVE_SUCCESS';
+export const TASK_REMOVE_FAIL = 'task/REMOVE_FAIL';
