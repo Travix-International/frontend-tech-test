@@ -1,0 +1,102 @@
+body {
+  padding: 10px;
+  margin: 0;
+}
+
+.loading {
+  font-size: 16px;
+  font-weight: bold;
+
+  img {
+    display: block;
+    margin: 10px auto;
+  }
+}
+
+.empty-list {
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  background: #eee;
+  font-size: 18px;
+  font-style: italic;
+  color: #999;
+  padding: 50px 0;
+}
+
+.loading, .empty-list {
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.task-list {
+
+  .task-item {
+    background: #d3d3d3;
+    padding: 10px;
+    outline: 1px solid #999;
+    cursor: pointer;
+
+    &:hover {
+      background: #d9d9d9;
+    }
+
+    .task-action {
+      float: right;
+    }
+
+    .id {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .title {
+      font-weight: bold;
+    }
+
+    .description {
+      font-style: italic;
+    }
+  }
+}
+
+.task-form {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 0 0;
+
+  .task-form-inputs {
+    flex-grow: 1;
+  }
+
+  & > div {
+    margin: 0 5px;
+  }
+
+  input[type=text] {
+    padding: 5px;
+    margin: 2px -5px;
+    width: 100%;
+
+    &[name=title] {
+      font-size: 20px;
+    }
+    &[name=description] {
+      font-size: 16px;
+    }
+  }
+
+  button {
+    font-size: 20px;
+    height: 100%;
+    width: 75px;
+  }
+
+  @media screen and (max-width: 550px) {
+    display: block;
+
+    button {
+      width: 100%;
+    }
+  }
+}
