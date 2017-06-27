@@ -47,10 +47,6 @@ export default class App extends React.Component {
     }
   }
 
-  onItemEditClick(id) {
-
-  }
-
   onItemDeleteClick(id) {
     if(confirm('Are you sure you want to delete this?')) {
       this.props.removeTask(id);
