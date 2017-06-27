@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { observe, streamProps } from 'frint-react';
 
 import {
@@ -6,50 +6,51 @@ import {
   decrementCounter
 } from '../actions/counter';
 
-class Root extends React.Component {
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="eight columns">
-            <h3>Counter App</h3>
+const propTypes = {
+  counter: PropTypes.number.isRequired,
+  incrementCounter: PropTypes.func.isRequired,
+  decrementCounter: PropTypes.func.isRequired
+};
 
-            <p>Counter value: <code>{this.props.counter}</code></p>
+const Root = props => (
+  <div className="container">
+    <div className="row">
+      <div className="eight columns">
+        <h3>Counter App</h3>
 
-            <div>
-              <button
-                className="button button-primary"
-                onClick={() => this.props.incrementCounter()}
-              >
-                +
-              </button>
+        <p>Counter value: <code>{props.counter}</code></p>
 
-              <button
-                className="button"
-                onClick={() => this.props.decrementCounter()}
-              >
-                -
-              </button>
-            </div>
-          </div>
+        <div>
+          <button
+            className="button button-primary"
+            onClick={() => props.incrementCounter()}
+          >
+            +
+          </button>
+
+          <button
+            className="button"
+            onClick={() => props.decrementCounter()}
+          >
+            -
+          </button>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  </div>
+);
 
-export default observe(function (app) {
-  return streamProps({})
+Root.propTypes = propTypes;
+
+export default observe(app => (
+  streamProps({})
     .set(
       app.get('store').getState$(),
       state => ({ counter: state.counter.value })
     )
-    .setDispatch(
-      {
-        incrementCounter,
-        decrementCounter,
-      },
-      app.get('store')
-    )
-    .get$();
-})(Root);
+    .setDispatch({
+      incrementCounter,
+      decrementCounter,
+    }, app.get('store'))
+    .get$()
+))(Root);
