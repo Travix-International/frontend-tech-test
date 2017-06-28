@@ -3,7 +3,7 @@ import { createStore } from 'frint-store';
 import { RegionService } from 'frint-react';
 
 import RootComponent from '../components/Root';
-import rootReducer from '../reducers';
+import rootReducer, { STATE } from '../reducers';
 
 export default createApp({
   name: 'TodoApp',
@@ -16,17 +16,7 @@ export default createApp({
       name: 'store',
       useFactory: ({ app }) => {
         const Store = createStore({
-          initialState: {
-            todos: [{
-              title: 'OLAR',
-              id: 123,
-              archived: false
-            }, {
-              title: 'OLAR2',
-              id: 1234,
-              archived: false
-            }]
-          },
+          initialState: STATE,
           reducer: rootReducer,
           thunkArgument: { app },
         });

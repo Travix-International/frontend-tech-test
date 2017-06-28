@@ -1,45 +1,80 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observe, streamProps } from 'frint-react';
 
+import {
+  getTodosAsync as getTodos,
+  createTodoAsync as createTodo,
+} from 'actions/todos';
+
 import style from './style.scss';
 
-console.log('style', style);
+class Root extends Component {
+  static propTypes = {
+    todos: PropTypes.array.isRequired,
+    getTodos: PropTypes.func.isRequired,
+    createTodo: PropTypes.func.isRequired,
+    // decrementCounter: PropTypes.func.isRequired
+  }
 
-// import {
-//   incrementCounter,
-//   decrementCounter
-// } from '../actions/counter';
+  state = { value: '' }
 
-const propTypes = {
-  todos: PropTypes.array.isRequired,
-  // incrementCounter: PropTypes.func.isRequired,
-  // decrementCounter: PropTypes.func.isRequired
-};
+  componentWillMount() {
+    this.props.getTodos();
+  }
 
-const Root = ({ todos }) => (
-  <div className={style.body}>
-    <h2>Todo App</h2>
+  handleChange = (event) => {
+    this.setState({ value: event.target.value });
+  }
 
-    <ul>
-      { todos.map(l => (
-        <li key={l.id}>{ l.title }</li>
-      ))}
-    </ul>
-  </div>
-);
+  handleSubmit = (event) => {
+    this.props.createTodo(this.state.value);
+    event.preventDefault();
+  }
 
-Root.propTypes = propTypes;
+  render() {
+    const { todos } = this.props;
+    return (
+      <div className={style.body}>
+        <h2>Todo App</h2>
+
+        <ul>
+          { todos.map(l => (
+            <li key={l.id}>
+              <button>
+                [ ] 
+              </button>
+              <span>{ l.title }</span>
+              <button>
+                x
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <form onSubmit={this.handleSubmit}>
+          <input
+            onChange={this.handleChange}
+            placeholder={'Add a new todo'}
+            type="text"
+            value={this.state.value}
+          />
+          <button type={'submit'}>Check</button>
+        </form>
+      </div>
+    );
+  }
+}
 
 export default observe(app => (
   streamProps({})
     .set(
       app.get('store').getState$(),
-      ({ todos }) => ({ todos })
+      state => ({ todos: state.todos.list })
     )
-    // .setDispatch({
-    //   incrementCounter,
-    //   decrementCounter,
-    // }, app.get('store'))
+    .setDispatch({
+      getTodos,
+      createTodo
+    }, app.get('store'))
     .get$()
 ))(Root);

@@ -1,22 +1,23 @@
 import {
-  INCREMENT_COUNTER,
-  DECREMENT_COUNTER
+  UPDATE_TODOS,
+  CREATE_TODO
 } from '../constants';
 
-const INITIAL_STATE = {
-  todos: []
+export const INITIAL_STATE = {
+  list: [],
+  isFetching: false
 };
 
 export default function todos(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case INCREMENT_COUNTER:
+    case UPDATE_TODOS:
       return Object.assign({}, {
-        value: state.value + 1
+        list: action.payload.todos || []
       });
 
-    case DECREMENT_COUNTER:
+    case CREATE_TODO:
       return Object.assign({}, {
-        value: state.value - 1
+        list: [...state.list, action.payload.todo]
       });
 
     default:
