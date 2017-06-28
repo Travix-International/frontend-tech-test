@@ -6,7 +6,7 @@ const tasks = require('./tasks.json');
 
 const app = express();
 
-app.use(bodyParser());
+app.use(bodyParser.json());
 
 /**
  * GET /tasks
