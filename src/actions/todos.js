@@ -36,8 +36,8 @@ export const createTodoAsync = title => dispatch =>
     .then(data => dispatch(createTodo(data)));
 
 export const editTodoAsync = (todo, id) => dispatch =>
-  fetch('PUT', `task/${id}`, { todo })
-    .then(data => dispatch(editTodo(data, id)));
+  fetch('PUT', `task/${id}`, todo)
+    .then(() => dispatch(editTodo(todo, id)));
 
 export const deleteTodoAsync = id => dispatch =>
   fetch('DELETE', `task/${id}`)
