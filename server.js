@@ -34,7 +34,7 @@ app.get('/task/:id', (req, res) => {
   if (!Number.isNaN(id)) {
     const task = tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    if (task !== undefined) {
       return res.status(200).json({
         task,
       });
@@ -68,7 +68,7 @@ app.put('/task/:id', (req, res) => {
   if (!Number.isNaN(id)) {
     const task = tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    if (task !== undefined) {
       task.title = req.body.title;
       task.description = req.body.description;
       return res.status(204);
@@ -115,9 +115,9 @@ app.post('/task', (req, res) => {
 
 /**
  * DELETE /task/delete/:id
- * 
+ *
  * id: Number
- * 
+ *
  * Delete the task linked to the  given id.
  * If the task is found and deleted as well, return a status code 204.
  * If the task is not found, return a status code 404.
@@ -129,22 +129,22 @@ app.delete('/task/:id', (req, res) => {
   if (!Number.isNaN(id)) {
     const task = tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    if (task !== undefined) {
       const taskIndex = tasks;
       tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',
       });
-    } else {
-      return res.status(404).json({
-        message: 'Not found',
-      });
     }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request',
+
+    return res.status(404).json({
+      message: 'Not found',
     });
   }
+
+  return res.status(400).json({
+    message: 'Bad request',
+  });
 });
 
 app.listen(9001, () => {
