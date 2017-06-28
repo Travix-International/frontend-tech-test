@@ -1,5 +1,6 @@
 import {
   UPDATE_TODOS,
+  DELETE_TODO,
   CREATE_TODO
 } from '../constants';
 
@@ -18,6 +19,11 @@ export default function todos(state = INITIAL_STATE, action) {
     case CREATE_TODO:
       return Object.assign({}, {
         list: [...state.list, action.payload.todo]
+      });
+
+    case DELETE_TODO:
+      return Object.assign({}, {
+        list: state.list.filter(l => l.id !== action.payload.id) || []
       });
 
     default:
