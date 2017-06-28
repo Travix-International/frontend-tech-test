@@ -21,17 +21,16 @@
   "author": "Leandro Oriente <leandroriente@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
     "frint": "^2.0.1",
     "frint-react": "^2.0.1",
     "frint-store": "^2.0.1",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "rxjs": "^5.4.1",
-    "history": "^4.6.1",
-    "lodash": "^4.17.4",
     "react-hot-loader": "3.0.0-beta.6",
-    "react-modal": "^2.0.6"
+    "rxjs": "^5.4.1"
   },
   "devDependencies": {
     "@webpack-blocks/dev-server2": "^0.4.0",
