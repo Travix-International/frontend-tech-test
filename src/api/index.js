@@ -9,7 +9,10 @@ const checkStatus = (response) => {
   throw error;
 };
 
-export const parseJSON = response => response.json();
+export const parseJSON = response => response.text()
+  .then(text => (
+    text ? JSON.parse(text) : {}
+  ));
 
 const encodeQueryString = (params) => {
   const keys = Object.keys(params);
