@@ -36,7 +36,7 @@ app.get('/task/:id', (req, res) => {
 
     if (task !== undefined) {
       return res.status(200).json({
-        task,
+        task
       });
     }
 
@@ -69,7 +69,8 @@ app.put('/task/:id', (req, res) => {
 
     if (task !== undefined) {
       task.title = req.body.title;
-      return res.status(204);
+      task.completed = req.body.completed;
+      return res.status(204).end();
     }
 
     return res.status(404).json({
@@ -100,7 +101,7 @@ app.post('/task', (req, res) => {
   const task = {
     id: tasks.length,
     title: req.body.title,
-    active: true
+    completed: false
   };
 
   tasks.push(task);
