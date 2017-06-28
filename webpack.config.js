@@ -25,6 +25,23 @@ const babel = () => () => ({
   },
 });
 
+const sass = () => () => ({
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [{
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader'
+        }, {
+          loader: 'sass-loader'
+        }]
+      }
+    ],
+  },
+});
+
 const assets = () => () => ({
   module: {
     rules: [
@@ -63,6 +80,7 @@ const config = createConfig([
     babel(),
   ]),
   assets(),
+  sass(),
   resolveModules(sourceDir),
 
   env('development', [

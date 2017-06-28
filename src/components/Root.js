@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observe, streamProps } from 'frint-react';
 
+import 'styles/main.scss';
+
 // import {
 //   incrementCounter,
 //   decrementCounter
