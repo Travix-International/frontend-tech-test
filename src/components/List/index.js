@@ -13,8 +13,18 @@ const List = ({ todos, deleteTodo, editTodo }) => (
   <ul className={style.wrapper}>
     { todos.map(l => (
       <li className={style.item} key={l.id}>
-        <button className={style.active} />
-        <span>{ l.title }</span>
+        <button
+          className={style.active}
+          onClick={() => editTodo({ ...l, completed: !l.completed }, l.id)}
+        >
+          { l.completed && (<span className={style.checkIcon}>&#x2713;</span>) }
+        </button>
+
+        <input
+          className={`${style.editInput} ${l.completed && style.completed}`}
+          defaultValue={l.title}
+        />
+
         <button
           className={style.remove}
           onClick={() => deleteTodo(l.id)}

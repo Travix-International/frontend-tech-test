@@ -1,4 +1,9 @@
 [{
   "id": 0,
-  "title": "OLAR"
+  "title": "OLAR",
+  "completed": true
+},{
+  "id": 1,
+  "title": "OLAROOO",
+  "completed": false
 }]

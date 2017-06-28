@@ -1,12 +1,12 @@
 import {
   UPDATE_TODOS,
   DELETE_TODO,
+  EDIT_TODO,
   CREATE_TODO
 } from '../constants';
 
 export const INITIAL_STATE = {
-  list: [],
-  isFetching: false
+  list: []
 };
 
 export default function todos(state = INITIAL_STATE, action) {
@@ -19,6 +19,13 @@ export default function todos(state = INITIAL_STATE, action) {
     case CREATE_TODO:
       return Object.assign({}, {
         list: [...state.list, action.payload.todo]
+      });
+
+    case EDIT_TODO:
+      return Object.assign({}, {
+        list: state.list.map(l => (
+          l.id === action.payload.id ? action.payload.todo : l
+        ))
       });
 
     case DELETE_TODO:
