@@ -4,10 +4,10 @@ import {
 } from '../constants';
 
 const INITIAL_STATE = {
-  value: 0
+  todos: []
 };
 
-export default function counter(state = INITIAL_STATE, action) {
+export default function todos(state = INITIAL_STATE, action) {
   switch (action.type) {
     case INCREMENT_COUNTER:
       return Object.assign({}, {

@@ -1,7 +1,7 @@
 import { combineReducers } from 'frint-store';
 
-import counter from './counter';
+import todos from './todos';
 
 export default combineReducers({
-  counter
+  todos
 });

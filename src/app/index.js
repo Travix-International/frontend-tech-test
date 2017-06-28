@@ -6,7 +6,7 @@ import RootComponent from '../components/Root';
 import rootReducer from '../reducers';
 
 export default createApp({
-  name: 'CounterApp',
+  name: 'TodoApp',
   providers: [
     {
       name: 'component',
@@ -17,9 +17,15 @@ export default createApp({
       useFactory: ({ app }) => {
         const Store = createStore({
           initialState: {
-            counter: {
-              value: 5,
-            }
+            todos: [{
+              title: 'OLAR',
+              id: 123,
+              archived: false
+            }, {
+              title: 'OLAR2',
+              id: 1234,
+              archived: false
+            }]
           },
           reducer: rootReducer,
           thunkArgument: { app },

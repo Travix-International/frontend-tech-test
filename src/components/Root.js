@@ -1,42 +1,27 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { observe, streamProps } from 'frint-react';
 
-import {
-  incrementCounter,
-  decrementCounter
-} from '../actions/counter';
+// import {
+//   incrementCounter,
+//   decrementCounter
+// } from '../actions/counter';
 
 const propTypes = {
-  counter: PropTypes.number.isRequired,
-  incrementCounter: PropTypes.func.isRequired,
-  decrementCounter: PropTypes.func.isRequired
+  todos: PropTypes.array.isRequired,
+  // incrementCounter: PropTypes.func.isRequired,
+  // decrementCounter: PropTypes.func.isRequired
 };
 
-const Root = props => (
+const Root = ({ todos }) => (
   <div className="container">
-    <div className="row">
-      <div className="eight columns">
-        <h3>Counter App</h3>
+    <h2>Todo App</h2>
 
-        <p>Counter value: <code>{props.counter}</code></p>
-
-        <div>
-          <button
-            className="button button-primary"
-            onClick={() => props.incrementCounter()}
-          >
-            +
-          </button>
-
-          <button
-            className="button"
-            onClick={() => props.decrementCounter()}
-          >
-            -
-          </button>
-        </div>
-      </div>
-    </div>
+    <ul>
+      { todos.map(l => (
+        <li key={l.id}>{ l.title }</li>
+      ))}
+    </ul>
   </div>
 );
 
@@ -46,11 +31,11 @@ export default observe(app => (
   streamProps({})
     .set(
       app.get('store').getState$(),
-      state => ({ counter: state.counter.value })
+      ({ todos }) => ({ todos })
     )
-    .setDispatch({
-      incrementCounter,
-      decrementCounter,
-    }, app.get('store'))
+    // .setDispatch({
+    //   incrementCounter,
+    //   decrementCounter,
+    // }, app.get('store'))
     .get$()
 ))(Root);
