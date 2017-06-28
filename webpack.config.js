@@ -30,13 +30,11 @@ const sass = () => () => ({
     rules: [
       {
         test: /\.scss$/,
-        use: [{
-          loader: 'style-loader'
-        }, {
-          loader: 'css-loader'
-        }, {
-          loader: 'sass-loader'
-        }]
+        use: [
+          'style-loader',
+          'css-loader?modules&importLoaders=1&sourceMap&localIdentName=[path][name]__[local]--[hash:base64:5]',
+          'sass-loader'
+        ]
       }
     ],
   },

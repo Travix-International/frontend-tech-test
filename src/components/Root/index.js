@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observe, streamProps } from 'frint-react';
 
-import 'styles/main.scss';
+import style from './style.scss';
+
+console.log('style', style);
 
 // import {
 //   incrementCounter,
@@ -16,7 +18,7 @@ const propTypes = {
 };
 
 const Root = ({ todos }) => (
-  <div className="container">
+  <div className={style.body}>
     <h2>Todo App</h2>
 
     <ul>
