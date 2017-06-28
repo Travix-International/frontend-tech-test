@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "bundle:vendors": "webpack --config ./vendors/webpack.config.js",
-    "start": "npm run dev",
+    "start": "concurrently \"npm run dev\" \"node server\"",
     "env:dev": "cross-env NODE_ENV=development",
     "env:prod": "cross-env NODE_ENV=production",
     "test": "jest",
@@ -47,6 +47,7 @@
     "babel-preset-stage-1": "^6.24.1",
     "babel-preset-travix": "^1.1.0",
     "babel-register": "^6.9.0",
+    "concurrently": "^3.5.0",
     "copyfiles": "^1.0.0",
     "cross-env": "^5.0.0",
     "enzyme": "^2.7.0",
