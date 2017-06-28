@@ -6,7 +6,7 @@ import RootComponent from '../components/Root';
 import rootReducer from '../reducers';
 
 export default createApp({
-  name: 'TodoApp',
+  name: 'CounterApp',
   providers: [
     {
       name: 'component',

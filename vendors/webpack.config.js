@@ -4,7 +4,7 @@ module.exports = {
   },
   devtool: 'source-map',
   output: {
-    path: __dirname + '/../build/js',
+    path: __dirname + '/../public/js',
     filename: '[name].js'
   }
 };
