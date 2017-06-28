@@ -7,6 +7,7 @@ import {
   createTodoAsync as createTodo,
 } from 'actions/todos';
 
+import Form from '../Form';
 import style from './style.scss';
 
 class Root extends Component {
@@ -17,32 +18,20 @@ class Root extends Component {
     // decrementCounter: PropTypes.func.isRequired
   }
 
-  state = { value: '' }
-
   componentWillMount() {
     this.props.getTodos();
   }
 
-  handleChange = (event) => {
-    this.setState({ value: event.target.value });
-  }
-
-  handleSubmit = (event) => {
-    this.props.createTodo(this.state.value);
-    event.preventDefault();
-  }
-
   render() {
-    const { todos } = this.props;
     return (
-      <div className={style.body}>
-        <h2>Todo App</h2>
+      <div className={style.wrapper}>
+        <h2 className={style.title}>Todo App</h2>
 
         <ul>
-          { todos.map(l => (
+          { this.props.todos.map(l => (
             <li key={l.id}>
               <button>
-                [ ] 
+                [ ]
               </button>
               <span>{ l.title }</span>
               <button>
@@ -52,15 +41,7 @@ class Root extends Component {
           ))}
         </ul>
 
-        <form onSubmit={this.handleSubmit}>
-          <input
-            onChange={this.handleChange}
-            placeholder={'Add a new todo'}
-            type="text"
-            value={this.state.value}
-          />
-          <button type={'submit'}>Check</button>
-        </form>
+        <Form createTodo={this.props.createTodo} />
       </div>
     );
   }
