@@ -8,6 +8,7 @@ import {
 } from 'actions/todos';
 
 import Form from '../Form';
+import List from '../List';
 import style from './style.scss';
 
 class Root extends Component {
@@ -26,22 +27,8 @@ class Root extends Component {
     return (
       <div className={style.wrapper}>
         <h2 className={style.title}>Todo App</h2>
-
-        <ul>
-          { this.props.todos.map(l => (
-            <li key={l.id}>
-              <button>
-                [ ]
-              </button>
-              <span>{ l.title }</span>
-              <button>
-                x
-              </button>
-            </li>
-          ))}
-        </ul>
-
         <Form createTodo={this.props.createTodo} />
+        <List todos={this.props.todos} />
       </div>
     );
   }
