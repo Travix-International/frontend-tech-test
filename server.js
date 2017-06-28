@@ -51,11 +51,10 @@ app.get('/task/:id', (req, res) => {
 });
 
 /**
- * PUT /task/update/:id/:title/:description
+ * PUT /task/:id
  *
  * id: Number
  * title: string
- * description: string
  *
  * Update the task with the given id.
  * If the task is found and update as well, return a status code 204.
@@ -70,7 +69,6 @@ app.put('/task/:id', (req, res) => {
 
     if (task !== undefined) {
       task.title = req.body.title;
-      task.description = req.body.description;
       return res.status(204);
     }
 
@@ -85,10 +83,9 @@ app.put('/task/:id', (req, res) => {
 });
 
 /**
- * POST /task/create/:title/:description
+ * POST /task/
  *
  * title: string
- * description: string
  *
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
@@ -103,14 +100,12 @@ app.post('/task', (req, res) => {
   const task = {
     id: tasks.length,
     title: req.body.title,
-    description: req.body.description
+    active: true
   };
 
   tasks.push(task);
 
-  return res.status(201).json({
-    message: 'Resource created',
-  });
+  return res.status(201).json(task);
 });
 
 /**
