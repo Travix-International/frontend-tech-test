@@ -1,4 +1,4 @@
-const API_ENDPOINT = 'http://localhost:9001/api/';
+const API_ENDPOINT = '/api/';
 
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
