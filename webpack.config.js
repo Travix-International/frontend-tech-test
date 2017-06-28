@@ -74,6 +74,15 @@ const config = createConfig([
       host,
       port,
     }),
+    devServer.proxy({
+      '/api/**': {
+        target: 'http://localhost:9001',
+        pathRewrite: {
+          "^/api": ""
+        },
+        changeOrigin: true
+      }
+    }),
     sourceMaps(),
     addPlugins([
       new webpack.NamedModulesPlugin(),
