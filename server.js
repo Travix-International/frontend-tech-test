@@ -99,7 +99,7 @@ app.post('/task', (req, res) => {
   }
 
   const task = {
-    id: tasks.length,
+    id: +new Date(),
     title: req.body.title,
     completed: false
   };
