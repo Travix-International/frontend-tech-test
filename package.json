@@ -26,6 +26,7 @@
     "frint": "^2.0.1",
     "frint-react": "^2.0.1",
     "frint-store": "^2.0.1",
+    "lodash": "^4.17.4",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
