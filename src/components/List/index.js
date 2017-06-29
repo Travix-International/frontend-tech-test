@@ -48,6 +48,7 @@ const TodosList = ({ todos, isFetching, deleteTodo, editTodo }) => {
               rowCount={todos.length}
               rowHeight={43}
               rowRenderer={data => rowRenderer(data, todos)}
+              style={{ outline: 'none' }}
               width={width}
             />
           )}
