@@ -2,7 +2,9 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const tasks = require('./huge-tasks.json');
+const tasks = process.env.HUGE_LIST
+  ? require('./huge-tasks.json')
+  : require('./tasks.json');
 
 const app = express();
 
