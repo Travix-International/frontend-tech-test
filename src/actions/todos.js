@@ -1,6 +1,7 @@
 import fetch from 'api';
 
 import {
+  UPDATE_SORT,
   UPDATE_TODOS,
   EDIT_TODO,
   DELETE_TODO,
@@ -25,6 +26,11 @@ const editTodo = (todo, id) => ({
 const deleteTodo = id => ({
   type: DELETE_TODO,
   payload: { id }
+});
+
+export const updateSort = sort => ({
+  type: UPDATE_SORT,
+  payload: { sort }
 });
 
 export const getTodosAsync = () => dispatch =>
