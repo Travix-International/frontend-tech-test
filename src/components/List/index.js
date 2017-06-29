@@ -6,6 +6,7 @@ import debounce from 'lodash/debounce';
 import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
 import List from 'react-virtualized/dist/commonjs/List';
 
+import sunIcon from 'assets/sun.svg';
 import style from './style.scss';
 
 const propTypes = {
@@ -58,17 +59,29 @@ const TodosList = ({ todos, deleteTodo, editTodo }) => {
 
   return (
     <div className={style.wrapper}>
-      <AutoSizer>
-        {({ width }) => (
-          <List
-            height={320}
-            rowCount={todos.length}
-            rowHeight={43}
-            rowRenderer={data => rowRenderer(data, todos)}
-            width={width}
-          />
-        )}
-      </AutoSizer>
+      { todos.length ? (
+        <AutoSizer>
+          {({ width }) => (
+            <List
+              height={320}
+              rowCount={todos.length}
+              rowHeight={43}
+              rowRenderer={data => rowRenderer(data, todos)}
+              width={width}
+            />
+          )}
+        </AutoSizer>
+      ) : (
+        <div className={style.emptyList}>
+          <img className={style.icon} src={sunIcon} />
+          <p className={style.emptyMessage}>
+            Congratulations!
+          </p>
+          <p className={style.emptyMessage}>
+            Your todo list is empty
+          </p>
+        </div>
+      ) }
     </div>
   );
 };
