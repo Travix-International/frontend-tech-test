@@ -53,6 +53,7 @@ class Root extends Component {
         <List
           deleteTodo={this.props.deleteTodo}
           editTodo={this.props.editTodo}
+          isEmpty={this.props.todos.length === 0}
           isFetching={this.props.isFetching}
           todos={sortTodos}
         />

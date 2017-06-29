@@ -12,10 +12,11 @@ const propTypes = {
   todos: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   deleteTodo: PropTypes.func.isRequired,
-  editTodo: PropTypes.func.isRequired
+  editTodo: PropTypes.func.isRequired,
+  isEmpty: PropTypes.bool.isRequired
 };
 
-const TodosList = ({ todos, isFetching, deleteTodo, editTodo }) => {
+const TodosList = ({ isEmpty, todos, isFetching, deleteTodo, editTodo }) => {
   const rowRenderer = (data) => {
     const {
       index
@@ -40,7 +41,7 @@ const TodosList = ({ todos, isFetching, deleteTodo, editTodo }) => {
         <div className={style.loading}>LOADING</div>
       ) }
 
-      { todos.length ? (
+      { !isEmpty ? (
         <AutoSizer>
           {({ width }) => (
             <List
@@ -55,7 +56,7 @@ const TodosList = ({ todos, isFetching, deleteTodo, editTodo }) => {
         </AutoSizer>
       ) : null }
 
-      { !todos.length && !isFetching ? (
+      { isEmpty && !isFetching ? (
         <div className={style.emptyList}>
           <img className={style.icon} src={sunIcon} />
           <p className={style.emptyMessage}>
