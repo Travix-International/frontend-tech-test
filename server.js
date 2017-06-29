@@ -125,10 +125,9 @@ app.delete('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.find(item => item.id === id);
+    const taskIndex = tasks.findIndex(item => item.id === id);
 
-    if (task !== undefined) {
-      const taskIndex = tasks;
+    if (taskIndex !== -1) {
       tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',
