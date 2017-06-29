@@ -18,14 +18,13 @@ const propTypes = {
 const TodosList = ({ todos, isFetching, deleteTodo, editTodo }) => {
   const rowRenderer = (data) => {
     const {
-      key,
       index
     } = data;
     const innerStyle = data.style;
     const todo = todos[index];
 
     return (
-      <div key={key} style={innerStyle}>
+      <div key={todo.id} style={innerStyle}>
         <Item
           deleteTodo={deleteTodo}
           editTodo={editTodo}
