@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import debounce from 'lodash/debounce';
 
+import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
+import List from 'react-virtualized/dist/commonjs/List';
+
 import style from './style.scss';
 
 const propTypes = {
@@ -11,17 +14,24 @@ const propTypes = {
   editTodo: PropTypes.func.isRequired
 };
 
-const List = ({ todos, deleteTodo, editTodo }) => {
+const TodosList = ({ todos, deleteTodo, editTodo }) => {
   const debounceUpdate = debounce(editTodo, 250);
 
   const handleTitleChange = (event, todo) => (
     debounceUpdate({ ...todo, title: event.target.value }, todo.id)
   );
 
-  return (
-    <ul className={style.wrapper}>
-      { todos.map(l => (
-        <li className={style.item} key={l.id}>
+  const rowRenderer = (data) => {
+    const {
+      key,
+      index
+    } = data;
+    const innerStyle = data.style;
+    const l = todos[index];
+
+    return (
+      <div key={key} style={innerStyle}>
+        <div className={style.item} key={l.id}>
           <button
             className={style.active}
             onClick={() => editTodo({ ...l, completed: !l.completed }, l.id)}
@@ -41,12 +51,28 @@ const List = ({ todos, deleteTodo, editTodo }) => {
           >
             &times;
           </button>
-        </li>
-      ))}
-    </ul>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className={style.wrapper}>
+      <AutoSizer>
+        {({ width }) => (
+          <List
+            height={320}
+            rowCount={todos.length}
+            rowHeight={43}
+            rowRenderer={data => rowRenderer(data, todos)}
+            width={width}
+          />
+        )}
+      </AutoSizer>
+    </div>
   );
 };
 
-List.propTypes = propTypes;
+TodosList.propTypes = propTypes;
 
-export default List;
+export default TodosList;

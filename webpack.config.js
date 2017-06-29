@@ -35,6 +35,13 @@ const sass = () => () => ({
           'css-loader?modules&importLoaders=1&sourceMap&localIdentName=[path][name]__[local]--[hash:base64:5]',
           'sass-loader'
         ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader?modules&importLoaders=1&sourceMap&localIdentName=[path][name]__[local]--[hash:base64:5]'
+        ]
       }
     ],
   },
