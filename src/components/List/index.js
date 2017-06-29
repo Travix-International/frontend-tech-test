@@ -45,7 +45,7 @@ const List = ({ todos, deleteTodo, editTodo }) => {
       ))}
     </ul>
   );
-}
+};
 
 List.propTypes = propTypes;
 
