@@ -54,10 +54,12 @@ class Root extends Component {
           editTodo={this.props.editTodo}
           todos={sortTodos}
         />
-        <Nav
-          sort={this.props.sort}
-          updateSort={this.props.updateSort}
-        />
+        { this.props.todos.length ? (
+          <Nav
+            sort={this.props.sort}
+            updateSort={this.props.updateSort}
+          />
+        ) : null }
       </div>
     );
   }
