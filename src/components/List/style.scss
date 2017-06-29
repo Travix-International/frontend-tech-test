@@ -12,6 +12,10 @@
   list-style: none;
   display: flex;
   align-items: center;
+
+  &:first-child {
+    border-top: 0;
+  }
 }
 
 .editInput {
