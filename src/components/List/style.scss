@@ -55,6 +55,10 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
+
+  &:focus {
+    border-color: #ccc;
+  }
 }
 
 .checkIcon {
