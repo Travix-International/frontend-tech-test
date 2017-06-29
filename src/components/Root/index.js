@@ -18,6 +18,7 @@ import style from './style.scss';
 class Root extends Component {
   static propTypes = {
     todos: PropTypes.array.isRequired,
+    isFetching: PropTypes.bool.isRequired,
     updateSort: PropTypes.func.isRequired,
     getTodos: PropTypes.func.isRequired,
     createTodo: PropTypes.func.isRequired,
@@ -52,6 +53,7 @@ class Root extends Component {
         <List
           deleteTodo={this.props.deleteTodo}
           editTodo={this.props.editTodo}
+          isFetching={this.props.isFetching}
           todos={sortTodos}
         />
         { this.props.todos.length ? (
@@ -71,7 +73,8 @@ export default observe(app => (
       app.get('store').getState$(),
       state => ({
         todos: state.todos.list,
-        sort: state.todos.sort
+        sort: state.todos.sort,
+        isFetching: state.todos.isFetching
       })
     )
     .setDispatch({

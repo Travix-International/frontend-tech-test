@@ -2,11 +2,16 @@ import fetch from 'api';
 
 import {
   UPDATE_SORT,
+  GET_TODOS,
   UPDATE_TODOS,
   EDIT_TODO,
   DELETE_TODO,
   CREATE_TODO
 } from '../constants';
+
+const getTodos = () => ({
+  type: GET_TODOS
+});
 
 const updateTodos = todos => ({
   type: UPDATE_TODOS,
@@ -33,9 +38,11 @@ export const updateSort = sort => ({
   payload: { sort }
 });
 
-export const getTodosAsync = () => dispatch =>
-  fetch('GET', 'task')
+export const getTodosAsync = () => dispatch => {
+  dispatch(getTodos());
+  return fetch('GET', 'task')
     .then(data => dispatch(updateTodos(data)));
+}
 
 export const createTodoAsync = title => dispatch =>
   fetch('POST', 'task', { title })

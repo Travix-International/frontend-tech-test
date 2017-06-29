@@ -1,4 +1,5 @@
 import {
+  GET_TODOS,
   UPDATE_TODOS,
   DELETE_TODO,
   EDIT_TODO,
@@ -8,7 +9,8 @@ import {
 
 export const INITIAL_STATE = {
   list: [],
-  sort: null
+  sort: null,
+  isFetching: false
 };
 
 export default function todos(state = INITIAL_STATE, action) {
@@ -18,9 +20,13 @@ export default function todos(state = INITIAL_STATE, action) {
         sort: action.payload.sort || null
       });
 
+    case GET_TODOS:
+      return Object.assign({}, state, { isFetching: true });
+
     case UPDATE_TODOS:
       return Object.assign({}, state, {
-        list: action.payload.todos || []
+        list: action.payload.todos || [],
+        isFetching: false
       });
 
     case CREATE_TODO:

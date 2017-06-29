@@ -10,11 +10,12 @@ import style from './style.scss';
 
 const propTypes = {
   todos: PropTypes.array.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   deleteTodo: PropTypes.func.isRequired,
   editTodo: PropTypes.func.isRequired
 };
 
-const TodosList = ({ todos, deleteTodo, editTodo }) => {
+const TodosList = ({ todos, isFetching, deleteTodo, editTodo }) => {
   const rowRenderer = (data) => {
     const {
       key,
@@ -36,6 +37,10 @@ const TodosList = ({ todos, deleteTodo, editTodo }) => {
 
   return (
     <div className={style.wrapper}>
+      { isFetching && (
+        <div className={style.loading}>LOADING</div>
+      ) }
+
       { todos.length ? (
         <AutoSizer>
           {({ width }) => (
@@ -48,7 +53,9 @@ const TodosList = ({ todos, deleteTodo, editTodo }) => {
             />
           )}
         </AutoSizer>
-      ) : (
+      ) : null }
+
+      { !todos.length && !isFetching ? (
         <div className={style.emptyList}>
           <img className={style.icon} src={sunIcon} />
           <p className={style.emptyMessage}>
@@ -58,7 +65,7 @@ const TodosList = ({ todos, deleteTodo, editTodo }) => {
             Your todo list is empty
           </p>
         </div>
-      ) }
+      ) : null }
     </div>
   );
 };
