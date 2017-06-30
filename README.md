@@ -22,9 +22,16 @@ If you want to bootstrap the application with 160k todos, add the environment va
 HUGE_LIST=true npm start
 ```
 
+Test:
+
+```
+npm test
+```
+
 ## Stack
 
 - [Frint framework](https://github.com/Travix-International/frint/)
 - [Frint store](https://github.com/Travix-International/frint/tree/master/packages/frint-store)
 - [Arc boilerplate](https://github.com/diegohaz/arc)
+- Jest + Enzyme
 - SASS + CSS Modules
