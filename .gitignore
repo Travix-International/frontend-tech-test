@@ -1,4 +1,5 @@
-node_modules/
-*~
-#*
-.vs_code/
+build
+node_modules
+.happypack
+.DS_Store
+coverage

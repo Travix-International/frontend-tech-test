@@ -1,19 +1,94 @@
 {
-  "name": "test-candidates",
+  "name": "todo-app",
   "version": "0.0.1",
-  "description": "test back - front",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+  "description": "Todo app Travix",
+  "main": "index.js",
+  "jest": {
+    "moduleDirectories": [
+      "src",
+      "node_modules"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/private/jest/fileMock.js",
+      "^components$": "<rootDir>/private/jest/componentsMock.js",
+      "\\.(css|scss)$": "identity-obj-proxy"
+    }
   },
-  "keywords": [
-    "test",
-    "travix"
-  ],
-  "author": "spartans",
-  "license": "ISC",
+  "scripts": {
+    "bundle:vendors": "webpack --config ./vendors/webpack.config.js",
+    "start": "concurrently \"npm run dev\" \"node server\"",
+    "env:dev": "cross-env NODE_ENV=development",
+    "env:prod": "cross-env NODE_ENV=production",
+    "test": "jest",
+    "coverage": "npm test -- --coverage",
+    "postcoverage": "opn coverage/lcov-report/index.html",
+    "lint": "eslint src src-example private webpack.config.js",
+    "dev": "npm run bundle:vendors && npm run env:dev -- webpack-dev-server",
+    "build:clean": "rimraf \"dist/!(.git*|Procfile)**\"",
+    "build:copy": "copyfiles -u 1 public/* public/**/* dist",
+    "prebuild": "npm run build:clean && npm run build:copy",
+    "build": "npm run env:prod -- webpack"
+  },
+  "author": "Leandro Oriente <leandroriente@gmail.com>",
+  "license": "MIT",
   "dependencies": {
-    "express": "^4.14.0"
+    "body-parser": "^1.17.2",
+    "enzyme": "^2.9.1",
+    "express": "^4.15.3",
+    "frint": "^2.0.1",
+    "frint-react": "^2.0.1",
+    "frint-store": "^2.0.1",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-hot-loader": "3.0.0-beta.6",
+    "react-virtualized": "^9.8.0",
+    "rxjs": "^5.4.1",
+    "supertest": "^3.0.0"
+  },
+  "devDependencies": {
+    "@webpack-blocks/dev-server2": "^0.4.0",
+    "@webpack-blocks/webpack2": "^0.4.0",
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.2",
+    "babel-jest": "^20.0.3",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.0",
+    "babel-preset-env": "^1.3.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "babel-preset-travix": "^1.1.0",
+    "babel-register": "^6.9.0",
+    "concurrently": "^3.5.0",
+    "copyfiles": "^1.0.0",
+    "cross-env": "^5.0.0",
+    "enzyme": "^2.7.0",
+    "eslint": "^3.19.0",
+    "eslint-config-travix": "^2.3.2",
+    "eslint-import-resolver-webpack": "^0.8.3",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-no-unused-vars-rest": "^1.0.6",
+    "eslint-plugin-react": "^7.1.0",
+    "file-loader": "^0.11.0",
+    "html-webpack-plugin": "^2.26.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^20.0.4",
+    "jest-cli": "^20.0.0",
+    "node-sass": "^4.5.3",
+    "opn-cli": "^3.1.0",
+    "raw-loader": "^0.5.1",
+    "react-test-renderer": "^15.6.1",
+    "rimraf": "^2.6.1",
+    "sass-loader": "^6.0.6",
+    "url-loader": "^0.5.7",
+    "webpack": "^2.6.1",
+    "webpack-blocks-happypack": "^0.1.3",
+    "webpack-blocks-split-vendor": "^0.2.0",
+    "webpack-dev-server": "^2.5.0"
   }
 }

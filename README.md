@@ -1,38 +1,37 @@
-# Travix test
+# Todo app
 
-Travix Front-End Tech Interview Test 
+## Usage
 
-# Introduction
+Run:
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+```
+npm install
+npm start
+```
 
-Using your application we must be able to create, modify and delete a task.
+Open: [http://localhost:3000](http://localhost:3000)
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
+Start command will start concurrently the `webpack dev server` and the API `express server`.
 
-However this server is not perfect. It could be improved and tested as well.
 
-So your mission is to develop the front-end from scratch using a famous front-end framework.
+You can run only the UI app with `npm run dev` and the API with `node server`.
 
-We are also expecting from you a usable, responsive UI.
+If you want to bootstrap the application with 160k todos, add the environment variable `HUGE_LIST` to the `npm start` command.
 
-# Process
+```
+HUGE_LIST=true npm start
+```
 
-Fork the repository into your account. Once your code is ready open a pull-request on this repository and we will review it.
+Test:
 
-# Requirements
+```
+npm test
+```
 
-* React 14+
-* Redux or Flux or Frint or whateverelse with a one-way data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
+## Stack
 
-# Bonus
-
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us !
+- [Frint framework](https://github.com/Travix-International/frint/)
+- [Frint store](https://github.com/Travix-International/frint/tree/master/packages/frint-store)
+- [Arc boilerplate](https://github.com/diegohaz/arc)
+- Jest + Enzyme
+- SASS + CSS Modules
