@@ -9,26 +9,26 @@ import {
   CREATE_TODO
 } from '../constants';
 
-const getTodos = () => ({
+export const getTodos = () => ({
   type: GET_TODOS
 });
 
-const updateTodos = todos => ({
+export const updateTodos = todos => ({
   type: UPDATE_TODOS,
   payload: { todos }
 });
 
-const createTodo = todo => ({
+export const createTodo = todo => ({
   type: CREATE_TODO,
   payload: { todo }
 });
 
-const editTodo = (todo, id) => ({
+export const editTodo = (todo, id) => ({
   type: EDIT_TODO,
   payload: { todo, id }
 });
 
-const deleteTodo = id => ({
+export const deleteTodo = id => ({
   type: DELETE_TODO,
   payload: { id }
 });
