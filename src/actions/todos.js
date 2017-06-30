@@ -38,11 +38,11 @@ export const updateSort = sort => ({
   payload: { sort }
 });
 
-export const getTodosAsync = () => dispatch => {
+export const getTodosAsync = () => (dispatch) => {
   dispatch(getTodos());
   return fetch('GET', 'task')
     .then(data => dispatch(updateTodos(data)));
-}
+};
 
 export const createTodoAsync = title => dispatch =>
   fetch('POST', 'task', { title })
