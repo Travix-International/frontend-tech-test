@@ -1,26 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Item from './Item';
 import Component from '.';
 
 describe('<List />', () => {
   const deleteTodo = jest.fn();
   const editTodo = jest.fn();
-  const todosList = [{
-    id: 92916525,
-    title: 'veniam id minim anim',
-    completed: true
-  },
-  {
-    id: 46769446,
-    title: 'velit ullamco amet enim',
-    completed: false
-  },
-  {
-    id: 59389998,
-    title: 'cupidatat incididunt velit ut',
-    completed: true
-  }];
 
   const renderWrapper = (isFetching, isEmpty, todos) => shallow(
     <Component
