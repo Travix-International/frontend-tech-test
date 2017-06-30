@@ -22,6 +22,10 @@ const todo = {
   completed: true
 };
 
+// Don't know how to test async actions with Frint framework
+// Ref: https://github.com/Travix-International/frint/tree/master/packages/frint-store#async-actions
+// Ref: https://github.com/Travix-International/frint/tree/master/examples
+
 describe('Todo reducer', () => {
   test('getTodos', () => {
     expect(getTodos()).toEqual({
