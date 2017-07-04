@@ -1,0 +1,4 @@
+{
+  "extends": "travix", // same as "travix/base"
+  "presets": ["es2015"]
+}
