@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "client": "node client.js"
   },
   "keywords": [
     "test",
@@ -15,5 +17,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0"
   }
 }
