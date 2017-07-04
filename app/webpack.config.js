@@ -35,10 +35,14 @@ module.exports = {
       },
       {
         test: /\.scss|\.css$/,
-        loaders: [
-          'style-loader',
-          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]',
-          'sass-loader']
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [{
+            loader: 'css-loader'
+          }, {
+            loader: 'sass-loader'
+          }]
+        })
       },
       {
         test: /\.svg|.png|.gif|.jpg$/,
@@ -56,7 +60,10 @@ module.exports = {
       inject: 'body',
       filename: 'index.html'
     }),
-    new ExtractTextPlugin('[name]-[hash].min.css'),
+    new ExtractTextPlugin({
+      filename: '[name]-[hash].min.css',
+      allChunks: true
+    }),
     // These plugins below could be run just in production, for optmization.
     // I did it here because I'd like to show how the files could be small.
     // new webpack.optimize.OccurrenceOrderPlugin(),

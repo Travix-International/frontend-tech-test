@@ -1,17 +1,19 @@
 import { connect } from 'react-redux';
 import component from './component';
 import {
-  taskList, taskDelete
+  taskSave
 } from './actions';
 
-const mapStateToProps = state => ({
-  tasks: state.main.tasks,
-  isFetching: state.main.isFetching
-});
+const mapStateToProps = (state, ownProps) => {
+  const task = state.main.tasks[ownProps.match.params.id];
+  return {
+    task,
+    isFetching: state.main.isFetching
+  };
+};
 
 const mapDispatchToProps = ({
-  taskList,
-  taskDelete
+  taskSave
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(component);

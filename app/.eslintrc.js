@@ -3,7 +3,8 @@ module.exports = {
   "rules": {
     "linebreak-style": 0,
     "comma-dangle": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "no-underscore-dangle": 0
   },
   "env": {
     "node": true,

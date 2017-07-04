@@ -16,8 +16,10 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
+    "core-js": "^2.4.1",
     "express": "^4.15.3",
     "history": "^4.6.2",
+    "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
