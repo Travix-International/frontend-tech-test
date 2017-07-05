@@ -1,0 +1,65 @@
+exports[`TaskRegister Tests TaskRegister Render 1`] = `
+<form
+  className="task__form"
+  id="taskForm"
+  onSubmit={[Function]}>
+  <div
+    className="task__form__content">
+    <h1>
+      Register Task
+    </h1>
+    <span
+      className="">
+      Title
+    </span>
+    <input
+      className=""
+      defaultValue=""
+      required={true}
+      type="text" />
+    <span
+      className="">
+      Description
+    </span>
+    <input
+      className=""
+      defaultValue=""
+      required={true}
+      type="text" />
+    <span
+      className="">
+      Date
+    </span>
+    <input
+      className=""
+      defaultValue="Invalid date"
+      required={true}
+      type="date" />
+    <div>
+      <input
+        className=""
+        defaultChecked={false}
+        id="register-task-completed"
+        type="checkbox" />
+      <label
+        htmlFor="register-task-completed">
+        Completed
+      </label>
+    </div>
+  </div>
+  <div
+    className="task__form__buttons">
+    <button
+      className="btn"
+      type="submit">
+      Send
+    </button>
+    <a
+      className="btn"
+      href="/"
+      onClick={[Function]}>
+      Back
+    </a>
+  </div>
+</form>
+`;
