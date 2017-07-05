@@ -1,0 +1,23 @@
+exports[`Task Tests Task Render 1`] = `
+<div
+  className="main__task">
+  <a
+    className="btn"
+    href="/task/0"
+    onClick={[Function]}>
+    New
+  </a>
+  <div
+    className="main__task__content" />
+  <div
+    className="loading ">
+    <div>
+      .
+    </div>
+  </div>
+  <div
+    className="notification ">
+    <span />
+  </div>
+</div>
+`;

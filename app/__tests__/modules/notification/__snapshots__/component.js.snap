@@ -1,0 +1,8 @@
+exports[`Notification Tests Notification Render 1`] = `
+<div
+  className="notification show success ">
+  <span>
+    Task saved!
+  </span>
+</div>
+`;

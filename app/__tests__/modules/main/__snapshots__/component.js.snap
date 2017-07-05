@@ -1,0 +1,41 @@
+exports[`Main Tests Main Render 1`] = `
+<div
+  className="main">
+  <header>
+    <h1>
+      Frontend-tech-test
+    </h1>
+  </header>
+  <div
+    className="content">
+    <div
+      className="main__task">
+      <a
+        className="btn"
+        href="/task/0"
+        onClick={[Function]}>
+        New
+      </a>
+      <div
+        className="main__task__content" />
+      <div
+        className="loading show">
+        <div>
+          .
+        </div>
+      </div>
+      <div
+        className="notification ">
+        <span>
+          
+        </span>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <h3>
+      Footer
+    </h3>
+  </footer>
+</div>
+`;

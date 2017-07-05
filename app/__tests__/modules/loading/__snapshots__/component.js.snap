@@ -1,0 +1,8 @@
+exports[`Loading Tests Loading Render 1`] = `
+<div
+  className="loading ">
+  <div>
+    .
+  </div>
+</div>
+`;
