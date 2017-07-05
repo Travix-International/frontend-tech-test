@@ -31,7 +31,7 @@ describe('Main actions', () => {
       .toEqual(expectedAction);
   });
 
-  it('Test task post action', () => {
+  it('Test task post action async', () => {
     const _id = '0';
     const title = 'Title test post jest 1';
     const description = 'Description test post jest 1';
@@ -75,7 +75,7 @@ describe('Main actions', () => {
       });
   });
 
-  it('Test task put action', () => {
+  it('Test task put action async', () => {
     const _id = '1';
     const title = 'Title test post jest 2';
     const description = 'Description test post jest 2';
