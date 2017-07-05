@@ -1,4 +1,4 @@
-# frontend-tech-test
+# frontend-tech-test api
 
 ## Run the project
 
