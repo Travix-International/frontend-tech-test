@@ -8,7 +8,7 @@ import { requestTask } from './../main/actions';
 import { config } from './../../config';
 import { history } from './../../store';
 
-const taskSaveAction = (_id, title, description, date, completed) => ({
+export const taskSaveAction = (_id, title, description, date, completed) => ({
   type: TASK_SAVE,
   _id,
   title,

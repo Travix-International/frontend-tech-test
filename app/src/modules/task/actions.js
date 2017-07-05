@@ -8,12 +8,12 @@ import { notificationAction } from './../notification/actions';
 import { requestTask } from './../main/actions';
 import { config } from './../../config';
 
-const taskListAction = tasks => ({
+export const taskListAction = tasks => ({
   type: TASK_LIST,
   tasks,
 });
 
-const taskDeleteAction = id => ({
+export const taskDeleteAction = id => ({
   type: TASK_DELETE,
   id
 });
