@@ -1,12 +1,11 @@
 import 'core-js/fn/promise';
-import 'whatwg-fetch';
+import 'isomorphic-fetch';
 import {
   TASK_SAVE
 } from './../../constants';
 import { notificationAction } from './../notification/actions';
 import { requestTask } from './../main/actions';
 import { config } from './../../config';
-import { history } from './../../store';
 
 export const taskSaveAction = (_id, title, description, date, completed) => ({
   type: TASK_SAVE,
@@ -17,7 +16,7 @@ export const taskSaveAction = (_id, title, description, date, completed) => ({
   completed
 });
 
-export const taskSave = (id, title, description, date, completed) => (dispatch) => {
+export const taskSave = (id, title, description, date, completed, history) => (dispatch) => {
   dispatch(requestTask());
   const body = {
     title,
@@ -32,9 +31,9 @@ export const taskSave = (id, title, description, date, completed) => (dispatch) 
     },
     body: JSON.stringify(body)
   };
-  const url = (id && id !== '0' ? `${config.api}task/${id}` : `${config.api}task`);
+  const url = (id && id !== '0' ? `${config.api}/task/${id}` : `${config.api}/task`);
 
-  fetch(url, options)
+  return fetch(url, options)
     .then(res => res.json())
     .then((json) => {
       const success = (json._id != null);
@@ -45,7 +44,7 @@ export const taskSave = (id, title, description, date, completed) => (dispatch) 
       setTimeout(() => {
         dispatch(notificationAction(false, false, null));
       }, 5000);
-    });
+    }).catch(() => dispatch(notificationAction(true, false, 'Occurred a problem to request the API.')));
 };
 
 export default taskSave;

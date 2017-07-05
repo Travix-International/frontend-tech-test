@@ -28,9 +28,9 @@ const propTypes = {
 class TaskRegister extends Component {
   save(e) {
     e.preventDefault();
-    const { task, taskSave } = this.props;
+    const { task, taskSave, history } = this.props;
     const { title, description, date, completed } = this;
-    taskSave(task._id, title.value, description.value, date.value, completed.checked);
+    taskSave(task._id, title.value, description.value, date.value, completed.checked, history);
   }
   render() {
     const { task } = this.props;

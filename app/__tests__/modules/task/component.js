@@ -1,9 +1,7 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 import Task from './../../../src/modules/task/component';
-
-import { history } from './../../../src/store';
 
 describe('Task Tests', () => {
   test('Task Render', () => {
@@ -16,7 +14,7 @@ describe('Task Tests', () => {
     };
 
     const tree = renderer.create(
-      <Router history={history}>
+      <Router>
         <Task {...props} />
       </Router>
     ).toJSON();

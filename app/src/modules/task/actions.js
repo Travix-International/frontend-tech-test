@@ -1,5 +1,5 @@
 import 'core-js/fn/promise';
-import 'whatwg-fetch';
+import 'isomorphic-fetch';
 import {
   TASK_LIST,
   TASK_DELETE
@@ -23,34 +23,35 @@ export const taskList = () => (dispatch) => {
   const options = {
     method: 'GET'
   };
-  const url = `${config.api}task`;
+  const url = `${config.api}/task`;
 
-  fetch(url, options)
+  return fetch(url, options)
     .then(res => res.json())
     .then((json) => {
       dispatch(taskListAction(json));
     }).catch(() => {
       dispatch(taskListAction(null));
+      dispatch(notificationAction(true, false, 'Occurred a problem to request the API.'));
     });
 };
 
 export const taskDelete = id => (dispatch) => {
   dispatch(requestTask());
 
-  const url = `${config.api}task/${id}`;
+  const url = `${config.api}/task/${id}`;
   const options = {
     method: 'DELETE'
   };
 
-  fetch(url, options)
+  return fetch(url, options)
     .then(res => res.json())
     .then((json) => {
       const success = (json.ok > 0);
-      const message = (json.ok > 0 ? 'Task removed!' : 'Occured a problem, try again!');
+      const message = (json.ok > 0 ? 'Task removed!' : 'Occurred a problem, try again!');
       dispatch(notificationAction(true, success, message));
       dispatch(taskDeleteAction(id));
       setTimeout(() => {
         dispatch(notificationAction(false, false, null));
       }, 5000);
-    });
+    }).catch(() => dispatch(notificationAction(true, false, 'Occurred a problem to request the API.')));
 };

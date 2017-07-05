@@ -1,10 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 import Main from './../../../src/modules/main/component';
 
-import { store, history } from './../../../src/store';
+import { store } from './../../../src/store';
 
 describe('Main Tests', () => {
   test('Main Render', () => {
@@ -12,7 +12,7 @@ describe('Main Tests', () => {
 
     const tree = renderer.create(
       <Provider store={store}>
-        <Router history={history}>
+        <Router>
           <Main {...props} />
         </Router>
       </Provider>
