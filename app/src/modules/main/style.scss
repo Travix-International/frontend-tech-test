@@ -3,6 +3,7 @@ body, html {
   border: 0;
   width: 100%;
   height: 100%;
+  font-family: 'Droid Sans', sans-serif;
 }
 
 #root {
@@ -20,4 +21,41 @@ body, html {
   justify-content: center;
   width: 100%;
   height: 100%;
+  max-width: 400px;
+  max-height: 500px;
+  margin: 0 10px;
+}
+
+.btn {
+  background: transparent;
+  width: 60px;
+  height: 35px;
+  border: 0;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+  background-color: #4294e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  margin: 1px;
+}
+
+header {
+  display: flex;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  min-height: 200px;
+  overflow: auto;
+}
+
+footer {
+  display: flex;
+  width: 100%;
 }

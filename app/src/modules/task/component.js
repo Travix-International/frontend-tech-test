@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Loading from './../loading/component';
 import './style.scss';
 
 const defaultProps = {
@@ -9,7 +10,7 @@ const defaultProps = {
 };
 
 const propTypes = {
-  tasks: PropTypes.object,
+  tasks: PropTypes.shape({}),
   isFetching: PropTypes.bool,
   taskList: PropTypes.func.isRequired,
   taskDelete: PropTypes.func.isRequired
@@ -27,19 +28,27 @@ class Task extends Component {
     taskDelete(id);
   }
   render() {
-    const { tasks } = this.props;
+    const { tasks, isFetching } = this.props;
     const tasksArray = (tasks ? Object.keys(tasks).map(key => tasks[key]) : []);
-
     return (
-      <div className="main-task">
-        <Link to="/task/0" className="">New</Link>
+      <div className="main__task">
+        <Link to="/task/0" className="btn">New</Link>
         {tasksArray.map(task => (
-          <div key={task._id}>
-            {task.title}
-            <Link to={`/task/${task._id}`} className="">Edit</Link>
-            <button onClick={() => this.deleteTask(task._id)}>Delete</button>
+          <div key={task._id} className="main__task__row">
+            <span>
+              {task.title}
+            </span>
+            <Link
+              to={`/task/${task._id}`}
+              className="btn"
+            >Edit</Link>
+            <button
+              className="btn"
+              onClick={() => this.deleteTask(task._id)}
+            >Delete</button>
           </div>
         ))}
+        <Loading show={isFetching} />
       </div>
     );
   }

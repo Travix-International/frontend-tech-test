@@ -46,7 +46,7 @@ export const taskList = () => (dispatch) => {
     });
 };
 
-export const taskDelete = (id) => (dispatch) => {
+export const taskDelete = id => (dispatch) => {
   dispatch(requestTask());
 
   const url = `${config.api}task/${id}`;
@@ -57,7 +57,9 @@ export const taskDelete = (id) => (dispatch) => {
   fetch(url, options)
     .then(res => res.json())
     .then((json) => {
-      dispatch(notificationAction(true, json.success, json.message));
+      const success = (json.ok > 0);
+      const message = (json.ok > 0 ? 'Task removed!' : 'Occured a problem, try again!');
+      dispatch(notificationAction(true, success, message));
       dispatch(taskDeleteAction(id));
       setTimeout(() => {
         dispatch(notificationAction(false, false, null));

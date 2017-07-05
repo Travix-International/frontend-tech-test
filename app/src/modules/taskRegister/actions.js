@@ -6,6 +6,7 @@ import {
   NOTIFICATION
  } from './../../constants';
 import { config } from './../../config';
+import { history } from './../../store';
 
 const requestTask = () => ({
   type: TASK_REQUEST
@@ -18,9 +19,9 @@ const notificationAction = (show, success, message) => ({
   message
 });
 
-const taskSaveAction = (id, title, description, date, completed) => ({
+const taskSaveAction = (_id, title, description, date, completed) => ({
   type: TASK_SAVE,
-  id,
+  _id,
   title,
   description,
   date,
@@ -51,6 +52,7 @@ export const taskSave = (id, title, description, date, completed) => (dispatch) 
     .then((json) => {
       dispatch(notificationAction(true, json.success, json.message));
       dispatch(taskSaveAction(json._id, title, description, date, completed));
+      history.push('/');
       setTimeout(() => {
         dispatch(notificationAction(false, false, null));
       }, 5000);

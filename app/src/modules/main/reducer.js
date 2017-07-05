@@ -34,27 +34,20 @@ const main = (state = initialState, action) => {
     }
     case TASK_SAVE: {
       const copyState = Object.assign({}, state);
-      if (action.id) {
-        copyState.tasks[action.id] = Object.assign({}, copyState.tasks[action.id], {
-          title: action.title,
-          description: action.description,
-          date: action.date,
-          completed: action.completed
-        });
-      } else {
-        copyState.tasks[action.id] = {
-          title: action.title,
-          description: action.description,
-          date: action.date,
-          completed: action.completed
-        };
-      }
+      const copyTask = {
+        _id: action._id,
+        title: action.title,
+        description: action.description,
+        date: action.date,
+        completed: action.completed
+      };
+      copyState.tasks[action._id] = Object.assign({}, copyState.tasks[action._id], copyTask);
       return copyState;
     }
     case TASK_DELETE: {
       const copyState = Object.assign({}, state);
       delete copyState.tasks[action.id];
-      return copyState;
+      return Object.assign({}, copyState);
     }
     case NOTIFICATION: {
       return Object.assign({}, state, {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import './style.scss';
 
 const defaultProps = {
   task: {
@@ -38,10 +39,12 @@ class TaskRegister extends Component {
 
     return (
       <form
-        id="taskForm" className=""
+        id="taskForm"
+        className="task__form"
         onSubmit={e => this.save(e)}
       >
-        <div className="">
+        <div className="task__form__content">
+          <h1>Register Task</h1>
           <span className="">Title</span>
           <input
             type="text" ref={(ref) => { this.title = ref; }}
@@ -63,16 +66,25 @@ class TaskRegister extends Component {
             defaultValue={customDate}
             required
           />
-          <span className="">Completed</span>
-          <input
-            type="checkbox" ref={(ref) => { this.completed = ref; }}
-            className=""
-            defaultChecked={completed}
-          />
+          <div>
+            <input
+              id="register-task-completed"
+              type="checkbox" ref={(ref) => { this.completed = ref; }}
+              className=""
+              defaultChecked={completed}
+            />
+            <label htmlFor="register-task-completed">Completed</label>
+          </div>
         </div>
-        <div className="">
-          <button type="submit">Send</button>
-          <Link to="/" className="">Back</Link>
+        <div className="task__form__buttons">
+          <button
+            type="submit"
+            className="btn"
+          >Send</button>
+          <Link
+            to="/"
+            className="btn"
+          >Back</Link>
         </div>
       </form>
     );
