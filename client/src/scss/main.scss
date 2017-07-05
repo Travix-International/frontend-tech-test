@@ -63,4 +63,19 @@ body {
   border-right: 1px solid #cf30ff;
 }
 
+.btn.btn-primary {
+  width: 100%;
+  background-color: #11e6d3;
+  padding: .5rem 1rem;
+}
+
+.form-msg-error {
+  display: none;
+  color: red;
+  text-align: center;
+}
+.form-msg-error.show {
+  display: block;
+}
+
 @import 'tasks_list';

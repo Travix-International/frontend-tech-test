@@ -6,6 +6,7 @@ import { addTask, fetchTasks } from '../actions';
 class TasksNew extends Component {
   onSubmit({ title, description }) {
     this.props.addTask({ title, description });
+    this.props.fetchTasks();
   }
 
   renderField(field) {
@@ -54,7 +55,7 @@ class TasksNew extends Component {
             component={this.renderField}
           />
 
-          {/*<button action="submit" className="btn btn-primary">Save my movie!</button>*/}
+          <button action="submit" className="btn btn-primary">add task</button>
         </form>
       </div>
     );
@@ -64,9 +65,13 @@ class TasksNew extends Component {
 function validate(values) {
 	const errors = {};
 
-	/*if (!values.name) {
-		errors.name = 'Write a name for the movie';
-	}*/
+	if (!values.title) {
+		errors.title = 'Write a title for the task';
+	}
+
+  if (!values.description) {
+		errors.description = 'Write a description for the task';
+	}
 
 	return errors;
 }
@@ -77,4 +82,4 @@ function mapStateToProps(state) {
   return { state };
 }
 
-export default connect (mapStateToProps, { addTask })(newTaskForm);
+export default connect (mapStateToProps, { addTask, fetchTasks })(newTaskForm);
