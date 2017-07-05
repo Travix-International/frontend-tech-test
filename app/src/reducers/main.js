@@ -4,7 +4,7 @@ import {
   TASK_SAVE,
   TASK_DELETE,
   NOTIFICATION
-} from './../../constants';
+} from './../constants';
 
 const initialState = {
   tasks: {}, // it's better work with object instead of array in immutable data.

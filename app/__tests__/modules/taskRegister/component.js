@@ -1,9 +1,9 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
 import renderer from 'react-test-renderer';
-import TaskRegister from './../../src/modules/taskRegister/component';
+import TaskRegister from './../../../src/modules/taskRegister/component';
 
-import { history } from './../../src/store';
+import { history } from './../../../src/store';
 
 describe('TaskRegister Tests', () => {
   test('TaskRegister Render', () => {

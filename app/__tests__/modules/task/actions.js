@@ -1,8 +1,8 @@
 import {
   TASK_LIST,
   TASK_DELETE
-} from './../../src/constants';
-import { taskListAction, taskDeleteAction } from './../../src/modules/task/actions';
+} from './../../../src/constants';
+import { taskListAction, taskDeleteAction } from './../../../src/modules/task/actions';
 
 describe('Main actions', () => {
   it('Test task list action', () => {

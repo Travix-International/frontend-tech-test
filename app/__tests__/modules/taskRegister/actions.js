@@ -1,7 +1,7 @@
 import {
   TASK_SAVE,
-} from './../../src/constants';
-import { taskSaveAction } from './../../src/modules/taskRegister/actions';
+} from './../../../src/constants';
+import { taskSaveAction } from './../../../src/modules/taskRegister/actions';
 
 describe('Main actions', () => {
   it('Test task list action', () => {

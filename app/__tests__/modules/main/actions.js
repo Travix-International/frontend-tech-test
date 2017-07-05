@@ -1,7 +1,7 @@
 import {
   TASK_REQUEST
-} from './../../src/constants';
-import { requestTask } from './../../src/modules/main/actions';
+} from './../../../src/constants';
+import { requestTask } from './../../../src/modules/main/actions';
 
 describe('Main actions', () => {
   it('Test request task action', () => {

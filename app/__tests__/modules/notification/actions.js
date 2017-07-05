@@ -1,7 +1,7 @@
 import {
   NOTIFICATION
-} from './../../src/constants';
-import { notificationAction } from './../../src/modules/notification/actions';
+} from './../../../src/constants';
+import { notificationAction } from './../../../src/modules/notification/actions';
 
 describe('Notification actions', () => {
   it('Test notification action', () => {
