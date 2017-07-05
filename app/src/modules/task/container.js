@@ -7,7 +7,8 @@ import {
 const mapStateToProps = state => ({
   main: state.main,
   tasks: state.main.tasks,
-  isFetching: state.main.isFetching
+  isFetching: state.main.isFetching,
+  notification: state.main.notification
 });
 
 const mapDispatchToProps = ({

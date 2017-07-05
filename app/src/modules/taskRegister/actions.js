@@ -1,23 +1,12 @@
 import 'core-js/fn/promise';
 import 'whatwg-fetch';
 import {
-  TASK_REQUEST,
-  TASK_SAVE,
-  NOTIFICATION
- } from './../../constants';
+  TASK_SAVE
+} from './../../constants';
+import { notificationAction } from './../notification/actions';
+import { requestTask } from './../main/actions';
 import { config } from './../../config';
 import { history } from './../../store';
-
-const requestTask = () => ({
-  type: TASK_REQUEST
-});
-
-const notificationAction = (show, success, message) => ({
-  type: NOTIFICATION,
-  show,
-  success,
-  message
-});
 
 const taskSaveAction = (_id, title, description, date, completed) => ({
   type: TASK_SAVE,
@@ -28,10 +17,8 @@ const taskSaveAction = (_id, title, description, date, completed) => ({
   completed
 });
 
-
 export const taskSave = (id, title, description, date, completed) => (dispatch) => {
   dispatch(requestTask());
-
   const body = {
     title,
     description,
@@ -50,7 +37,9 @@ export const taskSave = (id, title, description, date, completed) => (dispatch) 
   fetch(url, options)
     .then(res => res.json())
     .then((json) => {
-      dispatch(notificationAction(true, json.success, json.message));
+      const success = (json._id != null);
+      const message = (json._id != null ? 'Task saved!' : 'Occurred a problem, try again!');
+      dispatch(notificationAction(true, success, message));
       dispatch(taskSaveAction(json._id, title, description, date, completed));
       history.push('/');
       setTimeout(() => {

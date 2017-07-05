@@ -45,6 +45,7 @@ body, html {
 
 header {
   display: flex;
+  align-items: center;
   width: 100%;
 }
 
@@ -52,10 +53,10 @@ header {
   display: flex;
   width: 100%;
   min-height: 200px;
-  overflow: auto;
 }
 
 footer {
   display: flex;
+  align-items: center;
   width: 100%;
 }

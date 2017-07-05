@@ -33,7 +33,7 @@ const main = (state = initialState, action) => {
       return copyState;
     }
     case TASK_SAVE: {
-      const copyState = Object.assign({}, state);
+      const copyState = Object.assign({}, state, { isFetching: false });
       const copyTask = {
         _id: action._id,
         title: action.title,
@@ -45,13 +45,17 @@ const main = (state = initialState, action) => {
       return copyState;
     }
     case TASK_DELETE: {
-      const copyState = Object.assign({}, state);
+      const copyState = Object.assign({}, state, { isFetching: false });
       delete copyState.tasks[action.id];
       return Object.assign({}, copyState);
     }
     case NOTIFICATION: {
       return Object.assign({}, state, {
-        notification: Object.assign({}, state.notification, action.notification)
+        notification: {
+          show: action.show,
+          success: action.success,
+          message: action.message
+        }
       });
     }
     default: {

@@ -3,6 +3,13 @@
   max-width: 500px;
 }
 
+.main__task__content {
+  width: 100%;
+  max-width: 500px;
+  height: 85%;
+  overflow: auto;
+}
+
 .main__task__row {
   display: flex;
   align-items: center;

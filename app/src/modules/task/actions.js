@@ -1,16 +1,12 @@
 import 'core-js/fn/promise';
 import 'whatwg-fetch';
 import {
-  TASK_REQUEST,
   TASK_LIST,
-  TASK_DELETE,
-  NOTIFICATION
- } from './../../constants';
+  TASK_DELETE
+} from './../../constants';
+import { notificationAction } from './../notification/actions';
+import { requestTask } from './../main/actions';
 import { config } from './../../config';
-
-const requestTask = () => ({
-  type: TASK_REQUEST
-});
 
 const taskListAction = tasks => ({
   type: TASK_LIST,
@@ -22,16 +18,8 @@ const taskDeleteAction = id => ({
   id
 });
 
-const notificationAction = (show, success, message) => ({
-  type: NOTIFICATION,
-  show,
-  success,
-  message
-});
-
 export const taskList = () => (dispatch) => {
   dispatch(requestTask());
-
   const options = {
     method: 'GET'
   };

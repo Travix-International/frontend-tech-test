@@ -1,0 +1,27 @@
+.notification {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  z-index: -1;
+  opacity: 0;
+  transition: all .5s;
+}
+
+.show {
+  z-index: 1;
+  opacity: .8;
+}
+
+.success {
+  background-color: #54ab57;
+  color: #fff;
+}
+
+.warning {
+  background-color: #f3dc6f;
+}
