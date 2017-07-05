@@ -1,11 +1,12 @@
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
+import express from 'express';
+import path from 'path';
+import bodyParser from 'body-parser';
+import webpackHotReloader from './webpack.hotreloader';
 
 const app = express();
 const port = (process.env.PORT || 3000);
 
-require('./webpack.hotreloader')(app);
+webpackHotReloader(app);
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(bodyParser.text());
