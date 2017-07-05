@@ -16,6 +16,8 @@ class TasksList extends Component {
       return tasks.map(task => {
         return <TasksListItem key={task.id} task={task} />
       });
+    } else {
+      return <div className="no-tasks">You don't have any tasks yet</div>;
     }
   }
 

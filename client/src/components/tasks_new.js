@@ -16,8 +16,8 @@ class TasksNew extends Component {
       case 'textarea':
         return (
           <fieldset className={`form-group textarea ${touched && invalid ? 'has-error' : ''}`}>
-            <label>{field.label}</label>
-            <textarea className="form-input" placeholder={field.placeholder} {...field.input}></textarea>
+            <label htmlFor={field.htmlFor}>{field.label}</label>
+            <textarea id={field.htmlFor} className="form-input" placeholder={field.placeholder} {...field.input}></textarea>
             <span className={`form-msg-error ${touched && invalid ? 'show' : ''}`}>{error}</span>
           </fieldset>
         );
@@ -25,8 +25,8 @@ class TasksNew extends Component {
       default:
         return (
           <fieldset className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
-            <label>{field.label}</label>
-            <input className="form-input" type={field.type} placeholder={field.placeholder} {...field.input}/>
+            <label htmlFor={field.htmlFor}>{field.label}</label>
+            <input id={field.htmlFor} className="form-input" type={field.type} placeholder={field.placeholder} {...field.input}/>
             <span className={`form-msg-error ${touched && invalid ? 'show' : ''}`}>{error}</span>
           </fieldset>
         );
@@ -43,6 +43,7 @@ class TasksNew extends Component {
             name="title"
             type="text"
             label="Title"
+            htmlFor="title"
             placeholder="Write a title for your task"
             component={this.renderField}
           />
@@ -51,6 +52,7 @@ class TasksNew extends Component {
             name="description"
             type="textarea"
             label="Description"
+            htmlFor="description"
             placeholder="Describe your task"
             component={this.renderField}
           />

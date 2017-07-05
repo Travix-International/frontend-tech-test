@@ -1,15 +1,16 @@
 @import 'normalize';
 @import 'reset';
+@import 'colors';
 
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  color: #595959;
+  color: $grey;
 }
 
 .app-title {
   text-align: center;
-  color: #cf30ff;
+  color: $primary;
   margin: 1rem 0;
   text-transform: uppercase;
 }
@@ -21,61 +22,5 @@ body {
   padding: 0 1em;
 }
 
-.new-task-title {
-  margin: 0 0 .5rem;
-  font-size: .875em;
-}
-
-.form-group {
-  font-size: .875em;
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: inline-block;
-  width: 15%;
-  font-weight: bold;
-  color: #cf30ff;
-  border-bottom: 1px solid #cf30ff;
-  padding: 0 0 .5rem;
-}
-
-.form-group.textarea label {
-  display: block;
-  width: 100%;
-  border: 0;
-}
-
-.form-input {
-  display: inline-block;
-  width: 85%;
-  padding: .5rem;
-  border: 0;
-  border-bottom: 1px solid #cf30ff;
-}
-
-.form-group.textarea .form-input {
-  display: block;
-  width: 100%;
-  height: 60px;
-  resize: none;
-  border-left: 1px solid #cf30ff;
-  border-right: 1px solid #cf30ff;
-}
-
-.btn.btn-primary {
-  width: 100%;
-  background-color: #11e6d3;
-  padding: .5rem 1rem;
-}
-
-.form-msg-error {
-  display: none;
-  color: red;
-  text-align: center;
-}
-.form-msg-error.show {
-  display: block;
-}
-
 @import 'tasks_list';
+@import 'form';
