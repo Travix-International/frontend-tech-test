@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchTasks } from '../actions';
 
+import TasksListItem from './tasks_list_item';
+
 class TasksList extends Component {
   componentDidMount() {
     this.props.fetchTasks();
@@ -11,18 +13,16 @@ class TasksList extends Component {
     const tasks = this.props.tasks;
 
     if (tasks.length > 0) {
-      tasks.map(task => {
-        console.log(task.title);
+      return tasks.map(task => {
+        return <TasksListItem key={task.id} task={task} />
       });
     }
   }
 
   render() {
     return (
-      <div>
-        <h1>My Tasks</h1>
-
-        <ul className="movies-list">
+      <div className="grid">
+        <ul className="taskslist">
           {this.renderTasks()}
         </ul>
       </div>
