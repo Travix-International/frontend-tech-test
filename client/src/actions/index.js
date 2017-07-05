@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { FETCH_TASKS } from './types';
+import { FETCH_TASKS, ADD_TASK } from './types';
 
 const API_URL = 'http://localhost:9001';
 
@@ -12,6 +12,25 @@ export function fetchTasks() {
           type: FETCH_TASKS,
           payload: data.tasks,
         });
+      })
+      .catch(() => {
+        console.log('error');
+      })
+  };
+}
+
+export function addTask({ title, description}) {
+  return (dispatch) => {
+    axios.post(`${API_URL}/task/create/${title}/${description}`)
+      .then(({ data }) => {
+        console.log(data.message);
+
+        dispatch({
+          type: ADD_TASK,
+          payload: data.message,
+        });
+
+        fetchTasks();
       })
       .catch(() => {
         console.log('error');

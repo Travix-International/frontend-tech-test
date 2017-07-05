@@ -21,6 +21,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "redux-devtools": "^3.4.0",
+    "redux-form": "^6.8.0",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
     "webpack": "^2.4.1",
