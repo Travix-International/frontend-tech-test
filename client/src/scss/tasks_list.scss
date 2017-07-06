@@ -5,10 +5,16 @@
 }
 
 .taskslist-item {
-  padding: .5em 0;
-  border-bottom: 1px solid #d9d9d9;
+  padding: 1em 0;
+  border-bottom: 1px solid $grey-light;
 }
-
+.taskslist-item:first-child {
+  padding-top: 0;
+}
+.taskslist-item:last-child {
+  border: 0;
+  padding-bottom: 0;
+} 
 .taskslist-item h2 {
   font-size: .875em;
   margin: 0 0 .5rem;
@@ -18,6 +24,8 @@
   font-family: 'Merriweather', serif;
   font-size: .75em;
   line-height: 1.5;
+  word-wrap: break-word;
+  overflow: hidden;
 }
 
 .no-tasks {
@@ -25,14 +33,21 @@
   text-align: center;
 }
 
-.btn-check {
+.btn-icon {
   float: right;
+  margin-left: .5rem;
+  margin-top: -5px;
 }
-.btn-check,
-.check-icon {
+.btn-icon,
+.check-icon,
+.pencil-icon {
   width: 24px;
   height: 24px;
 }
-.check-icon path {
-  fill: $grey;
+.check-icon path,
+.pencil-icon path {
+  fill: $grey-light;
+}
+.pencil-icon.active path {
+  fill: $primary;
 }
