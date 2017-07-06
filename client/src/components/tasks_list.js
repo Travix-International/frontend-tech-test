@@ -10,9 +10,11 @@ class TasksList extends Component {
   }
 
   renderTasks() {
-    const tasks = this.props.tasks;
+    let tasks = this.props.tasks;
 
     if (tasks.length > 0) {
+      tasks = tasks.sort((a, b) => b.id - a.id);
+
       return tasks.map(task => {
         return <TasksListItem key={task.id} task={task} />
       });

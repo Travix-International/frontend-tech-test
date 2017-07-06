@@ -23,7 +23,6 @@ export function addTask({ title, description}) {
   return (dispatch) => {
     axios.post(`${API_URL}/task/create/${title}/${description}`)
       .then(({ data }) => {
-
         dispatch(fetchTasks());
       })
       .catch(() => {
@@ -36,7 +35,6 @@ export function deleteTask(id) {
   return (dispatch) => {
     axios.delete(`${API_URL}/task/delete/${id}`)
       .then(({ data }) => {
-
         dispatch(fetchTasks());
       })
       .catch(() => {
