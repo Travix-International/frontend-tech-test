@@ -14,7 +14,7 @@
 .taskslist-item:last-child {
   border: 0;
   padding-bottom: 0;
-} 
+}
 .taskslist-item h2 {
   font-size: .875em;
   margin: 0 0 .5rem;
@@ -37,6 +37,7 @@
   float: right;
   margin-left: .5rem;
   margin-top: -5px;
+  cursor: pointer;
 }
 .btn-icon,
 .check-icon,
@@ -47,6 +48,10 @@
 .check-icon path,
 .pencil-icon path {
   fill: $grey-light;
+}
+.btn-icon:hover .check-icon path,
+.btn-icon:hover .pencil-icon path {
+  fill: $secondary;
 }
 .pencil-icon.active path {
   fill: $primary;

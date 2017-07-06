@@ -1,3 +1,10 @@
+.tasknew-form {
+  @media screen and (min-width: $break-m) {
+    width: 400px;
+    margin: auto;
+  }
+}
+
 .form-group {
   font-size: .875em;
   margin-bottom: 1rem;
@@ -36,15 +43,26 @@
   resize: none;
   border-left: 1px solid $primary;
   border-right: 1px solid $primary;
+
+  @media screen and (min-width: $break-m) {
+    height: 80px;
+  }
 }
 .taskedit-form .form-group.textarea .form-input {
   height: 100px;
+
+  @media screen and (min-width: $break-m) {
+    height: 120px;
+  }
 }
 
 .btn.btn-primary {
   width: 100%;
   background-color: $secondary;
   padding: .5rem 1rem;
+}
+.btn.btn-primary:hover {
+  background-color: $secondary-hover;
 }
 
 .form-msg-error {

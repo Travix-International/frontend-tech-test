@@ -37,7 +37,7 @@ class TasksNew extends Component {
 
     return (
       <div className="grid">
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <form className="tasknew-form" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             name="title"
             type="text"
