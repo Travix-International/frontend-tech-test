@@ -22,7 +22,25 @@ class TasksListItem extends Component {
   }
 
   render() {
+    const editMode = this.state.edit;
     const task = this.props.task;
+
+    let taskContent = null;
+    if (editMode) {
+      taskContent = (
+        <div>
+          <h2>{task.title}</h2>
+          <div className="description">{task.description}</div>
+        </div>
+      );
+    } else {
+      taskContent = (
+        <div>
+          <h2>EDITAR</h2>
+          <div className="description">EDITAR</div>
+        </div>
+      );
+    }
 
     return (
       <li className="taskslist-item">
@@ -37,8 +55,7 @@ class TasksListItem extends Component {
           </svg>
         </div>
 
-        <h2>{task.title}</h2>
-        <div className="description">{task.description}</div>
+        {taskContent}
       </li>
     );
   }

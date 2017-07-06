@@ -5,9 +5,7 @@ import { addTask } from '../actions';
 
 class TasksNew extends Component {
   onSubmit({ title, description }) {
-    const { addTask, resetForm } = this.props;
-
-    addTask({ title, description });
+    this.props.addTask({ title, description });
   }
 
   renderField(field) {
