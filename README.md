@@ -31,4 +31,5 @@ And finally, you can start the server and the client running:
 
 `npm start` or `yarn start`
 
-# Thank you!
+
+Thank you!
