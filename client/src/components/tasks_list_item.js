@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteTask } from '../actions';
 
+import TaskEdit from './tasks_edit';
+
 class TasksListItem extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +28,7 @@ class TasksListItem extends Component {
     const task = this.props.task;
 
     let taskContent = null;
-    if (editMode) {
+    if (!editMode) {
       taskContent = (
         <div>
           <h2>{task.title}</h2>
@@ -35,10 +37,7 @@ class TasksListItem extends Component {
       );
     } else {
       taskContent = (
-        <div>
-          <h2>EDITAR</h2>
-          <div className="description">EDITAR</div>
-        </div>
+        <TaskEdit task={task}/>
       );
     }
 

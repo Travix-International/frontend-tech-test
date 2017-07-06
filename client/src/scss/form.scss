@@ -25,6 +25,9 @@
   border: 0;
   border-bottom: 1px solid $primary;
 }
+.taskedit-form .form-input {
+  width: 100%;
+}
 
 .form-group.textarea .form-input {
   display: block;
@@ -33,6 +36,9 @@
   resize: none;
   border-left: 1px solid $primary;
   border-right: 1px solid $primary;
+}
+.taskedit-form .form-group.textarea .form-input {
+  height: 100px;
 }
 
 .btn.btn-primary {
