@@ -1,38 +1,35 @@
 # Travix test
 
-Travix Front-End Tech Interview Test 
+Hi! This is my solution for Travix Front-End Tech Interview Test.
 
-# Introduction
+It was made with:
+- React
+- Redux, Redux Form and Redux Thunk
+- Sass
+- Cors to avoid cors error since I was starting to servers from the origin
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+# Things to improve
 
-Using your application we must be able to create, modify and delete a task.
+It would be great to add a "done" state for the tasks.
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
+Improve the UI with some animations
 
-However this server is not perfect. It could be improved and tested as well.
+# Usage
 
-So your mission is to develop the front-end from scratch using a famous front-end framework.
+First you will need to install the dependencies for the client, run:
+`cd client`
 
-We are also expecting from you a usable, responsive UI.
+`npm install` or `yarn install`
 
-# Process
+Then you need to install the servers dependencies, run:
 
-Fork the repository into your account. Once your code is ready open a pull-request on this repository and we will review it.
+`cd ..` to go back to the root
 
-# Requirements
+`npm install` or `yarn install`
 
-* React 14+
-* Redux or Flux or Frint or whateverelse with a one-way data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
+And finally, you can start the server and the client running:
 
-# Bonus
+`npm start` or `yarn start`
 
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us !
+
+Thank you!

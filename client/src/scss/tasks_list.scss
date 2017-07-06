@@ -1,0 +1,58 @@
+.taskslist {
+  padding: 1em;
+  list-style: none;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.taskslist-item {
+  padding: 1em 0;
+  border-bottom: 1px solid $grey-light;
+}
+.taskslist-item:first-child {
+  padding-top: 0;
+}
+.taskslist-item:last-child {
+  border: 0;
+  padding-bottom: 0;
+}
+.taskslist-item h2 {
+  font-size: .875em;
+  margin: 0 0 .5rem;
+}
+
+.taskslist-item .description {
+  font-family: 'Merriweather', serif;
+  font-size: .75em;
+  line-height: 1.5;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.no-tasks {
+  font-size: .875em;
+  text-align: center;
+}
+
+.btn-icon {
+  float: right;
+  margin-left: .5rem;
+  margin-top: -5px;
+  cursor: pointer;
+}
+.btn-icon,
+.check-icon,
+.pencil-icon {
+  width: 24px;
+  height: 24px;
+}
+.check-icon path,
+.pencil-icon path {
+  fill: $grey-light;
+}
+.btn-icon:hover .check-icon path,
+.btn-icon:hover .pencil-icon path {
+  fill: $secondary;
+}
+.pencil-icon.active path {
+  fill: $primary;
+}
