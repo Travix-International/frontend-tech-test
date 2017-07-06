@@ -37,7 +37,7 @@ class TasksListItem extends Component {
       );
     } else {
       taskContent = (
-        <TaskEdit task={task}/>
+        <TaskEdit task={task} editToggle={this.onEdit.bind(this)}/>
       );
     }
 

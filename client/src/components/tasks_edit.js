@@ -12,6 +12,9 @@ class TasksEdit extends Component {
 
   onSubmit({ title, description }) {
     const id = this.props.task.id;
+
+    this.props.updateTask({ id, title, description });
+    this.props.editToggle();
   }
 
   renderField(field) {

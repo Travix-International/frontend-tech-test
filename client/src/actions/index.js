@@ -19,7 +19,7 @@ export function fetchTasks() {
   };
 }
 
-export function addTask({ title, description}) {
+export function addTask({ title, description }) {
   return (dispatch) => {
     axios.post(`${API_URL}/task/create/${title}/${description}`)
       .then(({ data }) => {
@@ -39,6 +39,19 @@ export function deleteTask(id) {
       })
       .catch(() => {
         console.log('error');
+      })
+  };
+}
+
+export function updateTask({ id, title, description }) {
+  return (dispatch) => {
+    console.log('oi');
+    axios.put(`${API_URL}/task/update/${id}/${title}/${description}`)
+      .then(() => {
+        dispatch(fetchTasks());
+      })
+      .catch((error) => {
+        console.log(error);
       })
   };
 }
