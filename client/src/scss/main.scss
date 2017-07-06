@@ -1,0 +1,26 @@
+@import 'normalize';
+@import 'reset';
+@import 'colors';
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: $grey;
+}
+
+.app-title {
+  text-align: center;
+  color: $primary;
+  margin: 1rem 0;
+  text-transform: uppercase;
+}
+
+.grid {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  padding: 0 1em;
+}
+
+@import 'tasks_list';
+@import 'form';

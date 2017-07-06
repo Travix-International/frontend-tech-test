@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+fieldset {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+textarea, input, button {
+  outline: none;
+}
+
+button {
+  border: 0;
+  font-size: 1em;
+}
