@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, reset } from 'redux-form';
 import { addTask } from '../actions';
 
 class TasksNew extends Component {
   onSubmit({ title, description }) {
-    this.props.addTask({ title, description });
+    const { addTask, resetForm } = this.props;
+
+    addTask({ title, description });
   }
 
   renderField(field) {
@@ -77,7 +79,11 @@ function validate(values) {
 	return errors;
 }
 
-const newTaskForm = reduxForm({ form: 'newTaskForm', validate })(TasksNew);
+const newTaskForm = reduxForm({
+  form: 'newTaskForm',
+  onSubmitSuccess: (result, dispatch) => dispatch(reset('newTaskForm')),
+  validate
+})(TasksNew);
 
 function mapStateToProps(state) {
   return { state };
