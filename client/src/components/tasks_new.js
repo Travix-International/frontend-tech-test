@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { addTask, fetchTasks } from '../actions';
+import { addTask } from '../actions';
 
 class TasksNew extends Component {
   onSubmit({ title, description }) {
     this.props.addTask({ title, description });
-    this.props.fetchTasks();
   }
 
   renderField(field) {
@@ -84,4 +83,4 @@ function mapStateToProps(state) {
   return { state };
 }
 
-export default connect (mapStateToProps, { addTask, fetchTasks })(newTaskForm);
+export default connect (mapStateToProps, { addTask })(newTaskForm);

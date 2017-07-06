@@ -24,3 +24,15 @@
   font-size: .875em;
   text-align: center;
 }
+
+.btn-check {
+  float: right;
+}
+.btn-check,
+.check-icon {
+  width: 24px;
+  height: 24px;
+}
+.check-icon path {
+  fill: $grey;
+}
