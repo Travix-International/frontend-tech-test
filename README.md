@@ -1,38 +1,58 @@
-# Travix test
+![](http://jpsierens.com/wp-content/uploads/2016/06/react-eco-wp.gif)
 
-Travix Front-End Tech Interview Test 
+# webpack-react-redux
+A boilerplate for playing around with react, redux and react-router with the help of webpack.
 
-# Introduction
+Contains: 
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+* a working example of a filterable table which you can play around with (look below).
+* ES6 - 7 Support with Babel
+* Redux dev tools to help you keep track of the app's state
+* Routing
+* hot module replacement support so you can change modules or react components without having to reload the browser
+* a webpack production config so you can build the app and make it ready for production
+* Sass support, just import your styles wherever you need them
+* eslint to keep your js readable
+* much more...
 
-Using your application we must be able to create, modify and delete a task.
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
 
-However this server is not perfect. It could be improved and tested as well.
+![](http://jpsierens.com/wp-content/uploads/2016/06/filterableTable-1.gif)
 
-So your mission is to develop the front-end from scratch using a famous front-end framework.
 
-We are also expecting from you a usable, responsive UI.
+## Run the app
 
-# Process
+0. ```npm install```
+0. ```npm start```
 
-Fork the repository into your account. Once your code is ready open a pull-request on this repository and we will review it.
+Once running, if you want to hide the redux dev monitor: ```CTRL+H```
 
-# Requirements
+Yes, it takes a while to load the first time you open the app.
 
-* React 14+
-* Redux or Flux or Frint or whateverelse with a one-way data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
+### Is the hot module replacement really working?
 
-# Bonus
+Yup! Take a look:
 
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us !
+![](http://jpsierens.com/wp-content/uploads/2016/06/HMR4.gif)
+
+The app updates without the browser having to reload. You don't lose state!
+
+## Build the app
+```npm run build```
+
+This will build the app into the "dist" directory in the root of the project. It contains the index.html along with the minified assets, ready for production.
+
+![](http://i.imgur.com/uUg2A3S.png)
+
+It should look something like the above image.
+
+## I don't understand anything!
+
+I went ahead and wrote a detailed series of posts on this project for you. I hope it helps you understand better:
+
+* [configuring webpack](http://jpsierens.com/tutorial-react-redux-webpack/)
+* [understanding the app, part 1 (index.js, store, reducers)](http://jpsierens.com/simple-react-redux-application/)
+* [understanding the app, part 2 ( Root.js, router and the rest of the app)](http://jpsierens.com/simple-react-redux-application-2/)
+
+## Why doesn't it have async?
+To keep it unopinionated. You choose what async library you want. If you want to check out a full example with async in it, check this simple [todo-app](https://github.com/jpsierens/todo-app) that uses redux-sagas.
