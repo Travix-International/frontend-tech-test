@@ -6,4 +6,6 @@ export const FILTERS = {
 export const TODO_ACTIONS = {
     ADD_TODO: 'ADD_TODO'
 };
-
+export const FETCH = {
+    'GET_TASKS': 'GET_TASKS'
+};

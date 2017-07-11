@@ -1,4 +1,4 @@
-import {FILTERS, TODO_ACTIONS} from './types';
+import {FILTERS, TODO_ACTIONS, FETCH } from './types';
 
 let nextTodoId = 0;
 export const addNewTodo = text => {
@@ -22,3 +22,11 @@ export const toggleTodo = id => {
         id
     }
 };
+
+
+function requestTasks(tasks) {
+    return {
+        type: FETCH.GET_TASKS,
+        tasks
+    }
+}
