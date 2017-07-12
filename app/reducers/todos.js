@@ -20,11 +20,7 @@ const todos = (state = [], action) => {
                     ? {...todo, completed: !todo.completed}
                     : todo
             );
-        case FETCH.GET_TASKS:
-            return [
-                ...state,
-                ...action.tasks
-            ];
+
         default:
             return state
     }

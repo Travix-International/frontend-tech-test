@@ -42,7 +42,7 @@ export function fetchDataSuccess(items) {
         items
     };
 }
-export function fetchData(url) {
+export function fetchTasks(url) {
     return (dispatch) => {
         dispatch(isLoading(true));
 

@@ -6,8 +6,7 @@ import visibilityFilter from './visibilityFilter'
 export function fetchingFailed(state = false, action) {
     switch (action.type) {
         case 'FETCHING_FAILED':
-            return action.hasErrored;
-
+            return action.hasErrored
         default:
             return state;
     }
