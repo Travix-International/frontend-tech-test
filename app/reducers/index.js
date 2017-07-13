@@ -23,6 +23,9 @@ export function isLoading(state = false, action) {
 }
 
 export function fetchDataSuccess(state = [], action) {
+
+    console.log(action);
+
     switch (action.type) {
         case 'FETCH_DATA_SUCCESS':
             return action.items;

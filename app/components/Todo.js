@@ -11,6 +11,7 @@ const Todo = ({ onClick, completed, text }) => (
         }}
     >
         {text}
+        <button className="btn-xs  btn-success" onClick={onClick}> &#32;&#32;&#8744;	</button>
     </li>
 );
 

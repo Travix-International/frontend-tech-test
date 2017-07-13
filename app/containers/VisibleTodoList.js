@@ -9,6 +9,7 @@ import visibilities from '../consts/visibilityTypes'
 import PropTypes from 'prop-types'
 
 const getVisibleTodos = (todos, filter) => {
+    debugger;
     switch (filter) {
         case visibilities.ALL:
             return todos;
@@ -25,8 +26,10 @@ class VisibleTodoList extends Component {
         this.props.fetchData('/tasks');
     }
     render() {
+        debugger;
+
         if (this.props.hasErrored) {
-            return <p>Sorry! There was an error loading the items</p>;
+            return <p>Sorry! There was an error loading the tasks</p>;
         }
 
         if (this.props.isLoading) {
@@ -35,11 +38,7 @@ class VisibleTodoList extends Component {
 
         return (
             <ul>
-                {this.props.items.map((item) => (
-                    <li key={item.id}>
-                        {item.label}
-                    </li>
-                ))}
+                <TodoList todos={this.props.todos} onTodoClick={id => dispatch(toggleTodo(id))}/>
             </ul>
         );
     }
@@ -47,8 +46,8 @@ class VisibleTodoList extends Component {
 }
 const mapStateToProps = state => {
     return {
-        hasErrored: state.itemsHasErrored,
-        isLoading: state.itemsIsLoading,
+        hasErrored: state.fetchingFailed,
+        isLoading: state.isLoading,
         todos: getVisibleTodos(state.todos, state.visibilityFilter)
     }
 };
@@ -59,7 +58,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(toggleTodo(id));
 
         },
-        fetchData: (url) => dispatch(fetchTasks(url)),
+        fetchData: (url) => dispatch(fetchTasks(url))
 
     }
 };
@@ -71,9 +70,9 @@ VisibleTodoList.propTypes = {
     isLoading: PropTypes.bool.isRequired
 };
 
-const VisibleTodoList = connect(
+VisibleTodoList = connect(
     mapStateToProps,
     mapDispatchToProps
-)(TodoList);
+)(VisibleTodoList);
 
 export default VisibleTodoList
