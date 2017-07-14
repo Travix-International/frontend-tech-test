@@ -9,7 +9,7 @@ const Main = () => (
         <h3>Todo apps</h3>
         <AddTodo />
         <VisibleTodoList />
-        <Filters />
+        {/*<Filters />*/}
     </div>
 );
 export default Main;

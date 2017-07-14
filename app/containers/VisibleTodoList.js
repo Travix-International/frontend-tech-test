@@ -9,7 +9,6 @@ import visibilities from '../consts/visibilityTypes'
 import PropTypes from 'prop-types'
 
 const getVisibleTodos = (todos, filter) => {
-    debugger;
     switch (filter) {
         case visibilities.ALL:
             return todos;
@@ -21,12 +20,14 @@ const getVisibleTodos = (todos, filter) => {
             return todos;
     }
 };
+
 class VisibleTodoList extends Component {
+
     componentDidMount() {
-        this.props.fetchData('/tasks');
+        //this.props.fetchData('/tasks');
     }
+
     render() {
-        debugger;
 
         if (this.props.hasErrored) {
             return <p>Sorry! There was an error loading the tasks</p>;
@@ -35,36 +36,36 @@ class VisibleTodoList extends Component {
         if (this.props.isLoading) {
             return <p>Loading…</p>;
         }
+        //debugger;
 
         return (
-            <ul>
-                <TodoList todos={this.props.todos} onTodoClick={id => dispatch(toggleTodo(id))}/>
-            </ul>
+            <TodoList todos={this.props.todos} onTodoClick={this.props.toggleTodo}/>
         );
     }
 
+
 }
 const mapStateToProps = state => {
+
+    const { todoStore } = state;
+
     return {
-        hasErrored: state.fetchingFailed,
-        isLoading: state.isLoading,
-        todos: getVisibleTodos(state.todos, state.visibilityFilter)
+         hasErrored: todoStore.fetchingFailed,
+         isLoading: todoStore.isLoading,
+         todos:  getVisibleTodos(todoStore.todos, todoStore.visibilityFilter)
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onTodoClick: id => {
-            dispatch(toggleTodo(id));
-
-        },
+        toggleTodo: id => dispatch(toggleTodo(id)) ,
         fetchData: (url) => dispatch(fetchTasks(url))
-
     }
 };
 
 VisibleTodoList.propTypes = {
     fetchData: PropTypes.func.isRequired,
+    toggleTodo: PropTypes.func.isRequired,
     todos: PropTypes.array.isRequired,
     hasErrored: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired

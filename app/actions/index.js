@@ -4,42 +4,46 @@ let nextTodoId = 0;
 export const addNewTodo = text => {
     return {
         type: TODO_ACTIONS.ADD_TODO,
-        id: nextTodoId++,
-        text
+        payload: {
+            id: nextTodoId++,
+            text
+        }
     }
 };
 
 export const setVisibilityFilter = filter => {
     return {
         type: FILTERS.FILTER_BY,
-        filter
+        payload: filter
     }
 };
 
 export const toggleTodo = id => {
     return {
         type: FILTERS.TOGGLE_TODO,
-        id
+        payload: id
     }
 };
 export function fetchingFailed(bool) {
     return {
         type: 'FETCHING_FAILED',
-        hasErrored: bool
+        payload: {
+            hasErrored: bool
+        }
     };
 }
 
 export function isLoading(bool) {
     return {
         type: 'IS_LOADING',
-        isLoading: bool
+        payload: bool
     };
 }
 
 export function fetchDataSuccess(items) {
     return {
         type: 'FETCH_DATA_SUCCESS',
-        items
+        payload: items
     };
 }
 export function fetchTasks(url) {
