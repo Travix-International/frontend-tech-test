@@ -9,7 +9,7 @@
         {
             "id": 1,
             "title": "To do something else",
-            "completed": false,
+            "completed": true,
             "description": "Atributes some desc"
         },
         {

@@ -3,9 +3,8 @@ export const FILTERS = {
     TOGGLE_TODO: 'TOGGLE_TODO'
 };
 
-export const TODO_ACTIONS = {
-    ADD_TODO: 'ADD_TODO'
-};
 export const FETCH = {
-    'GET_TASKS': 'GET_TASKS'
+    FETCH_DONE: 'FETCH_DONE',
+    IS_LOADING: 'IS_LOADING',
+    FETCH_FAILED: 'FETCH_FAILED'
 };

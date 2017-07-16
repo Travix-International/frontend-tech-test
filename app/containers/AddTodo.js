@@ -3,13 +3,9 @@
  */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addNewTodo } from '../actions'
+import { addTodo } from '../actions'
 
 class AddTodo extends Component {
-    componentDidMount() {
-        this.props.addNewTodoProp(" aaaaaaaaaaaaaaaaaa  aaaaaaaaa");
-        this.props.addNewTodoProp(" bbbbbbbbbbbbbbbbbbbbbbb  bbbbbbbbbb")
-    }
 
     render() {
         let input;
@@ -22,7 +18,7 @@ class AddTodo extends Component {
                         if (!input.value.trim()) {
                             return
                         }
-                        //dispatch(addNewTodo(input.value));
+                       this.props.addNewTodoProp(input.value);
                         input.value = '';
                     }}
                 >
@@ -45,16 +41,12 @@ class AddTodo extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        // hasErrored: state.fetchingFailed,
-        // isLoading: state.isLoading,
-        // todos: getVisibleTodos(state.todos, state.visibilityFilter)
-    }
+    return { }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        addNewTodoProp: (text) => dispatch(addNewTodo(text))
+        addNewTodoProp: (text) => dispatch(addTodo(text))
     }
 };
 

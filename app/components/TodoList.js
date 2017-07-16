@@ -9,18 +9,18 @@ const TodoList = ({ todos, onTodoClick }) => {
     return (
         <ul>
             {todos.map(todo => (
-                <Todo key={todo.id} {...todo} onClick={() => onTodoClick(todo.id)} />
+                <Todo key={todo.id} {...todo} onClick={() => onTodoClick(todo.id, todo.title, !todo.completed)} />
             ))}
         </ul>
     )
-}
+};
 
 TodoList.propTypes = {
     todos: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number.isRequired,
             completed: PropTypes.bool.isRequired,
-            text: PropTypes.string.isRequired
+            title: PropTypes.string.isRequired,
         }).isRequired
     ).isRequired,
     onTodoClick: PropTypes.func.isRequired

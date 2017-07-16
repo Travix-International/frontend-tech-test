@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { toggleTodo , fetchTasks} from '../actions'
+import { updateTodo , fetchTasks} from '../actions'
 import TodoList from '../components/TodoList'
 import visibilities from '../consts/visibilityTypes'
 import PropTypes from 'prop-types'
@@ -24,25 +24,22 @@ const getVisibleTodos = (todos, filter) => {
 class VisibleTodoList extends Component {
 
     componentDidMount() {
-        //this.props.fetchData('/tasks');
+        this.props.fetchData();
     }
 
     render() {
 
         if (this.props.hasErrored) {
-            return <p>Sorry! There was an error loading the tasks</p>;
+            return <p className="text-danger">Sorry! There was an error loading the tasks</p>;
         }
 
         if (this.props.isLoading) {
             return <p>Loading…</p>;
         }
-        //debugger;
-
         return (
             <TodoList todos={this.props.todos} onTodoClick={this.props.toggleTodo}/>
         );
     }
-
 
 }
 const mapStateToProps = state => {
@@ -58,8 +55,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        toggleTodo: id => dispatch(toggleTodo(id)) ,
-        fetchData: (url) => dispatch(fetchTasks(url))
+        toggleTodo: (id, title, completed)=> dispatch(updateTodo(id, title, completed)) ,
+        fetchData: (url) => dispatch(fetchTasks())
     }
 };
 

@@ -1,15 +1,5 @@
-import {FILTERS, TODO_ACTIONS, FETCH } from './types';
+import {FILTERS, FETCH } from './types';
 
-let nextTodoId = 0;
-export const addNewTodo = text => {
-    return {
-        type: TODO_ACTIONS.ADD_TODO,
-        payload: {
-            id: nextTodoId++,
-            text
-        }
-    }
-};
 
 export const setVisibilityFilter = filter => {
     return {
@@ -18,15 +8,10 @@ export const setVisibilityFilter = filter => {
     }
 };
 
-export const toggleTodo = id => {
-    return {
-        type: FILTERS.TOGGLE_TODO,
-        payload: id
-    }
-};
+
 export function fetchingFailed(bool) {
     return {
-        type: 'FETCHING_FAILED',
+        type: FETCH.FETCH_FAILED,
         payload: {
             hasErrored: bool
         }
@@ -35,33 +20,63 @@ export function fetchingFailed(bool) {
 
 export function isLoading(bool) {
     return {
-        type: 'IS_LOADING',
+        type: FETCH.IS_LOADING,
         payload: bool
     };
 }
 
 export function fetchDataSuccess(items) {
     return {
-        type: 'FETCH_DATA_SUCCESS',
+        type: FETCH.FETCH_DONE,
         payload: items
     };
 }
-export function fetchTasks(url) {
+export function fetchTasks() {
     return (dispatch) => {
         dispatch(isLoading(true));
 
-        fetch(url)
+        fetch('/tasks')
             .then((response) => {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-
                 dispatch(isLoading(false));
 
                 return response;
             })
             .then((response) => response.json())
             .then((items) => dispatch(fetchDataSuccess(items)))
+            .catch(() => dispatch(fetchingFailed(true)));
+    };
+}
+
+export function addTodo(title, description = 'dummy desc') {
+    return (dispatch) => {
+
+        fetch(`/task/create/${title}/${description}`, {method: 'POST'})
+            .then((response) => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response;
+            })
+            .then((response) => response.json())
+            .then((items) => dispatch(fetchTasks()))
+            .catch(() => dispatch(fetchingFailed(true)));
+    };
+}
+
+export function updateTodo(id, title, completed) {
+    return (dispatch) => {
+        fetch(`/task/update/${id}/${title}/${completed}`, {method: 'PUT'})
+            .then((response) => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response;
+            })
+            .then((response) => response.json())
+            .then((items) => dispatch(fetchTasks()))
             .catch(() => dispatch(fetchingFailed(true)));
     };
 }
