@@ -42,7 +42,6 @@ export function todoReducer(state = {
             return state
     }
 
-    return state;
 }
 
 
