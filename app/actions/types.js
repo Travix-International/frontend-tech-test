@@ -1,0 +1,10 @@
+export const FILTERS = {
+    FILTER_BY: 'FILTER_BY',
+    TOGGLE_TODO: 'TOGGLE_TODO'
+};
+
+export const FETCH = {
+    FETCH_DONE: 'FETCH_DONE',
+    IS_LOADING: 'IS_LOADING',
+    FETCH_FAILED: 'FETCH_FAILED'
+};
