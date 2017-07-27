@@ -52,7 +52,9 @@ export default class TodoList extends Component {
 							<div>
 								<div className="progress-wrapper"><Progress completed={DoneRatio} /></div>
 								<span className="">{completedTasks.length} Items left.</span>
-								<div className="make-scrollable" onClick={this.handleScrollable}>Fixed Height</div>
+								<div className="make-scrollable" onClick={this.handleScrollable}>
+									{scrollable === true ? 'Normal Height' : 'Fixed Height'}
+								</div>
 							</div>
 							: ''
 						}
