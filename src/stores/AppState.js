@@ -15,19 +15,21 @@ class Todo {
 export default class AppState {
   @observable tasks;
   @observable task;
+  @observable newTaskTitle;
+  @observable scrollable;
 
   @computed get completedTasks() {
     return this.tasks.filter(task => !task.completed)
   }
 
-  @observable newTaskTitle;
-
   constructor() {
     this.tasks = [];
     this.task = {};
     this.newTaskTitle = '';
+    this.scrollable = false;
   }
-
+  // Actions
+  // ===========================
   @action setTasks(data) {
     this.tasks = data;
   }

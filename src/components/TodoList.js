@@ -10,15 +10,11 @@ import TodoItem 						from "./TodoItem";
 export default class TodoList extends Component {
 	constructor(props) {
 		super(props);
-		this.store = this.props.store;
-		this.handleDelete     = this.handleDelete.bind(this);
-		this.toggleComplete 	= this.toggleComplete.bind(this);
-		this.handleChangeTitle 	= this.handleChangeTitle.bind(this);
-		this.handleScrollable 	= this.handleScrollable.bind(this);
-		// handle Todos wrap style
-		this.state = {
-			scrollable: false
-		}
+		this.store             = this.props.store;
+		this.handleDelete      = this.handleDelete.bind(this);
+		this.toggleComplete    = this.toggleComplete.bind(this);
+		this.handleChangeTitle = this.handleChangeTitle.bind(this);
+		this.handleScrollable  = this.handleScrollable.bind(this);
 	}
 	handleDelete(id){
 		this.store.appState.deleteTask(id);
@@ -31,18 +27,11 @@ export default class TodoList extends Component {
 		this.store.appState.ChangeTaskTitle(task, value);
 	}
 	handleScrollable() {
-		var { scrollable } = this.state;
-		this.setState({
-			scrollable: !scrollable
-		})
+		this.store.appState.scrollable = !this.store.appState.scrollable;
 	}
 	render() {
-		const { tasks, completedTasks } = this.store.appState;
-		var { scrollable } = this.state;
-		const style = {
-			height: '397px',
-    	overflowY: 'scroll'
-		}
+		const { tasks, completedTasks, scrollable } = this.store.appState;
+		const style = {height: '397px',overflowY: 'scroll'}
 		var taskList = tasks.map( (task)=> {
 			return (
 				<TodoItem
