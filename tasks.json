@@ -1,3 +1,29 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "title": "First todo task..",
+      "completed": false,
+      "id": 1
+    },
+    {
+      "title": "Double Click to edit me, and press Enter",
+      "completed": false,
+      "id": 17
+    },
+    {
+      "title": "Hover to make delete button visible.",
+      "completed": false,
+      "id": 18
+    },
+    {
+      "title": "A finished Todo task..",
+      "completed": true,
+      "id": 19
+    },
+    {
+      "title": "Type your task, then press Enter or + button.",
+      "completed": false,
+      "id": 21
+    }
+  ]
 }

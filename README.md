@@ -1,38 +1,36 @@
-# Travix test
+# Todos
+Travix Front-End Tech Task (React/Mobx)
 
-Travix Front-End Tech Interview Test 
+## Getting Started
+Task | Description
+---  | ---
+`npm install` | to install the packages
+`npm start` | project will run at http://localhost:8080/
+`npm run build` | To build
+`npm run preview` | To preview then go to http://localhost:1234 for the minified production bundle, server should be running `npm start`
 
-# Introduction
+![Travix Todo](http://gdurl.com/ZW8D "Travix Todo by Albsugy")
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+## Features
+- Create a task - type then press Enter or (+) button.
+- Modify - Double click on a task to edit.
+- Delete - Hover over a task, a red delete button will be shown click on it to delete.
+- Mark as done - clcik on the right checkbox to mark a task as completed.
+- Fixed height - click on "Fixed Height" button to make todos wrapped scrollable.
 
-Using your application we must be able to create, modify and delete a task.
+## Technologies
+- React 15
+- MobX
+- Webpack
+- ES6
+- SASS
+- Bootstrap & FontAwesome (responsive)
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
+## Required properties
+- `id` number
+- `title` string
+- `completed` boolean
 
-However this server is not perfect. It could be improved and tested as well.
-
-So your mission is to develop the front-end from scratch using a famous front-end framework.
-
-We are also expecting from you a usable, responsive UI.
-
-# Process
-
-Fork the repository into your account. Once your code is ready open a pull-request on this repository and we will review it.
-
-# Requirements
-
-* React 14+
-* Redux or Flux or Frint or whateverelse with a one-way data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
-
-# Bonus
-
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us !
+Note:
+- server has been changed to fix some issues.
+- backend server run at http://localhost:3080/
