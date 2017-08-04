@@ -1,0 +1,17 @@
+body {
+  background: #f3f3f3;
+  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  padding: 0 5%;
+}
+
+%Section {
+  padding: 40px;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin: 20px;
+  background: #f3f3f3;
+}

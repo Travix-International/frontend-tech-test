@@ -1,0 +1,16 @@
+%Card {
+  font-size: 12px;
+  background: #fff;
+  padding: 50px;
+  text-align: left;
+  flex-basis: 100px;
+  margin: 15px;
+}
+
+%Card--float {
+  transition: all .2s ease-out;
+  &:hover {
+    transform: translateY(-5px);
+    @include material-shadow(5);
+  }
+}

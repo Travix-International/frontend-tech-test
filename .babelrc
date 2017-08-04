@@ -1,0 +1,42 @@
+{
+  "presets": [
+    ["env", {
+      "modules": false,
+      "targets": {
+        "ie": "11"
+      }
+    }],
+    "react",
+  ],
+  "plugins": [
+    "react-hot-loader/babel",
+    "transform-runtime",
+    "transform-class-properties",
+    "transform-es2015-spread",
+    "transform-object-rest-spread",
+    "transform-decorators",
+  ],
+  "env": {
+    "development": {
+      "plugins":[
+        ["react-intl", { "messagesDir": "./intl/extracted" }],
+        "react-element-info"
+      ]
+    },
+    "staging": {
+      "presets": ["babili"],
+      "plugins": [
+        "transform-react-constant-elements",
+        "transform-react-remove-prop-types",
+        "react-element-info"
+      ]
+    },
+    "production": {
+      "presets": ["babili"],
+      "plugins": [
+        "transform-react-constant-elements",
+        "transform-react-remove-prop-types"
+      ]
+    }
+  }
+}
