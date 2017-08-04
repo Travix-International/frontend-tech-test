@@ -1,0 +1,6 @@
+@import "../utils/styles/main.scss";
+
+.Todo__List {
+  @extend %Section;
+  flex-direction: column;
+}

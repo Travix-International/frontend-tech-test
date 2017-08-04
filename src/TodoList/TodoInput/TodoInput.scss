@@ -1,0 +1,25 @@
+@import "../../utils/styles/main.scss";
+
+.Todo__Input {
+  @extend %Card;
+  @include material-shadow(1);
+  padding: 0;
+
+  input {
+    width: 95%;
+    height: 60px;
+    padding: 10px;
+    font-size: 3vw;
+    outline: none;
+    border: 0;
+  }
+
+  span {
+    color: #d3d3d3;
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding-bottom: 10px;
+    margin-left: -10px;
+  }
+}

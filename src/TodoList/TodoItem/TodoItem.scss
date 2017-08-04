@@ -1,0 +1,23 @@
+@import "../../utils/styles/main.scss";
+
+.Todo__Item {
+  @extend %Card;
+  @include material-shadow(1);
+  font-size: 4vw;
+  padding: 5vw;
+  cursor: pointer;
+
+  @include material-shadow-float(3);
+}
+
+.Todo__Item--Complete {
+  @extend %Card;
+  @include material-shadow(0);
+  font-size: 4vw;
+  padding: 5vw;
+  cursor: pointer;
+  background-color: #d3d3d3;
+  opacity: 0.6;
+
+  @include material-shadow-float(2);
+}
