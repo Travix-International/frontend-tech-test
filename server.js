@@ -3,6 +3,13 @@
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+  next();
+});
+
 /**
  * GET /tasks
  * 
@@ -66,7 +73,9 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(200).json({
+        task,
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
