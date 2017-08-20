@@ -3,6 +3,13 @@
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+  next();
+});
+
 /**
  * GET /tasks
  * 
@@ -66,7 +73,9 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(200).json({
+        task,
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -88,9 +97,10 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task/create/:id/:title/:description', (req, res) => {
+  const id = parseInt(req.params.id, 10);
   const task = {
-    id: tasksContainer.tasks.length,
+    id,
     title: req.params.title,
     description: req.params.description,
   };
@@ -98,7 +108,7 @@ app.post('/task/create/:title/:description', (req, res) => {
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
-    message: 'Resource created',
+    task,
   });
 });
 
@@ -114,15 +124,14 @@ app.post('/task/create/:title/:description', (req, res) => {
  */
 app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
-
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
   
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+      const taskIndex = tasksContainer.tasks.indexOf(task);
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
-        message: 'Updated successfully',
+        task,
       });
     } else {
       return es.status(404).json({
