@@ -1,3 +1,15 @@
+# Rafael's answer
+
+# To run
+
+1. Start back-end server
+`npm install`
+`npm start`
+2. Start front-end server
+`cd front-end`
+`npm install`
+`npm start`
+
 # Travix test
 
 Travix Front-End Tech Interview Test 
