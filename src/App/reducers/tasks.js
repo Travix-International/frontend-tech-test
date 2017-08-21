@@ -1,4 +1,8 @@
 import {
+  Task_Add_Request,
+  Task_Add_Success,
+  Task_Add_Failure,
+
   Task_Edit_Request,
   Task_Edit_Success,
   Task_Edit_Failure,
@@ -28,7 +32,28 @@ const initState = {
 }
 
 export default function tasks(state= initState, action) {
+  console.log('Run Reducer with state = '+ state +' and action = '+ action);
+  
   switch(action.type) {
+    case Task_Add_Request:
+      return {
+        tasks: [
+          ...state.tasks,
+            {
+              content: action.payload.content,
+              done: false,
+              editable: false,
+              loading: false // when we make it async it will be true
+            }
+          ]
+        }
+    
+    case Task_Add_Success:
+      return state;
+    
+    case Task_Add_Failure:
+      return state;
+    
     case Task_Edit_Request:
       return state.tasks.map(function(task, id){
         if(id === action.id) {

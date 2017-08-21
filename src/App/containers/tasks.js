@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import TaskCard from  '../presentationals/TaskCard';
+import Input from '../presentationals/Input';
 import * as actionCreators from '../actions/tasks'
 
 class TasksList extends React.Component {
@@ -14,11 +15,14 @@ class TasksList extends React.Component {
   }
 
   render() {
-    const { tasks } = this.props;
+    const { tasks, actions } = this.props;
     console.log(this.props);
     return (
       <div>
-        {this.listOfTasks(tasks || [])}
+        <Input onEnter={ actions.add }/>
+        <div>
+          {this.listOfTasks(tasks || [])}
+        </div>
       </div>
     )
   }
