@@ -1,3 +1,5 @@
+import './styles/styles.scss';
+
 import React from 'react';
 import { render } from 'react-dom';
 
@@ -6,8 +8,6 @@ import createStore from './create-store'
 import App from './App/Container'
 
 const store = createStore()
-console.log('----store-----');
-console.log(store.getState())
 
 render(
   <App store={store}/>,

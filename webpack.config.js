@@ -4,6 +4,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   filename: 'index.html',
   inject: 'body'
 })
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -20,8 +21,21 @@ module.exports = {
             presets: ['env', 'react', 'stage-2']
           }
         }
+      },
+      // Sass loader, used for autoprefixer
+      {
+        test: /\.scss$/,
+        use: [{
+            loader: "style-loader"
+        }, {
+            loader: "css-loader"
+        }, {
+            loader: "sass-loader" 
+        }]
+
       }
     ]
- },
+
+  },
  plugins: [HtmlWebpackPluginConfig]
 }
