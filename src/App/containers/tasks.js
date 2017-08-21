@@ -18,9 +18,11 @@ class TasksList extends React.Component {
     const { tasks, actions } = this.props;
     console.log(this.props);
     return (
-      <div>
-        <Input onEnter={ actions.add }/>
-        <div>
+      <div className="tasks">
+        <div className="tasks__input">
+          <Input onEnter={ actions.add }/>
+        </div>
+        <div className="tasks__container">
           {this.listOfTasks(tasks || [])}
         </div>
       </div>
