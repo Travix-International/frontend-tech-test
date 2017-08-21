@@ -8,7 +8,7 @@ const tasksContainer = require('./tasks.json');
  * 
  * Return the list of tasks with status code 200.
  */
-app.get('/tasks', (req, res) => {
+app.get('/api/tasks', (req, res) => {
   return res.status(200).json(tasksContainer);
 });
 
@@ -23,11 +23,11 @@ app.get('/tasks', (req, res) => {
  * If not found return status code 404.
  * If id is not valid number return status code 400.
  */
-app.get('/task/:id', (req, res) => {
+app.get('/api/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
-  if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+  if (!Number.isNaN(Number(id))) {
+    const task = tasksContainer.find((item) => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
@@ -57,10 +57,10 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
+app.put('/api/task/update/:id/:title/:description', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
-  if (!Number.isNaN(id)) {
+  if (!Number.isNaN(Number(id))) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
@@ -88,7 +88,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/api/task/create/:title/:description', (req, res) => {
   const task = {
     id: tasksContainer.tasks.length,
     title: req.params.title,
@@ -112,10 +112,10 @@ app.post('/task/create/:title/:description', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/task/delete/:id', (req, res) => {
+app.delete('/api/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
-  if (!Number.isNaN(id)) {
+  if (!Number.isNaN(Number(id))) {
     const task = tasksContainer.tasks.find(item => item.id === id);
   
     if (task !== null) {
