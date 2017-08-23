@@ -10,6 +10,8 @@ import {
   Task_Remove_Request,
   Task_Remove_Success,
   Task_Remove_Failure,
+
+  Task_Editable,
 } from '../actions/actions'
 
 const initState = {
@@ -55,14 +57,17 @@ export default function tasks(state= initState, action) {
       return state;
     
     case Task_Edit_Request:
-      return state.tasks.map(function(task, id){
-        if(id === action.id) {
-          task.loading = true;
+      state.tasks.forEach(function(task, id){
+        if(action.payload.id === id) {
+          state.tasks[id].content = action.payload.content;
+          state.tasks[id].editable = false;
         }
-
-        return task;
       })
 
+      return {
+        tasks: [...state.tasks]
+      }
+      
     case Task_Edit_Success:
       return state.tasks.map(function(task, id){
         if(id === action.id) {
@@ -74,7 +79,7 @@ export default function tasks(state= initState, action) {
 
     case Task_Edit_Failure:
       return state.tasks.map(function(task, id){
-        if(id === action.id) {
+        if(id === action.payload.id) {
           task.loading = false;
         }
 
@@ -82,13 +87,11 @@ export default function tasks(state= initState, action) {
       })
     
     case Task_Remove_Request:
-      return state.tasks.map(function(task, id){
-        if(id === action.id) {
-          task.loading = true;
-        }
-
-        return task;
-      })
+      state.tasks.splice(action.payload.id, 1);
+      
+      return {
+        tasks: [...state.tasks]
+      }
 
     case Task_Remove_Success:
       return state.tasks.slice(action.id, 1);
@@ -102,6 +105,16 @@ export default function tasks(state= initState, action) {
         return task;
       })
 
+    case Task_Editable:
+      state.tasks.forEach(function(task, id){
+        if(action.payload.id === id) {
+          state.tasks[id].editable = true;
+        }
+      })
+
+      return {
+        tasks: [...state.tasks]
+      }
     default:
       return state;
 

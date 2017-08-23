@@ -11,6 +11,8 @@ import {
   Task_Remove_Request,
   Task_Remove_Success,
   Task_Remove_Failure,
+
+  Task_Editable,
 } from './actions'
 
 export function add(content) {
@@ -22,14 +24,42 @@ export function add(content) {
   }
 }
 
-export function edit(delay) {
+export function edit(id, content) {
   return {
-    types: [Task_Edit_Request, Task_Edit_Success, Task_Edit_Failure],
-    promise: () => {
-      return new Promise((resolve, reject) => {
-        // Just simulating an async request to a server via a setTimeout
-        
-      })
+    type: Task_Edit_Request,
+    payload: {
+      id,
+      content,
     }
   }
 }
+
+export function remove(id) {
+  return {
+    type: Task_Remove_Request,
+    payload: {
+      id
+    }
+  }
+}
+
+export function makeEditable(id) {
+  return {
+    type: Task_Editable,
+    payload: {
+      id
+    }
+  }
+}
+
+// export function edit(delay) {
+//   return {
+//     types: [Task_Edit_Request, Task_Edit_Success, Task_Edit_Failure],
+//     promise: () => {
+//       return new Promise((resolve, reject) => {
+//         // Just simulating an async request to a server via a setTimeout
+        
+//       })
+//     }
+//   }
+// }

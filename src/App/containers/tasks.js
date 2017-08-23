@@ -7,16 +7,25 @@ import Input from '../presentationals/Input';
 import * as actionCreators from '../actions/tasks'
 
 class TasksList extends React.Component {
-  listOfTasks(tasks) {
 
-    return tasks.map(function(task, i){
-      return (<TaskCard key={i} task={task} />)
+  listOfTasks(tasks) {
+    const { remove, edit, makeEditable } = this.props.actions;
+
+    return tasks.map(function(task, id){
+      return (<TaskCard
+        key={id}
+        task={task}
+        onRemove={remove.bind(null, id)}
+        onEdit={edit.bind(null, id)}
+        makeEditable={makeEditable.bind(null, id)}
+      />)
     })
   }
 
   render() {
     const { tasks, actions } = this.props;
     console.log(this.props);
+    
     return (
       <div className="tasks">
         <div className="tasks__input">
