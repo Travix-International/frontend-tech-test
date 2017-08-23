@@ -13,6 +13,7 @@ import {
   Task_Remove_Failure,
 
   Task_Editable,
+  Task_Toggle_Done,
 } from './actions'
 
 export function add(content) {
@@ -46,6 +47,15 @@ export function remove(id) {
 export function makeEditable(id) {
   return {
     type: Task_Editable,
+    payload: {
+      id
+    }
+  }
+}
+
+export function toggleDone(id) {
+  return {
+    type: Task_Toggle_Done,
     payload: {
       id
     }

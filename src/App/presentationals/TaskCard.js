@@ -9,13 +9,20 @@ class TaskCard extends React.Component {
   }
 
   render() {
-    const { task, onEdit, onRemove, makeEditable } = this.props;
+    const { task, onEdit, onRemove, makeEditable, toggleDone } = this.props;
     return (
       <div className="task_card">
         <div className="task_card__content">
           
           { task.editable === false?
-            task.content
+            (<span
+              onClick={toggleDone}
+              style= {{
+                textDecoration: task.done ? 'line-through' : 'none'
+              }}
+            >
+              {task.content}
+            </span>)
             :
             (<input type="text" defaultValue={task.content} onKeyUp={this.editTask.bind(this)} />)
           }

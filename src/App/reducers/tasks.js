@@ -12,6 +12,7 @@ import {
   Task_Remove_Failure,
 
   Task_Editable,
+  Task_Toggle_Done,
 } from '../actions/actions'
 
 const initState = {
@@ -115,6 +116,18 @@ export default function tasks(state= initState, action) {
       return {
         tasks: [...state.tasks]
       }
+
+    case Task_Toggle_Done:
+      state.tasks.forEach(function(task, id){
+        if(action.payload.id === id) {
+          state.tasks[id].done = !state.tasks[id].done;
+        }
+      })
+
+      return {
+        tasks: [...state.tasks]
+      }
+
     default:
       return state;
 

@@ -11,5 +11,6 @@ export const Task_Remove_Success = 'Task_Remove_Success';
 export const Task_Remove_Failure = 'Task_Remove_Failure';
 
 export const Task_Editable = 'Task_Editable';
+export const Task_Toggle_Done = 'Task_Toggle_Done';
 
 

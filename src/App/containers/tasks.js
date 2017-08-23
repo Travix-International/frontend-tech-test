@@ -9,7 +9,7 @@ import * as actionCreators from '../actions/tasks'
 class TasksList extends React.Component {
 
   listOfTasks(tasks) {
-    const { remove, edit, makeEditable } = this.props.actions;
+    const { remove, edit, makeEditable, toggleDone } = this.props.actions;
 
     return tasks.map(function(task, id){
       return (<TaskCard
@@ -18,6 +18,7 @@ class TasksList extends React.Component {
         onRemove={remove.bind(null, id)}
         onEdit={edit.bind(null, id)}
         makeEditable={makeEditable.bind(null, id)}
+        toggleDone={toggleDone.bind(null, id)}
       />)
     })
   }
