@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Common.Tittle should render with props 1`] = `
+<h5
+  className="Title "
+>
+  the title
+</h5>
+`;

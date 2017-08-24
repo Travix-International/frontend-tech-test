@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Common.List should render with props 1`] = `
+<ListGroup
+  bsClass="list-group"
+  className=""
+>
+  <div
+    className="list-item"
+  >
+    1
+  </div>
+  <div
+    className="list-item"
+  >
+    2
+  </div>
+</ListGroup>
+`;

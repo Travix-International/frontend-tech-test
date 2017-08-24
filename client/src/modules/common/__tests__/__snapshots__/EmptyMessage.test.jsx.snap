@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Common.EmptyMessage should render with props 1`] = `
+<div
+  className="EmptyMessage "
+>
+  <div>
+    <div
+      className="EmptyMessage-Sign"
+    >
+      Here goes an empty sign
+    </div>
+    <div
+      className="EmptyMessage-Message"
+    >
+      <div
+        className="message"
+      />
+    </div>
+  </div>
+</div>
+`;
