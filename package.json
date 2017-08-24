@@ -16,7 +16,18 @@
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "enzyme": "^2.9.1",
+    "express": "^4.14.0",
+    "jest": "^20.0.4",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
+    "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^4.3.0",
+    "reselect": "^3.0.1",
+    "superagent": "^3.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
