@@ -18,6 +18,7 @@ export default class ShowTasks extends React.Component {
     className: '',
     tasks: [],
     error: null,
+    isFetching: false,
   }
 
   componentWillMount() {
