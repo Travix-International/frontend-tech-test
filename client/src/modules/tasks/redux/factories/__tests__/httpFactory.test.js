@@ -1,4 +1,4 @@
-import httpFactory from '../http';
+import { http as httpFactory } from '../';
 
 describe('Tasks.Redux.Factories.http', () => {
   it('should return a default state with isFetching and error', () => {

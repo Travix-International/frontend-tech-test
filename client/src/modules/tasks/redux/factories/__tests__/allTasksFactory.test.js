@@ -1,8 +1,9 @@
-import allTaskFactory from '../allTasks';
+import { allTasks } from '../';
+import { taskFactory, normalizeTask } from '../../__tests__/factories';
 
 describe('Tasks.Redux.Factories.http', () => {
   it('should return a default state with empty tasks', () => {
-    const result = allTaskFactory();
+    const result = allTasks();
 
     expect(result).toHaveProperty('tasks', {});
   });
@@ -10,15 +11,11 @@ describe('Tasks.Redux.Factories.http', () => {
   it('should return a state when replacing tasks', () => {
     const newState = {
       tasks: {
-        1: {
-          id: 1,
-          title: 'sadasdas',
-          description: 'asdasdas',
-        },
+        ...normalizeTask(taskFactory()),
       },
     };
 
-    const result = allTaskFactory(newState);
+    const result = allTasks(newState);
 
     expect(result).toHaveProperty('tasks', newState.tasks);
   });

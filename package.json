@@ -56,10 +56,9 @@
     "webpack": "^3.5.5"
   },
   "jest": {
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(js?|jsx?)$",
+    "testRegex": "(/__tests__/(.*|(\/.|\/))).(test|spec).(js?|jsx?)$",
     "collectCoverageFrom": [
       "client/**/*.{js,jsx}",
-      "!**/__tests__/factories",
       "!**/node_modules/**",
       "!**/vendor/**"
     ]
