@@ -18,8 +18,61 @@ exports[`App should render 1`] = `
       className=""
       error={null}
       fetchTasks={[Function]}
-      isFetching={true}
-      tasks={Array []}
+      isFetching={false}
+      tasks={
+        Array [
+          Object {
+            "description": "adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad",
+            "id": 1,
+            "title": "Todo",
+          },
+          Object {
+            "description": "adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad",
+            "id": 2,
+            "title": "Todo",
+          },
+          Object {
+            "description": "adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad",
+            "id": 3,
+            "title": "Todo",
+          },
+          Object {
+            "description": "adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad",
+            "id": 4,
+            "title": "Todo",
+          },
+          Object {
+            "description": "adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad",
+            "id": 5,
+            "title": "Todo",
+          },
+          Object {
+            "description": "adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad",
+            "id": 6,
+            "title": "Todo",
+          },
+          Object {
+            "description": "adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad",
+            "id": 7,
+            "title": "Todo",
+          },
+          Object {
+            "description": "adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad",
+            "id": 8,
+            "title": "Todo",
+          },
+          Object {
+            "description": "adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad",
+            "id": 9,
+            "title": "Todo",
+          },
+          Object {
+            "description": "adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad",
+            "id": 10,
+            "title": "Todo",
+          },
+        ]
+      }
     />
   </Provider>
 </div>
