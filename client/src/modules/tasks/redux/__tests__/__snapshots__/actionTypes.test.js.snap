@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tasks.Redux.ActionTypes should match snapshot 1`] = `
+Object {
+  "FETCH_TASKS": "travix/front-end-test/tasks/FETCH_TASKS",
+  "FETCH_TASKS_ERROR": "travix/front-end-test/tasks/FETCH_TASKS_REJECTED",
+  "FETCH_TASKS_LOADING": "travix/front-end-test/tasks/FETCH_TASKS_PENDING",
+  "FETCH_TASKS_SUCCESS": "travix/front-end-test/tasks/FETCH_TASKS_FULFILLED",
+}
+`;

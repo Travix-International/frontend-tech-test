@@ -1,7 +1,10 @@
-import { addTasks } from '../';
+import * as addTasksModule from '../allTasks/addTasks';
+import fetchTasksSuccess from '../allTasks/fetchTasksSuccess';
+import * as httpCases from '../http';
 
 import { taskFactory, normalizeTask, httpFactory, actionFactory } from '../../../__tests__/factories';
 
+const addTasks = addTasksModule.default;
 const defaultState = { tasks: {}, ...httpFactory() };
 
 describe('Tasks.Redux.Reducers.Cases.allTasks.addTasks', () => {
@@ -60,5 +63,32 @@ describe('Tasks.Redux.Reducers.Cases.allTasks.addTasks', () => {
     );
 
     expect(newState.tasks).toEqual(desiredTasksState);
+  });
+});
+
+describe('Tasks.Redux.Reducers.Cases.allTasks.fetchTasksSuccess', () => {
+  let addTasksFn;
+  let setSuccessFn;
+
+  beforeAll(() => {
+    const tasks = [taskFactory(), taskFactory()];
+
+    addTasksFn = jest.spyOn(addTasksModule, 'default');
+    setSuccessFn = jest.spyOn(httpCases, 'setSuccess');
+
+    fetchTasksSuccess(defaultState, actionFactory({ payload: { tasks } }));
+  });
+
+  afterAll(() => {
+    addTasksFn.mockReset().mockRestore();
+    setSuccessFn.mockReset().mockRestore();
+  });
+
+  it('should resolve tasks update calling addTasks', () => {
+    expect(addTasksFn).toHaveBeenCalled();
+  });
+
+  it('should resolve http update calling http.setSuccess', () => {
+    expect(setSuccessFn).toHaveBeenCalled();
   });
 });

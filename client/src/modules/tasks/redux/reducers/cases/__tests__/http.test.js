@@ -1,11 +1,11 @@
-import * as cases from '../';
+import * as http from '../http';
 
 import { httpFactory, actionFactory } from '../../../__tests__/factories';
 
 const defaultState = { tasks: {}, ...httpFactory() };
 
 describe('Tasks.Redux.Reducers.Cases.http.setSuccess', () => {
-  const newState = cases.http.setSuccess(defaultState, actionFactory());
+  const newState = http.setSuccess(defaultState, actionFactory());
 
   it('should set isFetching to false', () => {
     expect(newState.isFetching).toBe(false);
@@ -17,7 +17,7 @@ describe('Tasks.Redux.Reducers.Cases.http.setSuccess', () => {
 });
 
 describe('Tasks.Redux.Reducers.Cases.http.setLoading', () => {
-  const newState = cases.http.setLoading(defaultState, actionFactory());
+  const newState = http.setLoading(defaultState, actionFactory());
 
   it('should set isFetching to true', () => {
     expect(newState.isFetching).toBe(true);
@@ -30,7 +30,7 @@ describe('Tasks.Redux.Reducers.Cases.http.setLoading', () => {
 
 describe('Tasks.Redux.Reducers.Cases.http.setError', () => {
   const error = 'error';
-  const newState = cases.http.setError(defaultState, actionFactory({ payload: { error } }));
+  const newState = http.setError(defaultState, actionFactory({ payload: { error } }));
 
   it('should set error to action.payload', () => {
     expect(newState.error).toEqual({ error });
