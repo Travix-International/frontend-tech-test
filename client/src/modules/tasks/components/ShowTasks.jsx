@@ -18,7 +18,6 @@ export default class ShowTasks extends React.Component {
     className: '',
     tasks: [],
     error: null,
-    isFetching: false,
   }
 
   componentWillMount() {
@@ -65,8 +64,8 @@ export default class ShowTasks extends React.Component {
 
     return (
       <LoadingMessage
-        isFetching={isFetching}
-        renderMessage={this.getErrorMessage}
+        isLoading={isFetching}
+        renderMessage={this.getLoadingMessage}
       >
         <ErrorMessage
           error={error}

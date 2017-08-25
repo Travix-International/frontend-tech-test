@@ -14,9 +14,13 @@ exports[`App should render 1`] = `
       }
     }
   >
-    <span>
-      dasasdas
-    </span>
+    <ShowTasks
+      className=""
+      error={null}
+      fetchTasks={[Function]}
+      isFetching={true}
+      tasks={Array []}
+    />
   </Provider>
 </div>
 `;

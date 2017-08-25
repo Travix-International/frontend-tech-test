@@ -19,6 +19,9 @@ module.exports = {
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.json', '.jsx'],
+  },
   devServer: {
     proxy: {
       '/api': 'http://localhost:9001',

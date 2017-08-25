@@ -8,6 +8,7 @@
     "dev-server": "webpack-dev-server",
     "dev": "concurrently --kill-others \"npm run start\" \"npm run dev-server\"",
     "test": "jest --silent",
+    "test:snapshots:regenerate": "npm run test -- --updateSnapshot",
     "test:debug": "jest",
     "test:coverage": "npm run test -- --coverage",
     "build": "webpack"

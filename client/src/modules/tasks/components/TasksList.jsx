@@ -23,7 +23,7 @@ export default class TasksList extends React.Component {
     return (
       <List
         className={`TasksList ${className}`}
-        renderListItem={() => this.getTaskListItem()}
+        renderListItem={task => this.getTaskListItem(task)}
         items={tasks}
       />
     );
