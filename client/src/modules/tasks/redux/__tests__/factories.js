@@ -20,8 +20,8 @@ export const normalizeTask = task => ({ [task.id]: task });
 export const actionFactory = ({
   type = 'travix/common/DEFAULT',
   payload = {},
-  error = false,
-  meta = {},
+  error,
+  meta,
 } = {}) => ({
   type, payload, error, meta,
 });

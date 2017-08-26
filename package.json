@@ -7,7 +7,7 @@
     "start": "node ./server/server.js",
     "dev-server": "webpack-dev-server",
     "dev": "concurrently --kill-others \"npm run start\" \"npm run dev-server\"",
-    "test": "jest --silent",
+    "test": "REACT_APP_API_HOST='http://localhost:8080' jest --silent",
     "test:snapshots:regenerate": "npm run test -- --updateSnapshot",
     "test:debug": "jest",
     "test:coverage": "npm run test -- --coverage",
@@ -24,6 +24,7 @@
     "enzyme-to-json": "^1.5.1",
     "express": "^4.14.0",
     "jest": "^20.0.4",
+    "nock": "^9.0.14",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",
@@ -32,6 +33,7 @@
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.2.3",
     "redux-promise-middleware": "^4.3.0",
     "reselect": "^3.0.1",
     "superagent": "^3.6.0",
@@ -56,7 +58,7 @@
     "webpack": "^3.5.5"
   },
   "jest": {
-    "testRegex": "(/__tests__/(.*|(\/.|\/))).(test|spec).(js?|jsx?)$",
+    "testRegex": "(/__tests__/(.*|(/.|/))).(test|spec).(js?|jsx?)$",
     "collectCoverageFrom": [
       "client/**/*.{js,jsx}",
       "!**/node_modules/**",
