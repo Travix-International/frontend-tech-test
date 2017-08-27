@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import PromiseMiddleware from 'redux-promise-middleware';
+import { Grid, Row } from 'react-bootstrap';
 import reducers from './modules/reducers';
 import ShowTasks from './modules/tasks/components/ShowTasks';
 import createStore from './store';
@@ -25,7 +26,11 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <Provider store={store}>
-          <ShowTasks fetchTasks={() => {}} tasks={tasks} />
+          <Grid>
+            <Row>
+              <ShowTasks fetchTasks={() => {}} tasks={tasks} />
+            </Row>
+          </Grid>
         </Provider>
       </div>
     );

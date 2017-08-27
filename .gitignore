@@ -13,7 +13,9 @@ npm-debug.log*
 node_modules
 
 # Compiled Assets
-static
+dist
 
 # Test Coverage
 coverage
+
+.DS_Store
