@@ -1,4 +1,21 @@
-node_modules/
+# Travix .gitignore
 *~
 #*
 .vs_code/
+
+# Logs
+npm-debug.log*
+
+# Linter Rules
+.eslintrc
+
+# Node Modules
+node_modules
+
+# Compiled Assets
+dist
+
+# Test Coverage
+coverage
+
+.DS_Store

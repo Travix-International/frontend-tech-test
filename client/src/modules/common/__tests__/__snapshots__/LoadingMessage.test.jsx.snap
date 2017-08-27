@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Common.LoadingMessage should render with props 1`] = `
+<div
+  className="LoadingMessage "
+>
+  <div>
+    <div
+      className="LoadingMessage-Spinner"
+    >
+      <Spinner />
+    </div>
+    <div
+      className="LoadingMessage-Message"
+    >
+      <div
+        className="message"
+      />
+    </div>
+  </div>
+</div>
+`;

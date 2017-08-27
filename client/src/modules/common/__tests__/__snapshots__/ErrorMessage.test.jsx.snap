@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Common.ErrorMessage should render with props 1`] = `
+<div
+  className="ErrorMessage "
+>
+  <div>
+    <div
+      className="ErrorMessage-Sign"
+    >
+      Here goes an error sign
+    </div>
+    <div
+      className="ErrorMessage-Message"
+    >
+      <div
+        className="message"
+      />
+    </div>
+  </div>
+</div>
+`;
