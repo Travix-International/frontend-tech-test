@@ -2,6 +2,7 @@ import configureStore from 'redux-mock-store';
 import PromiseMiddleware from 'redux-promise-middleware';
 import { fetchTasks } from '../../';
 import { FETCH_TASKS_LOADING } from '../../../actionTypes';
+import { actionFactory } from '../../../../../../__tests__/testUtils/redux';
 
 const middlewares = [new PromiseMiddleware()];
 const mockStore = configureStore(middlewares);
@@ -26,6 +27,6 @@ describe('Tasks.Redux.Actions.FetchTasks', () => {
     store.dispatch(fetchTasks());
 
 
-    expect(store.getActions()).toEqual([{ type: FETCH_TASKS_LOADING }]);
+    expect(store.getActions()).toEqual([actionFactory({ type: FETCH_TASKS_LOADING })]);
   });
 });

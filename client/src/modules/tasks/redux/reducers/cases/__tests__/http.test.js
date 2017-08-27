@@ -1,6 +1,7 @@
 import * as http from '../http';
 
-import { httpFactory, actionFactory } from '../../../__tests__/factories';
+import { actionFactory } from '../../../../../../__tests__/testUtils/redux';
+import { httpFactory } from '../../../../../../__tests__/testUtils/http';
 
 const defaultState = { tasks: {}, ...httpFactory() };
 

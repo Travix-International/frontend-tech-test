@@ -1,9 +1,10 @@
-import { allTasks } from '../';
-import { taskFactory, normalizeTask } from '../../__tests__/factories';
+import { tasks } from '../../allTasks';
+import { taskFactory } from '../../../../../../__tests__/testUtils/tasks';
+import { normalizeTask } from '../../../utils';
 
-describe('Tasks.Redux.Factories.http', () => {
+describe('Tasks.Redux.Factories.AllTasks.Tasks', () => {
   it('should return a default state with empty tasks', () => {
-    const result = allTasks();
+    const result = tasks();
 
     expect(result).toHaveProperty('tasks', {});
   });
@@ -15,7 +16,7 @@ describe('Tasks.Redux.Factories.http', () => {
       },
     };
 
-    const result = allTasks(newState);
+    const result = tasks(newState);
 
     expect(result).toHaveProperty('tasks', newState.tasks);
   });

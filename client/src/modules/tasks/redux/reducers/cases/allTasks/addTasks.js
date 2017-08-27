@@ -1,7 +1,10 @@
-import { allTasks } from '../../../factories';
-import normalizeTasks from '../../../utils';
+import { allTasks } from '../../../factories/';
+import { normalizeTasks } from '../../../utils';
+
+
+const tasks = allTasks.tasks;
 
 export default (state, { payload }) => ({
   ...state,
-  ...allTasks({ tasks: { ...state.tasks, ...normalizeTasks(payload.tasks) } }),
+  ...tasks({ tasks: { ...state.tasks, ...normalizeTasks(payload.tasks) } }),
 });

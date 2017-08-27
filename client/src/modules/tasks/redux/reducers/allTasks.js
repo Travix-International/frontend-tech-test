@@ -4,13 +4,15 @@ import {
   setLoading as loadingCase,
   setError as errorCase,
 } from './cases/http';
-import { state as stateFactory } from '../factories';
+import { allTasks } from '../factories';
 
 import {
   FETCH_TASKS_LOADING,
   FETCH_TASKS_SUCCESS,
   FETCH_TASKS_ERROR,
 } from '../actionTypes';
+
+const stateFactory = allTasks.state;
 
 const reducer = handleActions({
   [FETCH_TASKS_SUCCESS]: successCase,

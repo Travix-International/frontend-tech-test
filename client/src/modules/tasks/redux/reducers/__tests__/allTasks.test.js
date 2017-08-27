@@ -1,5 +1,5 @@
 import reducer from '../allTasks';
-import { actionFactory } from '../../__tests__/factories';
+import { actionFactory } from '../../../../../__tests__/testUtils/redux';
 
 import {
   FETCH_TASKS_LOADING,

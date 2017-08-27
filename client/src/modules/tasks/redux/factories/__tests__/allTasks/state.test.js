@@ -1,5 +1,11 @@
-import stateFactory from '../allTasksState';
-import { httpFactory, actionFactory } from '../../__tests__/factories';
+import stateFactory from '../../allTasks/state';
+import {
+  actionFactory,
+} from '../../../../../../__tests__/testUtils/redux';
+
+import {
+  httpFactory,
+} from '../../../../../../__tests__/testUtils/http';
 
 
 const defaultState = { tasks: {}, ...httpFactory() };

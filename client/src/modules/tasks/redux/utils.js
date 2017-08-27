@@ -1,9 +1,11 @@
-export default (tasks) => {
-  const normalizedTasks = {};
+export const normalizeTask = task => ({ [task.id]: task });
+
+export const normalizeTasks = (tasks) => {
+  const obj = {};
 
   tasks.forEach((task) => {
-    normalizedTasks[task.id] = task;
+    obj[task.id] = task;
   });
 
-  return normalizedTasks;
+  return obj;
 };

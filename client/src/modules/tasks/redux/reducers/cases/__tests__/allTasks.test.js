@@ -2,7 +2,10 @@ import * as addTasksModule from '../allTasks/addTasks';
 import fetchTasksSuccess from '../allTasks/fetchTasksSuccess';
 import * as httpCases from '../http';
 
-import { taskFactory, normalizeTask, httpFactory, actionFactory } from '../../../__tests__/factories';
+import { normalizeTask } from '../../../utils';
+import { actionFactory } from '../../../../../../__tests__/testUtils/redux';
+import { httpFactory } from '../../../../../../__tests__/testUtils/http';
+import { taskFactory } from '../../../../../../__tests__/testUtils/tasks';
 
 const addTasks = addTasksModule.default;
 const defaultState = { tasks: {}, ...httpFactory() };
