@@ -23,12 +23,10 @@ describe('Tasks.Redux.Selectors.getShowTasksProps', () => {
   });
 
   it('should get visible tasks as tasks prop', () => {
-    expect(getShowTasksProps().tasks).toEqual({
-      ...normalizeTasks([
-        taskFactory({ id: 1 }),
-        taskFactory({ id: 2 }),
-        taskFactory({ id: 3 }),
-      ]),
-    });
+    expect(getShowTasksProps().tasks).toEqual([
+      taskFactory({ id: 1 }),
+      taskFactory({ id: 2 }),
+      taskFactory({ id: 3 }),
+    ]);
   });
 });
