@@ -1,6 +1,6 @@
+import _ from 'lodash';
 import { createSelector } from 'reselect';
 import { getTasks, getIsFetching, getError } from './allTasks';
-import _ from 'lodash';
 
 export default createSelector(
   [
