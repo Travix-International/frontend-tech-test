@@ -1,11 +1,10 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 
-import connectToState from '../ShowTasks';
+import connectToState from '../ListTasks';
 
-jest.mock('../../redux/', () => ({
+jest.mock('../../../redux/', () => ({
   fetchTasks: jest.fn(),
   selectors: {
     getShowTasksProps: () => ({
@@ -22,7 +21,7 @@ class Component extends React.Component {
   }
 }
 
-describe('Tasks.Providers.ShowTasks', () => {
+describe('Tasks.List.Providers.ListTasks', () => {
   let instanceProps;
   let wrapper;
 

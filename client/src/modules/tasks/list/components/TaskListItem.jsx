@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ListGroupItem, Row, Col, Checkbox, Button } from 'react-bootstrap';
-import Title from '../../common/Title';
-import Description from '../../common/Description';
+import Title from '../../../common/Title';
+import Description from '../../../common/Description';
 
 export default class TaskListItem extends React.Component {
   static propTypes = {

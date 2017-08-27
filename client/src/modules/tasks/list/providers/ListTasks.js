@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchTasks, selectors } from '../redux/';
+import { fetchTasks, selectors } from '../../redux/';
 
 const { getShowTasksProps } = selectors;
 

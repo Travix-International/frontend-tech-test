@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LoadingMessage from '../../common/LoadingMessage';
-import ErrorMessage from '../../common/ErrorMessage';
-import EmptyMessage from '../../common/EmptyMessage';
+import LoadingMessage from '../../../common/LoadingMessage';
+import ErrorMessage from '../../../common/ErrorMessage';
+import EmptyMessage from '../../../common/EmptyMessage';
 import TasksList from './TasksList';
 
-export default class ShowTasks extends React.Component {
+export default class ListTasks extends React.Component {
   static propTypes = {
     fetchTasks: PropTypes.func.isRequired,
     tasks: PropTypes.arrayOf(PropTypes.any),

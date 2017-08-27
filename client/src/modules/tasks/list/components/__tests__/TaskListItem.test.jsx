@@ -3,8 +3,8 @@ import { shallow } from 'enzyme';
 import { ListGroupItem, Checkbox, Button } from 'react-bootstrap';
 
 import TaskListItem from '../TaskListItem';
-import Title from '../../../common/Title';
-import Description from '../../../common/Description';
+import Title from '../../../../common/Title';
+import Description from '../../../../common/Description';
 
 const task = {
   id: 1,
@@ -14,7 +14,7 @@ const task = {
 
 const taskListItem = shallow(<TaskListItem task={task} />);
 
-describe('Tasks.TaskListItem', () => {
+describe('Tasks.List.TaskListItem', () => {
   it('should render a ListGroupItem', () => (
     expect(taskListItem.find(ListGroupItem).length).toBe(1)
   ));

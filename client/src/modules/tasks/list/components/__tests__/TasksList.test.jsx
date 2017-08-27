@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import List from '../../../common/List';
+import List from '../../../../common/List';
 import TasksList from '../TasksList';
 import TaskListItem from '../TaskListItem';
 
@@ -16,7 +16,7 @@ const tasks = [
 const tasksList = shallow(<TasksList tasks={tasks} />);
 const getTaskListItem = tasksList.instance().getTaskListItem;
 
-describe('Tasks.TasksList', () => {
+describe('Tasks.List.TasksList', () => {
   it('should render a List', () => (
     expect(tasksList.find(List).length).toBe(1)
   ));

@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import ShowTasks from '../ShowTasks';
+import ShowTasks from '../ListTasks';
 import TasksList from '../TasksList';
-import ErrorMessage from '../../../common/ErrorMessage';
-import LoadingMessage from '../../../common/LoadingMessage';
-import EmptyMessage from '../../../common/EmptyMessage';
+import ErrorMessage from '../../../../common/ErrorMessage';
+import LoadingMessage from '../../../../common/LoadingMessage';
+import EmptyMessage from '../../../../common/EmptyMessage';
 
 const tasks = [
   {
@@ -15,7 +15,7 @@ const tasks = [
   },
 ];
 
-describe('Tasks.ShowTasks', () => {
+describe('Tasks.List.ListTasks', () => {
   it('should call fetchTasks prop when mounting', () => {
     const fetchTasks = jest.fn();
 

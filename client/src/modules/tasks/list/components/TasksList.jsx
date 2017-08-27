@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import List from '../../common/List';
+import List from '../../../common/List';
 import TaskListItem from './TaskListItem';
 
 export default class TasksList extends React.Component {
