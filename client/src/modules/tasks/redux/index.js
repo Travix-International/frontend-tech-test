@@ -8,7 +8,7 @@ import { fetchTasks } from './actions';
 import reducerModule from './reducers';
 
 const reducer = {
-  name: 'users', reducer: reducerModule,
+  name: 'tasks', reducer: reducerModule,
 };
 
 export {

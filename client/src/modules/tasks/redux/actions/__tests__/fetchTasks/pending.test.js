@@ -16,7 +16,6 @@ jest.mock(
       }
     }
   ),
-  { virtual: true },
 );
 
 describe('Tasks.Redux.Actions.FetchTasks', () => {

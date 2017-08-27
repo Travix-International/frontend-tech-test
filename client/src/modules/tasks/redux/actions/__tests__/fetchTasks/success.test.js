@@ -16,17 +16,16 @@ jest.mock(
       }
     }
   ),
-  { virtual: true },
 );
 
 describe('Tasks.Redux.Actions.FetchTasks', () => {
-  it('should dispatch a FETCH_TASKS_ERROR action', () => {
+  it('should dispatch a FETCH_TASKS_SUCCESS action', () => {
     const initialState = {};
     const store = mockStore(initialState);
 
-    return store.dispatch(fetchTasks()).catch(() => {
+    return store.dispatch(fetchTasks()).then(() => {
       expect(store.getActions())
-        .toContainEqual(actionFactory({ type: FETCH_TASKS_SUCCESS, payload: 'error' }));
+        .toContainEqual(actionFactory({ type: FETCH_TASKS_SUCCESS, payload: 'success' }));
     });
   });
 });

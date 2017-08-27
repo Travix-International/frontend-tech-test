@@ -33,7 +33,10 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      '/api': 'http://localhost:9001',
+      '/api': {
+        target: 'http://localhost:9001',
+        pathRewrite: { '^/api': '' },
+      }
     },
   },
   devtool: 'cheap-module-eval-source-map',

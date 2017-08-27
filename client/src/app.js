@@ -3,23 +3,15 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import PromiseMiddleware from 'redux-promise-middleware';
 import { Grid, Row } from 'react-bootstrap';
-import reducers from './modules/reducers';
-import ShowTasks from './modules/tasks/components/ShowTasks';
+
 import createStore from './store';
+import reducers from './modules/reducers';
+import connectToState from './modules/tasks/providers/ShowTasks';
+import ShowTasksComponent from './modules/tasks/components/ShowTasks';
+
+const ShowTasks = connectToState(ShowTasksComponent);
 
 const store = createStore({ reducers, middlewares: [new PromiseMiddleware(), logger] });
-const tasks = [
-  { id: 1, title: 'Todo', description: 'adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad' },
-  { id: 2, title: 'Todo', description: 'adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad' },
-  { id: 3, title: 'Todo', description: 'adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad' },
-  { id: 4, title: 'Todo', description: 'adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad' },
-  { id: 5, title: 'Todo', description: 'adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad' },
-  { id: 6, title: 'Todo', description: 'adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad' },
-  { id: 7, title: 'Todo', description: 'adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad' },
-  { id: 8, title: 'Todo', description: 'adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad' },
-  { id: 9, title: 'Todo', description: 'adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad' },
-  { id: 10, title: 'Todo', description: 'adasdasdasdasdasdasdasdasdsadasdasdasdasdasdasad' },
-];
 
 export default class App extends React.Component {
   render() {
@@ -28,7 +20,7 @@ export default class App extends React.Component {
         <Provider store={store}>
           <Grid>
             <Row>
-              <ShowTasks fetchTasks={() => {}} tasks={tasks} />
+              <ShowTasks />
             </Row>
           </Grid>
         </Provider>

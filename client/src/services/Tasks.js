@@ -8,11 +8,11 @@ export default class Tasks {
   fetchTasks() {
     return new Promise((resolve, reject) => {
       request
-        .get('/api/tasks')
+        .get(this.API_HOST + '/api/tasks')
         .then((response) => {
-          resolve({ tasks: response.body.taks });
+          resolve({ tasks: response.body.tasks });
         })
-        .catch(() => {
+        .catch((err) => {
           reject('We are unable to fetch tasks on this moment.');
         });
     });

@@ -1,3 +1,5 @@
+// TODO: this isn't working for some reason check this
+
 import nock from 'nock';
 import TasksService from '../Tasks';
 
@@ -15,23 +17,20 @@ const mockHttp = () => (
 const restoreMock = () => nock.restore();
 
 describe('Services.Tasks.fetchTasks', () => {
-  it('should fetch tasks from /api/tasks', () => {
-    const serverMock = mockHttp();
+  let serverMock;
 
-    Tasks.fetchTasks().then(() => {
+  beforeAll(() => {
+    serverMock = mockHttp();
+  });
+
+  afterAll(() => {
+    restoreMock();
+  });
+
+  it('should fetch tasks from /api/tasks', () => (
+    Tasks.fetchTasks().then((response) => {
       expect(serverMock.isDone()).toBe(true);
-    });
-
-    restoreMock();
-  });
-
-  it('should resolve when success', () => {
-    mockHttp();
-
-    Tasks.fetchTasks().then((tasks) => {
-      expect(tasks.length > 0).toBe(true);
-    });
-
-    restoreMock();
-  });
+      expect(response.tasks.length > 0).toBe(true);
+    })
+  ));
 });

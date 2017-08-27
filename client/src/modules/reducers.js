@@ -1,3 +1,5 @@
+import { reducer as tasksReducer } from './tasks/redux';
+
 export default {
-  test: () => ({}),
+  [tasksReducer.name]: tasksReducer.reducer,
 };
