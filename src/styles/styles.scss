@@ -1,0 +1,196 @@
+@import 'variables';
+@import 'responsive';
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  background: $mainColor;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  line-height: 1.6;
+
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.task {
+  width: 100%;
+  background: white;
+  height: 100vh;
+  box-shadow: 0px 0px 3px 1px darken($mainColor, 30%);
+
+  @include for-size(tablet-landscape-up) {
+    width: 50%;
+    margin: 20px 0 0 20px;
+    height: auto;
+  }
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  background: white;
+  box-shadow: 0px 0px 3px 1px darken($mainColor, 30%);
+  
+  @include for-size(tablet-landscape-up) {
+    width: 50%;
+    margin: 20px 0 0 20px;
+    height: auto;
+  }
+
+  &__form {
+    margin: 30px 20px;
+
+    &:after {
+      content: '';
+      clear: both;
+      display: block;
+    }
+  }
+
+  &__container {
+    font-size: 18px;
+    text-transform: capitalize;
+    color: $secondaryColor;
+    cursor:pointer;
+    
+    * {
+      text-transform: inherit;
+    }
+  }
+}
+
+.task_card {
+  background: white;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0 20px;
+
+  &__content {
+    flex: 1;
+
+    a {
+      width: 100%;
+      display: block;
+
+      color: $secondaryColor;
+      text-decoration: none;
+
+      &:hover {
+        color: darken($secondaryColor, 20%);
+      }
+    }
+  }
+
+  
+
+  &:hover {
+    background: lighten($mainColor, 30%);
+  }
+
+  &__controls {
+    .btn {
+      border: none;
+      background: transparent;
+      color: #888888;
+      cursor: pointer;
+      margin: 5px;
+    }
+  }
+}
+
+.form-field {
+  font-size: 18px;
+
+  &__input {
+    border: none;
+    box-shadow: inset 1px -1px $mainColor;
+    outline: none;
+    padding: 10px 30px;
+    transition: all 0.4s ease-in-out;
+    font-weight: 100;
+    width: 100%;
+
+    &:focus {
+      box-shadow: inset 0px 0px 1px 1px $mainColor;
+    }
+  }
+
+  &__textarea {
+    @extend .form-field__input;
+    margin-top:20px;
+  }
+
+  &:last-child {
+    text-align: center;
+  }
+
+  &__btn {
+    -webkit-appearance: none;
+    border: none;
+    background-color: $mainColor;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 20px;
+
+    &:hover {
+      background: lighten($mainColor, 10%);
+    }
+  }
+}
+
+.details {
+  font-size: 16px;
+  margin-bottom: 20px;
+
+  &__header {
+    margin: 20px 20px;
+    color: $secondaryColor;
+    border-bottom: 1px solid $secondaryColor;
+  }
+
+  &__element {
+    .label {
+      display: inline-block;
+      width: 140px;
+      color: $mainColor;
+      margin: 10px 0 10px 40px;
+      font-weight: bold;
+    }
+
+    .info {
+      font-weight: lighter;
+    }
+  }
+}
+
+
+//shared styles
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: $mainColor;
+  font-weight: 100;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: $mainColor;
+  font-weight: 100;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: $mainColor;
+  font-weight: 100;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: $mainColor;
+  font-weight: 100;
+}
