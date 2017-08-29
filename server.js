@@ -15,9 +15,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './index.html'));
-});
+
 /**
  * GET /tasks
  * 
@@ -41,8 +39,8 @@ app.get('/api/tasks', (req, res) => {
 app.get('/api/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
-  if (!Number.isNaN(Number(id))) {
-    const task = tasksContainer.find((item) => item.id === id);
+  if (!Number.isNaN(id)) {
+    const task = tasksContainer.tasks.find((item) => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
@@ -75,13 +73,13 @@ app.get('/api/task/:id', (req, res) => {
 app.put('/api/task/update/:id/:title/:description', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
-  if (!Number.isNaN(Number(id))) {
+  if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(200).json({task: task});
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -104,8 +102,19 @@ app.put('/api/task/update/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/api/task/create/:title/:description', (req, res) => {
+
+  // check if this id is taken for another task
+  // not scalable solution, it is just for this minor case
+  function generateNewId(newId) {
+    if(tasksContainer.tasks.find( ({id}) => id === newId)) {
+      return generateNewId(newId+1)
+    } else {
+      return newId;
+    }
+  }
+  
   const task = {
-    id: tasksContainer.tasks.length,
+    id: generateNewId(tasksContainer.tasks.length),
     title: req.params.title,
     description: req.params.description,
   };
@@ -114,6 +123,7 @@ app.post('/api/task/create/:title/:description', (req, res) => {
 
   return res.status(201).json({
     message: 'Resource created',
+    task: tasksContainer.tasks.find(({id}) => id === task.id)
   });
 });
 
@@ -130,7 +140,7 @@ app.post('/api/task/create/:title/:description', (req, res) => {
 app.delete('/api/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
-  if (!Number.isNaN(Number(id))) {
+  if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
   
     if (task !== null) {
@@ -138,6 +148,7 @@ app.delete('/api/task/delete/:id', (req, res) => {
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',
+        id
       });
     } else {
       return es.status(404).json({
@@ -149,6 +160,11 @@ app.delete('/api/task/delete/:id', (req, res) => {
       message: 'Bad request',
     });
   }
+});
+
+// Handling frontend rendering
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './index.html'));
 });
 
 app.listen(9001, () => {

@@ -1,75 +1,75 @@
-import Promise from 'bluebird'
+import fetch from 'isomorphic-fetch';
+
 import {
   Task_Add_Request,
   Task_Add_Success,
   Task_Add_Failure,
 
-  Task_Edit_Request,
-  Task_Edit_Success,
-  Task_Edit_Failure,
-
   Task_Remove_Request,
   Task_Remove_Success,
   Task_Remove_Failure,
 
-  Task_Editable,
-  Task_Toggle_Done,
+  Tasks_Get_Request,
+  Tasks_Get_Success,
+  Tasks_Get_Failure,
+
 } from './actions'
 
-export function add(content) {
+export function getAll() {
   return {
-    type: Task_Add_Request,
-    payload: {
-      content
+    types: [Tasks_Get_Request, Tasks_Get_Success, Tasks_Get_Failure],
+    promise: () => {
+      return fetch('/api/tasks')
+        .then(function(response) {
+
+          if (response.status >= 400) {
+            throw new Error("Bad response from server");
+            reject({error: 'Bad response from server'})
+          }
+          return response.json();
+        })
+        .then(function(tasks) {
+          return tasks
+        });
     }
   }
 }
 
-export function edit(id, content) {
+export function add(title, description) {
+
   return {
-    type: Task_Edit_Request,
-    payload: {
-      id,
-      content,
+    types: [Task_Add_Request, Task_Add_Success, Task_Add_Failure],
+    promise: () => {
+      return fetch(`/api/task/create/${title}/${description}`, {method: 'POST'})
+        .then(function(response) {
+          if (response.status >= 400) {
+            throw new Error("Bad response from server");
+            reject({error: 'Bad response from server'})
+          }
+          return response.json();
+        })
+        .then(function(tasks) {
+          return tasks
+        });
     }
   }
 }
 
 export function remove(id) {
   return {
-    type: Task_Remove_Request,
-    payload: {
-      id
+    types: [Task_Remove_Request, Task_Remove_Success, Task_Remove_Failure],
+    promise: () => {
+      return fetch(`/api/task/delete/${id}`, {method: 'DELETE'})
+        .then(function(response) {
+          if (response.status >= 400) {
+            throw new Error("Bad response from server");
+            reject({error: 'Bad response from server'})
+          }
+          return response.json();
+        })
+        .then(function(result) {
+          return result
+        });
     }
   }
 }
-
-export function makeEditable(id) {
-  return {
-    type: Task_Editable,
-    payload: {
-      id
-    }
-  }
-}
-
-export function toggleDone(id) {
-  return {
-    type: Task_Toggle_Done,
-    payload: {
-      id
-    }
-  }
-}
-
-// export function edit(delay) {
-//   return {
-//     types: [Task_Edit_Request, Task_Edit_Success, Task_Edit_Failure],
-//     promise: () => {
-//       return new Promise((resolve, reject) => {
-//         // Just simulating an async request to a server via a setTimeout
-        
-//       })
-//     }
-//   }
-// }

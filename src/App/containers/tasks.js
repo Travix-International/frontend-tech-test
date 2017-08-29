@@ -1,41 +1,44 @@
 import React from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Route } from 'react-router-dom';
 
-import TaskCard from  '../presentationals/TaskCard';
-import Input from '../presentationals/Input';
+import TaskCard from  '../components/TaskCard';
+import TaskPage from  '../components/TaskPage';
+import Form from '../components/Form';
 import * as actionCreators from '../actions/tasks'
 
 class TasksList extends React.Component {
+  componentWillMount() {
+    this.props.actions.getAll();
+  }
 
   listOfTasks(tasks) {
-    const { remove, edit, makeEditable, toggleDone } = this.props.actions;
+    const { remove } = this.props.actions;
 
     return tasks.map(function(task, id){
       return (<TaskCard
         key={id}
         task={task}
-        onRemove={remove.bind(null, id)}
-        onEdit={edit.bind(null, id)}
-        makeEditable={makeEditable.bind(null, id)}
-        toggleDone={toggleDone.bind(null, id)}
+        onRemove={remove.bind(null, task.id)}
       />)
     })
   }
 
   render() {
     const { tasks, actions } = this.props;
-    console.log(this.props);
-    
+
     return (
-      <div className="tasks">
-        <div className="tasks__input">
-          <Input onEnter={ actions.add }/>
-        </div>
-        <div className="tasks__container">
-          {this.listOfTasks(tasks || [])}
+      <div className="container" >
+        <div className="tasks">
+          <Form onEnter={ actions.add }/>
+          
+          <div className="tasks__container">
+            {this.listOfTasks(tasks || [])}
+          </div>
         </div>
       </div>
+
     )
   }
 }
