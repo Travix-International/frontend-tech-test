@@ -15,5 +15,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "http-status": "^1.0.1",
+    "superagent": "^3.6.0"
   }
 }
