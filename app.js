@@ -1,7 +1,27 @@
 'use strict';
 
 const app = require('express')();
+
+const cors = require('cors');
+
 const tasksContainer = require('./tasks.json');
+
+let ID_TASK = 1;
+
+const whitelist = [
+    'http://localhost:3300',
+    'http://localhost:8000',
+    'http://localhost:8080'
+];
+const corsOptions = {
+    origin: function(origin, callback){
+        const originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+        callback(null, originIsWhitelisted);
+    },
+    credentials: true
+};
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // include before other routes
 
 module.exports = () => {
 
@@ -94,12 +114,14 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: ID_TASK,
     title: req.params.title,
     description: req.params.description,
   };
 
   tasksContainer.tasks.push(task);
+
+  ID_TASK ++
 
   return res.status(201).json({
     message: 'Resource created',
@@ -120,10 +142,10 @@ app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    const task = tasksContainer.tasks.find((item) => item.id === id);
   
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+      const taskIndex = tasksContainer.tasks.indexOf(task);
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',

@@ -17,7 +17,9 @@
     "express": "^4.14.0"
   },
   "devDependencies": {
+    "cors": "^2.8.4",
     "http-status": "^1.0.1",
+    "mocha": "^3.5.0",
     "superagent": "^3.6.0"
   }
 }
