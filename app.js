@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const tasksContainer = require('./tasks.json');
 
-let ID_TASK = 1;
+let ID_TASK = 0;
 
 const whitelist = [
     'http://localhost:3300',
