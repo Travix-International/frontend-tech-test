@@ -2,3 +2,5 @@ node_modules/
 *~
 #*
 .vs_code/
+tasks.json
+tasks.test.json
