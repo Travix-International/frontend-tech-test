@@ -1,27 +1,32 @@
 /* eslint-disable no-multi-str */
 const fs = require('fs');
+const path = require('path');
 const { jsonFile } = require('./config');
 const dummyjson = require('dummy-json');
 
-const myPartials = {
-  task: '{\
-    "id": {{@index}},\
-    "title": "{{lorem 5}}",\
-    "description": "{{lorem}}",\
-    "completed": "{{boolean}}"\
-  }'
-};
+if (!fs.existsSync(path.resolve(__dirname, jsonFile))) {
 
-const template = '{\
-    "tasks": [\
-      {{#repeat 1000}}\
-        {{> task}}\
-      {{/repeat}}\
-    ]\
-  }';
+  const myPartials = {
+    task: '{\
+      "id": {{@index}},\
+      "title": "{{lorem 5}}",\
+      "description": "{{lorem}}",\
+      "completed": "{{boolean}}"\
+    }'
+  };
 
-const result = dummyjson.parse(template, {partials: myPartials});
-fs.writeFile(`./server/${jsonFile}`, result, (err) => {
-  if (!!err) console.log(err);
-  else console.log(`generate ${jsonFile} successfully`);
-});
+  const template = '{\
+      "tasks": [\
+        {{#repeat 1000}}\
+          {{> task}}\
+        {{/repeat}}\
+      ]\
+    }';
+
+  const result = dummyjson.parse(template, {partials: myPartials});
+  fs.writeFile(path.resolve(__dirname, jsonFile), result, (err) => {
+    if (!!err) console.log(err);
+    else console.log(`generate ${jsonFile} successfully`);
+  });
+
+}

@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs');
+const path = require('path');
 const { jsonFile, pagination } = require('./config');
 const tasksContainer = require(jsonFile);
 
@@ -82,7 +83,7 @@ const updateTask = (req, res) => {
       task.description = decodeURI(req.params.description);
 
       const json = JSON.stringify(tasksContainer);
-      return fs.writeFile(jsonFile, json, 'utf8', (err) => {
+      return fs.writeFile(path.resolve(__dirname, jsonFile), json, 'utf8', (err) => {
         if (err === null) {
           return res.status(204).end();
         }
@@ -121,7 +122,7 @@ const addTask = (req, res) => {
   tasksContainer.tasks.push(task);
 
   const json = JSON.stringify(tasksContainer);
-  fs.writeFile(jsonFile, json, 'utf8', (err) => {
+  fs.writeFile(path.resolve(__dirname, jsonFile), json, 'utf8', (err) => {
     if (err === null) {
       return res.status(201).json({
         message: 'Resource created',
@@ -154,7 +155,7 @@ const deleteTask = (req, res) => {
       tasksContainer.tasks.splice(taskIndex, 1);
 
       const json = JSON.stringify(tasksContainer);
-      return fs.writeFile(jsonFile, json, 'utf8', (err) => {
+      return fs.writeFile(path.resolve(__dirname, jsonFile), json, 'utf8', (err) => {
         if (err === null) {
           return res.status(200).json({
             message: 'Updated successfully',
