@@ -1,8 +1,12 @@
 'use strict';
 
 const app = require('express')();
+const bodyParser = require("body-parser");
+
 const tasksContainer = require('./tasks.json');
 
+
+app.use(bodyParser.json());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -86,24 +90,34 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
 });
 
 /**
- * POST /task/create/:title/:description
+ * POST /task/create/
  * 
  * title: string
  * description: string
  * 
  * Add a new task to the array tasksContainer.tasks with the given title and description.
- * Return status code 201.
+ * If both title and description is empty, return a status code 400
+ * Else return status code 200.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task/create', (req, res) => {
+
+  if(!req.body.title && !req.body.description) {
+    return res.status(400).json({
+      error: "Bad request",
+      message: "title or description is required"
+    });
+  }
+
   const task = {
-    id: tasksContainer.tasks.length,
-    title: req.params.title,
-    description: req.params.description,
+    id: tasksContainer.tasks.length+1,
+    title: req.body.title,
+    description: req.body.description,
   };
 
   tasksContainer.tasks.push(task);
 
-  return res.status(201).json({
+  return res.json({
+    task,
     message: 'Resource created',
   });
 });
