@@ -15,5 +15,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0"
+  },
+  "repository": {
+    "url": "https://github.com/maykinayki/frontend-tech-test.git",
+    "type": "git"
   }
 }
