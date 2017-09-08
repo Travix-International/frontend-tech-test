@@ -1,3 +1,4 @@
+/* eslint-disable wrap-iife, no-var, global-require, dot-notation */
 // react-dom
 (function () {
   var m = require('react-dom');
