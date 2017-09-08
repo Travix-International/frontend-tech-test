@@ -11,7 +11,8 @@
     "generate:test": "./node_modules/.bin/cross-env NODE_ENV=test node ./server/generate-json.js",
     "lint": "node_modules/.bin/eslint client, server",
     "prestart": "npm run generate",
-    "start": "./node_modules/.bin/cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development ./node_modules/.bin/nodemon index.js"
+    "start": "./node_modules/.bin/cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development ./node_modules/.bin/nodemon index.js",
+    "build": "./node_modules/.bin/webpack --config ./webpack.config.js"
   },
   "keywords": [
     "test",
@@ -31,11 +32,17 @@
     ]
   },
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "frint": "2.4.1",
+    "frint-react": "2.4.1",
+    "prop-types": "15.5.10",
+    "react": "15.6.1",
+    "react-dom": "15.6.1"
   },
   "devDependencies": {
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
+    "babel-loader": "7.1.2",
     "babel-plugin-webpack-loaders": "0.9.0",
     "babel-preset-travix": "1.1.1",
     "chai": "4.1.2",
@@ -49,6 +56,7 @@
     "eslint-plugin-react": "7.3.0",
     "jest": "21.0.1",
     "nodemon": "1.12.0",
-    "supertest": "3.0.0"
+    "supertest": "3.0.0",
+    "webpack": "3.5.6"
   }
 }
