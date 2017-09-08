@@ -57,7 +57,7 @@ app.get('/task/:id', (req, res) => {
 });
 
 /**
- * PUT /task/update/:id/:title/:description
+ * PUT /task/update
  * 
  * id: Number
  * title: string
@@ -66,17 +66,26 @@ app.get('/task/:id', (req, res) => {
  * Update the task with the given id.
  * If the task is found and update as well, return a status code 204.
  * If the task is not found, return a status code 404.
+ * If both title and description is empty, return as status code 400.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
+app.put('/task/update', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
+
+    if(!req.body.title && !req.body.description) {
+      return res.status(400).json({
+        error: "Bad request",
+        message: "title or description is required"
+      });
+    }
+
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
+      task.title = req.body.title;
+      task.description = req.body.description;
       return res.status(204);
     } else {
       return res.status(404).json({
@@ -97,7 +106,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * description: string
  * 
  * Add a new task to the array tasksContainer.tasks with the given title and description.
- * If both title and description is empty, return a status code 400
+ * If both title and description is empty, return a status code 400.
  * Else return status code 200.
  */
 app.post('/task/create', (req, res) => {
