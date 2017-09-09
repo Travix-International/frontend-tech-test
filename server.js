@@ -110,6 +110,9 @@ app.put('/task/update/:id', (req, res) => {
     if (task) {
       task.title = req.body.title;
       task.description = req.body.description;
+      if(req.body.done !== undefined) {
+        task.done = req.body.done;
+      }
       return res.status(200).json({
         task
       });

@@ -120,6 +120,9 @@ body {
         transition: opacity $t;
         position: relative;
         min-height: 80px;
+        &.done {
+            opacity: 0.66;
+        }
         .title {
             font-weight: 600;
             position: relative;
@@ -172,7 +175,7 @@ body {
             opacity: 0;
             transition: all $t;
         }
-        &:hover {
+        &:not(.done):hover {
             .todo-item--delete {
                 opacity: 1;
             }

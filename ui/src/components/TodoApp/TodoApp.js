@@ -71,19 +71,13 @@ class TodoApp extends Component {
 
         id = parseInt(id, 10);
 
-        let jsonData = {};
-
-        for(let field of data.entries()) {
-            jsonData[field[0]] = field[1];
-        }
-
         fetch("http://localhost:9001/task/update/"+id, {
             method: "PUT",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(jsonData)
+            body: JSON.stringify(data)
         }).then(fetchStatusHandler).then(response => {
             t.props.updateTodoById(id, response.task);
             t.props.socket.emit("update_task", id, response.task);

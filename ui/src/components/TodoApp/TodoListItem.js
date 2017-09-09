@@ -3,13 +3,22 @@
  */
 
 import React  from 'react';
+import classnames from "classnames";
 
 export default ({item, onTodoDelete, onTodoUpdate, onTodoModeChange}) => {
 
     const content = item.mode === "update" ? (
         <form className="todo-form" onSubmit={(e) => {
             e.preventDefault();
-            onTodoUpdate(item.id, new FormData(e.currentTarget));
+
+            let formData = new FormData(e.currentTarget);
+            let jsonData = {};
+
+            for(let field of formData.entries()) {
+                jsonData[field[0]] = field[1];
+            }
+
+            onTodoUpdate(item.id, jsonData);
         }}>
             <div className="todo-input">
                 <input name="title" className="input" placeholder="Title" defaultValue={item.title} />
@@ -21,8 +30,10 @@ export default ({item, onTodoDelete, onTodoUpdate, onTodoModeChange}) => {
     ) : (
         <label htmlFor="checkbox">
             <input className="todo-item--checkbox" type="checkbox" />
-            <div className="todo-item">
-                <div className="todo-item-inner">
+            <div className={classnames("todo-item", {'done': item.done})}>
+                <div className="todo-item-inner" onClick={() => {
+                    onTodoUpdate(item.id, {...item, done: !item.done})
+                }}>
                     <div className="title">{item.title}</div>
                     <div className="description">{item.description}</div>
                 </div>

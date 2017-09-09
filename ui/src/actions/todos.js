@@ -3,8 +3,7 @@ export const actionsList = {
     ADD_TODO: "ADD_TODO",
     CHANGE_TODO_MODE_BY_ID: "CHANGE_TODO_MODE_BY_ID",
     UPDATE_TODO_BY_ID: "UPDATE_TODO_BY_ID",
-    DELETE_TODO_BY_ID: "DELETE_TODO_BY_ID",
-    TOGGLE_TODO: "TOGGLE_TODO"
+    DELETE_TODO_BY_ID: "DELETE_TODO_BY_ID"
 };
 
 export const initTodoApp = (data = []) => {
@@ -40,13 +39,6 @@ export const updateTodoById = (id, data) => {
 export const deleteTodoById = (id) => {
     return {
         type: actionsList.DELETE_TODO_BY_ID,
-        id
-    };
-};
-
-export const toggleTodo = (id) => {
-    return {
-        type: 'TOGGLE_TODO',
         id
     };
 };

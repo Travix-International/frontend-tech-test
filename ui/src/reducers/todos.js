@@ -37,10 +37,6 @@ const todos = (state = initialState, action) => {
                 ...state.filter(_=>_.id !== action.id)
             ];
 
-        case actionsList.TOGGLE_TODO:
-            return state.map(todo =>
-                todo.id === action.id ? {...todo, done: !todo.done} : todo
-            );
         default:
             return state
     }
