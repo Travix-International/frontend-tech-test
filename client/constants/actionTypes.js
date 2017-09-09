@@ -1,0 +1,7 @@
+export const TODOS_ADD = 'TODOS_ADD';
+export const TODOS_DELETE = 'TODOS_DELETE';
+export const TODOS_UPDATE = 'TODOS_UPDATE';
+
+export const REQUEST_TODOS = 'REQUEST_TODOS';
+export const RECEIVE_TODOS = 'RECEIVE_TODOS';
+export const CANCEL_REQUEST_TODOS = 'CANCEL_REQUEST_TODOS';

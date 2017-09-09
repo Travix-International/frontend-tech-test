@@ -4,7 +4,7 @@ import { createStore } from 'frint-store';
 import { RegionService } from 'frint-react';
 
 import RootComponent from '../components/Root';
-import { REQUEST_TODOS } from '../constants';
+import { requestTodos } from '../actions/todos';
 import rootReducer from '../reducers';
 import todoEpic$ from '../epics';
 
@@ -27,7 +27,7 @@ export default createApp({
           thunkArgument: { app },
         });
         const store = new Store();
-        store.dispatch({ type: REQUEST_TODOS })
+        store.dispatch(requestTodos())
         return store;
       },
       deps: ['app'],

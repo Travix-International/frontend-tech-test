@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { observe, streamProps, Region } from 'frint-react';
 import { BehaviorSubject } from 'rxjs';
 
-import { TODO_SCHEMA } from '../constants';
+import { TODO_PROPTYPES } from '../constants';
 import { removeTodo, updateTodo } from '../actions/todos';
 import item from './item.scss';
 
@@ -12,7 +12,7 @@ const ENTER_KEY = 13;
 
 class Item extends Component {
   static propTypes = {
-    todo: TODO_SCHEMA,
+    todo: TODO_PROPTYPES,
     titleValue: PropTypes.string.isRequired,
     descriptionValue: PropTypes.string.isRequired,
     showEditForm: PropTypes.bool.isRequired,

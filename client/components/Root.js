@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { observe, Region } from 'frint-react';
 import { Observable, BehaviorSubject } from 'rxjs';
 
-import { TODO_SCHEMA } from '../constants';
+import { TODO_PROPTYPES } from '../constants';
 import { addTodo } from '../actions/todos';
 import Item from './Item';
 import root from './root.scss';
 
 class Root extends Component {
   static propTypes = {
-    todos: PropTypes.arrayOf(TODO_SCHEMA),
+    todos: PropTypes.arrayOf(TODO_PROPTYPES),
     changeInput: PropTypes.func.isRequired,
     addTodo: PropTypes.func.isRequired,
     inputValue: PropTypes.string,

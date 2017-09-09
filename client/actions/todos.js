@@ -2,6 +2,7 @@ import {
   TODOS_ADD,
   TODOS_DELETE,
   TODOS_UPDATE,
+  REQUEST_TODOS,
   RECEIVE_TODOS,
 } from '../constants';
 
@@ -26,9 +27,5 @@ export function updateTodo(todo) {
   };
 }
 
-export function receiveTodos(payload) {
-  return {
-    type: RECEIVE_TODOS,
-    payload,
-  };
-}
+export const requestTodos = () => ({ type: REQUEST_TODOS })
+export const receiveTodos = payload => ({ type: RECEIVE_TODOS, payload });
