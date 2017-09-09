@@ -137,6 +137,13 @@ body {
                 transition: width $t;
             }
         }
+        .description {
+            max-height: 150px;
+            overflow: scroll;
+            font-size: 18px;
+            font-weight: 300;
+            padding-right: 20px;
+        }
         &--checkbox {
             display: none;
             &:checked{
