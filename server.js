@@ -86,7 +86,9 @@ app.put('/task/update', (req, res) => {
     if (task !== null) {
       task.title = req.body.title;
       task.description = req.body.description;
-      return res.status(204);
+      return res.status(204).json({
+        task
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
