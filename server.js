@@ -64,7 +64,7 @@ app.get('/task/:id', (req, res) => {
  * description: string
  * 
  * Update the task with the given id.
- * If the task is found and update as well, return a status code 204.
+ * If the task is found and update as well, return a status code 200.
  * If the task is not found, return a status code 404.
  * If both title and description is empty, return as status code 400.
  * If the provided id is not a valid number return a status code 400.
@@ -86,7 +86,7 @@ app.put('/task/update/:id', (req, res) => {
     if (task !== null) {
       task.title = req.body.title;
       task.description = req.body.description;
-      return res.status(204).json({
+      return res.status(200).json({
         task
       });
     } else {
