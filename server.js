@@ -1,6 +1,7 @@
 'use strict';
-
-const app = require('express')();
+const path = require("path");
+const express = require('express');
+const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser = require("body-parser");
@@ -29,6 +30,13 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+/**
+ * GET /
+ * Serve static files on root path for react app
+ */
+app.use("/", express.static('./ui/build'));
+
 
 /**
  * GET /tasks
