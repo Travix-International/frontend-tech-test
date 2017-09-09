@@ -14,8 +14,8 @@
     "start": "./node_modules/.bin/cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development ./node_modules/.bin/nodemon index.js",
     "start:prod": "./node_modules/.bin/cross-env NODE_ENV=production node index.js",
     "bundle:vendors": "./node_modules/.bin/webpack --config ./client/vendors/webpack.config.js",
-    "bundle:apps": "node_modules/.bin/rimraf build/js/bundle.app.* && ./node_modules/.bin/webpack --env.prod",
-    "build":"npm run bundle:vendors -- -p && npm run bundle:apps -- -p"
+    "bundle:apps": "node_modules/.bin/rimraf build/bundle.app.* && ./node_modules/.bin/webpack --env.prod",
+    "build": "npm run bundle:vendors -- -p && npm run bundle:apps -- -p"
   },
   "keywords": [
     "test",
@@ -35,14 +35,15 @@
     ]
   },
   "dependencies": {
-    "express": "^4.14.0",
     "frint": "2.4.1",
     "frint-model": "2.4.1",
     "frint-react": "2.4.1",
     "frint-store": "2.4.1",
+    "normalizr": "3.2.3",
     "prop-types": "15.5.10",
     "react": "15.6.1",
-    "react-dom": "15.6.1"
+    "react-dom": "15.6.1",
+    "todomvc-app-css": "2.1.0"
   },
   "devDependencies": {
     "babel-core": "6.26.0",
@@ -52,6 +53,7 @@
     "babel-preset-travix": "1.1.1",
     "chai": "4.1.2",
     "cross-env": "5.0.5",
+    "css-loader": "0.28.7",
     "dummy-json": "2.0.0",
     "eslint": "4.6.1",
     "eslint-config-travix": "3.0.0",
@@ -60,10 +62,15 @@
     "eslint-plugin-promise": "3.5.0",
     "eslint-plugin-react": "7.3.0",
     "eventsource-polyfill": "0.9.6",
+    "express": "^4.14.0",
+    "extract-text-webpack-plugin": "3.0.0",
     "html-webpack-plugin": "2.30.1",
     "jest": "21.0.1",
+    "node-sass": "4.5.3",
     "nodemon": "1.12.0",
     "react-hot-loader": "1.3.1",
+    "sass-loader": "6.0.6",
+    "style-loader": "0.18.2",
     "supertest": "3.0.0",
     "webpack": "3.5.6",
     "webpack-dev-middleware": "1.12.0",

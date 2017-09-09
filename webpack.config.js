@@ -28,7 +28,7 @@ module.exports = (env) => {
       ])
     },
     output: {
-      path: path.resolve(__dirname, env.prod ? 'build/js' : './'),
+      path: path.resolve(__dirname, env.prod ? './build/' : './'),
       filename: env.prod ? 'bundle.[name].[chunkhash].js' : '[name].js'
     },
     module: {
@@ -41,6 +41,20 @@ module.exports = (env) => {
               'travix'
             ]
           }
+        },
+        {
+          test: /\.css$/,
+          use: [ 'style-loader', 'css-loader' ]
+        },
+        {
+          test: /\.scss$/,
+          use: [{
+              loader: "style-loader" // creates style nodes from JS strings
+          }, {
+              loader: "css-loader" // translates CSS into CommonJS
+          }, {
+              loader: "sass-loader" // compiles Sass to CSS
+          }]
         }
       ]
     },

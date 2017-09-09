@@ -1,0 +1,23 @@
+.toggle-description {
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  top: 20px;
+  left: -15px;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+
+  &:checked {
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+  }
+  
+  &:before {
+    content: '❯';
+    font-size: 22px;
+    color: #e6e6e6;
+    padding: 10px 27px 10px 27px;
+    top: 20px;
+  }
+}
