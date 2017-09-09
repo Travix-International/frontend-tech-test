@@ -4,7 +4,9 @@ import { createStore } from 'frint-store';
 import { RegionService } from 'frint-react';
 
 import RootComponent from '../components/Root';
+import { REQUEST_TODOS } from '../constants';
 import rootReducer from '../reducers';
+import todoEpic$ from '../epics';
 
 import css from 'todomvc-app-css/index.css';
 
@@ -19,29 +21,14 @@ export default createApp({
       name: 'store',
       useFactory({ app }) {
         const Store = createStore({
-          initialState: {
-            todos: {
-              records: [
-                {
-                  id: 0,
-                  title: 'First todo title',
-                  description: 'Id rhoncus consectetur maximus gravida vitae leo ac posuere sed. Eu ultrices sapien ligula. Pharetra ultricies est laoreet quisque. Porttitor non tempor magna e est.',
-                  completed: false,
-                },
-                {
-                  id: 1,
-                  title: 'Second todo title',
-                  description: 'Id rhoncus consectetur maximus gravida vitae leo ac posuere sed. Eu ultrices sapien ligula. Pharetra ultricies est laoreet quisque. Porttitor non tempor magna e est.',
-                  completed: true,
-                },
-              ]
-            },
-          },
+          initialState: {},
           reducer: rootReducer,
+          epic: todoEpic$,
           thunkArgument: { app },
         });
-
-        return new Store();
+        const store = new Store();
+        store.dispatch({ type: REQUEST_TODOS })
+        return store;
       },
       deps: ['app'],
     },

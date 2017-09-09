@@ -1,5 +1,5 @@
 import { combineEpics } from 'frint-store';
 
-import colorEpic$ from './color';
+import todoEpic$ from './todos';
 
-export default combineEpics(colorEpic$);
+export default combineEpics(todoEpic$);

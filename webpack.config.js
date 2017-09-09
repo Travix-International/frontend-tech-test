@@ -81,7 +81,9 @@ module.exports = (env) => {
       'frint-store': 'FrintStore',
       'react': 'React',
       'react-dom': 'ReactDOM',
-      'rxjs': 'Rx'
+      'rxjs': 'Rx',
+      'isomorphic-fetch': 'fetch',
+      'normalizr': 'normalizr'
     }
   };
 }

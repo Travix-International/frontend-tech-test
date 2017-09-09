@@ -1,11 +1,23 @@
-import {
-  CHANGE_COLOR_ASYNC
-} from '../constants';
-import { changeColor } from '../actions/color';
+import { normalize } from 'normalizr';
 
-export default function colorEpic$(action$) {
+import {
+  REQUEST_TODOS,
+  CANCEL_REQUEST_TODOS,
+} from '../constants';
+
+import { receiveTodos } from '../actions/todos';
+import callApi from './apiCaller';
+import * as schema from './schema';
+
+export default function fetchTodos$(action$) {
   return action$
-    .filter(action => action.type === CHANGE_COLOR_ASYNC)
-    .delay(1000)
-    .map(action => changeColor(action.color));
+    .filter(action => action.type === REQUEST_TODOS)
+    .mergeMap((action) => {
+      return Rx.Observable.fromPromise(callApi('tasks'))
+        .map((res) => {
+          const payload = normalize(res.tasks, schema.arrayOfTodos)
+          return receiveTodos(payload);
+        })
+        .takeUntil(action$.filter(action => action.type === CANCEL_REQUEST_TODOS))
+    });
 }

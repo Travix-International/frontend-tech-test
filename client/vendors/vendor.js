@@ -68,3 +68,23 @@
   }
   window['FrintReact'] = m;
 })();
+
+// isomorphic-fetch
+(function () {
+  var fetch = require('isomorphic-fetch');
+  if (typeof fetch.default !== 'undefined') {
+    window['fetch'] = fetch.default;
+    return;
+  }
+  window['fetch'] = fetch;
+})();
+
+// normalizr
+(function () {
+  var normalizr = require('normalizr');
+  if (typeof normalizr.default !== 'undefined') {
+    window['normalizr'] = normalizr.default;
+    return;
+  }
+  window['normalizr'] = normalizr;
+})();

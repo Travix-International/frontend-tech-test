@@ -11,7 +11,7 @@ if (!fs.existsSync(path.resolve(__dirname, jsonFile))) {
       "id": {{@index}},\
       "title": "{{lorem 5}}",\
       "description": "{{lorem}}",\
-      "completed": "{{boolean}}"\
+      "completed": {{boolean}}\
     }'
   };
 

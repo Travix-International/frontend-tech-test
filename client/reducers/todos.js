@@ -1,46 +1,32 @@
 import _ from 'lodash';
+import { combineReducers } from 'frint-store';
 
 import {
   TODOS_ADD,
   TODOS_DELETE,
   TODOS_UPDATE,
+  RECEIVE_TODOS,
 } from '../constants';
 
-const INITIAL_STATE = {
-  records: [],
-};
-
-export default function todos(state = INITIAL_STATE, action) {
+const TodoById = (state = {}, action) => {
   switch (action.type) {
-    case TODOS_ADD:
-      return Object.assign({}, {
-        records: [
-          ...state.records,
-          {
-            ...action.payload,
-            id: state.records.length,
-          }
-        ]
-      });
-
-    case TODOS_DELETE:
-      return Object.assign({}, {
-        records: state.records.filter(todo => todo.id !== action.id),
-      });
-
-    case TODOS_UPDATE:
-      return Object.assign({}, {
-        records: state.records
-          .map((todo) => {
-            if (todo.id !== action.payload.id) {
-              return todo;
-            }
-
-            return { ...todo, ...action.payload };
-          })
-      });
-
+    case RECEIVE_TODOS:
+      return action.payload.entities.todo || state;
     default:
       return state;
   }
-}
+};
+
+const TodoAllIds = (state = [], action) => {
+  switch (action.type) {
+    case RECEIVE_TODOS:
+      return action.payload.result;
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({
+  byId: TodoById,
+  allIds: TodoAllIds,
+});

@@ -68,11 +68,10 @@ class Root extends Component {
 
 export default observe(function (app) {
   const store = app.get('store');
-
   const state$ = store.getState$()
     .map((state) => {
       return {
-        todos: state.todos.records,
+        todos: state.todos.allIds.map(id => state.todos.byId[id]),
       };
     });
 
