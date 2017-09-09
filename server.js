@@ -69,7 +69,7 @@ app.get('/task/:id', (req, res) => {
  * If both title and description is empty, return as status code 400.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update', (req, res) => {
+app.put('/task/update/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
