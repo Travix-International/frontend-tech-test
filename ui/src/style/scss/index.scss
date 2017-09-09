@@ -1,0 +1,258 @@
+@import "base";
+@import "colors";
+@import "utility";
+
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    color:$primary-color;
+    min-height: 100vh;
+    margin: 0;
+    background-image: linear-gradient(135deg, #fc636b, #a177ff);
+    font-size: 100%;
+}
+
+.todo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 15px;
+    &-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+    }
+    &-headline {
+        font-family: $primary-font;
+        color: $primary-color;
+        padding: 5px 15px 5px 15px;
+        font-weight: 800;
+        font-size: calc(1.5em + 2.5vw);
+        letter-spacing: -2px;
+        span {
+            font-weight: 300;
+        }
+    }
+    &-count {
+        margin-left: 15px;
+    }
+    &-links-container {
+        display: flex;
+    }
+    &-link {
+        flex-grow: 3;
+        text-align: center;
+        font-family: $primary-font;
+        cursor: pointer;
+        opacity: .7;
+        padding: 5px;
+        &:hover {
+            opacity: 1;
+        }
+    }
+    &-form {
+        position: relative;
+    }
+    &-input {
+        border-radius: 5px;
+        margin-bottom: 15px;
+        background-color: $primary-color;
+        box-shadow: 0 25px 40px -20px shade($box-shadow, 5%);
+        padding: 3px;
+    }
+    .input {
+        transition: all $t;
+        width: 100%;
+        border: none;
+        outline: none;
+        font-size: 18px;
+        font-family: $primary-font;
+        font-weight: 300;
+        padding: 10px 50px 10px 10px;
+        height: 60px;
+        &:not(input) {
+            resize: none;
+            &:focus {
+                height: 150px;
+            }
+        }
+    }
+    &-btn {
+        height: 30px;
+        cursor: pointer;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: $secondary-color;
+        border: none;
+        border-radius: 3px;
+        font-size: 14px;
+        outline: none;
+        color: $quaternary-color;
+        transition: transform $t, opacity $t;
+        opacity: 1;
+        font-weight: 600;
+        &.cancel {
+            background-color: $tertiary-color;
+            right: 70px;
+        }
+    }
+    &-checkbox {
+        display:inline-block;
+        height: 10px;
+        width:20px;
+        background: blue;
+    }
+    &-item {
+        background-color: $primary-color;
+        cursor: pointer;
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 5px;
+        font-family: $primary-font;
+        color:#757575;
+        transition: opacity $t;
+        position: relative;
+        min-height: 80px;
+        .title {
+            font-weight: 600;
+            position: relative;
+            margin-bottom: 15px;
+            &:before {
+                position: absolute;
+                top: 2px;
+                left: 0;
+                bottom: 0;
+                margin: auto;
+                content:"";
+                width: 0;
+                height: 2px;
+                background-color: rgba(56,52,62,.3);
+                transition: width $t;
+            }
+        }
+        &--checkbox {
+            display: none;
+            &:checked{
+                +.todo__item{
+                    opacity: .4;
+                    span{
+                        &:before{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+        &--delete, &--edit {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background-color: $secondary-color;
+            color: $primary-color;
+            font-size: 20px;
+            line-height: 10px;
+            border: none;
+            border-radius: 25px;
+            width: 25px;
+            height: 25px;
+            opacity: 0;
+            transition: all $t;
+        }
+        &:hover {
+            .todo-item--delete {
+                opacity: 1;
+            }
+            .todo-item--edit {
+                opacity: 1;
+                top: 40px;
+            }
+        }
+    }
+}
+
+//Modal
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left:0;
+    right:0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 30vw;
+    height: 40vh;
+    min-width: 290px;
+    min-height: 200px;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform $t, opacity $t;
+    background: $secondary-color;
+    box-shadow: 0 25px 40px -20px shade($box-shadow, 5%);
+    border-radius: 3px;
+    &.active {
+        transform: scale(1);
+        opacity: 1;
+    }
+    &-header {
+        font-family: $primary-font;
+        font-weight: 700;
+        color: $quaternary-color;
+        font-size: calc(2em + 2vw);
+        letter-spacing: -3px;
+        margin-bottom: 10px;
+        span{
+            font-weight: 300;
+        }
+    }
+    &-text {
+        font-family: $primary-font;
+        color: $primary-color;
+        font-size: 12px;
+        opacity: .8;
+        margin-bottom: 5px;
+    }
+    &-button {
+        border: 1px solid $quaternary-color;
+        padding: 10px;
+        margin: 15px;
+        border-radius: 3px;
+        font-family: $primary-font;
+        background: none;
+        color: $quaternary-color;
+        font-size: 12px;
+        text-transform:uppercase;
+        cursor: pointer;
+        font-weight: 400;
+        transition: background-color $t, color $t;
+        &:hover{
+            background-color: $quaternary-color;
+            color: $secondary-color;
+        }
+    }
+    &-close {
+        position: absolute;
+        top:5px;
+        right: 15px;
+        height:24px;
+        width:24px;
+        border-radius: 24px;
+        color: $quaternary-color;
+        background-color: $tertiary-color;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        line-height: 10px;
+        transition: opacity $t;
+    }
+}
