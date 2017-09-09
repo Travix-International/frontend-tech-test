@@ -1,9 +1,25 @@
 'use strict';
 
 const app = require('express')();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const bodyParser = require("body-parser");
 
 const tasksContainer = require('./tasks.json');
+
+
+// use socket io for sync data across all clients
+io.on('connection', function (socket) {
+  socket.on("new_task", function (task) {
+    socket.broadcast.emit("new_task", task);
+  });
+  socket.on("update_task", function (id, task) {
+    socket.broadcast.emit("update_task", id, task);
+  });
+  socket.on("delete_task", function (id) {
+    socket.broadcast.emit("delete_task", id);
+  });
+});
 
 
 app.use(bodyParser.json());
@@ -38,9 +54,9 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find((item) => item.id === id);
 
-    if (task !== null) {
+    if (task) {
       return res.status(200).json({
         task,
       });
@@ -83,7 +99,7 @@ app.put('/task/update/:id', (req, res) => {
 
     const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    if (task) {
       task.title = req.body.title;
       task.description = req.body.description;
       return res.status(200).json({
@@ -167,6 +183,10 @@ app.delete('/task/delete/:id', (req, res) => {
   }
 });
 
-app.listen(9001, () => {
+server.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });
+
+module.exports = {
+  app
+};
