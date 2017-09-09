@@ -12,9 +12,9 @@ const isDeveloping = process.env.NODE_ENV !== 'production';
 
 if (isDeveloping) {
   const compiler = webpack(webpackConfig({ env: { prod: false} }));
-
+  const middleware = webpackDevMiddleware(compiler, { noInfo: true, publicPath: '/' });
   app.use(Express.static(path.resolve(__dirname, 'build/js')));
-  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: '/' }));
+  app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
 
   app.get('*', (req, res) => {
@@ -22,9 +22,9 @@ if (isDeveloping) {
     res.end();
   });
 } else {
-app.use(Express.static(path.resolve(__dirname, 'build')));
- app.get('*', (req, res) => {
-   res.sendFile(path.join(__dirname, 'index.html'));
+  app.use(Express.static(path.resolve(__dirname, 'build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
  });
 }
 app.listen(port, () => {
