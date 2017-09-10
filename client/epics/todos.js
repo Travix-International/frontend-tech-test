@@ -19,13 +19,13 @@ import {
   receiveTodo,
   receiveAddTodo,
   receiveDeleteTodo,
+  receiveUpdateTodo,
 } from '../actions/todos';
 
 import callApi from './apiCaller';
 import * as schema from './schema';
 
 export function fetchTodos$(action$) {
-  console.log(action$);
   return action$
     .filter(action => action.type === REQUEST_TODOS)
     .mergeMap((action) => {
@@ -54,8 +54,9 @@ export function addTodo$(action$) {
   return action$
     .filter(action => action.type === REQUEST_TODO_ADD)
     .mergeMap((action) => {
+      const { todo } = action;
       return Rx.Observable.fromPromise(
-          callApi(`task/create/${action.title}/${action.description}/${action.completed}`, 'post')
+          callApi(`task/create/${todo.title}/${todo.description || 'null'}`, 'post')
         )
         .map((res) => {
           return receiveAddTodo(res.task);
@@ -70,7 +71,7 @@ export function deleteTodo$(action$) {
     .mergeMap((action) => {
       return Rx.Observable.fromPromise(callApi(`task/delete/${action.id}`, 'delete'))
         .map((res) => {
-          return receiveDeleteTodo(res.task);
+          return receiveDeleteTodo(parseInt(res.id, 10));
         })
         .takeUntil(action$.filter(action => action.type === CANCEL_REQUEST_TODO_DELETE))
     });
@@ -80,8 +81,9 @@ export function updateTodo$(action$) {
   return action$
     .filter(action => action.type === REQUEST_TODO_UPDATE)
     .mergeMap((action) => {
+      const { todo } = action;
       return Rx.Observable.fromPromise(
-          callApi(`task/update/${action.id}/${action.title}/${action.description}/${action.completed}`, 'put')
+          callApi(`task/update/${todo.id}/${todo.title}/${todo.description}/${todo.completed}`, 'put')
         )
         .map((res) => {
           return receiveUpdateTodo(res.task);

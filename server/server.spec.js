@@ -38,11 +38,11 @@ describe(`POST ${pathToApi}/task/create/:title/:description`, function() {
   });
 });
 
-describe(`PUT ${pathToApi}/task/update/:id/:title/:description`, function() {
+describe(`PUT ${pathToApi}/task/update/:id/:title/:description/:completed`, function() {
   it('should respond 204', function(done) {
     request(app)
-      .put(`${pathToApi}/task/update/${newId}/${encodeURI(title)}/${encodeURI(description)}`)
-      .expect(204)
+      .put(`${pathToApi}/task/update/${newId}/${encodeURI(title)}/${encodeURI(description)}/false`)
+      .expect(200)
       .end((err, res) => {
         if (err) return done(err);
         return done();
@@ -50,7 +50,7 @@ describe(`PUT ${pathToApi}/task/update/:id/:title/:description`, function() {
   });
   it('should respond 404 not found', function(done) {
     request(app)
-      .put(`${pathToApi}/task/update/-1/${encodeURI(title)}/${encodeURI(description)}`)
+      .put(`${pathToApi}/task/update/-1/${encodeURI(title)}/${encodeURI(description)}/false`)
       .expect(404)
       .end((err, res) => {
         if (err) return done(err);
@@ -59,7 +59,7 @@ describe(`PUT ${pathToApi}/task/update/:id/:title/:description`, function() {
   });
   it('should respond 400 Bad Request', function(done) {
     request(app)
-      .put(`${pathToApi}/task/update/null/${encodeURI(title)}/${encodeURI(description)}`)
+      .put(`${pathToApi}/task/update/null/${encodeURI(title)}/${encodeURI(description)}/false`)
       .expect(400)
       .end((err, res) => {
         if (err) return done(err);
@@ -75,7 +75,7 @@ describe(`GET ${pathToApi}/task/:id`, function() {
       .expect('Content-Type', /json/)
       .expect(200)
       .end((err, res) => {
-        expect(res.body).to.be.eql({ task: { id: newId, title, description } });
+        expect(res.body).to.be.eql({ task: { id: newId, title, description, completed: false } });
         if (err) return done(err);
         return done();
       });

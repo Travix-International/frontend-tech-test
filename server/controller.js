@@ -81,11 +81,12 @@ const updateTask = (req, res) => {
     if (!!task) {
       task.title = decodeURI(req.params.title);
       task.description = decodeURI(req.params.description);
+      task.completed = req.params.completed === 'true';
 
       const json = JSON.stringify(tasksContainer);
       return fs.writeFile(path.resolve(__dirname, jsonFile), json, 'utf8', (err) => {
         if (err === null) {
-          return res.status(204).end();
+          return res.status(200).json({ task });
         }
         return res.status(500).json({
           message: 'Cannot save file',
@@ -116,7 +117,8 @@ const addTask = (req, res) => {
   const task = {
     id: tasksContainer.tasks.length,
     title: decodeURI(req.params.title),
-    description: decodeURI(req.params.description),
+    description: req.params.description !== 'null' ? decodeURI(req.params.description) : '',
+    completed: false,
   };
 
   tasksContainer.tasks.push(task);
@@ -159,6 +161,7 @@ const deleteTask = (req, res) => {
         if (err === null) {
           return res.status(200).json({
             message: 'Updated successfully',
+            id: req.params.id
           });
         }
         return res.status(500).json({

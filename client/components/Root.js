@@ -4,7 +4,7 @@ import { observe, Region } from 'frint-react';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { TODO_PROPTYPES } from '../constants';
-import { addTodo } from '../actions/todos';
+import { requestAddTodo } from '../actions/todos';
 import Item from './Item';
 import root from './root.scss';
 
@@ -87,7 +87,7 @@ export default observe(function (app) {
   const actions$ = Observable.of({
     addTodo: (...args) => {
       clearInput();
-      return store.dispatch(addTodo(...args));
+      return store.dispatch(requestAddTodo(...args));
     },
 
     changeInput,

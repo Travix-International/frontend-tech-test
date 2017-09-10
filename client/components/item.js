@@ -4,7 +4,7 @@ import { observe, streamProps, Region } from 'frint-react';
 import { BehaviorSubject } from 'rxjs';
 
 import { TODO_PROPTYPES } from '../constants';
-import { removeTodo, updateTodo } from '../actions/todos';
+import { requestDeleteTodo, requestUpdateTodo } from '../actions/todos';
 import item from './item.scss';
 
 const ESCAPE_KEY = 27;
@@ -16,7 +16,7 @@ class Item extends Component {
     titleValue: PropTypes.string.isRequired,
     descriptionValue: PropTypes.string.isRequired,
     showEditForm: PropTypes.bool.isRequired,
-    removeTodo: PropTypes.func.isRequired,
+    requestDeleteTodo: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
     edit: PropTypes.func.isRequired,
     cancelEdit: PropTypes.func.isRequired,
@@ -38,7 +38,7 @@ class Item extends Component {
     }
 	}
   render() {
-    const { todo, removeTodo, submit, titleValue, descriptionValue, edit, showEditForm, changeTitle, changeDescription } = this.props;
+    const { todo, requestDeleteTodo, submit, titleValue, descriptionValue, edit, showEditForm, changeTitle, changeDescription } = this.props;
     return (
       <li className={`${todo.completed ? 'completed' : ''} ${showEditForm ? 'editing' : ''}`}>
         {!showEditForm && (
@@ -52,7 +52,7 @@ class Item extends Component {
             />
             <label onDoubleClick={() => edit(todo)}>{todo.title}</label>
             <div className="description" onDoubleClick={() => edit(todo)}>{todo.description}</div>
-            <button className="destroy" onClick={() => removeTodo(todo.id)} />
+            <button className="destroy" onClick={() => requestDeleteTodo(todo.id)} />
           </div>
         )}
         {showEditForm && (
@@ -97,7 +97,7 @@ export default observe(function (app) {
   return streamProps()
     // dispatchable actions against store
     .setDispatch(
-      { removeTodo },
+      { requestDeleteTodo },
       store
     )
 
@@ -130,7 +130,7 @@ export default observe(function (app) {
       },
       cancelEdit,
       submit: (todo) => {
-        store.dispatch(updateTodo(todo));
+        store.dispatch(requestUpdateTodo(todo));
         cancelEdit();
       }
     })

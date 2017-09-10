@@ -17,11 +17,19 @@ export const receiveTodos = payload => ({ type: RECEIVE_TODOS, payload });
 export const requestTodo = id => ({ type: REQUEST_TODO, id })
 export const receiveTodo = payload => ({ type: RECEIVE_TODO, payload });
 
-export const requestAddTodo = todo => ({ type: REQUEST_TODO_ADD, todo })
+export const requestAddTodo = todo => ({ type: REQUEST_TODO_ADD, todo: {
+  title: encodeURI(todo.title),
+  description: !!todo.description ? encodeURI(todo.title) : ''
+} })
 export const receiveAddTodo = payload => ({ type: RECEIVE_TODO_ADD, payload });
 
 export const requestDeleteTodo = id => ({ type: REQUEST_TODO_DELETE, id })
-export const receiveDeleteTodo = payload => ({ type: RECEIVE_TODO_DELETE, payload });
+export const receiveDeleteTodo = id => ({ type: RECEIVE_TODO_DELETE, id });
 
-export const requestUpdateTodo = todo => ({ type: REQUEST_TODO_UPDATE, todo })
+export const requestUpdateTodo = todo => ({ type: REQUEST_TODO_UPDATE, todo : {
+  id: todo.id,
+  title: encodeURI(todo.title),
+  description: encodeURI(todo.description),
+  completed: todo.completed
+} })
 export const receiveUpdateTodo = payload => ({ type: RECEIVE_TODO_UPDATE, payload });
