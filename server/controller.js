@@ -17,7 +17,14 @@ const getTasks = (req, res) => {
         offset = (page - 1) * pageSize;
 
   tasksContainer.tasks.sort((a,b) => b.id - a.id);
-  const tasks = tasksContainer.tasks.slice(offset, offset + pageSize);
+  
+  const tasks = tasksContainer.tasks.filter((task) => {
+    switch(req.params.filter) {
+      case 'active': return !task.completed;
+      case 'completed': return task.completed;
+      default: return true;
+    }
+  }).slice(offset, offset + pageSize);
 
   return res.status(200).json({
     tasks,

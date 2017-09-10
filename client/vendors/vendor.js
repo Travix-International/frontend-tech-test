@@ -69,6 +69,26 @@
   window['FrintReact'] = m;
 })();
 
+// frint-router
+(function () {
+  var m = require('frint-router');
+  if (typeof m.default !== 'undefined') {
+    window['FrintRouter'] = m.default;
+    return;
+  }
+  window['FrintRouter'] = m;
+})();
+
+// frint-router-react
+(function () {
+  var m = require('frint-router-react');
+  if (typeof m.default !== 'undefined') {
+    window['FrintRouterReact'] = m.default;
+    return;
+  }
+  window['FrintRouterReact'] = m;
+})();
+
 // isomorphic-fetch
 (function () {
   var fetch = require('isomorphic-fetch');

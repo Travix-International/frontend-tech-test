@@ -4,7 +4,8 @@ import { observe, Region } from 'frint-react';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { TODO_PROPTYPES } from '../constants';
-import { requestAddTodo } from '../actions/todos';
+import { requestAddTodo, requestTodos } from '../actions/todos';
+import Filters from './Filters'
 import Item from './Item';
 import root from './root.scss';
 
@@ -13,6 +14,8 @@ class Root extends Component {
     todos: PropTypes.arrayOf(TODO_PROPTYPES),
     changeInput: PropTypes.func.isRequired,
     addTodo: PropTypes.func.isRequired,
+    getTodos: PropTypes.func.isRequired,
+    pathname: PropTypes.string.isRequired,
     inputValue: PropTypes.string,
   };
   static defaultProps = {
@@ -23,6 +26,14 @@ class Root extends Component {
     e.preventDefault();
     addTodo({ title: inputValue });
   }
+  componentDidMount = () => {
+    this.props.getTodos(this.props.pathname.slice(1));
+  }
+  componentDidUpdate = (prevProps) => {
+		if (prevProps.pathname !== this.props.pathname) {
+      this.props.getTodos(this.props.pathname.slice(1));
+    }
+	}
   render() {
     return (
       <div className="todoapp">
@@ -38,6 +49,7 @@ class Root extends Component {
           />
           <input className="toggle-description" type="checkbox" />
         </form>
+        <Filters />
         <ul className="todo-list">
           {this.props.todos.map((todo, index) => {
             return (
@@ -48,19 +60,7 @@ class Root extends Component {
             );
           })}
         </ul>
-
-        <footer className="footer">
-          <span className="todo-count">
-            <strong>1</strong>
-            <span> item</span>
-            <span> left</span>
-          </span>
-          <ul className="filters">
-            <li><a className="selected" href="#/">All</a></li>
-            <li><a href="#/active">Active</a></li>
-            <li><a href="#/completed">Completed</a></li>
-          </ul>
-        </footer>
+        <Filters />
       </div>
     );
   }
@@ -68,6 +68,12 @@ class Root extends Component {
 
 export default observe(function (app) {
   const store = app.get('store');
+  const router = app.get('router');
+  const history$ = router._history$.map((val) => {
+    return {
+      pathname: val.location.pathname
+    }
+  });
   const state$ = store.getState$()
     .map((state) => {
       return {
@@ -89,7 +95,7 @@ export default observe(function (app) {
       clearInput();
       return store.dispatch(requestAddTodo(...args));
     },
-
+    getTodos: filter => store.dispatch(requestTodos(filter)),
     changeInput,
     clearInput,
   });
@@ -97,6 +103,7 @@ export default observe(function (app) {
   return state$
     .merge(actions$)
     .merge(formInput$)
+    .merge(history$)
     .scan((props, emitted) => {
       return {
         ...props,

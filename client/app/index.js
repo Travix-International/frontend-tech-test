@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { createApp } from 'frint';
 import { createStore } from 'frint-store';
 import { RegionService } from 'frint-react';
+import HashRouterService from 'frint-router/BrowserRouterService';
 
 import RootComponent from '../components/Root';
 import { requestTodos } from '../actions/todos';
@@ -26,11 +27,16 @@ export default createApp({
           epic: todoEpic$,
           thunkArgument: { app },
         });
-        const store = new Store();
-        store.dispatch(requestTodos())
-        return store;
+        return new Store();
       },
       deps: ['app'],
+    },
+    {
+      name: 'router',
+      useFactory: function () {
+        return new HashRouterService();
+      },
+      cascade: true,
     },
     {
       name: 'region',

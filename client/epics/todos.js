@@ -34,7 +34,8 @@ export function fetchTodos$(action$) {
   return action$
     .filter(action => action.type === REQUEST_TODOS)
     .mergeMap((action) => {
-      return Rx.Observable.fromPromise(callApi('tasks'))
+      const filter = action.filter ? `/${action.filter}` : '';
+      return Rx.Observable.fromPromise(callApi(`tasks${filter}`))
         .map((res) => {
           const payload = normalize(res.tasks, schema.arrayOfTodos)
           return receiveTodos(payload);
