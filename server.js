@@ -33,9 +33,9 @@ app.use(function(req, res, next) {
 
 /**
  * GET /
- * Serve static files on root path for react app
+ * Serve static files on root path for displaying react app
  */
-app.use("/", express.static('./ui/build'));
+app.use("/", express.static(path.join(__dirname, 'ui', 'build')));
 
 
 /**
