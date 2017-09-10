@@ -93,7 +93,7 @@ export function updateTodo$(action$) {
     .mergeMap((action) => {
       const { todo } = action;
       return Rx.Observable.fromPromise(
-          callApi(`task/update/${todo.id}/${todo.title}/${todo.description}/${todo.completed}`, 'put')
+          callApi(`task/update/${todo.id}/${todo.title}/${todo.description || 'null'}/${todo.completed}`, 'put')
         )
         .map((res) => {
           return receiveUpdateTodo(res.task);

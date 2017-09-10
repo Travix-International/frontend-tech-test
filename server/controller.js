@@ -17,7 +17,7 @@ const getTasks = (req, res) => {
         offset = (page - 1) * pageSize;
 
   tasksContainer.tasks.sort((a,b) => b.id - a.id);
-  
+
   const tasks = tasksContainer.tasks.filter((task) => {
     switch(req.params.filter) {
       case 'active': return !task.completed;
@@ -87,7 +87,7 @@ const updateTask = (req, res) => {
 
     if (!!task) {
       task.title = decodeURI(req.params.title);
-      task.description = decodeURI(req.params.description);
+      task.description = req.params.description !== 'null' ? decodeURI(req.params.description) : '';
       task.completed = req.params.completed === 'true';
 
       const json = JSON.stringify(tasksContainer);
