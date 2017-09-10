@@ -2,6 +2,9 @@ import {
   REQUEST_TODOS,
   REQUEST_TODOS_ERROR,
   RECEIVE_TODOS,
+  REQUEST_NEXT_TODOS,
+  REQUEST_NEXT_TODOS_ERROR,
+  RECEIVE_NEXT_TODOS,
   REQUEST_TODO,
   REQUEST_TODO_ERROR,
   RECEIVE_TODO,
@@ -19,6 +22,10 @@ import {
 export const requestTodos = (filter='') => ({ type: REQUEST_TODOS, filter })
 export const receiveTodos = payload => ({ type: RECEIVE_TODOS, payload });
 export const requestTodosError = error => ({ type: REQUEST_TODOS_ERROR, error });
+
+export const requestNextTodos = (page, filter='') => ({ type: REQUEST_NEXT_TODOS, page, filter })
+export const receiveNextTodos = payload => ({ type: RECEIVE_NEXT_TODOS, payload });
+export const requestNextTodosError = error => ({ type: REQUEST_NEXT_TODOS_ERROR, error });
 
 export const requestTodo = id => ({ type: REQUEST_TODO, id })
 export const receiveTodo = payload => ({ type: RECEIVE_TODO, payload });

@@ -2,6 +2,8 @@ import { combineEpics } from 'frint-store';
 import { normalize } from 'normalizr';
 
 import {
+  REQUEST_NEXT_TODOS,
+  CANCEL_REQUEST_NEXT_TODOS,
   REQUEST_TODOS,
   CANCEL_REQUEST_TODOS,
   REQUEST_TODO,
@@ -15,6 +17,8 @@ import {
 } from '../constants';
 
 import {
+  requestNextTodosError,
+  receiveNextTodos,
   requestTodosError,
   receiveTodos,
   requestTodoError,
@@ -37,11 +41,32 @@ export function fetchTodos$(action$) {
       const filter = action.filter ? `/${action.filter}` : '';
       return Rx.Observable.fromPromise(callApi(`tasks${filter}`))
         .map((res) => {
-          const payload = normalize(res.tasks, schema.arrayOfTodos)
-          return receiveTodos(payload);
+          const payload = normalize(res.tasks, schema.arrayOfTodos);
+          return receiveTodos({
+            ...payload,
+            pagination: res.pagination
+          });
         })
         .takeUntil(action$.filter(action => action.type === CANCEL_REQUEST_TODOS))
         .catch(error => Rx.Observable.of(requestTodosError(error.toString())));
+    });
+}
+
+export function fetchNextTodos$(action$) {
+  return action$
+    .filter(action => action.type === REQUEST_NEXT_TODOS)
+    .mergeMap((action) => {
+      const filter = action.filter ? `/${action.filter}` : '';
+      return Rx.Observable.fromPromise(callApi(`tasks${filter}?page=${action.page}`))
+        .map((res) => {
+          const payload = normalize(res.tasks, schema.arrayOfTodos);
+          return receiveNextTodos({
+            ...payload,
+            pagination: res.pagination
+          });
+        })
+        .takeUntil(action$.filter(action => action.type === CANCEL_REQUEST_NEXT_TODOS))
+        .catch(error => Rx.Observable.of(requestNextTodosError(error.toString())));
     });
 }
 
@@ -105,6 +130,7 @@ export function updateTodo$(action$) {
 
 export default combineEpics(
   fetchTodos$,
+  fetchNextTodos$,
   fetchTodo$,
   addTodo$,
   deleteTodo$,

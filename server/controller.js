@@ -11,10 +11,6 @@ const tasksContainer = require(jsonFile);
  * Return the list of tasks with status code 200.
  */
 const getTasks = (req, res) => {
-  const page = parseInt(req.query.page, 10) || 1,
-        total = tasksContainer.tasks.length,
-        pageSize = parseInt(req.query.per_page, 10) || pagination.page_size,
-        offset = (page - 1) * pageSize;
 
   tasksContainer.tasks.sort((a,b) => b.id - a.id);
 
@@ -24,10 +20,15 @@ const getTasks = (req, res) => {
       case 'completed': return task.completed;
       default: return true;
     }
-  }).slice(offset, offset + pageSize);
+  });
+
+  const page = parseInt(req.query.page, 10) || 1,
+        total = tasks.length,
+        pageSize = parseInt(req.query.per_page, 10) || pagination.page_size,
+        offset = (page - 1) * pageSize;
 
   return res.status(200).json({
-    tasks,
+    tasks: tasks.slice(offset, offset + pageSize),
     pagination: {
       total,
       page,

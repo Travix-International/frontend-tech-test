@@ -22,3 +22,16 @@
     }
   }
 }
+
+.pagination {
+  text-align: center;
+  padding: 15px;
+  a {
+    color: inherit;
+    margin: 3px;
+    padding: 3px 7px;
+    text-decoration: none;
+    border: 1px solid rgba(175, 47, 47, 0.2);
+    border-radius: 3px;
+  }
+}
