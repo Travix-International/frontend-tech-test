@@ -15,10 +15,15 @@ import {
 } from '../constants';
 
 import {
+  requestTodosError,
   receiveTodos,
+  requestTodoError,
   receiveTodo,
+  requestAddTodoError,
   receiveAddTodo,
+  requestDeleteTodoError,
   receiveDeleteTodo,
+  requestUpdateTodoError,
   receiveUpdateTodo,
 } from '../actions/todos';
 
@@ -35,6 +40,7 @@ export function fetchTodos$(action$) {
           return receiveTodos(payload);
         })
         .takeUntil(action$.filter(action => action.type === CANCEL_REQUEST_TODOS))
+        .catch(error => Rx.Observable.of(requestTodosError(error.toString())));
     });
 }
 
@@ -47,6 +53,7 @@ export function fetchTodo$(action$) {
           return receiveTodo(res.task);
         })
         .takeUntil(action$.filter(action => action.type === CANCEL_REQUEST_TODO))
+        .catch(error => Rx.Observable.of(requestTodoError(error.toString())));
     });
 }
 
@@ -62,6 +69,7 @@ export function addTodo$(action$) {
           return receiveAddTodo(res.task);
         })
         .takeUntil(action$.filter(action => action.type === CANCEL_REQUEST_TODO_ADD))
+        .catch(error => Rx.Observable.of(requestAddTodoError(error.toString())));
     });
 }
 
@@ -74,6 +82,7 @@ export function deleteTodo$(action$) {
           return receiveDeleteTodo(parseInt(res.id, 10));
         })
         .takeUntil(action$.filter(action => action.type === CANCEL_REQUEST_TODO_DELETE))
+        .catch(error => Rx.Observable.of(requestDeleteTodoError(error.toString())));
     });
 }
 
@@ -89,6 +98,7 @@ export function updateTodo$(action$) {
           return receiveUpdateTodo(res.task);
         })
         .takeUntil(action$.filter(action => action.type === CANCEL_REQUEST_TODO_UPDATE))
+        .catch(error => Rx.Observable.of(requestUpdateTodoError(error.toString())));
     });
 }
 
