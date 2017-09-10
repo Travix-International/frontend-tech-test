@@ -1,31 +1,27 @@
 import {
-  TODOS_ADD,
-  TODOS_DELETE,
-  TODOS_UPDATE,
   REQUEST_TODOS,
   RECEIVE_TODOS,
+  REQUEST_TODO,
+  RECEIVE_TODO,
+  REQUEST_TODO_ADD,
+  RECEIVE_TODO_ADD,
+  REQUEST_TODO_DELETE,
+  RECEIVE_TODO_DELETE,
+  REQUEST_TODO_UPDATE,
+  RECEIVE_TODO_UPDATE,
 } from '../constants';
 
-export function addTodo(todo) {
-  return {
-    type: TODOS_ADD,
-    payload: todo,
-  };
-}
-
-export function removeTodo(id) {
-  return {
-    type: TODOS_DELETE,
-    id,
-  };
-}
-
-export function updateTodo(todo) {
-  return {
-    type: TODOS_UPDATE,
-    payload: todo,
-  };
-}
-
-export const requestTodos = () => ({ type: REQUEST_TODOS })
+export const requestTodos = (filter='') => ({ type: REQUEST_TODOS, filter })
 export const receiveTodos = payload => ({ type: RECEIVE_TODOS, payload });
+
+export const requestTodo = id => ({ type: REQUEST_TODO, id })
+export const receiveTodo = payload => ({ type: RECEIVE_TODO, payload });
+
+export const requestAddTodo = todo => ({ type: REQUEST_TODO_ADD, todo })
+export const receiveAddTodo = payload => ({ type: RECEIVE_TODO_ADD, payload });
+
+export const requestDeleteTodo = id => ({ type: REQUEST_TODO_DELETE, id })
+export const receiveDeleteTodo = payload => ({ type: RECEIVE_TODO_DELETE, payload });
+
+export const requestUpdateTodo = todo => ({ type: REQUEST_TODO_UPDATE, todo })
+export const receiveUpdateTodo = payload => ({ type: RECEIVE_TODO_UPDATE, payload });
