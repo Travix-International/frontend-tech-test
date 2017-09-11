@@ -70,7 +70,6 @@ class Item extends Component {
             <textarea
               className="edit description"
               onChange={e => changeDescription(e.target.value)}
-              onKeyDown={this.handleKeyDown}
               rows="4"
               value={descriptionValue}
             />

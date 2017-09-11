@@ -1,5 +1,11 @@
 $input-color: #e6e6e6;
 
+@media (max-width: 430px) {
+  .filters {
+    bottom: inherit !important;
+  }
+}
+
 .toggle-description {
   outline: none;
   -webkit-appearance: none;
@@ -27,6 +33,7 @@ $input-color: #e6e6e6;
 .add-todo-form {
   .btn {
     font-size: 16px;
+    font-weight: bold;
     padding: 10px 15px;
     text-decoration: none;
     border: 1px solid $input-color;
