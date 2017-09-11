@@ -64,12 +64,14 @@ class Item extends Component {
               className="edit"
               onChange={e => changeTitle(e.target.value)}
               onKeyDown={this.handleKeyDown}
+              placeholder="my todo title..."
               ref={(c) => { this.editTitle = c; }}
               value={titleValue}
             />
             <textarea
               className="edit description"
               onChange={e => changeDescription(e.target.value)}
+              placeholder="my todo description..."
               rows="4"
               value={descriptionValue}
             />
