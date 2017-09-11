@@ -1,7 +1,10 @@
 'use strict';
 
-const app = require('express')();
+const express = require('express');
 const tasksContainer = require('./tasks.json');
+
+const app = express();
+let taskId = Math.max(...tasksContainer.tasks.map(({ id }) => id), 0) + 1;
 
 /**
  * GET /tasks
@@ -27,22 +30,22 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
         task,
       });
-    } else {
-      return res.status(404).json({
-        message: 'Not found.',
-      });
     }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request.',
+
+    return res.status(404).json({
+      message: 'Not found.',
     });
   }
+
+  return res.status(400).json({
+    message: 'Bad request.',
+  });
 });
 
 /**
@@ -66,17 +69,17 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
-    } else {
-      return res.status(404).json({
-        message: 'Not found',
-      });
+      return res.status(204).send();
     }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request',
+
+    return res.status(404).json({
+      message: 'Not found',
     });
   }
+
+  return res.status(400).json({
+    message: 'Bad request',
+  });
 });
 
 /**
@@ -90,15 +93,17 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: taskId,
     title: req.params.title,
     description: req.params.description,
   };
+  taskId += 1;
 
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
     message: 'Resource created',
+    id: task.id
   });
 });
 
@@ -116,25 +121,26 @@ app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-  
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+    const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
+
+    if (taskIndex !== -1) {
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',
       });
-    } else {
-      return es.status(404).json({
-        message: 'Not found',
-      });
     }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request',
+
+    return res.status(404).json({
+      message: 'Not found',
     });
   }
+
+  return res.status(400).json({
+    message: 'Bad request',
+  });
 });
+
+app.use(express.static('public'));
 
 app.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');

@@ -1,0 +1,14 @@
+.task {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.11);
+}
+
+.task-title {
+  color: #0087cd;
+}
+
+.task-action {
+  &.disabled {
+    opacity: .65;
+    pointer-events: none;
+  }
+}

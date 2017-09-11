@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "travix/base",
+    "travix/react"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "rules": {
+    "class-methods-use-this": "off",
+    "import/no-named-as-default": "off"
+  }
+}
