@@ -2,9 +2,6 @@ import _ from 'lodash';
 import { combineReducers } from 'frint-store';
 
 import {
-  TODOS_ADD,
-  TODOS_DELETE,
-  TODOS_UPDATE,
   RECEIVE_TODOS,
   RECEIVE_TODO_ADD,
   RECEIVE_TODO_DELETE,

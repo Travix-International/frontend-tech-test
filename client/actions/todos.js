@@ -40,7 +40,7 @@ export const requestAddTodoError = error => ({ type: REQUEST_TODO_ADD_ERROR, err
 
 export const requestDeleteTodo = id => ({ type: REQUEST_TODO_DELETE, id })
 export const receiveDeleteTodo = id => ({ type: RECEIVE_TODO_DELETE, id });
-export const requestDeleteTodoError = error => ({ type: REQUEST_TODO_DELETE_ERROR, id })
+export const requestDeleteTodoError = error => ({ type: REQUEST_TODO_DELETE_ERROR, error })
 
 export const requestUpdateTodo = todo => ({ type: REQUEST_TODO_UPDATE, todo : {
   id: todo.id,
