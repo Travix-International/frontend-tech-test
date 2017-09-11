@@ -1,0 +1,534 @@
+generic:
+  border:
+    radius: &border-radius 8px
+  font:
+    primary:
+      weight:
+        regular: "400"
+        medium: "500"
+        semibold: "600"
+        bold: "700"
+      font-family: "Lato"
+      generic-family: "sans-serif"
+    secondary:
+      variants:
+        regular: "400"
+        bold: "700"
+      font-family: "Roboto"
+      generic-family: "sans-serif"
+    alternative:
+      variants:
+        regular: "400"
+      font-family: "Handlee"
+      generic-family: "cursive"
+  color:
+    accent-darker: &accent-darker   "#0B4848"
+    accent-dark: &accent-dark       "#177D7D"
+    accent: &accent                 "#2A9595"
+    accent-border: &accent-border   "#E6BB00"
+    accent-bottom: &accent-bottom   "#FFD05E"
+    accent-light: &accent-light     "#46BCBC"
+    accent-lighter: &accent-lighter "#6EE1E1"
+    accent-top: &accent-top         "#FFD97C"
+
+    primary-darker: &primary-darker     "#162052"
+    primary-dark: &primary-dark         "#283A8E"
+    primary-dark-rgb: &primary-dark-rgb "40,58,142"
+    primary: &primary                   "#3F52A9"
+    primary-light: &primary-light       "#7F92E7"
+    primary-lighter: &primary-lighter   "#5B6ECA"
+
+    secondary-darkest: &secondary-darkest "#57410f"
+    secondary-darker: &secondary-darker   "#785A13"
+    secondary-dark: &secondary-dark       "#CF9E26"
+    secondary: &secondary                 "#F8C346"
+    secondary-rgb: &secondary-rgb         "248,195,70"
+    secondary-light: &secondary-light     "#FFD05E"
+    secondary-lighter: &secondary-lighter "#FFD97C"
+
+    text-dark: &text-dark "#333"
+    text: &text "#666"
+    text-light: &text-light "#999"
+    text-lighter: &text-lighter "#998"
+    text-lighter-rgb: &text-lighter-rgb "153,153,136"
+
+    active: &active "#3892e7"
+    positive: &positive "#2ca937"
+    positive-light: &positive "#9edb97"
+    negative: &negative "#c54229"
+    negative-light: &negative-light "#f0d0c9"
+
+    shadow: &shadow "#000000"
+    shadow-rgb: &shadow-rgb "0,0,0"
+    shadow-alt: &shadow-alt "#00196F"
+    blank: &blank "#FFFFFF"
+
+    facebook: &facebook "#45619D"
+    facebook-border: &facebook-border "#324A87"
+    twitter: &twitter "#08ACEE"
+    twitter-border: &twitter-border "#1871C0"
+    google: &google "#B30303"
+    google-border: &google-border "#670E00"
+    mail: &mail "#ec7c1b"
+    mail-border: &mail-border "#cd6612"
+  separator:
+    width: &separator-width 2px
+    style: &separator-style dotted
+  size:
+    border-radius-small: &border-radius-small 2px
+autocomplete:
+  background-color: "var(--tx-generic-color-blank)"
+  box-shadow: "0 0 5px 0 rgba(var(--tx-generic-color-shadow-rgb), .18)"
+autocomplete-item:
+  color: "var(--tx-generic-color-text)"
+  active:
+    color: "var(--tx-generic-color-blank)"
+    background-color: "var(--tx-generic-color-active)"
+  title:
+    color: "var(--tx-generic-color-primary-darker)"
+    background-color: "var(--tx-generic-color-secondary-dark)"
+  highlight:
+    color: "var(--tx-generic-color-active)"
+badge:
+  after:
+    border:
+      size: 4px
+      color: "var(--tx-generic-color-primary-darker)"
+  arrow:
+    angle:
+      coefficient: "0.6"
+  border:
+    bottom:
+      width: 4px
+      style: solid
+      color: "var(--tx-generic-color-primary-darker)"
+    radius:
+      start: 0px
+      end: 0px
+  color:
+    background: "var(--tx-generic-color-accent)"
+    text: "var(--tx-generic-color-primary-darker)"
+  indent: 13px
+  font-size: 15px
+  padding:
+    right-left: 8px
+    top-bottom: 6px
+button:
+  icon:
+    color:
+      normal: "var(--tx-generic-color-primary-lighter)"
+      hover: "var(--tx-generic-color-active)"
+      active: "var(--tx-generic-color-primary-lighter)"
+  color:
+    bg-top: "var(--tx-generic-color-accent)"
+    bg-bottom: "var(--tx-generic-color-accent)"
+    text: "var(--tx-generic-color-blank)"
+    border: "var(--tx-generic-color-accent-dark)"
+    shadow: "transparent"
+    disabled:
+      bg-top: "var(--tx-generic-color-secondary-dark)"
+      bg-bottom: "var(--tx-generic-color-secondary-dark)"
+      text: "var(--tx-generic-color-secondary-darker)"
+      border: "transparent"
+      border-bottom: "var(--tx-generic-color-secondary-darkest)"
+  size:
+    border-radius: *border-radius-small
+  shadow: "0 3px var(--tx-generic-color-accent-border), 0 0 transparent"
+  shadow-hover: "0 5px var(--tx-generic-color-accent-border), 0 0 transparent"
+  text-shadow: "none"
+  ghost:
+    background: "transparent"
+    color: *accent
+    border-color: *accent
+    border: "3px solid var(--tx-button-ghost-border-color)"
+    border-radius: "var(--tx-button-size-border-radius)"
+    font-family: "var(--tx-generic-font-primary-font-family), var(--tx-generic-font-primary-generic-family)"
+    hover-color: *primary
+    hover-border-color: *primary
+  link:
+    color: *text
+    font:
+      family: "var(--tx-generic-font-secondary-font-family)"
+      size: "14px"
+      weight: "var(--tx-generic-font-primary-weight-regular)"
+    hover:
+      color: *text-dark
+      text:
+        decoration: "underline"
+      font:
+        family: "var(--tx-generic-font-secondary-font-family)"
+        weight: "var(--tx-generic-font-primary-weight-regular)"
+    text:
+      decoration: "underline"
+calendar:
+  height: 300px
+  nav:
+    background: "var(--tx-generic-color-primary-lighter)"
+    border-radius: "5px 5px 0 0"
+    button:
+      background-color-end: "var(--tx-generic-color-accent-bottom)"
+      background-color-start: "var(--tx-generic-color-accent-top)"
+      border-radius: 50%
+      box-shadow-color: "var(--tx-generic-color-accent-border)"
+      color: "var(--tx-generic-color-primary-lighter)"
+      font-weight: "700"
+      height: 27px
+      margin: "0 5px"
+      width: 27px
+    height: 41px
+    label:
+      color: "var(--tx-generic-color-blank)"
+      font-weight: "500"
+  header:
+    background-color: "var(--tx-generic-color-primary-lighter)"
+    height: 32px
+    weekday:
+      color: "var(--tx-generic-color-secondary)"
+      font-size: 14px
+      font-weight: bold
+  options:
+    border-color: "var(--tx-generic-color-secondary)"
+    option:
+      background-color: "var(--tx-generic-color-blank)"
+      border-bottom: "var(--tx-generic-color-secondary)"
+      border-right: "var(--tx-generic-color-secondary)"
+      color: "var(--tx-generic-color-primary-darker)"
+      disabled:
+        background-color: "var(--tx-generic-color-secondary)"
+        color: "var(--tx-generic-color-secondary-darkest)"
+      font-size: 14px
+      hover:
+        background-color: "var(--tx-generic-color-active)"
+        color: "var(--tx-generic-color-blank)"
+      next-month:
+        background-color: "var(--tx-generic-color-secondary-light)"
+      previous-month:
+        background-color: "var(--tx-generic-color-secondary-light)"
+      range:
+        after:
+          border-color: transparent
+        between:
+          background-color: "var(--tx-generic-color-secondary-dark)"
+        end:
+          after:
+            border-color: "var(--tx-generic-color-active)"
+          background-color: "var(--tx-generic-color-secondary-dark)"
+        start:
+          after:
+            border-color: "var(--tx-generic-color-active)"
+          background-color: "var(--tx-generic-color-secondary-dark)"
+  width: 300px
+checkbox:
+  text:
+    color: "var(--tx-generic-color-text-dark)"
+    background-color: "var(--tx-generic-color-blank)"
+    border-color: "var(--tx-generic-color-secondary)"
+    hover:
+      color: "var(--tx-generic-color-active)"
+    checked:
+      background-color: "var(--tx-generic-color-active)"
+      border-color: "var(--tx-generic-color-active)"
+    icon:
+      checked:
+        border-color: "var(--tx-generic-color-secondary)"
+    disabled:
+      color: "rgba(var(--tx-generic-color-text-lighter-rgb), .3)"
+      border-color: "rgba(var(--tx-generic-color-secondary-rgb), .3)"
+collapse:
+  background:
+    color: "var(--tx-generic-color-blank)"
+  border:
+    radius: *border-radius
+  padding: "25px"
+  item:
+    label:
+      color: "var(--tx-generic-color-text-dark)"
+      background:
+        color: "var(--tx-generic-color-blank)"
+      active:
+        color: "var(--tx-generic-color-active)"
+      icon:
+        color: "var(--tx-generic-color-secondary-darker)"
+        active:
+          color: "var(--tx-generic-color-active)"
+      border-bottom:
+        width: *separator-width
+        style: *separator-style
+        color: "var(--tx-generic-color-secondary-darker)"
+    content:
+      color: "var(--tx-generic-color-text)"
+      background:
+        color: "var(--tx-generic-color-secondary-light)"
+        border-bottom:
+          color: "var(--tx-generic-color-secondary-darker)"
+      border:
+        radius: *border-radius
+datepicker:
+  calendar-wrapper:
+    background-color: "var(--tx-generic-color-blank)"
+    box-shadow: "0 0 4px rgba(var(--tx-generic-color-shadow-rgb), .4)"
+dropdown:
+  input:
+    background-color: "var(--tx-generic-color-blank)"
+    border-color: "var(--tx-generic-color-secondary-darker)"
+  option:
+    color: "var(--tx-generic-color-text-dark)"
+  arrow:
+    color: "var(--tx-generic-color-primary-lighter)"
+  select-control:
+    border-color: "var(--tx-generic-color-active)"
+  select-menu-outer:
+    box-shadow: "0 0 5px 0 rgba(var(--tx-generic-color-shadow-rgb), .18)"
+  select-arrow-zone:
+    border-color-left: "var(--tx-generic-color-secondary-darker)"
+    color: "var(--tx-generic-color-active)"
+    hover:
+      color: "var(--tx-generic-color-active)"
+  select-option:
+    color: "var(--tx-generic-color-text)"
+    hover:
+      background-color: "var(--tx-generic-color-secondary-light)"
+    is-selected:
+      background-color: "var(--tx-generic-color-active)"
+      color: "var(--tx-generic-color-blank)"
+  option-arrow:
+    border-color: "var(--tx-generic-color-blank)"
+    border-shadow-color: "rgba(var(--tx-generic-color-shadow-rgb), .07)"
+  filter:
+    select-control:
+      border-color: "var(--tx-generic-color-secondary-darker)"
+    select-placeholder:
+      color: "var(--tx-generic-color-text-dark)"
+      line-height: 28px
+    select-menu-outer:
+      box-shadow: "rgba(var(--tx-generic-color-shadow-rgb), .5)"
+  active:
+    select-control:
+      background-color: "var(--tx-generic-color-blank)"
+      border-color: "var(--tx-generic-color-active)"
+  status:
+    font-size: "20px"
+    right: "59px"
+    error:
+      border-color: "var(--tx-generic-color-negative-light)"
+      color: "var(--tx-generic-color-negative)"
+      padding-right: "94px"
+    valid:
+      border-color: "var(--tx-generic-color-secondary-darker)"
+      color: "var(--tx-generic-color-positive)"
+      padding-right: "94px"
+  padding-right: "60px"
+dropdown-filter-option:
+  checkbox:
+    color: "var(--tx-generic-color-text-light)"
+    hover:
+      color: "var(--tx-generic-color-text)"
+    disabled:
+      color: "rgba(var(--tx-generic-color-text-lighter-rgb), .3)"
+  hover-and-not-disabled:
+    background-color: "var(--tx-generic-color-active)"
+    checkbox:
+      color: "var(--tx-generic-color-blank)"
+input:
+  border:
+    color: "var(--tx-generic-color-secondary-darker)"
+    hover:
+      color: "var(--tx-generic-color-active)"
+    width: "2px"
+  border-radius: "4px"
+  color: "var(--tx-generic-color-text-dark)"
+  font-size: "16px"
+  focused:
+    border-color: "var(--tx-generic-color-active)"
+  status:
+    font-size: "20px"
+    right: "14px"
+    error:
+      border-color: "var(--tx-generic-color-negative-light)"
+      color: "var(--tx-generic-color-negative)"
+      padding-right: "32px"
+    valid:
+      border-color: "var(--tx-generic-color-secondary-darker)"
+      color: "var(--tx-generic-color-positive)"
+      padding-right: "32px"
+  padding: "15px"
+list:
+  bullets:
+    color: "var(--tx-generic-color-active)"
+  color: "var(--tx-generic-color-text-dark)"
+  line-height: "38px"
+messagebox:
+  background-color:
+    info: "var(--tx-generic-color-secondary-light)"
+    error: "var(--tx-generic-color-negative-light)"
+    success: "var(--tx-generic-color-positive-lighter)"
+  border-radius: "12px"
+  color: "var(--tx-generic-color-text)"
+  title:
+    color: "var(--tx-generic-color-primary)"
+    font-size: "20px"
+    padding-bottom: "0px"
+  padding: "24px"
+modal:
+  z-index: "100"
+  color:
+    dark: "var(--tx-generic-color-primary-dark)"
+    secondary: "var(--tx-generic-color-secondary)"
+  overlay:
+    background:
+      color: "var(--tx-generic-color-primary-dark)"
+      opacity: "0.65"
+  container:
+    background:
+      color: "var(--tx-generic-color-blank)"
+    box-shadow:
+      color: "rgba(var(--tx-generic-color-shadow-rgb), .3)"
+  content:
+    background:
+      color: "var(--tx-generic-color-secondary-lighter)"
+    padding-left-right: "24px"
+  content-devider:
+    color: "var(--tx-generic-color-secondary-darker)"
+  close-button:
+    color: "var(--tx-generic-color-text-dark)"
+    hover:
+      color: "var(--tx-generic-color-active)"
+    icon:
+      color: "var(--tx-generic-color-secondary-darker)"
+price:
+  height:
+    underline: 6px
+  margin-top:
+    underline: 2px;
+  small:
+    font:
+      size:
+        currency: 15px
+        integers: 30px
+        decimals: 14px
+        additional-text: 13px
+        discount: 16px
+    line-height:
+      integers: 26px
+  medium:
+    font:
+      size:
+        currency: 16px
+        integers: 30px
+        decimals: 14px
+        additional-text: 13px
+        discount: 16px
+    line-height:
+      integers: 26px
+  large:
+    font:
+      size:
+        currency: 19px
+        integers: 35px
+        decimals: 17px
+        additional-text: 17px
+        discount: 20px
+    line-height:
+      integers: 31px
+  xlarge:
+    font:
+      size:
+        currency: 30px
+        integers: 55px
+        decimals: 27px
+        additional-text: 19px
+        discount: 22px
+    line-height:
+      integers: 51px
+    height:
+      underline: 8px
+sliding-panel:
+  content:
+    flex: "1 1 100%"
+    overflow: "hidden"
+    overflow-y: "auto"
+  overlay:
+    background-color: "rgba(var(--tx-generic-color-primary-dark-rgb), .65)"
+    position: "fixed"
+    z-index: "3"
+  panel:
+    background-color: "var(--tx-generic-color-blank)"
+    bottom: "0"
+    box-shadow: "3px 0 3px -3px var(--tx-generic-color-shadow)"
+    flex-flow: "column"
+    left: "0"
+    margin: "0"
+    max-width: "100%"
+    min-width: "150px"
+    opacity: "1"
+    padding: "15px"
+    position: "absolute"
+    right: "auto"
+    top: "0"
+    transform: "translateX(-100%)"
+    transition: "transform 195ms cubic-bezier(0.0, 0.0, 0.2, 1)"
+  panel-open:
+    transform: "translateX(0)"
+spinner:
+  color:
+    light: "var(--tx-generic-color-accent-lighter)"
+    lighter: "var(--tx-generic-color-accent)"
+    dark: "var(--tx-generic-color-active)"
+    darker: "var(--tx-generic-color-primary-lighter)"
+carousel:
+  track:
+    transition: "transform 0.5s cubic-bezier(0.2, 1, 0.3, 1)"
+  item:
+    min-height: "400px"
+  button:
+    font-size: "24px"
+    background-color: *blank
+    left-radius:  "0 5px 5px 0"
+    right-radius:  "5px 0 0 5px"
+    height: "54px"
+    min-width: "30px"
+    color: "var(--tx-generic-color-active)"
+  marker:
+    background-color: *blank
+    active-background-color: "var(--tx-generic-color-active)"
+    width: "10px"
+    height: "10px"
+    box-shadow: "0px 2px 5px 0px rgba(0,0,0,0.5)"
+    border-radius: "100%"
+  page:
+    background-color: *blank
+    border-radius: "3px"
+    padding: "5px 15px"
+    font-size: "12px"
+    font-family: "var(--tx-generic-font-secondary-font-family)"
+toggle-button:
+  item:
+    font-size: "14px"
+    line-height: "25px"
+    border:
+      color: "var(--tx-generic-color-secondary-darker)"
+      radius: "4px"
+      size: "2px"
+      style: solid
+  item-active:
+    font-size: "19px"
+    line-height: "24px"
+tooltip:
+  margin: 15px
+  arrow-align: 15px
+  close-button:
+    color: "var(--tx-generic-color-secondary-darker)"
+    hover:
+      color: "var(--tx-generic-color-secondary-darkest)"
+  top:
+    shadow: "2px 2px 6px -2px rgba(0,0,0,0.4)"
+  bottom:
+    shadow: "-2px -2px 6px -2px rgba(0,0,0,0.4)"
+  right:
+    shadow: "-2px 2px 6px -2px rgba(0,0,0,0.4)"
+  left:
+    shadow: "2px -2px 6px -2px rgba(0,0,0,0.4)"
+  shadow: "0 0 6px rgba(0,0,0,0.4)"
+  background-color: *blank
+  border-radius: 4px
+  font-size: 20px
