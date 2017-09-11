@@ -78,7 +78,7 @@ describe('todos reducer', () => {
     ).toEqual({
       allIds: [],
       byId: { [todoID]: todo },
-      pagination
+      pagination: { ...pagination, total: pagination.total -1}
     });
   });
 

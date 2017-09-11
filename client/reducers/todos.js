@@ -40,6 +40,8 @@ const TodoAllIds = (state = [], action) => {
 
 const pagination = (state = { total: 1, page: 1, pageSize: 10 }, action) => {
   switch (action.type) {
+    case RECEIVE_TODO_DELETE:
+      return { ...state, total: state.total-1 }
     case RECEIVE_TODOS:
     case RECEIVE_NEXT_TODOS:
       return action.payload.pagination;
