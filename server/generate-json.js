@@ -17,7 +17,7 @@ if (!fs.existsSync(path.resolve(__dirname, jsonFile))) {
 
   const template = '{\
       "tasks": [\
-        {{#repeat 1000}}\
+        {{#repeat 50}}\
           {{> task}}\
         {{/repeat}}\
       ]\

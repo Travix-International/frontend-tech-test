@@ -13,15 +13,21 @@ class ItemList extends Component {
   static propTypes = {
     pagination: PAGINATION_PROPTYPES,
     todos: PropTypes.arrayOf(TODO_PROPTYPES),
-    changeInput: PropTypes.func.isRequired,
+    changeTitleInput: PropTypes.func.isRequired,
+    inputTitleValue: PropTypes.string,
+    changeDescriptionInput: PropTypes.func.isRequired,
+    inputDescriptionValue: PropTypes.string,
+    toggleDescription: PropTypes.func.isRequired,
+    showDescription: PropTypes.bool,
     addTodo: PropTypes.func.isRequired,
     getNextPage: PropTypes.func.isRequired,
     getTodos: PropTypes.func.isRequired,
     filter: PropTypes.string.isRequired,
-    inputValue: PropTypes.string,
   };
   static defaultProps = {
-    inputValue: '',
+    inputTitleValue: '',
+    inputDescriptionValue: '',
+    showDescription: false,
   };
   componentDidMount = () => {
     this.props.getTodos(this.props.filter);
@@ -32,9 +38,11 @@ class ItemList extends Component {
     }
 	}
   submitForm = (e) => {
-    const { addTodo, inputValue } = this.props;
+    const { addTodo, inputTitleValue, inputDescriptionValue } = this.props;
     e.preventDefault();
-    addTodo({ title: inputValue });
+    if (inputTitleValue) {
+      addTodo({ title: inputTitleValue, description: inputDescriptionValue });
+    }
   }
   getNextTodos = (e) => {
     e.preventDefault();
@@ -44,24 +52,49 @@ class ItemList extends Component {
     }
   }
   render() {
+    const { changeTitleInput, inputTitleValue, changeDescriptionInput, inputDescriptionValue, showDescription, toggleDescription, todos } = this.props;
     const { page, pageSize, total } = this.props.pagination;
     return (
       <div className="todoapp">
         <h1>Todos</h1>
-        <form onSubmit={this.submitForm}>
+        <form className="add-todo-form" onSubmit={this.submitForm}>
           <input
             className="new-todo"
             id="todoInput"
-            onChange={e => this.props.changeInput(e.target.value)}
+            onChange={e => changeTitleInput(e.target.value)}
             placeholder="my todo title..."
+            style={{paddingRight: !showDescription? '60px' : '0'}}
             type="text"
-            value={this.props.inputValue}
+            value={inputTitleValue}
           />
-          <input className="toggle-description" type="checkbox" />
+          <textarea
+            className="new-todo"
+            id="todoDescriptionInput"
+            onChange={e => changeDescriptionInput(e.target.value)}
+            placeholder="my todo description..."
+            rows="4"
+            style={{display: showDescription? 'block' : 'none'}}
+            value={inputDescriptionValue}
+          />
+          <button
+            className={inputTitleValue.length===0?'btn-small disabled':'btn-small'}
+            style={{display: !showDescription? 'block' : 'none'}}
+            type="submit"
+          >+</button>
+          <button
+            className={inputTitleValue.length===0?'btn disabled':'btn'}
+            style={{display: showDescription? 'block' : 'none'}}
+            type="submit"
+          >Add Todo</button>
+          <input
+            className="toggle-description"
+            onClick={e => toggleDescription(!showDescription)}
+            type="checkbox"
+          />
         </form>
         <Filters />
         <ul className="todo-list">
-          {this.props.todos.map((todo, index) => {
+          {todos.map((todo, index) => {
             return (
               <Item
                 key={`todo-${index}`}
@@ -104,31 +137,40 @@ export default observe(function (app) {
       };
     });
 
-  const formInput$ = (new BehaviorSubject(''))
-    .map((inputValue) => {
-      return {
-        inputValue,
-      };
-    });
-  const clearInput = () => formInput$.next('');
-  const changeInput = value => formInput$.next(value);
+  const showDescription$ = new BehaviorSubject(false)
+    .map(showDescription => ({showDescription}));
+  const toggleDescription = value => showDescription$.next(value);
+
+  const formTitleInput$ = (new BehaviorSubject(''))
+    .map(inputTitleValue => ({inputTitleValue}));
+  const clearTitleInput = () => formTitleInput$.next('');
+  const changeTitleInput = value => formTitleInput$.next(value);
+
+  const formDescriptionInput$ = (new BehaviorSubject(''))
+    .map(inputDescriptionValue => ({inputDescriptionValue}));
+  const clearDescriptionInput = () => formDescriptionInput$.next('');
+  const changeDescriptionInput = value => formDescriptionInput$.next(value);
 
   const actions$ = Observable.of({
-    addTodo: (...args) => {
-      clearInput();
-      return store.dispatch(requestAddTodo(...args));
+    addTodo: (todo) => {
+      clearTitleInput();
+      clearDescriptionInput();
+      return store.dispatch(requestAddTodo(todo));
     },
-    getNextPage: (...args) => {
-      return store.dispatch(requestNextTodos(...args));
-    },
+    getNextPage: (...args) => store.dispatch(requestNextTodos(...args)),
     getTodos: filter => store.dispatch(requestTodos(filter)),
-    changeInput,
-    clearInput,
+    changeTitleInput,
+    clearTitleInput,
+    changeDescriptionInput,
+    clearDescriptionInput,
+    toggleDescription,
   });
 
   return state$
     .merge(actions$)
-    .merge(formInput$)
+    .merge(formTitleInput$)
+    .merge(formDescriptionInput$)
+    .merge(showDescription$)
     .merge(history$)
     .scan((props, emitted) => {
       return {
@@ -136,6 +178,7 @@ export default observe(function (app) {
         ...emitted,
       };
     }, {
+      filter: '',
       todos: [],
     });
 })(ItemList);

@@ -33,10 +33,13 @@ class Item extends Component {
 		if (event.which === ESCAPE_KEY) {
 			this.props.cancelEdit();
 		} else if (event.which === ENTER_KEY) {
-      const { todo, submit, titleValue, descriptionValue } = this.props;
-			submit({ ...todo, title: titleValue, description: descriptionValue });
+      this.handleSubmit();
     }
 	}
+  handleSubmit = () => {
+    const { todo, submit, titleValue, descriptionValue } = this.props;
+    submit({ ...todo, title: titleValue, description: descriptionValue });
+  }
   render() {
     const { todo, requestDeleteTodo, submit, titleValue, descriptionValue, edit, showEditForm, changeTitle, changeDescription } = this.props;
     return (
@@ -68,8 +71,13 @@ class Item extends Component {
               className="edit description"
               onChange={e => changeDescription(e.target.value)}
               onKeyDown={this.handleKeyDown}
+              rows="4"
               value={descriptionValue}
             />
+            <div className="toolbar">
+              <button className="btn" onClick={() => this.props.cancelEdit()}>Cancel</button>
+              <button className="btn" onClick={this.handleSubmit}>Save</button>
+            </div>
           </div>
         )}
         <Region

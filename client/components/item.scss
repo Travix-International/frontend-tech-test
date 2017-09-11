@@ -4,7 +4,7 @@
       margin-top: 10px;
     }
     .destroy {
-      margin-top: 5px;
+      margin-top: 7px;
     }
     label {
       padding: 15px 40px 15px 60px;
@@ -20,6 +20,21 @@
       text-decoration: line-through;
       color: #d9d9d9;
     }
+  }
+  &.editing .edit.description {
+    border-top: none;
+  }
+  .toolbar {
+    padding: 0 1px 0 43px;
+  }
+  .btn {
+    font-size: 16px;
+    color: inherit;
+    padding: 10px 15px;
+    text-decoration: none;
+    border: 1px solid #999;
+    border-radius: 0;
+    width: 50%;
   }
 }
 

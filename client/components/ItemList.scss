@@ -1,3 +1,5 @@
+$input-color: #e6e6e6;
+
 .toggle-description {
   outline: none;
   -webkit-appearance: none;
@@ -16,8 +18,40 @@
   &:before {
     content: '❯';
     font-size: 22px;
-    color: #e6e6e6;
+    color: $input-color;
     padding: 10px 27px 10px 27px;
     top: 20px;
   }
 }
+
+.add-todo-form {
+  .btn {
+    font-size: 16px;
+    padding: 10px 15px;
+    text-decoration: none;
+    border: 1px solid $input-color;
+    border-radius: 0;
+    width: 100%;
+    color: #999;
+    &.disabled {
+      color: $input-color;
+    }
+  }
+  .btn-small {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px 15px;
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    color: #999;
+    &.disabled {
+      color: $input-color;
+    }
+  }
+}
+
+textarea::-webkit-input-placeholder { color: $input-color; }
+textarea:-moz-placeholder { color: $input-color; }
+textarea::-moz-placeholder { color: $input-color; }
+textarea:-ms-input-placeholder { color: $input-color; }

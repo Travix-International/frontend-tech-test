@@ -33,7 +33,7 @@ export const requestTodoError = error => ({ type: REQUEST_TODO_ERROR, error });
 
 export const requestAddTodo = todo => ({ type: REQUEST_TODO_ADD, todo: {
   title: encodeURI(todo.title),
-  description: !!todo.description ? encodeURI(todo.title) : ''
+  description: !!todo.description ? encodeURI(todo.description) : ''
 } })
 export const receiveAddTodo = payload => ({ type: RECEIVE_TODO_ADD, payload });
 export const requestAddTodoError = error => ({ type: REQUEST_TODO_ADD_ERROR, error });

@@ -32,7 +32,7 @@ const getTasks = (req, res) => {
     pagination: {
       total,
       page,
-      pageSize
+      pageSize,
     },
   });
 };
