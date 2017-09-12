@@ -39,9 +39,18 @@ describe(`POST ${pathToApi}/task/create/:title/:description`, function() {
 });
 
 describe(`PUT ${pathToApi}/task/update/:id/:title/:description/:completed`, function() {
-  it('should respond 204', function(done) {
+  it('should respond 200', function(done) {
     request(app)
       .put(`${pathToApi}/task/update/${newId}/${encodeURI(title)}/${encodeURI(description)}/false`)
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        return done();
+      });
+  });
+  it('should respond 200', function(done) {
+    request(app)
+      .put(`${pathToApi}/task/update/${newId}/${encodeURI(title)}/${encodeURI(description)}`)
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
