@@ -5,7 +5,6 @@ import { BehaviorSubject } from 'rxjs';
 
 import { TODO_PROPTYPES } from '../constants';
 import { requestDeleteTodo, requestUpdateTodo } from '../actions/todos';
-import item from './item.scss';
 
 const ESCAPE_KEY = 27;
 const ENTER_KEY = 13;
@@ -90,6 +89,10 @@ class Item extends Component {
     );
   }
 }
+
+export {
+  Item,
+};
 
 export default observe(function (app) {
   const showEditForm$ = new BehaviorSubject(false); // start with hidden form

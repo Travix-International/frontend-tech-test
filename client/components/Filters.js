@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'frint-router-react';
 
-import filters from './filters.scss';
+// import filters from './filters.scss';
 
 const Filters = () => (
   <div className="filters-container">

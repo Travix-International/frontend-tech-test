@@ -7,7 +7,6 @@ import { TODO_PROPTYPES, PAGINATION_PROPTYPES } from '../constants';
 import { requestAddTodo, requestTodos, requestNextTodos } from '../actions/todos';
 import Filters from './Filters'
 import Item from './Item';
-import itemList from './ItemList.scss';
 
 class ItemList extends Component {
   static propTypes = {
@@ -113,6 +112,10 @@ class ItemList extends Component {
       </div>
     );
   }
+}
+
+export {
+  ItemList,
 }
 
 export default observe(function (app) {

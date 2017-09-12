@@ -1,5 +1,6 @@
 import { combineEpics } from 'frint-store';
 import { normalize } from 'normalizr';
+import Rx from 'rxjs';
 
 import {
   REQUEST_NEXT_TODOS,

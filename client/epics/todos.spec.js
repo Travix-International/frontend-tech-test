@@ -2,8 +2,6 @@ import nock from 'nock';
 import { ActionsObservable } from 'redux-observable'
 import { normalize } from 'normalizr';
 
-window.Rx = require('rxjs');
-
 import * as schema from './schema';
 import { fetchTodos$, fetchNextTodos$, fetchTodo$, addTodo$, deleteTodo$, updateTodo$ } from './todos';
 import { requestTodos, requestNextTodos, requestTodo, requestAddTodo, requestDeleteTodo, requestUpdateTodo } from '../actions/todos';
