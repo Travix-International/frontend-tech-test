@@ -9,7 +9,7 @@ if (!fs.existsSync(path.resolve(__dirname, jsonFile))) {
   const myPartials = {
     task: '{\
       "id": {{@index}},\
-      "title": "{{lorem 5}}",\
+      "title": "{{@index}} {{lorem 5}}",\
       "description": "{{lorem}}",\
       "completed": {{boolean}}\
     }'

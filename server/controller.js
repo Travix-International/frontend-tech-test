@@ -1,9 +1,10 @@
+/* eslint-disable promise/no-nesting, no-else-return, consistent-return */
+
 'use strict';
 
-const fs = require('fs');
+const fs = require('tidyfs');
 const path = require('path');
 const { jsonFile, pagination } = require('./config');
-const tasksContainer = require(jsonFile);
 
 /**
  * GET /tasks
@@ -12,29 +13,38 @@ const tasksContainer = require(jsonFile);
  */
 const getTasks = (req, res) => {
 
-  tasksContainer.tasks.sort((a,b) => b.id - a.id);
+  fs.readFile(path.resolve(__dirname, jsonFile), 'UTF-8')
+    .then((result) => {
+      const tasksContainer = JSON.parse(result);
+      tasksContainer.tasks.sort((a,b) => b.id - a.id);
 
-  const tasks = tasksContainer.tasks.filter((task) => {
-    switch(req.params.filter) {
-      case 'active': return !task.completed;
-      case 'completed': return task.completed;
-      default: return true;
-    }
-  });
+      const tasks = tasksContainer.tasks.filter((task) => {
+        switch(req.params.filter) {
+          case 'active': return !task.completed;
+          case 'completed': return task.completed;
+          default: return true;
+        }
+      });
 
-  const page = parseInt(req.query.page, 10) || 1,
-        total = tasks.length,
-        pageSize = parseInt(req.query.per_page, 10) || pagination.page_size,
-        offset = (page - 1) * pageSize;
+      const page = parseInt(req.query.page, 10) || 1,
+            total = tasks.length,
+            pageSize = parseInt(req.query.per_page, 10) || pagination.page_size,
+            offset = (page - 1) * pageSize;
 
-  return res.status(200).json({
-    tasks: tasks.slice(offset, offset + pageSize),
-    pagination: {
-      total,
-      page,
-      pageSize,
-    },
-  });
+      return res.status(200).json({
+        tasks: tasks.slice(offset, offset + pageSize),
+        pagination: {
+          total,
+          page,
+          pageSize,
+        },
+      });
+    })
+    .catch((err) => {
+      return res.status(500).json({
+        message: err,
+      });
+    })
 };
 
 /**
@@ -51,21 +61,29 @@ const getTasks = (req, res) => {
 const getTask = (req, res) => {
   const id = parseInt(req.params.id, 10);
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-    if (!!task) {
-      return res.status(200).json({
-        task,
+    fs.readFile(path.resolve(__dirname, jsonFile), 'UTF-8')
+      .then((result) => {
+        const tasksContainer = JSON.parse(result);
+        const task = tasksContainer.tasks.find(item => item.id === id);
+        if (!!task) {
+          return res.status(200).json({
+            task,
+          });
+        }
+        return res.status(404).json({
+          message: 'Not found.',
+        });
+      })
+      .catch((err) => {
+        return res.status(500).json({
+          message: err,
+        });
       });
-    }
-    return res.status(404).json({
-      message: 'Not found.',
+  } else {
+    return res.status(400).json({
+      message: 'Bad request.',
     });
-
   }
-  return res.status(400).json({
-    message: 'Bad request.',
-  });
-
 };
 
 /**
@@ -84,32 +102,40 @@ const updateTask = (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    fs.readFile(path.resolve(__dirname, jsonFile), 'UTF-8')
+      .then((result) => {
+        const tasksContainer = JSON.parse(result);
+        const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (!!task) {
-      task.title = decodeURI(req.params.title);
-      task.description = req.params.description !== 'null' ? decodeURI(req.params.description) : '';
-      task.completed = req.params.completed === 'true';
+        if (!!task) {
+          task.title = decodeURI(req.params.title);
+          task.description = req.params.description !== 'null' ? decodeURI(req.params.description) : '';
+          task.completed = req.params.completed === 'true';
 
-      const json = JSON.stringify(tasksContainer);
-      return fs.writeFile(path.resolve(__dirname, jsonFile), json, 'utf8', (err) => {
-        if (err === null) {
-          return res.status(200).json({ task });
+          const json = JSON.stringify(tasksContainer);
+          return fs.mkFile(path.resolve(__dirname, jsonFile), json, 'UTF-8')
+            .then(() => res.status(200).json({ task }))
+            .catch((err) => {
+              res.status(500).json({
+                message: err,
+              });
+            });
+        } else {
+          return res.status(404).json({
+            message: 'Not found',
+          });
         }
+      })
+      .catch((err) => {
         return res.status(500).json({
-          message: 'Cannot save file',
+          message: err,
         });
       });
-    }
-    return res.status(404).json({
-      message: 'Not found',
+  } else {
+    return res.status(400).json({
+      message: 'Bad request',
     });
-
   }
-  return res.status(400).json({
-    message: 'Bad request',
-  });
-
 };
 
 /**
@@ -122,27 +148,36 @@ const updateTask = (req, res) => {
  * Return status code 201.
  */
 const addTask = (req, res) => {
-  const task = {
-    id: tasksContainer.tasks.length,
-    title: decodeURI(req.params.title),
-    description: req.params.description !== 'null' ? decodeURI(req.params.description) : '',
-    completed: false,
-  };
+  fs.readFile(path.resolve(__dirname, jsonFile), 'UTF-8')
+    .then((result) => {
+      const tasksContainer = JSON.parse(result);
+      const task = {
+        id: tasksContainer.tasks.length,
+        title: decodeURI(req.params.title),
+        description: req.params.description !== 'null' ? decodeURI(req.params.description) : '',
+        completed: false,
+      };
+      tasksContainer.tasks.push(task);
 
-  tasksContainer.tasks.push(task);
-
-  const json = JSON.stringify(tasksContainer);
-  fs.writeFile(path.resolve(__dirname, jsonFile), json, 'utf8', (err) => {
-    if (err === null) {
-      return res.status(201).json({
-        message: 'Resource created',
-        task
+      const json = JSON.stringify(tasksContainer);
+      return fs.mkFile(path.resolve(__dirname, jsonFile), json, 'UTF-8')
+        .then(() => {
+          return res.status(201).json({
+            message: 'Resource created',
+            task
+          });
+        })
+        .catch((err) => {
+          return res.status(500).json({
+            message: 'Cannot save file',
+          });
+        });
+    })
+    .catch((err) => {
+      return res.status(500).json({
+        message: err,
       });
-    }
-    return res.status(500).json({
-      message: 'Cannot save file',
     });
-  });
 };
 
 /**
@@ -158,32 +193,44 @@ const addTask = (req, res) => {
 const deleteTask = (req, res) => {
   const id = parseInt(req.params.id, 10);
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    fs.readFile(path.resolve(__dirname, jsonFile), 'UTF-8')
+      .then((result) => {
+        const tasksContainer = JSON.parse(result);
+        const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (!!task) {
-      const taskIndex = tasksContainer.tasks.indexOf(task);
-      tasksContainer.tasks.splice(taskIndex, 1);
+        if (!!task) {
+          const taskIndex = tasksContainer.tasks.indexOf(task);
+          tasksContainer.tasks.splice(taskIndex, 1);
 
-      const json = JSON.stringify(tasksContainer);
-      return fs.writeFile(path.resolve(__dirname, jsonFile), json, 'utf8', (err) => {
-        if (err === null) {
-          return res.status(200).json({
-            message: 'Updated successfully',
-            id: req.params.id
+          const json = JSON.stringify(tasksContainer);
+          return fs.mkFile(path.resolve(__dirname, jsonFile), json, 'UTF-8')
+            .then(() => {
+              return res.status(200).json({
+                message: 'Updated successfully',
+                id: req.params.id
+              });
+            })
+            .catch((err) => {
+              return res.status(500).json({
+                message: 'Cannot save file',
+              });
+            });
+        } else {
+          return res.status(404).json({
+            message: 'Not found',
           });
         }
+      })
+      .catch((err) => {
         return res.status(500).json({
-          message: 'Cannot save file',
+          message: err,
         });
       });
-    }
-    return res.status(404).json({
-      message: 'Not found',
+  } else {
+    return res.status(400).json({
+      message: 'Bad request',
     });
   }
-  return res.status(400).json({
-    message: 'Bad request',
-  });
 };
 
 module.exports = {
