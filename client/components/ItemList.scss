@@ -1,0 +1,69 @@
+$input-color: #e6e6e6;
+
+@media (max-width: 430px) {
+  .filters {
+    bottom: inherit !important;
+  }
+}
+
+.todoapp.disabled {
+  pointer-events: none;
+  // opacity: .5;
+}
+
+.toggle-description {
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  top: 20px;
+  left: -15px;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+
+  &:checked {
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+  }
+
+  &:before {
+    content: '❯';
+    font-size: 22px;
+    color: $input-color;
+    padding: 10px 27px 10px 27px;
+    top: 20px;
+  }
+}
+
+.add-todo-form {
+  .btn {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    text-decoration: none;
+    border: 1px solid $input-color;
+    border-radius: 0;
+    width: 100%;
+    color: #999;
+    &.disabled {
+      color: $input-color;
+    }
+  }
+  .btn-small {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px 15px;
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    color: #999;
+    &.disabled {
+      color: $input-color;
+    }
+  }
+}
+
+textarea::-webkit-input-placeholder { color: $input-color; }
+textarea:-moz-placeholder { color: $input-color; }
+textarea::-moz-placeholder { color: $input-color; }
+textarea:-ms-input-placeholder { color: $input-color; }

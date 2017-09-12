@@ -1,0 +1,54 @@
+.todo-list li {
+  .view {
+    .toggle {
+      margin-top: 10px;
+    }
+    .destroy {
+      margin-top: 7px;
+    }
+    label {
+      padding: 15px 40px 15px 60px;
+    }
+  }
+  .description {
+    font-size: 16px;
+    margin-top: -20px;
+    padding: 15px 40px 15px 60px;
+  }
+  &.completed {
+    .description {
+      text-decoration: line-through;
+      color: #d9d9d9;
+    }
+  }
+  &.editing .edit.description {
+    border-top: none;
+    text-decoration: none;
+    color: #333;
+  }
+  .toolbar {
+    padding: 0 1px 0 43px;
+  }
+  .btn {
+    font-size: 16px;
+    color: inherit;
+    padding: 10px 15px;
+    text-decoration: none;
+    border: 1px solid #999;
+    border-radius: 0;
+    width: 50%;
+  }
+}
+
+.pagination {
+  text-align: center;
+  padding: 15px;
+  a {
+    color: inherit;
+    margin: 3px;
+    padding: 3px 7px;
+    text-decoration: none;
+    border: 1px solid rgba(175, 47, 47, 0.2);
+    border-radius: 3px;
+  }
+}
