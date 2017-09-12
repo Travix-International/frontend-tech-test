@@ -38,6 +38,7 @@ describe('todos reducer', () => {
         total: 1
       },
       loading: false,
+      error: '',
     });
   });
 
@@ -53,6 +54,7 @@ describe('todos reducer', () => {
       byId: { [todoID]: todo },
       pagination,
       loading: false,
+      error: '',
     });
   });
 
@@ -69,6 +71,7 @@ describe('todos reducer', () => {
       byId: { '50': { ...todo, id: 50 }, [todoID]: todo },
       pagination,
       loading: false,
+      error: '',
     });
   });
 
@@ -85,6 +88,7 @@ describe('todos reducer', () => {
       byId: { [todoID]: todo },
       pagination: { ...pagination, total: pagination.total -1},
       loading: false,
+      error: '',
     });
   });
 
@@ -101,6 +105,7 @@ describe('todos reducer', () => {
       byId: { [todoID]: { ...todo, title: 'test' } },
       pagination,
       loading: false,
+      error: '',
     });
   });
 
@@ -121,6 +126,7 @@ describe('todos reducer', () => {
       byId: { [todoID]: todo, '50': { ...todo, id: 50 } },
       pagination: { ...pagination, page: 2 },
       loading: false,
+      error: '',
     });
   });
 });

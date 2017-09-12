@@ -13,6 +13,12 @@ import {
   RECEIVE_TODO_DELETE,
   RECEIVE_TODO_UPDATE,
   RECEIVE_NEXT_TODOS,
+
+  REQUEST_TODOS_ERROR,
+  REQUEST_NEXT_TODOS_ERROR,
+  REQUEST_TODO_ADD_ERROR,
+  REQUEST_TODO_DELETE_ERROR,
+  REQUEST_TODO_UPDATE_ERROR,
 } from '../constants';
 
 const TodoById = (state = {}, action) => {
@@ -68,7 +74,30 @@ const loading = (state = false, action) => {
     case RECEIVE_TODO_DELETE:
     case RECEIVE_TODO_UPDATE:
     case RECEIVE_NEXT_TODOS:
+    case REQUEST_TODOS_ERROR:
+    case REQUEST_TODO_ADD_ERROR:
+    case REQUEST_TODO_DELETE_ERROR:
+    case REQUEST_TODO_UPDATE_ERROR:
+    case REQUEST_NEXT_TODOS_ERROR:
       return false;
+    default: return state;
+  }
+}
+
+const error = (state = '', action) => {
+  switch (action.type) {
+    case RECEIVE_TODOS:
+    case RECEIVE_TODO_ADD:
+    case RECEIVE_TODO_DELETE:
+    case RECEIVE_TODO_UPDATE:
+    case RECEIVE_NEXT_TODOS:
+      return '';
+    case REQUEST_TODOS_ERROR:
+    case REQUEST_TODO_ADD_ERROR:
+    case REQUEST_TODO_DELETE_ERROR:
+    case REQUEST_TODO_UPDATE_ERROR:
+    case REQUEST_NEXT_TODOS_ERROR:
+      return action.message;
     default: return state;
   }
 }
@@ -77,5 +106,6 @@ export default combineReducers({
   byId: TodoById,
   allIds: TodoAllIds,
   pagination,
-  loading
+  loading,
+  error,
 });
