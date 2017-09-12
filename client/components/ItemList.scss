@@ -6,6 +6,11 @@ $input-color: #e6e6e6;
   }
 }
 
+.todoapp.disabled {
+  pointer-events: none;
+  // opacity: .5;
+}
+
 .toggle-description {
   outline: none;
   -webkit-appearance: none;

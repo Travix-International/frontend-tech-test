@@ -15,7 +15,7 @@
     "start:prod": "./node_modules/.bin/cross-env NODE_ENV=production node index.js",
     "bundle:vendors": "./node_modules/.bin/webpack --config ./client/vendors/webpack.config.js",
     "bundle:apps": "node_modules/.bin/rimraf build/bundle.app.* && ./node_modules/.bin/webpack --env.prod",
-    "build": "npm run bundle:vendors -- -p && npm run bundle:apps -- -p"
+    "build": "npm run generate && npm run bundle:vendors -- -p && npm run bundle:apps -- -p"
   },
   "keywords": [
     "test",

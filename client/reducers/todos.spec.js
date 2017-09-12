@@ -36,7 +36,8 @@ describe('todos reducer', () => {
         page: 1,
         pageSize: 10,
         total: 1
-      }
+      },
+      loading: false,
     });
   });
 
@@ -50,7 +51,8 @@ describe('todos reducer', () => {
     ).toEqual({
       allIds: [todoID],
       byId: { [todoID]: todo },
-      pagination
+      pagination,
+      loading: false,
     });
   });
 
@@ -59,12 +61,14 @@ describe('todos reducer', () => {
       todos({
         allIds: [todoID],
         byId: { [todoID]: todo },
-        pagination
+        pagination,
+        loading: false,
       }, { type: RECEIVE_TODO_ADD, payload: { ...todo, id: 50 } })
     ).toEqual({
       allIds: [50, todoID],
       byId: { '50': { ...todo, id: 50 }, [todoID]: todo },
-      pagination
+      pagination,
+      loading: false,
     });
   });
 
@@ -73,12 +77,14 @@ describe('todos reducer', () => {
       todos({
         allIds: [todoID],
         byId: { [todoID]: todo },
-        pagination
+        pagination,
+        loading: false,
       }, { type: RECEIVE_TODO_DELETE, id: todoID })
     ).toEqual({
       allIds: [],
       byId: { [todoID]: todo },
-      pagination: { ...pagination, total: pagination.total -1}
+      pagination: { ...pagination, total: pagination.total -1},
+      loading: false,
     });
   });
 
@@ -87,12 +93,14 @@ describe('todos reducer', () => {
       todos({
         allIds: [todoID],
         byId: { [todoID]: todo },
-        pagination
+        pagination,
+        loading: false,
       }, { type: RECEIVE_TODO_UPDATE, payload: { ...todo, title: 'test' } })
     ).toEqual({
       allIds: [todoID],
       byId: { [todoID]: { ...todo, title: 'test' } },
-      pagination
+      pagination,
+      loading: false,
     });
   });
 
@@ -105,12 +113,14 @@ describe('todos reducer', () => {
       todos({
         allIds: [todoID],
         byId: { [todoID]: todo },
-        pagination
+        pagination,
+        loading: false,
       }, { type: RECEIVE_NEXT_TODOS, payload })
     ).toEqual({
       allIds: [todoID, 50],
       byId: { [todoID]: todo, '50': { ...todo, id: 50 } },
-      pagination: { ...pagination, page: 2 }
+      pagination: { ...pagination, page: 2 },
+      loading: false,
     });
   });
 });

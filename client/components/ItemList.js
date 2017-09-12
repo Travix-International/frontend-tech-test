@@ -12,6 +12,7 @@ import itemList from './ItemList.scss';
 class ItemList extends Component {
   static propTypes = {
     pagination: PAGINATION_PROPTYPES,
+    loading: PropTypes.bool.isRequired,
     todos: PropTypes.arrayOf(TODO_PROPTYPES),
     changeTitleInput: PropTypes.func.isRequired,
     inputTitleValue: PropTypes.string,
@@ -52,10 +53,10 @@ class ItemList extends Component {
     }
   }
   render() {
-    const { changeTitleInput, inputTitleValue, changeDescriptionInput, inputDescriptionValue, showDescription, toggleDescription, todos } = this.props;
+    const { loading, changeTitleInput, inputTitleValue, changeDescriptionInput, inputDescriptionValue, showDescription, toggleDescription, todos } = this.props;
     const { page, pageSize, total } = this.props.pagination;
     return (
-      <div className="todoapp">
+      <div className={`todoapp ${loading && 'disabled'}`}>
         <h1>Todos</h1>
         <form className="add-todo-form" onSubmit={this.submitForm}>
           <input
@@ -125,6 +126,7 @@ export default observe(function (app) {
   const state$ = store.getState$()
     .map((state) => {
       return {
+        loading: state.todos.loading,
         pagination: state.todos.pagination,
         todos: state.todos.allIds.map(id => state.todos.byId[id])
           .filter((todo) => {

@@ -2,6 +2,12 @@ import _ from 'lodash';
 import { combineReducers } from 'frint-store';
 
 import {
+  REQUEST_TODOS,
+  REQUEST_TODO_ADD,
+  REQUEST_TODO_DELETE,
+  REQUEST_TODO_UPDATE,
+  REQUEST_NEXT_TODOS,
+
   RECEIVE_TODOS,
   RECEIVE_TODO_ADD,
   RECEIVE_TODO_DELETE,
@@ -49,8 +55,27 @@ const pagination = (state = { total: 1, page: 1, pageSize: 10 }, action) => {
   }
 }
 
+const loading = (state = false, action) => {
+  switch (action.type) {
+    case REQUEST_TODOS:
+    case REQUEST_TODO_ADD:
+    case REQUEST_TODO_DELETE:
+    case REQUEST_TODO_UPDATE:
+    case REQUEST_NEXT_TODOS:
+      return true;
+    case RECEIVE_TODOS:
+    case RECEIVE_TODO_ADD:
+    case RECEIVE_TODO_DELETE:
+    case RECEIVE_TODO_UPDATE:
+    case RECEIVE_NEXT_TODOS:
+      return false;
+    default: return state;
+  }
+}
+
 export default combineReducers({
   byId: TodoById,
   allIds: TodoAllIds,
-  pagination
+  pagination,
+  loading
 });
