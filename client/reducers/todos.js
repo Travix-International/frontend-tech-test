@@ -97,7 +97,7 @@ const error = (state = '', action) => {
     case REQUEST_TODO_DELETE_ERROR:
     case REQUEST_TODO_UPDATE_ERROR:
     case REQUEST_NEXT_TODOS_ERROR:
-      return action.message;
+      return action.error;
     default: return state;
   }
 }
