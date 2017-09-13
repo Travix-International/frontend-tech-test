@@ -8,11 +8,16 @@ describe('Form Component', () => {
   const addTodo = jest.fn();
   const wrapper = mount(<Form addTodo={addTodo}/>);
 
-  it('should call createTodo with the input value on submit', () => {
+  it('should render an input', () => {
+    expect(wrapper.find('input').length).toBe(1);
+  });
+
+  it('should call addTodo with input value on submit', () => {
     const string = 'test';
     wrapper.find('input').simulate('change', { target: { value: string } });
     wrapper.simulate('submit', { preventDefault: () => {} });
     expect(addTodo).toBeCalled();
     expect(addTodo.mock.calls[0][0]).toEqual(string);
   });
+  
 });

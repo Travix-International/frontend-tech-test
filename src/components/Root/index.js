@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Observable } from 'rxjs';
 import { observe, streamProps } from 'frint-react';
 
@@ -21,7 +22,7 @@ const Root = props => (
     <h1>Hello TODO App</h1>
     <Form/>
     <div>
-      <p>Counter value: {props.counter}</p>
+      <p>Counter value: {props.counter} and input value</p>
       <Button size="s" onClick={() => props.incrementCounter()}>Inc +</Button>
       <Button size="s" onClick={() => props.decrementCounter()}>Dec -</Button>
     </div>
