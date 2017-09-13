@@ -10,7 +10,7 @@
   "author": "spartans",
   "license": "ISC",
   "scripts": {
-    "start": "npm run dev",
+    "start": "concurrently \"npm run dev\" \"node server\"",
     "env:dev": "cross-env NODE_ENV=development",
     "env:prod": "cross-env NODE_ENV=production",
     "test": "jest",
@@ -53,6 +53,7 @@
     "babel-preset-travix": "^1.1.0",
     "copyfiles": "^1.0.0",
     "cross-env": "^5.0.0",
+    "dummy-data": "0.0.8",
     "enzyme": "^2.7.0",
     "eslint": "^3.19.0",
     "eslint-config-travix": "^2.3.2",
