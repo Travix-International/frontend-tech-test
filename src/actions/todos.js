@@ -14,6 +14,16 @@ export const addTodo = todo => ({
   data: { todo }
 });
 
+export const editTodo = (todo, id) => ({
+  type: EDIT_TODO,
+  payload: { todo, id }
+});
+
+export const deleteTodo = id => ({
+  type: DELETE_TODO,
+  payload: { id }
+});
+
 export const updateTodos = todos => ({
   type: UPDATE_TODOS,
   data: { todos }
@@ -28,3 +38,11 @@ export const getTodosAsync = () => (dispatch) => {
 export const addTodoAsync = title => dispatch =>
   fetch('POST', 'task', { title })
     .then(data => dispatch(addTodo(data)));
+
+export const editTodoAsync = (todo, id) => dispatch =>
+  fetch('PUT', `task/${id}`, todo)
+    .then(() => dispatch(editTodo(todo, id)));
+
+export const deleteTodoAsync = id => dispatch =>
+  fetch('DELETE', `task/${id}`)
+    .then(() => dispatch(deleteTodo(id)));

@@ -6,6 +6,8 @@ import { observe, streamProps } from 'frint-react';
 import {
   getTodosAsync as getTodos,
   addTodoAsync as addTodo,
+  editTodoAsync as editTodo,
+  deleteTodoAsync as deleteTodo,
   updateSort
 } from 'actions/todos';
 
@@ -27,7 +29,9 @@ class Root extends Component {
     todos: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     getTodos: PropTypes.func.isRequired,
-    addTodo: PropTypes.func.isRequired
+    addTodo: PropTypes.func.isRequired,
+    editTodo: PropTypes.func.isRequired,
+    deleteTodo: PropTypes.func.isRequired
   }
 
   componentWillMount() {
@@ -70,7 +74,9 @@ export default observe(app => (
       incrementCounter,
       decrementCounter,
       getTodos,
-      addTodo
+      addTodo,
+      editTodo,
+      deleteTodo
     }, app.get('store'))
     .get$()
 ))(Root);

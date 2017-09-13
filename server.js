@@ -1,7 +1,10 @@
 'use strict';
 
 const app = require('express')();
+const bodyParser = require('body-parser');
 const tasks = require('./tasks.json');
+
+app.use(bodyParser.json());
 
 /**
  * GET /tasks
@@ -57,26 +60,26 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
+app.put('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
     const task = tasks.find(item => item.id === id);
 
-    if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
-      return res.status(204);
-    } else {
-      return res.status(404).json({
-        message: 'Not found',
-      });
+    if (task !== undefined) {
+      task.title = req.body.title;
+      task.completed = req.body.completed;
+      return res.status(204).end();
     }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request',
+
+    return res.status(404).json({
+      message: 'Not found',
     });
   }
+
+  return res.status(400).json({
+    message: 'Bad request',
+  });
 });
 
 /**
@@ -88,18 +91,22 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task', (req, res) => {
+  if (!req.body || !req.body.title) {
+    return res.status(400).json({
+      message: 'Bad request. Missing title parameter.'
+    });
+  }
+
   const task = {
-    id: tasks.length,
-    title: req.params.title,
-    description: req.params.description,
+    id: +new Date(),
+    title: req.body.title,
+    completed: false
   };
 
   tasks.push(task);
 
-  return res.status(201).json({
-    message: 'Resource created',
-  });
+  return res.status(201).json(task);
 });
 
 /**
