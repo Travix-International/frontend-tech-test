@@ -1,5 +1,8 @@
 import {
   GET_TODOS,
+  ADD_TODO,
+  EDIT_TODO,
+  DELETE_TODO,
   UPDATE_TODOS
 } from '../constants';
 
@@ -17,6 +20,28 @@ export default function todos(state = INITIAL_STATE, action) {
       return Object.assign({}, state, {
         list: action.data.todos || [],
         isFetching: false
+      });
+    case UPDATE_TODOS:
+      return Object.assign({}, state, {
+        list: action.data.todos || [],
+        isFetching: false
+      });
+
+    case ADD_TODO:
+      return Object.assign({}, state, {
+        list: [...state.list, action.data.todo]
+      });
+
+    case EDIT_TODO:
+      return Object.assign({}, state, {
+        list: state.list.map(l => (
+          l.id === action.data.id ? action.data.todo : l
+        ))
+      });
+
+    case DELETE_TODO:
+      return Object.assign({}, state, {
+        list: state.list.filter(l => l.id !== action.data.id) || []
       });
     default:
       return state;

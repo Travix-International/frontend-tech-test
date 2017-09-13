@@ -119,28 +119,27 @@ app.post('/task', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/task/delete/:id', (req, res) => {
+app.delete('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.find(item => item.id === id);
+    const taskIndex = tasks.findIndex(item => item.id === id);
 
-    if (task !== null) {
-      const taskIndex = tasks;
+    if (taskIndex !== -1) {
       tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',
       });
-    } else {
-      return res.status(404).json({
-        message: 'Not found',
-      });
     }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request',
+
+    return res.status(404).json({
+      message: 'Not found',
     });
   }
+
+  return res.status(400).json({
+    message: 'Bad request',
+  });
 });
 
 app.listen(9001, () => {

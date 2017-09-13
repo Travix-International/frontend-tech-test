@@ -38,7 +38,21 @@ class Root extends Component {
     this.props.getTodos();
   }
 
+  getTodosBySort = (todos, sort) => {
+    if (sort === 'active') {
+      return todos.filter(t => !t.completed);
+    }
+
+    if (sort === 'completed') {
+      return todos.filter(t => t.completed);
+    }
+    return todos;
+  }
+
   render() {
+
+    const sortTodos = this.getTodosBySort(this.props.todos, this.props.sort);
+
     return (
       <div>
         <h1>Hello TODO App</h1>
@@ -48,13 +62,8 @@ class Root extends Component {
           editTodo={this.props.editTodo}
           isEmpty={this.props.todos.length === 0}
           isFetching={this.props.isFetching}
-          todos={this.props.todos}
+          todos={sortTodos}
         />
-        <div>
-          <p>Counter value: {this.props.counter} and input value</p>
-          <Button size="s" onClick={() => props.incrementCounter()}>Inc +</Button>
-          <Button size="s" onClick={() => props.decrementCounter()}>Dec -</Button>
-        </div>
       </div>
     )
   }
@@ -76,7 +85,8 @@ export default observe(app => (
       getTodos,
       addTodo,
       editTodo,
-      deleteTodo
+      deleteTodo,
+      updateSort
     }, app.get('store'))
     .get$()
 ))(Root);

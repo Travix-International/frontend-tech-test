@@ -1,7 +1,11 @@
 import fetch from '../api/api';
 
 import {
+  UPDATE_SORT,
   GET_TODOS,
+  ADD_TODO,
+  EDIT_TODO,
+  DELETE_TODO,
   UPDATE_TODOS
 } from '../constants';
 
@@ -16,17 +20,22 @@ export const addTodo = todo => ({
 
 export const editTodo = (todo, id) => ({
   type: EDIT_TODO,
-  payload: { todo, id }
+  data: { todo, id }
 });
 
 export const deleteTodo = id => ({
   type: DELETE_TODO,
-  payload: { id }
+  data: { id }
 });
 
 export const updateTodos = todos => ({
   type: UPDATE_TODOS,
   data: { todos }
+});
+
+export const updateSort = sort => ({
+  type: UPDATE_SORT,
+  data: { sort }
 });
 
 export const getTodosAsync = () => (dispatch) => {

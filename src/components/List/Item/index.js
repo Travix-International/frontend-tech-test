@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 
+// travix-ui-kit
+import { Button, Checkbox, Tooltip, OverlayTrigger } from 'travix-ui-kit';
+
 import style from './style.scss';
 
 const propTypes = {
@@ -19,11 +22,15 @@ const Item = ({ todo, deleteTodo, editTodo }) => {
 
   return (
     <div className={style.item}>
-      <button className={style.active} onClick={() => editTodo({ ...todo, completed: !todo.completed }, todo.id)}>
-        { todo.completed && (<span className={style.checkIcon}>&#x2713;</span>) }
-      </button>
+      <Checkbox name={"todo"+todo.id} checked={todo.completed} className={style.active} onChange={() => editTodo({ ...todo, completed: !todo.completed }, todo.id)} size="xs">&nbsp;</Checkbox>
       <input className={`${style.editInput} ${todo.completed && style.completed}`} defaultValue={todo.title} onChange={e => handleTitleChange(e, todo)}/>
-      <button className={style.remove} onClick={() => deleteTodo(todo.id)}>&times;</button>
+      <OverlayTrigger
+        triggerAction="hover"
+        elemToToggle={
+          <Tooltip triggerAction="hover" active={true} position="left">Delete</Tooltip>
+      }>
+        <Button className={style.remove} onClick={() => deleteTodo(todo.id)} size="xs">&times;</Button>
+      </OverlayTrigger>
     </div>
   );
 };
