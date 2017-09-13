@@ -30,4 +30,10 @@ describe('Todo List Component', () => {
     expect(wrapper.find('ul.ui-list').length).toBe(1);
   });
 
+  it('should render todo list for two todo item', () => {
+    expect(wrapper.find('.ui-list__item').length).toBe(2);
+  });
+
+  
+
 });
