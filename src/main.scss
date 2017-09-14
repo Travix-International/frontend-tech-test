@@ -1,14 +1,32 @@
 :global {
+  @import 'responsive.scss';
+
   body{
     font-family: var(--tx-generic-font-primary-font-family), var(--tx-generic-font-primary-generic-family);
     margin: 0 auto;
     padding: 10px;
+    @include breakpoint(large){
+      min-width: 450px;
+      max-width: 650px;
+    }
   }
   input{
     box-sizing: border-box;
   }
   .ui-toggle-button_todo_filter{
     display: inline;
+    .ui-toggle-button__item{
+      display: block;
+      border-radius: var(--tx-toggle-button-item-border-radius);
+      &:last-child{
+        border-left: var(--tx-toggle-button-item-border-size) var(--tx-toggle-button-item-border-style) var(--tx-toggle-button-item-border-color);
+      }
+    }
+    @include breakpoint(large){
+      .ui-toggle-button__item{
+        display: inline-block;
+      }
+    }
   }
   .ui-spinner_loading{
     position: absolute;
@@ -19,5 +37,11 @@
     width: 50px;
     height: 50px;
     z-index: 999;
+  }
+  .ui-badge-badge{
+    display: none;
+    @include breakpoint(medium){
+      display: block;
+    }
   }
 }

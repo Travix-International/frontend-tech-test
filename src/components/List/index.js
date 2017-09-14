@@ -5,6 +5,7 @@ import { AutoSizer, List } from 'react-virtualized';
 
 import Item from './Item';
 import style from './style.scss';
+import patrick from 'assets/patrick.png';
 
 import { Spinner } from 'travix-ui-kit';
 
@@ -53,7 +54,7 @@ const TodoList = ({isEmpty, isFetching, editTodo, deleteTodo, todos}) => {
 
       { isEmpty && !isFetching ? (
         <div className={style.emptyList}>
-          <img className={style.icon} />
+          <img className={style.icon} src={patrick}/>
           <p className={style.emptyMessage}>
             Congratulations!
           </p>

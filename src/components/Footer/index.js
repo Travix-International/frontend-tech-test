@@ -13,7 +13,7 @@ import { ToggleButton, Badge } from 'travix-ui-kit';
 
 const Footer = ({ sort, updateSort, activeTodoCount }) => (
   <Badge position="right">
-    <Badge position="bottom" title={<span>{activeTodoCount} item left</span>}>
+    <Badge position="bottom" title={<span>{activeTodoCount} item{activeTodoCount>1?"s":""} left</span>}>
       <footer>
         <ToggleButton items={['All Todos', 'Active', 'Completed']} handleSelect={(stype) => updateSort(stype)} mods={['todo_filter']}/>
       </footer>
