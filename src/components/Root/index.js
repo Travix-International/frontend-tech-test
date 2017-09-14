@@ -26,7 +26,7 @@ class Root extends Component {
     editTodo: PropTypes.func.isRequired,
     deleteTodo: PropTypes.func.isRequired,
     updateSort: PropTypes.func.isRequired,
-    sort: PropTypes.string
+    sort: PropTypes.number
   }
 
   componentWillMount() {
@@ -34,11 +34,11 @@ class Root extends Component {
   }
 
   getTodosBySort = (todos, sort) => {
-    if (sort === 'active') {
+    if (sort === 1) { // active
       return todos.filter(t => !t.completed);
     }
 
-    if (sort === 'completed') {
+    if (sort === 2) { // complete
       return todos.filter(t => t.completed);
     }
     return todos;

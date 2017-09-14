@@ -1,5 +1,8 @@
 :global {
-  footer {
-    clear: both;
+  input{
+    box-sizing: border-box;
+  }
+  .ui-toggle-button_todo_filter{
+    display: inline;
   }
 }
