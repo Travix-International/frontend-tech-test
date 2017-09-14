@@ -48,6 +48,10 @@ class Root extends Component {
 
     const sortTodos = this.getTodosBySort(this.props.todos, this.props.sort);
 
+    const activeTodoCount = this.props.todos.reduce(function (accum, todo) {
+      return todo.completed ? accum : accum + 1;
+    }, 0);
+
     return (
       <div>
         <h1>Hello TODO App</h1>
@@ -63,6 +67,7 @@ class Root extends Component {
           <Footer
             sort={this.props.sort}
             updateSort={this.props.updateSort}
+            activeTodoCount={activeTodoCount}
           />
         ) : null }
       </div>
