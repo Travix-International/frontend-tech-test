@@ -17,8 +17,7 @@ import { incrementCounter, decrementCounter } from '../../actions/counter';
 // components
 import Form from '../Form';
 import List from '../List';
-// ui-kit
-import { Button } from 'travix-ui-kit';
+import Footer from '../Footer';
 
 class Root extends Component {
 
@@ -31,7 +30,9 @@ class Root extends Component {
     getTodos: PropTypes.func.isRequired,
     addTodo: PropTypes.func.isRequired,
     editTodo: PropTypes.func.isRequired,
-    deleteTodo: PropTypes.func.isRequired
+    deleteTodo: PropTypes.func.isRequired,
+    updateSort: PropTypes.func.isRequired,
+    sort: PropTypes.string
   }
 
   componentWillMount() {
@@ -64,6 +65,12 @@ class Root extends Component {
           isFetching={this.props.isFetching}
           todos={sortTodos}
         />
+        { this.props.todos.length ? (
+          <Footer
+            sort={this.props.sort}
+            updateSort={this.props.updateSort}
+          />
+        ) : null }
       </div>
     )
   }
@@ -76,6 +83,7 @@ export default observe(app => (
       state => ({
         counter: state.counter.value,
         todos: state.todos.list,
+        sort: state.todos.sort,
         isFetching: state.todos.isFetching
       })
     )

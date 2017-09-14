@@ -1,0 +1,29 @@
+footer{
+  display:block;
+}
+
+.button {
+  border: 0;
+  padding: 5px 8px;
+  margin: 10px 0;
+  height: auto;
+  line-height: 1;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: #ccc;
+
+  &:focus {
+    color: #ccc;
+  }
+}
+
+.active {
+  color: #999;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+
+  &:focus {
+    color: #999;
+    border-color: #ddd;
+  }
+}

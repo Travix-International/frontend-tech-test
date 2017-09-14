@@ -32,7 +32,7 @@ const TodoList = ({isEmpty, isFetching, editTodo, deleteTodo, todos}) => {
   };
 
   return (
-    <div>
+    <div className={style.list}>
       { isFetching && ( <div className={style.loading}>LOADING</div> ) }
       { !isEmpty ? (
         <AutoSizer>
@@ -40,7 +40,7 @@ const TodoList = ({isEmpty, isFetching, editTodo, deleteTodo, todos}) => {
             <List
               height={320}
               rowCount={todos.length}
-              rowHeight={43}
+              rowHeight={40}
               rowRenderer={data => rowRenderer(data, todos)}
               style={{ outline: 'none' }}
               width={width}
