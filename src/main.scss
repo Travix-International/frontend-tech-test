@@ -1,8 +1,23 @@
 :global {
+  body{
+    font-family: var(--tx-generic-font-primary-font-family), var(--tx-generic-font-primary-generic-family);
+    margin: 0 auto;
+    padding: 10px;
+  }
   input{
     box-sizing: border-box;
   }
   .ui-toggle-button_todo_filter{
     display: inline;
+  }
+  .ui-spinner_loading{
+    position: absolute;
+    margin-left:-25px;
+    margin-left:-25px;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    z-index: 999;
   }
 }

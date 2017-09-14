@@ -6,6 +6,8 @@ import { AutoSizer, List } from 'react-virtualized';
 import Item from './Item';
 import style from './style.scss';
 
+import { Spinner } from 'travix-ui-kit';
+
 const propTypes = {
   isFetching: PropTypes.bool.isRequired,
   editTodo: PropTypes.func.isRequired,
@@ -33,7 +35,7 @@ const TodoList = ({isEmpty, isFetching, editTodo, deleteTodo, todos}) => {
 
   return (
     <div className={style.list}>
-      { isFetching && ( <div className={style.loading}>LOADING</div> ) }
+      { isFetching && ( <Spinner size="s" mods={['loading']}/> ) }
       { !isEmpty ? (
         <AutoSizer>
           {({ width }) => (
