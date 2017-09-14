@@ -11,9 +11,6 @@ import {
   updateSort
 } from 'actions/todos';
 
-// our action creators
-import { incrementCounter, decrementCounter } from '../../actions/counter';
-
 // components
 import Form from '../Form';
 import List from '../List';
@@ -22,9 +19,6 @@ import Footer from '../Footer';
 class Root extends Component {
 
   static propTypes = {
-    counter: PropTypes.number.isRequired,
-    incrementCounter: PropTypes.func.isRequired,
-    decrementCounter: PropTypes.func.isRequired,
     todos: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     getTodos: PropTypes.func.isRequired,
@@ -81,15 +75,12 @@ export default observe(app => (
     .set(
       app.get('store').getState$(),
       state => ({
-        counter: state.counter.value,
         todos: state.todos.list,
         sort: state.todos.sort,
         isFetching: state.todos.isFetching
       })
     )
     .setDispatch({
-      incrementCounter,
-      decrementCounter,
       getTodos,
       addTodo,
       editTodo,
