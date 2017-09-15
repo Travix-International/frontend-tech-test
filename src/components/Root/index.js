@@ -54,7 +54,7 @@ class Root extends Component {
 
     return (
       <div>
-        <h1>Patrick's to do list</h1>
+        <h1>Patrick's TODO list</h1>
         <Form addTodo={this.props.addTodo}/>
         <List
           deleteTodo={this.props.deleteTodo}
