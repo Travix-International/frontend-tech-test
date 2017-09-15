@@ -29,7 +29,7 @@ const Item = ({ todo, deleteTodo, editTodo }) => {
         elemToToggle={
           <Tooltip triggerAction="hover" active={true} position="left">Delete</Tooltip>
       }>
-        <Button className={style.remove} onClick={() => deleteTodo(todo.id)} size="xs">&times;</Button>
+        <Button className={style.remove} onClick={() => deleteTodo(todo.id)} size="xs" mods={['remove']}>&times;</Button>
       </OverlayTrigger>
     </div>
   );

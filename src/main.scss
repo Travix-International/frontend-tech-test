@@ -13,21 +13,6 @@
   input{
     box-sizing: border-box;
   }
-  .ui-toggle-button_todo_filter{
-    display: inline;
-    .ui-toggle-button__item{
-      display: block;
-      border-radius: var(--tx-toggle-button-item-border-radius);
-      &:last-child{
-        border-left: var(--tx-toggle-button-item-border-size) var(--tx-toggle-button-item-border-style) var(--tx-toggle-button-item-border-color);
-      }
-    }
-    @include breakpoint(large){
-      .ui-toggle-button__item{
-        display: inline-block;
-      }
-    }
-  }
   .ui-spinner_loading{
     position: absolute;
     margin-left:-25px;
@@ -44,4 +29,22 @@
       display: block;
     }
   }
+
+  .ui-button.ui-button_todo{
+    margin:10px 5px;
+    display: block;
+    width: 100%;
+    &.ui-button_active{
+      background: #39CCCC;
+    }
+  }
+
+  @include breakpoint(large){
+    .ui-button.ui-button_todo{
+      display: inline-block;
+      margin:0 5px;
+      width: auto;
+    }
+  }
+
 }

@@ -9,14 +9,16 @@ const propTypes = {
 };
 
 // travix-ui-kit
-import { ToggleButton, Badge } from 'travix-ui-kit';
+import { Button, Badge } from 'travix-ui-kit';
 
 const Footer = ({ sort, updateSort, activeTodoCount }) => (
   <Badge position="right">
     <Badge position="bottom" title={<span>{activeTodoCount} item{activeTodoCount>1?"s":""} left</span>}>
-      <footer>
-        <ToggleButton items={['All Todos', 'Active', 'Completed']} handleSelect={(stype) => updateSort(stype)} mods={['todo_filter']}/>
-      </footer>
+      <div>
+        <Button onClick={() => updateSort(0)} mods={['todo', sort==null?'active':'']} size="s">All Todos</Button>
+        <Button onClick={() => updateSort(1)} mods={['todo', sort==1?'active':'']} size="s">Active</Button>
+        <Button onClick={() => updateSort(2)} mods={['todo', sort==2?'active':'']} size="s">Completed</Button>
+      </div>
     </Badge>
   </Badge>
 );
