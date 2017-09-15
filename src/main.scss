@@ -1,0 +1,50 @@
+:global {
+  @import 'responsive.scss';
+
+  body{
+    font-family: var(--tx-generic-font-primary-font-family), var(--tx-generic-font-primary-generic-family);
+    margin: 0 auto;
+    padding: 10px;
+    @include breakpoint(large){
+      min-width: 450px;
+      max-width: 650px;
+    }
+  }
+  input{
+    box-sizing: border-box;
+  }
+  .ui-spinner_loading{
+    position: absolute;
+    margin-left:-25px;
+    margin-left:-25px;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    z-index: 999;
+  }
+  .ui-badge-badge{
+    display: none;
+    @include breakpoint(medium){
+      display: block;
+    }
+  }
+
+  .ui-button.ui-button_todo{
+    margin:10px 5px;
+    display: block;
+    width: 100%;
+    &.ui-button_active{
+      background: #39CCCC;
+    }
+  }
+
+  @include breakpoint(large){
+    .ui-button.ui-button_todo{
+      display: inline-block;
+      margin:0 5px;
+      width: auto;
+    }
+  }
+
+}

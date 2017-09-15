@@ -1,0 +1,28 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "travix/base",
+    "travix/react"
+  ],
+  "plugins": [
+    "no-unused-vars-rest"
+  ],
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      }
+    }
+  },
+  "globals": {
+    "__DEV__": true,
+    "__PROD__": true,
+    "__DEBUG__": true,
+    "__COVERAGE__": true,
+    "__BASENAME__": true
+  }
+}

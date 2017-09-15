@@ -1,0 +1,34 @@
+.list {
+  margin: 0;
+  padding: 0;
+  height: 320px;
+}
+
+.emptyList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.emptyMessage {
+  margin: 0;
+}
+
+.icon {
+  width: 100%;
+  margin-bottom: 15px;
+  max-width: 120px;
+}
+
+.loading {
+  color: #ccc;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
