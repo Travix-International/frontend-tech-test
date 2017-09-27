@@ -5,8 +5,8 @@ const tasksContainer = require('./tasks.json');
 const path = require('path');
 
 
-const indexHTMLFilename = path.join(path.resolve(__dirname), 'src/index.html');
-const bundleFilename = path.join(path.resolve(__dirname), 'dist/bundle.js');
+const indexHTMLFilename = path.join(path.resolve(__dirname), 'index.html');
+const bundleFilename = path.join(path.resolve(__dirname), '../dist/bundle.js');
 
 // @TODO transform to MAP
 const getTasksObject = () => tasksContainer.tasks;

@@ -1,47 +1,20 @@
-/* global document, fetch */
+/* global document */
 import 'whatwg-fetch';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { render } from 'react-dom';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { TodoList } from './components';
-import reducer, { loadTasks } from './app.ducks';
+import { LoadedTodoList } from './Components';
+import reducer from './app.ducks';
 import './app.scss';
 
 const store = createStore(reducer);
 
-const LoadedTodoList = connect(state => ({
-  todos: state.todos
-}))(TodoList);
-
-class App extends Component {
-  componentWillMount() {
-    const { dispatch } = this.props;
-    fetch('/tasks')
-      .then((response) => {
-        return response.json();
-      }).then((json) => {
-        dispatch(loadTasks(json.tasks));
-      }).catch((ex) => {
-        throw new Error('parsing failed', ex);
-      });
-  }
-
-  render() {
-    return <LoadedTodoList />;
-  }
-}
-
-App.propTypes = {
-  dispatch: PropTypes.func
-};
-
-const ConnectedApp = connect()(App);
+const App = () => <LoadedTodoList />;
 
 render(
   <Provider store={store}>
-    <ConnectedApp />
+    <App />
   </Provider>,
   document.getElementById('app')
 );

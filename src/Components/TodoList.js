@@ -102,6 +102,6 @@ TodoList.propTypes = {
 };
 
 export {
-  TodoList,
+  TodoList as default,
   Todo
 };
