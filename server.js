@@ -10,6 +10,7 @@ const bundleFilename = path.join(path.resolve(__dirname), 'dist/bundle.js');
 
 // @TODO transform to MAP
 const getTasksObject = () => tasksContainer.tasks;
+// @TODO implement this after parse, the task file could be without lastAdded param
 const getTasksLastID = () => parseInt(tasksContainer.lastAdded, 10);
 
 /**
