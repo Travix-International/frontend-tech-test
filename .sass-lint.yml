@@ -1,0 +1,44 @@
+files:
+  include: '**/*.s+(a|c)ss'
+options:
+  formatter: stylish
+  merge-default-rules: true
+rules:
+  quotes:
+    - 1
+    - style: single
+  class-name-format:
+    - 1
+    - convention: hyphenatedbem
+  clean-import-paths:
+    - 0
+  nesting-depth:
+    - 1
+    - max-depth: 4
+  no-vendor-prefixes: 0
+  force-pseudo-nesting: 0
+  border-zero:
+    - 0
+    - convention: 'none'
+  force-attribute-nesting: 0
+  force-element-nesting: 0
+  leading-zero: 0
+  zero-unit: 0
+  no-color-keywords: 0
+  no-color-literals:
+    - 0
+    - allow-map-identifiers: true
+    - allow-rgba: true
+    - allow-variable-identifiers: true
+  empty-args:
+    - 1
+    - include: true
+  no-qualifying-elements:
+    - 0
+    - allow-element-with-attribute: true
+    - allow-element-with-class: true
+    - allow-element-with-id: true
+  url-quotes: 0
+  no-transition-all: 0
+  property-sort-order: 0
+  mixins-before-declarations: 0
