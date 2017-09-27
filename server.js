@@ -2,7 +2,13 @@
 
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
+const path = require('path');
 
+
+const indexHTMLFilename = path.join(path.resolve(__dirname), 'src/index.html');
+const bundleFilename = path.join(path.resolve(__dirname), 'dist/bundle.js');
+
+// @TODO transform to MAP
 const getTasksObject = () => tasksContainer.tasks;
 const getTasksLastID = () => parseInt(tasksContainer.lastAdded, 10);
 
@@ -28,24 +34,24 @@ app.get('/tasks', (req, res) => {
  */
 app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
+  let response = res.status(400).json({
+    message: 'Bad request.',
+  });
 
   if (!Number.isNaN(id)) {
-    const task = getTasksObject().find((item) => item.id === id);
+    const task = getTasksObject().find(item => item.id === id);
+    response = res.status(404).json({
+      message: 'Not found.',
+    });
 
     if (task !== null) {
-      return res.status(200).json({
+      response = res.status(200).json({
         task,
       });
-    } else {
-      return res.status(404).json({
-        message: 'Not found.',
-      });
     }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request.',
-    });
   }
+
+  return response;
 });
 
 /**
@@ -62,24 +68,24 @@ app.get('/task/:id', (req, res) => {
  */
 app.put('/task/update/:id/:title/:description', (req, res) => {
   const id = parseInt(req.params.id, 10);
+  let response = res.status(400).json({
+    message: 'Bad request.',
+  });
 
   if (!Number.isNaN(id)) {
     const task = getTasksObject().find(item => item.id === id);
+    response = res.status(404).json({
+      message: 'Not found',
+    });
 
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
-    } else {
-      return res.status(404).json({
-        message: 'Not found',
-      });
+      response = res.status(204);
     }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request',
-    });
   }
+
+  return response;
 });
 
 /**
@@ -117,19 +123,21 @@ app.post('/task/create/:title/:description', (req, res) => {
  */
 app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
+  let response = res.status(400).json({
+    message: 'Bad request.',
+  });
 
   if (!Number.isNaN(id)) {
     const tasks = getTasksObject();
     const taskIndex = tasks.findIndex(item => item.id === id);
+    response = res.status(404).json({
+      message: 'Not found',
+    });
 
     if (taskIndex !== -1) {
       tasks.splice(taskIndex, 1);
-      return res.status(200).json({
+      response = res.status(200).json({
         message: 'Updated successfully',
-      });
-    } else {
-      return es.status(404).json({
-        message: 'Not found',
       });
     }
   } else {
@@ -137,11 +145,9 @@ app.delete('/task/delete/:id', (req, res) => {
       message: 'Bad request',
     });
   }
-});
 
-const path = require('path');
-const indexHTMLFilename = path.join(path.resolve(__dirname), 'src/index.html');
-const bundleFilename = path.join(path.resolve(__dirname), 'dist/bundle.js');
+  return response;
+});
 
 /* Bundle entry point */
 app.get(/bundle\.js$/, (req, res) => {
