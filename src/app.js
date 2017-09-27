@@ -6,7 +6,7 @@ import { render } from 'react-dom';
 import { Provider, connect } from 'react-redux';
 import { createStore } from 'redux';
 import { TodoList } from './components';
-import reducer, { loadAction } from './app.ducks';
+import reducer, { loadTasks } from './app.ducks';
 import './app.scss';
 
 const store = createStore(reducer);
@@ -22,7 +22,7 @@ class App extends Component {
       .then((response) => {
         return response.json();
       }).then((json) => {
-        dispatch(loadAction(json.tasks));
+        dispatch(loadTasks(json.tasks));
       }).catch((ex) => {
         throw new Error('parsing failed', ex);
       });
