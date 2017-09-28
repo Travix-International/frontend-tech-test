@@ -11,6 +11,11 @@ class TaskDialog extends React.Component {
     this.descriptionFieldValue = '';
   }
 
+  componentWillReceiveProps({ selectedTask }) {
+    this.titleFieldValue = selectedTask ? selectedTask.title : '';
+    this.descriptionFieldValue = selectedTask ? selectedTask.description : '';
+  }
+
   handleCancel(evt) {
     evt.preventDefault();
     this.props.onCancel();
@@ -22,17 +27,17 @@ class TaskDialog extends React.Component {
 
     onAccept({
       id: selectedTask ? selectedTask.id : null,
-      titleValue: this.titleFieldValue.trim(),
-      descriptionValue: this.descriptionFieldValue.trim()
+      title: this.titleFieldValue.trim(),
+      description: this.descriptionFieldValue.trim()
     });
   }
 
   handleEntering() {
-
+    // Must focus?
   }
 
   render() {
-    const { selectedTask, open } = this.props;
+    const { open } = this.props;
 
     return (
       <Dialog
@@ -50,7 +55,7 @@ class TaskDialog extends React.Component {
             onSubmit={(...args) => this.addTodo(...args)}
           >
             <TextField
-              defaultValue={selectedTask ? selectedTask.title : ''}
+              defaultValue={this.titleFieldValue}
               label="Title"
               name="title"
               onChange={(e) => { this.titleFieldValue = e.target.value; }}
@@ -58,7 +63,7 @@ class TaskDialog extends React.Component {
               type="text"
             />
             <TextField
-              defaultValue={selectedTask ? selectedTask.description : ''}
+              defaultValue={this.descriptionFieldValue}
               label="Description"
               multiline
               name="description"
@@ -73,7 +78,7 @@ class TaskDialog extends React.Component {
           <Button color="primary" onClick={evt => this.handleCancel(evt)}>
             Cancel
           </Button>
-          <Button color="primary" onClick={evt => this.handleOk(evt)}>
+          <Button color="primary" onClick={evt => this.handleOk(evt)} type="submit">
             Ok
           </Button>
         </DialogActions>
