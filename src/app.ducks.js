@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 
 const initialState = {
   todos: [],
-  lastTaskID: 0
+  selectedTaskIndex: null,
+  deletedTaskIndex: null
 };
 
 const LOAD_TODOS = 'app/LOAD_TODOS';
@@ -33,6 +34,22 @@ const removeTask = index => ({
   index
 });
 
+const SELECT_TODO = 'app/SELECT_TODO';
+const selectTaskIndex = index => ({
+  type: SELECT_TODO,
+  index
+});
+
+const UNSELECT_TODO = 'app/UNSELECT_TODO';
+const unselectTaskIndex = {
+  type: UNSELECT_TODO
+};
+
+const CLEAR_DELETED_TODO = 'app/CLEAR_DELETED_TODO';
+const clearDeltedTask = {
+  type: CLEAR_DELETED_TODO
+};
+
 const todos = (state = initialState.todos, action) => {
   const { id, title, description } = action;
   const tmpState = [...state];
@@ -53,14 +70,41 @@ const todos = (state = initialState.todos, action) => {
   }
 };
 
+const selectedTaskIndex = (state = initialState.selectedTaskIndex, { type, index }) => {
+  switch (type) {
+    case SELECT_TODO:
+      return index;
+    case UNSELECT_TODO:
+      return null;
+    default:
+      return state;
+  }
+};
+
+const deletedTaskIndex = (state = initialState.deletedTaskIndex, { type, index }) => {
+  switch (type) {
+    case REMOVE_TODO:
+      return index;
+    case CLEAR_DELETED_TODO:
+      return null;
+    default:
+      return state;
+  }
+};
+
 const reducer = combineReducers({
-  todos
+  todos,
+  selectedTaskIndex,
+  deletedTaskIndex
 });
 
 export {
   addTask,
   updateTask,
   removeTask,
+  clearDeltedTask,
   loadTasks,
+  selectTaskIndex,
+  unselectTaskIndex,
   reducer as default,
 };
