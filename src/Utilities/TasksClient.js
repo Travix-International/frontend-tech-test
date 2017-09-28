@@ -1,25 +1,39 @@
 /* global fetch */
 
 class TaskClient {
-  get() {
+  static get() {
     return fetch('/tasks')
       .then((response) => {
         return response.json();
       }).catch((ex) => {
-        throw new Error('parsing failed', ex);
+        throw new Error('Parsing failed', ex);
       });
   }
 
-  put() {
-
+  static post(title, description) {
+    return fetch(`/task/create/${title}/${description}`, {
+      method: 'POST',
+    }).then((response) => {
+      return response.json();
+    }).catch((ex) => {
+      throw new Error('Adding failed', ex);
+    });
   }
 
-  delete() {
-
+  static delete(id) {
+    return fetch(`/task/delete/${id}`, {
+      method: 'DELETE',
+    }).catch((ex) => {
+      throw new Error('Remove failed', ex);
+    });
   }
 
-  update() {
-
+  static update(id, title, description) {
+    return fetch(`/task/update/${id}/${title}/${description}`, {
+      method: 'PUT',
+    }).catch((ex) => {
+      throw new Error('Update failed', ex);
+    });
   }
 }
 
