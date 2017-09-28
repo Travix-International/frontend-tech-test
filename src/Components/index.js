@@ -48,29 +48,7 @@ const ConnectedTaskDialog = connect(
     open: state.todoDetail !== null
   }),
   dispatch => ({
-    addTodo: (titleValue, descriptionValue) => {
-      const title = titleValue.trim();
-      const description = !!descriptionValue.trim();
-      if (!!title && !!description) {
-        TaskClient.post(title, description).then((json) => {
-          dispatch(addTodo(
-            json.task
-          ));
-        });
-      }
-    },
-    updateTodo: (index, id, titleValue, descriptionValue) => {
-      const title = titleValue.trim();
-      const description = !!descriptionValue.trim();
-      if (!!title && !!description) {
-        TaskClient.update(id, title, description).then((json) => {
-          dispatch(updateTodo(
-            index,
-            json.task
-          ));
-        });
-      }
-    },
+    dispatch
   }),
   (stateProps, dispatchProps, ownProps) => Object.assign(
     stateProps,
@@ -78,15 +56,21 @@ const ConnectedTaskDialog = connect(
     ownProps,
     {
       onAccept: ({ id, title, description }) => {
-        if (stateProps.selectedTask) {
-          console.info(stateProps.selectedTodoIndex,
-            id, title, description);
-          dispatchProps.updateTodo(
-            stateProps.selectedTodoIndex,
-            id, title, description
-          );
-        } else {
-          dispatchProps.addTodo(title, description);
+        if (!!title || !!description) {
+          if (stateProps.selectedTask) {
+            TaskClient.update(id, title, description).then((json) => {
+              dispatchProps.dispatch(updateTodo(
+                stateProps.selectedTodoIndex,
+                json.task
+              ));
+            });
+          } else {
+            TaskClient.post(title, description).then((json) => {
+              dispatchProps.dispatch(addTodo(
+                json.task
+              ));
+            });
+          }
         }
         dispatchProps.dispatch(clearOpenedDetail);
       },
