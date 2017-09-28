@@ -1,9 +1,9 @@
-/* global fetch */
+/* global */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { AutoSizer, List } from 'react-virtualized';
 import Button from 'material-ui/Button';
-import TextField from 'material-ui/TextField';
-import { addTask } from '../app.ducks';
+import './TodoList.scss';
 
 const Todo = (props) => {
   const { todo } = props;
@@ -22,83 +22,44 @@ Todo.propTypes = {
 };
 
 class TodoList extends Component {
-  constructor() {
-    super();
-    this.titleFieldValue = '';
-    this.descriptionFieldValue = '';
-  }
-
-  addTodo(evt) {
-    const { dispatch } = this.props;
-
-    fetch(`/task/create/${this.titleFieldValue}/${this.descriptionFieldValue}`, {
-      method: 'POST',
-    })
-      .then(() => {
-        dispatch(addTask(
-          this.titleFieldValue,
-          this.descriptionFieldValue
-        ));
-      }).catch((ex) => {
-        throw new Error('parsing failed', ex);
-      });
-
-    evt.preventDefault();
-  }
-
-  getListComponents() {
-    let components = [];
-    const { todos } = this.props;
-
-    todos.forEach((t, k) => {
-      components.push(
-        <li className="todo__item" key={k}>
-          <Todo todo={t} />
-        </li>
-      );
-    });
-
-    return components;
+  componentWillMount() {
+    this.props.loadTasks();
   }
 
   render() {
+    const { todos, removeTask } = this.props;
     return (
-      <div className="todo">
-        <form
-          autoComplete="off"
-          className="todo__form"
-          noValidate
-          onSubmit={(...args) => this.addTodo(...args)}
-        >
-          <TextField
-            label="Title"
-            name="title"
-            onChange={(e) => { this.titleFieldValue = e.target.value; }}
-            placeholder="Add todo title"
-            type="text"
-          />
-          <TextField
-            label="Description"
-            multiline
-            name="description"
-            onChange={(e) => { this.descriptionFieldValue = e.target.value; }}
-            placeholder="Add todo description"
-            rowsMax="4"
-            type="text"
-          />
-          <Button onSubmit={(...args) => this.addTodo(...args)} type="submit">Add</Button>
-        </form>
-        <ul className="todo__list">
-          {this.getListComponents()}
-        </ul>
+      <div className="todo-list">
+        <AutoSizer>
+          {({ width, height }) => (
+            <List
+              className="todo-list__main"
+              height={height}
+              rowCount={todos.length}
+              rowHeight={30}
+              rowRenderer={({ index, key, style }) => {
+                const task = todos[index];
+                return (
+                  <div className="list-row" key={key} style={style}>
+                    {task.title}, {task.description}
+                    <Button onClick={() => removeTask(task.id, index)}>Delete</Button>
+                  </div>
+                );
+              }}
+              width={width}
+            />
+          )}
+        </AutoSizer>
       </div>
     );
   }
 }
 
 TodoList.propTypes = {
-  dispatch: PropTypes.func,
-  todos: PropTypes.object
+  loadTasks: PropTypes.func,
+  addTask: PropTypes.func,
+  removeTask: PropTypes.func,
+  todos: PropTypes.array.isRequired
 };
 
 export {
