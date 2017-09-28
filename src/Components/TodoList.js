@@ -41,7 +41,7 @@ class TodoList extends Component {
                 const task = todos[index];
                 return (
                   <div className="list-row" key={key} style={style}>
-                    {task.title}, {task.description}
+                    {task.id}, {task.title}, {task.description}
                     <Button onClick={() => removeTask(task.id, index)}>Delete</Button>
                   </div>
                 );
