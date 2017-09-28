@@ -31,6 +31,8 @@ class TaskClient {
   static update(id, title, description) {
     return fetch(`/task/update/${id}/${title}/${description}`, {
       method: 'PUT',
+    }).then((response) => {
+      return response.json();
     }).catch((ex) => {
       throw new Error('Update failed', ex);
     });
