@@ -8,10 +8,8 @@ const path = require('path');
 const indexHTMLFilename = path.join(path.resolve(__dirname), 'index.html');
 const bundleFilename = path.join(path.resolve(__dirname), '../dist/bundle.js');
 
-// @TODO transform to MAP
-const getTasksObject = () => tasksContainer.tasks;
 // @TODO implement this after parse, the task file could be without lastAdded param
-const getTasksLastID = () => parseInt(tasksContainer.lastAdded, 10);
+const getTasksLastID = () => parseInt(tasksContainer.tasks.length, 10);
 
 /**
  * GET /tasks
@@ -35,21 +33,24 @@ app.get('/tasks', (req, res) => {
  */
 app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
-  let response = res.status(400).json({
-    message: 'Bad request.',
-  });
+  let response = null;
 
   if (!Number.isNaN(id)) {
-    const task = getTasksObject().find(item => item.id === id);
-    response = res.status(404).json({
-      message: 'Not found.',
-    });
+    const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
       response = res.status(200).json({
         task,
       });
+    } else {
+      response = res.status(404).json({
+        message: 'Not found.',
+      });
     }
+  } else {
+    response = res.status(400).json({
+      message: 'Bad request.',
+    });
   }
 
   return response;
@@ -69,21 +70,24 @@ app.get('/task/:id', (req, res) => {
  */
 app.put('/task/update/:id/:title/:description', (req, res) => {
   const id = parseInt(req.params.id, 10);
-  let response = res.status(400).json({
-    message: 'Bad request.',
-  });
+  let response = null;
 
   if (!Number.isNaN(id)) {
-    const task = getTasksObject().find(item => item.id === id);
-    response = res.status(404).json({
-      message: 'Not found',
-    });
+    const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
       response = res.status(204);
+    } else {
+      response = res.status(404).json({
+        message: 'Not found',
+      });
     }
+  } else {
+    response = res.status(400).json({
+      message: 'Bad request.',
+    });
   }
 
   return response;
@@ -105,11 +109,11 @@ app.post('/task/create/:title/:description', (req, res) => {
     description: req.params.description,
   };
 
-  getTasksObject().push(task);
-  tasksContainer.lastAdded = getTasksLastID() + 1;
+  tasksContainer.tasks.push(task);
 
   return res.status(201).json({
     message: 'Resource created',
+    task
   });
 });
 
@@ -125,26 +129,25 @@ app.post('/task/create/:title/:description', (req, res) => {
  */
 app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
-  let response = res.status(400).json({
-    message: 'Bad request.',
-  });
+  let response = null;
 
   if (!Number.isNaN(id)) {
-    const tasks = getTasksObject();
+    const tasks = tasksContainer.tasks;
     const taskIndex = tasks.findIndex(item => item.id === id);
-    response = res.status(404).json({
-      message: 'Not found',
-    });
 
     if (taskIndex !== -1) {
       tasks.splice(taskIndex, 1);
       response = res.status(200).json({
         message: 'Updated successfully',
       });
+    } else {
+      response = res.status(404).json({
+        message: 'Not found',
+      });
     }
   } else {
-    return res.status(400).json({
-      message: 'Bad request',
+    response = res.status(400).json({
+      message: 'Bad request: invalid id',
     });
   }
 

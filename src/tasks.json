@@ -1,9 +1,8 @@
 {
   "tasks": [
-    { "id": 0, "isDone": true, "title": "make components", "description": "" },
-    { "id": 1, "isDone": false, "title": "design actions", "description": "" },
-    { "id": 2, "isDone": false, "title": "implement reducer", "description": "" },
-    { "id": 3, "isDone": false, "title": "connect components", "description": "" }
-  ],
-  "lastAdded": 3
+    { "id": 0, "title": "make components", "description": "" },
+    { "id": 1, "title": "design actions", "description": "" },
+    { "id": 2, "title": "implement reducer", "description": "" },
+    { "id": 3, "title": "connect components", "description": "" }
+  ]
 }
