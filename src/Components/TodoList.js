@@ -2,15 +2,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AutoSizer, List } from 'react-virtualized';
-import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
 import EditIcon from 'material-ui-icons/Edit';
-import AddIcon from 'material-ui-icons/Add';
 import './TodoList.scss';
 
 const Todo = (props) => {
-  const { task, index, style, selectTaskIndex, removeTask } = props;
+  const { task, index, style, selectTodoIndex, removeTodo } = props;
 
   return (
     <div
@@ -23,10 +21,17 @@ const Todo = (props) => {
         <div className="list-row__id">{task.id}</div>
         <div className="list-row__title">{task.title}</div>
         <div className="list-row__description">{task.description}</div>
-        <IconButton className="list-row__button" onClick={() => selectTaskIndex(index)}>
+        <IconButton
+          className="list-row__button"
+          color="primary"
+          onClick={() => selectTodoIndex(index)}
+        >
           <EditIcon />
         </IconButton>
-        <IconButton className="list-row__button" onClick={() => removeTask(task.id, index)}>
+        <IconButton
+          className="list-row__button"
+          onClick={() => removeTodo(task.id, index)}
+        >
           <CloseIcon />
         </IconButton>
       </div>
@@ -35,8 +40,8 @@ const Todo = (props) => {
 };
 
 Todo.propTypes = {
-  selectTaskIndex: PropTypes.func,
-  removeTask: PropTypes.func,
+  selectTodoIndex: PropTypes.func,
+  removeTodo: PropTypes.func,
   index: PropTypes.number,
   style: PropTypes.object,
   task: PropTypes.object
@@ -44,21 +49,13 @@ Todo.propTypes = {
 
 class TodoList extends Component {
   componentWillMount() {
-    this.props.loadTasks();
+    this.props.loadTodos();
   }
 
   render() {
-    const { todos, removeTask, selectTaskIndex } = this.props;
+    const { todos, removeTodo, selectTodoIndex } = this.props;
     return (
       <div className="todo-list">
-        <Button
-          aria-label="add"
-          className="todo-list__add-button"
-          color="primary"
-          fab
-        >
-          <AddIcon />
-        </Button>
         <AutoSizer>
           {({ width, height }) => (
             <List
@@ -71,8 +68,8 @@ class TodoList extends Component {
                   <Todo
                     index={index}
                     key={key}
-                    removeTask={removeTask}
-                    selectTaskIndex={selectTaskIndex}
+                    removeTodo={removeTodo}
+                    selectTodoIndex={selectTodoIndex}
                     style={style}
                     task={todos[index]}
                   />
@@ -88,10 +85,10 @@ class TodoList extends Component {
 }
 
 TodoList.propTypes = {
-  loadTasks: PropTypes.func,
-  addTask: PropTypes.func,
-  removeTask: PropTypes.func,
-  selectTaskIndex: PropTypes.func,
+  loadTodos: PropTypes.func,
+  addTodo: PropTypes.func,
+  removeTodo: PropTypes.func,
+  selectTodoIndex: PropTypes.func,
   todos: PropTypes.array.isRequired
 };
 
