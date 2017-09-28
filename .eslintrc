@@ -1,0 +1,10 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "travix/base",
+    "travix/react"
+  ],
+  "rules": {
+    "class-methods-use-this": 0
+  }
+}
