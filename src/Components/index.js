@@ -2,7 +2,16 @@ import { connect } from 'react-redux';
 import TaskClient from '../Utilities/TasksClient';
 import TodoList, { Todo } from './TodoList';
 import TodoForm from './TodoForm';
-import { loadTasks, addTask, removeTask } from '../app.ducks';
+import TaskDialog from './TaskDialog';
+import NotificationSnackBar from './NotificationSnackBar';
+import {
+  loadTasks,
+  addTask,
+  removeTask,
+  selectTaskIndex,
+  unselectTaskIndex,
+  clearDeltedTask
+} from '../app.ducks';
 
 const ConnectedTodoList = connect(
   state => ({
@@ -20,7 +29,8 @@ const ConnectedTodoList = connect(
           index
         ));
       });
-    }
+    },
+    selectTaskIndex: index => dispatch(selectTaskIndex(index)),
   })
 )(TodoList);
 
@@ -43,9 +53,31 @@ const ConnectedTodoForm = connect(
   })
 )(TodoForm);
 
+const ConnectedTaskDialog = connect(
+  state => ({
+    selectedTask: state.todos[state.selectedTaskIndex],
+    open: state.selectedTaskIndex !== null
+  }),
+  dispatch => ({
+    onAccept: () => dispatch(unselectTaskIndex),
+    onCancel: () => dispatch(unselectTaskIndex)
+  })
+)(TaskDialog);
+
+const ConnectedNotificationSnackBar = connect(
+  state => ({
+    open: state.deletedTaskIndex !== null
+  }),
+  dispatch => ({
+    onClose: () => dispatch(clearDeltedTask)
+  })
+)(NotificationSnackBar);
+
 export {
   ConnectedTodoList,
   ConnectedTodoForm,
+  ConnectedTaskDialog,
+  ConnectedNotificationSnackBar,
   TodoForm,
   Todo
 };
