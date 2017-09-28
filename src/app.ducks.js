@@ -101,7 +101,7 @@ const deletedTodoIndex = (state = initialState.deletedTodoIndex, { type, index }
   switch (type) {
     case REMOVE_TODO:
       return index;
-    case CLEAR_DETAIL:
+    case CLEAR_DELETED_TODO:
       return null;
     default:
       return state;

@@ -25,7 +25,7 @@ const NotificationSnackBar = ({ onClose, open }) => (
       vertical: 'bottom',
       horizontal: 'left',
     }}
-    autoHideDuration={6000}
+    autoHideDuration={3000}
     className="notification-snackbar"
     message={<span id="message-id">Task Deleted</span>}
     onRequestClose={() => onClose()}

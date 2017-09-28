@@ -1,3 +1,6 @@
+@import './style-variables.scss';
+$grid-tablet-breakpoint: 750px;
+
 .add-todo {
   position: absolute;
   bottom: 0;
@@ -8,4 +11,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (min-width: $grid-tablet-breakpoint) {
+    flex-direction: row;
+    justify-content: flex-end;
+
+    &__button {
+      margin: 5px 25px;
+    }
+  }
 }

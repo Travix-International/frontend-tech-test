@@ -91,6 +91,7 @@ const ConnectedNotificationSnackBar = connect(
 
 // Add to do button
 const ConnectedAddTodo = connect(
+  null,
   dispatch => ({
     openAddTodo: () => dispatch(openAddDetail),
   })

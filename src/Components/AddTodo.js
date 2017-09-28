@@ -5,7 +5,14 @@ import './AddTodo.scss';
 
 const AddTodo = ({ openAddTodo }) => (
   <div className="add-todo">
-    <Button color="accent" onClick={() => openAddTodo} raised>Add to do</Button>
+    <Button
+      className="add-todo__button"
+      color="accent"
+      onClick={() => openAddTodo()}
+      raised
+    >
+      Add to do
+    </Button>
   </div>
 );
 
