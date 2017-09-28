@@ -4,7 +4,12 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { ConnectedTodoList, ConnectedTaskDialog, ConnectedNotificationSnackBar } from './Components';
+import {
+  ConnectedAddTodo,
+  ConnectedTodoList,
+  ConnectedTaskDialog,
+  ConnectedNotificationSnackBar
+} from './Components';
 import reducer from './app.ducks';
 import './app.scss';
 
@@ -13,6 +18,7 @@ const store = createStore(reducer);
 const App = () => (
   <div>
     <ConnectedTodoList />
+    <ConnectedAddTodo />
     <ConnectedTaskDialog />
     <ConnectedNotificationSnackBar />
   </div>
