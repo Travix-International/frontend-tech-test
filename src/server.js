@@ -8,8 +8,33 @@ const path = require('path');
 const indexHTMLFilename = path.join(path.resolve(__dirname), 'index.html');
 const bundleFilename = path.join(path.resolve(__dirname), '../dist/bundle.js');
 
-// @TODO implement this after parse, the task file could be without lastAdded param
-const getTasksLastID = () => parseInt(tasksContainer.tasks.length, 10);
+/**
+ * Order all task by id to avoid errors
+ */
+tasksContainer.tasks = tasksContainer.tasks.sort((a, b) => {
+  const aID = parseInt(a.id, 10);
+  const bID = parseInt(b.id, 10);
+  let order = 0;
+
+  if (aID < bID) {
+    order = -1;
+  } else if (aID > bID) {
+    order = 1;
+  }
+
+  return order;
+});
+
+/**
+ * Returns the next ID to be used on a task
+ * @returns {Number}
+ */
+const getTasksNextID = () => {
+  const totalSize = tasksContainer.tasks.length;
+  const lastTask = tasksContainer.tasks[totalSize - 1];
+  const lastID = parseInt(lastTask.id, 10);
+  return (Number.isNaN(lastID) ? totalSize : lastID) + 1;
+};
 
 /**
  * GET /tasks
@@ -104,7 +129,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: getTasksLastID() + 1,
+    id: getTasksNextID(),
     title: req.params.title,
     description: req.params.description,
   };
