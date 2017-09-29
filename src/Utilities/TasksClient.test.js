@@ -31,8 +31,8 @@ suite('On the task client library', () => {
   teardown(() => {
     fetchMock.restore();
   });
-  test('get method calls fetch with the correct url', () => {
-    TasksClient.get();
+  test('getAll method calls fetch with the correct url', () => {
+    TasksClient.getAll();
     assert.calledOnce(fetchMock.withArgs('/tasks'));
   });
   test('post method calls fetch with the correct url and method POST', () => {
