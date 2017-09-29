@@ -1,0 +1,75 @@
+@import './style-variables.scss';
+
+.todo-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: calc(100% - 50px);
+  width: 100%;
+
+  @media (min-width: $grid-tablet-breakpoint) {
+    height: 100%;
+  }
+
+  &__loading-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .list-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__wrapper {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__id,
+    &__title,
+    &__button,
+    &__description {
+      flex: 0 1 auto;
+      font-size: 20px;
+    }
+
+    &__id,
+    &__title,
+    &__description {
+      padding: 0 5px;
+      white-space: nowrap;
+    }
+
+    &__title,
+    &__description {
+      padding: 0 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &__id {
+      display: none;
+    }
+
+    &__button {
+      min-width: 48px;
+    }
+
+    &__description {
+      flex: 1 1 auto;
+    }
+  }
+}
