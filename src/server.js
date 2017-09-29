@@ -1,9 +1,11 @@
 'use strict';
 
 const app = require('express')();
+const TasksServer = require('./Utilities/TasksServer.js');
 const tasksContainer = require('./tasks.json');
 const path = require('path');
 
+const tasksServer = new TasksServer(tasksContainer);
 
 const indexHTMLFilename = path.join(path.resolve(__dirname), 'index.html');
 const bundleFilename = path.join(path.resolve(__dirname), '../dist/bundle.js');
@@ -42,7 +44,7 @@ const getTasksNextID = () => {
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
+  return res.status(200).json(tasksServer.getAll());
 });
 
 /**
@@ -57,11 +59,11 @@ app.get('/tasks', (req, res) => {
  * If id is not valid number return status code 400.
  */
 app.get('/task/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+  const id = tasksServer.parseId(req.params.id);
   let response = null;
 
-  if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+  if (tasksServer.idIsValid(id)) {
+    const task = tasksServer.find(id);
 
     if (task !== null) {
       response = res.status(200).json({
@@ -94,15 +96,15 @@ app.get('/task/:id', (req, res) => {
  * If the provided id is not a valid number return a status code 400.
  */
 app.put('/task/update/:id/:title/:description', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+  const id = tasksServer.parseId(req.params.id);
   let response = null;
 
-  if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => parseInt(item.id, 10) === id);
+  if (tasksServer.idIsValid(id)) {
+    const task = tasksServer.find(id);
 
     if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
+      tasksServer.update(task, req.params.title, req.params.description);
+
       response = res.status(200).json({
         message: 'Task updated correctly',
         task
@@ -131,13 +133,10 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
-  const task = {
-    id: getTasksNextID(),
-    title: req.params.title,
-    description: req.params.description,
-  };
-
-  tasksContainer.tasks.push(task);
+  const task = tasksServer.add(
+    req.params.title,
+    req.params.description
+  );
 
   return res.status(201).json({
     message: 'Task created',
@@ -156,15 +155,14 @@ app.post('/task/create/:title/:description', (req, res) => {
  * If the provided id is not a valid number return a status code 400.
  */
 app.delete('/task/delete/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+  const id = tasksServer.parseId(req.params.id);
   let response = null;
 
-  if (!Number.isNaN(id)) {
-    const tasks = tasksContainer.tasks;
-    const taskIndex = tasks.findIndex(item => item.id === id);
+  if (tasksServer.idIsValid(id)) {
+    const taskIndex = tasksServer.findIndex(id);
 
     if (taskIndex !== -1) {
-      tasks.splice(taskIndex, 1);
+      tasksServer.delete(taskIndex);
       response = res.status(200).json({
         message: 'Delete successfully',
       });
