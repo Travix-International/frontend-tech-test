@@ -24,7 +24,7 @@ const ConnectedTodoList = connect(
   }),
   dispatch => ({
     loadTodos: () => {
-      return TaskClient.get().then((json) => {
+      return TaskClient.getAll().then((json) => {
         dispatch(loadTodos(json.tasks));
       }).then(() => {
         dispatch(finishLoadTodos);

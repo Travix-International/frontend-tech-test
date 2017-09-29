@@ -1,7 +1,7 @@
 /* global fetch */
 
 class TaskClient {
-  static get() {
+  static getAll() {
     return fetch('/tasks')
       .then((response) => {
         return response.json();
