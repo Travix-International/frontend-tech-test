@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import TaskClient from '../Utilities/TasksClient';
 import TodoList, { Todo } from './TodoList';
-import TaskDialog from './TaskDialog';
+import TodoDialog from './TodoDialog';
 import NotificationSnackBar from './NotificationSnackBar';
 import AddTodo from './AddTodo';
 import {
@@ -47,7 +47,7 @@ const ConnectedTodoList = connect(
 )(TodoList);
 
 // Task dialog
-const ConnectedTaskDialog = connect(
+const ConnectedTodoDialog = connect(
   state => ({
     selectedTodoIndex: state.selectedTodoIndex,
     selectedTask: state.todos[state.selectedTodoIndex],
@@ -83,7 +83,7 @@ const ConnectedTaskDialog = connect(
       onCancel: () => dispatchProps.dispatch(clearOpenedDetail)
     }
   )
-)(TaskDialog);
+)(TodoDialog);
 
 // Notification Snack bar
 const ConnectedNotificationSnackBar = connect(
@@ -106,7 +106,7 @@ const ConnectedAddTodo = connect(
 export {
   ConnectedAddTodo,
   ConnectedTodoList,
-  ConnectedTaskDialog,
+  ConnectedTodoDialog,
   ConnectedNotificationSnackBar,
   Todo
 };

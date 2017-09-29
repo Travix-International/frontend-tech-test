@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
+import './TodoDialog.scss';
 
-class TaskDialog extends React.Component {
+class TodoDialog extends React.Component {
   constructor() {
     super();
     this.titleFieldValue = '';
@@ -46,7 +47,7 @@ class TaskDialog extends React.Component {
         onRequestClose={() => this.handleCancel()}
         open={open}
       >
-        <DialogTitle>{selectedTask ? 'Modify Task' : 'Add Task'}</DialogTitle>
+        <DialogTitle>{selectedTask ? 'Modify To Do' : 'Add To do'}</DialogTitle>
         <DialogContent>
           <form
             autoComplete="off"
@@ -55,6 +56,7 @@ class TaskDialog extends React.Component {
             onSubmit={(...args) => this.addTodo(...args)}
           >
             <TextField
+              className="todo-form__field"
               defaultValue={this.titleFieldValue}
               label="Title"
               name="title"
@@ -63,6 +65,7 @@ class TaskDialog extends React.Component {
               type="text"
             />
             <TextField
+              className="todo-form__field"
               defaultValue={this.descriptionFieldValue}
               label="Description"
               multiline
@@ -87,7 +90,7 @@ class TaskDialog extends React.Component {
   }
 }
 
-TaskDialog.propTypes = {
+TodoDialog.propTypes = {
   addTodo: PropTypes.func,
   onAccept: PropTypes.func,
   onCancel: PropTypes.func,
@@ -95,4 +98,4 @@ TaskDialog.propTypes = {
   open: PropTypes.bool,
 };
 
-export default TaskDialog;
+export default TodoDialog;

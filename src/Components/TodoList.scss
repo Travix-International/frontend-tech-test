@@ -60,6 +60,14 @@
       text-overflow: ellipsis;
     }
 
+    &__id {
+      display: none;
+    }
+
+    &__button {
+      min-width: 48px;
+    }
+
     &__description {
       flex: 1 1 auto;
     }
