@@ -4,8 +4,8 @@
   "description": "test back - front",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --debug",
+    "test": "webpack --config webpack.app.test.config.js --debug && mocha --require source-map-support/register -u tdd dist/bundle.test.js",
+    "build": "webpack --config webpack.app.config.js --debug",
     "start": "node src/server.js"
   },
   "keywords": [
