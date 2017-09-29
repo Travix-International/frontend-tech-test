@@ -6,6 +6,7 @@ import NotificationSnackBar from './NotificationSnackBar';
 import AddTodo from './AddTodo';
 import {
   loadTodos,
+  finishLoadTodos,
   addTodo,
   updateTodo,
   removeTodo,
@@ -19,15 +20,20 @@ import {
 const ConnectedTodoList = connect(
   state => ({
     todos: state.todos,
+    loading: state.loading,
   }),
   dispatch => ({
     loadTodos: () => {
-      TaskClient.get().then((json) => {
+      return TaskClient.get().then((json) => {
         dispatch(loadTodos(json.tasks));
+      }).then(() => {
+        dispatch(finishLoadTodos);
+      }).catch(() => {
+        dispatch(finishLoadTodos);
       });
     },
     removeTodo: (id, index) => {
-      TaskClient.delete(id).then(() => {
+      return TaskClient.delete(id).then(() => {
         dispatch(removeTodo(
           index
         ));
@@ -91,7 +97,7 @@ const ConnectedNotificationSnackBar = connect(
 
 // Add to do button
 const ConnectedAddTodo = connect(
-  null,
+  state => ({ loading: state.loading }),
   dispatch => ({
     openAddTodo: () => dispatch(openAddDetail),
   })

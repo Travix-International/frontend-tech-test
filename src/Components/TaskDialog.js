@@ -37,7 +37,7 @@ class TaskDialog extends React.Component {
   }
 
   render() {
-    const { open } = this.props;
+    const { open, selectedTask } = this.props;
 
     return (
       <Dialog
@@ -46,7 +46,7 @@ class TaskDialog extends React.Component {
         onRequestClose={() => this.handleCancel()}
         open={open}
       >
-        <DialogTitle>Task</DialogTitle>
+        <DialogTitle>{selectedTask ? 'Modify Task' : 'Add Task'}</DialogTitle>
         <DialogContent>
           <form
             autoComplete="off"

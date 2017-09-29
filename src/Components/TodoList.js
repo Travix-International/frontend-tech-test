@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AutoSizer, List } from 'react-virtualized';
 import IconButton from 'material-ui/IconButton';
+import { CircularProgress } from 'material-ui/Progress';
 import CloseIcon from 'material-ui-icons/Close';
 import EditIcon from 'material-ui-icons/Edit';
 import './TodoList.scss';
@@ -53,9 +54,15 @@ class TodoList extends Component {
   }
 
   render() {
-    const { todos, removeTodo, selectTodoIndex } = this.props;
+    const { todos, loading, removeTodo, selectTodoIndex } = this.props;
+
     return (
       <div className="todo-list">
+        {loading && (
+          <div className="todo-list__loading-wrapper">
+            <CircularProgress mode="indeterminate" />
+          </div>
+        )}
         <AutoSizer>
           {({ width, height }) => (
             <List
@@ -89,6 +96,7 @@ TodoList.propTypes = {
   addTodo: PropTypes.func,
   removeTodo: PropTypes.func,
   selectTodoIndex: PropTypes.func,
+  loading: PropTypes.bool.isRequired,
   todos: PropTypes.array.isRequired
 };
 

@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 const initialState = {
   todos: [],
+  loading: true,
   selectedTodoIndex: null,
   deletedTodoIndex: null,
   todoDetail: null
@@ -12,6 +13,11 @@ const loadTodos = todos => ({
   type: LOAD_TODOS,
   todos
 });
+
+const FINISH_LOAD_TODOS = 'app/FINISH_LOAD_TODOS';
+const finishLoadTodos = {
+  type: FINISH_LOAD_TODOS
+};
 
 const OPEN_ADD_DETAIL = 'app/OPEN_ADD_DIALOG';
 const openAddDetail = {
@@ -85,6 +91,17 @@ const todos = (state = initialState.todos, action) => {
   }
 };
 
+const loading = (state = initialState.loading, action) => {
+  switch (action.type) {
+    case LOAD_TODOS:
+      return true;
+    case FINISH_LOAD_TODOS:
+      return false;
+    default:
+      return state;
+  }
+};
+
 const selectedTodoIndex = (state = initialState.selectedTodoIndex, { type, index }) => {
   switch (type) {
     case SELECT_TODO:
@@ -122,6 +139,7 @@ const todoDetail = (state = initialState.todoDetail, { type }) => {
 
 const reducer = combineReducers({
   todos,
+  loading,
   selectedTodoIndex,
   deletedTodoIndex,
   todoDetail
@@ -136,6 +154,7 @@ export {
   removeTodo,
   clearDeletedTodo,
   loadTodos,
+  finishLoadTodos,
   selectTodoIndex,
   unselectTodoIndex,
   reducer as default,

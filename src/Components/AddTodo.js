@@ -3,20 +3,23 @@ import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import './AddTodo.scss';
 
-const AddTodo = ({ openAddTodo }) => (
+const AddTodo = ({ openAddTodo, loading }) => (
   <div className="add-todo">
-    <Button
-      className="add-todo__button"
-      color="accent"
-      onClick={() => openAddTodo()}
-      raised
-    >
-      Add to do
-    </Button>
+    {!loading && (
+      <Button
+        className="add-todo__button"
+        color="accent"
+        onClick={() => openAddTodo()}
+        raised
+      >
+        Add to do
+      </Button>
+    )}
   </div>
 );
 
 AddTodo.propTypes = {
+  loading: PropTypes.bool,
   openAddTodo: PropTypes.func,
 };
 
