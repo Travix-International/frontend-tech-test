@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskItems should render correctly 1`] = `
+<ul
+  className="task-list"
+>
+  <TaskItem
+    deleteTask={[Function]}
+    description="A description"
+    id={1}
+    title="A title"
+    updateTask={[Function]}
+  />
+</ul>
+`;
