@@ -18,7 +18,6 @@ export class Tasks extends Component {
   }
 
   deleteTask = (payload) => {
-    console.log('deleteTask', payload)
     this.props.deleteTask(payload)
   }
 
