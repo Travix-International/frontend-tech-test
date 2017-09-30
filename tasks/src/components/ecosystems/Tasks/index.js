@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import TaskList from '../TaskList/index'
-import TaskCreator from '../TaskCreator/index'
+import TaskList from '../../organisms/TaskList/index'
+import TaskCreator from '../../organisms/TaskCreator/index'
 
 export default class Tasks extends Component {
   render() {

@@ -1,13 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TaskDeleteButton should render correctly 1`] = `
-<button
-  onClick={[Function]}
->
-  Delete
-</button>
-`;
-
 exports[`TaskSubmitButton should render correctly 1`] = `
 <button
   onClick={[Function]}

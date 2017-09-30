@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import './App.css'
 
-import Tasks from './components/organisms/Tasks/index'
+import Tasks from './components/ecosystems/Tasks/index'
 import StoreConfigurator from './ducks/StoreConfigurator'
 
 const storeConfigurator = new StoreConfigurator()
