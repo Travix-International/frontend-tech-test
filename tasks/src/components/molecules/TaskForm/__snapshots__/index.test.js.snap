@@ -4,12 +4,10 @@ exports[`TaskForm should render correctly 1`] = `
 <li>
   <TaskTitleInput
     handleChange={[Function]}
-    handleSubmit={[Function]}
     value="A title"
   />
   <TaskDescriptionInput
     handleChange={[Function]}
-    handleSubmit={[Function]}
     value="A description"
   />
   <TaskSubmitButton
@@ -25,12 +23,10 @@ exports[`TaskForm should update description 1`] = `
 <li>
   <TaskTitleInput
     handleChange={[Function]}
-    handleSubmit={[Function]}
     value="A title"
   />
   <TaskDescriptionInput
     handleChange={[Function]}
-    handleSubmit={[Function]}
     value="Updated description"
   />
   <TaskSubmitButton
@@ -46,12 +42,10 @@ exports[`TaskForm should update title 1`] = `
 <li>
   <TaskTitleInput
     handleChange={[Function]}
-    handleSubmit={[Function]}
     value="Updated title"
   />
   <TaskDescriptionInput
     handleChange={[Function]}
-    handleSubmit={[Function]}
     value="A description"
   />
   <TaskSubmitButton

@@ -2,7 +2,6 @@
 
 exports[`TaskTitleInput should render correctly 1`] = `
 <input
-  onBlur={[Function]}
   onChange={[Function]}
   value="A title"
 />

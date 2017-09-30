@@ -1,11 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const TaskTitleInput = ({ value, handleSubmit, handleChange }) => {
+const TaskTitleInput = ({ value, handleChange }) => {
   return (
     <input
       value={value}
-      onBlur={handleSubmit}
 			onChange={handleChange}
     />
   )
@@ -13,7 +12,6 @@ const TaskTitleInput = ({ value, handleSubmit, handleChange }) => {
 
 TaskTitleInput.propTypes = {
   value: PropTypes.string,
-  handleSubmit: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired
 }
 

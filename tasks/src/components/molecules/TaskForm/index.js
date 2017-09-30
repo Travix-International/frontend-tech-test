@@ -44,12 +44,10 @@ class TaskForm extends Component {
       <li key={id}>
         <TaskTitleInput
           value={title}
-          handleSubmit={this.updateTask}
           handleChange={this.handleTitleChange}
         />
         <TaskDescriptionInput
           value={description}
-          handleSubmit={this.updateTask}
           handleChange={this.handleDescriptionChange}
         />
         <TaskSubmitButton onClick={this.updateTask} />
@@ -60,11 +58,11 @@ class TaskForm extends Component {
 }
 
 TaskForm.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  id: PropTypes.number,
+  title: PropTypes.string,
+  description: PropTypes.string,
   updateTask: PropTypes.func.isRequired,
-  deleteTask: PropTypes.func.isRequired
+  deleteTask: PropTypes.func
 }
 
 export default TaskForm

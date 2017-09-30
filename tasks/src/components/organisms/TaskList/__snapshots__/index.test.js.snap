@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskList should render correctly 1`] = `
+<TaskItems
+  deleteTask={[Function]}
+  items={
+    Array [
+      Object {
+        "description": "A description",
+        "id": 1,
+        "title": "A title",
+      },
+    ]
+  }
+  updateTask={[Function]}
+/>
+`;
