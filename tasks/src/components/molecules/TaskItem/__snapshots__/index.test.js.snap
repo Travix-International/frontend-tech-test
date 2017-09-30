@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskItem should render a task item 1`] = `
+<TaskContent
+  deleteTask={[Function]}
+  description="A description"
+  enableEdit={[Function]}
+  id={1}
+  title="A title"
+  updateTask={[Function]}
+/>
+`;
+
+exports[`TaskItem when edition mode is disabled should render a task content 1`] = `
+<TaskContent
+  deleteTask={[Function]}
+  description="A description"
+  enableEdit={[Function]}
+  id={1}
+  title="A title"
+  updateTask={[Function]}
+/>
+`;
+
+exports[`TaskItem when edition mode is enabled should render a task form 1`] = `
+<TaskForm
+  deleteTask={[Function]}
+  description="A description"
+  id={1}
+  title="A title"
+  updateTask={[Function]}
+/>
+`;
+
+exports[`TaskItem when update is called should disable edition mode and render the task content 1`] = `
+<TaskContent
+  deleteTask={[Function]}
+  description="A description"
+  enableEdit={[Function]}
+  id={1}
+  title="A title"
+  updateTask={[Function]}
+/>
+`;
