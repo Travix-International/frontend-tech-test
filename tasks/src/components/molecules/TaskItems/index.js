@@ -15,7 +15,7 @@ const TaskItems = ({ items, updateTask, deleteTask }) => {
               title={task.title}
               description={task.description}
               updateTask={updateTask}
-              deleteTask={deleteTask}
+              deleteTask={() => { deleteTask({ id: task.id }) }}
             />
           )
         })

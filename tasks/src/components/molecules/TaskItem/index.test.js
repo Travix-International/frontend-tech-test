@@ -4,6 +4,7 @@ import TaskItem from './index'
 
 import TaskTitle from '../../atoms/TaskTitle/index'
 import TaskDescription from '../../atoms/TaskDescription/index'
+import TaskDeleteButton from '../../atoms/TaskDeleteButton/index'
 
 describe('TaskItem', () => {
   it('should render correctly', () => {
@@ -30,7 +31,8 @@ describe('TaskItem', () => {
     expect(result.type).toEqual('li')
     expect(result.props.children).toEqual([
       <TaskTitle>A title</TaskTitle>,
-      <TaskDescription>A description</TaskDescription>
+      <TaskDescription>A description</TaskDescription>,
+      <TaskDeleteButton onClick={deleteTask}/>
     ])
   })
 })

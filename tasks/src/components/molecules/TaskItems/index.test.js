@@ -63,7 +63,7 @@ describe('TaskItems', () => {
     const result = renderer.getRenderOutput()
     const taskItem = result.props.children[0]
 
-    expect(taskItem.props.deleteTask(1))
-    expect(deleteTask).toBeCalledWith(1)
+    expect(taskItem.props.deleteTask())
+    expect(deleteTask).toBeCalledWith({ id: 1 })
   })
 })
