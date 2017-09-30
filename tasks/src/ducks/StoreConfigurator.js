@@ -8,7 +8,10 @@ export default class StoreConfigurator {
 
   configure(initialState) {
     const rootReducer = this._buildReducer()
-    return this.createStore(rootReducer, initialState)
+    return this.createStore(
+      rootReducer,
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
   }
 
   _buildReducer() {

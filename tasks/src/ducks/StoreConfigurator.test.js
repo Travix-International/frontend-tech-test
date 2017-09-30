@@ -4,7 +4,7 @@ import StoreConfigurator from './StoreConfigurator'
 
 describe('StoreConfigurator', () => {
   it('should configure redux store', () => {
-    const initialState = null
+    const initialState = undefined
     const createStore = jest.fn()
     const combineReducers = jest.fn().mockReturnValue('combinedReducer')
     const configurator = new StoreConfigurator(
