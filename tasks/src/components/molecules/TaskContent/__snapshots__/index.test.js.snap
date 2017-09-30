@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskContent should render a task content 1`] = `
+<li
+  onDoubleClick={[Function]}
+>
+  <TaskTitle>
+    A title
+  </TaskTitle>
+  <TaskDescription>
+    A description
+  </TaskDescription>
+  <TaskDeleteButton
+    onClick={[Function]}
+  />
+</li>
+`;
