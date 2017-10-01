@@ -1,0 +1,10 @@
+$gradient-base-color: #36d1dc;
+$gradient-end-color: #5b86e5;
+$gradient: linear-gradient(to right, $gradient-base-color, $gradient-end-color);
+
+body {
+  background: $gradient;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
