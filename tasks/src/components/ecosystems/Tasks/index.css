@@ -1,0 +1,11 @@
+.tasks {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center; }
+
+.tasks-title {
+  color: #fff;
+  font-size: 42px;
+  font-weight: 200; }

@@ -1,8 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tasks should render correctly 1`] = `
-<div>
-  <Connect(TaskList) />
+<div
+  className="tasks"
+>
+  <h1
+    className="tasks-title"
+  >
+    Tasks
+  </h1>
   <Connect(TaskCreator) />
+  <Connect(TaskList) />
 </div>
 `;
