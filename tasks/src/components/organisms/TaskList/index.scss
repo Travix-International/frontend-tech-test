@@ -1,0 +1,17 @@
+@import 'src/styles/base/colors.scss';
+@import 'src/styles/base/medias.scss';
+
+.task-list {
+  background-color: $white;
+  flex: 1;
+
+  @media #{$phone} {
+    border-radius: 0;
+    width: 100%;
+  }
+
+  @media #{$tablet} {
+    border-radius: 5px;
+    width: 50%;
+  }
+}

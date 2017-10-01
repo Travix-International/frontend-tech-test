@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import './index.css'
 
 import { createTask } from '../../../ducks/modules/tasks'
 
@@ -22,11 +23,13 @@ export class TaskCreator extends Component {
 
   render() {
     return (
-      <TaskForm
-        title={this.state.title}
-        description={this.state.description}
-        updateTask={this.createTask}
-      />
+      <div className='task-creator'>
+        <TaskForm
+          title={this.state.title}
+          description={this.state.description}
+          updateTask={this.createTask}
+        />
+      </div>
     )
   }
 }

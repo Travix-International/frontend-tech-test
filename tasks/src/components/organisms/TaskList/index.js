@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import './index.css'
 
 import {
   fetchTasks, updateTask, deleteTask
@@ -23,11 +24,13 @@ export class TaskList extends Component {
 
   render() {
     return (
-      <TaskItems
-        items={this.props.items}
-        updateTask={this.updateTask}
-        deleteTask={this.deleteTask}
-      />
+      <div className='task-list'>
+        <TaskItems
+          items={this.props.items}
+          updateTask={this.updateTask}
+          deleteTask={this.deleteTask}
+        />
+      </div>
     )
   }
 }
