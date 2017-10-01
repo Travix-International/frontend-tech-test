@@ -2,7 +2,7 @@
 
 exports[`TaskItems should render correctly 1`] = `
 <ul
-  className="task-list"
+  className="task-items"
 >
   <TaskItem
     deleteTask={[Function]}

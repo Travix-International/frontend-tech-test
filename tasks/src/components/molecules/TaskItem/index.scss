@@ -1,0 +1,14 @@
+@import 'src/styles/base/colors.scss';
+@import 'src/styles/base/container.scss';
+
+.task-item {
+  border-top: 1px solid lighten($black, 50%);
+  display: flex;
+  list-style-type: none;
+  padding: $padding-small;
+  position: relative;
+
+  &:first-child {
+    border-top: 0;
+  }
+}

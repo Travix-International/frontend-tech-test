@@ -1,0 +1,11 @@
+.task-content-inputs {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  padding-left: 5px; }
+
+.task-content-actions {
+  align-items: center;
+  display: flex;
+  flex-direction: row; }

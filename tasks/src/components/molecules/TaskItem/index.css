@@ -1,0 +1,8 @@
+.task-item {
+  border-top: 1px solid gray;
+  display: flex;
+  list-style-type: none;
+  padding: 5px;
+  position: relative; }
+  .task-item:first-child {
+    border-top: 0; }

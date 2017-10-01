@@ -1,0 +1,15 @@
+@import 'src/styles/base/container.scss';
+
+.task-form-inputs {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  padding-left: $padding-small;
+}
+
+.task-form-actions {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}

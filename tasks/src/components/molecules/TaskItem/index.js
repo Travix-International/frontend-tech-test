@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import './index.css'
 
 import TaskContent from '../TaskContent/index'
 import TaskForm from '../TaskForm/index'
@@ -28,17 +29,25 @@ class TaskItem extends Component {
   render() {
     if (this.state.editionMode) {
       return (
-        <TaskForm
-          {...this.props}
-          updateTask={this.updateTask}
-        />
+        <li
+          key={this.props.id}
+          className='task-item'
+        >
+          <TaskForm
+            {...this.props}
+            updateTask={this.updateTask}
+          />
+        </li>
       )
     }
     return (
-      <TaskContent
-        {...this.props}
-        enableEdit={this.enableEditionMode}
-      />
+      <li
+        key={this.props.id}
+        className='task-item'
+        onDoubleClick={this.enableEditionMode}
+      >
+        <TaskContent {...this.props}/>
+      </li>
     )
   }
 }

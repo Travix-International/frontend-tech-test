@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import './index.css'
 
 import TaskItem from '../../molecules/TaskItem/index'
 
 const TaskItems = ({ items, updateTask, deleteTask }) => {
   return (
-    <ul className='task-list'>
+    <ul className='task-items'>
       {
         items.map((task) => {
           return (

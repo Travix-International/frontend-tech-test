@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import './index.css'
 
 import TaskTitleInput from '../../atoms/TaskTitleInput/index'
 import TaskDescriptionInput from '../../atoms/TaskDescriptionInput/index'
-import TaskDeleteButton from '../../atoms/TaskDeleteButton/index'
 import TaskSubmitButton from '../../atoms/TaskSubmitButton/index'
 
 class TaskForm extends Component {
@@ -39,9 +39,8 @@ class TaskForm extends Component {
 
   render() {
     const { title, description } = this.state
-    const { id, deleteTask } = this.props
-    return (
-      <li key={id}>
+    return [
+      <div key='taskFormInputs' className='task-form-inputs'>
         <TaskTitleInput
           value={title}
           handleChange={this.handleTitleChange}
@@ -50,10 +49,11 @@ class TaskForm extends Component {
           value={description}
           handleChange={this.handleDescriptionChange}
         />
+      </div>,
+      <div key='taskFormActions' className='task-form-actions'>
         <TaskSubmitButton onClick={this.updateTask} />
-        <TaskDeleteButton onClick={deleteTask} />
-      </li>
-    )
+      </div>
+    ]
   }
 }
 
@@ -61,8 +61,7 @@ TaskForm.propTypes = {
   id: PropTypes.number,
   title: PropTypes.string,
   description: PropTypes.string,
-  updateTask: PropTypes.func.isRequired,
-  deleteTask: PropTypes.func
+  updateTask: PropTypes.func.isRequired
 }
 
 export default TaskForm

@@ -1,25 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import './index.css'
 
 import TaskTitle from '../../atoms/TaskTitle/index'
 import TaskDescription from '../../atoms/TaskDescription/index'
 import TaskDeleteButton from '../../atoms/TaskDeleteButton/index'
 
-const TaskContent = ({ id, title, description, enableEdit, deleteTask }) => {
-  return (
-    <li key={id} onDoubleClick={enableEdit}>
-      <TaskTitle>{title}</TaskTitle>
-      <TaskDescription>{description}</TaskDescription>
+const TaskContent = ({ title, description, deleteTask }) => {
+  return [
+    <div key='taskContentInputs' className='task-content-inputs'>
+      <TaskTitle>
+        {title}
+      </TaskTitle>
+      <TaskDescription>
+        {description}
+      </TaskDescription>
+    </div>,
+    <div key='taskContentActions' className='task-content-actions'>
       <TaskDeleteButton onClick={deleteTask} />
-    </li>
-  )
+    </div>
+  ]
 }
 
 TaskContent.propTypes = {
-  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  enableEdit: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired
 }
 
