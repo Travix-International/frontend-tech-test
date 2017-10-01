@@ -2,8 +2,9 @@
 
 exports[`TaskSubmitButton should render correctly 1`] = `
 <button
+  className="task-submit-button"
   onClick={[Function]}
 >
-  Submit
+  Save
 </button>
 `;

@@ -1,0 +1,10 @@
+@import 'src/styles/base/colors.scss';
+@import 'src/styles/base/fonts.scss';
+@import 'src/styles/base/input.scss';
+
+.task-description-input {
+  @extend .input;
+  color: lighten($black, 33%);
+  font-size: $font-small;
+  font-weight: $font-normal;
+}

@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TaskTitle should render correctly 1`] = `
-<h2>
+<h2
+  className="task-title"
+>
   Something...
 </h2>
 `;

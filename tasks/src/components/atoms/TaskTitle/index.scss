@@ -1,0 +1,14 @@
+@import 'src/styles/base/colors.scss';
+@import 'src/styles/base/fonts.scss';
+
+.task-title {
+  @extend .ellipsis;
+
+  color: $black;
+  flex: 1;
+  font-size: $font-medium;
+  font-weight: $font-bold;
+  line-height: 1.3;
+  margin: 0;
+  padding: 0;
+}

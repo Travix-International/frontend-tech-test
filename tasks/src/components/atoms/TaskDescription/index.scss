@@ -1,0 +1,12 @@
+@import 'src/styles/base/colors.scss';
+@import 'src/styles/base/fonts.scss';
+
+.task-description {
+  @extend .ellipsis;
+
+  color: lighten($black, 33%);
+  flex: 1;
+  font-size: $font-small;
+  font-weight: $font-normal;
+  line-height: 1.3;
+}

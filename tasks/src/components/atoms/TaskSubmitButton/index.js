@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import './index.css'
 
 const TaskSubmitButton = ({ onClick }) => {
   return (
-    <button onClick={onClick}>
-      Submit
+    <button className='task-submit-button' onClick={onClick}>
+      Save
     </button>
   )
 }

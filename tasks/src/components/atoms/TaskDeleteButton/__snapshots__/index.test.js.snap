@@ -2,8 +2,9 @@
 
 exports[`TaskDeleteButton should render correctly 1`] = `
 <button
+  className="task-delete-button"
   onClick={[Function]}
 >
-  Delete
+  x
 </button>
 `;
