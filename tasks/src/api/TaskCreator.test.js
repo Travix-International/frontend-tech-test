@@ -1,7 +1,7 @@
 import TaskCreator from './TaskCreator'
 
 describe('TaskCreator', () => {
-  it('should fetch tasks', (done) => {
+  it('should create task', (done) => {
     const response = {
       json: () => {
         return Promise.resolve(true)

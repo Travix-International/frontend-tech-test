@@ -146,18 +146,28 @@ describe('Tasks Ducks', () => {
         })
     })
 
-    it('should build a TASKS_UPDATE_ITEM action', () => {
+    it('should build a TASKS_UPDATE_ITEM action', (done) => {
       const payload = {
         id: 1,
         title: 'A title',
         description: 'A description'
       }
-      const action = updateTask(payload)
 
-      expect(action).toEqual({
-        type: 'TASKS_UPDATE_ITEM',
-        payload: payload
-      })
+      const store = mockStore({ tasks: {} })
+      class Updater {
+        update(payload) {
+          return Promise.resolve(true)
+        }
+      }
+
+      return store.dispatch(updateTask(payload, Updater))
+        .then(() => {
+          expect(store.getActions()).toEqual([{
+            type: 'TASKS_UPDATE_ITEM',
+            payload: payload
+          }])
+          done()
+        })
     })
 
     it('should build a TASKS_CREATE_ITEM action', (done) => {
@@ -183,16 +193,26 @@ describe('Tasks Ducks', () => {
         })
     })
 
-    it('should build a TASKS_DELETE_ITEM action', () => {
+    it('should build a TASKS_DELETE_ITEM action', (done) => {
       const payload = {
         id: 1
       }
-      const action = deleteTask(payload)
 
-      expect(action).toEqual({
-        type: 'TASKS_DELETE_ITEM',
-        payload: payload
-      })
+      const store = mockStore({ tasks: {} })
+      class Deleter {
+        delete(payload) {
+          return Promise.resolve(true)
+        }
+      }
+
+      return store.dispatch(deleteTask(payload, Deleter))
+        .then(() => {
+          expect(store.getActions()).toEqual([{
+            type: 'TASKS_DELETE_ITEM',
+            payload: payload
+          }])
+          done()
+        })
     })
   })
 })

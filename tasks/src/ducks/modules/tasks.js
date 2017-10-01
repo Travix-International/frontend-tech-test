@@ -1,5 +1,7 @@
 import TasksFetcher from '../../api/TasksFetcher'
 import TaskCreator from '../../api/TaskCreator'
+import TaskUpdater from '../../api/TaskUpdater'
+import TaskDeleter from '../../api/TaskDeleter'
 
 // Constants
 
@@ -22,17 +24,27 @@ export const fetchTasks = (Fetcher = TasksFetcher) => {
   }
 }
 
-export const updateTask = (payload) => {
-  return {
-    type: TASKS_UPDATE_ITEM,
-    payload: payload
+export const updateTask = (payload, Updater = TaskUpdater) => {
+  return (dispatch) => {
+    const updater = new Updater()
+    return updater.update(payload).then(() => {
+      return dispatch({
+        type: TASKS_UPDATE_ITEM,
+        payload: payload
+      })
+    })
   }
 }
 
-export const deleteTask = (payload) => {
-  return {
-    type: TASKS_DELETE_ITEM,
-    payload: payload
+export const deleteTask = (payload, Deleter = TaskDeleter) => {
+  return (dispatch) => {
+    const deleter = new Deleter()
+    return deleter.delete(payload).then(() => {
+      return dispatch({
+        type: TASKS_DELETE_ITEM,
+        payload: payload
+      })
+    })
   }
 }
 

@@ -1,4 +1,4 @@
-export default class TasksCreator {
+export default class TaskCreator {
   constructor(fetchApi) {
     this.url = 'http://localhost:9001/task'
     this.fetchApi = fetchApi || require('isomorphic-fetch')
