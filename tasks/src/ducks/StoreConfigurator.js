@@ -1,5 +1,4 @@
 import tasks from './modules/tasks'
-import thunk from 'redux-thunk'
 
 export default class StoreConfigurator {
   constructor(createStore, combineReducers, applyMiddleware, thunk) {

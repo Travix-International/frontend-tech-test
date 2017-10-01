@@ -1,3 +1,5 @@
+import TasksFetcher from '../../api/TasksFetcher'
+
 // Constants
 
 const TASKS_FETCH_ITEMS = 'TASKS_FETCH_ITEMS'
@@ -7,14 +9,15 @@ const TASKS_CREATE_ITEM = 'TASKS_CREATE_ITEM'
 
 // Actions Creator
 
-export const fetchTasks = () => {
-  return {
-    type: TASKS_FETCH_ITEMS,
-    payload: [
-      { id: 1, title: 'Something...', description: 'Description 1'},
-      { id: 2, title: 'Other...', description: 'Description 2' },
-      { id: 3, title: 'Another...', description: 'Description 3' }
-    ]
+export const fetchTasks = (Fetcher = TasksFetcher) => {
+  return (dispatch) => {
+    const fetcher = new Fetcher()
+    return fetcher.fetch().then((result) => {
+      return dispatch({
+        type: TASKS_FETCH_ITEMS,
+        payload: result.tasks
+      })
+    })
   }
 }
 

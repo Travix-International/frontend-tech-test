@@ -2,6 +2,11 @@ import tasksReducer, {
   fetchTasks, updateTask, createTask, deleteTask, initialState
 } from './tasks'
 
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+const middlewares = [thunk]
+const mockStore = configureMockStore(middlewares)
+
 describe('Tasks Ducks', () => {
   describe('Reducer', () => {
     it('should return initial state', () => {
@@ -114,17 +119,32 @@ describe('Tasks Ducks', () => {
   })
 
   describe('Action Creators', () => {
-    it('should build a TASKS_FETCH_ITEMS action', () => {
-      const action = fetchTasks()
+    it('should build a TASKS_FETCH_ITEMS action', (done) => {
+      const store = mockStore({ tasks: {} })
+      class Fetcher {
+        fetch() {
+          return Promise.resolve({
+            tasks: [
+              { id: 1, title: 'Something...', description: 'Description 1'},
+              { id: 2, title: 'Other...', description: 'Description 2' },
+              { id: 3, title: 'Another...', description: 'Description 3' }
+            ]
+          })
+        }
+      }
 
-      expect(action).toEqual({
-        type: 'TASKS_FETCH_ITEMS',
-        payload: [
-          { id: 1, title: 'Something...', description: 'Description 1'},
-          { id: 2, title: 'Other...', description: 'Description 2' },
-          { id: 3, title: 'Another...', description: 'Description 3' }
-        ]
-      })
+      return store.dispatch(fetchTasks(Fetcher))
+        .then(() => {
+          expect(store.getActions()).toEqual([{
+            type: 'TASKS_FETCH_ITEMS',
+            payload: [
+              { id: 1, title: 'Something...', description: 'Description 1'},
+              { id: 2, title: 'Other...', description: 'Description 2' },
+              { id: 3, title: 'Another...', description: 'Description 3' }
+            ]
+          }])
+          done()
+        })
     })
 
     it('should build a TASKS_UPDATE_ITEM action', () => {
