@@ -1,4 +1,5 @@
 import TasksFetcher from '../../api/TasksFetcher'
+import TaskCreator from '../../api/TaskCreator'
 
 // Constants
 
@@ -35,10 +36,15 @@ export const deleteTask = (payload) => {
   }
 }
 
-export const createTask = (payload) => {
-  return {
-    type: TASKS_CREATE_ITEM,
-    payload: payload
+export const createTask = (payload, Creator = TaskCreator) => {
+  return (dispatch) => {
+    const creator = new Creator()
+    return creator.create(payload).then(() => {
+      return dispatch({
+        type: TASKS_CREATE_ITEM,
+        payload: payload
+      })
+    })
   }
 }
 
@@ -101,7 +107,10 @@ export default (state = initialState, action) => {
         ...state,
         items: [
           ...state.items,
-          action.payload
+          {
+            ...action.payload,
+            id: state.items.length
+          }
         ]
       }
     default:

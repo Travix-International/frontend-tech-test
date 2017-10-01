@@ -65,15 +65,14 @@ describe('Tasks Ducks', () => {
 
     it('should create a task and append on state items', () => {
       const payload = {
-        id: 4,
         title: 'New task...',
         description: 'Description 4'
       }
       const initialState = {
         items: [
-          { id: 1, title: 'Something...', description: 'Description 1'},
-          { id: 2, title: 'Other...', description: 'Description 2' },
-          { id: 3, title: 'Another...', description: 'Description 3' }
+          { id: 0, title: 'Something...', description: 'Description 1'},
+          { id: 1, title: 'Other...', description: 'Description 2' },
+          { id: 2, title: 'Another...', description: 'Description 3' }
         ]
       }
       const action = {
@@ -84,10 +83,10 @@ describe('Tasks Ducks', () => {
 
       expect(state).toEqual({
         items: [
-          { id: 1, title: 'Something...', description: 'Description 1'},
-          { id: 2, title: 'Other...', description: 'Description 2' },
-          { id: 3, title: 'Another...', description: 'Description 3' },
-          { id: 4, title: 'New task...', description: 'Description 4' }
+          { id: 0, title: 'Something...', description: 'Description 1'},
+          { id: 1, title: 'Other...', description: 'Description 2' },
+          { id: 2, title: 'Another...', description: 'Description 3' },
+          { id: 3, title: 'New task...', description: 'Description 4' }
         ]
       })
     })
@@ -161,18 +160,27 @@ describe('Tasks Ducks', () => {
       })
     })
 
-    it('should build a TASKS_CREATE_ITEM action', () => {
+    it('should build a TASKS_CREATE_ITEM action', (done) => {
       const payload = {
-        id: 1,
         title: 'New task',
         description: 'New task description'
       }
-      const action = createTask(payload)
 
-      expect(action).toEqual({
-        type: 'TASKS_CREATE_ITEM',
-        payload: payload
-      })
+      const store = mockStore({ tasks: {} })
+      class Creator {
+        create(payload) {
+          return Promise.resolve(true)
+        }
+      }
+
+      return store.dispatch(createTask(payload, Creator))
+        .then(() => {
+          expect(store.getActions()).toEqual([{
+            type: 'TASKS_CREATE_ITEM',
+            payload: payload
+          }])
+          done()
+        })
     })
 
     it('should build a TASKS_DELETE_ITEM action', () => {
