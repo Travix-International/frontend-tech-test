@@ -1,0 +1,13 @@
+$font-small: 20px;
+$font-medium: 25px;
+$font-big: 42px;
+
+$font-bold: 700;
+$font-normal: 500;
+$font-thin: 200;
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,11 @@
+.ellipsis, .input {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.input {
+  background-color: transparent;
+  border: 0;
+  flex: 1;
+  line-height: 1.3;
+  padding: 0; }
