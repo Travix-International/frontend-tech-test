@@ -51,10 +51,13 @@ export const deleteTask = (payload, Deleter = TaskDeleter) => {
 export const createTask = (payload, Creator = TaskCreator) => {
   return (dispatch) => {
     const creator = new Creator()
-    return creator.create(payload).then(() => {
+    return creator.create(payload).then((result) => {
       return dispatch({
         type: TASKS_CREATE_ITEM,
-        payload: payload
+        payload: {
+          ...payload,
+          id: result.id
+        }
       })
     })
   }

@@ -1,6 +1,6 @@
 # Travix test
 
-Travix Front-End Tech Interview Test 
+Travix Front-End Tech Interview Test
 
 # Introduction
 

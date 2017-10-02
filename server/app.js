@@ -2,9 +2,11 @@
 
 const app = require('express')();
 const cors = require('cors');
-const tasksContainer = require('./tasks.json');
+const tasksContainer = require('../tasks.json');
 
 app.use(cors());
+
+let nextId = 0;
 
 /**
  * GET /tasks
@@ -30,9 +32,8 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
-
-    if (task !== null) {
+    const task = tasksContainer.tasks.find(item => item.id === id);
+    if (task !== null && task !== undefined) {
       return res.status(200).json({
         task,
       });
@@ -66,10 +67,15 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    if (task !== null && task !== undefined) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(200).json({
+        id: id,
+        title: task.title,
+        description: task.description
+      });
+      return res.end();
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -92,8 +98,10 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
+  const id = nextId;
+  nextId++;
   const task = {
-    id: tasksContainer.tasks.length,
+    id: id,
     title: req.params.title,
     description: req.params.description,
   };
@@ -102,6 +110,7 @@ app.post('/task/create/:title/:description', (req, res) => {
 
   return res.status(201).json({
     message: 'Resource created',
+    id: id
   });
 });
 
@@ -117,18 +126,17 @@ app.post('/task/create/:title/:description', (req, res) => {
  */
 app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
-
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    if (task !== null && task !== undefined) {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
       });
     }
@@ -139,6 +147,4 @@ app.delete('/task/delete/:id', (req, res) => {
   }
 });
 
-app.listen(9001, () => {
-  process.stdout.write('the server is available on http://localhost:9001/\n');
-});
+module.exports = app;
