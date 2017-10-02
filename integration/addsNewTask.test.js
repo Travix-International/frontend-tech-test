@@ -1,6 +1,6 @@
 'use strict'
 
-jest.setTimeout(10000)
+jest.setTimeout(30000)
 
 const Nightmare = require('nightmare')
 

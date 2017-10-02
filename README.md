@@ -22,17 +22,37 @@ Fork the repository into your account. Once your code is ready open a pull-reque
 
 # Requirements
 
-* React 14+
-* Redux or Flux or Frint or whateverelse with a one-way data flow
-* SASS or LESS
-* Must be responsive
+* :white_check_mark: React 14+
+* :white_check_mark: Redux or Flux or Frint or whateverelse with a one-way data flow
+* :white_check_mark: SASS or LESS
+* :white_check_mark: Must be responsive
 * We have big tasks files for testing the application (very huge)
 
 # Bonus
 
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us !
+* :white_check_mark: unit-tests for the UI
+* :white_check_mark: integration-test (one (or more) just in order to show that you know what is it (: )
+* :white_check_mark: evolution - unit-tests for the server
+* :red_circle: dynamic-ui (web-sockets...?)
+* :red_circle: using the `made in Travix` technologies
+* :pray: ... Impress us !
+
+# Running
+
+```shell
+npm run install:all
+npm start
+```
+
+# Running unit tests
+
+```shell
+npm run test:unit
+```
+
+# Running integration tests
+
+```shell
+npm start
+npm run test:integration
+```

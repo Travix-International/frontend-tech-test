@@ -4,8 +4,12 @@
   "description": "test back - front",
   "main": "server/server.js",
   "scripts": {
+    "install:all": "npm-run-all -p install:server install:client",
+    "install:client": "npm install --prefix ./client",
+    "install:server": "npm install",
     "test:server": "./node_modules/.bin/jest server --watch",
     "test:client": "npm test --prefix ./client",
+    "test:unit": "npm-run-all -p test:server test:client",
     "test:integration": "./node_modules/.bin/jest integration",
     "start:server": "node server/server.js",
     "start:client": "npm start --prefix ./client",
