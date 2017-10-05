@@ -40,6 +40,7 @@ Fork the repository into your account. Once your code is ready open a pull-reque
 # Running
 
 ```shell
+npm i
 npm run install:all
 npm start
 ```
