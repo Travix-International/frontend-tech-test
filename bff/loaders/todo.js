@@ -17,7 +17,7 @@ const http = (path, method = "GET", body) => {
   }
 
   return fetch(`${BASE_URL}/${path}`, options)
-    .then(res => console.log("cbvncvbncvbn", res) || res.status !== 204 ? res.json() : null);
+    .then(res => res.status !== 204 ? res.json() : null);
 };
 
 const getTodos = () => http("task"),
