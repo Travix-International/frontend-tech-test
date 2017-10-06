@@ -2,6 +2,8 @@
 
 Travix Front-End Tech Interview Test
 
+![Tasks Preview](https://imgur.com/r09sKgj.png)
+
 # Introduction
 
 The aim of the test is to develop a mini-application for managing TODO tasks.
@@ -22,19 +24,19 @@ Fork the repository into your account. Once your code is ready open a pull-reque
 
 # Requirements
 
-* :white_check_mark: React 14+
-* :white_check_mark: Redux or Flux or Frint or whateverelse with a one-way data flow
-* :white_check_mark: SASS or LESS
-* :white_check_mark: Must be responsive
-* We have big tasks files for testing the application (very huge)
+* :sunny: React 14+
+* :sunny: Redux or Flux or Frint or whateverelse with a one-way data flow
+* :sunny: SASS or LESS
+* :sunny: Must be responsive
+* :sunny: We have big tasks files for testing the application (very huge (I have tested with a thousand items))
 
 # Bonus
 
-* :white_check_mark: unit-tests for the UI
-* :white_check_mark: integration-test (one (or more) just in order to show that you know what is it (: )
-* :white_check_mark: evolution - unit-tests for the server
-* :red_circle: dynamic-ui (web-sockets...?)
-* :red_circle: using the `made in Travix` technologies
+* :sunny: unit-tests for the UI
+* :sunny: integration-test (one (or more) just in order to show that you know what is it (: )
+* :sunny: evolution - unit-tests for the server
+* :cloud: dynamic-ui (web-sockets...?)
+* :cloud: using the `made in Travix` technologies
 * :pray: ... Impress us !
 
 # Running
