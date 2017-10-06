@@ -4,6 +4,7 @@
 
 .task-description-input {
   @extend .input;
+  
   color: lighten($black, 33%);
   font-size: $font-small;
   font-weight: $font-normal;

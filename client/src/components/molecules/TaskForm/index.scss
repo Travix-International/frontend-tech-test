@@ -1,6 +1,9 @@
+@import 'src/styles/base/colors.scss';
 @import 'src/styles/base/container.scss';
 
 .task-form-inputs {
+  background: $white;
+  border-radius: 5px;
   display: flex;
   flex: 1;
   flex-direction: column;

@@ -19,6 +19,9 @@ export class TaskCreator extends Component {
 
   createTask = (payload) => {
     this.props.createTask(payload)
+    this.setState(() => {
+      return { title: '', description: '' }
+    })
   }
 
   render() {

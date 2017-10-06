@@ -1,7 +1,9 @@
 @import 'src/styles/base/colors.scss';
 @import 'src/styles/base/container.scss';
+@import 'src/styles/base/medias.scss';
 
 .task-item {
+  background-color: $white;
   border-bottom: 1px solid lighten($black, 50%);
   display: flex;
   flex: 1;
@@ -12,5 +14,10 @@
 
   &:first-child {
     border-bottom: 0;
+    border-radius: 0 0 5px 5px;
+
+    @media #{$phone} {
+      border-radius: 0;
+    }
   }
 }

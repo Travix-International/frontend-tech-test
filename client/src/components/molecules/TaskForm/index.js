@@ -9,27 +9,51 @@ import TaskSubmitButton from '../../atoms/TaskSubmitButton/index'
 class TaskForm extends Component {
   constructor(props) {
     super(props)
-    this.state = {
+    this.state = this.mapPropsToState(props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(() => {
+      return this.mapPropsToState(nextProps)
+    })
+  }
+
+  mapPropsToState(props) {
+    return {
       title: props.title,
-      description: props.description
+      description: props.description,
+      valid: this.isValid(props.title, props.description)
     }
+  }
+
+  isValid(title, description) {
+    return title && title.length && description && description.length
   }
 
   handleTitleChange = (event) => {
     const title = event.target.value
     this.setState(() => {
-      return { title: title }
+      return {
+        title: title,
+        valid: this.isValid(title, this.state.description)
+      }
     })
   }
 
   handleDescriptionChange = (event) => {
     const description = event.target.value
     this.setState(() => {
-      return { description: description }
+      return {
+        description: description,
+        valid: this.isValid(this.state.title, description)
+      }
     })
   }
 
   updateTask = () => {
+    if (!this.state.valid) {
+      return;
+    }
     this.props.updateTask({
       id: this.props.id,
       title: this.state.title,
@@ -38,7 +62,7 @@ class TaskForm extends Component {
   }
 
   render() {
-    const { title, description } = this.state
+    const { title, description, valid } = this.state
     return [
       <div key='taskFormInputs' className='task-form-inputs'>
         <TaskTitleInput
@@ -53,7 +77,7 @@ class TaskForm extends Component {
         />
       </div>,
       <div key='taskFormActions' className='task-form-actions'>
-        <TaskSubmitButton onClick={this.updateTask} />
+        <TaskSubmitButton onClick={this.updateTask} disabled={!valid} />
       </div>
     ]
   }

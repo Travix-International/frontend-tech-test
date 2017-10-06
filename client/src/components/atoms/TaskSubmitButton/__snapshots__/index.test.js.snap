@@ -1,8 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TaskSubmitButton should render correctly (disabled button) 1`] = `
+<button
+  className="task-submit-button"
+  disabled="true"
+  onClick={[Function]}
+>
+  Save
+</button>
+`;
+
 exports[`TaskSubmitButton should render correctly 1`] = `
 <button
   className="task-submit-button"
+  disabled={null}
   onClick={[Function]}
 >
   Save

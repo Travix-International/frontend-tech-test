@@ -6,7 +6,15 @@ describe('TaskSubmitButton', () => {
   it('should render correctly', () => {
     const onClick = jest.fn()
     const tree = renderer.create(
-      <TaskSubmitButton onClick={onClick} />
+      <TaskSubmitButton onClick={onClick} disabled={false} />
+    ).toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+
+  it('should render correctly (disabled button)', () => {
+    const onClick = jest.fn()
+    const tree = renderer.create(
+      <TaskSubmitButton onClick={onClick} disabled={true} />
     ).toJSON()
     expect(tree).toMatchSnapshot()
   })
