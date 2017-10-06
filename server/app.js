@@ -130,8 +130,9 @@ app.delete('/task/delete/:id', (req, res) => {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null && task !== undefined) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
+      tasksContainer.tasks = tasksContainer.tasks.filter((item) => {
+        return item.id !== task.id
+      });
       return res.status(200).json({
         message: 'Updated successfully',
       });
