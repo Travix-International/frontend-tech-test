@@ -8,3 +8,24 @@ body {
   margin: 0;
   padding: 0;
 }
+
+// Reset
+
+button {
+  appearance: none;
+  background: none;
+  border: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  font-smoothing: antialiased;
+  font-weight: inherit;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+input {
+  outline: none;
+}
