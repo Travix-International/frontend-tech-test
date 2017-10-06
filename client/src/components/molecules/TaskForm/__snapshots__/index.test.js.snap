@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskForm should render correctly 1`] = `
+Array [
+  <div
+    className="task-form-inputs"
+>
+    <Unknown
+        handleChange={[Function]}
+        handleSubmit={[Function]}
+        value="A title"
+    />
+    <Unknown
+        handleChange={[Function]}
+        handleSubmit={[Function]}
+        value="A description"
+    />
+</div>,
+  <div
+    className="task-form-actions"
+>
+    <TaskSubmitButton
+        disabled={false}
+        onClick={[Function]}
+    />
+</div>,
+]
+`;
+
+exports[`TaskForm should update description 1`] = `
+Array [
+  <div
+    className="task-form-inputs"
+>
+    <Unknown
+        handleChange={[Function]}
+        handleSubmit={[Function]}
+        value="A title"
+    />
+    <Unknown
+        handleChange={[Function]}
+        handleSubmit={[Function]}
+        value="Updated description"
+    />
+</div>,
+  <div
+    className="task-form-actions"
+>
+    <TaskSubmitButton
+        disabled={false}
+        onClick={[Function]}
+    />
+</div>,
+]
+`;
+
+exports[`TaskForm should update title 1`] = `
+Array [
+  <div
+    className="task-form-inputs"
+>
+    <Unknown
+        handleChange={[Function]}
+        handleSubmit={[Function]}
+        value="Updated title"
+    />
+    <Unknown
+        handleChange={[Function]}
+        handleSubmit={[Function]}
+        value="A description"
+    />
+</div>,
+  <div
+    className="task-form-actions"
+>
+    <TaskSubmitButton
+        disabled={false}
+        onClick={[Function]}
+    />
+</div>,
+]
+`;

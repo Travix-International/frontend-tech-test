@@ -1,6 +1,8 @@
 # Travix test
 
-Travix Front-End Tech Interview Test 
+Travix Front-End Tech Interview Test
+
+![Tasks Preview](https://imgur.com/r09sKgj.png)
 
 # Introduction
 
@@ -22,17 +24,38 @@ Fork the repository into your account. Once your code is ready open a pull-reque
 
 # Requirements
 
-* React 14+
-* Redux or Flux or Frint or whateverelse with a one-way data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
+* :sunny: React 14+
+* :sunny: Redux or Flux or Frint or whateverelse with a one-way data flow
+* :sunny: SASS or LESS
+* :sunny: Must be responsive
+* :sunny: We have big tasks files for testing the application (very huge (I have tested with a thousand items))
 
 # Bonus
 
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us !
+* :sunny: unit-tests for the UI
+* :sunny: integration-test (one (or more) just in order to show that you know what is it (: )
+* :sunny: evolution - unit-tests for the server
+* :cloud: dynamic-ui (web-sockets...?)
+* :cloud: using the `made in Travix` technologies
+* :pray: ... Impress us !
+
+# Running
+
+```shell
+npm i
+npm run install:all
+npm start
+```
+
+# Running unit tests
+
+```shell
+npm run test:unit
+```
+
+# Running integration tests
+
+```shell
+npm start
+npm run test:integration
+```

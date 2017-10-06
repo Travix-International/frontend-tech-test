@@ -1,0 +1,12 @@
+@import 'src/styles/base/fonts.scss';
+
+.input {
+  @extend .ellipsis;
+
+  background-color: transparent;
+  border: 0;
+  flex: 1;
+  letter-spacing: 0;
+  line-height: 1.3;
+  padding: 0;
+}

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskContent should render a task content 1`] = `
+Array [
+  <div
+    className="task-content-inputs"
+>
+    <TaskTitle>
+        A title
+    </TaskTitle>
+    <TaskDescription>
+        A description
+    </TaskDescription>
+</div>,
+  <div
+    className="task-content-actions"
+>
+    <TaskEditButton
+        onClick={[Function]}
+    />
+    <TaskDeleteButton
+        onClick={[Function]}
+    />
+</div>,
+]
+`;

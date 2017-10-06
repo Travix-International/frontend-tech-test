@@ -1,4 +1,7 @@
 node_modules/
 *~
 #*
+.DS_Store
+*.css
 .vs_code/
+npm-debug.log

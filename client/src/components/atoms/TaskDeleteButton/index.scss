@@ -1,0 +1,16 @@
+@import 'src/styles/base/colors.scss';
+@import 'src/styles/base/button.scss';
+
+.task-delete-button {
+  @extend .button;
+
+  color: $red;
+
+  &:hover {
+    color: darken($red, 10%);
+  }
+
+  &:active {
+    color: darken($red, 20%);
+  }
+}

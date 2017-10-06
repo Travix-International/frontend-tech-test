@@ -1,0 +1,16 @@
+@import 'src/styles/base/medias.scss';
+
+.task-list {
+  height: 365px;
+  overflow-y: scroll;
+
+  @media #{$tablet} {
+    border-radius: 5px;
+    width: 50%;
+  }
+
+  @media #{$phone} {
+    border-radius: 0;
+    width: 100%;
+  }
+}

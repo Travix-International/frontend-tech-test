@@ -1,0 +1,31 @@
+$gradient-base-color: #36d1dc;
+$gradient-end-color: #5b86e5;
+$gradient: linear-gradient(to right, $gradient-base-color, $gradient-end-color);
+
+body {
+  background: $gradient;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+// Reset
+
+button {
+  appearance: none;
+  background: none;
+  border: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  font-smoothing: antialiased;
+  font-weight: inherit;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+input {
+  outline: none;
+}

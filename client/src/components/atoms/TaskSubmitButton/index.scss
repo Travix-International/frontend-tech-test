@@ -1,0 +1,21 @@
+@import 'src/styles/base/colors.scss';
+@import 'src/styles/base/button.scss';
+
+.task-submit-button {
+  @extend .button;
+
+  color: $green;
+
+  &:hover {
+    color: darken($green, 10%);
+  }
+
+  &:active {
+    color: darken($green, 20%);
+  }
+
+  &:disabled {
+    color: lighten($black, 50%);
+    cursor: not-allowed;
+  }
+}

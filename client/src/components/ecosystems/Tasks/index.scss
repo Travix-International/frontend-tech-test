@@ -1,0 +1,17 @@
+@import 'src/styles/base/colors.scss';
+@import 'src/styles/base/container.scss';
+@import 'src/styles/base/fonts.scss';
+
+.tasks {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tasks-title {
+  color: $white;
+  font-size: $font-big;
+  font-weight: $font-thin;
+}

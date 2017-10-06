@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskDescriptionInput should render correctly 1`] = `
+<input
+  className="task-description-input"
+  onChange={[Function]}
+  onKeyPress={[Function]}
+  placeholder="Type the task description..."
+  value="A description"
+/>
+`;
