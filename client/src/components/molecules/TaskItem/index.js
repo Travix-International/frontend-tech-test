@@ -27,26 +27,13 @@ class TaskItem extends Component {
   }
 
   render() {
-    if (this.state.editionMode) {
-      return (
-        <li
-          key={this.props.id}
-          className='task-item'
-        >
-          <TaskForm
-            {...this.props}
-            updateTask={this.updateTask}
-          />
-        </li>
-      )
-    }
     return (
-      <li
-        key={this.props.id}
-        className='task-item'
-        onDoubleClick={this.enableEditionMode}
-      >
-        <TaskContent {...this.props}/>
+      <li key={this.props.id} className='task-item'>
+        {
+          this.state.editionMode ?
+            <TaskForm {...this.props} updateTask={this.updateTask} /> :
+            <TaskContent {...this.props} editTask={this.enableEditionMode} />
+        }
       </li>
     )
   }

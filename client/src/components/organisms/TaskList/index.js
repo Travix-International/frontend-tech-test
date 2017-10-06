@@ -26,6 +26,7 @@ export class TaskList extends Component {
     return (
       <div className='task-list'>
         <TaskItems
+          loading={this.props.loading}
           items={this.props.items}
           updateTask={this.updateTask}
           deleteTask={this.deleteTask}
@@ -37,6 +38,7 @@ export class TaskList extends Component {
 
 TaskList.propTypes = {
   items: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
   fetchTasks: PropTypes.func.isRequired,
   updateTask: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired
@@ -44,7 +46,8 @@ TaskList.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    items: state.tasks.items
+    loading: state.tasks.loading,
+    items: state.tasks.items,
   }
 }
 

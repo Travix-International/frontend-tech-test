@@ -5,8 +5,9 @@ import './index.css'
 import TaskTitle from '../../atoms/TaskTitle/index'
 import TaskDescription from '../../atoms/TaskDescription/index'
 import TaskDeleteButton from '../../atoms/TaskDeleteButton/index'
+import TaskEditButton from '../../atoms/TaskEditButton/index'
 
-const TaskContent = ({ title, description, deleteTask }) => {
+const TaskContent = ({ title, description, editTask, deleteTask }) => {
   return [
     <div key='taskContentInputs' className='task-content-inputs'>
       <TaskTitle>
@@ -17,6 +18,7 @@ const TaskContent = ({ title, description, deleteTask }) => {
       </TaskDescription>
     </div>,
     <div key='taskContentActions' className='task-content-actions'>
+      <TaskEditButton onClick={editTask} />
       <TaskDeleteButton onClick={deleteTask} />
     </div>
   ]
@@ -25,6 +27,7 @@ const TaskContent = ({ title, description, deleteTask }) => {
 TaskContent.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  editTask: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired
 }
 

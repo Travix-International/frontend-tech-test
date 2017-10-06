@@ -66,7 +66,8 @@ export const createTask = (payload, Creator = TaskCreator) => {
 // Initial State
 
 export const initialState = {
-  items: []
+  items: [],
+  loading: true
 }
 
 // Reducer
@@ -93,7 +94,8 @@ export default (state = initialState, action) => {
     case TASKS_FETCH_ITEMS:
       return {
         ...state,
-        items: action.payload
+        items: action.payload,
+        loading: false
       }
     case TASKS_UPDATE_ITEM:
       return {

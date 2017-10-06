@@ -15,6 +15,9 @@ Array [
   <div
     className="task-content-actions"
 >
+    <TaskEditButton
+        onClick={[Function]}
+    />
     <TaskDeleteButton
         onClick={[Function]}
     />

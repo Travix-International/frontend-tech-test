@@ -1,15 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TaskItems should render correctly 1`] = `
-<ul
-  className="task-items"
->
-  <TaskItem
-    deleteTask={[Function]}
-    description="A description"
-    id={1}
-    title="A title"
-    updateTask={[Function]}
-  />
-</ul>
+exports[`TaskItems should render correctly with active loading 1`] = `<LoadingIndicator />`;
+
+exports[`TaskItems should render correctly with inactive loading 1`] = `
+<Unknown
+  deleteTask={[Function]}
+  items={
+    Array [
+      Object {
+        "description": "A description",
+        "id": 1,
+        "title": "A title",
+      },
+    ]
+  }
+  loading={false}
+  updateTask={[Function]}
+/>
 `;

@@ -31,7 +31,8 @@ describe('Tasks Ducks', () => {
           { id: 1, title: 'Something...', description: 'Description 1'},
           { id: 2, title: 'Other...', description: 'Description 2' },
           { id: 3, title: 'Another...', description: 'Description 3' }
-        ]
+        ],
+        loading: false
       })
     })
 

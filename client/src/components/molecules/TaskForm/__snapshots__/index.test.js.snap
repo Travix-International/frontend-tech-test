@@ -5,12 +5,14 @@ Array [
   <div
     className="task-form-inputs"
 >
-    <TaskTitleInput
+    <Unknown
         handleChange={[Function]}
+        handleSubmit={[Function]}
         value="A title"
     />
-    <TaskDescriptionInput
+    <Unknown
         handleChange={[Function]}
+        handleSubmit={[Function]}
         value="A description"
     />
 </div>,
@@ -29,12 +31,14 @@ Array [
   <div
     className="task-form-inputs"
 >
-    <TaskTitleInput
+    <Unknown
         handleChange={[Function]}
+        handleSubmit={[Function]}
         value="A title"
     />
-    <TaskDescriptionInput
+    <Unknown
         handleChange={[Function]}
+        handleSubmit={[Function]}
         value="Updated description"
     />
 </div>,
@@ -53,12 +57,14 @@ Array [
   <div
     className="task-form-inputs"
 >
-    <TaskTitleInput
+    <Unknown
         handleChange={[Function]}
+        handleSubmit={[Function]}
         value="Updated title"
     />
-    <TaskDescriptionInput
+    <Unknown
         handleChange={[Function]}
+        handleSubmit={[Function]}
         value="A description"
     />
 </div>,

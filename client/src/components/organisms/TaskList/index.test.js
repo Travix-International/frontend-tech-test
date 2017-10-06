@@ -3,7 +3,7 @@ import ShallowRenderer from 'react-test-renderer/shallow'
 import { TaskList } from './index'
 
 describe('TaskList', () => {
-  it('should render correctly', () => {
+  it('should render correctly with inactive loading', () => {
     const renderer = new ShallowRenderer()
     const items = [{
       id: 1,
@@ -17,6 +17,28 @@ describe('TaskList', () => {
     renderer.render(
       <TaskList
         items={items}
+        loading={false}
+        fetchTasks={fetchTasks}
+        updateTask={updateTask}
+        deleteTask={deleteTask}
+      />
+    )
+    const result = renderer.getRenderOutput()
+
+    expect(result).toMatchSnapshot()
+  })
+
+  it('should render correctly with active loading', () => {
+    const renderer = new ShallowRenderer()
+    const items = []
+    const fetchTasks = jest.fn()
+    const updateTask = jest.fn()
+    const deleteTask = jest.fn()
+
+    renderer.render(
+      <TaskList
+        items={items}
+        loading={true}
         fetchTasks={fetchTasks}
         updateTask={updateTask}
         deleteTask={deleteTask}
@@ -40,6 +62,7 @@ describe('TaskList', () => {
     renderer.render(
       <TaskList
         items={items}
+        loading={false}
         fetchTasks={fetchTasks}
         updateTask={updateTask}
         deleteTask={deleteTask}
@@ -64,6 +87,7 @@ describe('TaskList', () => {
     renderer.render(
       <TaskList
         items={items}
+        loading={false}
         fetchTasks={fetchTasks}
         updateTask={updateTask}
         deleteTask={deleteTask}
@@ -88,6 +112,7 @@ describe('TaskList', () => {
     renderer.render(
       <TaskList
         items={items}
+        loading={false}
         fetchTasks={fetchTasks}
         updateTask={updateTask}
         deleteTask={deleteTask}

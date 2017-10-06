@@ -1,7 +1,18 @@
+@import 'src/styles/base/colors.scss';
+@import 'src/styles/base/medias.scss';
+
 .task-items {
+  background-color: $white;
   display: flex;
   flex: 1;
   flex-direction: column;
+}
+
+.task-items-list {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-grow: 1;
+  height: 100%;
   margin: 0;
   padding: 0;
 }

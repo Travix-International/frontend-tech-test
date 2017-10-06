@@ -10,7 +10,7 @@ describe('TaskContent', () => {
       title: 'A title',
       description: 'A description'
     }
-    const enableEdit = jest.fn()
+    const editTask = jest.fn()
     const deleteTask = jest.fn()
 
     renderer.render(
@@ -18,7 +18,7 @@ describe('TaskContent', () => {
         id={task.id}
         title={task.title}
         description={task.description}
-        enableEdit={enableEdit}
+        editTask={editTask}
         deleteTask={deleteTask}
       />
     )

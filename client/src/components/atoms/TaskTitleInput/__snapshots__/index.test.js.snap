@@ -4,6 +4,7 @@ exports[`TaskTitleInput should render correctly 1`] = `
 <input
   className="task-title-input"
   onChange={[Function]}
+  onKeyPress={[Function]}
   placeholder="Type the task title..."
   value="A title"
 />

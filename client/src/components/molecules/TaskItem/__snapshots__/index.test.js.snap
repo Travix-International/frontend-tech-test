@@ -3,11 +3,11 @@
 exports[`TaskItem should render a task item 1`] = `
 <li
   className="task-item"
-  onDoubleClick={[Function]}
 >
   <TaskContent
     deleteTask={[Function]}
     description="A description"
+    editTask={[Function]}
     id={1}
     title="A title"
     updateTask={[Function]}
@@ -18,11 +18,11 @@ exports[`TaskItem should render a task item 1`] = `
 exports[`TaskItem when edition mode is disabled should render a task content 1`] = `
 <li
   className="task-item"
-  onDoubleClick={[Function]}
 >
   <TaskContent
     deleteTask={[Function]}
     description="A description"
+    editTask={[Function]}
     id={1}
     title="A title"
     updateTask={[Function]}
@@ -47,11 +47,11 @@ exports[`TaskItem when edition mode is enabled should render a task form 1`] = `
 exports[`TaskItem when update is called should disable edition mode and render the task content 1`] = `
 <li
   className="task-item"
-  onDoubleClick={[Function]}
 >
   <TaskContent
     deleteTask={[Function]}
     description="A description"
+    editTask={[Function]}
     id={1}
     title="A title"
     updateTask={[Function]}

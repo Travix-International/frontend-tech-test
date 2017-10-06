@@ -1,9 +1,9 @@
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
-import TaskItems from './index'
+import TaskItemsWithLoading, { TaskItems } from './index'
 
 describe('TaskItems', () => {
-  it('should render correctly', () => {
+  it('should render correctly with inactive loading', () => {
     const renderer = new ShallowRenderer()
     const tasks = [
       { id: 1, title: 'A title', description: 'A description' }
@@ -12,8 +12,28 @@ describe('TaskItems', () => {
     const deleteTask = jest.fn()
 
     renderer.render(
-      <TaskItems
+      <TaskItemsWithLoading
         items={tasks}
+        loading={false}
+        updateTask={updateTask}
+        deleteTask={deleteTask}
+      />
+    )
+    const result = renderer.getRenderOutput()
+
+    expect(result).toMatchSnapshot()
+  })
+
+  it('should render correctly with active loading', () => {
+    const renderer = new ShallowRenderer()
+    const tasks = []
+    const updateTask = jest.fn()
+    const deleteTask = jest.fn()
+
+    renderer.render(
+      <TaskItemsWithLoading
+        items={tasks}
+        loading={true}
         updateTask={updateTask}
         deleteTask={deleteTask}
       />
@@ -34,14 +54,16 @@ describe('TaskItems', () => {
     renderer.render(
       <TaskItems
         items={tasks}
+        loading={false}
         updateTask={updateTask}
         deleteTask={deleteTask}
       />
     )
     const result = renderer.getRenderOutput()
-    const taskItem = result.props.children[0]
+    const taskItem = result.props.children.props.children[0]
 
-    expect(taskItem.props.updateTask('payload'))
+    taskItem.props.updateTask('payload')
+
     expect(updateTask).toBeCalledWith('payload')
   })
 
@@ -56,14 +78,16 @@ describe('TaskItems', () => {
     renderer.render(
       <TaskItems
         items={tasks}
+        loading={false}
         updateTask={updateTask}
         deleteTask={deleteTask}
       />
     )
     const result = renderer.getRenderOutput()
-    const taskItem = result.props.children[0]
+    const taskItem = result.props.children.props.children[0]
 
-    expect(taskItem.props.deleteTask())
+    taskItem.props.deleteTask()
+
     expect(deleteTask).toBeCalledWith({ id: 1 })
   })
 })

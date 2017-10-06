@@ -1,0 +1,16 @@
+@import 'src/styles/base/colors.scss';
+@import 'src/styles/base/button.scss';
+
+.task-edit-button {
+  @extend .button;
+
+  color: $black;
+
+  &:hover {
+    color: lighten($black, 10%);
+  }
+
+  &:active {
+    color: lighten($black, 20%);
+  }
+}

@@ -1,10 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TaskList should render correctly 1`] = `
+exports[`TaskList should render correctly with active loading 1`] = `
 <div
   className="task-list"
 >
-  <TaskItems
+  <Unknown
+    deleteTask={[Function]}
+    items={Array []}
+    loading={true}
+    updateTask={[Function]}
+  />
+</div>
+`;
+
+exports[`TaskList should render correctly with inactive loading 1`] = `
+<div
+  className="task-list"
+>
+  <Unknown
     deleteTask={[Function]}
     items={
       Array [
@@ -15,6 +28,7 @@ exports[`TaskList should render correctly 1`] = `
         },
       ]
     }
+    loading={false}
     updateTask={[Function]}
   />
 </div>

@@ -44,10 +44,12 @@ class TaskForm extends Component {
         <TaskTitleInput
           value={title}
           handleChange={this.handleTitleChange}
+          handleSubmit={this.updateTask}
         />
         <TaskDescriptionInput
           value={description}
           handleChange={this.handleDescriptionChange}
+          handleSubmit={this.updateTask}
         />
       </div>,
       <div key='taskFormActions' className='task-form-actions'>
