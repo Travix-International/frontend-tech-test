@@ -17,7 +17,13 @@ const http = (path, method = "GET", body) => {
   }
 
   return fetch(`${BASE_URL}/${path}`, options)
-    .then(res => res.status !== 204 ? res.json() : null);
+    .then(res => {
+      if(res.status !== 204) {
+        return res.json();
+      }
+
+      return Promise.resolve();
+    });
 };
 
 const getTodos = () => http("task"),
