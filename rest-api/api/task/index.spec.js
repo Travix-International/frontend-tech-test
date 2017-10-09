@@ -19,7 +19,7 @@ describe("Route: GET /", () => {
       method: "GET",
       url: "/"
     });
-    console.log(request, response);
+
     response.on("end", function () {
       expect(response.statusCode).to.be.equal(200);
 
