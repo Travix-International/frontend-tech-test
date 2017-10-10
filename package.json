@@ -1,19 +1,38 @@
 {
-  "name": "test-candidates",
+  "name": "todo-app",
   "version": "0.0.1",
-  "description": "test back - front",
-  "main": "server.js",
+  "description": "Todo App",
+  "main": "src/server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node src/server/index.js",
+    "start:dev": "nodemon src/server/index.js --watch server",
+    "build-client": "webpack -p",
+    "build-client:dev": "webpack -d --watch"
   },
   "keywords": [
     "test",
     "travix"
   ],
-  "author": "spartans",
+  "author": "JonoH",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
-  }
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "compression": "^1.7.1",
+    "express": "^4.14.0",
+    "nodemon": "^1.12.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "webpack": "^3.6.0"
+  },
+  "devDependencies": {}
 }

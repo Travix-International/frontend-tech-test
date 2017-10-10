@@ -1,14 +1,15 @@
 'use strict';
 
-const app = require('express')();
-const tasksContainer = require('./tasks.json');
+const express = require('express');
+var router = express.Router({ mergeParams: true });
+const tasksContainer = require('./../../data/tasks.json');
 
 /**
  * GET /tasks
  * 
  * Return the list of tasks with status code 200.
  */
-app.get('/tasks', (req, res) => {
+router.get('/', (req, res) => {
   return res.status(200).json(tasksContainer);
 });
 
@@ -23,7 +24,7 @@ app.get('/tasks', (req, res) => {
  * If not found return status code 404.
  * If id is not valid number return status code 400.
  */
-app.get('/task/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -57,7 +58,7 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
+router.put('/update/:id/:title/:description', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -88,7 +89,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+router.post('/create/:title/:description', (req, res) => {
   const task = {
     id: tasksContainer.tasks.length,
     title: req.params.title,
@@ -112,7 +113,7 @@ app.post('/task/create/:title/:description', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/task/delete/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -136,6 +137,4 @@ app.delete('/task/delete/:id', (req, res) => {
   }
 });
 
-app.listen(9001, () => {
-  process.stdout.write('the server is available on http://localhost:9001/\n');
-});
+module.exports = router;
