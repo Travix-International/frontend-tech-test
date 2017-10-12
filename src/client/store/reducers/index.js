@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
 import session from './session';
+import ui from './ui/index';
 
 const appReducer = combineReducers({
-	session
+	session,
+	ui
 });
 
 const rootReducer = (state, action) => {

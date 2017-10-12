@@ -1,16 +1,20 @@
 'use strict';
 
 var express = require('express');
+var bodyParser = require('body-parser');
 var compression = require('compression');
 var path = require('path');
-var tasksRouter = require('./routes/tasks/index');
 
 var app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(compression());
 
 app.set('view engine', 'html')
 
 var file_path = path.join(__dirname, './../../public');
+var tasksRouter = require('./routes/tasks/index');
 
 app.use(express.static(file_path));
 app.use('/tasks', tasksRouter);

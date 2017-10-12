@@ -10,6 +10,8 @@ const tasksContainer = require('./../../data/tasks.json');
  * Return the list of tasks with status code 200.
  */
 router.get('/', (req, res) => {
+  tasksContainer.tasks = tasksContainer.tasks.sort( function ( a, b ) { return b.id - a.id; } );
+
   return res.status(200).json(tasksContainer);
 });
 
@@ -58,16 +60,20 @@ router.get('/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-router.put('/update/:id/:title/:description', (req, res) => {
+router.put('/update/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-
+    
     if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
-      return res.status(204);
+      task.title = req.body.title;
+      task.description = req.body.description;
+      task.isCompleted = req.body.isCompleted;
+      return res.status(200).json({
+        message: 'Task updated',
+        task: task
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -99,7 +105,8 @@ router.post('/create/:title/:description', (req, res) => {
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
-    message: 'Resource created',
+    message: 'Task created',
+    task: task
   });
 });
 
@@ -120,10 +127,11 @@ router.delete('/delete/:id', (req, res) => {
     const task = tasksContainer.tasks.find(item => item.id === id);
   
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+      var taskIndex = tasksContainer.tasks.indexOf(task);
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
-        message: 'Updated successfully',
+        message: 'Task deleted',
+        task: task
       });
     } else {
       return es.status(404).json({

@@ -26,8 +26,14 @@ var config = {
         loader: 'babel-loader',
         query:
         {
-            presets:['es2015','react']
+            presets:['es2015','react'],
+            plugins: ["transform-es2015-destructuring", "transform-object-rest-spread"]
         }
+      },
+      {
+        test: /\.scss$/,
+        include: APP_DIR,
+        loaders: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
   }
