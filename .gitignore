@@ -9,6 +9,9 @@
 # production
 /build
 
+# useless css files
+src/**/*.css
+
 # misc
 .DS_Store
 .env.local
