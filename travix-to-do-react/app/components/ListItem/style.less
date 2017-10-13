@@ -1,0 +1,39 @@
+@import '../../style.less';
+.list-item {
+  border-bottom : 1px solid @cold;
+  color         : @cold;
+  text-align    : left;
+  .item-title {
+    margin: 3px 0;
+    font-weight: normal;
+  }
+  .text-container {
+    padding : @medium-padding;
+  }
+  .title-description {
+    font-size : 20px;
+    margin    : 4px 0;
+  }
+  .item-options {
+    color : #000;
+    text-align: right;
+    height : 100%;
+    padding: @medium-margin @medium-padding 0 0 ;
+    i {
+      color     : #aaa;
+      cursor    : pointer;
+      font-size : 20px;
+      margin    : 0 @small-margin * 2;
+    }
+    .fa-times {
+      &:hover {
+        color : red;
+      }
+    }
+    .fa-pencil {
+      &:hover {
+        color : @night;
+      }
+    }
+  }
+}
