@@ -1,13 +1,5 @@
 {
   "tasks": [
-  	{ "id": 0, "title": "design actions", "description": "" },
-    { "id": 1, "title": "implement reducer", "description": "" },
-    { "id": 2, "title": "connect components", "description": "" },
-    { "id": 3, "title": "Test components", "description": "" },
-    { "id": 4, "title": "Test server library", "description": "" },
-    { "id": 5, "title": "Test client library", "description": "" },
-    { "id": 6, "title": "Make integration test", "description": "" },
-    { "id": 7, "title": "Make responsive components", "description": "" },
-    { "id": 8, "title": "make components", "description": "" }
+  	
   ]
 }

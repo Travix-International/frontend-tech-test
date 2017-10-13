@@ -19,7 +19,7 @@ class App extends React.Component {
   render() {
     var loader = this.props.isLoading ? <BubbleLoader color='#E53D82'/> : undefined;    
   	return (
-      <MuiThemeProvider>
+      <MuiThemeProvider id="MainContainerThemeProvider">
     		<div id="MainContainer">
   	        <div className="container">
   	        	<h1>Todo List</h1>

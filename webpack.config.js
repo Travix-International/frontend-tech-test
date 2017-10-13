@@ -10,7 +10,12 @@ var config = {
     path: BUILD_DIR,
     filename: 'bundle.js'
   },
-
+  externals: {
+    'cheerio': 'window',
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
+  },
   resolve: {
       alias: {
           '~': path.join(__dirname, 'src/client')
@@ -26,7 +31,7 @@ var config = {
         loader: 'babel-loader',
         query:
         {
-            presets:['es2015','react'],
+            presets:['es2015','react','stage-0'],
             plugins: ["transform-es2015-destructuring", "transform-object-rest-spread"]
         }
       },
