@@ -1,0 +1,16 @@
+.list-item {
+	&.list-item-completed {
+		text-decoration: line-through
+	}
+
+	.button-container {
+		display: block;
+		float: right; 
+		height: 0;
+		margin-right: -15px; 
+
+		.button-todo-edit, .button-todo-delete {
+			bottom: 15px;
+		}
+	}
+}

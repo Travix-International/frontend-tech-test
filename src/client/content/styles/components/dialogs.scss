@@ -1,0 +1,14 @@
+.add-todo-dialog, .edit-todo-dialog {
+	max-width: 75%;
+	padding-left: 25%;
+}
+
+.delete-dialog {
+	max-width: 70%;
+	padding-left: 30%;
+
+	.dialog-text {
+		font-size: 22px;
+		text-align: center;
+	}
+}
