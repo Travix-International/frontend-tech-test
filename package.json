@@ -72,12 +72,15 @@
     "sass-loader": "^6.0.6"
   },
   "scripts": {
-    "webapp:start": "node webapp/scripts/start.js",
+    "webapp:start": "cd webapp && node scripts/start",
     "server:start": "node server.js",
-    "webapp:build": "node webapp/scripts/build.js",
-    "webapp:test": "node webapp/scripts/test.js --env=jsdom",
-    "webapp:lint": "./node_modules/.bin/eslint webapp/."
+    "webapp:build": "cd webapp && node scripts/build.js",
+    "webapp:test": "cd webapp && node scripts/test.js --env=jsdom",
+    "webapp:lint": "./node_modules/.bin/eslint webapp/**"
   },
+  "pre-commit": [
+    "webapp:lint"
+  ],
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
