@@ -66,7 +66,9 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(204).json({
+        message: 'Updated successfully',
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -116,10 +118,10 @@ app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-  
+    const task = tasksContainer.tasks.findIndex(item => item.id === id);
+
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+      const taskIndex = task;
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',

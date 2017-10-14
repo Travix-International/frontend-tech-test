@@ -1,0 +1,21 @@
+@import "colors";
+
+.TaskItem {
+	margin: 5px 0;
+	padding: 0 10px;
+	text-align: left;
+	color: $darker-purple;
+	border-bottom: 1px solid $darker-purple;
+
+	.content {
+		display: inline-block;
+	}
+
+	.title, .desc {
+		display: block;
+	}
+
+	.title {
+		font-weight: bold;
+	}
+}

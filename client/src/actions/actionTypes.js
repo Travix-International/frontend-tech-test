@@ -1,0 +1,5 @@
+export const PENDING = 'PENDING';
+export const FETCH_ALL_SUCCESS = 'FETCH_ALL_SUCCESS';
+export const CREATE_SUCCESS = 'CREATE_SUCCESS';
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
+export const DELETE_SUCCESS = 'DELETE_SUCCESS';

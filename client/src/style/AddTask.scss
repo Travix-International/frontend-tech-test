@@ -1,0 +1,8 @@
+@import "colors";
+@import "mixins";
+
+.AddTask {
+	.cta-btn {
+		@include button;
+		}
+	}

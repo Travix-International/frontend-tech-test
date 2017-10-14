@@ -1,0 +1,29 @@
+@import 'colors';
+@import "mixins";
+
+.TaskForm {
+	width: 70%;
+	margin: 0 auto;
+
+	.taskForm-input {
+		margin: 15px 0;
+		text-align: left;
+		label {
+			display: block;
+			font-size: .8rem;
+		}
+
+		input {
+			width: 100%;
+			margin-top: 15px;
+			font-size: 1rem;
+			background: transparent;
+			border-bottom: 1px solid $primary-font-color;
+			color: $primary-font-color;
+		}
+	}
+	.cta-btn {
+		@include button;
+		margin: 30px 0;
+	}
+}
