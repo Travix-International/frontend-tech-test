@@ -2,11 +2,10 @@
 
 .todo {
   &-header {
-    padding: 1.25rem 0;
+    padding: 1.875rem 0;
     text-align: center;
     color: $white;
-    background-color: $purple;
-    border-bottom: 0.375rem solid $pink;
+    border-top: 0.375rem solid $pink;
   }
 
   &-logo {
@@ -27,22 +26,28 @@
     font-size: 1.75rem;
     font-weight: 700;
     line-height: 1;
+    color: $purple;
   }
 
   &-subtitle {
     margin: 1.25rem 0 0;
     font-size: 0.875rem;
     line-height: 1;
+    color: $gray;
   }
 
   &-box {
-    padding: 1.25rem 0;
-    margin: 1.25rem 0;
+    padding: 0.625rem;
+    margin: 0 0 1.5rem;
     background-color: $purple;
     border: 0.0625rem solid $purple;
     border-bottom: 0.1875rem solid rgba($black, .3);
     border-radius: 0.5rem;
     box-shadow: -5px 5px rgba($black, .14);
+
+    &-big-padding {
+      padding: 1.25rem;
+    }
   }
 
   &-footer {
@@ -62,7 +67,7 @@
 
   @media screen and (min-width: 768px) {
     &-header {
-      padding: 1.563rem 0;
+      padding: 1.875rem 0;
     }
 
     &-title {
@@ -75,8 +80,7 @@
     }
 
     &-box {
-      padding: 1.875rem 0;
-      margin: 1.875rem 0;
+      margin: 0 0 1.875rem;
     }
 
     &-footer {
