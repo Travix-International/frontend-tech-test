@@ -13,8 +13,9 @@
     "travix-ui-kit": "^0.6.32"
   },
   "scripts": {
-    "start": "npm-run-all -p watch-css start-js",
+    "start": "npm-run-all -p watch-css start-js start-server",
     "start-js": "react-scripts start",
+    "start-server": "node src/server.js",
     "build": "npm run build-css && react-scripts build",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
