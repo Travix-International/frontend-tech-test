@@ -1,35 +1,19 @@
-const asynchronousCall = () => new Promise((resolve) => {
-  setTimeout(function () {
-    resolve({ message: 'Async call complete!'});
-  }, 1000);
-});
-
+import http from '../utils/http';
 
 export const constants = {
-  HELLO_WORLD: 'HELLO_WORLD',
-  UPDATE_TIME: 'UPDATE_TIME',
-  ASYNC_CALL: 'ASYNC_CALL'
+  LIST_TODOS: 'LIST_TODOS',
+  GET_TODO: 'GET_TODO',
+  CREATE_TODO: 'CREATE_TODO',
+  UPDATE_TODO: 'UPDATE_TODO',
+  DELETE_TODO: 'DELETE_TODO'
 };
 
 export const actions = {
-  sayHelloWorld: () => {
-    alert('Dispatching Redux Action!');
-    return {
-      type: constants.HELLO_WORLD
-    };
-  },
-  updateTime: () => {
-    const now = new Date();
-    return {
-      type: constants.UPDATE_TIME,
-      payload: { time: now }
-    };
-  },
-  triggerRequest: () => {
+  listTodos: () => {
     return {
       type: constants.ASYNC_CALL,
       payload: {
-        promise: asynchronousCall().then((response) => {
+        promise: http('/task').then((response) => {
           console.log('Response received!');
           // Normalize data here
           return Promise.resolve(response);
@@ -39,6 +23,9 @@ export const actions = {
   }
 };
 
+const pendingReducer = (state) => ({ ...state, isLoading: true });
+const rejectedReducer = (state) => ({ ...state, isLoading: false });
+
 const ACTION_HANDLERS = {
   HELLO_WORLD: (state) => {
     return {
@@ -46,35 +33,29 @@ const ACTION_HANDLERS = {
       message: 'Redux is fun!'
     };
   },
-  UPDATE_TIME: (state, action) => {
-    return {
-      ...state,
-      currentTime: action.payload.time
-    };
-  },
-  ASYNC_CALL_PENDING: (state) => ({
+  // Pending reducers
+  LIST_TODOS_PENDING: pendingReducer,
+  GET_TODO_PENDING: pendingReducer,
+  CREATE_TODO_PENDING: pendingReducer,
+  UPDATE_TODO_PENDIG: pendingReducer,
+  DELETE_TODO_PENDING: pendingReducer,
+  // Fulfilled reducers
+  LIST_TODOS_FULFILLED: (state, action) => ({
     ...state,
-    isLoading: true
-  }),
-  ASYNC_CALL_FULFILLED: (state, action) => ({
-    ...state,
-    asyncMessage: action.payload.message,
     isLoading: false
   }),
-  ASYNC_CALL_REJECTED: (state) => {
-    console.log('Error Found');
-    return {
-      ...state,
-      isLoading: false
-    };
-  }
+  // Rejected reducers
+  LIST_TODOS_REJECTED: rejectedReducer,
+  GET_TODO_REJECTED: rejectedReducer,
+  CREATE_TODO_REJECTED: rejectedReducer,
+  UPDATE_TODO_REJECTED: rejectedReducer,
+  DELETE_TODO_REJECTED: rejectedReducer
 };
 
 export const initialState = {
-  currentTime: new Date(),
-  message: '',
-  asyncMessage: '',
-  isLoading: ''
+  todoIds: [],
+  todos: {},
+  isLoading: false
 };
 
 export default (state = initialState, action) => {

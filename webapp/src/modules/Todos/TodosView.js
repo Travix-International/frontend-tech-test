@@ -7,7 +7,7 @@ import { actions as sampleActions } from '../../redux/modules/sampleActions';
 class TodosView extends Component {
   static propTypes = {
     sampleActions: PropTypes.object.isRequired,
-    message: PropTypes.string.isRequired
+    message: PropTypes.string
   }
   render() {
     return (

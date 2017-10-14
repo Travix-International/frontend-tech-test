@@ -7,6 +7,14 @@ const bodyParser = require('body-parser');
 // parse application/json
 app.use(bodyParser.json())
 
+// Enabling cors
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 /**
  * GET /tasks
  *
@@ -64,10 +72,10 @@ app.get('/task/:id', (req, res) => {
 app.put('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
-  if (!Number.isNaN(id)) {
+  if(!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    if(task) {
       task.title = req.body.title;
       task.description = req.body.description;
       return res.status(204).send();
@@ -122,14 +130,14 @@ app.delete('/task/:id', (req, res) => {
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    if (task) {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Deleted successfully',
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
       });
     }
