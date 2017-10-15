@@ -1,0 +1,85 @@
+@import '../../css/colors.scss';
+
+.todolist {
+  padding: 0;
+  margin: 0;
+  color: $white;
+
+  &-item {
+    padding: 0.75rem 0;
+    min-height: 4.063rem;
+    list-style: none;
+    clear: both;
+
+    &:first-child {
+      padding-top: 0;
+      min-height: 3.125rem;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+      min-height: 3.375rem;
+    }
+
+    & + & {
+      border-top: 0.0625rem solid rgba($white, .1);
+    }
+
+    &-complete,
+    &-content,
+    &-remove {
+      float: left;
+      display: inline-block;
+    }
+
+    &-complete,
+    &-remove {
+      &-button {
+        width: 2rem;
+        height: 2rem;
+        background-color: $purple;
+        border: 0.125rem solid $pink;
+        border-radius: 3.75rem;
+      }
+    }
+
+    &-complete {
+      margin-right: 1rem;
+
+      &-button {
+        background-color: $purple;
+        border: 0.125rem solid $pink;
+        border-radius: 3.75rem;
+        text-indent: -9999px;
+      }
+    }
+
+    &-remove {
+      float: right;
+      margin-left: 1rem;
+
+      &-button {
+        font-size: 1.5rem;
+        line-height: 1;
+        color: rgba($white, .5);
+        border-color: transparent;
+
+        &:hover,
+        &:focus {
+          color: $white;
+          background-color: $pink;
+        }
+      }
+    }
+
+    &-name {
+      margin: 0 0 0.3125rem;
+      font-size: 1rem;
+    }
+
+    &-desc {
+      margin: 0;
+      font-size: 0.875rem;
+    }
+  }
+}

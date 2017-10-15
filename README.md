@@ -6,17 +6,19 @@ A todo tasks manager written with React and a gorgeous UI.
 
 ## [Demo](https://nl-react-todo-manager.herokuapp.com)
 
-## Running
-### `npm start`
+## Usage
+### `npm install`
+
+#### `npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `npm test:app`
+#### `npm test:app`
 
 Runs tests for backend server.
 
-### `npm run build`
+#### `npm run build`
 
 Builds the app for production to the `build` folder.
 

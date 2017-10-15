@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import * as actions from '../../actions';
 
 import { TodoForm, TodoList, TodoFooter, TodoLoading } from '../../components'
 
@@ -6,7 +10,7 @@ import './TodoBoard.css'
 
 const columns = 'col-lg-6 col-md-8 col-sm-10 col-xs-12 col-lg-offset-3 col-md-offset-2 col-sm-offset-1'
 
-export default class TodoBoard extends Component {
+class TodoBoard extends Component {
   constructor(props) {
     super(props)
 
@@ -26,13 +30,13 @@ export default class TodoBoard extends Component {
 
     return (
       <div>
-        <header className="todo-header">
+        <header className={`todo-header`}>
           <div className="container">
             <div className="row">
               <div className={columns}>
                 <h1 className="todo-title">
                   <span className="todo-logo">
-                    Todo <span class="label todo-logo-label">Manager</span>
+                    Todo <span className="label todo-logo-label">Manager</span>
                   </span>
                 </h1>
 
@@ -52,18 +56,24 @@ export default class TodoBoard extends Component {
                   <TodoForm />
                 </div>
 
-                <div class="todo-box todo-box-big-padding">
-                  { isLoading &&
+                { isLoading &&
+                  <div class="todo-box todo-box-big-padding">
                     <TodoLoading />
-                  }
+                  </div>
+                }
 
-                  { !isLoading &&
-                    <div>
+                { !isLoading &&
+                  <div>
+                    <div class="todo-box todo-box-big-padding">
                       <TodoList tasks={[]} />
+                      <div className="clearfix"></div>
+                    </div>
+
+                    <div class="todo-box todo-box-big-padding">
                       <TodoFooter />
                     </div>
-                  }
-                </div>
+                  </div>
+                }
               </div>
             </div>
           </div>
@@ -84,3 +94,8 @@ export default class TodoBoard extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => state;
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoBoard);

@@ -20,8 +20,8 @@ export default function (state = initialState, action) {
     case REQUEST_TASKS_SUCCESS:
       return {
         ...state,
-        list: [
-          ...state.list,
+        tasks: [
+          ...state.tasks,
           action.payload.data
         ],
         isLoading: false

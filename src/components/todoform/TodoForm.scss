@@ -6,23 +6,68 @@
     margin: 0;
   }
 
-  &-input {
+  &-input,
+  &-textarea {
     font-size: 1rem;
     color: rgba($purple-3, .85);
     background-color: $white;
     border: none;
-    // box-shadow: 0 0 0 5px transparent;
     box-shadow: none;
     transition: none;
 
     &:focus {
       border: none;
       box-shadow: none;
-      // box-shadow: 0 0 0 4px $pink;
     }
 
     @include placeholder {
       color: rgba($purple-3, .7);
+    }
+  }
+
+  &-textarea {
+    margin: 0.75rem 0 0;
+    resize: none;
+  }
+
+  &-button {
+    display: block;
+    margin: 1.125rem 0 0.625rem;
+    text-align: right;
+
+    .btn-todoform {
+      margin: 0;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      text-shadow: none;
+      color: $white;
+      background: $pink;
+      border: 0.0625rem solid $pink;
+      border-bottom: 0.1875rem solid rgba($black, .3);
+      border-radius: 0.3125rem;
+      box-shadow: 0 0.1875rem $pink-2, -0.3125rem 0.4375rem rgba($black, .15);
+      transition: all .1s ease-in-out;
+
+      &:focus,
+      &:hover,
+      &:active,
+      &:active:focus {
+        color: $white;
+        background: $pink;
+        border-color: $pink;
+      }
+
+      &:focus,
+      &:hover {
+        transform: translateY(-0.1875rem);
+        border-color: $pink-2;
+        box-shadow: 0 0.3125rem $pink-2, -0.3125rem 0.5625rem rgba($black, .15);
+      }
+
+      &:active {
+        box-shadow: 0 0.125rem $pink-2;
+      }
     }
   }
 }

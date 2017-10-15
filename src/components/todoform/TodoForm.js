@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FormGroup, FormControl } from 'react-bootstrap'
+import { FormGroup, FormControl, Button } from 'react-bootstrap'
 
 import './TodoForm.css'
 
@@ -8,32 +8,46 @@ export default class TodoForm extends Component {
     super(props)
 
     this.state = {
-      value: ''
+      title: '',
+      description: ''
     }
   }
 
   handleChange(e) {
-    this.setState({ value: e.target.value });
+    this.setState({ title: e.target.title, description: e.target.description })
   }
 
   handleSubmit(e) {
-    this.setState({ value: e.target.value });
+    console.log(e.target)
+    // this.setState({ title: e.target.title, description: e.target.description })
   }
 
   render() {
     return (
-      <form>
+      <form className="todoform">
         <FormGroup className="todoform-group">
           <FormControl
             type="text"
-            value={this.state.value}
-            placeholder="Enter a new task"
+            value={this.state.title}
+            placeholder="Enter a new task title"
             bsSize="lg"
             className="todoform-input"
-            onChange={(e) => this.handleChange(e)}
-            onSubmit={(e) => this.handleSubmit(e)}
+          />
+
+          <FormControl
+            componentClass="textarea"
+            value={this.state.description}
+            placeholder="Description"
+            bsSize="lg"
+            className="todoform-textarea"
           />
         </FormGroup>
+
+        <div className="todoform-button">
+          <Button onClick={(e) => this.handleSubmit(e)} bsStyle="todoform">Add Task</Button>
+        </div>
+        
+        <div class="clearfix"></div>
       </form>
     );
   }
