@@ -71,7 +71,8 @@
     "pre-commit": "^1.2.2",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^15.6.2",
-    "sass-loader": "^6.0.6"
+    "sass-loader": "^6.0.6",
+    "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
     "webapp:start": "cd webapp && node scripts/start",
@@ -85,21 +86,21 @@
   ],
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
+      "webapp/src/**/*.{js,jsx}"
     ],
     "setupFiles": [
-      "<rootDir>/config/polyfills.js"
+      "<rootDir>/webapp/config/polyfills.js"
     ],
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.js?(x)",
-      "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
+      "<rootDir>/webapp/src/**/__tests__/**/*.js?(x)",
+      "<rootDir>/webapp/src/**/?(*.)(spec|test).js?(x)"
     ],
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {
       "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+      "^.+\\.css$": "<rootDir>/webapp/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/webapp/config/jest/fileTransform.js"
     },
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
