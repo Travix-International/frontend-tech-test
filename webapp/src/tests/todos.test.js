@@ -21,7 +21,7 @@ const todoListProps = {
       description: 'Bar'
     }
   ]
-}
+};
 
 describe('Todo Components', () => {
   it('renders TodoList correctly', () => {
