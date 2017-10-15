@@ -11,9 +11,9 @@ You'll find a demo hosted on Heroku: [nl-react-todo-manager.herokuapp.com](https
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `npm test`
+### `npm test:app`
 
-Launches the test runner in the interactive watch mode.
+Runs tests for backend server.
 
 ### `npm run build`
 
