@@ -2,14 +2,25 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { actions as sampleActions } from '../../redux/modules/sampleActions';
+import { actions as todoActions } from '../../redux/modules/todos';
 
 class TodosView extends Component {
   static propTypes = {
-    sampleActions: PropTypes.object.isRequired,
-    message: PropTypes.string
+    todoActions: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    todoIds: PropTypes.array.isRequired,
+    todos: PropTypes.object.isRequired
   }
+
+  componentDidMount() {
+    this.props.todoActions.listTodos();
+  }
+
   render() {
+    const todos = this.props.todoIds.map((id) => {
+      return this.props.todos[id];
+    });
+    console.log(todos);
     return (
       <p className="app-intro">
         Hello World! <br />
@@ -19,11 +30,13 @@ class TodosView extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  sampleActions: bindActionCreators(sampleActions, dispatch)
+  todoActions: bindActionCreators(todoActions, dispatch)
 });
 
 const mapStateToProps = (state) => ({
-  message: state.sampleActions.message
+  isLoading: state.todos.isLoading,
+  todoIds: state.todos.todoIds,
+  todos: state.todos.todos
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodosView);

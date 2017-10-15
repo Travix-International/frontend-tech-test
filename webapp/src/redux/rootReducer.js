@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import sampleActions from './modules/sampleActions';
+import todos from './modules/todos';
 import { routerReducer } from 'react-router-redux';
 
 export default combineReducers({
-  sampleActions,
+  todos,
   router: routerReducer
 });
