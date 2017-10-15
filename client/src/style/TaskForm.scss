@@ -6,6 +6,11 @@
 	margin: 0 auto;
   text-align: center;
 
+  .error-msg {
+    height: 20px;
+    color: $error-font-color;
+  }
+
 	.taskForm-input {
 		margin: 15px 0;
 		text-align: left;

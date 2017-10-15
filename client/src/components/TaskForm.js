@@ -8,7 +8,8 @@ class TaskForm extends PureComponent {
       taskDetails: this.props.taskDetails || {
         title: '',
         description: ''
-      }
+      },
+      showError: false
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,7 +17,7 @@ class TaskForm extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.taskDetails || !nextProps.taskDetails) {
-      this.setState({ taskDetails: { title: '', description: '' } });
+      this.setState({ taskDetails: { title: '', description: '' }, showError: false });
       return;
     }
 
@@ -25,7 +26,8 @@ class TaskForm extends PureComponent {
         id: nextProps.taskDetails.id,
         title: nextProps.taskDetails.title,
         description: nextProps.taskDetails.description
-      }
+      },
+      showError: false
     });
   }
 
@@ -48,8 +50,11 @@ class TaskForm extends PureComponent {
     const { taskDetails } = this.state;
     const { onSubmit } = this.props;
 
-    if (taskDetails) {
+    if (taskDetails.title && taskDetails.description) {
+      this.setState({ showError: false });
       onSubmit(taskDetails);
+    } else {
+        this.setState({ showError: true });
     }
   }
 
@@ -59,6 +64,10 @@ class TaskForm extends PureComponent {
 
     return (
       <div className="TaskForm">
+        <div className="error-msg">
+          { this.state.showError ? <span>
+            Sorry, every fields are required </span> : null }
+        </div>
         <form onSubmit={this.handleSubmit}>
           <div className="taskForm-input">
             <label htmlFor="title">Title: </label>
