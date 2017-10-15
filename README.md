@@ -24,8 +24,12 @@ Builds the app for production to the `build` folder.
 ```
 react-todo-manager/
   README.md
-  node_modules/
   package.json
+  app/
+    app.js
+    controller.js
+    spec.js
+    tasks.json
   public/
     index.html
     favicon.ico
@@ -46,13 +50,13 @@ react-todo-manager/
 
 * [React](https://facebook.github.io/react)
 * [Redux](http://redux.js.org)
-* [webpack](https://webpack.js.org)
 * [Babel](http://babeljs.io)
-* [Autoprefixer](https://github.com/postcss/autoprefixer)
+* [webpack](https://webpack.js.org)
 * [ESLint](http://eslint.org)
+* [Chai](http://chaijs.com)
 * [Jest](http://facebook.github.io/jest)
+* [Mocha](https://mochajs.org)
+* [Supertest](https://github.com/visionmedia/supertest)
+* [Sass](http://sass-lang.com)
+* [Autoprefixer](https://github.com/postcss/autoprefixer)
 * [Bootstrap](http://getbootstrap.com)
-
-## Features
-- [x] Add, edit and remove tasks
-- [x] Responsiveness
