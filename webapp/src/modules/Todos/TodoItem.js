@@ -20,10 +20,10 @@ class TodoItem extends Component {
   render() {
     const { todo } = this.props;
     return (
-      <li className='todo-item'>
-        <input type='checkbox' onChange={this.toggleTodo(todo.id)} defaultChecked={todo.done}/>
-        <span>{todo.title}</span>: <span>{todo.description}</span>&nbsp;
-        <a href='' onClick={this.deleteTodo(todo.id)}>D</a>
+      <li className='todo-item list-group-item'>
+        <input className='toggle-todo' type='checkbox' onChange={this.toggleTodo(todo.id)} defaultChecked={todo.done}/>
+        <span className={todo.done ? 'is-done' : ''}><strong>{todo.title}</strong>: {todo.description}</span>
+        <a className='delete-todo' href='' onClick={this.deleteTodo(todo.id)}><span className="badge badge-secondary">x</span></a>
       </li>
     );
   }

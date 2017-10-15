@@ -113,7 +113,7 @@ const ACTION_HANDLERS = {
   LIST_TODOS_PENDING: pendingReducer,
   GET_TODO_PENDING: pendingReducer,
   CREATE_TODO_PENDING: pendingReducer,
-  UPDATE_TODO_PENDIG: pendingReducer,
+  UPDATE_TODO_PENDING: pendingReducer,
   DELETE_TODO_PENDING: pendingReducer,
   // Fulfilled reducers
   LIST_TODOS_FULFILLED: (state, action) => {

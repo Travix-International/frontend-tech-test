@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actions as todoActions } from '../../redux/modules/todos';
 import TodosList from './TodosList';
+import '../../styles/todos.scss';
 
 class TodosView extends Component {
   static propTypes = {
@@ -21,11 +22,19 @@ class TodosView extends Component {
   createTodo = () => {
     const title = this.title.value;
     const description = this.description.value;
-    if(title.length && description.length) {
+    const { isLoading } = this.props;
+
+    if(title.length && description.length && !isLoading) {
       this.props.todoActions.createTodo(title, description);
       this.title.value = '';
       this.description.value = '';
       this.title.focus();
+    }
+  }
+
+  enterTodo = (e) => {
+    if (e.key === 'Enter') {
+      this.createTodo();
     }
   }
 
@@ -38,19 +47,20 @@ class TodosView extends Component {
     const todos = todoIds.map((id) => this.props.todos[id]);
 
     return (
-      <div className="todo-view">
-        {
-          error
-          ? <div className='error-message'>{error.message || 'Error Found'}</div>
-          : null
-        }
-        <div className="todo-create">
-          <input type='text' placeholder="Enter Title" ref={this.setRef('title')}/>
-          <input type='text' placeholder="Enter Description" ref={this.setRef('description')}/>
-          <button onClick={this.createTodo} disabled={isLoading}>Create Todo</button>
+      <div className={`todo-view ${isLoading ? 'loading' : ''}`}>
+        <h1>Travix test by Andrew4d3</h1>
+        <div className="todo-create input-group">
+          <input className="form-control" type='text' placeholder="Enter Title" ref={this.setRef('title')} onKeyPress={this.enterTodo} />
+          <input className="form-control" type='text' placeholder="Enter Description" ref={this.setRef('description')} onKeyPress={this.enterTodo} />
+          <button className='btn btn-primary' onClick={this.createTodo} disabled={isLoading}>Create Task</button>
+          {
+            error
+            ? <div className='error-message alert alert-danger'>{error.message || 'Error Found'}</div>
+            : null
+          }
         </div>
-        { isLoading
-          ? <div>Loading...</div>
+        {isLoading
+          ? <div className='loading-message'>Loading...</div>
           : null
         }
         <TodosList todos={todos} todoActions={todoActions} />

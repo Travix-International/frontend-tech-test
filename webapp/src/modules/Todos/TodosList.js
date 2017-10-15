@@ -11,7 +11,7 @@ class TodosList extends Component {
   render() {
     const { todoActions, todos } = this.props;
     return (
-      <ul className='todo-list'>
+      <ul className='todo-list list-group'>
         {
           todos.map((todo) =>
             <TodoItem

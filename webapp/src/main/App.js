@@ -13,9 +13,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <ConnectedRouter history={browserHistory}>
-          <div className='main-wrapper'>
-            <Routes />
-          </div>
+          <Routes />
         </ConnectedRouter>
       </Provider>
     );
