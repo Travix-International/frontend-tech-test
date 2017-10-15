@@ -2,8 +2,9 @@
 
 ![React Todo Manager](screenshot.png)
 
-## Demo
-You'll find a demo hosted on Heroku: [nl-react-todo-manager.herokuapp.com](https://nl-react-todo-manager.herokuapp.com)
+A todo tasks manager written with React and a gorgeous UI.
+
+## [Demo](https://nl-react-todo-manager.herokuapp.com)
 
 ## Running
 ### `npm start`
@@ -60,3 +61,10 @@ react-todo-manager/
 * [Sass](http://sass-lang.com)
 * [Autoprefixer](https://github.com/postcss/autoprefixer)
 * [Bootstrap](http://getbootstrap.com)
+
+## Requirements
+- [x] React 16 and Redux
+- [x] Sass
+- [x] Responsiveness
+- [x] Integration tests on backend with 100% coverage
+- [x] UI inspired on [vliegwinkel.nl](https://www.vliegwinkel.nl)
