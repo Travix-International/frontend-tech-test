@@ -4,6 +4,8 @@ const app = require('express')();
 const tasksContainer = require('./tasks.json');
 const bodyParser = require('body-parser');
 
+// Setting initial id;
+let taskNextId = tasksContainer.tasks.length;
 // parse application/json
 app.use(bodyParser.json())
 
@@ -71,13 +73,17 @@ app.get('/task/:id', (req, res) => {
  */
 app.put('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
+  const keysAllowed = ['title', 'description', 'done'];
 
   if(!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if(task) {
-      task.title = req.body.title;
-      task.description = req.body.description;
+      Object.keys(req.body).forEach((key) => {
+        if(keysAllowed.indexOf(key) !== -1) {
+          task[key] = req.body[key];
+        }
+      })
       return res.status(204).send();
     } else {
       return res.status(404).json({
@@ -102,12 +108,13 @@ app.put('/task/:id', (req, res) => {
  */
 app.post('/task', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: taskNextId,
     title: req.body.title,
     description: req.body.description,
   };
 
   tasksContainer.tasks.push(task);
+  taskNextId++;
 
   return res.status(201).json({
     task: task,
@@ -131,7 +138,7 @@ app.delete('/task/:id', (req, res) => {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task) {
-      const taskIndex = tasksContainer.tasks;
+      const taskIndex = tasksContainer.tasks.indexOf(task);
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Deleted successfully',

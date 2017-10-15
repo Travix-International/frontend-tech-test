@@ -10,7 +10,7 @@ export const constants = {
 };
 
 const rejectPromise = (response) => {
-  console.error(response, 'Bad response received');
+  console.error(response, 'Bad response received'); // eslint-disable-line no-console
   const { body } = response;
   return Promise.reject(body || response);
 };
@@ -41,11 +41,11 @@ export const actions = {
       }
     };
   },
-  createTodo: (description, title) => {
+  createTodo: (title, description) => {
     return {
       type: constants.CREATE_TODO,
       payload: {
-        promise: http.post('/task', { description, title }).then((response) => {
+        promise: http.post('/task', { title, description }).then((response) => {
           const { statusCode, body } = response;
           if(statusCode === 201 && body && body.task) {
             return Promise.resolve(body);
@@ -166,8 +166,7 @@ const ACTION_HANDLERS = {
     const todoIds = state.todoIds.filter((id) => id !== payload.id);
     const todos = _.cloneDeep(state.todos);
 
-    delete todos[payload.id];    
-
+    delete todos[payload.id];
     return {
       ...state,
       todoIds,
