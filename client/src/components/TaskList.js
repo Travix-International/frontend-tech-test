@@ -8,10 +8,6 @@ import TaskItem from './TaskItem';
 import '../style/TaskList.scss';
 
 class TaskList extends Component {
-	constructor(props){
-		super(props);
-		}
-
 	componentDidMount(){
 	  this.props.fetchAll();
 	}
@@ -31,7 +27,8 @@ class TaskList extends Component {
 		const { tasks } = this.props;
 
 		if (tasks.length === 0) {
-			return <div className="msg">You not have any task,<br />
+			return <div className="msg">
+				You not have any task,<br />
 				click on add task button to add one
 			</div>;
 		}

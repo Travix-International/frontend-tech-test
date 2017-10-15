@@ -1,6 +1,6 @@
 import { PENDING, FETCH_ALL_SUCCESS, CREATE_SUCCESS, UPDATE_SUCCESS, DELETE_SUCCESS } from '../actions/actionTypes';
 
-function tasks( state = { isFetching: false, tasks: []}, action){
+function tasks( state = { loading: false, tasks: []}, action){
 	switch (action.type) {
 		case PENDING:
     return {
@@ -24,8 +24,6 @@ function tasks( state = { isFetching: false, tasks: []}, action){
 			 tasks: state.tasks.concat(createdTask)
 		 }
 		 case UPDATE_SUCCESS:
-		 console.log('ACTIOOOOO', action.payload.id);
-
 		 const updatedTasks = [];
 
 		 for (const task of state.tasks) {
@@ -35,7 +33,6 @@ function tasks( state = { isFetching: false, tasks: []}, action){
 				 updatedTasks.push(task);
 			 }
 		 }
-		  console.log('ACTIOOOOO', updatedTasks);
  		 return {
  			 ...state,
  		   loading: false,

@@ -91,8 +91,11 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
+    "mocha": "^4.0.1",
     "node-sass": "^4.5.3",
     "react-test-renderer": "^16.0.0",
     "sass-loader": "^6.0.6"

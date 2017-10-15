@@ -8,34 +8,34 @@ import {
 } from './actionTypes';
 
 
-function requestStarted() {
+export function requestStarted() {
   return {
     type: PENDING
   }
 }
 
-function fetchAllSuccess(payload) {
+export function fetchAllSuccess(payload) {
   return {
     type: FETCH_ALL_SUCCESS,
     payload
   }
 }
 
-function createSuccess(payload) {
+export function createSuccess(payload) {
   return {
     type: CREATE_SUCCESS,
   	payload
   }
 }
 
-function updateSuccess(payload) {
+export function updateSuccess(payload) {
   return {
     type: UPDATE_SUCCESS,
   	payload
   }
 }
 
-function deleteSuccess(payload) {
+export function deleteSuccess(payload) {
   return {
     type: DELETE_SUCCESS,
   	payload
@@ -82,7 +82,6 @@ export function updateTask(task) {
 }
 
 export function deleteTask(id) {
-	console.log('id', id)
 	return function (dispatch) {
 		const deleteEndPoint = `/task/delete/${id}`;
 		dispatch(requestStarted());
