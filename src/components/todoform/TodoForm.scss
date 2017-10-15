@@ -6,8 +6,8 @@
     margin: 0;
   }
 
-  &-input,
-  &-textarea {
+  &-group > &-input,
+  &-group > &-textarea {
     font-size: 1rem;
     color: rgba($purple-3, .85);
     background-color: $white;
@@ -25,7 +25,7 @@
     }
   }
 
-  &-textarea {
+  &-group > &-textarea {
     margin: 0.75rem 0 0;
     resize: none;
   }
