@@ -12,13 +12,15 @@ BE port: 9001
 
 # usage and features
 
-- The user can can see the his/her task list, if there is any task.<br>
-- By default there is no tasks  in the list. <br>
-- User can add task, update/change the existing task and delete it.<br>
+- The user can see his/her tasks in a list, if there is any task.<br>
+- By default there is no tasks in the list. <br>
+- User can add tasks, update/change the existing tasks and delete them.<br>
 - Add task functionality available by clicking the add task button on the screen.<br>
 - Update and delete task functionality is available by clicking on the change/delete icon
 next the task in the list.
 - clicking to add/update task button should open a modal window, with the related data in case of update<br>
+- modal can be closed by clicking X icon or outside the modal.
+- task will be add by clicking on add/update button in the modal window (if every fields are filled)
 
 # short description regarding to the application folder structure and config
 
@@ -59,14 +61,14 @@ next the task in the list.
 (under client folder!)<br>
 
 <b>Running unit tests Server</b>
-- <b>mocha </b>
-(under root folder!)<br>
-Please note: I assumed that you already have mocha on your machine.
-If not: run npm i -g mocha before running tests
+- <b>npm run server-test</b>
+(under root folder)<br>
 
 # Additional notes
 
 I used create-react-app as boilerplate.<br>
 Possible future development plan:
- - add more tests
- - polish style
+- handling errors from API !!!!
+- add error messages !!!
+- add more tests
+- polish style
