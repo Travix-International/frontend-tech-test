@@ -6,17 +6,17 @@ import ReduxThunk from 'redux-thunk';
 
 import App from './components/App';
 import reducer from './reducers';
-//registerServiceWorker from create-react-app
-import registerServiceWorker from './registerServiceWorker';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
 
 ReactDOM.render(
+  /* eslint-disable no-underscore-dangle */
   <Provider store={createStoreWithMiddleware(
-			reducer,
-			window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())}>
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+      )}>
     <App />
   </Provider>
-  , document.getElementById('root'));
-
-	registerServiceWorker();
+  /* eslint-enable */
+  , document.getElementById('root'),
+);

@@ -4,12 +4,14 @@
 .TaskForm {
 	width: 70%;
 	margin: 0 auto;
+  text-align: center;
 
 	.taskForm-input {
 		margin: 15px 0;
 		text-align: left;
 		label {
 			display: block;
+      color: $primary-font-color;
 			font-size: .8rem;
 		}
 

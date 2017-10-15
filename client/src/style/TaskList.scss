@@ -1,10 +1,15 @@
 @import 'colors';
+@import "mixins";
 
 .TaskList {
-
+  margin: 20px 10px;
 	.msg {
 		font-size: 1.2rem;
 		line-height: 1.2rem;
 		color: $secondary-font-color;
+
+    @include breakpoint(lg) {
+			font-size: 1.5rem;
+		};
 	}
 }

@@ -20,7 +20,7 @@
   }
 }
 
-@mixin button(){
+@mixin button {
 		font-size: 1rem;
 		padding: 10px 25px;
 		border-radius: 25px;
@@ -34,4 +34,10 @@
 		&:focus {
 			background: $primary-cta-color-dark;
 		}
+}
+
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

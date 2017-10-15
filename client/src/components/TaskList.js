@@ -1,76 +1,82 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchAll, updateTask, deleteTask } from '../actions/tasks';
-import { FETCH_ALL, FETCH_ALL_SUCCESS } from '../actions/actionTypes';
-
 import TaskItem from './TaskItem';
 
 import '../style/TaskList.scss';
 
 class TaskList extends Component {
-	componentDidMount(){
-	  this.props.fetchAll();
-	}
+  constructor() {
+    super();
 
-	handleUpdate = (task) => {
-		const { updateTask } = this.props;
-		updateTask(task);
-	}
+    this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+  }
+  componentDidMount() {
+    this.props.fetchAll();
+  }
 
-	handleRemove = (task) => {
-		const { deleteTask } = this.props;
+  handleUpdate(task) {
+    const { updateTask } = this.props;
+    updateTask(task);
+  }
 
-		deleteTask(task.id);
-	}
+  handleRemove(task) {
+    const { deleteTask } = this.props;
 
-	renderTaskList() {
-		const { tasks } = this.props;
+    deleteTask(task.id);
+  }
 
-		if (tasks.length === 0) {
-			return <div className="msg">
-				You not have any task,<br />
-				click on add task button to add one
-			</div>;
-		}
+  renderTaskList() {
+    const { tasks } = this.props;
 
-		return tasks.map( (task, index) => {
-			return <TaskItem
-				key={index}
-				task={task}
-				handleUpdate={this.handleUpdate}
-				handleRemove={this.handleRemove} />
-		})
-	}
+    if (tasks.length === 0) {
+      return (
+        <div className="msg">
+          You not have any task,<br />
+          click on add task button to add one
+        </div>
+      );
+    }
+
+    return tasks.map((task, index) => {
+      return (<TaskItem
+        key={index}
+        task={task}
+        handleUpdate={this.handleUpdate}
+        handleRemove={this.handleRemove} />);
+    });
+  }
 
   render() {
     return (
-			<div>
-	      <ul className="TaskList">
-					{this.renderTaskList()}
-	      </ul>
-			</div>
+      <div>
+        <ul className="TaskList">
+          {this.renderTaskList()}
+        </ul>
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-	const { tasks } = state;
+  const { tasks } = state;
   return tasks;
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchAll: () => {
       dispatch(fetchAll());
     },
-		updateTask: (task) => {
-			dispatch(updateTask(task));
-		},
-		deleteTask: (id) => {
-			dispatch(deleteTask(id));
-		}
-  }
-}
+    updateTask: (task) => {
+      dispatch(updateTask(task));
+    },
+    deleteTask: (id) => {
+      dispatch(deleteTask(id));
+    }
+  };
+};
 
 const ConnectedTaskList = connect(
   mapStateToProps,
