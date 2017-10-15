@@ -70,7 +70,7 @@ next the task in the list.
 
 I used create-react-app as boilerplate.<br>
 Possible future development plan:
-- handling errors from API !!!!
+- handling errors API (for instance sending special caracters, non existing id etc.) !!!!
 - add error messages !!!
 - add more tests
 - polish style
