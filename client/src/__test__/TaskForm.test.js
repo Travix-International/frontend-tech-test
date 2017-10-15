@@ -31,6 +31,9 @@ describe('TaskForm', () => {
 		const mockFunction = jest.fn();
 		const component = shallow(<TaskForm data={mockData} onSubmit={mockFunction} />);
 
+    component.find('input').at(0).simulate('change', {target: {name: 'title', value: 'NewTitle' }});
+    component.find('input').at(1).simulate('change', {target: {name: 'description', value: 'NewDescription' }});
+
 		component.find('form').at(0).simulate('submit', { preventDefault() {} });
 
 		expect(mockFunction).toBeCalled();

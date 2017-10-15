@@ -1,8 +1,9 @@
 # install
 
 1. clone the repo
-2. npm install
-3. npm start
+2. npm install in root -> BE app dependencies
+3. npm install in client -> FE app dependencies
+4. npm start in ROOT
 
 It will automatically start the Backend(BE) and Frontend application (FE) as well.<br>
 (Small start script added to the root package.json for convenience)
@@ -24,7 +25,7 @@ next the task in the list.
 
 # short description regarding to the application folder structure and config
 
- - client: FE application under client:
+ - client: FE application under client/src:
 	 - component: all components here. In a bigger application it useful to seperate
 	 smart/container components from only representational components.
 	 - actions: actionTypes- actionType constants, tasks - task related actions
@@ -32,6 +33,7 @@ next the task in the list.
 	 - style: every style related file here (scss, img).
 	 - __test__ unit tests
  - test folder in root: contains server related unit tests
+
 
 # style
 

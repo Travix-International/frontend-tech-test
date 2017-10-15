@@ -51,8 +51,8 @@ class TaskForm extends PureComponent {
     const { onSubmit } = this.props;
 
     if (taskDetails.title && taskDetails.description) {
-      this.setState({ showError: false });
       onSubmit(taskDetails);
+      this.setState({ showError: false });
     } else {
         this.setState({ showError: true });
     }
