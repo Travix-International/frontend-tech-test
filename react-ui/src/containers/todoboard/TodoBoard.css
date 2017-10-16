@@ -1,0 +1,63 @@
+.todo-header {
+  padding: 1.875rem 0;
+  text-align: center;
+  color: #FFFFFF;
+  border-top: 0.375rem solid #F24D67; }
+
+.todo-logo > .todo-logo-label {
+  padding: 0.25rem 0.75rem;
+  font-size: 1em;
+  vertical-align: baseline;
+  background-color: #F24D67; }
+
+.todo-logo > .todo-logo-label-small {
+  padding: 0.1875rem 0.3125rem; }
+
+.todo-title {
+  margin: 0.25rem 0 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #3848AA; }
+
+.todo-subtitle {
+  margin: 1.25rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1;
+  color: #757575; }
+
+.todo-box {
+  padding: 0.625rem;
+  margin: 0 0 1.5rem;
+  background-color: #3848AA;
+  border: 0.0625rem solid #3848AA;
+  border-bottom: 0.1875rem solid rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  box-shadow: -5px 5px rgba(0, 0, 0, 0.14); }
+  .todo-box-big-padding {
+    padding: 1.25rem; }
+
+.todo-footer {
+  padding: 0 0 1.25rem; }
+  .todo-footer-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #757575;
+    text-align: center; }
+    .todo-footer-text a {
+      color: #3848AA; }
+
+@media screen and (min-width: 768px) {
+  .todo-header {
+    padding: 1.875rem 0; }
+  .todo-title {
+    font-size: 2.5rem; }
+  .todo-subtitle {
+    margin-top: 1.75rem;
+    font-size: 1rem; }
+  .todo-box {
+    margin: 0 0 1.875rem; }
+  .todo-footer {
+    padding: 0 0 1.875rem; }
+    .todo-footer-text {
+      font-size: 0.8125rem; } }

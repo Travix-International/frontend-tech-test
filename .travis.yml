@@ -5,5 +5,7 @@ cache:
   directories:
     - node_modules
 script:
+  - npm test
+  - cd react-ui
   - npm run build
-  - npm run test:app
+  - npm test

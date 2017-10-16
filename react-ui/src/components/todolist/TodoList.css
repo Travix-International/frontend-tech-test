@@ -1,0 +1,56 @@
+.todolist {
+  padding: 0;
+  margin: 0;
+  color: #FFFFFF; }
+  .todolist-item {
+    padding: 0.75rem 0;
+    list-style: none;
+    clear: both; }
+    .todolist-item:first-child {
+      padding-top: 0; }
+    .todolist-item:last-child {
+      padding-bottom: 0; }
+    .todolist-item + .todolist-item {
+      border-top: 0.0625rem solid rgba(255, 255, 255, 0.1); }
+    .todolist-item-complete, .todolist-item-content, .todolist-item-remove {
+      display: inline-block;
+      vertical-align: top; }
+    .todolist-item-content {
+      width: calc(100% - 6rem); }
+    .todolist-item-complete, .todolist-item-remove {
+      width: 2rem; }
+      .todolist-item-complete-button, .todolist-item-remove-button {
+        width: 2rem;
+        height: 2rem;
+        line-height: 1;
+        background-color: #3848AA;
+        border: 0.125rem solid #F24D67;
+        border-radius: 3.75rem;
+        opacity: .5;
+        transition: all .1s ease-in-out; }
+        .todolist-item-complete-button:hover, .todolist-item-complete-button:focus, .todolist-item-remove-button:hover, .todolist-item-remove-button:focus {
+          background-color: #F24D67;
+          opacity: 1; }
+    .todolist-item-complete {
+      margin-right: 1rem; }
+      .todolist-item-complete-button {
+        font-size: 0.75rem;
+        background-color: #3848AA;
+        border: 0.125rem solid #F24D67;
+        border-radius: 3.75rem;
+        opacity: 0.5; }
+    .todolist-item-remove {
+      float: right;
+      margin-left: 1rem; }
+      .todolist-item-remove-button {
+        font-size: 1.5rem;
+        color: #FFFFFF;
+        border-color: transparent; }
+        .todolist-item-remove-button:hover, .todolist-item-remove-button:focus {
+          color: #FFFFFF; }
+    .todolist-item-name {
+      margin: 0 0 0.3125rem;
+      font-size: 1rem; }
+    .todolist-item-desc {
+      margin: 0;
+      font-size: 0.875rem; }

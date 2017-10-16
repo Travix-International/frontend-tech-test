@@ -1,7 +1,7 @@
 const request = require('supertest')
 var assert = require('chai').assert;
 
-const app = require('./app')
+const server = require('./index')
 const tasks = require('./tasks')
 
 function ok(expr, msg) {
@@ -12,7 +12,7 @@ describe('loading express', () => {
   let server
 
   beforeEach(() => {
-    server = require('./app')
+    server = require('./server')
   })
 
   afterEach(() => {
@@ -34,7 +34,7 @@ describe('loading express', () => {
 
 describe('GET /tasks', () => {
   it('returns all tasks', (done) => {
-    request(app)
+    request(server)
       .get('/tasks')
       .set('Accept', 'application/json')
       .expect(200)
@@ -50,7 +50,7 @@ describe('GET /task/:id', () => {
   it('returns a single task', (done) => {
     const id = 1
 
-    request(app)
+    request(server)
       .get('/task/' + id)
       .set('Accept', 'application/json')
       .expect(200)
@@ -62,7 +62,7 @@ describe('GET /task/:id', () => {
   })
 
   it('does not find a task', (done) => {
-    request(app)
+    request(server)
       .get('/task/9999999')
       .set('Accept', 'application/json')
       .expect(404)
@@ -74,7 +74,7 @@ describe('GET /task/:id', () => {
   })
 
   it('handles with invalid params', (done) => {
-    request(app)
+    request(server)
       .get('/task/NaN')
       .set('Accept', 'application/json')
       .expect(400)
@@ -88,7 +88,7 @@ describe('GET /task/:id', () => {
 
 describe('PUT /task/update/:id/:title/:description', () => {
   it('updates a given task', (done) => {
-    request(app)
+    request(server)
       .put('/task/update/1/Task%20Title/Task%20Description')
       .set('Accept', 'application/json')
       .expect(200)
@@ -102,7 +102,7 @@ describe('PUT /task/update/:id/:title/:description', () => {
 
 describe('POST /task/create/:title/:description', () => {
   it('creates a new task', (done) => {
-    request(app)
+    request(server)
       .post('/task/create/Task%20Title/Task%20Description')
       .set('Accept', 'application/json')
       .expect(200)
@@ -116,7 +116,7 @@ describe('POST /task/create/:title/:description', () => {
 
 describe('DELETE /task/delete/:id', () => {
   it('deletes a task', (done) => {
-    request(app)
+    request(server)
       .delete('/task/delete/1')
       .set('Accept', 'application/json')
       .expect(200)
@@ -128,7 +128,7 @@ describe('DELETE /task/delete/:id', () => {
   })
 
   it('does not find a task', (done) => {
-    request(app)
+    request(server)
       .delete('/task/delete/9999999')
       .set('Accept', 'application/json')
       .expect(404)
@@ -140,7 +140,7 @@ describe('DELETE /task/delete/:id', () => {
   })
 
   it('handles with invalid params', (done) => {
-    request(app)
+    request(server)
       .delete('/task/delete/NaN')
       .set('Accept', 'application/json')
       .expect(400)

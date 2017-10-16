@@ -26,12 +26,6 @@ class TodoBoard extends Component {
     fetchTodoList()
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({ isLoading: false })
-    }, 0)
-  }
-
   componentWillReceiveProps() {
     const { todo } = this.props
 

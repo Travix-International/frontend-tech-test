@@ -17,8 +17,16 @@ import 'bootstrap/dist/css/bootstrap-theme.css'
 
 import './css/layout.css'
 
+require('dotenv').config()
+
+let endpoint = 'http://localhost:5000'
+
+if (process.env.NODE_ENV === 'production') {
+  endpoint = 'https://nl-react-todo-manager.herokuapp.com'
+}
+
 export const client = axios.create({
-  baseURL: 'http://localhost:9001',
+  baseURL: endpoint,
   responseType: 'json'
 })
 

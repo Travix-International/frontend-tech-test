@@ -6,21 +6,49 @@ A todo tasks manager written with React and a gorgeous UI.
 
 ## [Demo](https://nl-react-todo-manager.herokuapp.com)
 
-## Usage
-### `npm install`
+## Local Development
 
-#### `npm start`
+### Run the API Server
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+# Initial setup
+npm install
 
-#### `npm test:app`
+# Start the server
+npm start
+```
 
-Runs tests for backend server.
+### Run the React UI
 
-#### `npm run build`
+In a separate terminal from the API server, start the UI:
 
-Builds the app for production to the `build` folder.
+```bash
+# Always change directory, first
+cd react-ui/
+
+# Initial setup
+npm install
+
+# Start the server
+npm start
+```
+
+## Tests
+
+### API Server
+```bash
+# Run API tests
+npm test
+```
+
+### React UI
+```bash
+# Always change directory, first
+cd react-ui/
+
+# Run React UI tests
+npm test
+```
 
 ## Folder Structure
 
