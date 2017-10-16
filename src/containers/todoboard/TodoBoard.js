@@ -52,25 +52,25 @@ class TodoBoard extends Component {
           <div className="container">
             <div className="row">
               <div className={columns}>
-                <div class="todo-box">
+                <div className="todo-box">
                   <TodoForm />
                 </div>
 
                 { isLoading &&
-                  <div class="todo-box todo-box-big-padding">
+                  <div className="todo-box todo-box-big-padding">
                     <TodoLoading />
                   </div>
                 }
 
                 { !isLoading &&
                   <div>
-                    <div class="todo-box todo-box-big-padding">
-                      <TodoList tasks={[]} />
+                    <div className="todo-box todo-box-big-padding">
+                      <TodoList {...this.props} />
                       <div className="clearfix"></div>
                     </div>
 
-                    <div class="todo-box todo-box-big-padding">
-                      <TodoFooter />
+                    <div className="todo-box todo-box-big-padding">
+                      <TodoFooter {...this.props} />
                     </div>
                   </div>
                 }
@@ -84,7 +84,7 @@ class TodoBoard extends Component {
             <div className="row">
               <div className={columns}>
                 <p className="todo-footer-text">
-                  <span className="todo-logo">Todo <span class="label todo-logo-label todo-logo-label-small">Manager</span></span> was created by <a href="https://pedrofelipe.com.br">Pedro Felipe</a>
+                  <span className="todo-logo">Todo <span className="label todo-logo-label todo-logo-label-small">Manager</span></span> was created by <a href="https://pedrofelipe.com.br">Pedro Felipe</a>
                 </p>
               </div>
             </div>
@@ -95,7 +95,7 @@ class TodoBoard extends Component {
   }
 }
 
-const mapStateToProps = (state) => state;
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
+const mapStateToProps = (state) => state
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoBoard);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoBoard)

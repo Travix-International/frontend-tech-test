@@ -16,7 +16,7 @@
       background-color: $pink;
     }
 
-    &-label-small {
+    & > &-label-small {
       padding: 0.1875rem 0.3125rem;
     }
   }
