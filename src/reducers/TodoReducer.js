@@ -25,7 +25,7 @@ export default function (state = initialState, action) {
         ...state,
         tasks: [
           ...state.tasks,
-          action.payload.data
+          action.payload.data.tasks
         ],
         isLoading: false
       }
@@ -39,7 +39,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         tasks: [
-          action.task,
+          action.payload.data.task,
           ...state.tasks
         ]
       }
@@ -47,7 +47,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         tasks: [
-          action.task,
+          action.payload.data.task,
           ...state.tasks
         ]
       }
@@ -55,7 +55,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         tasks: [
-          state.task.filter(id => id !== action.task.id)
+          state.task.filter(id => id !== action.payload.data.task.id)
         ]
       }
     default:

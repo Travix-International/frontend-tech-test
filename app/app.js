@@ -1,5 +1,7 @@
 let app = require('express')()
+let cors = require('cors')
 
+app.use(cors())
 app.use(require('./controller'))
 
 let server = app.listen(9001, () => {

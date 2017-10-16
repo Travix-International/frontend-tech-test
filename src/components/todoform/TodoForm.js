@@ -18,8 +18,6 @@ export default class TodoForm extends Component {
   }
 
   handleSubmit(e) {
-    console.log(e.target)
-    // this.setState({ title: e.target.title, description: e.target.description })
   }
 
   render() {

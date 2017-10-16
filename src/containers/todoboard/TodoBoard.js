@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as actions from '../../actions'
+import * as actions from '../../actions/TodoListActions'
 
 import { TodoForm, TodoList, TodoFooter, TodoLoading } from '../../components'
 
@@ -15,7 +15,8 @@ class TodoBoard extends Component {
     super(props)
 
     this.state = {
-      isLoading: true
+      isLoading: true,
+      hasFailed: false
     }
   }
 
@@ -28,7 +29,23 @@ class TodoBoard extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({ isLoading: false })
-    }, 2500)
+    }, 0)
+  }
+
+  componentWillReceiveProps() {
+    const { todo } = this.props
+
+    if(todo && !todo.isLoading) {
+      setTimeout(() => {
+        this.setState({ isLoading: false })
+        // Yep, intentionally faking loading for at least 2s
+        // Our Node backend is running too fast :(
+      }, 2000)
+    }
+
+    if(todo && todo.hasFailed) {
+      this.setState({ hasFailed: todo.hasFailed })
+    }
   }
 
   render() {
@@ -75,7 +92,7 @@ class TodoBoard extends Component {
                       <div className="clearfix"></div>
                     </div>
 
-                    <div className="todo-box todo-box-big-padding">
+                    <div className="todo-box">
                       <TodoFooter {...this.props} />
                     </div>
                   </div>

@@ -1,4 +1,4 @@
-export { default as TodoAddNewTask } from './TodoFormActions'
-export { default as TodoUpdateTask } from './TodoFormActions'
-export { default as TodoRemoveTask } from './TodoFormActions'
-export { default as TodoListActions } from './TodoListActions'
+export { default as addNewTask } from './TodoFormActions'
+export { default as updateTask } from './TodoFormActions'
+export { default as removeTask } from './TodoFormActions'
+export { default as fetchTodoList } from './TodoListActions'
