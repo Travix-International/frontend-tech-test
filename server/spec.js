@@ -1,11 +1,11 @@
 const request = require('supertest')
-var assert = require('chai').assert;
+var assert = require('chai').assert
 
 const server = require('./index')
 const tasks = require('./tasks')
 
 function ok(expr, msg) {
-  if (!expr) throw new Error(msg);
+  if (!expr) throw new Error(msg)
 }
 
 describe('loading express', () => {

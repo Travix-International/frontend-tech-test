@@ -37,8 +37,9 @@
   }
 
   &-box {
+    display: block;
     padding: 0.625rem;
-    margin: 0 0 1.5rem;
+    margin: 0 auto 1.875rem;
     background-color: $purple;
     border: 0.0625rem solid $purple;
     border-bottom: 0.1875rem solid rgba($black, .3);

@@ -56,3 +56,17 @@
     .todolist-item-desc {
       margin: 0;
       font-size: 0.875rem; }
+  .todolist-load-more {
+    display: block;
+    padding: 0.5rem 1rem;
+    margin: 0 auto 1.875rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-shadow: none;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #3848AA;
+    border: 0.0625rem solid #3848AA;
+    border-bottom: 0.1875rem solid rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    box-shadow: -5px 5px rgba(0, 0, 0, 0.14); }

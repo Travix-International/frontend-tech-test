@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import * as actions from '../../actions/actions'
 
 import './TodoList.css'
+import '../../containers/todoboard/TodoBoard.css'
 
 const LOCAL_STORAGE_NAME = 'todoManagerCompleted'
 
@@ -13,7 +14,9 @@ class TodoList extends Component {
     super(props)
 
     this.state = {
-      completed:  this.getCompleted()
+      completed:  this.getCompleted(),
+      shownItems: 5,
+      reachedBottom: false
     }
   }
 
@@ -65,56 +68,88 @@ class TodoList extends Component {
       newCompleted.splice(newCompleted.indexOf(id), 1)
 
       removeTask(id)
-      
+
       this.setState({ completed: newCompleted })
       this.setCompleted(newCompleted)
     }
   }
 
-  renderTasks() {
+  incrementShownItems() {
+    const { shownItems, reachedBottom } = this.state
     const { todo } = this.props
 
+    const increment = 5
+
+    const newShownItems = shownItems + increment <= todo.tasks.length ? shownItems + increment : todo.tasks.length
+    this.setState({ shownItems: newShownItems })
+
+    if(!reachedBottom && newShownItems === todo.tasks.length) {
+      this.setState({ reachedBottom: true })
+    }
+  }
+
+  renderTasks() {
+    const { todo } = this.props
+    const { shownItems, reachedBottom } = this.state
+
+    let rows = []
+    let tasks = todo.tasks.slice().reverse()
+
+    for(let k = 0; k < shownItems; k++) {
+      rows.push(
+        <li className="todolist-item" key={k}>
+          <span className="todolist-item-complete">
+            <button
+              className={`
+                todolist-item-complete-button
+                ${this.isCompleted(tasks[k].id)
+                  ? 'todolist-item-complete-button-marked'
+                  : 'todolist-item-complete-button-unmarked'
+                }
+              `}
+              aria-label="Complete task"
+              onClick={() => this.handleComplete(tasks[k].id)}>
+                <i className="glyphicon glyphicon-ok" aria-label="Complete task"></i>
+            </button>
+          </span>
+
+          <span className="todolist-item-content">
+            <h4 className="todolist-item-name">{ tasks[k].title }</h4>
+            <p className="todolist-item-desc">{ tasks[k].description }</p>
+          </span>
+
+          <span className="todolist-item-remove">
+            <button
+              className="todolist-item-remove-button"
+              aria-label="Remove task"
+              onClick={() => this.handleRemove(tasks[k].id)}>
+                <i className="glyphicon glyphicon-remove" aria-label="Remove task"></i>
+            </button>
+          </span>
+        </li>
+      )
+    }
+
     return (
-      <ul className="todolist">
-        { todo.tasks && todo.tasks.slice().reverse().map((t, key) => (
-          <li className="todolist-item" key={key}>
-            <span className="todolist-item-complete">
-              <button
-                className={`
-                  todolist-item-complete-button
-                  ${this.isCompleted(t.id)
-                    ? 'todolist-item-complete-button-marked'
-                    : 'todolist-item-complete-button-unmarked'
-                  }
-                `}
-                aria-label="Complete task"
-                onClick={() => this.handleComplete(t.id)}>
-                  <i className="glyphicon glyphicon-ok" aria-label="Complete task"></i>
-              </button>
-            </span>
+      <div>
+        <div className="todo-box todo-box-big-padding">
+          <ul className="todolist">
+            { todo.tasks && rows }
+          </ul>
+        </div>
 
-            <span className="todolist-item-content">
-              <h4 className="todolist-item-name">{ t.title }</h4>
-              <p className="todolist-item-desc">{ t.description }</p>
-            </span>
-
-            <span className="todolist-item-remove">
-              <button
-                className="todolist-item-remove-button"
-                aria-label="Remove task"
-                onClick={() => this.handleRemove(t.id)}>
-                  <i className="glyphicon glyphicon-remove" aria-label="Remove task"></i>
-              </button>
-            </span>
-          </li>
-        ))}
-      </ul>
+        { !reachedBottom &&
+          <button className="todolist-load-more" onClick={() => this.incrementShownItems()}>Load More</button>
+        }
+      </div>
     )
   }
 
   renderEmpty() {
     return (
-      <img src="https://i.imgur.com/6Kmg87X.gif" className="img-responsive" alt="You've completed all your tasks. Congrats!" />
+      <div className="todo-box todo-box-big-padding">
+        <img src="https://i.imgur.com/6Kmg87X.gif" className="img-responsive" alt="You've completed all your tasks. Congrats!" />
+      </div>
     )
   }
 

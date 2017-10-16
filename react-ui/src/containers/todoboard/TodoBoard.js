@@ -81,10 +81,7 @@ class TodoBoard extends Component {
 
                 { !isLoading &&
                   <div>
-                    <div className="todo-box todo-box-big-padding">
-                      <TodoList {...this.props} />
-                      <div className="clearfix"></div>
-                    </div>
+                    <TodoList {...this.props} />
 
                     <div className="todo-box">
                       <TodoFooter {...this.props} />

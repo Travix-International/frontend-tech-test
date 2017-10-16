@@ -99,4 +99,20 @@
       font-size: 0.875rem;
     }
   }
+
+  &-load-more {
+    display: block;
+    padding: 0.5rem 1rem;
+    margin: 0 auto 1.875rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-shadow: none;
+    text-align: center;
+    color: $white;
+    background-color: $purple;
+    border: 0.0625rem solid $purple;
+    border-bottom: 0.1875rem solid rgba($black, .3);
+    border-radius: 0.5rem;
+    box-shadow: -5px 5px rgba($black, .14);
+  }
 }
