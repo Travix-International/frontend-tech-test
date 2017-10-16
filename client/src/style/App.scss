@@ -1,0 +1,61 @@
+@import "reset";
+@import "mixins";
+@import "colors";
+
+#root { height: 100% }
+
+.App {
+	width: 100%;
+	height: 100%;
+	font-size: 16px;
+	line-height: 16px;
+	text-align: center;
+	background: $darkest-purple;
+	color: $primary-font-color;
+
+	.App-whole {
+		position: relative;
+		max-width: 900px;
+		height: 100%;
+		margin: 0 auto;
+		background: $primary-background;
+	}
+
+	.App-header {
+		padding: 25px 10px;
+		font-weight: 100;
+		background: $darker-purple;
+
+		.App-title {
+			font-size: 1.3rem;
+			line-height: 1.3rem;
+			font-weight: 100;
+			text-transform: uppercase;
+
+			@include breakpoint(md) {
+				font-size: 2rem;
+				line-height: 2rem;
+			}
+		}
+
+		.App-desc {
+			margin-top: 15px;
+		}
+
+		.App-author, .App-logo {
+			vertical-align: middle;
+		}
+
+		.App-logo {
+			height: 30px;
+			margin-left: 5px;
+		}
+	}
+
+	.App-body {
+		padding: 25px 10px;
+		z-index: 1;
+		color: $primary-font-color;
+		background: $primary-background;
+	}
+}
