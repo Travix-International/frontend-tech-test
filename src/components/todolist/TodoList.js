@@ -10,7 +10,7 @@ export default class TodoList extends Component {
       tasks: []
     }
   }
-  
+
   render() {
     return (
       <ul className="todolist">
@@ -89,6 +89,6 @@ export default class TodoList extends Component {
           </span>
         </li>
       </ul>
-    );
+    )
   }
 }

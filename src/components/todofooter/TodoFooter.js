@@ -8,6 +8,6 @@ export default class TodoFooter extends Component {
       <div>
         TodoFooter
       </div>
-    );
+    )
   }
 }

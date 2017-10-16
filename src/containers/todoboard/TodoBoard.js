@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-import * as actions from '../../actions';
+import * as actions from '../../actions'
 
 import { TodoForm, TodoList, TodoFooter, TodoLoading } from '../../components'
 
@@ -17,6 +17,12 @@ class TodoBoard extends Component {
     this.state = {
       isLoading: true
     }
+  }
+
+  componentWillMount() {
+    const { fetchTodoList } = this.props
+
+    fetchTodoList()
   }
 
   componentDidMount() {
@@ -91,7 +97,7 @@ class TodoBoard extends Component {
           </div>
         </footer>
       </div>
-    );
+    )
   }
 }
 

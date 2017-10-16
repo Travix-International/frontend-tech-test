@@ -12,8 +12,8 @@ import reducers from './reducers'
 
 import { TodoBoard } from './containers'
 
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap-theme.css'
 
 import './css/layout.css'
 

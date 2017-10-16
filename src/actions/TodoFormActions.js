@@ -2,9 +2,9 @@ import {
   ADD_NEW_TASK,
   UPDATE_TASK,
   REMOVE_TASK
-} from '../constants';
+} from '../constants'
 
-export const TodoAddNewTask = (title, description) => ({
+export const addNewTask = (title, description) => ({
   types: [ADD_NEW_TASK],
   payload: {
     request: {
@@ -13,7 +13,7 @@ export const TodoAddNewTask = (title, description) => ({
   }
 })
 
-export const TodoUpdateTask = (id, title, description) => ({
+export const updateTask = (id, title, description) => ({
   types: [UPDATE_TASK],
   payload: {
     request: {
@@ -22,7 +22,7 @@ export const TodoUpdateTask = (id, title, description) => ({
   }
 })
 
-export const TodoRemoveTask = (id) => ({
+export const removeTask = (id) => ({
   types: [REMOVE_TASK],
   payload: {
     request: {

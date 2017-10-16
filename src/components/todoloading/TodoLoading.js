@@ -6,6 +6,6 @@ export default class TodoLoading extends Component {
   render() {
     return (
       <div className="todoloading-spinner"></div>
-    );
+    )
   }
 }

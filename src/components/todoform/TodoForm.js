@@ -47,6 +47,6 @@ export default class TodoForm extends Component {
           <Button onClick={(e) => this.handleSubmit(e)} bsStyle="todoform">Add Task</Button>
         </div>
       </form>
-    );
+    )
   }
 }
