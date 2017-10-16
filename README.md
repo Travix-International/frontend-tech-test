@@ -16,9 +16,14 @@ So your mission is to develop the front-end from scratch using a famous front-en
 
 We are also expecting from you a usable, responsive UI.
 
-# Process
+# Instrucctions and other author notes
 
-Fork the repository into your account. Once your code is ready open a pull-request on this repository and we will review it.
+* Install dependecies with:`npm install`
+* Start server with: `npm run server:start`
+* Open a second terminal and start frontend with: `npm run webapp:start`
+* Start testing this beutiful app ;)
+* Then you can start running all the tests by doing: `npm test`
+* All frontend files are in `webapp/`
 
 # Requirements
 
