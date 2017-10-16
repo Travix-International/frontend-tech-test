@@ -42,14 +42,14 @@ describe('GET /tasks', () => {
 
 describe('GET /task/:id', () => {
   it('returns a single task', (done) => {
-    const id = 1
+    const id = 2
 
     request(server)
       .get('/task/' + id)
       .set('Accept', 'application/json')
       .expect(200)
       .end((err, res) => {
-        assert.strictEqual(res.body.task.title, tasks.tasks[id].title, 'Invalid single task')
+        assert.strictEqual(res.body.task.title, tasks.tasks[id - 1].title, 'Invalid single task')
 
         done()
       })

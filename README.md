@@ -96,5 +96,5 @@ react-todo-manager/
 - [x] React 16 and Redux
 - [x] Sass
 - [x] Responsiveness
-- [x] Integration tests on backend with 100% coverage
+- [x] Integration tests on backend
 - [x] UI inspired on [vliegwinkel.nl](https://www.vliegwinkel.nl)
