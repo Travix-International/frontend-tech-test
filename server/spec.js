@@ -9,12 +9,6 @@ function ok(expr, msg) {
 }
 
 describe('loading express', () => {
-  let server
-
-  beforeEach(() => {
-    server = require('./server')
-  })
-
   afterEach(() => {
     server.close()
   })
