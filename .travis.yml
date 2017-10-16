@@ -7,6 +7,3 @@ cache:
 script:
   - npm install
   - npm test
-  - cd react-ui
-  - npm install
-  - npm run build
