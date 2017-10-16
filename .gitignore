@@ -11,7 +11,7 @@
 /build
 
 # useless css files
-src/**/*.css
+react-ui/src/**/*.css
 
 # misc
 .DS_Store

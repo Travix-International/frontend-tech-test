@@ -19,7 +19,7 @@ import './css/layout.css'
 
 require('dotenv').config()
 
-let endpoint = 'http://localhost:5000'
+let endpoint = 'http://10.0.10.10:5000'
 
 if (process.env.NODE_ENV === 'production') {
   endpoint = 'https://nl-react-todo-manager.herokuapp.com'

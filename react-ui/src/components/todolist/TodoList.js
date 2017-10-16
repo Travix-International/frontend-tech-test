@@ -1,13 +1,65 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import * as actions from '../../actions/actions'
 
 import './TodoList.css'
 
-export default class TodoList extends Component {
+const LOCAL_STORAGE_NAME = 'todoManagerCompleted'
+
+class TodoList extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      tasks: []
+      completed:  this.getCompleted()
+    }
+  }
+
+  setCompleted(completed) {
+    localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify(completed))
+
+    return true
+  }
+
+  getCompleted() {
+    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME)) || []
+  }
+
+  isCompleted(id) {
+    const { completed } = this.state
+
+    if(Number.isInteger(id)) {
+      let newCompleted = completed
+      return newCompleted.includes(id)
+    }
+
+    return false
+  }
+
+  handleComplete(id) {
+    const { completed } = this.state
+
+    if(Number.isInteger(id)) {
+      const newCompleted = completed
+
+      if(newCompleted.includes(id)) {
+        newCompleted.splice(newCompleted.indexOf(id), 1)
+      } else {
+        newCompleted.push(id)
+      }
+
+      this.setState({ completed: newCompleted })
+      this.setCompleted(newCompleted)
+    }
+  }
+
+  handleRemove(id) {
+    const { removeTask } = this.props
+
+    if(Number.isInteger(id)) {
+      removeTask(id)
     }
   }
 
@@ -16,11 +68,20 @@ export default class TodoList extends Component {
 
     return (
       <ul className="todolist">
-        {todo.tasks[0] && todo.tasks[0].map((t, key) => (
+        {todo.tasks && todo.tasks.slice().reverse().map((t, key) => (
           <li className="todolist-item" key={key}>
             <span className="todolist-item-complete">
-              <button className="todolist-item-complete-button" aria-label="Complete task">
-                <span role="img" aria-label="Complete task">👍</span>
+              <button
+                className={`
+                  todolist-item-complete-button
+                  ${this.isCompleted(t.id)
+                    ? 'todolist-item-complete-button-marked'
+                    : 'todolist-item-complete-button-unmarked'
+                  }
+                `}
+                aria-label="Complete task"
+                onClick={() => this.handleComplete(t.id)}>
+                  <i className="glyphicon glyphicon-ok" aria-label="Complete task"></i>
               </button>
             </span>
 
@@ -30,7 +91,12 @@ export default class TodoList extends Component {
             </span>
 
             <span className="todolist-item-remove">
-              <button className="todolist-item-remove-button" aria-label="Remove task">&times;</button>
+              <button
+                className="todolist-item-remove-button"
+                aria-label="Remove task"
+                onClick={() => this.handleRemove(t.id)}>
+                  <i className="glyphicon glyphicon-remove" aria-label="Remove task"></i>
+              </button>
             </span>
           </li>
         ))}
@@ -38,3 +104,8 @@ export default class TodoList extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => state
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)

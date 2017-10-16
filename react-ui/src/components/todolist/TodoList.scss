@@ -38,33 +38,41 @@
       width: 2rem;
 
       &-button {
+        padding: 0;
         width: 2rem;
         height: 2rem;
+        font-size: 0.8125rem;
         line-height: 1;
+        color: $white;
         background-color: $purple;
         border: 0.125rem solid $pink;
         border-radius: 3.75rem;
         opacity: .5;
         transition: all .1s ease-in-out;
 
+        & > .glyphicon {
+          top: 0;
+        }
+
         &:hover,
-        &:focus {
+        &:focus,
+        &-marked {
           background-color: $pink;
           opacity: 1;
+          transform: scale(1.25);
+        }
+
+        &-unmarked,
+        &-unmarked:focus {
+          background-color: $purple;
+          opacity: .5;
+          transform: scale(1);
         }
       }
     }
 
     &-complete {
       margin-right: 1rem;
-
-      &-button {
-        font-size: 0.75rem;
-        background-color: $purple;
-        border: 0.125rem solid $pink;
-        border-radius: 3.75rem;
-        opacity: 0.5;
-      }
     }
 
     &-remove {
@@ -72,8 +80,6 @@
       margin-left: 1rem;
 
       &-button {
-        font-size: 1.5rem;
-        color: $white;
         border-color: transparent;
 
         &:hover,

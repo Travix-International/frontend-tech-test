@@ -11,8 +11,8 @@ export default class TodoFooter extends Component {
   calculateTasks() {
     const { todo } = this.props
 
-    if(todo.tasks[0]) {
-      return `There are ${todo.tasks[0].length} tasks waiting to be completed 🚀`
+    if(todo.tasks) {
+      return `There are ${todo.tasks.length} tasks waiting to be completed 🚀`
     }
 
     return 'Houston, we have a problem! 🛰'
