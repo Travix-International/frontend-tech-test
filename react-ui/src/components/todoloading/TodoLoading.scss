@@ -1,0 +1,21 @@
+@import '../../css/colors.scss';
+
+.todoloading-spinner {
+	margin: 0.75rem auto;
+	width: 3rem;
+	height: 3rem;
+	border: 0.5rem rgba($white, 0.25) solid;
+	border-top: 0.5rem rgba($white, 1) solid;
+	border-radius: 50%;
+	animation: todoloading-spin .6s infinite linear;
+}
+
+@-webkit-keyframes todoloading-spin {
+	from { -webkit-transform: rotate(0deg); }
+	to { -webkit-transform: rotate(359deg); }
+}
+
+@keyframes todoloading-spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(359deg); }
+}

@@ -1,38 +1,100 @@
-# Travix test
+# React Todo Manager [![Build Status](https://travis-ci.org/PedroFelipe/frontend-tech-test.svg?branch=master)](https://travis-ci.org/PedroFelipe/frontend-tech-test)
 
-Travix Front-End Tech Interview Test 
+![React Todo Manager](screenshot.png)
 
-# Introduction
+A todo tasks manager written with React and a gorgeous UI.
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+## [Demo](https://nl-react-todo-manager.herokuapp.com)
 
-Using your application we must be able to create, modify and delete a task.
+## Local Development
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
+### Run the API Server
 
-However this server is not perfect. It could be improved and tested as well.
+```bash
+# Initial setup
+npm install
 
-So your mission is to develop the front-end from scratch using a famous front-end framework.
+# Start the server
+npm start
+```
 
-We are also expecting from you a usable, responsive UI.
+### Run the React UI
 
-# Process
+In a separate terminal from the API server, start the UI:
 
-Fork the repository into your account. Once your code is ready open a pull-request on this repository and we will review it.
+```bash
+# Always change directory, first
+cd react-ui/
 
-# Requirements
+# Initial setup
+npm install
 
-* React 14+
-* Redux or Flux or Frint or whateverelse with a one-way data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
+# Start the server
+npm start
+```
 
-# Bonus
+## Tests
 
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us !
+### API Server
+```bash
+# Run API tests
+npm test
+```
+
+### React UI
+```bash
+# Always change directory, first
+cd react-ui/
+
+# Run React UI tests
+npm test
+```
+
+## Folder Structure
+
+```
+react-todo-manager/
+  README.md
+  package.json
+  app/
+    app.js
+    controller.js
+    spec.js
+    tasks.json
+  public/
+    index.html
+    favicon.ico
+    manifest.json
+  src/
+    actions/
+    components/
+    constants/
+    containers/
+    css/
+    decorators/
+    reducers/
+    index.css
+    index.js
+```
+
+## What’s Inside?
+
+* [React](https://facebook.github.io/react)
+* [Redux](http://redux.js.org)
+* [Babel](http://babeljs.io)
+* [webpack](https://webpack.js.org)
+* [ESLint](http://eslint.org)
+* [Chai](http://chaijs.com)
+* [Jest](http://facebook.github.io/jest)
+* [Mocha](https://mochajs.org)
+* [Supertest](https://github.com/visionmedia/supertest)
+* [Sass](http://sass-lang.com)
+* [Autoprefixer](https://github.com/postcss/autoprefixer)
+* [Bootstrap](http://getbootstrap.com)
+
+## Requirements
+- [x] React 16 and Redux
+- [x] Sass
+- [x] Responsiveness
+- [x] Integration tests on backend
+- [x] UI inspired on [vliegwinkel.nl](https://www.vliegwinkel.nl)

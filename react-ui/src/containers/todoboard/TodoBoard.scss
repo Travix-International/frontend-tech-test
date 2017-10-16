@@ -1,0 +1,95 @@
+@import '../../css/colors.scss';
+
+.todo {
+  &-header {
+    padding: 1.875rem 0;
+    text-align: center;
+    color: $white;
+    border-top: 0.375rem solid $pink;
+  }
+
+  &-logo {
+    & > &-label {
+      padding: 0.25rem 0.75rem;
+      font-size: 1em;
+      vertical-align: baseline;
+      background-color: $pink;
+    }
+
+    & > &-label-small {
+      padding: 0.1875rem 0.3125rem;
+    }
+  }
+
+  &-title {
+    margin: 0.25rem 0 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1;
+    color: $purple;
+  }
+
+  &-subtitle {
+    margin: 1.25rem 0 0;
+    font-size: 0.875rem;
+    line-height: 1;
+    color: $gray;
+  }
+
+  &-box {
+    display: block;
+    padding: 0.625rem;
+    margin: 0 auto 1.875rem;
+    background-color: $purple;
+    border: 0.0625rem solid $purple;
+    border-bottom: 0.1875rem solid rgba($black, .3);
+    border-radius: 0.5rem;
+    box-shadow: -5px 5px rgba($black, .14);
+
+    &-big-padding {
+      padding: 1.25rem;
+    }
+  }
+
+  &-footer {
+    padding: 0 0 1.25rem;
+
+    &-text {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: $gray;
+      text-align: center;
+
+      a {
+        color: $purple;
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    &-header {
+      padding: 1.875rem 0;
+    }
+
+    &-title {
+      font-size: 2.5rem;
+    }
+
+    &-subtitle {
+      margin-top: 1.75rem;
+      font-size: 1rem;
+    }
+
+    &-box {
+      margin: 0 0 1.875rem;
+    }
+
+    &-footer {
+      padding: 0 0 1.875rem;
+
+      &-text {
+        font-size: 0.8125rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,118 @@
+@import '../../css/colors.scss';
+
+.todolist {
+  padding: 0;
+  margin: 0;
+  color: $white;
+
+  &-item {
+    padding: 0.75rem 0;
+    list-style: none;
+    clear: both;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    & + & {
+      border-top: 0.0625rem solid rgba($white, .1);
+    }
+
+    &-complete,
+    &-content,
+    &-remove {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    &-content {
+      width: calc(100% - 6rem);
+    }
+
+    &-complete,
+    &-remove {
+      width: 2rem;
+
+      &-button {
+        padding: 0;
+        width: 2rem;
+        height: 2rem;
+        font-size: 0.8125rem;
+        line-height: 1;
+        color: $white;
+        background-color: $purple;
+        border: 0.125rem solid $pink;
+        border-radius: 3.75rem;
+        opacity: .5;
+        transition: all .1s ease-in-out;
+
+        & > .glyphicon {
+          top: 0;
+        }
+
+        &:hover,
+        &:focus,
+        &-marked {
+          background-color: $pink;
+          opacity: 1;
+          transform: scale(1.25);
+        }
+
+        &-unmarked,
+        &-unmarked:focus {
+          background-color: $purple;
+          opacity: .5;
+          transform: scale(1);
+        }
+      }
+    }
+
+    &-complete {
+      margin-right: 1rem;
+    }
+
+    &-remove {
+      float: right;
+      margin-left: 1rem;
+
+      &-button {
+        border-color: transparent;
+
+        &:hover,
+        &:focus {
+          color: $white;
+        }
+      }
+    }
+
+    &-name {
+      margin: 0 0 0.3125rem;
+      font-size: 1rem;
+    }
+
+    &-desc {
+      margin: 0;
+      font-size: 0.875rem;
+    }
+  }
+
+  &-load-more {
+    display: block;
+    padding: 0.5rem 1rem;
+    margin: 0 auto 1.875rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-shadow: none;
+    text-align: center;
+    color: $white;
+    background-color: $purple;
+    border: 0.0625rem solid $purple;
+    border-bottom: 0.1875rem solid rgba($black, .3);
+    border-radius: 0.5rem;
+    box-shadow: -5px 5px rgba($black, .14);
+  }
+}
