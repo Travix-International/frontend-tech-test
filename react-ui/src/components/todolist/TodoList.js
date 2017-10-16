@@ -8,6 +8,8 @@ import './TodoList.css'
 import '../../containers/todoboard/TodoBoard.css'
 
 const LOCAL_STORAGE_NAME = 'todoManagerCompleted'
+const INITIAL_ITEMS_TO_SHOW = 25
+const INCREMENT_ITEMS = 25
 
 class TodoList extends Component {
   constructor(props) {
@@ -15,9 +17,41 @@ class TodoList extends Component {
 
     this.state = {
       completed:  this.getCompleted(),
-      shownItems: 5,
-      reachedBottom: false
+      shownItems: this.setShownItems(props),
+      reachedBottom: false,
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { shownItems } = this.state
+
+    this.setState({
+      shownItems: this.setShownItems(nextProps, shownItems),
+      reachedBottom: this.reachedBottom(this.setShownItems(nextProps), nextProps),
+    })
+
+  }
+
+  componentWillMount() {
+    this.setState({ reachedBottom: this.reachedBottom(this.setShownItems(this.props), this.props) })
+  }
+
+  reachedBottom(shownItems, props) {
+    const { todo } = props
+
+    console.log(shownItems)
+
+    return todo.tasks.length < shownItems ? true : false
+  }
+
+  setShownItems(props, shownItems = INITIAL_ITEMS_TO_SHOW) {
+    const { todo } = props
+
+    if (shownItems > INITIAL_ITEMS_TO_SHOW && todo.tasks.length > shownItems) return shownItems
+
+    return todo.tasks.length < INITIAL_ITEMS_TO_SHOW || todo.tasks.length < shownItems
+      ? todo.tasks.length
+      : INITIAL_ITEMS_TO_SHOW
   }
 
   setCompleted(completed) {
@@ -78,9 +112,7 @@ class TodoList extends Component {
     const { shownItems, reachedBottom } = this.state
     const { todo } = this.props
 
-    const increment = 5
-
-    const newShownItems = shownItems + increment <= todo.tasks.length ? shownItems + increment : todo.tasks.length
+    const newShownItems = shownItems + INCREMENT_ITEMS <= todo.tasks.length ? (shownItems + INCREMENT_ITEMS) : todo.tasks.length
     this.setState({ shownItems: newShownItems })
 
     if(!reachedBottom && newShownItems === todo.tasks.length) {
@@ -102,27 +134,27 @@ class TodoList extends Component {
             <button
               className={`
                 todolist-item-complete-button
-                ${this.isCompleted(tasks[k].id)
+                ${this.isCompleted(todo.tasks.slice().reverse()[k].id)
                   ? 'todolist-item-complete-button-marked'
                   : 'todolist-item-complete-button-unmarked'
                 }
               `}
               aria-label="Complete task"
-              onClick={() => this.handleComplete(tasks[k].id)}>
+              onClick={() => this.handleComplete(todo.tasks.slice().reverse()[k].id)}>
                 <i className="glyphicon glyphicon-ok" aria-label="Complete task"></i>
             </button>
           </span>
 
           <span className="todolist-item-content">
-            <h4 className="todolist-item-name">{ tasks[k].title }</h4>
-            <p className="todolist-item-desc">{ tasks[k].description }</p>
+            <h4 className="todolist-item-name">{ todo.tasks.slice().reverse()[k].title }</h4>
+            <p className="todolist-item-desc">{ todo.tasks.slice().reverse()[k].description }</p>
           </span>
 
           <span className="todolist-item-remove">
             <button
               className="todolist-item-remove-button"
               aria-label="Remove task"
-              onClick={() => this.handleRemove(tasks[k].id)}>
+              onClick={() => this.handleRemove(todo.tasks.slice().reverse()[k].id)}>
                 <i className="glyphicon glyphicon-remove" aria-label="Remove task"></i>
             </button>
           </span>
