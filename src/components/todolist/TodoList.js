@@ -25,7 +25,7 @@ export default class TodoList extends Component {
         {tasks && tasks.map((t, key) => (
           <li className="todolist-item" key={key}>
             <span className="todolist-item-complete">
-              <button className="todolist-item-complete-button" aria-label="Complete task">Complete Task</button>
+              <button className="todolist-item-complete-button" aria-label="Complete task">👍</button>
             </span>
 
             <span className="todolist-item-content">

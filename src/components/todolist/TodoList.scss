@@ -40,9 +40,18 @@
       &-button {
         width: 2rem;
         height: 2rem;
+        line-height: 1;
         background-color: $purple;
         border: 0.125rem solid $pink;
         border-radius: 3.75rem;
+        opacity: .5;
+        transition: all .1s ease-in-out;
+
+        &:hover,
+        &:focus {
+          background-color: $pink;
+          opacity: 1;
+        }
       }
     }
 
@@ -50,10 +59,11 @@
       margin-right: 1rem;
 
       &-button {
+        font-size: 0.75rem;
         background-color: $purple;
         border: 0.125rem solid $pink;
         border-radius: 3.75rem;
-        text-indent: -9999px;
+        opacity: 0.5;
       }
     }
 
@@ -63,14 +73,12 @@
 
       &-button {
         font-size: 1.5rem;
-        line-height: 1;
-        color: rgba($white, .5);
+        color: $white;
         border-color: transparent;
 
         &:hover,
         &:focus {
           color: $white;
-          background-color: $pink;
         }
       }
     }
