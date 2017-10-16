@@ -57,18 +57,26 @@ class TodoList extends Component {
 
   handleRemove(id) {
     const { removeTask } = this.props
+    const { completed } = this.state
+
+    const newCompleted = completed
 
     if(Number.isInteger(id)) {
+      newCompleted.splice(newCompleted.indexOf(id), 1)
+
       removeTask(id)
+      
+      this.setState({ completed: newCompleted })
+      this.setCompleted(newCompleted)
     }
   }
 
-  render() {
+  renderTasks() {
     const { todo } = this.props
 
     return (
       <ul className="todolist">
-        {todo.tasks && todo.tasks.slice().reverse().map((t, key) => (
+        { todo.tasks && todo.tasks.slice().reverse().map((t, key) => (
           <li className="todolist-item" key={key}>
             <span className="todolist-item-complete">
               <button
@@ -101,6 +109,25 @@ class TodoList extends Component {
           </li>
         ))}
       </ul>
+    )
+  }
+
+  renderEmpty() {
+    return (
+      <img src="https://i.imgur.com/6Kmg87X.gif" className="img-responsive" alt="You've completed all your tasks. Congrats!" />
+    )
+  }
+
+  render() {
+    const { todo } = this.props
+
+    return (
+      <div>
+        { todo && todo.tasks.length > 0
+          ? this.renderTasks()
+          : this.renderEmpty()
+        }
+      </div>
     )
   }
 }

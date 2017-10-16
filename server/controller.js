@@ -128,8 +128,11 @@ app.delete('/task/delete/:id', (req, res) => {
     const task = tasksContainer.tasks.find(item => item.id === id)
 
     if (task && task.id) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1)
+      const newTasks = tasksContainer.tasks.filter((i) => {
+        return i.id !== task.id
+      })
+
+      tasksContainer.tasks = newTasks
 
       return res.status(200).json({
         message: 'Task has been removed',

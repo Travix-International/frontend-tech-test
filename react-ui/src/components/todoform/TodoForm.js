@@ -44,10 +44,10 @@ class TodoForm extends Component {
     const { addNewTask } = this.props
     const { title, description } = this.state
 
-    // if(validateFields())
-    addNewTask(title, description)
-
-    this.setState({ title: '', description: '' })
+    if(title && title.length >= 3) {
+      addNewTask(title, description)
+      this.setState({ title: '', description: '' })
+    }
   }
 
   render() {
@@ -56,6 +56,7 @@ class TodoForm extends Component {
         <FormGroup
           className="todoform-group"
           validationState={this.validateTitleState()}
+          onSubmit={(e) => e.preventDefault()}
         >
           <FormControl
             type="text"
@@ -64,13 +65,11 @@ class TodoForm extends Component {
             bsSize="lg"
             className="todoform-input"
             onChange={(e) => this.handleTitleChange(e)}
+            onSubmit={(e) => e.preventDefault()}
           />
         </FormGroup>
 
-        <FormGroup
-          className="todoform-group"
-          validationState={this.validateDescriptionState()}
-        >
+        <FormGroup className="todoform-group">
           <FormControl
             componentClass="textarea"
             value={this.state.description}
@@ -81,9 +80,15 @@ class TodoForm extends Component {
           />
         </FormGroup>
 
-        <div className="todoform-button">
-          <Button onClick={(e) => this.handleSubmit(e)} bsStyle="todoform">Add Task</Button>
-        </div>
+        <FormGroup className="todoform-group">
+          <div className="todoform-button">
+            <Button
+              onClick={(e) => this.handleSubmit(e)}
+              bsStyle="todoform">
+                Add Task
+            </Button>
+          </div>
+        </FormGroup>
       </form>
     )
   }
