@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import MainLayout from './MainLayout';
 import TodosView from '../modules/Todos/TodosView';
-import '../styles/App.scss';
+import '../styles/app.scss';
 
 class Routes extends Component {
   render() {

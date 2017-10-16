@@ -67,19 +67,23 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.1.0",
     "lodash": "^4.17.4",
+    "mocha": "^4.0.1",
     "node-sass": "^4.5.3",
     "pre-commit": "^1.2.2",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^15.6.2",
     "sass-loader": "^6.0.6",
+    "supertest": "^3.0.0",
     "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
-    "webapp:start": "cd webapp && node scripts/start",
     "server:start": "node server.js",
+    "server:test": "./node_modules/mocha/bin/mocha",
+    "webapp:start": "cd webapp && node scripts/start",
     "webapp:build": "cd webapp && node scripts/build.js",
-    "webapp:test": "cd webapp && node scripts/test.js --env=jsdom",
-    "webapp:lint": "./node_modules/.bin/eslint webapp/**"
+    "webapp:test": "cd webapp && node scripts/test.js --env=jsdom --coverage",
+    "webapp:lint": "./node_modules/.bin/eslint webapp/**",
+    "test": "npm run server:test && npm run webapp:lint && npm run webapp:test"
   },
   "pre-commit": [
     "webapp:lint"
