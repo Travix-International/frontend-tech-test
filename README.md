@@ -1,6 +1,6 @@
 # Travix test
 
-Travix Front-End Tech Interview Test 
+Travix Front-End Tech Interview Test
 
 # Introduction
 
@@ -18,11 +18,12 @@ We are also expecting from you a usable, responsive UI.
 
 # Instrucctions and other author notes
 
+* Use node.js version 6.11.4 or higher
 * Install dependecies with:`npm install`
 * Start server with: `npm run server:start`
 * Open a second terminal and start frontend with: `npm run webapp:start`
 * Start testing this beutiful app ;)
-* Then you can start running all the tests by doing: `npm test`
+* Then you can start running all tests by doing: `npm test`
 * All frontend files are in `webapp/`
 
 # Requirements
@@ -35,7 +36,7 @@ We are also expecting from you a usable, responsive UI.
 
 # Bonus
 
-* unit-tests for the UI 
+* unit-tests for the UI
 * integration-test (one (or more) just in order to show that you know what is it (: )
 * evolution - unit-tests for the server
 * dynamic-ui (web-sockets...?)
