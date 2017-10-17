@@ -16,7 +16,7 @@ So your mission is to develop the front-end from scratch using a famous front-en
 
 We are also expecting from you a usable, responsive UI.
 
-# Instrucctions and notes
+# Instructions and notes
 
 * Use node.js version 6.11.4 or higher
 * Install dependencies with:`npm install`
