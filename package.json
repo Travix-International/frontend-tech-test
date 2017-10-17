@@ -80,7 +80,6 @@
     "server:start": "node server.js",
     "server:test": "./node_modules/mocha/bin/mocha",
     "webapp:start": "cd webapp && node scripts/start",
-    "webapp:build": "cd webapp && node scripts/build.js",
     "webapp:test": "cd webapp && node scripts/test.js --env=jsdom --coverage  --no-cache",
     "webapp:lint": "./node_modules/.bin/eslint webapp/**",
     "test": "npm run server:test && npm run webapp:lint && npm run webapp:test"

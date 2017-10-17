@@ -16,13 +16,13 @@ So your mission is to develop the front-end from scratch using a famous front-en
 
 We are also expecting from you a usable, responsive UI.
 
-# Instrucctions and other author notes
+# Instrucctions and notes
 
 * Use node.js version 6.11.4 or higher
-* Install dependecies with:`npm install`
+* Install dependencies with:`npm install`
 * Start server with: `npm run server:start`
 * Open a second terminal and start frontend with: `npm run webapp:start`
-* Start testing this beutiful app ;)
+* Play around with this beautiful app ;)
 * Then you can start running all tests by doing: `npm test`
 * All frontend files are in `webapp/`
 
