@@ -1,6 +1,6 @@
 # Travix test
 
-Travix Front-End Tech Interview Test 
+Travix Front-End Tech Interview Test
 
 # Introduction
 
@@ -16,9 +16,15 @@ So your mission is to develop the front-end from scratch using a famous front-en
 
 We are also expecting from you a usable, responsive UI.
 
-# Process
+# Instructions and notes
 
-Fork the repository into your account. Once your code is ready open a pull-request on this repository and we will review it.
+* Use node.js version 6.11.4 or higher
+* Install dependencies with:`npm install`
+* Start server with: `npm run server:start`
+* Open a second terminal and start frontend with: `npm run webapp:start`
+* Play around with this beautiful app ;)
+* Then you can start running all tests by doing: `npm test`
+* All frontend files are in `webapp/`
 
 # Requirements
 
@@ -30,7 +36,7 @@ Fork the repository into your account. Once your code is ready open a pull-reque
 
 # Bonus
 
-* unit-tests for the UI 
+* unit-tests for the UI
 * integration-test (one (or more) just in order to show that you know what is it (: )
 * evolution - unit-tests for the server
 * dynamic-ui (web-sockets...?)

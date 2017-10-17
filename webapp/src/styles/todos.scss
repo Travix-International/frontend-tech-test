@@ -1,0 +1,66 @@
+.todo-view {
+  padding: 25px;
+
+  h1 {
+    text-align: center;
+  }
+
+  .loading-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    padding: 5px;
+    background-color: #d8e9f7;
+  }
+
+  .error-message {
+    margin-top: 10px;
+    text-align: left;
+  }
+
+  .todo-create {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+
+    input {
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 50%;
+    }
+  }
+
+  .todo-list {
+    .toggle-todo {
+      margin-right: 20px;
+    }
+
+    .delete-todo {
+      position: absolute;
+      top: 30%;
+      right: 10px;
+    }
+
+    .is-done {
+      text-decoration: line-through;
+    }
+
+    .todo-item {
+      position: relative;
+    }
+  }
+}
+
+.loading{
+  opacity: 0.6;
+}
+
+@media (max-width: 700px) {
+  .todo-view h1 {
+    font-size: 2em;
+    margin-top: 0;
+  }
+}
