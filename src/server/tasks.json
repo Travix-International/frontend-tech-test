@@ -3,7 +3,12 @@
     {
       "id":1,
       "title": "Test thing",
-      "Description": "Updating this crap"
+      "description": "Oh yeah"
+    },
+    {
+      "id":2,
+      "title": "Test more things",
+      "description": "Indeed we like this"
     }
   ]
 }

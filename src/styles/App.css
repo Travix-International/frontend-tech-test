@@ -1,6 +1,5 @@
 @charset "UTF-8";
 /* Bring in your custom variables */
-/* or just overwrite a variable */
 /* Set $icon-font-path from sass-loader issue #40, https://github.com/webpack-contrib/sass-loader/issues/40#issuecomment-70269553 */
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -1144,7 +1143,7 @@ h1, h2, h3, h4, h5, h6,
   font-family: inherit;
   font-weight: 500;
   line-height: 1.1;
-  color: #F00; }
+  color: inherit; }
   h1 small,
   h1 .small, h2 small,
   h2 .small, h3 small,

@@ -1,7 +1,21 @@
 'use strict';
 
-const app = require('express')();
+var express = require('express');
+var path = require('path');
+var fs = require('fs');
+var app = express();
+
 const tasksContainer = require('./tasks.json');
+
+
+app.use(function (req, res, next) {
+      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+      next();
+  });
+
+app.set('port', (process.env.PORT || 9001));
 
 /**
  * GET /tasks
@@ -136,6 +150,6 @@ app.delete('/task/delete/:id', (req, res) => {
   }
 });
 
-app.listen(9001, () => {
-  process.stdout.write('the server is available on http://localhost:9001/\n');
+app.listen(app.get('port'), () => {
+  process.stdout.write('the server is available on http://localhost:' + app.get('port') + '/\n');
 });

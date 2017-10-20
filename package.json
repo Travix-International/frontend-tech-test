@@ -20,6 +20,7 @@
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.16.2",
     "bootstrap": "^3.3.7",
     "bootstrap-sass": "^3.3.7",
     "express": "^4.14.0",
@@ -30,9 +31,14 @@
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.3",
     "react-dom": "^16.0.0",
+    "react-router": "^4.2.0",
+    "react-router-bootstrap": "^0.24.4",
+    "redux": "^3.7.2",
+    "request-promise": "^4.2.2",
     "shx": "^0.2.2"
   },
   "devDependencies": {
+    "react-router-dom": "^4.2.2",
     "react-scripts": "^1.0.14"
   }
 }
