@@ -8,16 +8,7 @@ class ToDoList extends Component{
         super(props);
     
         this.state = {
-            tasks: [
-                {
-                    id: 1,
-                    title:"34343434"
-                },
-                {
-                    id: 2,
-                    title:"asdadsasd"
-                }
-            ]
+            tasks: []
         };
     }
 
@@ -25,10 +16,9 @@ class ToDoList extends Component{
         console.log("Loaded component");
         axios.get(`http://localhost:9001/tasks`)
         .then(res => {
-            this.setState({
-                tasks:  _.values(res.data)
-            });
-            console.log();
+           this.setState({
+              tasks:  _.values(res.data.tasks)
+           });
         });
     }
 
@@ -36,14 +26,6 @@ class ToDoList extends Component{
 
         return(
             <div>
-                <ul>
-                    {
-                        this.state.tasks.map((task) => {
-                            return <ToDo task={task} key={task.id}/>
-                        })
-                    }
-                </ul>
-
                 <table className="table table-striped">
                     <thead>
                         <tr>
@@ -52,24 +34,14 @@ class ToDoList extends Component{
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Test</td>
-                            <td>HELLLLO</td>
-                        </tr>
-                        <tr>
-                            <td>Test</td>
-                            <td>HELLLLO</td>
-                        </tr>
-                        <tr>
-                            <td>Test</td>
-                            <td>HELLLLO</td>
-                        </tr>
-                        <tr>
-                            <td>Test</td>
-                            <td>HELLLLO</td>
-                        </tr>
+                        {
+                            this.state.tasks.map((task) => {
+                                return <ToDo task={task} key={task.id}/>
+                            })
+                        }
                     </tbody>
                 </table>
+               
             </div>
         );
     }

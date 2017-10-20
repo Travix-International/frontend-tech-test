@@ -7,8 +7,6 @@ import { Jumbotron } from 'react-bootstrap';
 import Header from '../common/header';
 import TodoManager from '../todo/toDoManager';
 
-
-
 class HomePage extends Component{
     render(){
         return(

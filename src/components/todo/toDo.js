@@ -3,9 +3,14 @@ import React, { Component } from 'react';
 class ToDo extends Component{
     render(){
         return(
-            <li>
-                {this.props.task.title}
-            </li>
+            <tr>
+                <td>
+                    {this.props.task.title}
+                </td>
+                <td>
+                    {this.props.task.description}
+                </td>
+            </tr>
         );
     }
 }
