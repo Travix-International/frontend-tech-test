@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 import { connect } from 'react-redux'
 
-class AddToDoList extends Component{
+class addToDo extends Component{
     render(){
         function FieldGroup({ id, label, help, ...props }) {
             return (
@@ -31,4 +31,4 @@ function mapStateToProps(state) {
     return { tasks: state.tasks };
 }
 
-export default connect(mapStateToProps)(AddToDoList);
+export default connect(mapStateToProps)(addToDo);

@@ -1,25 +1,23 @@
-const initialState = {
+export default function reducer(state={
+  tasks: [],
   fetching: false,
   fetched: false,
-  tasks: [],
   error: null,
-}
-
-const toDoReducer = (state = initialState, action) => {
+}   , action) {
   switch (action.type) {
-      case 'FETCH_TASKS_START':
+      case 'FETCH_TASKS_PENDING':
         return {
           ...state,
           fetching: true,
         }
-      case 'RECEIVE_TASKS':
+      case 'FETCH_TASKS_FULFILLED':
         return {
           ...state,
           fetching: false,
           fetched: true,
-          tasks: action.payload,
+          tasks: action.payload.data.tasks,//_.values(action.payload.data),
         }
-      case 'FETCH_TASKS_ERROR':
+      case 'FETCH_TASKS_REJECTED':
         return {
           ...state,
           fetching: false,
@@ -29,5 +27,3 @@ const toDoReducer = (state = initialState, action) => {
        return state;
     }
   }
-  
-  export default toDoReducer
