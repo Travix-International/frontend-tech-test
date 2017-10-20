@@ -104,17 +104,21 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: tasksContainer.tasks.length + 1,
     title: req.params.title,
     description: req.params.description,
   };
 
   tasksContainer.tasks.push(task);
+ // fs.writeFile('tasks.json', JSON.stringify(tasksContainer.tasks), 'utf8', callback)
 
   return res.status(201).json({
     message: 'Resource created',
   });
 });
+
+function callback()
+{}
 
 /**
  * DELETE /task/delete/:id
