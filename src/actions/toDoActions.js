@@ -30,3 +30,16 @@ export function updateTask(id, title, desc){
         })
     }      
 }
+
+export function deleteTask(id){
+    return function(dispatch) {
+        dispatch({type: "DELETE_TASK_PENDING", payload: ""})
+        axios.delete(`http://localhost:9001/task/delete/` + id)
+        .then((response) => {
+            dispatch({type: "DELETE_TASK_FULFILLED", payload: id})
+        })
+        .catch((err) =>{
+            dispatch({type: "DELETE_TASK_REJECTED", payload: err})    
+        })
+    }      
+}

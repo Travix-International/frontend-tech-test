@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ToDo from './toDo';
-import { Modal, Button, FormGroup, FormControl, Glyphicon } from 'react-bootstrap';
+import { Modal, Button, FormGroup, FormControl, Glyphicon, Label } from 'react-bootstrap';
 
 class ToDoList extends Component{
     constructor(props){
@@ -34,6 +34,17 @@ class ToDoList extends Component{
     };
 
     render(){
+        let message = "";
+        
+        if (this.props.errorUpdating){
+            message = <Label bsStyle="danger">Error while saving!</Label>
+        } else if (this.props.updating){
+            message = <Label bsStyle="info">Saving updates!</Label>
+        }
+        else if (this.props.updated){
+            message = <Label bsStyle="success">Saved!</Label>
+        }
+
         return(
             <div>
                 <table className="table table-striped">
@@ -48,7 +59,9 @@ class ToDoList extends Component{
                     <tbody>
                         {
                             this.props.tasksList.map((task) => {
-                                return <ToDo task={task} openModal={this.open.bind(this, task.id, task.title, task.description)} key={task.id}/>
+                                return <ToDo task={task} key={task.id}
+                                        openModal={this.open.bind(this, task.id, task.title, task.description)} 
+                                        deleteTask={this.props.deleteTask.bind(this, task.id)}  />
                             })
                         }
                     </tbody>
@@ -69,6 +82,9 @@ class ToDoList extends Component{
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
+                    <div className="text-center botSeparated">
+                        {message}
+                    </div>
                     <Button bsSize="large" 
                         className="updateBtn" 
                         bsStyle="warning"

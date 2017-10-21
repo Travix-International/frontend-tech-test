@@ -16,7 +16,7 @@ class ToDo extends Component{
                     <Button bsSize="xsmall" bsStyle="primary"><Glyphicon glyph="pencil" onClick={this.props.openModal}/> </Button>
                 </td>
                 <td>
-                    <Button bsSize="xsmall" bsStyle="danger"><Glyphicon glyph="trash"/> </Button>
+                    <Button bsSize="xsmall" bsStyle="danger"><Glyphicon glyph="trash" onClick={() => this.props.deleteTask(this.props.task.id)}/> </Button>
                 </td>
             </tr>
         );

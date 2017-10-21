@@ -7,10 +7,14 @@ export default function reducer(
       added: false,
       updating: false,
       updated: false,
+      erasing: false,
+      erased: false,
+      errorErasing: null,
       errorAdding: null,
       errorRetriving: null,
       errorUpdating: null
     }, action) {
+      console.log(action.payload);
   switch (action.type) {
       case "FETCH_TASKS_PENDING":
         return {
@@ -52,6 +56,7 @@ export default function reducer(
         return {
           ...state,
           updating: true,
+          updated: false,
           errorUpdating: null
         }
       case "UPDATE_TASK_FULFILLED":
@@ -75,7 +80,29 @@ export default function reducer(
           ...state,
           adding: false,
           errorUpdating: action.payload,
-        } 
+        }
+
+      case "DELETE_TASK_PENDING":
+        return {
+          ...state,
+          erasing: true,
+          erased: true
+        }
+      case "DELETE_TASK_FULFILLED":
+        return {
+          ...state,
+          erasing: false,
+          erased: true,
+          tasks: state.tasks.filter(task => task.id !== action.payload)
+      }
+      case "DELETE_TASK_REJECTED":
+        return {
+          ...state,
+          adding: false,
+          erased: false,
+          errorAdding: action.payload,
+      } 
+
       default:
        return state;
     }

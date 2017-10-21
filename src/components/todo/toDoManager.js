@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
-import { fetchAllTasks, addNewTasks, updateTask } from '../../actions/toDoActions';  
+import { fetchAllTasks, addNewTasks, updateTask, deleteTask } from '../../actions/toDoActions';  
 import { Well, ProgressBar } from 'react-bootstrap';
 import ToDoList from './toDoList';
 import AddToDo from './addToDo';
@@ -35,7 +35,8 @@ export class TodoManager extends Component {
                 </Well>
                 <Well>
                     <h2> TODO List </h2>
-                    <ToDoList tasksList={this.props.tasks} updateTask={this.props.updateTask}/>
+                    <ToDoList tasksList={this.props.tasks} updateTask={this.props.updateTask} deleteTask={this.props.deleteTask} 
+                        errorUpdating={this.props.errorUpdating} updated={this.props.updated} updating={this.props.updating}/>
                 </Well>
             </div>
         );
@@ -45,16 +46,20 @@ export class TodoManager extends Component {
   // AppContainer.js
   const mapStateToProps = (state, ownProps) => ({  
     fetching: state.todo.fetching,
-    errorRetriving: state.todo.errorRetriving,
     adding: state.todo.adding,
+    updated: state.todo.updated,
+    updating: state.todo.updating,
+    errorRetriving: state.todo.errorRetriving,
     errorAdding: state.todo.errorAdding,
+    errorUpdating: state.todo.errorUpdating,
     tasks: state.todo.tasks
   });
   
   const mapDispatchToProps = {  
     fetchAllTasks,
     addNewTasks,
-    updateTask
+    updateTask,
+    deleteTask
   };
   
   const TodoManagerContainer = connect(  
