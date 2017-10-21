@@ -9,7 +9,6 @@ export class TodoManager extends Component {
     constructor(props) {
         super(props);
         this.props.fetchAllTasks();
- //       this.props.addNewTasks("sdsdsdsd","sdsdsdsd");
     }
 
     render() {

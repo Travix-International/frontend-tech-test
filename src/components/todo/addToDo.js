@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, HelpBlock, Button     } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
 
 class addToDo extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            title: "",
             description: "",
+            IsTaskValid: false,
         }
     }
 
     getValidationStateForTitle() {
-        const titleLength = this.state.title.value.length;
-        if (titleLength > 10) return 'success';
-        else if (titleLength > 5) return 'warning';
-        else if (titleLength > 0) return 'error';
+        const titleLength = this.state.title.length;
+        if (titleLength > 5) return 'success';
+        else return 'error';
     };
 
     getValidationStateForDescription() {
         const descriptionLength = this.state.description.length;
-        console.log("Valor: " + descriptionLength);
         if (descriptionLength > 10) return 'success';
-        else if (descriptionLength > 5) return 'warning';
-        else if (descriptionLength > 0) return 'error';
+        else return 'error';
     };
 
     handleTitleChange(e) {
@@ -30,33 +29,30 @@ class addToDo extends Component{
     };
 
     handleDescriptionChange(e) {
-        console.log("e: " + e.target.value);
         this.setState({ description: e.target.value });
     };
 
     render(){
-        function FieldGroup({ id, label, help, ...props }) {
-            return (
-              <FormGroup controlId={id}>
-                <ControlLabel>{label}</ControlLabel>
-                <FormControl {...props} />
-                {help && <HelpBlock>{help}</HelpBlock>}
-              </FormGroup>
-            );
-        }
-
+        let button = "";
+        if (this.state.title.length > 5 && this.state.description.length > 10) {
+            button  = <Button bsStyle="success" onClick={() => this.props.addTask(this.state.title, this.state.description)}>Add Task</Button>;
+          } else {
+            button = <Button bsStyle="success" disabled>Add Task</Button>;
+          }
+    
         return(
             <form>
-                
-                <FieldGroup id="formControlsText" type="text" label="Title" placeholder="Please enter a title" />
+                <FormGroup controlId="formCsontrolsTextarea" validationState={this.getValidationStateForTitle()}>
+                    <ControlLabel>Title</ControlLabel>
+                    <FormControl type="text" value={this.state.title.value} placeholder="Please enter a title" onChange={e => this.handleTitleChange(e)} />
+                </FormGroup>
                 <FormGroup controlId="formControlsTextarea" validationState={this.getValidationStateForDescription()}>
                     <ControlLabel>Description</ControlLabel>
                     <FormControl componentClass="textarea" placeholder="Please enter a description" 
-                        value={this.state.value} onChange={e => this.handleDescriptionChange(e)} />
+                        value={this.state.description.value} onChange={e => this.handleDescriptionChange(e)} />
                 </FormGroup>
-                <Button bsStyle="success">Add Task</Button>
-                {/* <button type="button" className="btn btn-success" onClick={() => this.props.addTask("Testing", "Testing descrip too")}>Add Task</button> */}
-                {/* <button type="button" className="btn btn-success" onSubmit={this.handleLogin}>Add Task</button> */}
+                {button}
+                {/* <Button bsStyle="success" onClick={() => this.props.addTask(this.state.title, this.state.description)}>Add Task</Button> */}
             </form>
         );
     }

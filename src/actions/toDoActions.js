@@ -9,7 +9,7 @@ export function fetchAllTasks(){
 
 export function addNewTasks(title, desc){
     return {
-        type: "SAVE_TASKS",
+        type: "ADD_TASK",
         payload: axios.post(`http://localhost:9001/task/create/` + title + `/` + desc)
     }
 }

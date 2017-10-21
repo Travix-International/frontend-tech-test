@@ -10,6 +10,8 @@ class ToDoList extends Component{
                         <tr>
                             <th>Title</th>
                             <th>Description</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
