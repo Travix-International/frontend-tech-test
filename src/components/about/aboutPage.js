@@ -31,19 +31,27 @@ class AboutPage extends Component{
                          <p><strong>redux-thunk:</strong> Allow for actions creator to return functions </p>
                          <p><strong>react, redux, react-dom:</strong> Main libraries for react and redux</p>
                     </Panel>
-                    <Panel header="Solution explain" eventKey="3">
-                        <p><strong>Steps</strong></p>
-                        <ol>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ol>
+                    <Panel header="Solution explained" eventKey="3">
+                        <p>Solution it self its base on the create-react-app boilerplate, after cloning the original project the react-scripts were install and then the folder
+                        structure was made up.</p>
+
+                        FRONTEND-TECH-TEST
+                        <ul>
+                           <li>build: PROD Version of the code</li>
+                           <li>public: Holds index.html and favicon</li>
+                           <li>src:</li>
+                            <ul>
+                                <li>actions: Hold all the actions that that modify the data</li>
+                                <li>common: Holds all the common components </li>
+                                <li>home: Holds the main page</li>
+                                <li>todo: Holds the todo page were all operations occur</li>
+                                <li>about: Holds the about page</li>
+                                <li>reducer: Holds the todo reducer and the index file for future merging</li>
+                            </ul>
+                        </ul>
+                        <p>For the UX/UI bootstrap was added and it was used on the 2 pages that compose the solution (TDO and About). Axios is handeling the API call
+                            and the promises are used to handle the informaiton in an async way 
+                        </p>
                     </Panel>
                 </Accordion>
             </div>

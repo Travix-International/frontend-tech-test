@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/bootstrap/javascripts/bootstrap/affix.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\..\index.html">All files</a> / <a href="index.html">src/bootstrap/javascripts/bootstrap</a> affix.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/91</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/60</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/76</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* ========================================================================
+ * Bootstrap: affix.js v3.3.7
+ * http://getbootstrap.com/javascript/#affix
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >+<span class="fstat-no" title="function not covered" >fu</span>nction ($) {</span>
+  'use strict';
+&nbsp;
+  // AFFIX CLASS DEFINITION
+  // ======================
+&nbsp;
+  var Affix = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction (element, options) {</span>
+<span class="cstat-no" title="statement not covered" >    this.options = $.extend({}, Affix.DEFAULTS, options)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.$target = $(this.options.target)</span>
+      .on('scroll.bs.affix.data-api', $.proxy(this.checkPosition, this))
+      .on('click.bs.affix.data-api',  $.proxy(this.checkPositionWithEventLoop, this))
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.$element     = $(elemen</span>t)
+<span class="cstat-no" title="statement not covered" >    this.affixed      = n</span>ull
+<span class="cstat-no" title="statement not covered" >    this.unpin        =</span> null
+<span class="cstat-no" title="statement not covered" >    this.pinnedOffset = null</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.checkPosition()</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Affix.VERSION  = '3.3.7'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Affix.RESET    = 'affix affix-top affix-bottom</span>'
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Affix.DEFAULTS = {</span>
+    offset: 0,
+    target: window
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Affix.prototype.getState = <span class="fstat-no" title="function not covered" >fu</span>nction (scrollHeight, height, offsetTop, offsetBottom) {</span>
+    var scrollTop   <span class="cstat-no" title="statement not covered" > = this.$target.scrollTop</span>()
+    var position   <span class="cstat-no" title="statement not covered" >  = this.$element.offse</span>t()
+    var targetHeight = <span class="cstat-no" title="statement not covered" >this.$target.height()</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (offsetTop != null &amp;&amp; this.affixed == 'top') <span class="cstat-no" title="statement not covered" >return scrollTop &lt; offsetTop ? 'top' : false</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.affixed == 'bottom') {</span>
+<span class="cstat-no" title="statement not covered" >      if (offsetTop != null) <span class="cstat-no" title="statement not covered" >return (scrollTop + this.unpin &lt;= position.top) ? false : 'bottom'</span></span>
+<span class="cstat-no" title="statement not covered" >      return (scrollTop + targetHeight &lt;= scrollHeight - offsetBottom) ? false : 'bottom'</span>
+    }
+&nbsp;
+    var initializing   <span class="cstat-no" title="statement not covered" >= this.affixed == nul</span>l
+    var colliderTop   <span class="cstat-no" title="statement not covered" > = initializing ? scrollTop : position.t</span>op
+    var colliderHeight = <span class="cstat-no" title="statement not covered" >initializing ? targetHeight : height</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (offsetTop != null &amp;&amp; scrollTop &lt;= offsetTop) <span class="cstat-no" title="statement not covered" >return 'top'</span></span>
+<span class="cstat-no" title="statement not covered" >    if (offsetBottom != null &amp;&amp; (colliderTop + colliderHeight &gt;= scrollHeight - offsetBottom)<span class="cstat-no" title="statement not covered" >) return 'bottom'</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return false</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Affix.prototype.getPinnedOffset = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    if (this.pinnedOffset) <span class="cstat-no" title="statement not covered" >return this.pinnedOffset</span></span>
+<span class="cstat-no" title="statement not covered" >    this.$element.removeClass(Affix.RESET).addClass('affix')</span>
+    var scrollTop = <span class="cstat-no" title="statement not covered" >this.$target.scrollTop()</span>
+    var position  =<span class="cstat-no" title="statement not covered" > this.$element.offset()</span>
+<span class="cstat-no" title="statement not covered" >    return (this.pinnedOffset = position.top - scrollTop)</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Affix.prototype.checkPositionWithEventLoop = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    setTimeout($.proxy(this.checkPosition, this), 1)</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Affix.prototype.checkPosition = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    if (!this.$element.is(':visible')) <span class="cstat-no" title="statement not covered" >return</span></span>
+&nbsp;
+    var height   <span class="cstat-no" title="statement not covered" >    = this.$element.hei</span>ght()
+    var offset   <span class="cstat-no" title="statement not covered" >    = this.options.o</span>ffset
+    var offsetTop   <span class="cstat-no" title="statement not covered" > = offset.t</span>op
+    var offsetBottom = <span class="cstat-no" title="statement not covered" >offset.bottom</span>
+    var scrollHeight = <span class="cstat-no" title="statement not covered" >Math.max($(document).height(), $(document.body).height())</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (typeof offset != 'object') <span class="cstat-no" title="statement not covered" >        offsetBottom = offsetTop = </span></span>offset
+<span class="cstat-no" title="statement not covered" >    if (typeof offsetTop == 'function') <span class="cstat-no" title="statement not covered" >   offsetTop    = offset.top(this.$elem</span></span>ent)
+<span class="cstat-no" title="statement not covered" >    if (typeof offsetBottom == 'function') <span class="cstat-no" title="statement not covered" >offsetBottom = offset.bottom(this.$element)</span></span>
+&nbsp;
+    var affix = <span class="cstat-no" title="statement not covered" >this.getState(scrollHeight, height, offsetTop, offsetBottom)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.affixed != affix) {</span>
+<span class="cstat-no" title="statement not covered" >      if (this.unpin != null) <span class="cstat-no" title="statement not covered" >this.$element.css('top', '')</span></span>
+&nbsp;
+      var affixType = <span class="cstat-no" title="statement not covered" >'affix' + (affix ? '-' + affix : '')</span>
+      var e   <span class="cstat-no" title="statement not covered" >      = $.Event(affixType + '.bs.</span>affix')
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.$element.trigger(e)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (e.isDefaultPrevented()) <span class="cstat-no" title="statement not covered" >return</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.affixed = affix</span>
+<span class="cstat-no" title="statement not covered" >      this.unpin = affix == 'bottom' ? this.getPinnedOffset() : null</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.$element</span>
+        .removeClass(Affix.RESET)
+        .addClass(affixType)
+        .trigger(affixType.replace('affix', 'affixed') + '.bs.affix')
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (affix == 'bottom') {</span>
+<span class="cstat-no" title="statement not covered" >      this.$element.offset({</span>
+        top: scrollHeight - height - offsetBottom
+      })
+    }
+  }
+&nbsp;
+&nbsp;
+  // AFFIX PLUGIN DEFINITION
+  // =======================
+&nbsp;
+  function <span class="fstat-no" title="function not covered" >Plugin(</span>option) {
+<span class="cstat-no" title="statement not covered" >    return this.each(<span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+      var $this   <span class="cstat-no" title="statement not covered" >= $(this</span>)
+      var data   <span class="cstat-no" title="statement not covered" > = $this.data('bs.affix</span>')
+      var options = <span class="cstat-no" title="statement not covered" >typeof option == 'object' &amp;&amp; option</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (!data) <span class="cstat-no" title="statement not covered" >$this.data('bs.affix', (data = new Affix(this, options)))</span></span>
+<span class="cstat-no" title="statement not covered" >      if (typeof option == 'string') <span class="cstat-no" title="statement not covered" >data[option]()</span></span>
+    })
+  }
+&nbsp;
+  var old = <span class="cstat-no" title="statement not covered" >$.fn.affix</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $.fn.affix           </span>  = Plugin
+<span class="cstat-no" title="statement not covered" >  $.fn.affix.Constructor = Affix</span>
+&nbsp;
+&nbsp;
+  // AFFIX NO CONFLICT
+  // =================
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $.fn.affix.noConflict = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    $.fn.affix = old</span>
+<span class="cstat-no" title="statement not covered" >    return this</span>
+  }
+&nbsp;
+&nbsp;
+  // AFFIX DATA-API
+  // ==============
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $(window).on('load', <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    $('[data-spy="affix"]').each(<span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+      var $spy = <span class="cstat-no" title="statement not covered" >$(this)</span>
+      var data = <span class="cstat-no" title="statement not covered" >$spy.data()</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      data.offset = data.offset || {}</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (data.offsetBottom != null) <span class="cstat-no" title="statement not covered" >data.offset.bottom = data.offsetBottom</span></span>
+<span class="cstat-no" title="statement not covered" >      if (data.offsetTop    != nul<span class="cstat-no" title="statement not covered" >l) data.offset.top    = data.offse</span></span>tTop
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      Plugin.call($spy, data)</span>
+    })
+  })
+&nbsp;
+}(jQuery);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Oct 21 2017 18:55:45 GMT-0300 (Hora estándar de Argentina)
+</div>
+</div>
+<script src="..\..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\..\sorter.js"></script>
+</body>
+</html>

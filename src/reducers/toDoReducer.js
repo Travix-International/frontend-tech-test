@@ -14,7 +14,6 @@ export default function reducer(
       errorRetriving: null,
       errorUpdating: null
     }, action) {
-      console.log(action.payload);
   switch (action.type) {
       case "FETCH_TASKS_PENDING":
         return {

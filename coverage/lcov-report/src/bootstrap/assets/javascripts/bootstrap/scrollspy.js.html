@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/bootstrap/assets/javascripts/bootstrap/scrollspy.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\..\..\index.html">All files</a> / <a href="index.html">src/bootstrap/assets/javascripts/bootstrap</a> scrollspy.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/78</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/40</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/76</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* ========================================================================
+ * Bootstrap: scrollspy.js v3.3.7
+ * http://getbootstrap.com/javascript/#scrollspy
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >+<span class="fstat-no" title="function not covered" >fu</span>nction ($) {</span>
+  'use strict';
+&nbsp;
+  // SCROLLSPY CLASS DEFINITION
+  // ==========================
+&nbsp;
+  function <span class="fstat-no" title="function not covered" >ScrollSpy(</span>element, options) {
+<span class="cstat-no" title="statement not covered" >    this.$body          = $(documen</span>t.body)
+<span class="cstat-no" title="statement not covered" >    this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)</span>
+<span class="cstat-no" title="statement not covered" >    this.options        = $.extend({}, ScrollSpy.DEFAULTS, opt</span>ions)
+<span class="cstat-no" title="statement not covered" >    this.selector       = (this.options.target || '') + ' .nav li </span>&gt; a'
+<span class="cstat-no" title="statement not covered" >    this.offsets       </span> = []
+<span class="cstat-no" title="statement not covered" >    this.targets       </span> = []
+<span class="cstat-no" title="statement not covered" >    this.activeTarget   = null</span>
+<span class="cstat-no" title="statement not covered" >    this.scrollHeight   = 0</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))</span>
+<span class="cstat-no" title="statement not covered" >    this.refresh()</span>
+<span class="cstat-no" title="statement not covered" >    this.process()</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  ScrollSpy.VERSION  = '3.3.7'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  ScrollSpy.DEFAULTS = {</span>
+    offset: 10
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  ScrollSpy.prototype.getScrollHeight = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  ScrollSpy.prototype.refresh = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+    var that   <span class="cstat-no" title="statement not covered" >     </span>  = this
+    var offsetMethod  =<span class="cstat-no" title="statement not covered" > 'offset'</span>
+    var offsetBase   <span class="cstat-no" title="statement not covered" > =</span> 0
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.offsets      =</span> []
+<span class="cstat-no" title="statement not covered" >    this.targets      =</span> []
+<span class="cstat-no" title="statement not covered" >    this.scrollHeight = this.getScrollHeight()</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!$.isWindow(this.$scrollElement[0])) {</span>
+<span class="cstat-no" title="statement not covered" >      offsetMethod = 'position'</span>
+<span class="cstat-no" title="statement not covered" >      offsetBase   = this.$scrollElement.scrollTop()</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.$body</span>
+      .find(this.selector)
+      .m<span class="fstat-no" title="function not covered" >ap</span>(function () {
+        var $el <span class="cstat-no" title="statement not covered" >  = $(th</span>is)
+        var href <span class="cstat-no" title="statement not covered" > = $el.data('target') || $el.attr('href</span>')
+        var $href <span class="cstat-no" title="statement not covered" >= /^#./.test(href) &amp;&amp; $(href</span>)
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return ($href</span>
+          &amp;&amp; $href.length
+          &amp;&amp; $href.is(':visible')
+          &amp;&amp; [[$href[offsetMethod]().top + offsetBase, href]]) || null
+      })
+      .so<span class="fstat-no" title="function not covered" >rt</span>(function (a, b<span class="cstat-no" title="statement not covered" >) { return a[0] - b[</span>0] })
+      .ea<span class="fstat-no" title="function not covered" >ch</span>(function () {
+<span class="cstat-no" title="statement not covered" >        that.offsets.push(this[0])</span>
+<span class="cstat-no" title="statement not covered" >        that.targets.push(this[1])</span>
+      })
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  ScrollSpy.prototype.process = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+    var scrollTop   <span class="cstat-no" title="statement not covered" > = this.$scrollElement.scrollTop() + this.options.offs</span>et
+    var scrollHeight = <span class="cstat-no" title="statement not covered" >this.getScrollHeight()</span>
+    var maxScroll   <span class="cstat-no" title="statement not covered" > = this.options.offset + scrollHeight - this.$scrollElement.height</span>()
+    var offsets   <span class="cstat-no" title="statement not covered" >   = this.off</span>sets
+    var targets   <span class="cstat-no" title="statement not covered" >   = this.tar</span>gets
+    var activeTarget = <span class="cstat-no" title="statement not covered" >this.activeTarget</span>
+    var i
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.scrollHeight != scrollHeight) {</span>
+<span class="cstat-no" title="statement not covered" >      this.refresh()</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (scrollTop &gt;= maxScroll) {</span>
+<span class="cstat-no" title="statement not covered" >      return activeTarget != (i = targets[targets.length - 1]) &amp;&amp; this.activate(i)</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (activeTarget &amp;&amp; scrollTop &lt; offsets[0]) {</span>
+<span class="cstat-no" title="statement not covered" >      this.activeTarget = null</span>
+<span class="cstat-no" title="statement not covered" >      return this.clear()</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    for (i = offsets.length; i--;) {</span>
+<span class="cstat-no" title="statement not covered" >      activeTarget != targets[i]</span>
+        &amp;&amp; scrollTop &gt;= offsets[i]
+        &amp;&amp; (offsets[i + 1] === undefined || scrollTop &lt; offsets[i + 1])
+        &amp;&amp; this.activate(targets[i])
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  ScrollSpy.prototype.activate = <span class="fstat-no" title="function not covered" >fu</span>nction (target) {</span>
+<span class="cstat-no" title="statement not covered" >    this.activeTarget = target</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.clear()</span>
+&nbsp;
+    var selector = <span class="cstat-no" title="statement not covered" >this.selector +</span>
+      '[data-target="' + target + '"],' +
+      this.selector + '[href="' + target + '"]'
+&nbsp;
+    var active = <span class="cstat-no" title="statement not covered" >$(selector)</span>
+      .parents('li')
+      .addClass('active')
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (active.parent('.dropdown-menu').length) {</span>
+<span class="cstat-no" title="statement not covered" >      active = active</span>
+        .closest('li.dropdown')
+        .addClass('active')
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    active.trigger('activate.bs.scrollspy')</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  ScrollSpy.prototype.clear = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    $(this.selector)</span>
+      .parentsUntil(this.options.target, '.active')
+      .removeClass('active')
+  }
+&nbsp;
+&nbsp;
+  // SCROLLSPY PLUGIN DEFINITION
+  // ===========================
+&nbsp;
+  function <span class="fstat-no" title="function not covered" >Plugin(</span>option) {
+<span class="cstat-no" title="statement not covered" >    return this.each(<span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+      var $this   <span class="cstat-no" title="statement not covered" >= $(this</span>)
+      var data   <span class="cstat-no" title="statement not covered" > = $this.data('bs.scrollspy</span>')
+      var options = <span class="cstat-no" title="statement not covered" >typeof option == 'object' &amp;&amp; option</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (!data) <span class="cstat-no" title="statement not covered" >$this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))</span></span>
+<span class="cstat-no" title="statement not covered" >      if (typeof option == 'string') <span class="cstat-no" title="statement not covered" >data[option]()</span></span>
+    })
+  }
+&nbsp;
+  var old = <span class="cstat-no" title="statement not covered" >$.fn.scrollspy</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $.fn.scrollspy           </span>  = Plugin
+<span class="cstat-no" title="statement not covered" >  $.fn.scrollspy.Constructor = ScrollSpy</span>
+&nbsp;
+&nbsp;
+  // SCROLLSPY NO CONFLICT
+  // =====================
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $.fn.scrollspy.noConflict = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    $.fn.scrollspy = old</span>
+<span class="cstat-no" title="statement not covered" >    return this</span>
+  }
+&nbsp;
+&nbsp;
+  // SCROLLSPY DATA-API
+  // ==================
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $(window).on('load.bs.scrollspy.data-api', <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    $('[data-spy="scroll"]').each(<span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+      var $spy = <span class="cstat-no" title="statement not covered" >$(this)</span>
+<span class="cstat-no" title="statement not covered" >      Plugin.call($spy, $spy.data())</span>
+    })
+  })
+&nbsp;
+}(jQuery);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Oct 21 2017 18:55:45 GMT-0300 (Hora estándar de Argentina)
+</div>
+</div>
+<script src="..\..\..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\..\..\sorter.js"></script>
+</body>
+</html>
