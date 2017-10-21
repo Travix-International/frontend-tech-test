@@ -76,11 +76,10 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(204).json({});
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -104,7 +103,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length + 1,
+    id: tasksContainer.tasks.length,
     title: req.params.title,
     description: req.params.description,
   };

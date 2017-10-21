@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
-import { fetchAllTasks, addNewTasks } from '../../actions/toDoActions';  
-import { Well } from 'react-bootstrap';
+import { fetchAllTasks, addNewTasks, updateTask } from '../../actions/toDoActions';  
+import { Well, ProgressBar } from 'react-bootstrap';
 import ToDoList from './toDoList';
 import AddToDo from './addToDo';
 
@@ -10,14 +10,17 @@ export class TodoManager extends Component {
         super(props);
         this.props.fetchAllTasks();
     }
-
+    
     render() {
+       
+        let progressBar;
         if(this.props.fetching){
-            return (
-                <p>Loading tasks. PLease hold on to your hat...</p>
-            );
+            progressBar = <ProgressBar active now={100}  label='Fetching task list'/>;
+         } else {
+            progressBar = "";
         }
-        if(this.props.error){
+
+        if(this.props.errorRetriving){
             return (
                 <p>Error while retriving the tasks, please check that the server is running</p>
             );
@@ -25,13 +28,14 @@ export class TodoManager extends Component {
 
         return (
             <div>
+                {progressBar}
                 <Well>
                     <h2>Add ToDo Task:</h2>
-                    <AddToDo addTask={this.props.addNewTasks} />
+                    <AddToDo adding={this.props.adding} addTask={this.props.addNewTasks} errorAdding={this.props.errorAdding} />
                 </Well>
                 <Well>
                     <h2> TODO List </h2>
-                    <ToDoList tasksList={this.props.tasks}/>
+                    <ToDoList tasksList={this.props.tasks} updateTask={this.props.updateTask}/>
                 </Well>
             </div>
         );
@@ -41,13 +45,16 @@ export class TodoManager extends Component {
   // AppContainer.js
   const mapStateToProps = (state, ownProps) => ({  
     fetching: state.todo.fetching,
-    error: state.todo.error,
+    errorRetriving: state.todo.errorRetriving,
+    adding: state.todo.adding,
+    errorAdding: state.todo.errorAdding,
     tasks: state.todo.tasks
   });
   
   const mapDispatchToProps = {  
     fetchAllTasks,
     addNewTasks,
+    updateTask
   };
   
   const TodoManagerContainer = connect(  

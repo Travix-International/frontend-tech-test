@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, ProgressBar } from 'react-bootstrap';
 import { connect } from 'react-redux'
 
 class addToDo extends Component{
@@ -38,7 +38,20 @@ class addToDo extends Component{
             button  = <Button bsStyle="success" onClick={() => this.props.addTask(this.state.title, this.state.description)}>Add Task</Button>;
           } else {
             button = <Button bsStyle="success" disabled>Add Task</Button>;
-          }
+        }
+
+        let progressBar;
+        if(this.props.adding){
+            progressBar = <ProgressBar active now={100}  label='Adding task to list'/>;
+         } else {
+            progressBar = "";
+        }
+
+        if(this.props.errorAdding){
+            return (
+                <p>Error while saving the tasks, please check that the server is running</p>
+            );
+        }
     
         return(
             <form>
@@ -52,7 +65,8 @@ class addToDo extends Component{
                         value={this.state.description.value} onChange={e => this.handleDescriptionChange(e)} />
                 </FormGroup>
                 {button}
-                {/* <Button bsStyle="success" onClick={() => this.props.addTask(this.state.title, this.state.description)}>Add Task</Button> */}
+                <br /> <br />
+                {progressBar}
             </form>
         );
     }

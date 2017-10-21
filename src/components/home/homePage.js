@@ -17,7 +17,6 @@ class HomePage extends Component{
                     <p>Below you may find a simple TODO manager integrated with the express server you provided.</p>
                     <p>Please feel free to check out the "About" page for the detail steps and technologies that were taken/used.</p>
                 </Jumbotron>
-                <br/>
                 <TodoManager />
             </div>
         );

@@ -3,3 +3,14 @@
 /* Set $icon-font-path from sass-loader issue #40, https://github.com/webpack-contrib/sass-loader/issues/40#issuecomment-70269553 */
 $icon-font-path: '../bootstrap/fonts/bootstrap/';
 @import '../bootstrap/stylesheets/_bootstrap.scss';
+
+.modal-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .updateBtn{
+      width: 100%;
+  }

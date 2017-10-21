@@ -3,9 +3,14 @@ export default function reducer(
       tasks: [],
       fetching: false,
       fetched: false,
-      error: null
+      adding: false,
+      added: false,
+      updating: false,
+      updated: false,
+      errorAdding: null,
+      errorRetriving: null,
+      errorUpdating: null
     }, action) {
-
   switch (action.type) {
       case "FETCH_TASKS_PENDING":
         return {
@@ -23,7 +28,7 @@ export default function reducer(
         return {
           ...state,
           fetching: false,
-          error: action.payload,
+          errorRetriving: action.payload,
         }
       case "ADD_TASK_PENDING":
         return {
@@ -41,7 +46,35 @@ export default function reducer(
         return {
           ...state,
           adding: false,
-          error: action.payload,
+          errorAdding: action.payload,
+        } 
+      case "UPDATE_TASK_PENDING":
+        return {
+          ...state,
+          updating: true,
+          errorUpdating: null
+        }
+      case "UPDATE_TASK_FULFILLED":
+        return {
+          ...state,
+          updating: false,
+          updated: true,
+          tasks: state.tasks.map((task, index) => {
+            if(index !== action.payload.id) {
+                return task;
+            }
+            return {
+                ...task,
+                title: action.payload.title,
+                description: action.payload.desc
+            };    
+        })
+      }
+      case "UPDATE_TASK_REJECTED":
+        return {
+          ...state,
+          adding: false,
+          errorUpdating: action.payload,
         } 
       default:
        return state;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Nav, NavItem,  Navbar, FormGroup, Button, FormControl } from 'react-bootstrap';
+import { Nav, NavItem,  Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 class Header extends Component{
@@ -21,13 +21,6 @@ class Header extends Component{
                         <NavItem>About</NavItem>
                     </LinkContainer>
                 </Nav> 
-                <Navbar.Form pullRight>
-                    <FormGroup>
-                        <FormControl type="text" placeholder="Search" />
-                    </FormGroup>
-                    {' '}
-                    <Button type="submit">Submit</Button>
-                </Navbar.Form>
                 </Navbar.Collapse>
         </Navbar>
         );
