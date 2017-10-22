@@ -1,23 +1,25 @@
 import axios from 'axios';
 
+const server = "http://localhost:9001/";
+
 export function fetchAllTasks(){
     return {
         type: "FETCH_TASKS",
-        payload: axios.get(`http://localhost:9001/tasks`)
+        payload: axios.get(server + "tasks")
     }
 }
 
 export function addNewTasks(title, desc){
     return {
         type: "ADD_TASK",
-        payload: axios.post(`http://localhost:9001/task/create/` + title + `/` + desc)
+        payload: axios.post(server + "task/create/" + title + "/" + desc)
     }
 }
 
 export function updateTask(id, title, desc){
     return function(dispatch) {
         dispatch({type: "UPDATE_TASK_PENDING", payload: ""})
-        axios.put(`http://localhost:9001/task/update/` + id + `/` + title + `/`  + desc)
+        axios.put(server + "task/update/" + id + "/" + title + "/"  + desc)
         .then((response) => {
             dispatch({type: "UPDATE_TASK_FULFILLED", payload: {
                 id: id, 
@@ -34,7 +36,7 @@ export function updateTask(id, title, desc){
 export function deleteTask(id){
     return function(dispatch) {
         dispatch({type: "DELETE_TASK_PENDING", payload: ""})
-        axios.delete(`http://localhost:9001/task/delete/` + id)
+        axios.delete(server + "task/delete/" + id)
         .then((response) => {
             dispatch({type: "DELETE_TASK_FULFILLED", payload: id})
         })

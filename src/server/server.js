@@ -102,8 +102,9 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
+  var maxId = Math.max.apply(Math,tasksContainer.tasks.map(function(task){return task.id;}));
   const task = {
-    id: tasksContainer.tasks.length,
+    id:  (isNaN(maxId) || !isFinite(maxId) ? 1 : maxId + 1),
     title: req.params.title,
     description: req.params.description,
   };
