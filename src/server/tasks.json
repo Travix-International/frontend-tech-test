@@ -2,18 +2,18 @@
     "tasks": [
       {
         "id":0,
-        "title": "Integrate rest of API call",
-        "description": "I am missing the POST, PUT and DELETE calls from my interface"
+        "title": "Learn a new language",
+        "description": "To open new door at life and to stay active"
       },
       {
         "id":1,
-        "title": "Add redux support",
-        "description": "I need to create an store and some logix to handle the state of the application"
+        "title": "Stay in school",
+        "description": "Education is very very very imnportant to be a great person"
       },
       {
         "id":2,
-        "title": "Add validation",
-        "description": "It would be good if i could validate that adding a task both values are needed!"
+        "title": "Clean house",
+        "description": "It is a mess! THat is impossible to clean or live in!!!!"
       }
     ]
   }

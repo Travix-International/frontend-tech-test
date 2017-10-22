@@ -11,10 +11,15 @@ $icon-font-path: '../bootstrap/fonts/bootstrap/';
     transform: translate(-50%, -50%) !important;
   }
 
-  .updateBtn{
-      width: 100%;
-  }
+.updateBtn{
+    width: 100%;
+}
 
-  .botSeparated {
-      margin-bottom: 10px;
-  }
+.botSeparated {
+    margin-bottom: 10px;
+}
+
+table {
+    table-layout: auto;
+    word-wrap: break-word;
+}

@@ -5827,3 +5827,7 @@ button.close {
 
 .botSeparated {
   margin-bottom: 10px; }
+
+table {
+  table-layout: auto;
+  word-wrap: break-word; }

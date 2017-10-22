@@ -40,11 +40,8 @@ class ToDoList extends Component{
             message = <Label bsStyle="danger">Error while saving!</Label>
         } else if (this.props.updating){
             message = <Label bsStyle="info">Saving updates!</Label>
-        }
-        else if (this.props.updated){
-            message = <Label bsStyle="success">Saved!</Label>
-        }
-
+        } 
+ 
         return(
             <div>
                 <table className="table table-striped">

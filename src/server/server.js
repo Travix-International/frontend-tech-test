@@ -104,7 +104,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
 app.post('/task/create/:title/:description', (req, res) => {
   var maxId = Math.max.apply(Math,tasksContainer.tasks.map(function(task){return task.id;}));
   const task = {
-    id:  (isNaN(maxId) || !isFinite(maxId) ? 1 : maxId + 1),
+    id:  (isNaN(maxId) || !isFinite(maxId) ? 0 : maxId + 1),
     title: req.params.title,
     description: req.params.description,
   };
@@ -135,10 +135,8 @@ app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-  
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+    const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
+    if (taskIndex !== null) {
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',

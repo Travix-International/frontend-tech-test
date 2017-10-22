@@ -11,7 +11,7 @@ class AboutPage extends Component{
                 <Accordion>
                     <Panel header="Available Commands" eventKey="1">
                         <p><strong>build-css:</strong>  node-sass-chokidar src/ -o src/  (Converts scss files into css) </p> 
-                        <p><strong>watch-css:</strong>  npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive (Watchs for any modification ont eh css file to dynamically create the css)</p>
+                        <p><strong>watch-css:</strong>  npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive (Watches for any modification on the css file to dynamically create the css)</p>
                         <p><strong>start-js:</strong>  react-scripts start (Starts the functionality of react-create)</p>
                         <p><strong>start:</strong>  npm-run-all -p watch-css start-js (Regular npm start that also watches the scss files)</p>
                         <p><strong>build:</strong>  npm run build-css && react-scripts build (Creates PROD optimized version of the code)</p>
@@ -25,9 +25,9 @@ class AboutPage extends Component{
                          <p><strong>node-sass-chokidar:</strong> Library used to enable the watch command of the scss to css</p>
                          <p><strong>react-bootstrap:</strong> Bootstrap element optimize for the react framework</p>
                          <p><strong>react-redux:</strong> Enables the Provider and connect tag/command to cascade the redux store/dispatcher to all components </p>
-                         <p><strong>react-router:</strong> React standarize routing library </p>
+                         <p><strong>react-router:</strong> React standardized routing library </p>
                          <p><strong>redux-logger:</strong> Middleware in charge of logging all dispatched actions</p>
-                         <p><strong>redux-promise-middleware:</strong> Middle ware that allows for handeling promises ina much cleaner way</p>
+                         <p><strong>redux-promise-middleware:</strong> Middleware that allows for handling promises in a much cleaner way</p>
                          <p><strong>redux-thunk:</strong> Allow for actions creator to return functions </p>
                          <p><strong>react, redux, react-dom:</strong> Main libraries for react and redux</p>
                          <p><strong>nodemon:</strong> Enables de watch command to auto restart changes on the server</p>

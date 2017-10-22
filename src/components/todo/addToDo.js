@@ -48,9 +48,7 @@ class addToDo extends Component{
         }
 
         if(this.props.errorAdding){
-            return (
-                <p>Error while saving the tasks, please check that the server is running</p>
-            );
+            progressBar =  <p>Error while saving the tasks, please check that the server is running</p>
         }
     
         return(

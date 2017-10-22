@@ -12,14 +12,14 @@ export function fetchAllTasks(){
 export function addNewTasks(title, desc){
     return {
         type: "ADD_TASK",
-        payload: axios.post(server + "task/create/" + title + "/" + desc)
+        payload: axios.post(server + "task/create/" + encodeURIComponent(title) + "/" + encodeURIComponent(desc))
     }
 }
 
 export function updateTask(id, title, desc){
     return function(dispatch) {
         dispatch({type: "UPDATE_TASK_PENDING", payload: ""})
-        axios.put(server + "task/update/" + id + "/" + title + "/"  + desc)
+        axios.put(server + "task/update/" + id + "/" + encodeURIComponent(title) + "/"  + encodeURIComponent(desc))
         .then((response) => {
             dispatch({type: "UPDATE_TASK_FULFILLED", payload: {
                 id: id, 
