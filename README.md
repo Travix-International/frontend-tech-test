@@ -36,3 +36,28 @@ Fork the repository into your account. Once your code is ready open a pull-reque
 * dynamic-ui (web-sockets...?)
 * using the `made in Travix` technologies
 * ... Impress us !
+
+
+---
+# Things Implemented
+```
+* React/Redux app, with Sass, responsive
+* Unit-tests for the UI 
+* Integration-test
+* Used some of the `made in Travix` technologies
+```
+# Commands
+### Install
+```
+$npm install
+```
+### Run
+```
+1-) $npm run start:be //BackEnd 
+2-) $npm run start:fe //FrontEnd 
+3-) Open browser at http://localhost:8080/
+```
+### Test
+```
+npm run test
+```

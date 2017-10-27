@@ -1,3 +1,13 @@
 {
-  "tasks": []
-}
+    "tasks": [
+      { "id": 1, "task": "Buy bread" },
+      { "id": 2, "task": "Buy milk" },
+      { "id": 3, "task": "Pay rent" },
+      { "id": 4, "task": "Read book" },
+      { "id": 5, "task": "Go walk" },
+      { "id": 6, "task": "Buy paper" },
+      { "id": 7, "task": "Pay cellphone" },
+      { "id": 8, "task": "Go to gym" },
+      { "id": 9, "task": "Buy water" }
+    ]
+  }

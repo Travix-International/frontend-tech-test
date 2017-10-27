@@ -1,0 +1,8 @@
+export const TODOS_FETCH_LIST = 'TODOS_FETCH_LIST';
+export const TODOS_ADD_EDIT = 'TODOS_ADD_EDIT';
+export const TODOS_DELETE = 'TODOS_DELETE';
+export const TODOS_LIST_SAVE = 'TODOS_LIST_SAVE';
+export const TODOS_ADD_SAVE = 'TODOS_ADD_SAVE';
+export const TODOS_EDIT_SAVE = 'TODOS_EDIT_SAVE';
+export const TODOS_DELETE_SAVE = 'TODOS_DELETE_SAVE';
+export const BEGIN_AJAX_CALL = 'BEGIN_AJAX_CALL';
