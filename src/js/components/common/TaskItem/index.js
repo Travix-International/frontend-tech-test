@@ -26,7 +26,6 @@ class TaskItem extends Component {
         <div className="task-info">
           <div className="task-title">{this.props.title}</div>
           <div className="task-description">{this.props.description}</div>
-          <div>{this.props.id}</div>
         </div>
         <div className="task-item-buttons">
           <Button
