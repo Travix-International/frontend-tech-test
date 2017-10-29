@@ -1,4 +1,4 @@
-# App features
+## App features
 
 - Users can add, edit and delete a Task
 
@@ -8,16 +8,18 @@
 
 - Responsive layout
 
-# How to run
+## How to run
 
 - You need to have node installed on your environment
 
-npm install
+   $npm install
 
 - Open two terminal windows, execute the following commands, one on each terminal window
 
-npm run server 
-npm run dev
+   $npm run server
+
+
+   $npm run dev
 
 # Travix test
 
