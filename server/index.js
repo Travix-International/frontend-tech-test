@@ -1,10 +1,12 @@
 'use strict';
 
 const app = require('express')();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
 const bodyParser = require('body-parser');
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
-
 const paramIdValidator = require('./middleware/id-param-validator').idParamValidator;
 
 const adapter = new FileSync('./data/tasks.json');
@@ -13,14 +15,43 @@ const db = low(adapter);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+  next();
+});
+
 /**
  * GET /tasks
  * 
  * Return the list of tasks with status code 200.
  */
-app.get('/tasks', (req, res) => {
+app.get('/tasks/', (req, res) => {
+  const { pageCount, pageNumber } = req.query;
+  if (pageCount && pageNumber) {
+    const endIndex = pageCount * pageNumber;
+    const startIndex = endIndex - pageCount;
+    const rangeOfTasks = db.get('tasks')
+      .slice()
+      .reverse()
+      .slice(startIndex, endIndex)
+      .value();
+    return res.status(200).json(rangeOfTasks);
+  }
+
   const tasks = db.get('tasks').value();
   return res.status(200).json(tasks);
+});
+
+/**
+ * GET /tasks/total
+ * 
+ * Return the total amout of tasks with status code 200.
+ */
+app.get('/tasks/total', (req, res) => {
+  const tasksTotal = db.get('tasks').size().value();
+  return res.status(200).json(tasksTotal);
 });
 
 /**
@@ -65,12 +96,17 @@ app.put('/task/update/:id', paramIdValidator, (req, res) => {
   const taskId = req.params.id;
   const task = db.get('tasks').find({ id: taskId });
 
+  const taskUpdated = () => {
+    res.status(200).json({
+      message: 'Updated successfully',
+    });
+    io.emit('taskUpdates', 'task-edited');
+  };
+
   if (task) {
     const updatedTask = task.assign({ title, description }).write();
     return updatedTask
-      ? res.status(200).json({
-        message: 'Updated successfully',
-      })
+      ? taskUpdated()
       : res.status(500).json({
         message: 'Internal server error',
       });
@@ -92,18 +128,24 @@ app.put('/task/update/:id', paramIdValidator, (req, res) => {
  */
 app.post('/task/create', (req, res) => {
   const tasks = db.get('tasks');
-  const tasksSize = tasks.size().value();
+  const lastItem = tasks.last(1).value();
+  const newTaskId = lastItem ? parseInt(lastItem.id, 10) + 1 : 1;
   const newTask = {
-    id: (tasksSize + 1).toString(),
+    id: (newTaskId).toString(),
     title: req.body.title,
     description: req.body.description
   };
   const createdTask = tasks.push(newTask).write();
 
-  return createdTask.length > 0
-    ? res.status(201).json({
+  const taskCreated = () => {
+    res.status(201).json({
       message: 'Created successfully',
-    })
+    });
+    io.emit('taskUpdates', 'task-created');
+  };
+
+  return createdTask.length > 0
+    ? taskCreated()
     : res.status(500).json({
       message: 'Internal server error',
     });
@@ -127,10 +169,15 @@ app.delete('/task/delete/:id', paramIdValidator, (req, res) => {
   if (task) {
     const removedTask = tasks.remove({ id: taskId }).write();
 
-    return removedTask.length > 0
-      ? res.status(200).json({
+    const taskDeleted = () => {
+      res.status(200).json({
         message: 'Removed successfully',
-      })
+      });
+      io.emit('taskUpdates', 'task-deleted');
+    };
+
+    return removedTask.length > 0
+      ? taskDeleted()
       : res.status(500).json({
         message: 'Internal server error',
       });
@@ -141,6 +188,6 @@ app.delete('/task/delete/:id', paramIdValidator, (req, res) => {
   });
 });
 
-app.listen(9001, () => {
+server.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });
