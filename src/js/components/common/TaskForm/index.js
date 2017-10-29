@@ -48,7 +48,7 @@ class TaskForm extends Component {
             <FormControl
               className="form-input"
               onChange={this.handleTitleChange}
-              placeholder="Enter text"
+              placeholder="Title"
               type="text"
               value={this.state.title}
             />
@@ -56,7 +56,7 @@ class TaskForm extends Component {
             <FormControl
               className="form-input"
               onChange={this.handleDescriptionChange}
-              placeholder="Enter text"
+              placeholder="Description"
               type="text"
               value={this.state.description}
             />
