@@ -1,5 +1,5 @@
 {
-  "name": "test-candidates",
+  "name": "Reactjs-realtime-Todo-App",
   "version": "0.0.1",
   "description": "test back - front",
   "main": "server.js",
@@ -10,8 +10,9 @@
     "server": "node ./server/index.js"
   },
   "keywords": [
-    "test",
-    "travix"
+    "realtime",
+    "todo",
+    "app"
   ],
   "author": "spartans",
   "license": "ISC",
