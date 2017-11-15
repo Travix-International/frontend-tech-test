@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/bootstrap/javascripts/bootstrap/button.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\..\index.html">All files</a> / <a href="index.html">src/bootstrap/javascripts/bootstrap</a> button.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/67</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/34</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/59</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* ========================================================================
+ * Bootstrap: button.js v3.3.7
+ * http://getbootstrap.com/javascript/#buttons
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >+<span class="fstat-no" title="function not covered" >fu</span>nction ($) {</span>
+  'use strict';
+&nbsp;
+  // BUTTON PUBLIC CLASS DEFINITION
+  // ==============================
+&nbsp;
+  var Button = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction (element, options) {</span>
+<span class="cstat-no" title="statement not covered" >    this.$element  = $(element)</span>
+<span class="cstat-no" title="statement not covered" >    this.options   = $.extend({}, Button.DEFAULTS, options)</span>
+<span class="cstat-no" title="statement not covered" >    this.isLoading = false</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Button.VERSION  = '3.3.7'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Button.DEFAULTS = {</span>
+    loadingText: 'loading...'
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Button.prototype.setState = <span class="fstat-no" title="function not covered" >fu</span>nction (state) {</span>
+    var d   <span class="cstat-no" title="statement not covered" > = 'disable</span>d'
+    var $el  =<span class="cstat-no" title="statement not covered" > this.$element</span>
+    var val  =<span class="cstat-no" title="statement not covered" > $el.is('input') ? 'val' : 'html'</span>
+    var data = <span class="cstat-no" title="statement not covered" >$el.data()</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    state += 'Text'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (data.resetText == null) <span class="cstat-no" title="statement not covered" >$el.data('resetText', $el[val]())</span></span>
+&nbsp;
+    // push to event loop to allow forms to submit
+<span class="cstat-no" title="statement not covered" >    setTimeout($.proxy(<span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >      $el[val](data[state] == null ? this.options[state] : data[state])</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (state == 'loadingText') {</span>
+<span class="cstat-no" title="statement not covered" >        this.isLoading = true</span>
+<span class="cstat-no" title="statement not covered" >        $el.addClass(d).attr(d, d).prop(d, true)</span>
+      } else <span class="cstat-no" title="statement not covered" >if (this.isLoading) {</span>
+<span class="cstat-no" title="statement not covered" >        this.isLoading = false</span>
+<span class="cstat-no" title="statement not covered" >        $el.removeClass(d).removeAttr(d).prop(d, false)</span>
+      }
+    }, this), 0)
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Button.prototype.toggle = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+    var changed = <span class="cstat-no" title="statement not covered" >true</span>
+    var $parent = <span class="cstat-no" title="statement not covered" >this.$element.closest('[data-toggle="buttons"]')</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if ($parent.length) {</span>
+      var $input = <span class="cstat-no" title="statement not covered" >this.$element.find('input')</span>
+<span class="cstat-no" title="statement not covered" >      if ($input.prop('type') == 'radio') {</span>
+<span class="cstat-no" title="statement not covered" >        if ($input.prop('checked')) <span class="cstat-no" title="statement not covered" >changed = false</span></span>
+<span class="cstat-no" title="statement not covered" >        $parent.find('.active').removeClass('active')</span>
+<span class="cstat-no" title="statement not covered" >        this.$element.addClass('active')</span>
+      } else <span class="cstat-no" title="statement not covered" >if ($input.prop('type') == 'checkbox') {</span>
+<span class="cstat-no" title="statement not covered" >        if (($input.prop('checked')) !== this.$element.hasClass('active')<span class="cstat-no" title="statement not covered" >) changed = false</span></span>
+<span class="cstat-no" title="statement not covered" >        this.$element.toggleClass('active')</span>
+      }
+<span class="cstat-no" title="statement not covered" >      $input.prop('checked', this.$element.hasClass('active'))</span>
+<span class="cstat-no" title="statement not covered" >      if (changed) <span class="cstat-no" title="statement not covered" >$input.trigger('change')</span></span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      this.$element.attr('aria-pressed', !this.$element.hasClass('active'))</span>
+<span class="cstat-no" title="statement not covered" >      this.$element.toggleClass('active')</span>
+    }
+  }
+&nbsp;
+&nbsp;
+  // BUTTON PLUGIN DEFINITION
+  // ========================
+&nbsp;
+  function <span class="fstat-no" title="function not covered" >Plugin(</span>option) {
+<span class="cstat-no" title="statement not covered" >    return this.each(<span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+      var $this   <span class="cstat-no" title="statement not covered" >= $(this</span>)
+      var data   <span class="cstat-no" title="statement not covered" > = $this.data('bs.button</span>')
+      var options = <span class="cstat-no" title="statement not covered" >typeof option == 'object' &amp;&amp; option</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (!data) <span class="cstat-no" title="statement not covered" >$this.data('bs.button', (data = new Button(this, options)))</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (option == 'toggle') <span class="cstat-no" title="statement not covered" >data.toggle()</span></span>
+<span class="cstat-no" title="statement not covered" >      else if (opt<span class="cstat-no" title="statement not covered" >ion) data.setState(opti</span></span>on)
+    })
+  }
+&nbsp;
+  var old = <span class="cstat-no" title="statement not covered" >$.fn.button</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $.fn.button           </span>  = Plugin
+<span class="cstat-no" title="statement not covered" >  $.fn.button.Constructor = Button</span>
+&nbsp;
+&nbsp;
+  // BUTTON NO CONFLICT
+  // ==================
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $.fn.button.noConflict = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    $.fn.button = old</span>
+<span class="cstat-no" title="statement not covered" >    return this</span>
+  }
+&nbsp;
+&nbsp;
+  // BUTTON DATA-API
+  // ===============
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $(document)</span>
+    .on('click.bs.button.data-api', '[data-toggle^="button"]<span class="fstat-no" title="function not covered" >',</span> function (e) {
+      var $btn <span class="cstat-no" title="statement not covered" >= $(e.target).closest('.btn'</span>)
+<span class="cstat-no" title="statement not covered" >      Plugin.call($btn, 'toggle')</span>
+<span class="cstat-no" title="statement not covered" >      if (!($(e.target).is('input[type="radio"], input[type="checkbox"]'))) {</span>
+        // Prevent double click on radios, and the double selections (so cancellation) on checkboxes
+<span class="cstat-no" title="statement not covered" >        e.preventDefault()</span>
+        // The target component still receive the focus
+<span class="cstat-no" title="statement not covered" >        if ($btn.is('input,button')<span class="cstat-no" title="statement not covered" >) $btn.trigger('focus')</span></span>
+<span class="cstat-no" title="statement not covered" >        else $btn.find('input:visible,button:visible').first().trigger('fo</span>cus')
+      }
+    })
+    .on('focus.bs.button.data-api blur.bs.button.data-api', '[data-toggle^="button"]<span class="fstat-no" title="function not covered" >',</span> function (e) {
+<span class="cstat-no" title="statement not covered" >      $(e.target).closest('.btn').toggleClass('focus', /^focus(in)?$/.test(e.type))</span>
+    })
+&nbsp;
+}(jQuery);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Oct 21 2017 18:55:45 GMT-0300 (Hora estándar de Argentina)
+</div>
+</div>
+<script src="..\..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\..\sorter.js"></script>
+</body>
+</html>

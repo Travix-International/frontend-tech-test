@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/about/aboutPage.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/components/about</a> aboutPage.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/4</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react';<span class="cstat-no" title="statement not covered" ></span></span>
+import { Accordion,Panel } from 'react-bootstrap';
+// User define components
+import Header<span class="cstat-no" title="statement not covered" > from '../common/</span>header';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span></span>
+&nbsp;
+class AboutPage extends Component{
+<span class="fstat-no" title="function not covered" >    re</span>nder(){
+<span class="cstat-no" title="statement not covered" >        return(</span>
+            &lt;div&gt;
+                &lt;Header /&gt;
+                &lt;Accordion&gt;
+                    &lt;Panel header="Available Commands" eventKey="1"&gt;
+                        &lt;p&gt;&lt;strong&gt;build-css:&lt;/strong&gt;  node-sass-chokidar src/ -o src/  (Converts scss files into css) &lt;/p&gt; 
+                        &lt;p&gt;&lt;strong&gt;watch-css:&lt;/strong&gt;  npm run build-css &amp;&amp; node-sass-chokidar src/ -o src/ --watch --recursive (Watchs for any modification ont eh css file to dynamically create the css)&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;start-js:&lt;/strong&gt;  react-scripts start (Starts the functionality of react-create)&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;start:&lt;/strong&gt;  npm-run-all -p watch-css start-js (Regular npm start that also watches the scss files)&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;build:&lt;/strong&gt;  npm run build-css &amp;&amp; react-scripts build (Creates PROD optimized version of the code)&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;test:&lt;/strong&gt;  react-scripts test --env=jsdom (Executes tests)&lt;/p&gt;
+                        &lt;p&gt;&lt;strong&gt;eject:&lt;/strong&gt;  react-scripts eject (Decouple the code from the react-create libs)&lt;/p&gt;
+                    &lt;/Panel&gt;
+                    &lt;Panel header="Used Technologies" eventKey="2"&gt;
+                         &lt;p&gt;&lt;strong&gt;create-react-app:&lt;/strong&gt; In charge of creating the boiler plate that takes cares of multiple standard configurations (Webpack, abbel,m etc)&lt;/p&gt;
+                         &lt;p&gt;&lt;strong&gt;axios:&lt;/strong&gt; Library in charge of HTTP communications (Promise based)&lt;/p&gt;
+                         &lt;p&gt;&lt;strong&gt;bootstrap-sass:&lt;/strong&gt; Bootstrap v3 standard library but optimize to use scss&lt;/p&gt;
+                         &lt;p&gt;&lt;strong&gt;node-sass-chokidar:&lt;/strong&gt; Library used to enable the watch command of the scss to css&lt;/p&gt;
+                         &lt;p&gt;&lt;strong&gt;react-bootstrap:&lt;/strong&gt; Bootstrap element optimize for the react framework&lt;/p&gt;
+                         &lt;p&gt;&lt;strong&gt;react-redux:&lt;/strong&gt; Enables the Provider and connect tag/command to cascade the redux store/dispatcher to all components &lt;/p&gt;
+                         &lt;p&gt;&lt;strong&gt;react-router:&lt;/strong&gt; React standarize routing library &lt;/p&gt;
+                         &lt;p&gt;&lt;strong&gt;redux-logger:&lt;/strong&gt; Middleware in charge of logging all dispatched actions&lt;/p&gt;
+                         &lt;p&gt;&lt;strong&gt;redux-promise-middleware:&lt;/strong&gt; Middle ware that allows for handeling promises ina much cleaner way&lt;/p&gt;
+                         &lt;p&gt;&lt;strong&gt;redux-thunk:&lt;/strong&gt; Allow for actions creator to return functions &lt;/p&gt;
+                         &lt;p&gt;&lt;strong&gt;react, redux, react-dom:&lt;/strong&gt; Main libraries for react and redux&lt;/p&gt;
+                    &lt;/Panel&gt;
+                    &lt;Panel header="Solution explained" eventKey="3"&gt;
+                        &lt;p&gt;Solution it self its base on the create-react-app boilerplate, after cloning the original project the react-scripts were install and then the folder
+                        structure was made up.&lt;/p&gt;
+&nbsp;
+                        FRONTEND-TECH-TEST
+                        &lt;ul&gt;
+                           &lt;li&gt;build: PROD Version of the code&lt;/li&gt;
+                           &lt;li&gt;public: Holds index.html and favicon&lt;/li&gt;
+                           &lt;li&gt;src:&lt;/li&gt;
+                            &lt;ul&gt;
+                                &lt;li&gt;actions: Hold all the actions that that modify the data&lt;/li&gt;
+                                &lt;li&gt;common: Holds all the common components &lt;/li&gt;
+                                &lt;li&gt;home: Holds the main page&lt;/li&gt;
+                                &lt;li&gt;todo: Holds the todo page were all operations occur&lt;/li&gt;
+                                &lt;li&gt;about: Holds the about page&lt;/li&gt;
+                                &lt;li&gt;reducer: Holds the todo reducer and the index file for future merging&lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/ul&gt;
+                        &lt;p&gt;For the UX/UI bootstrap was added and it was used on the 2 pages that compose the solution (TDO and About). Axios is handeling the API call
+                            and the promises are used to handle the informaiton in an async way 
+                        &lt;/p&gt;
+                    &lt;/Panel&gt;
+                &lt;/Accordion&gt;
+            &lt;/div&gt;
+        );
+    }<span class="cstat-no" title="statement not covered" ></span>
+}
+&nbsp;
+export default AboutPage;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Oct 21 2017 18:55:45 GMT-0300 (Hora estándar de Argentina)
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>

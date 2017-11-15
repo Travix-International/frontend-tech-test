@@ -1,0 +1,1625 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/bootstrap/javascripts/bootstrap/tooltip.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\..\index.html">All files</a> / <a href="index.html">src/bootstrap/javascripts/bootstrap</a> tooltip.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/279</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/213</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/38</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/257</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* ========================================================================
+ * Bootstrap: tooltip.js v3.3.7
+ * http://getbootstrap.com/javascript/#tooltip
+ * Inspired by the original jQuery.tipsy by Jason Frame
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >+<span class="fstat-no" title="function not covered" >fu</span>nction ($) {</span>
+  'use strict';
+&nbsp;
+  // TOOLTIP PUBLIC CLASS DEFINITION
+  // ===============================
+&nbsp;
+  var Tooltip = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction (element, options) {</span>
+<span class="cstat-no" title="statement not covered" >    this.type       = </span>null
+<span class="cstat-no" title="statement not covered" >    this.options    = nul</span>l
+<span class="cstat-no" title="statement not covered" >    this.enabled    = nul</span>l
+<span class="cstat-no" title="statement not covered" >    this.timeout    = nul</span>l
+<span class="cstat-no" title="statement not covered" >    this.hoverState = null</span>
+<span class="cstat-no" title="statement not covered" >    this.$element   = null</span>
+<span class="cstat-no" title="statement not covered" >    this.inState    = nul</span>l
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.init('tooltip', element, options)</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.VERSION  = '3.3.7'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.TRANSITION_DURATION = 150</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.DEFAULTS = {</span>
+    animation: true,
+    placement: 'top',
+    selector: false,
+    template: '&lt;div class="tooltip" role="tooltip"&gt;&lt;div class="tooltip-arrow"&gt;&lt;/div&gt;&lt;div class="tooltip-inner"&gt;&lt;/div&gt;&lt;/div&gt;',
+    trigger: 'hover focus',
+    title: '',
+    delay: 0,
+    html: false,
+    container: false,
+    viewport: {
+      selector: 'body',
+      padding: 0
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.init = <span class="fstat-no" title="function not covered" >fu</span>nction (type, element, options) {</span>
+<span class="cstat-no" title="statement not covered" >    this.enabled   = true</span>
+<span class="cstat-no" title="statement not covered" >    this.type      = t</span>ype
+<span class="cstat-no" title="statement not covered" >    this.$element  = $(element)</span>
+<span class="cstat-no" title="statement not covered" >    this.options   = this.getOptions(options)</span>
+<span class="cstat-no" title="statement not covered" >    this.$viewport = this.options.viewport &amp;&amp; $($.isFunction(this.options.viewport) ? this.options.viewport.call(this, this.$element) : (this.options.viewport.selector || this.options.viewport))</span>
+<span class="cstat-no" title="statement not covered" >    this.inState   = { click: false, hover: false, focus: false }</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.$element[0] instanceof document.constructor &amp;&amp; !this.options.selector) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error('`selector` option must be specified when initializing ' + this.type + ' on the window.document object!')</span>
+    }
+&nbsp;
+    var triggers = <span class="cstat-no" title="statement not covered" >this.options.trigger.split(' ')</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    for (var i = triggers.length; i--;) {</span>
+      var trigger = <span class="cstat-no" title="statement not covered" >triggers[i]</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (trigger == 'click') {</span>
+<span class="cstat-no" title="statement not covered" >        this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this))</span>
+      } else <span class="cstat-no" title="statement not covered" >if (trigger != 'manual') {</span>
+        var eventIn  =<span class="cstat-no" title="statement not covered" > trigger == 'hover' ? 'mouseenter' : 'focusin'</span>
+        var eventOut = <span class="cstat-no" title="statement not covered" >trigger == 'hover' ? 'mouseleave' : 'focusout'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.$element.on(eventIn  + '.' + this.type, this.options.selector, $.proxy(this.enter, this))</span>
+<span class="cstat-no" title="statement not covered" >        this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))</span>
+      }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.options.selector ?</span>
+      (this._options = $.extend({}, this.options, { trigger: 'manual', selector: '' })) :
+      this.fixTitle()
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.getDefaults = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    return Tooltip.DEFAULTS</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.getOptions = <span class="fstat-no" title="function not covered" >fu</span>nction (options) {</span>
+<span class="cstat-no" title="statement not covered" >    options = $.extend({}, this.getDefaults(), this.$element.data(), options)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (options.delay &amp;&amp; typeof options.delay == 'number') {</span>
+<span class="cstat-no" title="statement not covered" >      options.delay = {</span>
+        show: options.delay,
+        hide: options.delay
+      }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return options</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.getDelegateOptions = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+    var options  =<span class="cstat-no" title="statement not covered" > {}</span>
+    var defaults = <span class="cstat-no" title="statement not covered" >this.getDefaults()</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this._options &amp;&amp; $.each(this._options, <span class="fstat-no" title="function not covered" >fu</span>nction (key, value) {</span>
+<span class="cstat-no" title="statement not covered" >      if (defaults[key] != value) <span class="cstat-no" title="statement not covered" >options[key] = value</span></span>
+    })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return options</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.enter = <span class="fstat-no" title="function not covered" >fu</span>nction (obj) {</span>
+    var self = <span class="cstat-no" title="statement not covered" >obj instanceof this.constructor ?</span>
+      obj : $(obj.currentTarget).data('bs.' + this.type)
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!self) {</span>
+<span class="cstat-no" title="statement not covered" >      self = new this.constructor(obj.currentTarget, this.getDelegateOptions())</span>
+<span class="cstat-no" title="statement not covered" >      $(obj.currentTarget).data('bs.' + this.type, self)</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (obj instanceof $.Event) {</span>
+<span class="cstat-no" title="statement not covered" >      self.inState[obj.type == 'focusin' ? 'focus' : 'hover'] = true</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (self.tip().hasClass('in') || self.hoverState == 'in') {</span>
+<span class="cstat-no" title="statement not covered" >      self.hoverState = 'in'</span>
+<span class="cstat-no" title="statement not covered" >      return</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    clearTimeout(self.timeout)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    self.hoverState = 'in'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!self.options.delay || !self.options.delay.show) <span class="cstat-no" title="statement not covered" >return self.show()</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    self.timeout = setTimeout(<span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >      if (self.hoverState == 'in') <span class="cstat-no" title="statement not covered" >self.show()</span></span>
+    }, self.options.delay.show)
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.isInStateTrue = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    for (var key in this.inState) {</span>
+<span class="cstat-no" title="statement not covered" >      if (this.inState[key]) <span class="cstat-no" title="statement not covered" >return true</span></span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return false</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.leave = <span class="fstat-no" title="function not covered" >fu</span>nction (obj) {</span>
+    var self = <span class="cstat-no" title="statement not covered" >obj instanceof this.constructor ?</span>
+      obj : $(obj.currentTarget).data('bs.' + this.type)
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!self) {</span>
+<span class="cstat-no" title="statement not covered" >      self = new this.constructor(obj.currentTarget, this.getDelegateOptions())</span>
+<span class="cstat-no" title="statement not covered" >      $(obj.currentTarget).data('bs.' + this.type, self)</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (obj instanceof $.Event) {</span>
+<span class="cstat-no" title="statement not covered" >      self.inState[obj.type == 'focusout' ? 'focus' : 'hover'] = false</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (self.isInStateTrue()) <span class="cstat-no" title="statement not covered" >return</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    clearTimeout(self.timeout)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    self.hoverState = 'out'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!self.options.delay || !self.options.delay.hide) <span class="cstat-no" title="statement not covered" >return self.hide()</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    self.timeout = setTimeout(<span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >      if (self.hoverState == 'out') <span class="cstat-no" title="statement not covered" >self.hide()</span></span>
+    }, self.options.delay.hide)
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.show = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+    var e = <span class="cstat-no" title="statement not covered" >$.Event('show.bs.' + this.type)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.hasContent() &amp;&amp; this.enabled) {</span>
+<span class="cstat-no" title="statement not covered" >      this.$element.trigger(e)</span>
+&nbsp;
+      var inDom = <span class="cstat-no" title="statement not covered" >$.contains(this.$element[0].ownerDocument.documentElement, this.$element[0])</span>
+<span class="cstat-no" title="statement not covered" >      if (e.isDefaultPrevented() || !inDom) <span class="cstat-no" title="statement not covered" >return</span></span>
+      var that = <span class="cstat-no" title="statement not covered" >this</span>
+&nbsp;
+      var $tip = <span class="cstat-no" title="statement not covered" >this.tip()</span>
+&nbsp;
+      var tipId = <span class="cstat-no" title="statement not covered" >this.getUID(this.type)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.setContent()</span>
+<span class="cstat-no" title="statement not covered" >      $tip.attr('id', tipId)</span>
+<span class="cstat-no" title="statement not covered" >      this.$element.attr('aria-describedby', tipId)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (this.options.animation) <span class="cstat-no" title="statement not covered" >$tip.addClass('fade')</span></span>
+&nbsp;
+      var placement = <span class="cstat-no" title="statement not covered" >typeof this.options.placement == 'function' ?</span>
+        this.options.placement.call(this, $tip[0], this.$element[0]) :
+        this.options.placement
+&nbsp;
+      var autoToken = <span class="cstat-no" title="statement not covered" >/\s?auto?\s?/i</span>
+      var autoPlace = <span class="cstat-no" title="statement not covered" >autoToken.test(placement)</span>
+<span class="cstat-no" title="statement not covered" >      if (autoPlace) <span class="cstat-no" title="statement not covered" >placement = placement.replace(autoToken, '') || 'top'</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      $tip</span>
+        .detach()
+        .css({ top: 0, left: 0, display: 'block' })
+        .addClass(placement)
+        .data('bs.' + this.type, this)
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)</span>
+<span class="cstat-no" title="statement not covered" >      this.$element.trigger('inserted.bs.' + this.type)</span>
+&nbsp;
+      var pos   <span class="cstat-no" title="statement not covered" >       = this.getPo</span>sition()
+      var actualWidth  =<span class="cstat-no" title="statement not covered" > $tip[0].offsetWidth</span>
+      var actualHeight = <span class="cstat-no" title="statement not covered" >$tip[0].offsetHeight</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (autoPlace) {</span>
+        var orgPlacement = <span class="cstat-no" title="statement not covered" >placement</span>
+        var viewportDim = <span class="cstat-no" title="statement not covered" >this.getPosition(this.$viewport)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        placement = placement == 'bottom' &amp;&amp; pos.bottom + actualHeight &gt; viewportDim.bottom ? 'top'    :</span>
+                    placement == 'top'    &amp;&amp; pos.top    - actualHeight &lt; viewportDim.top    ? 'bottom' :
+                    placement == 'right'  &amp;&amp; pos.right  + actualWidth  &gt; viewportDim.width  ? 'left'   :
+                    placement == 'left'   &amp;&amp; pos.left   - actualWidth  &lt; viewportDim.left   ? 'right'  :
+                    placement
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        $tip</span>
+          .removeClass(orgPlacement)
+          .addClass(placement)
+      }
+&nbsp;
+      var calculatedOffset = <span class="cstat-no" title="statement not covered" >this.getCalculatedOffset(placement, pos, actualWidth, actualHeight)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.applyPlacement(calculatedOffset, placement)</span>
+&nbsp;
+      var complete = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+        var prevHoverState = <span class="cstat-no" title="statement not covered" >that.hoverState</span>
+<span class="cstat-no" title="statement not covered" >        that.$element.trigger('shown.bs.' + that.type)</span>
+<span class="cstat-no" title="statement not covered" >        that.hoverState = null</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (prevHoverState == 'out') <span class="cstat-no" title="statement not covered" >that.leave(that)</span></span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      $.support.transition &amp;&amp; this.$tip.hasClass('fade') ?</span>
+        $tip
+          .one('bsTransitionEnd', complete)
+          .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
+        complete()
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.applyPlacement = <span class="fstat-no" title="function not covered" >fu</span>nction (offset, placement) {</span>
+    var $tip   <span class="cstat-no" title="statement not covered" >= this.tip(</span>)
+    var width  =<span class="cstat-no" title="statement not covered" > $tip[0].offsetWidth</span>
+    var height = <span class="cstat-no" title="statement not covered" >$tip[0].offsetHeight</span>
+&nbsp;
+    // manually read margins because getBoundingClientRect includes difference
+    var marginTop = <span class="cstat-no" title="statement not covered" >parseInt($tip.css('margin-top'), 10)</span>
+    var marginLeft = <span class="cstat-no" title="statement not covered" >parseInt($tip.css('margin-left'), 10)</span>
+&nbsp;
+    // we must check for NaN for ie 8/9
+<span class="cstat-no" title="statement not covered" >    if (isNaN(marginTop)) <span class="cstat-no" title="statement not covered" > marginTop  = 0</span></span>
+<span class="cstat-no" title="statement not covered" >    if (isNaN(marginLeft)) <span class="cstat-no" title="statement not covered" >marginLeft = 0</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    offset.top  += marginTop</span>
+<span class="cstat-no" title="statement not covered" >    offset.left += marginLeft</span>
+&nbsp;
+    // $.fn.offset doesn't round pixel values
+    // so we use setOffset directly with our own function B-0
+<span class="cstat-no" title="statement not covered" >    $.offset.setOffset($tip[0], $.extend({</span>
+      using: <span class="fstat-no" title="function not covered" >fu</span>nction (props) {
+<span class="cstat-no" title="statement not covered" >        $tip.css({</span>
+          top: Math.round(props.top),
+          left: Math.round(props.left)
+        })
+      }
+    }, offset), 0)
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $tip.addClass('in')</span>
+&nbsp;
+    // check to see if placing tip in new offset caused the tip to resize itself
+    var actualWidth  =<span class="cstat-no" title="statement not covered" > $tip[0].offsetWidth</span>
+    var actualHeight = <span class="cstat-no" title="statement not covered" >$tip[0].offsetHeight</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (placement == 'top' &amp;&amp; actualHeight != height) {</span>
+<span class="cstat-no" title="statement not covered" >      offset.top = offset.top + height - actualHeight</span>
+    }
+&nbsp;
+    var delta = <span class="cstat-no" title="statement not covered" >this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (delta.left) <span class="cstat-no" title="statement not covered" >offset.left += delta.left</span></span>
+<span class="cstat-no" title="statement not covered" >    else offset.top += delta.</span>top
+&nbsp;
+    var isVertical   <span class="cstat-no" title="statement not covered" >       = /top|bottom/.test(pl</span>acement)
+    var arrowDelta   <span class="cstat-no" title="statement not covered" >       = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actu</span>alHeight
+    var arrowOffsetPosition = <span class="cstat-no" title="statement not covered" >isVertical ? 'offsetWidth' : 'offsetHeight'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $tip.offset(offset)</span>
+<span class="cstat-no" title="statement not covered" >    this.replaceArrow(arrowDelta, $tip[0][arrowOffsetPosition], isVertical)</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.replaceArrow = <span class="fstat-no" title="function not covered" >fu</span>nction (delta, dimension, isVertical) {</span>
+<span class="cstat-no" title="statement not covered" >    this.arrow()</span>
+      .css(isVertical ? 'left' : 'top', 50 * (1 - delta / dimension) + '%')
+      .css(isVertical ? 'top' : 'left', '')
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.setContent = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+    var $tip  =<span class="cstat-no" title="statement not covered" > this.tip()</span>
+    var title = <span class="cstat-no" title="statement not covered" >this.getTitle()</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $tip.find('.tooltip-inner')[this.options.html ? 'html' : 'text'](title)</span>
+<span class="cstat-no" title="statement not covered" >    $tip.removeClass('fade in top bottom left right')</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.hide = <span class="fstat-no" title="function not covered" >fu</span>nction (callback) {</span>
+    var that = <span class="cstat-no" title="statement not covered" >this</span>
+    var $tip = <span class="cstat-no" title="statement not covered" >$(this.$tip)</span>
+    var e   <span class="cstat-no" title="statement not covered" > = $.Event('hide.bs.' + this.typ</span>e)
+&nbsp;
+    function <span class="fstat-no" title="function not covered" >complete(</span>) {
+<span class="cstat-no" title="statement not covered" >      if (that.hoverState != 'in') <span class="cstat-no" title="statement not covered" >$tip.detach()</span></span>
+<span class="cstat-no" title="statement not covered" >      if (that.$element) { // TODO: Check whether guarding this code with this `if` is really necessary.</span>
+<span class="cstat-no" title="statement not covered" >        that.$element</span>
+          .removeAttr('aria-describedby')
+          .trigger('hidden.bs.' + that.type)
+      }
+<span class="cstat-no" title="statement not covered" >      callback &amp;&amp; callback()</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.$element.trigger(e)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (e.isDefaultPrevented()) <span class="cstat-no" title="statement not covered" >return</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $tip.removeClass('in')</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $.support.transition &amp;&amp; $tip.hasClass('fade') ?</span>
+      $tip
+        .one('bsTransitionEnd', complete)
+        .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
+      complete()
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.hoverState = null</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return this</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.fixTitle = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+    var $e = <span class="cstat-no" title="statement not covered" >this.$element</span>
+<span class="cstat-no" title="statement not covered" >    if ($e.attr('title') || typeof $e.attr('data-original-title') != 'string') {</span>
+<span class="cstat-no" title="statement not covered" >      $e.attr('data-original-title', $e.attr('title') || '').attr('title', '')</span>
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.hasContent = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    return this.getTitle()</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.getPosition = <span class="fstat-no" title="function not covered" >fu</span>nction ($element) {</span>
+<span class="cstat-no" title="statement not covered" >    $element   = $element || this.$element</span>
+&nbsp;
+    var el   <span class="cstat-no" title="statement not covered" >  = $element</span>[0]
+    var isBody = <span class="cstat-no" title="statement not covered" >el.tagName == 'BODY'</span>
+&nbsp;
+    var elRect   <span class="cstat-no" title="statement not covered" > = el.getBoundingClientRect</span>()
+<span class="cstat-no" title="statement not covered" >    if (elRect.width == null) {</span>
+      // width and height are missing in IE8, so compute them manually; see https://github.com/twbs/bootstrap/issues/14093
+<span class="cstat-no" title="statement not covered" >      elRect = $.extend({}, elRect, { width: elRect.right - elRect.left, height: elRect.bottom - elRect.top })</span>
+    }
+    var isSvg = <span class="cstat-no" title="statement not covered" >window.SVGElement &amp;&amp; el instanceof window.SVGElement</span>
+    // Avoid using $.offset() on SVGs since it gives incorrect results in jQuery 3.
+    // See https://github.com/twbs/bootstrap/issues/20280
+    var elOffset  =<span class="cstat-no" title="statement not covered" > isBody ? { top: 0, left: 0 } : (isSvg ? null : $element.offset(</span>))
+    var scroll   <span class="cstat-no" title="statement not covered" > = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop()</span> }
+    var outerDims = <span class="cstat-no" title="statement not covered" >isBody ? { width: $(window).width(), height: $(window).height() } : null</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return $.extend({}, elRect, scroll, outerDims, elOffset)</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.getCalculatedOffset = <span class="fstat-no" title="function not covered" >fu</span>nction (placement, pos, actualWidth, actualHeight) {</span>
+<span class="cstat-no" title="statement not covered" >    return placement == 'bottom' ? { top: pos.top + pos.height,   left: pos.left + pos.width / 2 - actualWidth / 2 } :</span>
+           placement == 'top'    ? { top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2 } :
+           placement == 'left'   ? { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth } :
+        /* placement == 'right' */ { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width }
+&nbsp;
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.getViewportAdjustedDelta = <span class="fstat-no" title="function not covered" >fu</span>nction (placement, pos, actualWidth, actualHeight) {</span>
+    var delta = <span class="cstat-no" title="statement not covered" >{ top: 0, left: 0 }</span>
+<span class="cstat-no" title="statement not covered" >    if (!this.$viewport) <span class="cstat-no" title="statement not covered" >return delta</span></span>
+&nbsp;
+    var viewportPadding = <span class="cstat-no" title="statement not covered" >this.options.viewport &amp;&amp; this.options.viewport.padding || 0</span>
+    var viewportDimensions = <span class="cstat-no" title="statement not covered" >this.getPosition(this.$viewport)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (/right|left/.test(placement)) {</span>
+      var topEdgeOffset   <span class="cstat-no" title="statement not covered" > = pos.top - viewportPadding - viewportDimensions.scro</span>ll
+      var bottomEdgeOffset = <span class="cstat-no" title="statement not covered" >pos.top + viewportPadding - viewportDimensions.scroll + actualHeight</span>
+<span class="cstat-no" title="statement not covered" >      if (topEdgeOffset &lt; viewportDimensions.top) { // top overflow</span>
+<span class="cstat-no" title="statement not covered" >        delta.top = viewportDimensions.top - topEdgeOffset</span>
+      } else <span class="cstat-no" title="statement not covered" >if (bottomEdgeOffset &gt; viewportDimensions.top + viewportDimensions.height) { // bottom overflow</span>
+<span class="cstat-no" title="statement not covered" >        delta.top = viewportDimensions.top + viewportDimensions.height - bottomEdgeOffset</span>
+      }
+    } else {
+      var leftEdgeOffset  =<span class="cstat-no" title="statement not covered" > pos.left - viewportPadding</span>
+      var rightEdgeOffset = <span class="cstat-no" title="statement not covered" >pos.left + viewportPadding + actualWidth</span>
+<span class="cstat-no" title="statement not covered" >      if (leftEdgeOffset &lt; viewportDimensions.left) { // left overflow</span>
+<span class="cstat-no" title="statement not covered" >        delta.left = viewportDimensions.left - leftEdgeOffset</span>
+      } else <span class="cstat-no" title="statement not covered" >if (rightEdgeOffset &gt; viewportDimensions.right) { // right overflow</span>
+<span class="cstat-no" title="statement not covered" >        delta.left = viewportDimensions.left + viewportDimensions.width - rightEdgeOffset</span>
+      }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return delta</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.getTitle = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+    var title
+    var $e = <span class="cstat-no" title="statement not covered" >this.$element</span>
+    var o  =<span class="cstat-no" title="statement not covered" > this.options</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    title = $e.attr('data-original-title')</span>
+      || (typeof o.title == 'function' ? o.title.call($e[0]) :  o.title)
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return title</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.getUID = <span class="fstat-no" title="function not covered" >fu</span>nction (prefix) {</span>
+<span class="cstat-no" title="statement not covered" >    do <span class="cstat-no" title="statement not covered" >prefix += ~~(Math.random() * 1000000)</span></span>
+    while (document.getElementById(prefix))
+<span class="cstat-no" title="statement not covered" >    return prefix</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.tip = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    if (!this.$tip) {</span>
+<span class="cstat-no" title="statement not covered" >      this.$tip = $(this.options.template)</span>
+<span class="cstat-no" title="statement not covered" >      if (this.$tip.length != 1) {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error(this.type + ' `template` option must consist of exactly 1 top-level element!')</span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return this.$tip</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.arrow = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    return (this.$arrow = this.$arrow || this.tip().find('.tooltip-arrow'))</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.enable = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    this.enabled = true</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.disable = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    this.enabled = false</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.toggleEnabled = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    this.enabled = !this.enabled</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.toggle = <span class="fstat-no" title="function not covered" >fu</span>nction (e) {</span>
+    var self = <span class="cstat-no" title="statement not covered" >this</span>
+<span class="cstat-no" title="statement not covered" >    if (e) {</span>
+<span class="cstat-no" title="statement not covered" >      self = $(e.currentTarget).data('bs.' + this.type)</span>
+<span class="cstat-no" title="statement not covered" >      if (!self) {</span>
+<span class="cstat-no" title="statement not covered" >        self = new this.constructor(e.currentTarget, this.getDelegateOptions())</span>
+<span class="cstat-no" title="statement not covered" >        $(e.currentTarget).data('bs.' + this.type, self)</span>
+      }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (e) {</span>
+<span class="cstat-no" title="statement not covered" >      self.inState.click = !self.inState.click</span>
+<span class="cstat-no" title="statement not covered" >      if (self.isInStateTrue()) <span class="cstat-no" title="statement not covered" >self.enter(self)</span></span>
+<span class="cstat-no" title="statement not covered" >      else self.leave(se</span>lf)
+    } else {
+<span class="cstat-no" title="statement not covered" >      self.tip().hasClass('in') ? self.leave(self) : self.enter(self)</span>
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  Tooltip.prototype.destroy = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+    var that = <span class="cstat-no" title="statement not covered" >this</span>
+<span class="cstat-no" title="statement not covered" >    clearTimeout(this.timeout)</span>
+<span class="cstat-no" title="statement not covered" >    this.hide(<span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >      that.$element.off('.' + that.type).removeData('bs.' + that.type)</span>
+<span class="cstat-no" title="statement not covered" >      if (that.$tip) {</span>
+<span class="cstat-no" title="statement not covered" >        that.$tip.detach()</span>
+      }
+<span class="cstat-no" title="statement not covered" >      that.$tip = null</span>
+<span class="cstat-no" title="statement not covered" >      that.$arrow = null</span>
+<span class="cstat-no" title="statement not covered" >      that.$viewport = null</span>
+<span class="cstat-no" title="statement not covered" >      that.$element = null</span>
+    })
+  }
+&nbsp;
+&nbsp;
+  // TOOLTIP PLUGIN DEFINITION
+  // =========================
+&nbsp;
+  function <span class="fstat-no" title="function not covered" >Plugin(</span>option) {
+<span class="cstat-no" title="statement not covered" >    return this.each(<span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+      var $this   <span class="cstat-no" title="statement not covered" >= $(this</span>)
+      var data   <span class="cstat-no" title="statement not covered" > = $this.data('bs.tooltip</span>')
+      var options = <span class="cstat-no" title="statement not covered" >typeof option == 'object' &amp;&amp; option</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (!data &amp;&amp; /destroy|hide/.test(option)) <span class="cstat-no" title="statement not covered" >return</span></span>
+<span class="cstat-no" title="statement not covered" >      if (!data) <span class="cstat-no" title="statement not covered" >$this.data('bs.tooltip', (data = new Tooltip(this, options)))</span></span>
+<span class="cstat-no" title="statement not covered" >      if (typeof option == 'string') <span class="cstat-no" title="statement not covered" >data[option]()</span></span>
+    })
+  }
+&nbsp;
+  var old = <span class="cstat-no" title="statement not covered" >$.fn.tooltip</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $.fn.tooltip           </span>  = Plugin
+<span class="cstat-no" title="statement not covered" >  $.fn.tooltip.Constructor = Tooltip</span>
+&nbsp;
+&nbsp;
+  // TOOLTIP NO CONFLICT
+  // ===================
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $.fn.tooltip.noConflict = <span class="fstat-no" title="function not covered" >fu</span>nction () {</span>
+<span class="cstat-no" title="statement not covered" >    $.fn.tooltip = old</span>
+<span class="cstat-no" title="statement not covered" >    return this</span>
+  }
+&nbsp;
+}(jQuery);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Oct 21 2017 18:55:45 GMT-0300 (Hora estándar de Argentina)
+</div>
+</div>
+<script src="..\..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\..\sorter.js"></script>
+</body>
+</html>

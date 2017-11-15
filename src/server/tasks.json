@@ -1,0 +1,19 @@
+{
+    "tasks": [
+      {
+        "id":0,
+        "title": "Learn a new language",
+        "description": "To open new door at life and to stay active"
+      },
+      {
+        "id":1,
+        "title": "Stay in school",
+        "description": "Education is very very very imnportant to be a great person"
+      },
+      {
+        "id":2,
+        "title": "Clean house",
+        "description": "It is a mess! THat is impossible to clean or live in!!!!"
+      }
+    ]
+  }

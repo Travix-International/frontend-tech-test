@@ -1,7 +1,21 @@
 'use strict';
 
-const app = require('express')();
+var express = require('express');
+var path = require('path');
+var fs = require('fs');
+var app = express();
+
 const tasksContainer = require('./tasks.json');
+
+
+app.use(function (req, res, next) {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+      next();
+  });
+
+app.set('port', (process.env.PORT || 9001));
 
 /**
  * GET /tasks
@@ -62,11 +76,10 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(204).json({});
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -89,18 +102,24 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
+  var maxId = Math.max.apply(Math,tasksContainer.tasks.map(function(task){return task.id;}));
   const task = {
-    id: tasksContainer.tasks.length,
+    id:  (isNaN(maxId) || !isFinite(maxId) ? 0 : maxId + 1),
     title: req.params.title,
     description: req.params.description,
   };
 
   tasksContainer.tasks.push(task);
+ // fs.writeFile('tasks.json', JSON.stringify(tasksContainer.tasks), 'utf8', callback)
 
   return res.status(201).json({
     message: 'Resource created',
+    task
   });
 });
+
+function callback()
+{}
 
 /**
  * DELETE /task/delete/:id
@@ -116,10 +135,8 @@ app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-  
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+    const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
+    if (taskIndex !== null) {
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',
@@ -136,6 +153,6 @@ app.delete('/task/delete/:id', (req, res) => {
   }
 });
 
-app.listen(9001, () => {
-  process.stdout.write('the server is available on http://localhost:9001/\n');
+app.listen(app.get('port'), () => {
+  process.stdout.write('the server is available on http://localhost:' + app.get('port') + '/\n');
 });
