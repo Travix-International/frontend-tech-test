@@ -23,7 +23,7 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 # Requirements
 
 * React 15+
-* Redux or Flux or [FrintJS](https://frint.js.org) or whatever else with a unidirectional data flow
+* Redux or Flux or [FrintJS](https://frint.js.org) or other alternatives that implement a unidirectional data flow
 * SASS or LESS
 * Must be responsive
 * We have big tasks files for testing the application (very huge)
