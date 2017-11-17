@@ -1,0 +1,16 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "travix/base",
+    "travix/react",
+  ],
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "browser": true,
+  },
+  "rules": {
+    "react/jsx-no-bind": "off",
+  }
+}
