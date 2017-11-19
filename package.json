@@ -8,7 +8,7 @@
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "prestart": "npm run build",
     "start": "node server.js",
-    "dev": "react-scripts start & npm run watch-css & npm start",
+    "dev": "node server.js & npm run watch-css && react-scripts start",
     "build": "react-scripts build && npm run build-css",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
@@ -27,7 +27,8 @@
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.17",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-promise": "^0.5.3"
   },
   "proxy": "http://localhost:9001"
 }
