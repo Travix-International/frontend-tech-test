@@ -95,12 +95,14 @@ app.put(`${apiPaths.UPDATE}/:id/:title/:description`, (req, res) => {
 
       writeToFile()
         .then(() => {
-          res.status(204).json();
+          res.status(201).json({
+            message: 'Resource updated',
+            state: tasksContainer,
+          });
         })
         .catch(error => {
           res.status(501).json({
             message: error,
-            state: tasksContainer,
           })
         })
     } else {

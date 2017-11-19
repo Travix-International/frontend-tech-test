@@ -1,10 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchTasks } from '../actions'
-import { deleteTask } from '../actions'
+import { fetchTasks, editTask, deleteTask } from '../actions'
 
-import Item from '../components/Item/Item'
+import Task from '../components/Task/Task'
 
 class TodoList extends React.Component {
   componentDidMount() {
@@ -15,7 +14,12 @@ class TodoList extends React.Component {
     return (
       <ul className="todo-list">
         {this.props.tasks && this.props.tasks.map(task => (
-          <Item {...task} deleteTask={this.props.deleteTask} key={task.id} />
+          <Task {...task}
+            editTask={this.props.editTask}
+            editingTask={this.props.editingTask}
+            deleteTask={this.props.deleteTask}
+            key={task.id}
+          />
         ))
       }
       </ul>
@@ -24,11 +28,14 @@ class TodoList extends React.Component {
 }
 
 const mapStateToProps = state => (
-  { tasks: state.todos.tasks }
+  {
+    tasks: state.todos.tasks,
+    editingTask: state.editingTask
+  }
 )
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ fetchTasks, deleteTask }, dispatch)
+  bindActionCreators({ fetchTasks, editTask, deleteTask }, dispatch)
 )
 
 TodoList = connect(mapStateToProps, mapDispatchToProps)(TodoList)

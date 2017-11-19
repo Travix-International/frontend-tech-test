@@ -1,14 +1,29 @@
 import * as apiPaths from '../constants/apiPaths'
+import setTasks from './setTasks'
+import setError from './setError'
+import isFetching from './isFetching'
 
-const creatTask = () => {
-  const payload = fetch(apiPaths.CREATE, {
-    method: 'POST'
-  });
+const createTask = ({ title, description }) => {
+  const encodedTitle = encodeURIComponent(title)
+  const encodedDescription = encodeURIComponent(description)
 
-  return {
-    type: 'CREATE_TASK',
-    payload
-  }
+  return (dispatch) => {
+    const url = `${apiPaths.CREATE}/${encodedTitle}/${encodedDescription}`
+    dispatch(isFetching(true))
+
+    fetch(url, { method: 'POST'})
+      .then((response) => {
+        if (!response.ok) {
+          dispatch(setError('There was a problem with the syncronization.'))
+        }
+
+        dispatch(isFetching(false));
+        return response;
+      })
+      .then((response) => response.json())
+      .then((response) => dispatch(setTasks(response.state)))
+      .catch(() =>dispatch(setError('There was a problem with the syncronization.')));
+  };
 }
 
-export default creatTask
+export default createTask

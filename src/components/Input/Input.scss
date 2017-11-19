@@ -1,0 +1,44 @@
+label,
+input,
+svg {
+  max-width: 100%;
+}
+
+label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-border {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  pointer-events: none;
+
+  stroke: purple;
+  stroke-width: 6;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: all .35s ease-in;
+}
+
+input {
+  width: 250px;
+  height: 40px;
+  padding: .1em .85em;
+
+  border: 2px solid #999;
+  outline: none;
+
+  &:focus {
+    + svg {
+      stroke-dashoffset: 0;
+    }
+  }
+}

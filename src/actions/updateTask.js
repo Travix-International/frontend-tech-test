@@ -4,7 +4,7 @@ import setError from './setError'
 import isFetching from './isFetching'
 import editTask from './editTask'
 
-const updateTask = ({id, title, description}) => {
+const updateTask = ({ id, title, description }) => {
   return (dispatch) => {
     const url = `${apiPaths.UPDATE}/${id}/${title}/${description}`
     dispatch(isFetching(true))
@@ -16,7 +16,7 @@ const updateTask = ({id, title, description}) => {
         }
 
         dispatch(isFetching(false));
-        dispatch(editTask({ id, title, description }))
+        dispatch(editTask({ payload: -1 }))
         return response;
       })
       .then((response) => response.json())
