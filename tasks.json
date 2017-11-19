@@ -1,3 +1,39 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Go to Amsterdam",
+      "description": "Such a nice place, got to get there as soon as I can!"
+    },
+    {
+      "id": 2,
+      "title": "Go to London",
+      "description": "One of the most important cities in the world with lots of great Pubs :D."
+    },
+    {
+      "id": 3,
+      "title": "Go to New York",
+      "description": "Probably the busiest city in the world. Lots of beer and pizza!"
+    },
+    {
+      "id": 4,
+      "title": "Go to San Francisco",
+      "description": "Such a charming and lovely city. Looks amazing!"
+    },
+    {
+      "id": 5,
+      "title": "Go to Paris",
+      "description": "The city of love, cheese, wine... Gotta got to the Eiffel Tower."
+    },
+    {
+      "id": 6,
+      "title": "Go to Cardiff",
+      "description": "Well, it's Doctor's city, gotta go there!"
+    },
+    {
+      "id": 7,
+      "title": "Go to Sydney",
+      "description": "A modern and nice city. It's the last on the list because I'll have to spend like 24h to get there..."
+    }
+  ]
 }
