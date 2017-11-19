@@ -8,7 +8,7 @@
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "prestart": "npm run build",
     "start": "node server.js",
-    "dev": "node server.js & npm run watch-css && react-scripts start",
+    "dev": "node server.js & npm run watch-css & react-scripts start",
     "build": "react-scripts build && npm run build-css",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
