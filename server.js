@@ -100,6 +100,7 @@ app.put(`${apiPaths.UPDATE}/:id/:title/:description`, (req, res) => {
         .catch(error => {
           res.status(501).json({
             message: error,
+            state: tasksContainer,
           })
         })
     } else {
@@ -136,6 +137,7 @@ app.post(`${apiPaths.CREATE}/:title/:description`, (req, res) => {
     .then(() => {
       res.status(201).json({
         message: 'Resource created',
+        state: tasksContainer,
       });
     })
     .catch(error => {
@@ -168,6 +170,7 @@ app.delete(`${apiPaths.DELETE}/:id`, (req, res) => {
         .then(() => {
           res.status(201).json({
             message: 'Updated successfully',
+            state: tasksContainer,
           });
         })
         .catch(error => {
