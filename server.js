@@ -128,7 +128,7 @@ app.put(`${apiPaths.UPDATE}/:id/:title/:description`, (req, res) => {
  */
 app.post(`${apiPaths.CREATE}/:title/:description`, (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: tasksContainer.tasks.length + 1,
     title: req.params.title,
     description: req.params.description,
   };
