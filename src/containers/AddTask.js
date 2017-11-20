@@ -13,7 +13,7 @@ const AddTask = ({ createTask }) => {
 
   function handleSubmit(event) {
     event.preventDefault()
-    if (!title.value.trim()) {
+    if (!title.value.trim() || !description) {
       return
     }
 
