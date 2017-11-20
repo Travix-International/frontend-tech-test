@@ -1,0 +1,25 @@
+@import '../../scss/vars';
+@import '../../scss/functions';
+
+header {
+  margin-bottom: rem(36);
+
+  background: $c-brand;
+  text-align: center;
+}
+
+.logo {
+  display: inline-block;
+  margin-right: 8px;
+
+  fill: #fff;
+}
+
+.app-title {
+  margin: 0;
+  padding: .3em;
+
+  color: #fff;
+  font-size: rem(32);
+  font-weight: 400;
+}

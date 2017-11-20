@@ -1,0 +1,26 @@
+.todo-list {
+  background: #fff;
+  list-style: none; }
+
+.task-item {
+  position: relative;
+  margin-bottom: 1.25rem;
+  padding: .6em 1rem .3em 1rem;
+  border: 2px solid #999; }
+
+.icon-edit {
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+  fill: #999;
+  transition: .2s ease-out; }
+  .icon-edit:hover {
+    fill: green; }
+
+.task-title {
+  margin: 0;
+  padding-bottom: .7rem;
+  border-bottom: 1px solid #8a8a8a; }
+
+.task-description {
+  padding-left: 28px; }

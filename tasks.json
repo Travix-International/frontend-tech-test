@@ -1,3 +1,29 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Go to Amsterdam",
+      "description": "A livid and bright city with bicycles everywhere."
+    },
+    {
+      "id": 2,
+      "title": "Go to London",
+      "description": "One of the most important cities in the world with lots of great Pubs :D."
+    },
+    {
+      "id": 3,
+      "title": "Go to New York",
+      "description": "Probably the busiest city in the world. Lots of beer and pizza!"
+    },
+    {
+      "id": 4,
+      "title": "Go to San Francisco",
+      "description": "Such a charming and lovely city. Looks amazing!"
+    },
+    {
+      "id": 5,
+      "title": "Go to Paris",
+      "description": "The city of love, cheese, wine... Gotta got to the Eiffel Tower."
+    }
+  ]
 }

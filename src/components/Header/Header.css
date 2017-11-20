@@ -1,0 +1,16 @@
+header {
+  margin-bottom: 2.25rem;
+  background: #aa00aa;
+  text-align: center; }
+
+.logo {
+  display: inline-block;
+  margin-right: 8px;
+  fill: #fff; }
+
+.app-title {
+  margin: 0;
+  padding: .3em;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 400; }

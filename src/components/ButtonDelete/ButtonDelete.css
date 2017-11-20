@@ -1,0 +1,9 @@
+.button-delete a {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: .5em .7em 1em .7em;
+  background: #e40707;
+  cursor: pointer;
+  clip-path: polygon(0% 0%, 100% 0, 100% 69%, 50% 100%, 0 69%); }

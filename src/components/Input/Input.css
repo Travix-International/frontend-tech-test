@@ -1,0 +1,24 @@
+.input {
+  margin-bottom: 1.375rem; }
+  .input input {
+    display: block;
+    margin-top: .2em; }
+
+.input label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer; }
+
+.input-wrap {
+  position: relative; }
+
+.input-border {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+  stroke: #aa00aa;
+  stroke-width: 6;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  transition: all .3s ease-in; }

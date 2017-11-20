@@ -1,0 +1,23 @@
+.textarea {
+  margin-bottom: 1.25rem; }
+  .textarea label {
+    position: relative;
+    display: inline-block;
+    cursor: pointer; }
+  .textarea textarea {
+    display: block;
+    margin-top: .2em; }
+
+.textarea-wrap {
+  position: relative; }
+
+.textarea-border {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+  stroke: #aa00aa;
+  stroke-width: 6;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  transition: all .3s ease-in; }

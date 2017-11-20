@@ -1,0 +1,50 @@
+///////////////////////////////////////////////////////////////////////////////
+//  # Variables
+//--------------------------------
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+// ## Colours
+//---------------------------------
+//    Colours variables are prefixed with 'c-'. Try to use abstract names and
+//    not colour names as it won't affect your project in the long run
+///////////////////////////////////////////////////////////////////////////////
+
+$c-brand:     rgb(170, 0, 170);
+$c-highlight: rgb(170, 0, 170);
+$c-warnning:  #e40707;
+
+$c-light:     #FCFCFC;
+$c-dark:      #999;
+
+
+
+// ## Fonts
+//    Font variables are prefixed widt 'f-'. Try to use abstract names and
+//    not font names as it won't affect your project in the long run
+///////////////////////////////////////////////////////////////////////////////
+
+$f-display: 'Encode Sans Semi Condensed', sans-serif;
+$f-body:    $f-display;
+
+
+
+
+// # Media Queries break points
+//    MQ variables are prefixed widt 'vp-' (as in viewport). Try to use
+//    abstract names and not something specific as mobile, as it won't
+//    affect your project in the long run
+///////////////////////////////////////////////////////////////////////////////
+
+$vp-small: 450px;
+$vp-large: 750px;
+
+
+// # Helpers
+//    Any global helper variable should be defined here. Try to chose a name
+//    that describes it the best as possible
+///////////////////////////////////////////////////////////////////////////////
+
+$container-width: 720px;
