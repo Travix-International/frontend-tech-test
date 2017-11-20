@@ -1,0 +1,12 @@
+button,
+.button {
+  display: inline-block;
+  padding: .5em 1.3em;
+
+  cursor: pointer;
+  color: #fff;
+  background: $c-highlight;
+  border: 0;
+
+  font-size: rem(18);
+}

@@ -6,6 +6,8 @@ import { editTask, updateTask } from '../../actions/'
 import Input from '../Input/Input'
 import Textarea from '../Textarea/Textarea'
 
+import './EditTask.css'
+
 const EditTask = ({ id, title, description, editTask, updateTask }) => {
   let newTitle = ''
   let newDescription = ''
@@ -41,11 +43,11 @@ const EditTask = ({ id, title, description, editTask, updateTask }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="edit-task" onSubmit={handleSubmit}>
       <Input title="Title" type="text" handleChange={handleTitle} />
       <Textarea title="Description" handleChange={handleDescription} />
-      <button onClick={handleCancel}>Cancel</button>
       <button>Save</button>
+      <button className="button-cancel" onClick={handleCancel}>Cancel</button>
     </form>
   )
 }

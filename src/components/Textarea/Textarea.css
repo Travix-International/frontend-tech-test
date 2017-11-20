@@ -1,18 +1,17 @@
-.input {
-  margin-bottom: 1.375rem; }
-  .input input {
+.textarea {
+  margin-bottom: 1.25rem; }
+  .textarea label {
+    position: relative;
+    display: inline-block;
+    cursor: pointer; }
+  .textarea textarea {
     display: block;
     margin-top: .2em; }
 
-.input label {
-  position: relative;
-  display: inline-block;
-  cursor: pointer; }
-
-.input-wrap {
+.textarea-wrap {
   position: relative; }
 
-.input-border {
+.textarea-border {
   position: absolute;
   left: 0;
   bottom: 0;

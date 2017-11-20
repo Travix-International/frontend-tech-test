@@ -1,0 +1,37 @@
+.loading {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  background: #333;
+  color: #fff;
+  font-size: 1.125rem;
+  text-align: center; }
+
+.loader {
+  display: inline-block;
+  margin-right: 10px;
+  text-align: center; }
+
+.ball-one,
+.ball-two,
+.ball-three {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 5px;
+  background: #fff;
+  border-radius: 100%;
+  vertical-align: baseline;
+  animation: jumping 1s ease-out infinite; }
+
+.ball-two {
+  animation-delay: .33s; }
+
+.ball-three {
+  animation-delay: .66s; }
+
+@keyframes jumping {
+  50% {
+    transform: translate3d(0, -100%, 0); } }

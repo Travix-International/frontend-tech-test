@@ -1,26 +1,26 @@
 @import '../../scss/functions';
 @import '../../scss/vars';
 
-.input {
-  margin-bottom: rem(22);
+.textarea {
+  margin-bottom: rem(20);
 
-  input {
+  label {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  textarea {
     display: block;
     margin-top: .2em;
   }
 }
 
-.input label {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.input-wrap {
+.textarea-wrap {
   position: relative;
 }
 
-.input-border {
+.textarea-border {
   position: absolute;
   left: 0;
   bottom: 0;

@@ -1,3 +1,39 @@
+@import '../../scss/vars';
+@import '../../scss/functions';
+
+.todo-list {
+  background: #fff;
+  list-style: none;
+}
+
+.task-item {
+  position: relative;
+  margin-bottom: rem(20);
+  padding: .6em 1rem .3em 1rem;
+
+  border: 2px solid $c-dark;
+}
+
 .icon-edit {
-  fill: #999;
+  display: inline-block;
+  margin-right: 10px;
+
+  cursor: pointer;
+  fill: $c-dark;
+  transition: .2s ease-out;
+
+  &:hover {
+    fill: green;
+  }
+}
+
+.task-title {
+  margin: 0;
+  padding-bottom: .7rem;
+
+  border-bottom: 1px solid #8a8a8a;
+}
+
+.task-description {
+  padding-left: 28px;
 }

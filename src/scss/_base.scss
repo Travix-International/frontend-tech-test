@@ -1,0 +1,30 @@
+///////////////////////////////////////////////////////////////////////////////
+//   # Base styles
+//     All your general styles should be here
+///////////////////////////////////////////////////////////////////////////////
+
+
+html {
+  font-size: 85%;
+  font-family: $f-body;
+  line-height: 1.1;
+
+  background: $c-light;
+
+  @media only screen and (min-width: $vp-large) {
+    font-size: 100%;
+    line-height: 1.35;
+  }
+}
+
+
+
+a {
+  color: $c-brand;
+  text-decoration: none;
+}
+
+
+* {
+  outline-color: $c-brand;
+}

@@ -1,0 +1,13 @@
+@import '../../scss/vars';
+
+.edit-task {
+  button {
+    display: inline-block;
+    cursor: pointer;
+  }
+}
+
+.button-cancel {
+  margin-left: 1em;
+  background: darken($c-warnning, 10%);
+}

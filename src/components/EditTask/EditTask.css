@@ -1,0 +1,7 @@
+.edit-task button {
+  display: inline-block;
+  cursor: pointer; }
+
+.button-cancel {
+  margin-left: 1em;
+  background: #b30505; }

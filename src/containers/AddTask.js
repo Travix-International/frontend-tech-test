@@ -36,9 +36,11 @@ const AddTask = ({ createTask }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input title="Title" type="text" handleChange={handleTitle} />
+      <Input title="Task" type="text" handleChange={handleTitle} />
       <Textarea title="Description" handleChange={handleDescription} />
-      <button>Save</button>
+      <div className="button-wrap">
+        <button>Save</button>
+      </div>
     </form>
   )
 }

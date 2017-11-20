@@ -1,8 +1,9 @@
 import React from 'react'
+import './ButtonDelete.css'
 
 const ButtonDelete = ({ id, children, deleteTask }) => (
   <span className="button-delete">
-    <button onClick={() => deleteTask(id)}>{children}</button>
+    <a className="button" onClick={() => deleteTask(id)}>{children}</a>
   </span>
 )
 
