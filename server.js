@@ -127,8 +127,12 @@ app.put(`${apiPaths.UPDATE}/:id/:title/:description`, (req, res) => {
  * Return status code 201.
  */
 app.post(`${apiPaths.CREATE}/:title/:description`, (req, res) => {
+  const biggestID = tasksContainer.tasks.reduce((acc, curr) => (
+    curr.id > acc ? curr.id : acc
+  ), 0)
+
   const task = {
-    id: tasksContainer.tasks.length + 1,
+    id: biggestID + 1,
     title: req.params.title,
     description: req.params.description,
   };

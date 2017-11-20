@@ -2,8 +2,8 @@
   "tasks": [
     {
       "id": 1,
-      "title": "fd dfgdfgdfgdfg ",
-      "description": "dfgdfg dfgdfggf"
+      "title": "Go to Amsterdam",
+      "description": "A livid and bright city with bicycles everywhere."
     },
     {
       "id": 2,
@@ -24,16 +24,6 @@
       "id": 5,
       "title": "Go to Paris",
       "description": "The city of love, cheese, wine... Gotta got to the Eiffel Tower."
-    },
-    {
-      "id": 6,
-      "title": "fdsdf sdfsdfsdfds fsdfsdf",
-      "description": "sdsdsdfasd asdasd"
-    },
-    {
-      "id": 7,
-      "title": "daf sdssdfsdf sdfsdfsdfds",
-      "description": "sdfsdfsdf sdfsdf"
     }
   ]
 }
