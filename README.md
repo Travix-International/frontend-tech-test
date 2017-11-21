@@ -1,3 +1,19 @@
+
+Application generated via [create-react-app](https://github.com/facebookincubator/create-react-app)
+
+# Run Application
+
+``$ yarn install``
+
+``$ yarn server``  // start server
+
+``$ yarn start``  // start app
+
+``$ yarn test``  // run tests
+
+
+
+
 # Travix test
 
 Travix Front-End Tech Interview Test 
