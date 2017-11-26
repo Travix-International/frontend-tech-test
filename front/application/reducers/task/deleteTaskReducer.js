@@ -5,7 +5,7 @@ const match = (action) => action.type === DELETE_TASK
 
 const execute = ({ tasks }, { task: taskToDelete }, injection) => {
   const updatedTasks = tasks.filter((task) => task.id !== taskToDelete.id)
-console.log(updatedTasks)
+
   return { tasks: [ ...updatedTasks ]  }
 }
 

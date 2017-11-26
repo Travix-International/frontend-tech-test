@@ -27,11 +27,11 @@ class Task extends Component {
     deleteTask(task)
   }
 
-  openTaskEditor(){
+  openTaskEditor() {
     this.setState({ editing: true })
   }
 
-  editTask(title, description){
+  editTask(title, description) {
     const { task, editTask } = this.props
     editTask(task.id, title, description)
     this.setState({ editing: false })
