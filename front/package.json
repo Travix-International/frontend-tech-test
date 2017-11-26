@@ -45,15 +45,16 @@
   },
   "dependencies": {
     "bem-classname": "^0.1.1",
+    "frint": "^2.0.1",
+    "frint-react": "^2.0.1",
+    "frint-store": "^2.0.1",
     "iban": "^0.0.8",
     "joi": "^10.6.0",
     "joi-browser": "^10.6.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "frint": "^2.0.1",
-    "frint-react": "^2.0.1",
-    "frint-store": "^2.0.1",
+    "react-icons": "^2.2.7",
     "redux": "^3.7.2",
     "speck-entity": "^0.1.9"
   }

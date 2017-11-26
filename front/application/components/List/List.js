@@ -12,17 +12,20 @@ const bem = bemClassName.bind(null, 'list')
 class List extends Component {
   static propTypes = {
     tasks: PropTypes.array.isRequired,
-    createTask: PropTypes.func.isRequired
+    createTask: PropTypes.func.isRequired,
+    deleteTask: PropTypes.func.isRequired,
+    editTask: PropTypes.func.isRequired
   }
 
   renderTask(task, index) {
-    return (<Task task={task} key={index} />)
+    const { deleteTask, editTask } = this.props
+    return (<Task task={task} key={index} deleteTask={deleteTask} editTask={editTask} />)
   }
 
   render() {
     const { tasks, createTask } = this.props
 
-    const renderedItens = tasks.map(this.renderTask)
+    const renderedItens = tasks.map(this.renderTask.bind(this))
 
     return (
       <ul className={bem('container')}>

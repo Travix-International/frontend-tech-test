@@ -4,7 +4,7 @@ import rootReducer from './reducers'
 
 export default function storeReducers({ app }) {
   const reducer = combineReducers(rootReducer)
-  const Store = createStore({ reducer, thunkArgument: { app } })
+  const Store = createStore({ reducer, deps: { app } })
 
   return new Store()
 }

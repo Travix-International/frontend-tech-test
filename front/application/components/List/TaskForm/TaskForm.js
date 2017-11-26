@@ -8,37 +8,62 @@ const bem = bemClassName.bind(null, 'task')
 
 class TaskForm extends Component {
   static propTypes = {
-    createTask: PropTypes.func.isRequired
+    createTask: PropTypes.func.isRequired,
+    title: PropTypes.string,
+    description: PropTypes.string
   }
 
   constructor(props) {
     super(props)
-    this.state = { title: '' }
+    this.state = {
+      title: this.props.title || '',
+      description: this.props.description || '',
+      step: 1
+    }
   }
 
-  handleChange (event) {
+  handleChangeTitle (event) {
     this.setState({ title: event.target.value })
   }
 
+  handleChangeDescription (event) {
+    this.setState({ description: event.target.value })
+  }
+
   handleSubmit (event) {
-    const { title } = this.state
+    const { title, description, step } = this.state
     event.preventDefault()
-    this.props.createTask(title, 'desc')
-    this.setState({ title: '' })
+
+    if(title && step === 1) {
+      return this.setState({ step: 2 })
+    }
+
+    this.props.createTask(title, description)
+    this.setState({ title: '', description: '', step: 1 })
   }
 
   render() {
     return (
       <li className={bem('container')}>
         <form className={bem('form')} onSubmit={this.handleSubmit.bind(this)}>
-          <input
-            className={bem('field')}
-            onChange={this.handleChange.bind(this)}
-            value={this.state.title}
-            type="text"
-            placeholder="Insert your new todo here :)"
-            autoFocus="true"
-          />
+          { this.state.step === 1 ?
+            <input
+              className={bem('field')}
+              onChange={this.handleChangeTitle.bind(this)}
+              value={this.state.title}
+              type="text"
+              placeholder="Insert your todo title here :)"
+              autoFocus="true"
+            /> :
+            <input
+              className={bem('field')}
+              onChange={this.handleChangeDescription.bind(this)}
+              value={this.state.description}
+              type="text"
+              placeholder="Now a description to it"
+              autoFocus="true"
+            />
+          }
         </form>
       </li>
     )

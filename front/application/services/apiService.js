@@ -22,6 +22,7 @@ function apiService(method, dataUrl) {
       return response
     })
     .then((response) => response.json())
+    .catch(() => {})
 }
 
 export default apiService
