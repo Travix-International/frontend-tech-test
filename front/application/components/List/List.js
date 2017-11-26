@@ -1,0 +1,36 @@
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import bemClassName from 'bem-classname'
+
+import Task from './Task'
+import TaskForm from './TaskForm'
+
+import './List.less'
+
+const bem = bemClassName.bind(null, 'list')
+
+class List extends Component {
+  static propTypes = {
+    tasks: PropTypes.array.isRequired,
+    createTask: PropTypes.func.isRequired
+  }
+
+  renderTask(task, index) {
+    return (<Task task={task} key={index} />)
+  }
+
+  render() {
+    const { tasks, createTask } = this.props
+
+    const renderedItens = tasks.map(this.renderTask)
+
+    return (
+      <ul className={bem('container')}>
+        {renderedItens}
+        <TaskForm createTask={createTask} />
+      </ul>
+    );
+  }
+}
+
+export default List

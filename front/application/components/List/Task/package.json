@@ -1,0 +1,5 @@
+{
+  "name": "Task",
+  "private": true,
+  "main": "./Task.js"
+}
