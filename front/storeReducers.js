@@ -1,8 +1,10 @@
-import { createStore combineReducers } from 'frint-store';
+import { createStore, combineReducers } from 'frint-store';
 
 import rootReducer from './reducers'
 
-export default function storeReducers() {
+export default function storeReducers({ app }) {
   const reducer = combineReducers(rootReducer)
-  return createStore({ reducer })
+  const Store = createStore({ reducer, thunkArgument: { app } })
+
+  return new Store()
 }

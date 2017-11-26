@@ -7,7 +7,7 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, 'application')
+    app: path.resolve(__dirname)
   },
   output: {
     filename: '[name].js',
@@ -47,7 +47,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './application/index.ejs'),
+      template: path.resolve(__dirname, './index.ejs'),
       filename: path.resolve(__dirname, './dist/index.html')
     }),
     new FriendlyErrorsWebpackPlugin(),
@@ -60,11 +60,20 @@ module.exports = {
     hot: true,
     inline: true,
     historyApiFallback: true,
-    port: process.env.PORT,
-    host: process.env.HOST,
+    port: process.env.PORT || 3000,
+    host: process.env.HOST || 'localhost',
     overlay: {
       errors: true,
       warnings: false
+    },
+    proxy: {
+      '/api/**': {
+        target: 'http://localhost:9001',
+        pathRewrite: {
+          "^/api": ""
+        },
+        changeOrigin: true
+      }
     }
   }
-};
+}

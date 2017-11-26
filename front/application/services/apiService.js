@@ -4,23 +4,24 @@ function throwError(response) {
   throw new Error(response.statusText)
 }
 
-async function callApi(method, dataUrl) {
+function apiService(method, dataUrl) {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json'
   }
 
-  const response = await fetch(
-    `${API_URL}/${dataUrl}`, {
-    headers,
-    method
-  })
-
-  if (response.status >= 200 && response.status < 300) {
-    return throwError(response)
-  }
-
-  return response.json()
+  return fetch(
+      `${API_URL}/${dataUrl}`, {
+      headers,
+      method
+    })
+    .then((response) => {
+      if (response.status <= 200 && response.status > 300) {
+        return throwError(response)
+      }
+      return response
+    })
+    .then((response) => response.json())
 }
 
-export default callApi
+export default apiService

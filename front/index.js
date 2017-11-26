@@ -1,13 +1,11 @@
 import { createApp } from 'frint';
 import { RegionService } from 'frint-react';
-import { render } from 'frint-react'
+import { render, RegionService } from 'frint-react'
 
 import storeReducers from './storeReducers'
-import Main from './components/Main'
+import Todos from 'application/components/Todos'
 
 import 'application/styles/base.less'
-
-const store = storeReducers()
 
 const renderApplication = () => {
   const applicationDOMElement = document.getElementById('app')
@@ -16,16 +14,21 @@ const renderApplication = () => {
     providers: [
       {
         name: 'component',
-        useValue: Main,
+        useValue: Todos,
       },
       {
         name: 'store',
-        useValue: new Store()
+        useFactory: storeReducers,
+        deps: ['app']
+      },
+      {
+        name: 'region',
+        useClass: RegionService
       }
     ],
   })
 
-  render(application, applicationDOMElement)
+  render(new application(), applicationDOMElement)
 }
 
 const rootInstance = renderApplication()

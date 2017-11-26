@@ -6,7 +6,7 @@ class Task extends Entity {
 
   static SCHEMA = {
     id: adapter(Joi.number()),
-    title: adapter(Joi.title().required()),
+    title: adapter(Joi.string().required()),
     description: adapter(Joi.string().required()),
   }
 }
