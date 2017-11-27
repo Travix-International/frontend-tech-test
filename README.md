@@ -1,6 +1,28 @@
 # Travix test
 
-Travix Front-End Tech Interview Test 
+Travix Front-End Tech Interview Test
+
+# Running
+
+On front folder follow the commands
+```sh
+$ yarn
+$ yarn start
+```
+
+On server folder follow the commands
+```sh
+$ yarn
+$ yarn start
+```
+
+# Tests
+
+To run the front-end tests, follow the commands
+```sh
+$ yarn test
+```
+
 
 # Introduction
 
@@ -30,7 +52,7 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 
 # Bonus
 
-* unit-tests for the UI 
+* unit-tests for the UI
 * integration-test (one (or more) just in order to show that you know what is it (: )
 * evolution - unit-tests for the server
 * dynamic-ui (web-sockets...?)

@@ -1,0 +1,47 @@
+@import './mixins.less';
+@import './theme.less';
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  font-size: 62.5%;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  align-content: stretch;
+  padding: 0;
+  margin: 0;
+}
+
+body,
+input,
+textarea,
+keygen,
+select,
+button {
+  font-family: 'Montserrat', sans-serif;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.app {
+  display: flex;
+  flex: 1 1 auto;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  align-items: start;
+  justify-content: center;
+  overflow: auto;
+  .gradient(linear; @--light-400, @--light-100);
+}

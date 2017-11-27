@@ -1,0 +1,5 @@
+{
+  "name": "taskReducer",
+  "private": true,
+  "main": "./taskReducer.js"
+}
