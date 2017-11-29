@@ -1,0 +1,12 @@
+{
+  "presets": ["react", "env"],
+  "plugins": ["transform-object-rest-spread", "react-hot-loader/babel"],
+  "minified": false,
+  "comments": true,
+  "env": {
+    "production": {
+      "minified": true,
+      "comments": false
+    }
+  }
+}

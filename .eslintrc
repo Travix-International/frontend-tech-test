@@ -1,0 +1,24 @@
+{
+  "extends": ["airbnb", "plugin:react/all"],
+  "env": {
+    "jest": true,
+    "node": true,
+    "browser": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "semi": [2, "never"],
+    "arrow-body-style": ["error", "as-needed"],
+    "no-underscore-dangle": 0,
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "react/require-default-props": 0,
+    "react/jsx-filename-extension": 0,
+    "jsx-a11y/label-has-for": [ 2, {
+        "required": {
+            "some": [ "nesting" ]
+        }
+    }]
+  }
+}
