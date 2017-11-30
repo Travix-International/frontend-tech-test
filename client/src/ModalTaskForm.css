@@ -1,0 +1,53 @@
+.BackDrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 100;
+}
+
+.ModalForm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -180px;
+  margin-left: -280px;
+  background-color: #fff;
+  border-radius: 5px;
+  width: 500px;
+  height: 300px;
+  padding: 30px;
+  z-index: 101;
+}
+
+.ModalForm div {
+  padding: 5px;
+}
+
+.ModalForm input {
+  width: 100%;
+  padding: 1px;
+}
+
+.ModalForm textarea {
+  width: 100%;
+  height: 60px;
+  resize: none;
+  padding: 1px;
+}
+
+.EmptyField {
+  border: 1px solid red;
+}
+
+.FullField {
+  border: 1px solid black;
+}
+
+.FooterForm {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
