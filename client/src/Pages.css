@@ -1,0 +1,14 @@
+.Pages {
+  font-family: Courier New, monospace;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.Pages a {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.Pages select {
+  margin-right: 3px;
+}

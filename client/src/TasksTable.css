@@ -1,0 +1,30 @@
+.TasksTable {
+  width: 100%;
+  border-collapse: collapse;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.TasksTable td, .TasksTable th {
+  border: 2px solid #ddd;
+  padding: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.TasksTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.ColumnTitle {
+  width: 30%;
+  text-align: left;
+  max-width: 200px;
+}
+
+.ColumnDescription {
+  width: 70%;
+  text-align: left;
+  max-width: 450px;
+}

@@ -1,7 +1,17 @@
 'use strict';
 
-const app = require('express')();
+const express = require('express');
+const app = express();
 const tasksContainer = require('./tasks.json');
+
+// Not sure, that task ids from file coincide with task position in array, so find last id first
+var lastId = tasksContainer.tasks.reduce((id, item) => Math.max(id, item.id), 0);
+
+app.use(express.static("./client/build"));
+
+app.get('/', function (req, res) {
+  res.sendFile('./client/build/index.html');
+});
 
 /**
  * GET /tasks
@@ -27,20 +37,20 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find((item) => item.id === id);
 
-    if (task !== null) {
+    if (task) {
       return res.status(200).json({
-        task,
+        task
       });
     } else {
       return res.status(404).json({
-        message: 'Not found.',
+        message: 'Not found.'
       });
     }
   } else {
     return res.status(400).json({
-      message: 'Bad request.',
+      message: 'Bad request.'
     });
   }
 });
@@ -53,7 +63,7 @@ app.get('/task/:id', (req, res) => {
  * description: string
  * 
  * Update the task with the given id.
- * If the task is found and update as well, return a status code 204.
+ * If the task is found and update as well, return a status code 200.
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
@@ -63,18 +73,20 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    if (task) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(200).json({
+        message: 'Updated successfully'
+      });
     } else {
       return res.status(404).json({
-        message: 'Not found',
+        message: 'Not found'
       });
     }
   } else {
     return res.status(400).json({
-      message: 'Bad request',
+      message: 'Bad request'
     });
   }
 });
@@ -90,15 +102,15 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: ++lastId,
     title: req.params.title,
-    description: req.params.description,
+    description: req.params.description
   };
 
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
-    message: 'Resource created',
+    message: 'Resource created'
   });
 });
 
@@ -107,8 +119,8 @@ app.post('/task/create/:title/:description', (req, res) => {
  * 
  * id: Number
  * 
- * Delete the task linked to the  given id.
- * If the task is found and deleted as well, return a status code 204.
+ * Delete the task linked to the given id.
+ * If the task is found and deleted as well, return a status code 200.
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
@@ -117,25 +129,27 @@ app.delete('/task/delete/:id', (req, res) => {
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-  
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+
+    if (task) {
+      const taskIndex = tasksContainer.tasks.indexOf(task);
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
-        message: 'Updated successfully',
+        message: 'Updated successfully'
       });
     } else {
-      return es.status(404).json({
-        message: 'Not found',
+      return res.status(404).json({
+        message: 'Not found'
       });
     }
   } else {
     return res.status(400).json({
-      message: 'Bad request',
+      message: 'Bad request'
     });
   }
 });
 
-app.listen(9001, () => {
+var server = app.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });
+
+module.exports = server;
