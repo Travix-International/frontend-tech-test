@@ -42,6 +42,8 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
+    "@wepow/aphrodite": "git+ssh://git@github.com/wepow/aphrodite.git",
+    "@wepow/hermes": "git+ssh://git@github.com/wepow/hermes",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
