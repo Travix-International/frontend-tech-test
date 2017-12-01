@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Note from '../components/Note'
+
 /* eslint-disable react/prefer-stateless-function  */
 export default class App extends React.Component {
   shouldComponentUpdate() {
@@ -7,11 +9,13 @@ export default class App extends React.Component {
   }
 
   render() {
+    const text = 'HOLA BB YAY FUNCIONA'
+
     return (
       <div style={{ textAlign: 'center' }}>
-        <h1>
-          Hello Worldee
-        </h1>
+        <Note>
+          {text}
+        </Note>
       </div>
     )
   }
