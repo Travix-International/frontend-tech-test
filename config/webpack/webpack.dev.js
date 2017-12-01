@@ -8,7 +8,7 @@ const plugins = [
   new webpack.NoEmitOnErrorsPlugin(),
   new HtmlWebpackPlugin({
     template: 'src/index.html',
-    filename: 'dist/index.html',
+    filename: 'index.html',
     inject: 'body',
     minify: {
       removeComments: true,
@@ -39,13 +39,19 @@ module.exports = require('./webpack.base')({
   ],
 
   output: {
-    filename: 'dist/[name].js',
-    chunkFilename: 'dist/[name].chunk.js',
+    filename: '[name].js',
+    chunkFilename: '[name].chunk.js',
   },
 
   plugins,
 
   performance: {
     hints: false,
+  },
+
+  devServer: {
+    contentBase: path.join(process.cwd(), 'dist'),
+    hot: true,
+    port: 8080,
   },
 })

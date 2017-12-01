@@ -15,7 +15,7 @@
     "test": "./test"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --config config/webpack/webpack.dev.js"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --hot --config config/webpack/webpack.dev.js"
   },
   "repository": {
     "type": "git",
