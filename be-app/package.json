@@ -1,0 +1,19 @@
+{
+  "name": "travix-be-test",
+  "version": "0.0.1",
+  "description": "BE app for Travix International Test",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "test",
+    "travix"
+  ],
+  "author": "Jose A Ramirez Mora",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.14.0"
+  }
+}
