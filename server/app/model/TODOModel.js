@@ -32,8 +32,10 @@ class TODOModel {
     }
 
     static * create_task (request) {
-        todos[request.body._id] = Object.assign({}, {
-                _id: Object.keys(todos).length,
+        const _id = Object.keys(todos).length;
+
+        todos[_id] = Object.assign({}, {
+                _id: _id,
                 description: '',
                 title: '',
                 tags: [],
@@ -41,7 +43,7 @@ class TODOModel {
             }, request.body);
 
         return {
-            [`${request.body._id}`]: todos[request.body._id]
+            [`${_id}`]: todos[_id]
         };
     }
 

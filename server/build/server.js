@@ -20,7 +20,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a0f462de47b2387e61e2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7417df7516f46ec7a74c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -11600,13 +11600,13 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _keys = __webpack_require__(85);
-
-var _keys2 = _interopRequireDefault(_keys);
-
-var _assign = __webpack_require__(86);
+var _assign = __webpack_require__(85);
 
 var _assign2 = _interopRequireDefault(_assign);
+
+var _keys = __webpack_require__(86);
+
+var _keys2 = _interopRequireDefault(_keys);
 
 var _defineProperty2 = __webpack_require__(87);
 
@@ -11701,21 +11701,26 @@ var TODOModel = function () {
     }, {
         key: 'create_task',
         value: /*#__PURE__*/_regenerator2.default.mark(function create_task(request) {
+            var _id;
+
             return _regenerator2.default.wrap(function create_task$(_context4) {
                 while (1) {
                     switch (_context4.prev = _context4.next) {
                         case 0:
-                            todos[request.body._id] = (0, _assign2.default)({}, {
-                                _id: (0, _keys2.default)(todos).length,
+                            _id = (0, _keys2.default)(todos).length;
+
+
+                            todos[_id] = (0, _assign2.default)({}, {
+                                _id: _id,
                                 description: '',
                                 title: '',
                                 tags: [],
                                 completed: false
                             }, request.body);
 
-                            return _context4.abrupt('return', (0, _defineProperty3.default)({}, '' + request.body._id, todos[request.body._id]));
+                            return _context4.abrupt('return', (0, _defineProperty3.default)({}, '' + _id, todos[_id]));
 
-                        case 2:
+                        case 3:
                         case 'end':
                             return _context4.stop();
                     }
@@ -11754,13 +11759,13 @@ exports.default = TODOModel;
 /* 85 */
 /***/ (function(module, exports) {
 
-module.exports = require("babel-runtime/core-js/object/keys");
+module.exports = require("babel-runtime/core-js/object/assign");
 
 /***/ }),
 /* 86 */
 /***/ (function(module, exports) {
 
-module.exports = require("babel-runtime/core-js/object/assign");
+module.exports = require("babel-runtime/core-js/object/keys");
 
 /***/ }),
 /* 87 */
