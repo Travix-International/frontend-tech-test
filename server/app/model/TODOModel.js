@@ -1,15 +1,20 @@
 //Core Modules
-import { 
-    readdirSync, 
-    existsSync, 
-    mkdirSync, 
-    rmdirSync 
-} from 'fs'
+import { readFileSync } from 'fs'
 
-//Database
-import db from '../DataBase'
-
+//TODOS
 const todos = {};
+
+//Read TODOS from db
+const todos_json = JSON.parse(readFileSync(__dirname + '/tasks.json', 'utf8'));
+for (let i = 0; i < todos_json.tasks.length; i++) {
+    todos[i] = Object.assign({}, {
+        tags: [],
+        _id: i,
+        title: '',
+        description: '',
+        completed: false
+    }, todos_json.tasks[i]);
+}
 
 class TODOModel {
 
@@ -35,12 +40,12 @@ class TODOModel {
         const _id = Object.keys(todos).length;
 
         todos[_id] = Object.assign({}, {
-                _id: _id,
-                description: '',
-                title: '',
-                tags: [],
-                completed: false
-            }, request.body);
+            _id: _id,
+            description: '',
+            title: '',
+            tags: [],
+            completed: false
+        }, request.body);
 
         return {
             [`${_id}`]: todos[_id]
@@ -48,9 +53,7 @@ class TODOModel {
     }
 
     static * delete_task (request) {
-        yield db.delete('todo', {
-            "_id": ObjectId(id)
-        });
+        delete todos[request.params.id];
 
         return true;
     }

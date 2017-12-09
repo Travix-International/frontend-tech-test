@@ -17,7 +17,7 @@ class TODOAddComponent extends React.Component {
 
         this.state = {
             title: '',
-            deocscription: ''
+            description: ''
         }
     }
 

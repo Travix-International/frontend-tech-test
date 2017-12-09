@@ -11,7 +11,9 @@ module.exports = {
     target: 'node',
 
     externals: [
-        nodeExternals(),
+        nodeExternals({
+            modulesDir: '../node_modules'
+        }),
         function(context, request, callback) {
             if (/^\.\/Config$/.test(request)){
                 return callback(null, 'commonjs ' + request);
@@ -56,9 +58,5 @@ module.exports = {
             }
 
         ]
-    },
-
-    plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ]
+    }
 };

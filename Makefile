@@ -7,9 +7,7 @@ configure:
 	npm install
 
 srv:
-	cd server && npm install
 	cd server && webpack
-	cd server && cp -r node_modules build/
 
 spa:
 	webpack
