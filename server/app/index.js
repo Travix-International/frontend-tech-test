@@ -18,6 +18,12 @@ class API {
         //Configurations
         server.use(bodyParser.json());
 
+        //RESOURCES
+        server.set('views', __dirname + '/public');
+        server.engine('html', require('ejs').renderFile);
+        server.set('view engine', 'html');
+        server.use(express.static(__dirname + '/public'));
+
         //Middleware for modules instances
         const headerController = new HeaderController(server);
         const authController = new AuthController(server);

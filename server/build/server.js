@@ -20,7 +20,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7417df7516f46ec7a74c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a0e34dea247d1bb83ce6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -5275,21 +5275,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //Import Controllers
 var API = function API() {
-        var port = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 9001;
-        (0, _classCallCheck3.default)(this, API);
+    var port = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 9001;
+    (0, _classCallCheck3.default)(this, API);
 
-        var server = (0, _express2.default)();
+    var server = (0, _express2.default)();
 
-        //Configurations
-        server.use(_bodyParser2.default.json());
+    //Configurations
+    server.use(_bodyParser2.default.json());
 
-        //Middleware for modules instances
-        var headerController = new _HeaderController2.default(server);
-        var authController = new _AuthController2.default(server);
-        var todoController = new _TODOController2.default(server);
+    //RESOURCES
+    server.set('views', __dirname + '/public');
+    server.engine('html', __webpack_require__(89).renderFile);
+    server.set('view engine', 'html');
+    server.use(_express2.default.static(__dirname + '/public'));
 
-        server.listen(port);
-        console.log("Server Running on", port);
+    //Middleware for modules instances
+    var headerController = new _HeaderController2.default(server);
+    var authController = new _AuthController2.default(server);
+    var todoController = new _TODOController2.default(server);
+
+    server.listen(port);
+    console.log("Server Running on", port);
 };
 
 //API Options
@@ -11337,7 +11343,7 @@ exports.default = HeaderController;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _classCallCheck2 = __webpack_require__(0);
@@ -11364,24 +11370,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //Helpers
 var AuthController = function () {
-  function AuthController(server) {
-    (0, _classCallCheck3.default)(this, AuthController);
+    function AuthController(server) {
+        (0, _classCallCheck3.default)(this, AuthController);
 
 
-    //Set ContentType and Allowed Headers
-    server.all('*', _AuthModel2.default.header_token_present);
-    server.all('*', this.header_token_valid);
-  }
-
-  (0, _createClass3.default)(AuthController, [{
-    key: 'header_token_valid',
-    value: function header_token_valid(request, response, next) {
-      _Saga2.default.saga_builder(_AuthModel2.default.header_token_valid, request).then(next).catch(function (error) {
-        return _Request2.default.error('No access allowed.', [error.stack], {}, response);
-      });
+        //Set ContentType and Allowed Headers
+        server.all('*', _AuthModel2.default.header_token_present);
+        server.all('*', this.header_token_valid);
     }
-  }]);
-  return AuthController;
+
+    (0, _createClass3.default)(AuthController, [{
+        key: 'header_token_valid',
+        value: function header_token_valid(request, response, next) {
+            _Saga2.default.saga_builder(_AuthModel2.default.header_token_valid, request).then(next).catch(function (error) {
+                return _Request2.default.error('No access allowed.', [error.stack], {}, response);
+            });
+        }
+    }]);
+    return AuthController;
 }(); //Models
 
 
@@ -11395,7 +11401,7 @@ exports.default = AuthController;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+       value: true
 });
 
 var _regenerator = __webpack_require__(36);
@@ -11430,31 +11436,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //Helpers
 var AuthModel = function () {
-    function AuthModel() {
-        (0, _classCallCheck3.default)(this, AuthModel);
-    }
+       function AuthModel() {
+              (0, _classCallCheck3.default)(this, AuthModel);
+       }
 
-    (0, _createClass3.default)(AuthModel, null, [{
-        key: 'header_token_present',
-        value: function header_token_present(request, response, next) {
-            //TODO Check If token present
-            next();
-        }
-    }, {
-        key: 'header_token_valid',
-        value: /*#__PURE__*/_regenerator2.default.mark(function header_token_valid(request) {
-            return _regenerator2.default.wrap(function header_token_valid$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                        case 'end':
-                            return _context.stop();
-                    }
-                }
-            }, header_token_valid, this);
-        })
-    }]);
-    return AuthModel;
+       (0, _createClass3.default)(AuthModel, null, [{
+              key: 'header_token_present',
+              value: function header_token_present(request, response, next) {
+                     //TODO Check If token present
+                     next();
+              }
+       }, {
+              key: 'header_token_valid',
+              value: /*#__PURE__*/_regenerator2.default.mark(function header_token_valid(request) {
+                     return _regenerator2.default.wrap(function header_token_valid$(_context) {
+                            while (1) {
+                                   switch (_context.prev = _context.next) {
+                                          case 0:
+                                          case 'end':
+                                                 return _context.stop();
+                                   }
+                            }
+                     }, header_token_valid, this);
+              })
+       }]);
+       return AuthModel;
 }();
 
 exports.default = AuthModel;
@@ -11778,6 +11784,12 @@ module.exports = require("babel-runtime/helpers/defineProperty");
 /***/ (function(module, exports) {
 
 module.exports = require("commander");
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports) {
+
+module.exports = require("ejs");
 
 /***/ })
 /******/ ]);

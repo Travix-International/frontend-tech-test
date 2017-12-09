@@ -60,7 +60,7 @@ class TODOAddComponent extends React.Component {
                 { ' ' }
 
                 <FormGroup style={{width: '100%'}}>        
-                    <Button type="submit" bsStyle='success' pullRight>
+                    <Button type="submit" bsStyle='success'>
                         Create
                     </Button>
                 </FormGroup>

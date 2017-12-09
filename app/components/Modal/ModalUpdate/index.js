@@ -100,14 +100,28 @@ class ModalUpdateComponent extends React.Component {
                                 {
                                     this.state.tags.map(
                                         tag => <span>
-                                                    <Label bsStyle="success" onClick={event => this.removeTag(event)} tag={tag}>{tag}</Label>{ ' ' }
+                                                    <Label
+                                                        key={tag}
+                                                        bsStyle="success"
+                                                        onClick={event => this.removeTag(event)}
+                                                        tag={tag}>
+                                                            {tag}
+                                                    </Label>
+                                                    { ' ' }
                                                 </span>
                                     )
                                 }
                                 {
                                     this.tags.map(
                                         tag => <span>
-                                                    <Label bsStyle="info" onClick={event => this.addTag(event)} tag={tag}>{tag}</Label>{ ' ' }
+                                                    <Label
+                                                        key={tag}
+                                                        bsStyle="info"
+                                                        onClick={event => this.addTag(event)}
+                                                        tag={tag}>
+                                                            {tag}
+                                                    </Label>
+                                                    { ' ' }
                                                 </span>
                                     )
                                 }
