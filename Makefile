@@ -18,8 +18,13 @@ tar:
 	mkdir temp
 	cp server/build/* temp/
 	cp dist/* temp/
-	cd temp 
-	tar -cvf * ${TARNAME}
+	cp package.json temp/
+	cd temp && npm install --production
+	cd temp && tar -cvf * ${TARNAME}
+
+configure:
+	npm install
 
 all:
 	tar
+
