@@ -1,19 +1,23 @@
 //Core Modules
-import { readFileSync } from 'fs'
+import { readFileSync, existsSync } from 'fs'
 
 //TODOS
 const todos = {};
 
 //Read TODOS from db
-const todos_json = JSON.parse(readFileSync(__dirname + '/tasks.json', 'utf8'));
-for (let i = 0; i < todos_json.tasks.length; i++) {
-    todos[i] = Object.assign({}, {
-        tags: [],
-        _id: i,
-        title: '',
-        description: '',
-        completed: false
-    }, todos_json.tasks[i]);
+if (existsSync(__dirname + '/tasks.json')) {
+    const todos_json = JSON.parse(readFileSync(__dirname + '/tasks.json', 'utf8'));
+    for (let i = 0; i < todos_json.tasks.length; i++) {
+        todos[i] = Object.assign({}, {
+            tags: [],
+            _id: i,
+            title: '',
+            description: '',
+            completed: false
+        }, todos_json.tasks[i]);
+    }
+} else {
+    console.log(' - tasks.json not found. Server started with empty tasks list.');
 }
 
 class TODOModel {

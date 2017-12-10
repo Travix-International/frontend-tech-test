@@ -767,15 +767,19 @@ var todos = {};
 
 //Read TODOS from db
 //Core Modules
-var todos_json = JSON.parse((0, _fs.readFileSync)(__dirname + '/tasks.json', 'utf8'));
-for (var i = 0; i < todos_json.tasks.length; i++) {
-    todos[i] = (0, _assign2.default)({}, {
-        tags: [],
-        _id: i,
-        title: '',
-        description: '',
-        completed: false
-    }, todos_json.tasks[i]);
+if ((0, _fs.existsSync)(__dirname + '/tasks.json')) {
+    var todos_json = JSON.parse((0, _fs.readFileSync)(__dirname + '/tasks.json', 'utf8'));
+    for (var i = 0; i < todos_json.tasks.length; i++) {
+        todos[i] = (0, _assign2.default)({}, {
+            tags: [],
+            _id: i,
+            title: '',
+            description: '',
+            completed: false
+        }, todos_json.tasks[i]);
+    }
+} else {
+    console.log(' - tasks.json not found. Server started with empty tasks list.');
 }
 
 var TODOModel = function () {

@@ -1,7 +1,7 @@
 Set VERSION=0.1.0
 Set TARNAME=travix-todo-%VERSION%.tar
 
-npm install
+CALL npm install
 
 :: Configure and Build server
 cd server 
@@ -19,7 +19,7 @@ copy server\build\server.js temp\
 xcopy /s dist\* temp\public\
 copy package.json temp\
 cd temp 
-npm install --production
+CALL npm install --production
 if exist "package.json" del package.json
 cd ..
 if not exist "artifacts\%TARNAME%" mkdir artifacts\%TARNAME%

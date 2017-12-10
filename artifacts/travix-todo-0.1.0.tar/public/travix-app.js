@@ -5699,7 +5699,7 @@ var _axios2 = _interopRequireDefault(_axios);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var API = exports.API = _axios2.default.create({
-  baseURL: 'http://localhost:9001'
+  baseURL: location.origin
 }); //Third Party
 
 /***/ }),
@@ -48543,6 +48543,9 @@ var TODOListComponent = function (_React$Component) {
                 });
             }
 
+            /*
+             * Each itemm of the Virtualized list will call this function
+             */
             var rowRender = function rowRender(_ref) {
                 var key = _ref.key,
                     index = _ref.index,
@@ -54847,15 +54850,15 @@ var _reactBootstrap = __webpack_require__(36);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var TODOListComponent = function (_React$Component) {
-    (0, _inherits3.default)(TODOListComponent, _React$Component);
+var TODOItemComponent = function (_React$Component) {
+    (0, _inherits3.default)(TODOItemComponent, _React$Component);
 
-    function TODOListComponent() {
-        (0, _classCallCheck3.default)(this, TODOListComponent);
-        return (0, _possibleConstructorReturn3.default)(this, (TODOListComponent.__proto__ || (0, _getPrototypeOf2.default)(TODOListComponent)).apply(this, arguments));
+    function TODOItemComponent() {
+        (0, _classCallCheck3.default)(this, TODOItemComponent);
+        return (0, _possibleConstructorReturn3.default)(this, (TODOItemComponent.__proto__ || (0, _getPrototypeOf2.default)(TODOItemComponent)).apply(this, arguments));
     }
 
-    (0, _createClass3.default)(TODOListComponent, [{
+    (0, _createClass3.default)(TODOItemComponent, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.state = {
@@ -54894,11 +54897,11 @@ var TODOListComponent = function (_React$Component) {
             );
         }
     }]);
-    return TODOListComponent;
+    return TODOItemComponent;
 }(_react2.default.Component); //Third Party
 
 
-exports.default = TODOListComponent;
+exports.default = TODOItemComponent;
 module.exports = exports['default'];
 
 /***/ }),
@@ -55801,6 +55804,13 @@ var TODOAddComponent = function (_React$Component) {
                 description: event.target.value
             });
         }
+
+        /*
+         * If the required title has been set
+         * calls the parent's submit method
+         * to Create a new TODO
+         */
+
     }, {
         key: 'submit',
         value: function submit(event) {
@@ -56350,6 +56360,13 @@ var ModalUpdateComponent = function (_React$Component) {
                 description: event.target.value
             });
         }
+
+        /*
+         * If a selected tag has been clicked
+         * is removed from the TODO tags
+         * and added to the avaiable tags
+         */
+
     }, {
         key: 'removeTag',
         value: function removeTag(event) {
@@ -56365,6 +56382,13 @@ var ModalUpdateComponent = function (_React$Component) {
             tags.splice(tags.indexOf(tag));
             this.setState({ tags: tags });
         }
+
+        /*
+         * If a avaiable tag has been clicked
+         * is removed from the available tags
+         * and added to the TODO's tags
+         */
+
     }, {
         key: 'addTag',
         value: function addTag(event) {
@@ -56380,6 +56404,11 @@ var ModalUpdateComponent = function (_React$Component) {
             tags.push(tag);
             this.setState({ tags: tags });
         }
+
+        /*
+         * Calls Container's method to fire a save action
+         */
+
     }, {
         key: 'save',
         value: function save() {
@@ -56670,6 +56699,13 @@ var PanelHeaderComponent = function (_React$Component) {
         return _this;
     }
 
+    /* 
+     * fires an event notifyng the application
+     * that a new filter tag has been selected
+     * Triggers a list redraw
+     */
+
+
     (0, _createClass3.default)(PanelHeaderComponent, [{
         key: 'onTagSelected',
         value: function onTagSelected(event) {
@@ -56681,6 +56717,14 @@ var PanelHeaderComponent = function (_React$Component) {
 
             this.props.filter(tag);
         }
+
+        /* 
+         * fires an event notifyng the application
+         * that no tag is selected and all elements should 
+         * be displayed
+         * Triggers a list redraw
+         */
+
     }, {
         key: 'setTagToAll',
         value: function setTagToAll() {
@@ -59450,7 +59494,7 @@ Object.defineProperty(exports, "__esModule", {
 var _API = __webpack_require__(85);
 
 exports.default = function (DATA) {
-  return _API.API.put('/task/' + PUT._id, DATA);
+  return _API.API.put('/task/' + DATA._id, DATA);
 }; //API Instance
 
 

@@ -252,6 +252,11 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/* 
+ * Saga builder is a custom class created to allow generators
+ * to work a Sagas to perform multiple async operations in the
+ * models with a cleaner look than the common promises pattern
+ */
 var Saga = function () {
     function Saga() {
         (0, _classCallCheck3.default)(this, Saga);
@@ -352,7 +357,11 @@ var API = function API() {
         //Configurations
         server.use(_bodyParser2.default.json());
 
-        //RESOURCES
+        /* 
+         * Servers all the files in the public folder
+         * to allow to run a Standalone version of the
+         * server with the application
+         */
         server.set('views', __dirname + '/public');
         server.engine('html', __webpack_require__(23).renderFile);
         server.set('view engine', 'html');
@@ -367,11 +376,19 @@ var API = function API() {
         console.log("Server Running on", port);
 };
 
+/* 
+ * Allows to run the server in a different port
+ */
+
+
 //API Options
 
 
 _commander2.default.version('0.1.0').option('-p, --port [port]', 'Server port (default 9001)').parse(process.argv);
 
+/* 
+ * New API instance with specified configurations
+ */
 var APIInstance = new API(_commander2.default.port);
 
 /***/ }),
@@ -405,6 +422,7 @@ var HeaderController = function HeaderController(server) {
 	(0, _classCallCheck3.default)(this, HeaderController);
 
 
+	// Set Request headers for OPTIONS
 	server.all('*', _HeaderModel2.default.setHeaders);
 };
 
@@ -418,7 +436,7 @@ exports.default = HeaderController;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _classCallCheck2 = __webpack_require__(0);
@@ -445,24 +463,29 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //Helpers
 var AuthController = function () {
-  function AuthController(server) {
-    (0, _classCallCheck3.default)(this, AuthController);
+    function AuthController(server) {
+        (0, _classCallCheck3.default)(this, AuthController);
 
 
-    //Set ContentType and Allowed Headers
-    server.all('*', _AuthModel2.default.header_token_present);
-    server.all('*', this.header_token_valid);
-  }
-
-  (0, _createClass3.default)(AuthController, [{
-    key: 'header_token_valid',
-    value: function header_token_valid(request, response, next) {
-      _Saga2.default.saga_builder(_AuthModel2.default.header_token_valid, request).then(next).catch(function (error) {
-        return _Request2.default.error('No access allowed.', [error.stack], {}, response);
-      });
+        //Set ContentType and Allowed Headers
+        server.all('*', _AuthModel2.default.header_token_present);
+        server.all('*', this.header_token_valid);
     }
-  }]);
-  return AuthController;
+
+    /* 
+     *  header_token_valid Interceptor for all routes
+     */
+
+
+    (0, _createClass3.default)(AuthController, [{
+        key: 'header_token_valid',
+        value: function header_token_valid(request, response, next) {
+            _Saga2.default.saga_builder(_AuthModel2.default.header_token_valid, request).then(next).catch(function (error) {
+                return _Request2.default.error('No access allowed.', [error.stack], {}, response);
+            });
+        }
+    }]);
+    return AuthController;
 }(); //Models
 
 
@@ -512,6 +535,12 @@ var AuthModel = function () {
 
     (0, _createClass3.default)(AuthModel, null, [{
         key: 'header_token_present',
+
+
+        /* 
+            * If authorizationi need, the validation will ocurr in 
+            * this two methods
+            */
         value: function header_token_present(request, response, next) {
             //TODO Check If auth token present
             next();
@@ -615,6 +644,11 @@ var FolderController = function () {
         server.delete('/task/:id', this.delete_task);
     }
 
+    /* 
+     *  GET - Return all tasks mapped on the server
+     */
+
+
     (0, _createClass3.default)(FolderController, [{
         key: 'get_tasks',
         value: function get_tasks(request, response) {
@@ -624,6 +658,11 @@ var FolderController = function () {
                 return _Request2.default.error('An error has ocurred.', [error.stack], {}, response);
             });
         }
+
+        /* 
+         *  GET - Return a single tasks by URL specified ID
+         */
+
     }, {
         key: 'get_task_by_id',
         value: function get_task_by_id(request, response) {
@@ -633,6 +672,11 @@ var FolderController = function () {
                 return _Request2.default.error('An error has ocurred.', [error.stack], {}, response);
             });
         }
+
+        /* 
+         *  PUT - Updates single task by URL specified ID and request body
+         */
+
     }, {
         key: 'update_task_by_id',
         value: function update_task_by_id(request, response) {
@@ -642,6 +686,11 @@ var FolderController = function () {
                 return _Request2.default.error('An error has ocurred.', [error.stack], {}, response);
             });
         }
+
+        /* 
+         *  POST - create a single task by request body
+         */
+
     }, {
         key: 'create_task',
         value: function create_task(request, response) {
@@ -651,6 +700,11 @@ var FolderController = function () {
                 return _Request2.default.error('An error has ocurred.', [error.stack], {}, response);
             });
         }
+
+        /* 
+         * DELETE - Delete a single tasks by URL specified ID
+         */
+
     }, {
         key: 'delete_task',
         value: function delete_task(request, response) {
@@ -713,15 +767,19 @@ var todos = {};
 
 //Read TODOS from db
 //Core Modules
-var todos_json = JSON.parse((0, _fs.readFileSync)(__dirname + '/tasks.json', 'utf8'));
-for (var i = 0; i < todos_json.tasks.length; i++) {
-    todos[i] = (0, _assign2.default)({}, {
-        tags: [],
-        _id: i,
-        title: '',
-        description: '',
-        completed: false
-    }, todos_json.tasks[i]);
+if ((0, _fs.existsSync)(__dirname + '/tasks.json')) {
+    var todos_json = JSON.parse((0, _fs.readFileSync)(__dirname + '/tasks.json', 'utf8'));
+    for (var i = 0; i < todos_json.tasks.length; i++) {
+        todos[i] = (0, _assign2.default)({}, {
+            tags: [],
+            _id: i,
+            title: '',
+            description: '',
+            completed: false
+        }, todos_json.tasks[i]);
+    }
+} else {
+    console.log(' - tasks.json not found. Server started with empty tasks list.');
 }
 
 var TODOModel = function () {
@@ -731,6 +789,11 @@ var TODOModel = function () {
 
     (0, _createClass3.default)(TODOModel, null, [{
         key: 'get_tasks',
+
+
+        /* 
+         * Return all todos
+         */
         value: /*#__PURE__*/_regenerator2.default.mark(function get_tasks(request) {
             return _regenerator2.default.wrap(function get_tasks$(_context) {
                 while (1) {
@@ -745,6 +808,11 @@ var TODOModel = function () {
                 }
             }, get_tasks, this);
         })
+
+        /* 
+         * Return todo by id
+         */
+
     }, {
         key: 'get_task_by_id',
         value: /*#__PURE__*/_regenerator2.default.mark(function get_task_by_id(request) {
@@ -767,6 +835,11 @@ var TODOModel = function () {
                 }
             }, get_task_by_id, this);
         })
+
+        /* 
+         * Update a single todo a return the new object
+         */
+
     }, {
         key: 'update_task_by_id',
         value: /*#__PURE__*/_regenerator2.default.mark(function update_task_by_id(request) {
@@ -785,6 +858,12 @@ var TODOModel = function () {
                 }
             }, update_task_by_id, this);
         })
+
+        /* 
+         * Creates a new todo, assigns all missing required attributes,
+         * creates a custom id and return the newly created object
+         */
+
     }, {
         key: 'create_task',
         value: /*#__PURE__*/_regenerator2.default.mark(function create_task(request) {
@@ -814,6 +893,11 @@ var TODOModel = function () {
                 }
             }, create_task, this);
         })
+
+        /* 
+         * Delete todo by id
+         */
+
     }, {
         key: 'delete_task',
         value: /*#__PURE__*/_regenerator2.default.mark(function delete_task(request) {

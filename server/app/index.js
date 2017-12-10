@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import HeaderController from './controller/HeaderController'
 import AuthController from './controller/AuthController'
 import TODOController from './controller/TODOController'
+import SocketController from './controller/SocketController'
 
 //API Options
 import program from 'commander'
