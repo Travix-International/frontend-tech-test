@@ -1,10 +1,7 @@
-# Travix test
-
-Travix Front-End Tech Interview Test
-
 # Introduction
 
-Small Responsive app to manage your own TODOs. 
+Small Responsive app to manage your own TODOs. You can add TODOs to a centralized shared server, modified them, and set them to Done. 
+The page is fully responsive and can be displayed on multiple devices. It works with lots of Tasks (Lots!) and it will keep sincronized all the instances currently open of the App.
 
 # Install
 
@@ -27,3 +24,20 @@ Small Responsive app to manage your own TODOs.
 ##Server Tests
 * move to server/__tests/
 * node test.js
+
+# Known Issues
+
+##TODO TAGS get duplicated
+* Click on a TODO to open the detail
+* Click on Update
+* Select multiple tags
+* Save
+* Reopen the Update Modal
+* TAGS are duplicated
+* Click on the first TAG
+* All TAGS are unselected
+
+##RESIZE List not fully responsive
+*Load the application
+*Resize the application to a smaller size
+*The list is not well scalated
