@@ -1,0 +1,41 @@
+{
+  "extends": [
+    "travix/base"
+  ],
+  "env": {
+  	"node": true,
+  	"es6": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "indent": [ 2, 2 ],
+    "linebreak-style": 0,
+    "max-len": [
+      2,
+      80,
+      4,
+      {
+        "ignoreUrls": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreTrailingComments": true,
+        "ignoreComments": true,
+        "ignorePattern": "^(import.*|const\\s.*\\s=\\srequire.*)"
+      }
+    ],
+    "newline-after-var": 2,
+    "padded-blocks": 2,
+    "quotes": [
+      2,
+      "single"
+    ],
+    "semi": [ 2, "always" ]
+  },
+  "globals": {
+    "describe": true,
+    "beforeEach": true,
+    "expect": true,
+    "afterEach": true,
+    "jest": true,
+    "test": true
+  }
+}

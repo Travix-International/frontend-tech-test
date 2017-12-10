@@ -4,8 +4,7 @@
   "description": "BE app for Travix International Test",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "local": "./node_modules/webpack/bin/webpack.js --config ./webpack-dev.js --colors --progress"
   },
   "keywords": [
     "test",
@@ -14,6 +13,23 @@
   "author": "Jose A Ramirez Mora",
   "license": "ISC",
   "dependencies": {
-    "express": "4.14.0"
+    "body-parser": "1.18.2",
+    "cors": "2.8.4",
+    "express": "4.14.0",
+    "http": "0.0.0",
+    "morgan": "1.9.0",
+    "start-server-webpack-plugin": "2.2.0",
+    "webpack": "3.10.0"
+  },
+  "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-eslint": "8.0.3",
+    "babel-loader": "7.1.2",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-plugin-transform-runtime": "6.23.0",
+    "babel-preset-env": "1.6.1",
+    "eslint": "4.12.1",
+    "eslint-config-travix": "3.0.1",
+    "eslint-plugin-import": "2.8.0"
   }
 }
