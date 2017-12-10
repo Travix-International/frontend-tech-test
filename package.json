@@ -4,7 +4,7 @@
   "description": "test back - front",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "./node_modules/.bin/webpack-dev-server"
   },
   "keywords": [
@@ -43,6 +43,7 @@
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -54,9 +55,12 @@
     "babel-preset-travix": "^1.1.1",
     "babel-register": "^6.26.0",
     "css-loader": "^0.28.7",
+    "jasmine": "^2.8.0",
+    "jest": "^21.2.1",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "my-local-ip": "^1.0.0",
+    "react-test-renderer": "^16.2.0",
     "style-loader": "^0.19.0",
     "transform-runtime": "0.0.0",
     "webpack": "^3.10.0",
@@ -72,5 +76,14 @@
     "plugins": [
       "transform-object-rest-spread"
     ]
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "transform": {
+      "^.+\\.js?$": "babel-jest",
+      "^.+\\.(css|less)$": "./config/Style.js"
+    }
   }
 }
