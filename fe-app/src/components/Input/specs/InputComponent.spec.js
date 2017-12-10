@@ -44,29 +44,6 @@ describe('<InputComponent />', () => {
       expect(input.props().value).toBe('foo');
       expect(getValueSpy).toHaveBeenCalled();
     });
-    describe('.input-has-error', () => {
-      test('should render with error', () => {
-        expect(wrapper.hasClass('input-has-error')).toBe(true);
-      });
-      test('should not render error: pristine', () => {
-        isPristineSpy.mockReturnValue(true);
-
-        wrapper = shallow(<InputComponent {...defaultProps} />);
-        expect(wrapper.hasClass('input-has-error')).toBe(false);
-      });
-      test('should not render error: not required, no error', () => {
-        showRequiredSpy.mockReturnValue(false);
-        getErrorMessageSpy.mockReturnValue('');
-
-        wrapper = shallow(<InputComponent {...defaultProps} />);
-        expect(wrapper.hasClass('input-has-error')).toBe(false);
-      });
-    });
-    describe('<p.input-error />', () => {
-      test('should render input error', () => {
-        expect(wrapper.find('.input-error').text()).toBe('bar');
-      });
-    });
   });
   describe('onChange', () => {
     test('should call setValue', () => {

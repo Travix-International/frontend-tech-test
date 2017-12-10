@@ -13,28 +13,28 @@ jest.mock('../../../../api/apiService');
 
 describe('ListTasksActions', () => {
   describe('listTasksSuccess', () => {
-    test('should return an add tasks success action', () => {
+    test('should return a list tasks success action', () => {
       expect(actions.listTasksSuccess([{ foo: 'bar' }])).toEqual({
         type: LIST_TASKS_SUCESSS
       });
     });
   });
   describe('listTasksFailed', () => {
-    test('should return an add tasks failed action', () => {
+    test('should return a list tasks failed action', () => {
       expect(actions.listTasksFailed()).toEqual({
         type: LIST_TASKS_FAILED,
       });
     });
   });
   describe('listTasksLoading', () => {
-    test('should return an add tasks loading action', () => {
+    test('should return a list tasks loading action', () => {
       expect(actions.listTasksLoading()).toEqual({
         type: LIST_TASKS_LOADING,
       });
     });
   });
   describe('listTasksLoaded', () => {
-    test('should return an add tasks loaded action', () => {
+    test('should return a list tasks loaded action', () => {
       expect(actions.listTasksLoaded()).toEqual({
         type: LIST_TASKS_LOADED,
       });

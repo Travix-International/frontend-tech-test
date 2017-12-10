@@ -9,7 +9,7 @@ describe('<SubmitInputComponent />', () => {
 
   beforeEach(() => {
     defaultProps = {
-      isFetching: false,
+      isSubmitting: false,
       name: 'foo',
       canSubmit: true,
     };
@@ -38,7 +38,7 @@ describe('<SubmitInputComponent />', () => {
       expect(input.props().value).toBe('Submit');
     });
     test('should show Submitting isFetching: true', () => {
-      defaultProps.isFetching = true;
+      defaultProps.isSubmitting = true;
       wrapper = shallow(<SubmitInputComponent {...defaultProps} />);
       input = wrapper.find('input');
       expect(input.props().value).toBe('Submitting...');
