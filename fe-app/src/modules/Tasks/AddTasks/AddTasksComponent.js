@@ -23,7 +23,7 @@ const AddTasksComponent = (props) => {
 
   return (
     <Form
-      className="row form-group"
+      className="row flex-bottom form-group"
       onDisable={onDisable}
       onEnable={onEnable}
       onValidSubmit={onValidSubmit}

@@ -35,13 +35,13 @@ describe('<SubmitInputComponent />', () => {
       });
     });
     test('should show Submit isFetching: false', () => {
-      expect(input.props().value).toBe('Submit');
+      expect(input.props().value).toBe('Create');
     });
     test('should show Submitting isFetching: true', () => {
       defaultProps.isSubmitting = true;
       wrapper = shallow(<SubmitInputComponent {...defaultProps} />);
       input = wrapper.find('input');
-      expect(input.props().value).toBe('Submitting...');
+      expect(input.props().value).toBe('Creating...');
     });
   });
 });

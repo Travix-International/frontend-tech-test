@@ -25,7 +25,7 @@ describe('AddTasksComponent', () => {
   describe('<Form />', () => {
     test('should render a Form', () => {
       expect(wrapper.exists()).toBe(true);
-      expect(wrapper.props().className).toBe('row form-group');
+      expect(wrapper.props().className).toBe('row flex-bottom form-group');
       expect(wrapper.props().onDisable).toBe(onDisableSpy);
       expect(wrapper.props().onEnable).toBe(onEnableSpy);
       expect(wrapper.props().onValidSubmit).toBe(onValidSubmitSpy);

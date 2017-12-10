@@ -4,13 +4,14 @@ import AddTasks from '../AddTasks/AddTasksContainer';
 
 const propTypes = {
   tasks: T.arrayOf(T.object),
+  onDelete: T.func,
 };
 
 const ListTasksComponent = (props) => {
-  const { tasks } = props;
+  const { tasks, onDelete } = props;
 
   return (
-    <div className="margin">
+    <div className="list-tasks margin">
       <h2 className="align-middle">Todo List App</h2>
       <AddTasks />
       <div className="child-borders">
@@ -21,6 +22,14 @@ const ListTasksComponent = (props) => {
                 tasks.map(task => (
                   <tr key={task.id}>
                     <td>{task.title}</td>
+                    <td>
+                      <button
+                        className="btn-delete btn-small"
+                        onClick={() => (onDelete(task.id))}
+                      >
+                        <i aria-hidden="true" className="fa fa-trash" />
+                      </button>
+                    </td>
                   </tr>
                 ))
               }
