@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TODOItemComponent marked as completed 1`] = `
+<span
+  className="list-group-item list-group-item-info"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col-xs-2"
+    >
+      <input
+        checked={undefined}
+        onChange={[Function]}
+        type="checkbox"
+      />
+    </div>
+    <div
+      className="col-xs-10"
+      onClick={[Function]}
+    >
+      
+    </div>
+  </div>
+</span>
+`;
+
+exports[`TODOItemComponent marked as uncompleted 1`] = `
+<span
+  className="list-group-item list-group-item-info"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col-xs-2"
+    >
+      <input
+        checked={undefined}
+        onChange={[Function]}
+        type="checkbox"
+      />
+    </div>
+    <div
+      className="col-xs-10"
+      onClick={[Function]}
+    >
+      
+    </div>
+  </div>
+</span>
+`;

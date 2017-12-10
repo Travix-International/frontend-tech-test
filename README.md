@@ -21,3 +21,9 @@ Small Responsive app to manage your own TODOs.
 * access the browser on specified port (default 9001)
 
 # Tests
+##App Tests
+* npm test
+
+##Server Tests
+* move to server/__tests/
+* node test.js

@@ -10,7 +10,7 @@ import {
     InputGroup
 } from 'react-bootstrap'
 
-class TODOListComponent extends React.Component {
+class TODOItemComponent extends React.Component {
 
     componentDidMount () {
         this.state = {
@@ -38,4 +38,4 @@ class TODOListComponent extends React.Component {
 
 }
 
-export default TODOListComponent
+export default TODOItemComponent
