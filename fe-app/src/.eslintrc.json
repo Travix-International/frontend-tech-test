@@ -5,14 +5,11 @@
   ],
   "parser": "babel-eslint",
   "rules": {
-    "import/no-extraneous-dependencies": [
-      2,
-      {
-        "devDependencies": [
-          "**/*.spec.js", "**/config/*.js"
-        ]
-      }
-    ],
+    "import/no-extraneous-dependencies": [ 2, {
+      "devDependencies": [
+        "**/*.spec.js", "**/config/*.js"
+      ]
+    }],
     "indent": [ 2, 2 ],
     "linebreak-style": 0,
     "max-len": [
