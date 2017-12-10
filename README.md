@@ -18,16 +18,16 @@ The page is fully responsive and can be displayed on multiple devices. It works 
 * access the browser on specified port (default 9001)
 
 # Tests
-##App Tests
+## App Tests
 * npm test
 
-##Server Tests
+## Server Tests
 * move to server/__tests/
 * node test.js
 
 # Known Issues
 
-##TODO TAGS get duplicated
+## TODO TAGS get duplicated
 * Click on a TODO to open the detail
 * Click on Update
 * Select multiple tags
@@ -37,7 +37,7 @@ The page is fully responsive and can be displayed on multiple devices. It works 
 * Click on the first TAG
 * All TAGS are unselected
 
-##RESIZE List not fully responsive
-*Load the application
-*Resize the application to a smaller size
-*The list is not well scalated
+## RESIZE List not fully responsive
+* Load the application
+* Resize the application to a smaller size
+* The list is not well scalated

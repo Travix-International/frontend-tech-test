@@ -13,7 +13,7 @@ class WebSocketMiddleware {
 		// By WebSocket Async methods
 		this.store = store;
 
-		const host = '10.0.0.187:9001';
+		const host = location.host;
 		const webSocketRouterInstance = new WebSocketRouter(new WebSocket(`ws:\/\/${host}`));
 
 		//On Taks created
