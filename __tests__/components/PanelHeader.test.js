@@ -13,9 +13,7 @@ test('onTagSelected() Tag is added to the list', () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
 
-    console.log(tree.children[0].children[1].children[0].children[0].children[1].children[0].children[0].onClick());
-
-    tree.onTagSelected({
+    component.onTagSelected({
         getAttribute () {
             return 'TAG';
         }

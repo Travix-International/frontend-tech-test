@@ -15,6 +15,9 @@ class AuthController {
 
 	}
 
+    /* 
+     *  header_token_valid Interceptor for all routes
+     */
 	header_token_valid (request, response, next) {
         Saga.saga_builder(AuthModel.header_token_valid, request)
             .then(next)

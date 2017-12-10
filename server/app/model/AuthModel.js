@@ -7,6 +7,10 @@ import axios from 'axios'
 
 class AuthModel {
 
+	/* 
+     * If authorizationi need, the validation will ocurr in 
+     * this two methods
+     */
 	static header_token_present (request, response, next) {
         //TODO Check If auth token present
         next();

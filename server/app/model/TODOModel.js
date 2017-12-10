@@ -18,16 +18,25 @@ for (let i = 0; i < todos_json.tasks.length; i++) {
 
 class TODOModel {
 
+    /* 
+     * Return all todos
+     */
     static * get_tasks (request) {
         return todos;
     }
 
+    /* 
+     * Return todo by id
+     */
     static * get_task_by_id (request) {
         return yield db.select('todo', {
             '_id': ObjectId(request.params.id)
         });
     }
 
+    /* 
+     * Update a single todo a return the new object
+     */
     static * update_task_by_id (request) {
         todos[request.body._id] = request.body;
 
@@ -36,6 +45,10 @@ class TODOModel {
         };
     }
 
+    /* 
+     * Creates a new todo, assigns all missing required attributes,
+     * creates a custom id and return the newly created object
+     */
     static * create_task (request) {
         const _id = Object.keys(todos).length;
 
@@ -52,6 +65,9 @@ class TODOModel {
         };
     }
 
+    /* 
+     * Delete todo by id
+     */
     static * delete_task (request) {
         delete todos[request.params.id];
 

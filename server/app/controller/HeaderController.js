@@ -4,6 +4,7 @@ class HeaderController {
 
 	constructor (server) {
 
+		// Set Request headers for OPTIONS
 		server.all('*', HeaderModel.setHeaders);
 
 	}

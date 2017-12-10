@@ -33,6 +33,11 @@ class TODOAddComponent extends React.Component {
         });
     }
 
+    /*
+     * If the required title has been set
+     * calls the parent's submit method
+     * to Create a new TODO
+     */
     submit (event) {
         event.preventDefault();
 

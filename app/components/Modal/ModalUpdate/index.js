@@ -39,6 +39,11 @@ class ModalUpdateComponent extends React.Component {
 		});
 	}
 
+    /*
+     * If a selected tag has been clicked
+     * is removed from the TODO tags
+     * and added to the avaiable tags
+     */
     removeTag (event) {
 
         //Retrieve Tag from Clicked element
@@ -53,6 +58,11 @@ class ModalUpdateComponent extends React.Component {
         this.setState({tags});
     }
 
+    /*
+     * If a avaiable tag has been clicked
+     * is removed from the available tags
+     * and added to the TODO's tags
+     */
     addTag (event) {
 
         //Retrieve Tag from Clicked element
@@ -67,6 +77,9 @@ class ModalUpdateComponent extends React.Component {
         this.setState({tags});
     }
 
+    /*
+     * Calls Container's method to fire a save action
+     */
 	save () {
 		this.props.saveModal(this.state);
 	}

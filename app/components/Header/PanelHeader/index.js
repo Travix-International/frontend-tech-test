@@ -25,6 +25,11 @@ class PanelHeaderComponent extends React.Component {
         };
     }
 
+    /* 
+     * fires an event notifyng the application
+     * that a new filter tag has been selected
+     * Triggers a list redraw
+     */
     onTagSelected (event) {
         const tag = event.target.getAttribute('tag');
         
@@ -35,6 +40,12 @@ class PanelHeaderComponent extends React.Component {
         this.props.filter(tag);
     }
 
+    /* 
+     * fires an event notifyng the application
+     * that no tag is selected and all elements should 
+     * be displayed
+     * Triggers a list redraw
+     */
     setTagToAll () {
         this.setState({
             activeTag: 'Filter'

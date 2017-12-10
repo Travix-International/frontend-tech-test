@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "http://192.168.2.15:8080/built/";
+/******/ 	__webpack_require__.p = "http://192.168.2.14:8080/built/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 220);
@@ -5699,7 +5699,7 @@ var _axios2 = _interopRequireDefault(_axios);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var API = exports.API = _axios2.default.create({
-  baseURL: location.origin
+  baseURL: 'http://localhost:9001'
 }); //Third Party
 
 /***/ }),
@@ -48559,20 +48559,20 @@ var TODOListComponent = function (_React$Component) {
 
             return _react2.default.createElement(
                 _reactBootstrap.ListGroup,
-                { style: { height: '300px' } },
+                null,
                 _react2.default.createElement(
                     _reactVirtualized.AutoSizer,
-                    null,
+                    { disableHeight: true, style: { flex: '1 1 auto' } },
                     function (_ref2) {
-                        var height = _ref2.height,
-                            width = _ref2.width;
+                        var width = _ref2.width;
                         return _react2.default.createElement(_reactVirtualized.List, {
                             className: _Style2.default.list,
-                            width: width,
-                            height: 300,
                             rowCount: items.length,
                             rowHeight: 45,
-                            rowRenderer: rowRender });
+                            rowRenderer: rowRender,
+                            width: width,
+                            height: window.innerHeight - 300,
+                            maxHeight: 500 });
                     }
                 )
             );
@@ -55538,11 +55538,12 @@ exports = module.exports = __webpack_require__(79)(undefined);
 
 
 // module
-exports.push([module.i, ".app-components-TODOList-Style__list--2In09 {\n  overflow: hidden;\n}\n", ""]);
+exports.push([module.i, ".app-components-TODOList-Style__list--2tF9Q {\n  overflow: auto;\n}\n.app-components-TODOList-Style__autoSizer--33vx6 {\n  height: 100%;\n}\n", ""]);
 
 // exports
 exports.locals = {
-	"list": "app-components-TODOList-Style__list--2In09"
+	"list": "app-components-TODOList-Style__list--2tF9Q",
+	"autoSizer": "app-components-TODOList-Style__autoSizer--33vx6"
 };
 
 /***/ }),
@@ -55781,7 +55782,7 @@ var TODOAddComponent = function (_React$Component) {
 
         _this.state = {
             title: '',
-            deocscription: ''
+            description: ''
         };
         return _this;
     }
@@ -55836,12 +55837,20 @@ var TODOAddComponent = function (_React$Component) {
                     this.state.error
                 ),
                 ' ',
+                _react2.default.createElement(_reactBootstrap.FormControl, {
+                    style: { width: '100%', margin: '10px 0' },
+                    componentClass: 'textarea',
+                    placeholder: 'Description',
+                    value: this.state.description,
+                    onChange: function onChange(event) {
+                        return _this2.descriptionChange(event);
+                    } }),
                 _react2.default.createElement(
                     _reactBootstrap.FormGroup,
                     { style: { width: '100%' } },
                     _react2.default.createElement(
                         _reactBootstrap.Button,
-                        { type: 'submit', bsStyle: 'success', pullRight: true },
+                        { type: 'submit', bsStyle: 'success', className: 'pull-right' },
                         'Create'
                     )
                 )
@@ -56446,9 +56455,13 @@ var ModalUpdateComponent = function (_React$Component) {
                                         null,
                                         _react2.default.createElement(
                                             _reactBootstrap.Label,
-                                            { bsStyle: 'success', onClick: function onClick(event) {
+                                            {
+                                                key: tag,
+                                                bsStyle: 'success',
+                                                onClick: function onClick(event) {
                                                     return _this2.removeTag(event);
-                                                }, tag: tag },
+                                                },
+                                                tag: tag },
                                             tag
                                         ),
                                         ' '
@@ -56460,9 +56473,13 @@ var ModalUpdateComponent = function (_React$Component) {
                                         null,
                                         _react2.default.createElement(
                                             _reactBootstrap.Label,
-                                            { bsStyle: 'info', onClick: function onClick(event) {
+                                            {
+                                                key: tag,
+                                                bsStyle: 'info',
+                                                onClick: function onClick(event) {
                                                     return _this2.addTag(event);
-                                                }, tag: tag },
+                                                },
+                                                tag: tag },
                                             tag
                                         ),
                                         ' '
@@ -56690,29 +56707,9 @@ var PanelHeaderComponent = function (_React$Component) {
                         _reactBootstrap.Navbar.Brand,
                         null,
                         _react2.default.createElement(
-                            'a',
-                            { href: '#' },
-                            'TODOs'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        _reactBootstrap.Navbar.Form,
-                        null,
-                        _react2.default.createElement(
-                            _reactBootstrap.FormGroup,
+                            'label',
                             null,
-                            _react2.default.createElement(
-                                _reactBootstrap.InputGroup,
-                                null,
-                                _react2.default.createElement(_reactBootstrap.FormControl, { onChange: function onChange(event) {
-                                        return _this2.props.search(event);
-                                    }, type: 'text', placeholder: 'Search' }),
-                                _react2.default.createElement(
-                                    _reactBootstrap.InputGroup.Addon,
-                                    null,
-                                    _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'search' })
-                                )
-                            )
+                            'TODOs'
                         )
                     ),
                     _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
@@ -56742,6 +56739,26 @@ var PanelHeaderComponent = function (_React$Component) {
                                     tag
                                 );
                             })
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _reactBootstrap.Navbar.Form,
+                        { className: 'pull-right' },
+                        _react2.default.createElement(
+                            _reactBootstrap.FormGroup,
+                            null,
+                            _react2.default.createElement(
+                                _reactBootstrap.InputGroup,
+                                null,
+                                _react2.default.createElement(_reactBootstrap.FormControl, { onChange: function onChange(event) {
+                                        return _this2.props.search(event);
+                                    }, type: 'text', placeholder: 'Search' }),
+                                _react2.default.createElement(
+                                    _reactBootstrap.InputGroup.Addon,
+                                    null,
+                                    _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'search' })
+                                )
+                            )
                         )
                     )
                 )
@@ -56797,11 +56814,11 @@ exports = module.exports = __webpack_require__(79)(undefined);
 
 
 // module
-exports.push([module.i, ".app-components-Header-PanelHeader-Style__navbar--B3Oyg {\n  flex: 1;\n}\n", ""]);
+exports.push([module.i, ".app-components-Header-PanelHeader-Style__navbar--12yvJ {\n  flex: 1;\n}\n", ""]);
 
 // exports
 exports.locals = {
-	"navbar": "app-components-Header-PanelHeader-Style__navbar--B3Oyg"
+	"navbar": "app-components-Header-PanelHeader-Style__navbar--12yvJ"
 };
 
 /***/ }),
@@ -56844,12 +56861,12 @@ exports = module.exports = __webpack_require__(79)(undefined);
 
 
 // module
-exports.push([module.i, ".app-components-App-Style__app--2CIsD {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n}\n.app-components-App-Style__body--2pgmz {\n  flex: 9;\n}\nbody {\n  overflow: hidden;\n}\n::-webkit-scrollbar {\n  width: 6px;\n  height: 6px;\n}\n::-webkit-scrollbar-button {\n  width: 0px;\n  height: 0px;\n}\n::-webkit-scrollbar-thumb {\n  background: #e1e1e1;\n  border: 0px none #ffffff;\n  border-radius: 0px;\n}\n::-webkit-scrollbar-thumb:hover {\n  background: #ffffff;\n}\n::-webkit-scrollbar-thumb:active {\n  background: #000000;\n}\n::-webkit-scrollbar-track {\n  background: #666666;\n  border: 0px none #ffffff;\n  border-radius: 0px;\n}\n::-webkit-scrollbar-track:hover {\n  background: #666666;\n}\n::-webkit-scrollbar-track:active {\n  background: #333333;\n}\n::-webkit-scrollbar-corner {\n  background: transparent;\n}\n", ""]);
+exports.push([module.i, ".app-components-App-Style__app--3W1pP {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n}\n.app-components-App-Style__body--K0peR {\n  flex: 9;\n}\nbody {\n  overflow: hidden;\n}\n::-webkit-scrollbar {\n  width: 6px;\n  height: 6px;\n}\n::-webkit-scrollbar-button {\n  width: 0px;\n  height: 0px;\n}\n::-webkit-scrollbar-thumb {\n  background: #e1e1e1;\n  border: 0px none #ffffff;\n  border-radius: 0px;\n}\n::-webkit-scrollbar-thumb:hover {\n  background: #ffffff;\n}\n::-webkit-scrollbar-thumb:active {\n  background: #000000;\n}\n::-webkit-scrollbar-track {\n  background: #666666;\n  border: 0px none #ffffff;\n  border-radius: 0px;\n}\n::-webkit-scrollbar-track:hover {\n  background: #666666;\n}\n::-webkit-scrollbar-track:active {\n  background: #333333;\n}\n::-webkit-scrollbar-corner {\n  background: transparent;\n}\n", ""]);
 
 // exports
 exports.locals = {
-	"app": "app-components-App-Style__app--2CIsD",
-	"body": "app-components-App-Style__body--2pgmz"
+	"app": "app-components-App-Style__app--3W1pP",
+	"body": "app-components-App-Style__body--K0peR"
 };
 
 /***/ }),
@@ -59553,7 +59570,7 @@ Object.defineProperty(exports, "__esModule", {
 var _API = __webpack_require__(85);
 
 exports.default = function (DATA) {
-  return axios.put('/task/' + PUT._id, DATA);
+  return _API.API.put('/task/' + DATA._id, DATA);
 }; //API Instance
 
 

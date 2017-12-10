@@ -1,3 +1,8 @@
+/* 
+ * Saga builder is a custom class created to allow generators
+ * to work a Sagas to perform multiple async operations in the
+ * models with a cleaner look than the common promises pattern
+ */
 class Saga {
 
     static saga_builder (GENERATOR) {

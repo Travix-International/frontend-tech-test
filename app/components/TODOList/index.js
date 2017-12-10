@@ -39,6 +39,9 @@ class TODOListComponent extends React.Component {
             );
         }
 
+        /*
+         * Each itemm of the Virtualized list will call this function
+         */
         const rowRender = ({key, index, isScrolling, isVisible, style}) => {
             return (
                     <div key={key} style={style}>

@@ -27,6 +27,9 @@ class FolderController {
 
     }
 
+    /* 
+     *  GET - Return all tasks mapped on the server
+     */
     get_tasks (request, response) {
         Saga.saga_builder(TODOModel.get_tasks, request)
             .then(
@@ -37,6 +40,9 @@ class FolderController {
             );
     }
 
+    /* 
+     *  GET - Return a single tasks by URL specified ID
+     */
     get_task_by_id (request, response) {
         Saga.saga_builder(TODOModel.get_task_by_id, request)
             .then(
@@ -47,6 +53,9 @@ class FolderController {
             );
     }
 
+    /* 
+     *  PUT - Updates single task by URL specified ID and request body
+     */
     update_task_by_id (request, response) {
         Saga.saga_builder(TODOModel.update_task_by_id, request)
             .then(
@@ -57,6 +66,10 @@ class FolderController {
             );
     }
 
+
+    /* 
+     *  POST - create a single task by request body
+     */
     create_task (request, response) {
         Saga.saga_builder(TODOModel.create_task, request)
             .then(
@@ -67,6 +80,9 @@ class FolderController {
             );
     }
 
+    /* 
+     * DELETE - Delete a single tasks by URL specified ID
+     */
     delete_task (request, response) {
         Saga.saga_builder(TODOModel.delete_task, request)
             .then(

@@ -6,9 +6,9 @@
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -32,9 +32,6 @@
 /******/
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
 /******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
@@ -63,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 23);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -89,7 +86,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _stringify = __webpack_require__(15);
+var _stringify = __webpack_require__(14);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -164,6 +161,74 @@ exports.default = Request;
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("express");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var HeaderModel = function () {
+	function HeaderModel() {
+		(0, _classCallCheck3.default)(this, HeaderModel);
+	}
+
+	(0, _createClass3.default)(HeaderModel, null, [{
+		key: 'setHeaders',
+		value: function setHeaders(request, response, next) {
+			response.set('Access-Control-Allow-Origin', '*');
+			response.set('Access-Control-Allow-Methods', 'OPTIONS,DELETE,PUT,POST,GET');
+			response.set('Access-Control-Allow-Headers', 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type');
+			response.set('Content-Type', 'application/json');
+			next();
+		}
+	}, {
+		key: 'headers',
+		value: function headers(request) {
+			return {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'X-Auth-token': request.headers['x-auth-token']
+			};
+		}
+	}]);
+	return HeaderModel;
+}();
+
+exports.default = HeaderModel;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/regenerator");
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -173,7 +238,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _promise = __webpack_require__(18);
+var _promise = __webpack_require__(16);
 
 var _promise2 = _interopRequireDefault(_promise);
 
@@ -232,77 +297,16 @@ var Saga = function () {
 exports.default = Saga;
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var HeaderModel = function () {
-	function HeaderModel() {
-		(0, _classCallCheck3.default)(this, HeaderModel);
-	}
-
-	(0, _createClass3.default)(HeaderModel, null, [{
-		key: 'setHeaders',
-		value: function setHeaders(request, response, next) {
-			response.set('Access-Control-Allow-Origin', '*');
-			response.set('Access-Control-Allow-Methods', 'OPTIONS,DELETE,PUT,POST,GET');
-			response.set('Access-Control-Allow-Headers', 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type');
-			response.set('Content-Type', 'application/json');
-			next();
-		}
-	}, {
-		key: 'headers',
-		value: function headers(request) {
-			return {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
-				'X-Auth-token': request.headers['x-auth-token']
-			};
-		}
-	}]);
-	return HeaderModel;
-}();
-
-exports.default = HeaderModel;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/regenerator");
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-module.exports = require("express");
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = require("fs");
-
-/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(9);
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -310,29 +314,29 @@ var _classCallCheck2 = __webpack_require__(0);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _express = __webpack_require__(6);
+var _express = __webpack_require__(3);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _fs = __webpack_require__(7);
+var _fs = __webpack_require__(4);
 
-var _bodyParser = __webpack_require__(20);
+var _bodyParser = __webpack_require__(10);
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
-var _HeaderController = __webpack_require__(10);
+var _HeaderController = __webpack_require__(11);
 
 var _HeaderController2 = _interopRequireDefault(_HeaderController);
 
-var _AuthController = __webpack_require__(9);
+var _AuthController = __webpack_require__(12);
 
 var _AuthController2 = _interopRequireDefault(_AuthController);
 
-var _TODOController = __webpack_require__(11);
+var _TODOController = __webpack_require__(17);
 
 var _TODOController2 = _interopRequireDefault(_TODOController);
 
-var _commander = __webpack_require__(21);
+var _commander = __webpack_require__(22);
 
 var _commander2 = _interopRequireDefault(_commander);
 
@@ -340,27 +344,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //Import Controllers
 var API = function API() {
-    var port = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 9001;
-    (0, _classCallCheck3.default)(this, API);
+        var port = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 9001;
+        (0, _classCallCheck3.default)(this, API);
 
-    var server = (0, _express2.default)();
+        var server = (0, _express2.default)();
 
-    //Configurations
-    server.use(_bodyParser2.default.json());
+        //Configurations
+        server.use(_bodyParser2.default.json());
 
-    //RESOURCES
-    server.set('views', __dirname + '/public');
-    server.engine('html', __webpack_require__(22).renderFile);
-    server.set('view engine', 'html');
-    server.use(_express2.default.static(__dirname + '/public'));
+        //RESOURCES
+        server.set('views', __dirname + '/public');
+        server.engine('html', __webpack_require__(23).renderFile);
+        server.set('view engine', 'html');
+        server.use(_express2.default.static(__dirname + '/public'));
 
-    //Middleware for modules instances
-    var headerController = new _HeaderController2.default(server);
-    var authController = new _AuthController2.default(server);
-    var todoController = new _TODOController2.default(server);
+        //Middleware for modules instances
+        var headerController = new _HeaderController2.default(server);
+        var authController = new _AuthController2.default(server);
+        var todoController = new _TODOController2.default(server);
 
-    server.listen(port);
-    console.log("Server Running on", port);
+        server.listen(port);
+        console.log("Server Running on", port);
 };
 
 //API Options
@@ -371,65 +375,13 @@ _commander2.default.version('0.1.0').option('-p, --port [port]', 'Server port (d
 var APIInstance = new API(_commander2.default.port);
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 10 */
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _AuthModel = __webpack_require__(12);
-
-var _AuthModel2 = _interopRequireDefault(_AuthModel);
-
-var _Request = __webpack_require__(2);
-
-var _Request2 = _interopRequireDefault(_Request);
-
-var _Saga = __webpack_require__(3);
-
-var _Saga2 = _interopRequireDefault(_Saga);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//Helpers
-var AuthController = function () {
-    function AuthController(server) {
-        (0, _classCallCheck3.default)(this, AuthController);
-
-
-        //Set ContentType and Allowed Headers
-        server.all('*', _AuthModel2.default.header_token_present);
-        server.all('*', this.header_token_valid);
-    }
-
-    (0, _createClass3.default)(AuthController, [{
-        key: 'header_token_valid',
-        value: function header_token_valid(request, response, next) {
-            _Saga2.default.saga_builder(_AuthModel2.default.header_token_valid, request).then(next).catch(function (error) {
-                return _Request2.default.error('No access allowed.', [error.stack], {}, response);
-            });
-        }
-    }]);
-    return AuthController;
-}(); //Models
-
-
-exports.default = AuthController;
+module.exports = require("body-parser");
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -443,7 +395,7 @@ var _classCallCheck2 = __webpack_require__(0);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _HeaderModel = __webpack_require__(4);
+var _HeaderModel = __webpack_require__(5);
 
 var _HeaderModel2 = _interopRequireDefault(_HeaderModel);
 
@@ -459,7 +411,154 @@ var HeaderController = function HeaderController(server) {
 exports.default = HeaderController;
 
 /***/ }),
-/* 11 */
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _AuthModel = __webpack_require__(13);
+
+var _AuthModel2 = _interopRequireDefault(_AuthModel);
+
+var _Request = __webpack_require__(2);
+
+var _Request2 = _interopRequireDefault(_Request);
+
+var _Saga = __webpack_require__(7);
+
+var _Saga2 = _interopRequireDefault(_Saga);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//Helpers
+var AuthController = function () {
+  function AuthController(server) {
+    (0, _classCallCheck3.default)(this, AuthController);
+
+
+    //Set ContentType and Allowed Headers
+    server.all('*', _AuthModel2.default.header_token_present);
+    server.all('*', this.header_token_valid);
+  }
+
+  (0, _createClass3.default)(AuthController, [{
+    key: 'header_token_valid',
+    value: function header_token_valid(request, response, next) {
+      _Saga2.default.saga_builder(_AuthModel2.default.header_token_valid, request).then(next).catch(function (error) {
+        return _Request2.default.error('No access allowed.', [error.stack], {}, response);
+      });
+    }
+  }]);
+  return AuthController;
+}(); //Models
+
+
+exports.default = AuthController;
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _regenerator = __webpack_require__(6);
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _Request = __webpack_require__(2);
+
+var _Request2 = _interopRequireDefault(_Request);
+
+var _HeaderModel = __webpack_require__(5);
+
+var _HeaderModel2 = _interopRequireDefault(_HeaderModel);
+
+var _axios = __webpack_require__(15);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var AuthModel = function () {
+    function AuthModel() {
+        (0, _classCallCheck3.default)(this, AuthModel);
+    }
+
+    (0, _createClass3.default)(AuthModel, null, [{
+        key: 'header_token_present',
+        value: function header_token_present(request, response, next) {
+            //TODO Check If auth token present
+            next();
+        }
+    }, {
+        key: 'header_token_valid',
+        value: /*#__PURE__*/_regenerator2.default.mark(function header_token_valid(request) {
+            return _regenerator2.default.wrap(function header_token_valid$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, header_token_valid, this);
+        })
+    }]);
+    return AuthModel;
+}();
+
+//Helpers
+//Model
+
+
+exports.default = AuthModel;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/core-js/json/stringify");
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/core-js/promise");
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -477,15 +576,15 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _express = __webpack_require__(6);
+var _express = __webpack_require__(3);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _TODOModel = __webpack_require__(13);
+var _TODOModel = __webpack_require__(18);
 
 var _TODOModel2 = _interopRequireDefault(_TODOModel);
 
-var _Saga = __webpack_require__(3);
+var _Saga = __webpack_require__(7);
 
 var _Saga2 = _interopRequireDefault(_Saga);
 
@@ -571,78 +670,7 @@ var FolderController = function () {
 exports.default = FolderController;
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-       value: true
-});
-
-var _regenerator = __webpack_require__(5);
-
-var _regenerator2 = _interopRequireDefault(_regenerator);
-
-var _classCallCheck2 = __webpack_require__(0);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(1);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _Request = __webpack_require__(2);
-
-var _Request2 = _interopRequireDefault(_Request);
-
-var _HeaderModel = __webpack_require__(4);
-
-var _HeaderModel2 = _interopRequireDefault(_HeaderModel);
-
-var _axios = __webpack_require__(14);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var AuthModel = function () {
-       function AuthModel() {
-              (0, _classCallCheck3.default)(this, AuthModel);
-       }
-
-       (0, _createClass3.default)(AuthModel, null, [{
-              key: 'header_token_present',
-              value: function header_token_present(request, response, next) {
-                     //TODO Check If auth token present
-                     next();
-              }
-       }, {
-              key: 'header_token_valid',
-              value: /*#__PURE__*/_regenerator2.default.mark(function header_token_valid(request) {
-                     return _regenerator2.default.wrap(function header_token_valid$(_context) {
-                            while (1) {
-                                   switch (_context.prev = _context.next) {
-                                          case 0:
-                                          case 'end':
-                                                 return _context.stop();
-                                   }
-                            }
-                     }, header_token_valid, this);
-              })
-       }]);
-       return AuthModel;
-}();
-
-//Helpers
-//Model
-
-
-exports.default = AuthModel;
-
-/***/ }),
-/* 13 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -652,15 +680,15 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _keys = __webpack_require__(17);
+var _keys = __webpack_require__(19);
 
 var _keys2 = _interopRequireDefault(_keys);
 
-var _defineProperty2 = __webpack_require__(19);
+var _defineProperty2 = __webpack_require__(20);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _regenerator = __webpack_require__(5);
+var _regenerator = __webpack_require__(6);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
@@ -672,11 +700,11 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _assign = __webpack_require__(16);
+var _assign = __webpack_require__(21);
 
 var _assign2 = _interopRequireDefault(_assign);
 
-var _fs = __webpack_require__(7);
+var _fs = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -811,65 +839,34 @@ var TODOModel = function () {
 exports.default = TODOModel;
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-module.exports = require("axios");
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/core-js/json/stringify");
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/core-js/object/assign");
-
-/***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/core-js/object/keys");
 
 /***/ }),
-/* 18 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/core-js/promise");
-
-/***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/helpers/defineProperty");
 
 /***/ }),
-/* 20 */
-/***/ (function(module, exports) {
-
-module.exports = require("body-parser");
-
-/***/ }),
 /* 21 */
 /***/ (function(module, exports) {
 
-module.exports = require("commander");
+module.exports = require("babel-runtime/core-js/object/assign");
 
 /***/ }),
 /* 22 */
 /***/ (function(module, exports) {
 
-module.exports = require("ejs");
+module.exports = require("commander");
 
 /***/ }),
 /* 23 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__(8);
-
+module.exports = require("ejs");
 
 /***/ })
 /******/ ]);
