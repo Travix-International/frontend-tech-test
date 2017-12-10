@@ -86,7 +86,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _stringify = __webpack_require__(14);
+var _stringify = __webpack_require__(15);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -238,7 +238,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _promise = __webpack_require__(16);
+var _promise = __webpack_require__(17);
 
 var _promise2 = _interopRequireDefault(_promise);
 
@@ -329,25 +329,30 @@ var _bodyParser = __webpack_require__(10);
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
-var _HeaderController = __webpack_require__(11);
+var _ws = __webpack_require__(11);
+
+var _HeaderController = __webpack_require__(12);
 
 var _HeaderController2 = _interopRequireDefault(_HeaderController);
 
-var _AuthController = __webpack_require__(12);
+var _AuthController = __webpack_require__(13);
 
 var _AuthController2 = _interopRequireDefault(_AuthController);
 
-var _TODOController = __webpack_require__(17);
+var _TODOController = __webpack_require__(18);
 
 var _TODOController2 = _interopRequireDefault(_TODOController);
 
-var _commander = __webpack_require__(22);
+var _SocketController = __webpack_require__(23);
+
+var _SocketController2 = _interopRequireDefault(_SocketController);
+
+var _commander = __webpack_require__(25);
 
 var _commander2 = _interopRequireDefault(_commander);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//Import Controllers
 var API = function API() {
         var port = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 9001;
         (0, _classCallCheck3.default)(this, API);
@@ -363,17 +368,36 @@ var API = function API() {
          * server with the application
          */
         server.set('views', __dirname + '/public');
-        server.engine('html', __webpack_require__(23).renderFile);
+        server.engine('html', __webpack_require__(26).renderFile);
         server.set('view engine', 'html');
         server.use(_express2.default.static(__dirname + '/public'));
+
+        //List of subscribed clients
+        var clients = [];
 
         //Middleware for modules instances
         var headerController = new _HeaderController2.default(server);
         var authController = new _AuthController2.default(server);
-        var todoController = new _TODOController2.default(server);
+        var todoController = new _TODOController2.default(server, clients);
 
-        server.listen(port);
         console.log("Server Running on", port);
+        var serverInstance = server.listen(port);
+
+        //Websocket
+        var wsServer = new _ws.Server({
+                server: serverInstance
+        });
+
+        //New connection listener
+        wsServer.on('connection', function (connection) {
+                var socketClient = new _SocketController2.default(connection);
+                socketClient.router.on('/close', function () {
+                        var socketIndex = clients.indexOf(socketClient);
+                        socketClient = socketClient.slice(socketClient, 1);
+                });
+
+                clients.push(socketClient);
+        });
 };
 
 /* 
@@ -382,6 +406,10 @@ var API = function API() {
 
 
 //API Options
+
+
+//Import Controllers
+//Third Party
 
 
 _commander2.default.version('0.1.0').option('-p, --port [port]', 'Server port (default 9001)').parse(process.argv);
@@ -399,6 +427,12 @@ module.exports = require("body-parser");
 
 /***/ }),
 /* 11 */
+/***/ (function(module, exports) {
+
+module.exports = require("ws");
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -429,7 +463,7 @@ var HeaderController = function HeaderController(server) {
 exports.default = HeaderController;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -447,7 +481,7 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _AuthModel = __webpack_require__(13);
+var _AuthModel = __webpack_require__(14);
 
 var _AuthModel2 = _interopRequireDefault(_AuthModel);
 
@@ -492,7 +526,7 @@ var AuthController = function () {
 exports.default = AuthController;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -522,7 +556,7 @@ var _HeaderModel = __webpack_require__(5);
 
 var _HeaderModel2 = _interopRequireDefault(_HeaderModel);
 
-var _axios = __webpack_require__(15);
+var _axios = __webpack_require__(16);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -569,25 +603,25 @@ var AuthModel = function () {
 exports.default = AuthModel;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/core-js/json/stringify");
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/core-js/promise");
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -609,7 +643,7 @@ var _express = __webpack_require__(3);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _TODOModel = __webpack_require__(18);
+var _TODOModel = __webpack_require__(19);
 
 var _TODOModel2 = _interopRequireDefault(_TODOModel);
 
@@ -626,22 +660,42 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //Helper
 //Third Party
 var FolderController = function () {
-    function FolderController(server) {
+    function FolderController(server, clients) {
+        var _this = this;
+
         (0, _classCallCheck3.default)(this, FolderController);
 
 
+        //Cretes middleware to allow controllers to
+        //apply actions to all the subscribed clients
+        this.notifyClients = function (notifier) {
+            for (var i = 0; i < clients.length; i++) {
+                notifier(clients[i]);
+            }
+        };
+
         //GET
-        server.get('/task', this.get_tasks);
-        server.get('/task/:id', this.get_task_by_id);
+        server.get('/task', function (request, response) {
+            return _this.get_tasks(request, response);
+        });
+        server.get('/task/:id', function (request, response) {
+            return _this.get_task_by_id(request, response);
+        });
 
         //PUT
-        server.put('/task/:id', this.update_task_by_id);
+        server.put('/task/:id', function (request, response) {
+            return _this.update_task_by_id(request, response);
+        });
 
         //POST
-        server.post('/task', this.create_task);
+        server.post('/task', function (request, response) {
+            return _this.create_task(request, response);
+        });
 
         //DELETE
-        server.delete('/task/:id', this.delete_task);
+        server.delete('/task/:id', function (request, response) {
+            return _this.delete_task(request, response);
+        });
     }
 
     /* 
@@ -680,8 +734,13 @@ var FolderController = function () {
     }, {
         key: 'update_task_by_id',
         value: function update_task_by_id(request, response) {
+            var _this2 = this;
+
             _Saga2.default.saga_builder(_TODOModel2.default.update_task_by_id, request).then(function (todo) {
-                return _Request2.default.success('Success.', [], todo, response, 200);
+                _this2.notifyClients(function (client) {
+                    return client.notifyUpdated(todo);
+                });
+                _Request2.default.success('Success.', [], todo, response, 200);
             }).catch(function (error) {
                 return _Request2.default.error('An error has ocurred.', [error.stack], {}, response);
             });
@@ -694,8 +753,13 @@ var FolderController = function () {
     }, {
         key: 'create_task',
         value: function create_task(request, response) {
+            var _this3 = this;
+
             _Saga2.default.saga_builder(_TODOModel2.default.create_task, request).then(function (todo) {
-                return _Request2.default.success('Success.', [], todo, response, 200);
+                _this3.notifyClients(function (client) {
+                    return client.notifyCreated(todo);
+                });
+                _Request2.default.success('Success.', [], todo, response, 200);
             }).catch(function (error) {
                 return _Request2.default.error('An error has ocurred.', [error.stack], {}, response);
             });
@@ -724,7 +788,7 @@ var FolderController = function () {
 exports.default = FolderController;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -734,11 +798,11 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _keys = __webpack_require__(19);
+var _keys = __webpack_require__(20);
 
 var _keys2 = _interopRequireDefault(_keys);
 
-var _defineProperty2 = __webpack_require__(20);
+var _defineProperty2 = __webpack_require__(21);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -754,7 +818,7 @@ var _createClass2 = __webpack_require__(1);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _assign = __webpack_require__(21);
+var _assign = __webpack_require__(22);
 
 var _assign2 = _interopRequireDefault(_assign);
 
@@ -923,31 +987,91 @@ var TODOModel = function () {
 exports.default = TODOModel;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/core-js/object/keys");
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/helpers/defineProperty");
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/core-js/object/assign");
 
 /***/ }),
-/* 22 */
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _webSocketRouter = __webpack_require__(24);
+
+var _webSocketRouter2 = _interopRequireDefault(_webSocketRouter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SocketController = function () {
+	function SocketController(connection) {
+		(0, _classCallCheck3.default)(this, SocketController);
+
+		this.router = new _webSocketRouter2.default(connection, this);
+	}
+
+	(0, _createClass3.default)(SocketController, [{
+		key: 'notifyDeleted',
+		value: function notifyDeleted(TODO) {
+			new this.router.message().route('/task').data(TODO).action(this.router.action.DELETE).send();
+		}
+	}, {
+		key: 'notifyCreated',
+		value: function notifyCreated(TODO) {
+			new this.router.message().route('/task').data(TODO).action(this.router.action.CREATE).send();
+		}
+	}, {
+		key: 'notifyUpdated',
+		value: function notifyUpdated(TODO) {
+			new this.router.message().route('/task').data(TODO).action(this.router.action.UPDATE).send();
+		}
+	}]);
+	return SocketController;
+}(); // https://www.npmjs.com/package/web-socket-router
+
+
+exports.default = SocketController;
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+module.exports = require("web-socket-router");
+
+/***/ }),
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = require("commander");
 
 /***/ }),
-/* 23 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = require("ejs");

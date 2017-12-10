@@ -39,7 +39,8 @@
     "redux-saga": "^0.16.0",
     "regenerator-runtime": "^0.11.0",
     "rm": "^0.1.8",
-    "web-socket-router": "^1.3.5"
+    "web-socket-router": "^1.3.5",
+    "ws": "^3.3.2"
   },
   "devDependencies": {
     "babel": "^6.23.0",

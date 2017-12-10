@@ -1,6 +1,8 @@
+//Third Party
 import express from 'express'
 import { readdirSync } from 'fs'
 import bodyParser from 'body-parser'
+import { Server as WebSocketServer } from 'ws'
 
 //Import Controllers
 import HeaderController from './controller/HeaderController'
@@ -29,13 +31,32 @@ class API {
         server.set('view engine', 'html');
         server.use(express.static(__dirname + '/public'));
 
+        //List of subscribed clients
+        const clients = [];
+
         //Middleware for modules instances
         const headerController = new HeaderController(server);
         const authController = new AuthController(server);
-        const todoController = new TODOController(server);
+        const todoController = new TODOController(server, clients);
 
-        server.listen(port);
         console.log("Server Running on", port);
+        const serverInstance = server.listen(port);
+
+        //Websocket
+        const wsServer = new WebSocketServer({
+            server: serverInstance
+        });
+
+        //New connection listener
+        wsServer.on('connection', function (connection) {
+          let socketClient = new SocketController(connection);
+              socketClient.router.on('/close', function () {
+                let socketIndex = clients.indexOf(socketClient);
+                    socketClient = socketClient.slice(socketClient, 1);
+              });
+              
+          clients.push(socketClient);
+        });
     }
 }
 

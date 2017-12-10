@@ -341,13 +341,16 @@ var _TODOController = __webpack_require__(17);
 
 var _TODOController2 = _interopRequireDefault(_TODOController);
 
-var _commander = __webpack_require__(22);
+var _SocketController = __webpack_require__(22);
+
+var _SocketController2 = _interopRequireDefault(_SocketController);
+
+var _commander = __webpack_require__(24);
 
 var _commander2 = _interopRequireDefault(_commander);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//Import Controllers
 var API = function API() {
         var port = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 9001;
         (0, _classCallCheck3.default)(this, API);
@@ -363,14 +366,33 @@ var API = function API() {
          * server with the application
          */
         server.set('views', __dirname + '/public');
-        server.engine('html', __webpack_require__(23).renderFile);
+        server.engine('html', __webpack_require__(25).renderFile);
         server.set('view engine', 'html');
         server.use(_express2.default.static(__dirname + '/public'));
+
+        //List of subscribed clients
+        var clients = [];
+
+        //Websocket
+        wsServer = new WebSocketServer({
+                server: server
+        });
+
+        //New connection listener
+        wsServer.on('connection', function (connection) {
+                var socketClient = new _SocketController2.default(connection);
+                socketClient.router.on('/close', function () {
+                        var socketIndex = clients.indexOf(socketClient);
+                        socketClient = socketClient.slice(socketClient, 1);
+                });
+
+                clients.push(socketClient);
+        });
 
         //Middleware for modules instances
         var headerController = new _HeaderController2.default(server);
         var authController = new _AuthController2.default(server);
-        var todoController = new _TODOController2.default(server);
+        var todoController = new _TODOController2.default(server, clients);
 
         server.listen(port);
         console.log("Server Running on", port);
@@ -382,6 +404,9 @@ var API = function API() {
 
 
 //API Options
+
+
+//Import Controllers
 
 
 _commander2.default.version('0.1.0').option('-p, --port [port]', 'Server port (default 9001)').parse(process.argv);
@@ -626,9 +651,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //Helper
 //Third Party
 var FolderController = function () {
-    function FolderController(server) {
+    function FolderController(server, clients) {
         (0, _classCallCheck3.default)(this, FolderController);
 
+
+        //Cretes middleware to allow controllers to
+        //apply actions to all the subscribed clients
+        this.notifyClients = function (notifier) {
+            for (var i = 0; i < clients.length; i++) {
+                notifier(clients[i]);
+            }
+        };
 
         //GET
         server.get('/task', this.get_tasks);
@@ -680,8 +713,13 @@ var FolderController = function () {
     }, {
         key: 'update_task_by_id',
         value: function update_task_by_id(request, response) {
+            var _this = this;
+
             _Saga2.default.saga_builder(_TODOModel2.default.update_task_by_id, request).then(function (todo) {
-                return _Request2.default.success('Success.', [], todo, response, 200);
+                _this.notifyClients(function (client) {
+                    return client.notifyUpdated(todos);
+                });
+                _Request2.default.success('Success.', [], todo, response, 200);
             }).catch(function (error) {
                 return _Request2.default.error('An error has ocurred.', [error.stack], {}, response);
             });
@@ -694,8 +732,13 @@ var FolderController = function () {
     }, {
         key: 'create_task',
         value: function create_task(request, response) {
+            var _this2 = this;
+
             _Saga2.default.saga_builder(_TODOModel2.default.create_task, request).then(function (todo) {
-                return _Request2.default.success('Success.', [], todo, response, 200);
+                _this2.notifyClients(function (client) {
+                    return client.notifyCreated(todos);
+                });
+                _Request2.default.success('Success.', [], todo, response, 200);
             }).catch(function (error) {
                 return _Request2.default.error('An error has ocurred.', [error.stack], {}, response);
             });
@@ -942,12 +985,72 @@ module.exports = require("babel-runtime/core-js/object/assign");
 
 /***/ }),
 /* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _classCallCheck2 = __webpack_require__(0);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(1);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _webSocketRouter = __webpack_require__(23);
+
+var _webSocketRouter2 = _interopRequireDefault(_webSocketRouter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SocketController = function () {
+	function SocketController() {
+		(0, _classCallCheck3.default)(this, SocketController);
+
+		this.router = new _webSocketRouter2.default(connection, this);
+	}
+
+	(0, _createClass3.default)(SocketController, [{
+		key: 'notifyDeleted',
+		value: function notifyDeleted(TODO) {
+			new this.router.message().route('/task').data(TODO).action(webSocketRouterInstance.action.DELETE).send();
+		}
+	}, {
+		key: 'notifyCreated',
+		value: function notifyCreated(TODO) {
+			new this.router.message().route('/task').data(TODO).action(webSocketRouterInstance.action.CREATE).send();
+		}
+	}, {
+		key: 'notifyUpdated',
+		value: function notifyUpdated(TODO) {
+			new this.router.message().route('/task').data(TODO).action(webSocketRouterInstance.action.UPDATE).send();
+		}
+	}]);
+	return SocketController;
+}(); // https://www.npmjs.com/package/web-socket-router
+
+
+exports.default = SocketController;
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+module.exports = require("web-socket-router");
+
+/***/ }),
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = require("commander");
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = require("ejs");
