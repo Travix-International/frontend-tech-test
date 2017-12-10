@@ -1,0 +1,21 @@
+{
+  "verbose": true,
+  "collectCoverage": true,
+  "collectCoverageFrom" : [
+    "src/api/**/*.js",
+    "src/components/**/*.js",
+    "src/modules/**/*.js",
+    "!**/index.js"
+  ],
+  "coverageReporters": ["cobertura", "html", "text", "text-summary"],
+  "coverageThreshold": {
+    "global": {
+      "statements": 85,
+      "branches": 85,
+      "functions": 85,
+      "lines": 85
+    }
+  },
+  "setupTestFrameworkScriptFile": "./config/enzymeSetup.js",
+  "rootDir": "../"
+}
