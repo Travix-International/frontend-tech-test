@@ -1,6 +1,5 @@
 var webpack = require('webpack');
 var path = require('path');
-var localIp = require('my-local-ip')();
 
 module.exports = {
 
@@ -11,7 +10,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist/'),
         filename: 'travix-app.js',
-        publicPath: 'http://'+localIp+':8080/built/'
+        publicPath: 'http://192.168.2.14:8080/built/'
     },
 
     devServer: {
@@ -21,7 +20,7 @@ module.exports = {
       allowedHosts: [
         'local.travix.com',
         'localhost',
-        localIp
+        '192.168.2.14'
       ]
     },
 

@@ -47,6 +47,7 @@ class TODOAddComponent extends React.Component {
     render () {
         return (
             <Form inline onSubmit={event => this.submit(event)}>
+            
                 <FormGroup style={{width: '100%'}}>
                     <FormControl 
                         style={{width: '100%'}}
@@ -59,8 +60,16 @@ class TODOAddComponent extends React.Component {
 
                 { ' ' }
 
-                <FormGroup style={{width: '100%'}}>        
-                    <Button type="submit" bsStyle='success'>
+                <FormControl
+                    style={{width: '100%', margin: '10px 0'}}
+                    componentClass="textarea" 
+                    placeholder="Description" 
+                    value={this.state.description}  
+                    onChange={event => this.descriptionChange(event)}/>
+
+
+                <FormGroup style={{width: '100%'}}>
+                    <Button type="submit" bsStyle='success' className='pull-right'>
                         Create
                     </Button>
                 </FormGroup>

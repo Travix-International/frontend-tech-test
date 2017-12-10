@@ -48,21 +48,20 @@ class TODOListComponent extends React.Component {
         }
 
         return (
-            <ListGroup style={{height: '300px'}}>
-                <AutoSizer>
-                    {
-                        ({ height, width }) => (
-                            <List 
-                                className={Style.list}
-                                width={width}
-                                height={300}
-                                rowCount={items.length}
-                                rowHeight={45}
-                                rowRenderer={rowRender}/>        
-                        )
-                    }
+            <ListGroup>
+                <AutoSizer disableHeight style={{flex: '1 1 auto'}}>
+                    {({ width }) => (
+                        <List
+                            className={Style.list}
+                            rowCount={items.length}
+                            rowHeight={45}
+                            rowRenderer={rowRender}
+                            width={width}
+                            height={window.innerHeight - 300} 
+                            maxHeight={500}/>
+                    )}
                 </AutoSizer>
-            </ListGroup>    
+            </ListGroup>
         );
     }
 

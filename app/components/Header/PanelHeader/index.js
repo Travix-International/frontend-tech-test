@@ -52,20 +52,11 @@ class PanelHeaderComponent extends React.Component {
             <Navbar className={Style.navbar} collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="#">TODOs</a>
+                        <label>TODOs</label>
                     </Navbar.Brand>
-                    <Navbar.Form>
-                            <FormGroup>
-                                <InputGroup>
-                                    <FormControl onChange={event => this.props.search(event)} type="text" placeholder="Search" />
-                                    <InputGroup.Addon>
-                                        <Glyphicon glyph="search" />
-                                    </InputGroup.Addon>
-                                </InputGroup>
-                            </FormGroup>
-                        </Navbar.Form>
                     <Navbar.Toggle />
                 </Navbar.Header>
+                
                 <Navbar.Collapse>
                     <Nav>
                         <NavDropdown id={1} title={this.state.activeTag}>
@@ -77,6 +68,16 @@ class PanelHeaderComponent extends React.Component {
                             }
                         </NavDropdown>
                     </Nav>
+                        <Navbar.Form className="pull-right">
+                            <FormGroup>
+                                <InputGroup>
+                                    <FormControl onChange={event => this.props.search(event)} type="text" placeholder="Search" />
+                                    <InputGroup.Addon>
+                                        <Glyphicon glyph="search" />
+                                    </InputGroup.Addon>
+                                </InputGroup>
+                            </FormGroup>
+                        </Navbar.Form>
                 </Navbar.Collapse>
             </Navbar>
         );
