@@ -17,7 +17,7 @@ const SubmitInputComponent = (props) => {
         disabled={!canSubmit}
         name={name}
         type="submit"
-        value={isSubmitting ? 'Submitting...' : 'Submit'}
+        value={isSubmitting ? 'Creating...' : 'Create'}
       />
     </div>
   );
