@@ -1,7 +1,8 @@
 //Third Party
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
+import PropTypes from 'prop-types'
 
 // main app
 import AppContainer from './components/App';
@@ -16,15 +17,19 @@ class App extends React.Component {
 
     render () {
         return (
-            <Provider store={store}>
-                <AppContainer/>
-            </Provider>
+          <Provider store={this.props.store}>
+            <AppContainer/>
+          </Provider>
         );
     }
 
 }
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+App.propTypes = {
+    store: PropTypes.object
+}
+
+ReactDOM.render(<App store={store}/>, document.getElementById('app'));
 
 const steps = [
   {

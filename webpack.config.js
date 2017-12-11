@@ -10,7 +10,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist/'),
         filename: 'travix-app.js',
-        publicPath: 'http://10.0.0.187:8080/built/'
+        publicPath: 'http://{your_id_address}:8080/built/'
     },
 
     devServer: {
@@ -20,7 +20,7 @@ module.exports = {
       allowedHosts: [
         'local.travix.com',
         'localhost',
-        '10.0.0.187'
+        '{your_id_address}'
       ]
     },
 
@@ -29,17 +29,24 @@ module.exports = {
 		    {
 			    test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
-				loader: 'babel-loader',
-                options: {
-                    presets: [
-                        'es2015',
-                        'stage-0',
-                        "travix"
-                    ],
-                    plugins: [
-                        'transform-runtime',
-                    ]
-                }
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                'es2015',
+                                'stage-0',
+                                "travix"
+                            ],
+                            plugins: [
+                                'transform-runtime',
+                            ]
+                        }
+                    }, {
+                        loader: 'eslint-loader',
+                    }
+                ]
+				
 			},
             {
                 test: /\.css$/,

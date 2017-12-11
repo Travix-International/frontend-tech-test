@@ -1,6 +1,7 @@
 //Third Party
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 //Component
 import PanelHeaderComponent from '../../components/Header/PanelHeader'
@@ -12,11 +13,16 @@ import { TODOFilter } from '../../redux/actions/TODOFilter'
 class PanelHeaderContainer extends React.Component {
 
     render () {
-        return <PanelHeaderComponent
-                    search={this.props.search}
-                    filter={this.props.filter}/>
+        return (
+          <PanelHeaderComponent filter={this.props.filter} search={this.props.search}/>
+        );
     }
 
+}
+
+PanelHeaderContainer.propTypes = {
+    search: PropTypes.string,
+    filter: PropTypes.array
 }
 
 const mapStateToProps = (state, props) => {
@@ -26,11 +32,11 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
 
-        search: event => {
+        search: (event) => {
             dispatch(TODOSearch(event.target.value));
         },
 
-        filter: tag => {
+        filter: (tag) => {
             dispatch(TODOFilter(tag));
         }
 

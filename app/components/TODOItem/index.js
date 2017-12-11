@@ -9,6 +9,7 @@ import {
     ListGroupItem,
     InputGroup
 } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 
 class TODOItemComponent extends React.Component {
 
@@ -20,22 +21,29 @@ class TODOItemComponent extends React.Component {
 
     render () {
         return (
-            <ListGroupItem bsStyle={this.props.TODO.completed ? 'success' : 'info'}>
-                <Row>
-                    <Col xs={2}>
-                        <input 
-                            type="checkbox" 
-                            checked={this.props.TODO.completed}
-                            onChange={event => this.props.onChecked(event)}/>
-                    </Col>
-                    <Col xs={10} onClick={event => this.props.onClick(event)}>
-                        {this.props.TODO.title}
-                    </Col>
-                </Row>
-            </ListGroupItem>
+          <ListGroupItem bsStyle={this.props.TODO.completed ? 'success' : 'info'}>
+            <Row>
+              <Col xs={2}>
+                <input 
+                  checked={this.props.TODO.completed}
+                  onChange={event => this.props.onChecked(event)}
+                  type="checkbox" 
+                />
+              </Col>
+              <Col onClick={event => this.props.onClick(event)} xs={10}>
+                {this.props.TODO.title}
+              </Col>
+            </Row>
+          </ListGroupItem>
         );
     }
 
+}
+
+TODOItemComponent.propTypes = {
+    TODO: PropTypes.object,
+    onChecked: PropTypes.func,
+    onClick: PropTypes.func
 }
 
 export default TODOItemComponent

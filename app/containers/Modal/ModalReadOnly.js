@@ -1,6 +1,7 @@
 //Third Party
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 //Components
 import ModalReadOnly from '../../components/Modal/ModalReadOnly'
@@ -13,14 +14,22 @@ class ModalReadOnlyContainer extends React.Component {
 
     render () {
         return (
-            <ModalReadOnly 
-                TODO={this.props.TODO} 
-                open={this.props.open}
-                close={this.props.closeModal}
-                update={() => this.props.updateModal(this.props.TODO)}/>
+          <ModalReadOnly 
+            TODO={this.props.TODO} 
+            close={this.props.closeModal}
+            open={this.props.open}
+            update={() => this.props.updateModal(this.props.TODO)}
+          />
         );
     }
 
+}
+
+ModalReadOnlyContainer.propTypes = {
+    open: PropTypes.bool,
+    TODO: PropTypes.object,
+    closeModal: PropTypes.func,
+    updateModal: PropTypes.func
 }
 
 const mapStateToProps = (state, props) => {
@@ -33,11 +42,11 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
 
-        closeModal: TODO => {
+        closeModal: (TODO) => {
             dispatch(ModalClose())
         },
 
-        updateModal: TODO => {
+        updateModal: (TODO) => {
             dispatch(ModalUpdate(TODO))
         }
 

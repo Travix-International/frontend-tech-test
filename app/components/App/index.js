@@ -19,24 +19,39 @@ import Style from './Style.less'
 
 class AppComponent extends React.Component {
 
-    render () {
-        return (
-        	<div className={Style.app}>
+		constructor (props) {
+			super(props);
 
-        		<PanelHeaderContainer className={Style.navbar}/>
+			//To be accessed locally
+			this.Style = Style;
+		}
 
-        		<Col className={Style.body} xs={12} sm={12} md={6} mdOffset={3} lg={4} lgOffset={4}>
+		render () {
+	      return (
+					<div className={this.Style.app}>
 
-		            <Panel>
-				     	<TODOListContainer/>
-		                <TODOAddContainer/>
-				    </Panel>
+						<PanelHeaderContainer className={Style.navbar}/>
 
-				    <ModalContainer/>
+						<Col 
+							className={this.Style.body} 
+							lg={4} 
+							lgOffset={4}
+							md={6} 
+							mdOffset={3} 
+							sm={12} 
+							xs={12} 
+						>
 
-	            </Col>
-        	</div>
-        );
+							<Panel>
+								<TODOListContainer/>
+								<TODOAddContainer/>
+							</Panel>
+
+							<ModalContainer/>
+
+						</Col>
+					</div>
+	      );
     }
 
 }

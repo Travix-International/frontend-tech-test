@@ -1,6 +1,7 @@
 //Third Party
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 //Components
 import TODOItemComponent from '../components/TODOItem'
@@ -26,13 +27,20 @@ class TODOItemContainer extends React.Component {
 
     render () {
         return (
-            <TODOItemComponent
-                TODO={this.props.TODO} 
-                onChecked={event => this.onChecked(event)}
-                onClick={event => this.onClick(event)}/>  
-            );
+          <TODOItemComponent 
+            TODO={this.props.TODO} 
+            onChecked={event => this.onChecked(event)} 
+            onClick={event => this.onClick(event)}
+          />  
+        );
     }
 
+}
+
+TODOItemContainer.propTypes = {
+    onChecked: PropTypes.func,
+    openDetail: PropTypes.func,
+    TODO: PropTypes.object
 }
 
 const mapStateToProps = (state, props) => {
@@ -44,11 +52,11 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
 
-        onChecked: TODO => {
+        onChecked: (TODO) => {
             dispatch(TODODone(TODO))
         },
 
-        openDetail: TODO => {
+        openDetail: (TODO) => {
             dispatch(ModalReadOnly(TODO))
         }
 

@@ -1,6 +1,7 @@
 //Third Party
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 //Components
 import TODOListComponent from '../components/TODOList'
@@ -15,12 +16,18 @@ class TODOListContainer extends React.Component {
     }
 
     render () {
-        return <TODOListComponent 
-                    TODOS={this.props.TODOS} 
-                    search={this.props.search}
-                    tag={this.props.tag}/>;
+        return (
+          <TODOListComponent TODOS={this.props.TODOS} search={this.props.search} tag={this.props.tag}/>
+        );
     }
 
+}
+
+TODOListContainer.propTypes = {
+    fetchTODOS: PropTypes.func,
+    TODOS: PropTypes.object,
+    search: PropTypes.string,
+    tag: PropTypes.array
 }
 
 const mapStateToProps = (state, props) => {

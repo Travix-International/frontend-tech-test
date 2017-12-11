@@ -9,6 +9,7 @@ import {
     ListGroupItem,
     InputGroup
 } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 
 //Container
 import TODOItemContainer from '../../containers/TODOItem'
@@ -44,30 +45,36 @@ class TODOListComponent extends React.Component {
          */
         const rowRender = ({key, index, isScrolling, isVisible, style}) => {
             return (
-                    <div key={key} style={style}>
-                    <TODOItemContainer TODO={this.props.TODOS[items[index]]} />
-                </div>
+              <div key={key} style={style}>
+                <TODOItemContainer TODO={this.props.TODOS[items[index]]} />
+              </div>
             );
         }
 
         return (
-            <ListGroup>
-                <AutoSizer disableHeight style={{flex: '1 1 auto'}}>
-                    {({ width }) => (
-                        <List
-                            className={Style.list}
-                            rowCount={items.length}
-                            rowHeight={45}
-                            rowRenderer={rowRender}
-                            width={width}
-                            height={window.innerHeight - 300} 
-                            maxHeight={500}/>
-                    )}
-                </AutoSizer>
-            </ListGroup>
+          <ListGroup>
+            <AutoSizer disableHeight style={{flex: '1 1 auto'}}>
+              {({ width }) => (
+                <List
+                  className={Style.list}
+                  height={window.innerHeight - 300} 
+                  maxHeight={500}
+                  rowCount={items.length}
+                  rowHeight={45}
+                  rowRenderer={rowRender}
+                  width={width}
+                />
+              )}
+            </AutoSizer>
+          </ListGroup>
         );
     }
+}
 
+TODOListComponent.propTypes = {
+    TODOS: PropTypes.object,
+    search: PropTypes.string,
+    tag: PropTypes.array
 }
 
 export default TODOListComponent

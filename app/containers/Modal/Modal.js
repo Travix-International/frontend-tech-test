@@ -1,6 +1,7 @@
 //Third Party
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 //Components
 import ModalReadOnlyContainer from './ModalReadOnly'
@@ -21,6 +22,10 @@ class ModalContainer extends React.Component {
         return MODAL || null;
     }
 
+}
+
+ModalContainer.propTypes = {
+    type: PropTypes.string
 }
 
 const mapStateToProps = (state, props) => {

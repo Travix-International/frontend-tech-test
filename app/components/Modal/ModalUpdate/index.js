@@ -10,6 +10,7 @@ import {
     ControlLabel, 
     Label
 } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 
 //Modal
 class ModalUpdateComponent extends React.Component {
@@ -17,10 +18,9 @@ class ModalUpdateComponent extends React.Component {
 	constructor (props) {
 		super(props);
 
-		this.state = {
-            ...{tags: []},
-            ...this.props.TODO
-        };
+		this.state = Object.assign({}, this.props.TODO, {
+            tags: []
+        });
 
         this.tags = [
             'Home', 'Work', 'Fun', 'Friends', 'Health', 'Vacations', '2017', '2018', 'Others', 'Important'
@@ -86,71 +86,91 @@ class ModalUpdateComponent extends React.Component {
 
     render () {
         return (
-            <Modal show={this.props.open}>
-                <Modal.Header>
-                    <Modal.Title>{`Updating TODO "${this.props.TODO.title}"`}</Modal.Title>
-                </Modal.Header>
+          <Modal show={this.props.open}>
+            <Modal.Header>
+              <Modal.Title>{`Updating TODO "${this.props.TODO.title}"`}</Modal.Title>
+            </Modal.Header>
 
-                <Modal.Body>
-                    <FormGroup>
-                        <ControlLabel>Title</ControlLabel>
-                        <FormControl
-                            type="text" 
-                            placeholder="Title" 
-                            value={this.state.title} onChange={event => this.titleChange(event)}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <ControlLabel>Description</ControlLabel>
-                    	<FormControl 
-                            type="text" 
-                            placeholder="Description" 
-                            value={this.state.description} onChange={event => this.descriptionChange(event)}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <ControlLabel>Tags</ControlLabel>
-                        <Row>
-                            <Col xs={12}>
-                                {
-                                    this.state.tags.map(
-                                        tag => <span>
-                                                    <Label
-                                                        key={tag}
-                                                        bsStyle="success"
-                                                        onClick={event => this.removeTag(event)}
-                                                        tag={tag}>
-                                                            {tag}
-                                                    </Label>
-                                                    { ' ' }
-                                                </span>
-                                    )
-                                }
-                                {
-                                    this.tags.map(
-                                        tag => <span>
-                                                    <Label
-                                                        key={tag}
-                                                        bsStyle="info"
-                                                        onClick={event => this.addTag(event)}
-                                                        tag={tag}>
-                                                            {tag}
-                                                    </Label>
-                                                    { ' ' }
-                                                </span>
-                                    )
-                                }
-                            </Col>
-                        </Row>
-                    </FormGroup>
-                </Modal.Body>
+            <Modal.Body>
 
-                <Modal.Footer>
-                	<Button onClick={() => this.save()}>Save</Button>
-                	<Button onClick={event => this.props.close(event)}>Cancel</Button>
-                </Modal.Footer>
-            </Modal>
+              <FormGroup>
+                <ControlLabel>Title</ControlLabel>
+                <FormControl
+                  onChange={event => this.titleChange(event)}
+                  placeholder="Title" 
+                  type="text" 
+                  value={this.state.title} 
+                />  
+              </FormGroup>
+
+              <FormGroup>
+                <ControlLabel>Description</ControlLabel>
+                <FormControl 
+                  onChange={event => this.descriptionChange(event)}
+                  placeholder="Description" 
+                  type="text" 
+                  value={this.state.description}
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <ControlLabel>Tags</ControlLabel>
+                <Row>
+                  <Col xs={12}>
+                    {
+                      this.state.tags.map(
+                        tag => (
+                          <span>
+                            <Label
+                              bsStyle="success"
+                              key={tag}
+                              onClick={event => this.removeTag(event)}
+                              tag={tag}
+                            >
+                              {tag}
+                            </Label>
+                            { ' ' }
+                          </span>
+                        )
+                      )
+                    }
+                    {
+                      this.tags.map(
+                        tag => (
+                          <span>
+                            <Label
+                              bsStyle="info"
+                              key={tag}
+                              onClick={event => this.addTag(event)}
+                              tag={tag}
+                            >
+                              {tag} 
+                            </Label>
+                            { ' ' }
+                          </span>
+                        )
+                      )
+                    }
+                  </Col>
+                </Row>
+              </FormGroup>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button onClick={() => this.save()}>Save</Button>
+              <Button onClick={event => this.props.close(event)}>Cancel</Button>
+            </Modal.Footer>
+          </Modal>
         );
     }
 
+}
+
+ModalUpdateComponent.propTypes = {
+    TODO: PropTypes.object,
+    saveModal: PropTypes.func,
+    close: PropTypes.func,
+    open: PropTypes.func
 }
 
 export default ModalUpdateComponent

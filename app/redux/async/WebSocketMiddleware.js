@@ -14,7 +14,7 @@ class WebSocketMiddleware {
 		this.store = store;
 
 		const host = location.host;
-		const webSocketRouterInstance = new WebSocketRouter(new WebSocket(`ws:\/\/${host}`));
+		const webSocketRouterInstance = new WebSocketRouter(new WebSocket(`ws://${host}`));
 
 		//On Taks created
 		webSocketRouterInstance

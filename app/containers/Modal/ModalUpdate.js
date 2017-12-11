@@ -1,6 +1,7 @@
 //Third Party
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 //Components
 import ModalUpdate from '../../components/Modal/ModalUpdate'
@@ -13,14 +14,22 @@ class ModalUpdateContainer extends React.Component {
 
     render () {
         return (
-            <ModalUpdate 
-                TODO={this.props.TODO} 
-                open={this.props.open}
-                close={this.props.closeModal}
-                saveModal={this.props.saveModal}/>
+          <ModalUpdate 
+            TODO={this.props.TODO} 
+            close={this.props.closeModal}
+            open={this.props.open}
+            saveModal={this.props.saveModal}
+          />
         );
     }
 
+}
+
+ModalUpdateContainer.propTypes = {
+    open: PropTypes.bool,
+    TODO: PropTypes.object,
+    closeModal: PropTypes.func,
+    saveModal: PropTypes.func
 }
 
 const mapStateToProps = (state, props) => {
@@ -33,11 +42,11 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
 
-        closeModal: TODO => {
+        closeModal: (TODO) => {
             dispatch(ModalClose())
         },
 
-        saveModal: TODO => {
+        saveModal: (TODO) => {
             dispatch(TODOUpdate(TODO))
         },        
 

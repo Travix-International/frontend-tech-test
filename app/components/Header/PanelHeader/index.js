@@ -11,6 +11,7 @@ import {
     InputGroup,
     Glyphicon
 } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 
 //Style less
 import Style from './Style.less';
@@ -60,40 +61,53 @@ class PanelHeaderComponent extends React.Component {
         ];
 
         return (
-            <Navbar className={Style.navbar} collapseOnSelect>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <label>TODOs</label>
-                    </Navbar.Brand>
-                    <Navbar.Toggle />
-                </Navbar.Header>
-                
-                <Navbar.Collapse>
-                    <Nav>
-                        <NavDropdown id={1} title={this.state.activeTag}>
-                            <MenuItem onClick={() => this.setTagToAll()}>All</MenuItem>
-                            {
-                                tags.map (
-                                   tag => <MenuItem key={tag} tag={tag} onClick={event => this.onTagSelected(event)}>{tag}</MenuItem>
-                                )
-                            }
-                        </NavDropdown>
-                    </Nav>
-                        <Navbar.Form className="pull-right">
-                            <FormGroup>
-                                <InputGroup>
-                                    <FormControl onChange={event => this.props.search(event)} type="text" placeholder="Search" />
-                                    <InputGroup.Addon>
-                                        <Glyphicon glyph="search" />
-                                    </InputGroup.Addon>
-                                </InputGroup>
-                            </FormGroup>
-                        </Navbar.Form>
-                </Navbar.Collapse>
-            </Navbar>
+          <Navbar className={Style.navbar} collapseOnSelect>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <label>TODOs</label>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+            </Navbar.Header>
+
+            <Navbar.Collapse>
+              <Nav>
+                <NavDropdown id={1} title={this.state.activeTag}>
+                  <MenuItem onClick={() => this.setTagToAll()}>All</MenuItem>
+                  {
+                    tags.map (
+                      tag => (
+                        <MenuItem 
+                          key={tag} 
+                          onClick={event => this.onTagSelected(event)}
+                          tag={tag} 
+                        >
+                          {tag}
+                        </MenuItem>
+                      )
+                    )
+                  }
+                </NavDropdown>
+              </Nav>
+              <Navbar.Form className="pull-right">
+                <FormGroup>
+                  <InputGroup>
+                    <FormControl onChange={event => this.props.search(event)} placeholder="Search" type="text"/>
+                    <InputGroup.Addon>
+                      <Glyphicon glyph="search" />
+                    </InputGroup.Addon>
+                  </InputGroup>
+                </FormGroup>
+              </Navbar.Form>
+            </Navbar.Collapse>
+          </Navbar>
         );
     }
 
+}
+
+PanelHeaderComponent.propTypes = {
+    search: PropTypes.string,
+    filter: PropTypes.array
 }
 
 export default PanelHeaderComponent

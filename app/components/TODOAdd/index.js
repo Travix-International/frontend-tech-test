@@ -9,6 +9,7 @@ import {
     Row,
     Col
 } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 
 class TODOAddComponent extends React.Component {
 
@@ -51,38 +52,44 @@ class TODOAddComponent extends React.Component {
 
     render () {
         return (
-            <Form inline onSubmit={event => this.submit(event)}>
-            
-                <FormGroup style={{width: '100%'}}>
-                    <FormControl 
-                        style={{width: '100%'}}
-                        type="text" 
-                        placeholder="Title" 
-                        value={this.state.title} 
-                        onChange={event => this.titleChange(event)} />
-                        {this.state.error}
-                </FormGroup>
+          <Form inline onSubmit={event => this.submit(event)}>
 
-                { ' ' }
+            <FormGroup style={{width: '100%'}}>
+              <FormControl 
+                onChange={event => this.titleChange(event)} 
+                placeholder="Title" 
+                style={{width: '100%'}}
+                type="text" 
+                value={this.state.title} 
+              />
+              {this.state.error}
+            </FormGroup>
 
-                <FormControl
-                    style={{width: '100%', margin: '10px 0'}}
-                    componentClass="textarea" 
-                    placeholder="Description" 
-                    value={this.state.description}  
-                    onChange={event => this.descriptionChange(event)}/>
+            { ' ' }
+
+            <FormControl
+              componentClass="textarea" 
+              onChange={event => this.descriptionChange(event)}
+              placeholder="Description" 
+              style={{width: '100%', margin: '10px 0'}}
+              value={this.state.description}  
+            />
 
 
-                <FormGroup style={{width: '100%'}}>
-                    <Button type="submit" bsStyle='success' className='pull-right'>
-                        Create
-                    </Button>
-                </FormGroup>
+            <FormGroup style={{width: "100%"}}>
+              <Button bsStyle="success" className="pull-right" type="submit">
+                Create
+              </Button>
+            </FormGroup>
 
-            </Form>
+          </Form>
         );
     }
 
+}
+
+TODOAddComponent.propTypes = {
+    submit: PropTypes.func
 }
 
 export default TODOAddComponent
