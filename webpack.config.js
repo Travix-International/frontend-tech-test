@@ -10,7 +10,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist/'),
         filename: 'travix-app.js',
-        publicPath: 'http://{your_id_address}:8080/built/'
+        publicPath: 'http://localhost:8080/built/'
     },
 
     devServer: {

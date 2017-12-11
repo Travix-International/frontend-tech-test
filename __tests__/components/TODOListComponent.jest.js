@@ -5,7 +5,11 @@ import renderer from 'react-test-renderer';
 //Component
 import TODOItemComponent from '../../app/components/TODOItem'
 
-test('TODOItemComponent marked as completed', () => {
+/*
+ * 2 Simple Snapshot test
+ */
+
+test('Simple Snapshot test 1 - TODOItemComponent marked as completed', () => {
     const TODO = {
         copleted: true,
         description: '',
@@ -20,7 +24,7 @@ test('TODOItemComponent marked as completed', () => {
     expect(tree).toMatchSnapshot();
 });
 
-test('TODOItemComponent marked as uncompleted', () => {
+test('Simple Snapshot test 2 - TODOItemComponent marked as uncompleted', () => {
     const TODO = {
         copleted: false,
         description: '',

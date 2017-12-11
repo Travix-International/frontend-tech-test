@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.17.1",
+    "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
     "commander": "^2.12.2",
     "copy": "^0.3.1",
@@ -65,7 +66,7 @@
     "eslint-loader": "^1.9.0",
     "eslint-plugin-react": "^7.5.1",
     "jasmine": "^2.8.0",
-    "jest": "^21.2.1",
+    "jest": "^21.0.0",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "load-grunt-tasks": "^3.5.2",
@@ -90,11 +91,7 @@
     ]
   },
   "jest": {
-    "expo": {
-      "packagerOpts": {
-        "nonPersistent": "--nonPersistent"
-      }
-    },
+    "testRegex": ".*__tests__.*.jest.js$",
     "moduleFileExtensions": [
       "js"
     ],
