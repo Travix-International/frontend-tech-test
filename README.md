@@ -41,3 +41,8 @@ The page is fully responsive and can be displayed on multiple devices. It works 
 * Load the application
 * Resize the application to a smaller size
 * The list is not well scalated
+
+## Update and Detail window not updated with other user actions when open
+* Open the Update/Detail window
+* In another instance update the same TODO
+* Update doesnt get updated until reopened
