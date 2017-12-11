@@ -5,11 +5,11 @@ CALL npm install
 
 :: Configure and Build server
 cd server 
-CALL webpack
+CALL node ../node_modules\webpack\bin\webpack.js
 
 :: Configure and Build app
 cd .. 
-CALL webpack
+CALL node node_modules\webpack\bin\webpack.js
 
 :: Create Artifact
 if not exist "artifacts" mkdir artifacts

@@ -7,10 +7,10 @@ configure:
 	npm install
 
 srv:
-	cd server && webpack
+	cd server && node ../node_modules\webpack\bin\webpack.js
 
 spa:
-	webpack
+	node_modules\webpack\bin\webpack.js
 
 tar:
 	mkdir -p artifacts
