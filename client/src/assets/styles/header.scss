@@ -1,3 +1,5 @@
+@import 'vars.scss';
+
 .main-header {
   text-align: center;
   width: 100%;
@@ -20,7 +22,7 @@
   font-weight: 900;
 }
 
-@media (max-width: 620px) {
+@media (max-width: $appWidth) {
   .main-header {
     text-align: center;
     width: 100%;

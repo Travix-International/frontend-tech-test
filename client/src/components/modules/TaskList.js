@@ -45,7 +45,7 @@ export class TaskList extends Component {
 
     if (event.type === 'submit') {
       event.preventDefault()
-      const { tasks: { tasks, isFetching } } = this.props;
+      const { tasks: { tasks } } = this.props;
       return this.props.updateTask(tasks, task);
     }
 
