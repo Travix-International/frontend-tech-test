@@ -51,6 +51,9 @@ export class EditTasksContainer extends React.Component {
   render() {
     return (
       <TaskFormComponent
+        buttonTitle={
+          this.props.isSubmitting ? 'Updating...' : 'Update'
+        }
         canSubmit={this.state.canSubmit}
         isSubmitting={this.props.isSubmitting}
         onDisable={this.onDisable}

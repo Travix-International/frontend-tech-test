@@ -9,11 +9,13 @@ import ListTasksComponent from './ListTasksComponent';
 const propTypes = {
   actions: T.object.isRequired,
   deleteActions: T.object.isRequired,
+  totalPages: T.number.isRequired,
   tasks: T.arrayOf(T.object),
 };
 const defaultProps = { tasks: [] };
 const mapStateToProps = state => ({
   tasks: state.ListTasksReducer.tasks,
+  totalPages: state.ListTasksReducer.totalPages,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -27,6 +29,7 @@ export class ListTasksContainer extends React.Component {
 
     this.onDeleteTask = this.onDeleteTask.bind(this);
     this.onEdit = this.onEdit.bind(this);
+    this.onPageChange = this.onPageChange.bind(this);
   }
 
   componentDidMount() {
@@ -41,12 +44,18 @@ export class ListTasksContainer extends React.Component {
     this.props.actions.showEditMode(this.props.tasks, id);
   }
 
+  onPageChange({ selected }) {
+    this.props.actions.listTasks(selected + 1);
+  }
+
   render() {
     return (
       <ListTasksComponent
         onDelete={this.onDeleteTask}
         onEdit={this.onEdit}
+        onPageChange={this.onPageChange}
         tasks={this.props.tasks}
+        totalPages={this.props.totalPages}
       />
     );
   }

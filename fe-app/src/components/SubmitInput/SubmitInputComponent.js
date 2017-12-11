@@ -2,13 +2,13 @@ import React from 'react';
 import { PropTypes as T } from 'prop-types';
 
 const propsTypes = {
+  buttonTitle: T.string.isRequired,
   canSubmit: T.bool.isRequired,
-  isSubmitting: T.bool.isRequired,
   name: T.string.isRequired,
 };
 
 const SubmitInputComponent = (props) => {
-  const { canSubmit, name, isSubmitting } = props;
+  const { canSubmit, name, buttonTitle } = props;
 
   return (
     <div>
@@ -17,7 +17,7 @@ const SubmitInputComponent = (props) => {
         disabled={!canSubmit}
         name={name}
         type="submit"
-        value={isSubmitting ? 'Creating...' : 'Create'}
+        value={buttonTitle}
       />
     </div>
   );

@@ -4,11 +4,10 @@ import {
   LIST_TASKS_SUCESSS,
   LIST_TASKS_LOADING,
   LIST_TASKS_LOADED,
+  SHOW_TASKS_SUCESSS,
 } from './ListTasksActionTypes';
 
-const listTasksSuccess = ({ data }) => (
-  { type: LIST_TASKS_SUCESSS, tasks: data }
-);
+const listTasksSuccess = ({ data }) => ({ type: LIST_TASKS_SUCESSS, data });
 
 const listTasksFailed = () => ({ type: LIST_TASKS_FAILED });
 
@@ -16,9 +15,9 @@ const listTasksLoading = () => ({ type: LIST_TASKS_LOADING });
 
 const listTasksLoaded = () => ({ type: LIST_TASKS_LOADED });
 
-const listTasks = () => ((dispatch) => {
+const listTasks = (page = 1) => ((dispatch) => {
   dispatch(listTasksLoading());
-  return apiService.get('task')
+  return apiService.get(`task?page=${page}`)
     .then((response) => {
       dispatch(listTasksSuccess(response));
       dispatch(listTasksLoaded());
@@ -38,7 +37,7 @@ const showEditMode = (loadedTasks, id) => {
     return item;
   });
 
-  return { type: LIST_TASKS_SUCESSS, tasks };
+  return { type: SHOW_TASKS_SUCESSS, tasks };
 };
 
 export {

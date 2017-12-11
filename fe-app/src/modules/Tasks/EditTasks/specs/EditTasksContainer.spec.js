@@ -9,6 +9,7 @@ describe('EditTasksContainer', () => {
   let editTaskSpy;
 
   beforeEach(() => {
+    jest.resetAllMocks();
     viewTaskSpy = jest.fn();
     editTaskSpy = jest.fn();
     defaultProps = {
@@ -69,6 +70,23 @@ describe('EditTasksContainer', () => {
       wrapper = shallow(<EditTasksContainer {...defaultProps} />);
       component = wrapper.find('TaskFormComponent');
     });
+    describe('<SubmitInput />: title', () => {
+      test('should render TaskFormComponent update title', () => {
+        expect(component.props().buttonTitle).toBe('Update');
+      });
+      test('should render TaskFormComponent Updating title', () => {
+        defaultProps.isSubmitting = true;
+        wrapper = shallow(<EditTasksContainer {...defaultProps} />);
+        component = wrapper.find('TaskFormComponent');
+        expect(component.props().buttonTitle).toBe('Updating...');
+      });
+    });
+    test('should render TaskFormComponent with default props', () => {
+      expect(component.props().canSubmit).toBe(false);
+      expect(component.props().isSubmitting).toBe(false);
+      expect(component.props().task).toEqual({});
+    });
+
     test('should have a event prop for disable', () => {
       component.simulate('disable');
       expect(disableSpy).toHaveBeenCalled();

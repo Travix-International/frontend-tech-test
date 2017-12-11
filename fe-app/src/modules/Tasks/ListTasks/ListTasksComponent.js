@@ -1,17 +1,20 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
+import ReactPaginate from 'react-paginate';
 import ActionButton from '../../../components/ActionButton/ActionButton';
 import AddTasks from '../AddTasks/AddTasksContainer';
 import EditTasks from '../EditTasks/EditTasksContainer';
 
 const propTypes = {
+  totalPages: T.number,
   tasks: T.arrayOf(T.object),
   onDelete: T.func,
   onEdit: T.func,
+  onPageChange: T.func,
 };
 
 const ListTasksComponent = (props) => {
-  const { tasks, onDelete, onEdit } = props;
+  const { totalPages, tasks, onDelete, onEdit, onPageChange } = props;
 
   return (
     <div className="list-tasks margin">
@@ -21,7 +24,7 @@ const ListTasksComponent = (props) => {
           <table className="table-hover">
             <thead>
               <tr>
-                <th colSpan="4"><AddTasks /></th>
+                <th colSpan="3"><AddTasks /></th>
               </tr>
             </thead>
             <tbody>
@@ -48,13 +51,32 @@ const ListTasksComponent = (props) => {
                     </td>
                   </tr>,
                   <tr>
-                    <th colSpan="4">
+                    <th colSpan="3">
                       { task.isEditing && <EditTasks taskId={task.id} /> }
                     </th>
                   </tr>
                 ]))
               }
             </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan="3">
+                  <ReactPaginate
+                    activeClassName={'active'}
+                    breakClassName={'break-me'}
+                    breakLabel={<a href="">...</a>}
+                    containerClassName={'pagination'}
+                    marginPagesDisplayed={2}
+                    nextLabel={'next'}
+                    onPageChange={onPageChange}
+                    pageCount={totalPages}
+                    pageRangeDisplayed={5}
+                    previousLabel={'previous'}
+                    subContainerClassName={'pages pagination'}
+                  />
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>

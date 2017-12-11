@@ -8,6 +8,7 @@ describe('AddTasksContainer', () => {
   let addTasksSpy;
 
   beforeEach(() => {
+    jest.resetAllMocks();
     addTasksSpy = jest.fn();
     defaultProps = {
       actions: { addTasks: addTasksSpy },
@@ -54,6 +55,17 @@ describe('AddTasksContainer', () => {
 
       wrapper = shallow(<AddTasksContainer {...defaultProps} />);
       component = wrapper.find('TaskFormComponent');
+    });
+    describe('<SubmitInput />: title', () => {
+      test('should render TaskFormComponent Create title', () => {
+        expect(component.props().buttonTitle).toBe('Create');
+      });
+      test('should render TaskFormComponent Creating title', () => {
+        defaultProps.isSubmitting = true;
+        wrapper = shallow(<AddTasksContainer {...defaultProps} />);
+        component = wrapper.find('TaskFormComponent');
+        expect(component.props().buttonTitle).toBe('Creating...');
+      });
     });
     test('should have a event prop for disable', () => {
       component.simulate('disable');

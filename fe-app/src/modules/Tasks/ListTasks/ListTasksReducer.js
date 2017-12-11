@@ -3,9 +3,13 @@ import {
   LIST_TASKS_SUCESSS,
   LIST_TASKS_LOADING,
   LIST_TASKS_LOADED,
+  SHOW_TASKS_SUCESSS,
 } from './ListTasksActionTypes';
 
 const initialState = {
+  currentPage: 0,
+  total: 0,
+  totalPages: 0,
   tasks: [],
   isFetching: false,
 };
@@ -20,7 +24,10 @@ export default function ListTasksReducer(state = initialState, action) {
   case LIST_TASKS_SUCESSS:
     return {
       ...state,
-      tasks: action.tasks,
+      currentPage: action.data.currentPage,
+      total: action.data.total,
+      totalPages: action.data.totalPages,
+      tasks: action.data.tasks,
     };
   case LIST_TASKS_LOADING:
     return {
@@ -31,6 +38,11 @@ export default function ListTasksReducer(state = initialState, action) {
     return {
       ...state,
       isFetching: false,
+    };
+  case SHOW_TASKS_SUCESSS:
+    return {
+      ...state,
+      tasks: action.tasks,
     };
   default:
     return state;

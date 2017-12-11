@@ -6,6 +6,7 @@ import {
   LIST_TASKS_FAILED,
   LIST_TASKS_LOADING,
   LIST_TASKS_LOADED,
+  SHOW_TASKS_SUCESSS,
 } from '../ListTasksActionTypes';
 import * as actions from '../ListTasksActions';
 
@@ -52,7 +53,7 @@ describe('ListTasksActions', () => {
     });
     test('should call api and handle success', (cb) => {
       store.dispatch(actions.listTasks()).then(() => {
-        expect(apiService.get).toHaveBeenCalledWith('task');
+        expect(apiService.get).toHaveBeenCalledWith('task?page=1');
         expect(store.getActions()[0]).toEqual({ type: LIST_TASKS_LOADING });
         expect(store.getActions()[1]).toEqual(
           expect.objectContaining({ type: LIST_TASKS_SUCESSS })
@@ -63,7 +64,7 @@ describe('ListTasksActions', () => {
     test('should call api and handle failure', () => {
       apiService.get.mockReturnValue(Promise.reject());
       store.dispatch(actions.listTasks()).then(() => {
-        expect(apiService.get).toHaveBeenCalledWith('task');
+        expect(apiService.get).toHaveBeenCalledWith('task?page=1');
         expect(store.getActions()[0]).toEqual({ type: LIST_TASKS_LOADING });
         expect(store.getActions()[1]).toEqual({ type: LIST_TASKS_FAILED });
         expect(store.getActions()[2]).toEqual({ type: LIST_TASKS_LOADED });
@@ -76,7 +77,7 @@ describe('ListTasksActions', () => {
       const result = [{ id: '1', foo: 'bar', isEditing: true }];
 
       expect(actions.showEditMode(loadedTasks, '1')).toEqual({
-        type: LIST_TASKS_SUCESSS, tasks: result
+        type: SHOW_TASKS_SUCESSS, tasks: result
       });
     });
   });

@@ -14,11 +14,13 @@ describe('TaskFormComponent', () => {
     onEnableSpy = jest.fn();
     onValidSubmitSpy = jest.fn();
     defaultProps = {
+      buttonTitle: 'FOO title',
       canSubmit: false,
       isSubmitting: false,
       onDisable: onDisableSpy,
       onEnable: onEnableSpy,
       onValidSubmit: onValidSubmitSpy,
+      task: { foo: 'bar' },
     };
     wrapper = shallow(<TaskFormComponent {...defaultProps} />);
   });
@@ -41,7 +43,7 @@ describe('TaskFormComponent', () => {
 
       expect(submit.exists()).toBe(true);
       expect(submit.props().canSubmit).toBe(false);
-      expect(submit.props().isSubmitting).toBe(false);
+      expect(submit.props().buttonTitle).toBe('FOO title');
     });
     test('should render submit Input: can submit', () => {
       defaultProps.canSubmit = true;
@@ -50,7 +52,7 @@ describe('TaskFormComponent', () => {
 
       expect(submit.exists()).toBe(true);
       expect(submit.props().canSubmit).toBe(true);
-      expect(submit.props().isSubmitting).toBe(false);
+      expect(submit.props().buttonTitle).toBe('FOO title');
     });
   });
 });

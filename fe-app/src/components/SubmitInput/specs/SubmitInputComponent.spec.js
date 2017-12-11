@@ -9,7 +9,7 @@ describe('<SubmitInputComponent />', () => {
 
   beforeEach(() => {
     defaultProps = {
-      isSubmitting: false,
+      buttonTitle: 'foo title',
       name: 'foo',
       canSubmit: true,
     };
@@ -23,6 +23,7 @@ describe('<SubmitInputComponent />', () => {
     describe('render with props', () => {
       test('should render name', () => {
         expect(input.props().name).toBe('foo');
+        expect(input.props().value).toBe('foo title');
       });
       test('should render disabled false when canSubmit: true', () => {
         expect(input.props().disabled).toBe(false);
@@ -33,15 +34,6 @@ describe('<SubmitInputComponent />', () => {
         input = wrapper.find('input');
         expect(input.props().disabled).toBe(true);
       });
-    });
-    test('should show Submit isFetching: false', () => {
-      expect(input.props().value).toBe('Create');
-    });
-    test('should show Submitting isFetching: true', () => {
-      defaultProps.isSubmitting = true;
-      wrapper = shallow(<SubmitInputComponent {...defaultProps} />);
-      input = wrapper.find('input');
-      expect(input.props().value).toBe('Creating...');
     });
   });
 });

@@ -5,6 +5,7 @@ import Input from '../../components/Input/InputComponent';
 import SubmitInput from '../../components/SubmitInput/SubmitInputComponent';
 
 const propTypes = {
+  buttonTitle: T.string,
   canSubmit: T.bool,
   isSubmitting: T.bool,
   onValidSubmit: T.func,
@@ -12,7 +13,6 @@ const propTypes = {
   onDisable: T.func,
   task: T.object,
 };
-
 
 const defaultProps = {
   task: {
@@ -23,6 +23,7 @@ const defaultProps = {
 
 const TaskFormComponent = (props) => {
   const {
+    buttonTitle,
     canSubmit,
     isSubmitting,
     onDisable,
@@ -60,8 +61,8 @@ const TaskFormComponent = (props) => {
       </div>
       <div className="col sm-3">
         <SubmitInput
+          buttonTitle={buttonTitle}
           canSubmit={canSubmit && !isSubmitting}
-          isSubmitting={isSubmitting}
           name="submit"
         />
       </div>
