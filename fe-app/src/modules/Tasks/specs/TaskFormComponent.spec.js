@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import AddTasksComponent from '../AddTasksComponent';
+import TaskFormComponent from '../TaskFormComponent';
 
-describe('AddTasksComponent', () => {
+describe('TaskFormComponent', () => {
   let defaultProps;
   let onDisableSpy;
   let onEnableSpy;
@@ -20,7 +20,7 @@ describe('AddTasksComponent', () => {
       onEnable: onEnableSpy,
       onValidSubmit: onValidSubmitSpy,
     };
-    wrapper = shallow(<AddTasksComponent {...defaultProps} />);
+    wrapper = shallow(<TaskFormComponent {...defaultProps} />);
   });
   describe('<Form />', () => {
     test('should render a Form', () => {
@@ -45,7 +45,7 @@ describe('AddTasksComponent', () => {
     });
     test('should render submit Input: can submit', () => {
       defaultProps.canSubmit = true;
-      wrapper = shallow(<AddTasksComponent {...defaultProps} />);
+      wrapper = shallow(<TaskFormComponent {...defaultProps} />);
       const submit = wrapper.find({ name: 'submit' });
 
       expect(submit.exists()).toBe(true);

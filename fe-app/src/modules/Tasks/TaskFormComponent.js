@@ -1,8 +1,8 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
-import Form from '../../../components/Form/FormComponent';
-import Input from '../../../components/Input/InputComponent';
-import SubmitInput from '../../../components/SubmitInput/SubmitInputComponent';
+import Form from '../../components/Form/FormComponent';
+import Input from '../../components/Input/InputComponent';
+import SubmitInput from '../../components/SubmitInput/SubmitInputComponent';
 
 const propTypes = {
   canSubmit: T.bool,
@@ -10,15 +10,25 @@ const propTypes = {
   onValidSubmit: T.func,
   onEnable: T.func,
   onDisable: T.func,
+  task: T.object,
 };
 
-const AddTasksComponent = (props) => {
+
+const defaultProps = {
+  task: {
+    title: '',
+    description: '',
+  },
+};
+
+const TaskFormComponent = (props) => {
   const {
     canSubmit,
     isSubmitting,
     onDisable,
     onEnable,
     onValidSubmit,
+    task,
   } = props;
 
   return (
@@ -37,7 +47,7 @@ const AddTasksComponent = (props) => {
           validationErrors={{
             isDefaultRequiredValue: 'Task title is required',
           }}
-          value=""
+          value={task.title}
         />
       </div>
       <div className="col sm-6">
@@ -45,7 +55,7 @@ const AddTasksComponent = (props) => {
           inputClass="input-block"
           label="Description"
           name="description"
-          value=""
+          value={task.description}
         />
       </div>
       <div className="col sm-3">
@@ -59,5 +69,6 @@ const AddTasksComponent = (props) => {
   );
 };
 
-AddTasksComponent.propTypes = propTypes;
-export default AddTasksComponent;
+TaskFormComponent.propTypes = propTypes;
+TaskFormComponent.defaultProps = defaultProps;
+export default TaskFormComponent;

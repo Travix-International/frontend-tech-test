@@ -1,23 +1,37 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { AddTasksContainer } from '../AddTasksContainer';
+import { EditTasksContainer } from '../EditTasksContainer';
 
-describe('AddTasksContainer', () => {
+describe('EditTasksContainer', () => {
   let defaultProps;
   let wrapper;
-  let addTasksSpy;
+  let viewTaskSpy;
+  let editTaskSpy;
 
   beforeEach(() => {
-    addTasksSpy = jest.fn();
+    viewTaskSpy = jest.fn();
+    editTaskSpy = jest.fn();
     defaultProps = {
-      actions: { addTasks: addTasksSpy },
+      actions: {
+        viewTask: viewTaskSpy,
+        editTask: editTaskSpy,
+      },
       isSubmitting: false,
+      taskId: '1',
+      task: {},
     };
-    wrapper = shallow(<AddTasksContainer {...defaultProps} />);
+    wrapper = shallow(<EditTasksContainer {...defaultProps} />);
   });
   describe('constructor', () => {
     test('should set initial state', () => {
       expect(wrapper.state('canSubmit')).toBe(false);
+    });
+  });
+  describe('componentDidMount', () => {
+    test('should load task data', () => {
+      wrapper.instance().componentDidMount();
+
+      expect(viewTaskSpy).toHaveBeenCalled();
     });
   });
   describe('onDisable', () => {
@@ -34,25 +48,25 @@ describe('AddTasksContainer', () => {
       expect(wrapper.state('canSubmit')).toBe(true);
     });
   });
-  describe('onSubmit', () => {
-    test('should parse and submit information', () => {
-      wrapper.instance().onSubmit({ foo: 'bar' });
+  describe('onUpdate', () => {
+    test('should parse and submit update information', () => {
+      wrapper.instance().onUpdate({ foo: 'bar' });
 
-      expect(addTasksSpy).toHaveBeenCalledWith({ foo: 'bar' });
+      expect(editTaskSpy).toHaveBeenCalledWith('1', { foo: 'bar' });
     });
   });
   describe('render', () => {
     let enableSpy;
     let disableSpy;
-    let submitSpy;
+    let updateSpy;
     let component;
 
     beforeEach(() => {
-      enableSpy = jest.spyOn(AddTasksContainer.prototype, 'onEnable');
-      disableSpy = jest.spyOn(AddTasksContainer.prototype, 'onDisable');
-      submitSpy = jest.spyOn(AddTasksContainer.prototype, 'onSubmit');
+      enableSpy = jest.spyOn(EditTasksContainer.prototype, 'onEnable');
+      disableSpy = jest.spyOn(EditTasksContainer.prototype, 'onDisable');
+      updateSpy = jest.spyOn(EditTasksContainer.prototype, 'onUpdate');
 
-      wrapper = shallow(<AddTasksContainer {...defaultProps} />);
+      wrapper = shallow(<EditTasksContainer {...defaultProps} />);
       component = wrapper.find('TaskFormComponent');
     });
     test('should have a event prop for disable', () => {
@@ -65,7 +79,7 @@ describe('AddTasksContainer', () => {
     });
     test('should have a event prop for validSubmit', () => {
       component.simulate('validSubmit');
-      expect(submitSpy).toHaveBeenCalled();
+      expect(updateSpy).toHaveBeenCalled();
     });
   });
 });

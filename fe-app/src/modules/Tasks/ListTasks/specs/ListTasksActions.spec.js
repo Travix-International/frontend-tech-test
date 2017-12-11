@@ -70,4 +70,14 @@ describe('ListTasksActions', () => {
       });
     });
   });
+  describe('showEditMode', () => {
+    test('should return a show task edit action', () => {
+      const loadedTasks = [{ id: '1', foo: 'bar' }];
+      const result = [{ id: '1', foo: 'bar', isEditing: true }];
+
+      expect(actions.showEditMode(loadedTasks, '1')).toEqual({
+        type: LIST_TASKS_SUCESSS, tasks: result
+      });
+    });
+  });
 });

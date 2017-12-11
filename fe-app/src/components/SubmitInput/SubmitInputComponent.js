@@ -24,5 +24,4 @@ const SubmitInputComponent = (props) => {
 };
 
 SubmitInputComponent.propTypes = propsTypes;
-
 export default SubmitInputComponent;

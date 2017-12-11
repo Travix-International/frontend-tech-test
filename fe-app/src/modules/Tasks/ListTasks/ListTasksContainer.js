@@ -26,6 +26,7 @@ export class ListTasksContainer extends React.Component {
     super(props);
 
     this.onDeleteTask = this.onDeleteTask.bind(this);
+    this.onEdit = this.onEdit.bind(this);
   }
 
   componentDidMount() {
@@ -36,10 +37,15 @@ export class ListTasksContainer extends React.Component {
     this.props.deleteActions.deleteTask(id);
   }
 
+  onEdit(id) {
+    this.props.actions.showEditMode(this.props.tasks, id);
+  }
+
   render() {
     return (
       <ListTasksComponent
         onDelete={this.onDeleteTask}
+        onEdit={this.onEdit}
         tasks={this.props.tasks}
       />
     );

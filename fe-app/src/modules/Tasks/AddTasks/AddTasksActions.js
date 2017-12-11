@@ -12,17 +12,15 @@ const addTasksFailed = () => ({ type: ADD_TASKS_FAILED });
 
 const addTasksRequest = () => ({ type: ADD_TASKS_REQUEST });
 
-const addTasks = payload => (
-  (dispatch) => {
-    dispatch(addTasksRequest());
-    return apiService.post('task', payload)
-      .then(() => {
-        dispatch(addTasksSuccess());
-        dispatch(listActions.listTasks());
-      })
-      .catch(() => dispatch(addTasksFailed()));
-  }
-);
+const addTasks = payload => ((dispatch) => {
+  dispatch(addTasksRequest());
+  return apiService.post('task', payload)
+    .then(() => {
+      dispatch(addTasksSuccess());
+      dispatch(listActions.listTasks());
+    })
+    .catch(() => dispatch(addTasksFailed()));
+});
 
 export {
   addTasksSuccess,
