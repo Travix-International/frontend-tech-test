@@ -42,12 +42,21 @@ export class TaskList extends Component {
   }
 
   onTaskUpdate(event, task, target) {
+
+    if (event.type === 'submit') {
+      event.preventDefault()
+      const { tasks: { tasks, isFetching } } = this.props;
+      return this.props.updateTask(tasks, task);
+    }
+
     const updatedTasks = this.props.tasks.tasks.map(item => {
       item[target] = item.id === task.id ? event.target.value : item[target];
       return item;
     });
 
     if (event.type === 'change') return this.props.updateTask(updatedTasks);
+
+    event.preventDefault()
     return this.props.updateTask(updatedTasks, task);
   }
 
