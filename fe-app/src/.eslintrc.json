@@ -1,0 +1,62 @@
+{
+  "extends": [
+    "travix/base",
+    "travix/react"
+  ],
+  "parser": "babel-eslint",
+  "rules": {
+    "import/no-extraneous-dependencies": [ 2, {
+      "devDependencies": [
+        "**/*.spec.js", "**/config/*.js"
+      ]
+    }],
+    "indent": [ 2, 2 ],
+    "linebreak-style": 0,
+    "max-len": [
+      2,
+      80,
+      4,
+      {
+        "ignoreUrls": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreTrailingComments": true,
+        "ignoreComments": true,
+        "ignorePattern": "^(import.*|const\\s.*\\s=\\srequire.*)"
+      }
+    ],
+    "newline-after-var": 2,
+    "no-plusplus": [
+      2,
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "padded-blocks": 2,
+    "quotes": [
+      2,
+      "single"
+    ],
+    "react/jsx-filename-extension": 0,
+    "react/jsx-indent": [
+      2,
+      2
+    ],
+    "react/jsx-indent-props": [ 2, 2 ],
+    "react/jsx-max-props-per-line": [
+      2,
+      { "when": "multiline" }
+    ],
+    "react/no-array-index-key": 0,
+    "react/require-default-props": 0,
+    "semi": [ 2, "always" ]
+  },
+  "globals": {
+    "describe": true,
+    "document": true,
+    "beforeEach": true,
+    "expect": true,
+    "afterEach": true,
+    "jest": true,
+    "test": true
+  }
+}

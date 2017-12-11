@@ -1,0 +1,21 @@
+.list-tasks {
+  .action-column {
+    width: 30px;
+  }
+
+  .btn-action {
+    float: right;
+    margin-right: 5px;
+  }
+
+  .pagination {
+    float: right;
+
+    li {
+      cursor: pointer;
+      display: inline;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+  }
+}
