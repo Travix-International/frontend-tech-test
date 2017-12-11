@@ -17,6 +17,8 @@ The page is fully responsive and can be displayed on multiple devices. It works 
 * run `node server.js [--port your_port]`
 * access the browser on specified port (default 9001)
 
+** If you want to use a custom tasks.json file place it with the server before to start it.
+
 # Tests
 ## App Tests
 * npm test
