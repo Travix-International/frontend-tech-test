@@ -1,0 +1,29 @@
+.main-header {
+  text-align: center;
+  width: 100%;
+  margin: 50px 0;
+}
+
+.main-header figure {
+  display: block;
+  width: 240px;
+  height: 80px;
+  margin: 0 auto;
+  background-image: url('../images/logo.png');
+  text-indent: -9999px;
+}
+
+.main-header h1 {
+  display: block;
+  color: #fff;
+  margin: 0px 0;
+  font-weight: 900;
+}
+
+@media (max-width: 620px) {
+  .main-header {
+    text-align: center;
+    width: 100%;
+    margin: 10px 0;
+  }
+}

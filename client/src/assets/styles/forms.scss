@@ -1,0 +1,35 @@
+input[type="text"], textarea {
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  display: block;
+  font-weight: 100;
+  color: #fff;
+  background: none;
+  border: none;
+  outline: none;
+  border: 1px solid transparent;
+  width: 100%;
+}
+
+input[type="text"] {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+textarea {
+  font-size: 14px;
+  color: #777;
+}
+
+textarea::placeholder {
+  font-size: 14px;
+  color: #444;
+}
+
+input[type="text"]:focus, textarea:focus {
+  border: 1px solid #333333;
+  border-radius: 2px;
+  background: #2c2c2c;
+}

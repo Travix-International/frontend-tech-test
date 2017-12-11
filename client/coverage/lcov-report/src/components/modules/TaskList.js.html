@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/modules/TaskList.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/modules</a> TaskList.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">90.38% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>47/52</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">85.71% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>12/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">86.96% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>20/23</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>41/41</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Loader from 'components/modules/Loader'
+import TaskActive from 'components/modules/TaskActive'
+import TaskCompleted from 'components/modules/TaskCompleted'
+import TaskCreate from 'components/modules/TaskCreate'
+import { toggleTask, fetchTasks, updateTask, createTask, deleteTask } from 'actions/Tasks'
+&nbsp;
+export class TaskList extends Component {
+  constructor(props) {
+    super(props);
+&nbsp;
+    this.state = {
+      newTitle: '',
+    }
+&nbsp;
+    this.onTaskDelete = this.onTaskDelete.bind(this);
+    this.onTaskToggle = this.onTaskToggle.bind(this);
+    this.onTaskUpdate = this.onTaskUpdate.bind(this);
+    this.onTaskCreate = this.onTaskCreate.bind(this);
+    this.renderActiveTasks = this.renderActiveTasks.bind(this);
+    this.renderCompleteTasks = this.renderCompleteTasks.bind(this);
+  }
+&nbsp;
+  componentDidMount() {
+    setTimeout(<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >this.props.fetchTasks(),</span> 1000);
+    setInterval(<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >this.props.fetchTasks(),</span> 30000);
+  }
+&nbsp;
+  onTaskToggle({ id }) {
+    const updatedTasks = this.props.tasks.tasks.map(item =&gt; {
+      item.status = item.id === id ? !item.status : item.status;
+      return item;
+    });
+    return this.props.toggleTask(updatedTasks, id)
+  }
+&nbsp;
+  onTaskDelete({ id }) {
+    const updatedTasks = this.props.tasks.tasks.filter(item =&gt; item.id !== id);
+    return this.props.deleteTask(updatedTasks, id)
+  }
+&nbsp;
+  onTaskUpdate(event, task, target) {
+    const updatedTasks = this.props.tasks.tasks.map(item =&gt; {
+      item[target] = item.id === task.id ? event.target.value : item[target];
+      return item;
+    });
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (event.type === 'change') <span class="cstat-no" title="statement not covered" >return this.props.updateTask(updatedTasks);</span>
+    return this.props.updateTask(updatedTasks, task);
+  }
+&nbsp;
+  onTaskCreate(event, title) {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (event.type === 'change' || !title.length) <span class="cstat-no" title="statement not covered" >return this.setState({ newTitle: event.target.value });</span>
+&nbsp;
+    event.preventDefault()
+    this.setState({ newTitle: '' });
+    return this.props.createTask(this.props.tasks.tasks, title);
+  }
+&nbsp;
+  renderTasks() {
+    const { tasks: { tasks, isFetching } } = this.props;
+&nbsp;
+    if (isFetching) return &lt;Loader /&gt;;
+    if (!tasks.length) return &lt;div className="no-task"&gt;No task created yet...&lt;/div&gt;
+    return [this.renderActiveTasks(), this.renderCompleteTasks()]
+  }
+&nbsp;
+  renderActiveTasks() {
+    const { tasks: { tasks } } = this.props;
+&nbsp;
+    const activeTasks = tasks.filter(task =&gt; !task.status).sort(<span class="fstat-no" title="function not covered" >(a</span>, b) =&gt; <span class="cstat-no" title="statement not covered" >b.id - a.id)</span>;
+    return activeTasks.map(task =&gt;
+      &lt;TaskActive
+        task={task}
+        onTaskToggle={this.onTaskToggle}
+        onTaskDelete={this.onTaskDelete}
+        onTaskUpdate={this.onTaskUpdate}
+      /&gt;
+    )
+  }
+&nbsp;
+  renderCompleteTasks() {
+    const { tasks: { tasks } } = this.props;
+    const completeTasks = tasks.filter(task =&gt; task.status).sort((a, b) =&gt; b.id - a.id);
+    return completeTasks.map(task =&gt;
+      &lt;TaskCompleted
+        task={task}
+        onTaskToggle={this.onTaskToggle}
+        onTaskDelete={this.onTaskDelete}
+      /&gt;
+    )
+  }
+&nbsp;
+  render() {
+    const { newTitle } = this.state
+&nbsp;
+    return (
+      &lt;div className={`task-list-container`}&gt;
+        &lt;ul className={`task-list`}&gt;
+          &lt;TaskCreate title={newTitle} onTaskCreate={this.onTaskCreate}/&gt;
+          {this.renderTasks()}
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+&nbsp;
+function mapStateToProps({ tasks }) {
+  return { tasks }
+}
+&nbsp;
+function mapDespatchToProps(dispatch) {
+  return bindActionCreators({ toggleTask, fetchTasks, updateTask, createTask, deleteTask }, dispatch)
+}
+&nbsp;
+export default connect(mapStateToProps, mapDespatchToProps)(TaskList);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Dec 11 2017 02:29:40 GMT-0200 (-02)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
