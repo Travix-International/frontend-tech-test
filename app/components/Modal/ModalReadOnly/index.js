@@ -46,7 +46,7 @@ ModalReadOnlyComponent.propTypes = {
     TODO: PropTypes.object,
     saveModal: PropTypes.func,
     close: PropTypes.func,
-    open: PropTypes.func,
+    open: PropTypes.bool,
     update: PropTypes.func
 }
 

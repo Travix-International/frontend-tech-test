@@ -21,8 +21,8 @@ class PanelHeaderContainer extends React.Component {
 }
 
 PanelHeaderContainer.propTypes = {
-    search: PropTypes.string,
-    filter: PropTypes.array
+    search: PropTypes.func,
+    filter: PropTypes.func
 }
 
 const mapStateToProps = (state, props) => {

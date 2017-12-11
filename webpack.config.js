@@ -4,7 +4,7 @@ var path = require('path');
 module.exports = {
 
 	entry: {
-        lib: ['./app/index.js'],
+        lib: ['babel-polyfill', './app/index.js'],
     },
 
     output: {

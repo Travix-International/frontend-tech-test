@@ -106,8 +106,8 @@ class PanelHeaderComponent extends React.Component {
 }
 
 PanelHeaderComponent.propTypes = {
-    search: PropTypes.string,
-    filter: PropTypes.array
+    search: PropTypes.func,
+    filter: PropTypes.func
 }
 
 export default PanelHeaderComponent
