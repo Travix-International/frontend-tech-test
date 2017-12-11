@@ -15,7 +15,7 @@ export const deleteTask = (tasks, id) => {
 };
 
 export const createTask = (tasks, title) => {
-  const request = title ? Fetch('POST', `task/create/${title}`) : null;
+  const request = title ? Fetch('POST', `task/create/${encodeURIComponent(title)}`) : null;
   return {
     type: CREATE_TASK,
     payload: request
@@ -23,7 +23,7 @@ export const createTask = (tasks, title) => {
 };
 
 export const updateTask = (tasks, task) => {
-  if (task) Fetch('PUT', `task/update/${task.id}/${task.title}/${task.description}`);
+  if (task) Fetch('PUT', `task/update/${task.id}/${encodeURIComponent(task.title)}/${encodeURIComponent(task.description || '')}`);
   return {
     type: UPDATE_TASK,
     payload: tasks
