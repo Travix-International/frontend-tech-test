@@ -36,14 +36,16 @@ describe('AddTasksActions', () => {
       apiService.post.mockReturnValue(Promise.resolve({}));
     });
     test('should call api and handle success', (cb) => {
-      store.dispatch(actions.addTasks()).then(() => {
+      store.dispatch(actions.addTasks({ foo: 'bar' })).then(() => {
+        expect(apiService.post).toHaveBeenCalledWith('task', { foo: 'bar' });
         expect(store.getActions()[0]).toEqual({ type: ADD_TASKS_REQUEST });
         expect(store.getActions()[1]).toEqual({ type: ADD_TASKS_SUCESSS });
       }).then(cb);
     });
     test('should call api and handle failure', () => {
       apiService.post.mockReturnValue(Promise.reject());
-      store.dispatch(actions.addTasks()).then(() => {
+      store.dispatch(actions.addTasks({ foo: 'bar' })).then(() => {
+        expect(apiService.post).toHaveBeenCalledWith('task', { foo: 'bar' });
         expect(store.getActions()[0]).toEqual({ type: ADD_TASKS_REQUEST });
         expect(store.getActions()[1]).toEqual({ type: ADD_TASKS_FAILED });
       });

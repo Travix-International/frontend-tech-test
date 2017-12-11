@@ -12,7 +12,7 @@ describe('ListTasksComponent', () => {
     };
     wrapper = shallow(<ListTasksComponent {...defaultProps} />);
   });
-  test('should render with default props', () => {
+  test('should render ListTasksComponent', () => {
     expect(wrapper.exists()).toBe(true);
   });
 });

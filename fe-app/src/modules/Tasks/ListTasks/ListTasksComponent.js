@@ -13,11 +13,13 @@ const ListTasksComponent = (props) => {
   return (
     <div className="list-tasks margin">
       <h2 className="align-middle">Todo List App</h2>
-      <AddTasks />
       <div className="child-borders">
         <div className="padding-small">
           <table className="table-hover">
             <tbody>
+              <tr>
+                <AddTasks />
+              </tr>
               {
                 tasks.map(task => (
                   <tr key={task.id}>
@@ -25,7 +27,7 @@ const ListTasksComponent = (props) => {
                     <td>
                       <button
                         className="btn-delete btn-small"
-                        onClick={() => (onDelete(task.id))}
+                        onClick={() => onDelete(task.id)}
                       >
                         <i aria-hidden="true" className="fa fa-trash" />
                       </button>
