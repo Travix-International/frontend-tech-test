@@ -1,6 +1,24 @@
+# Install
+> From root
+
+- `npm install`
+- `cd client && npm install`
+
+# Run
+> From root
+
+- `npm start`
+
+# Test (client)
+> From client
+
+- `npm test`
+- `npm run coverage`
+- `npm run coverage:open`
+
 # Travix test
 
-Travix Front-End Tech Interview Test 
+Travix Front-End Tech Interview Test
 
 # Introduction
 
@@ -30,7 +48,7 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 
 # Bonus
 
-* unit-tests for the UI 
+* unit-tests for the UI
 * integration-test (one (or more) just in order to show that you know what is it (: )
 * evolution - unit-tests for the server
 * dynamic-ui (web-sockets...?)
