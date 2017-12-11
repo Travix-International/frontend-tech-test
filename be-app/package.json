@@ -4,7 +4,8 @@
   "description": "BE app for Travix International Test",
   "main": "server.js",
   "scripts": {
-    "local": "./node_modules/webpack/bin/webpack.js --config ./webpack-dev.js --colors --progress"
+    "local": "./node_modules/webpack/bin/webpack.js --config ./webpack-dev.js --colors --progress",
+    "test": "./node_modules/jest/bin/jest.js --config ./jest.config.json"
   },
   "keywords": [
     "test",
@@ -25,12 +26,15 @@
   "devDependencies": {
     "babel-core": "6.26.0",
     "babel-eslint": "8.0.3",
+    "babel-jest": "21.2.0",
     "babel-loader": "7.1.2",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-plugin-transform-runtime": "6.23.0",
     "babel-preset-env": "1.6.1",
     "eslint": "4.12.1",
     "eslint-config-travix": "3.0.1",
-    "eslint-plugin-import": "2.8.0"
+    "eslint-plugin-import": "2.8.0",
+    "jest": "21.2.1",
+    "jest-cli": "21.2.1"
   }
 }
