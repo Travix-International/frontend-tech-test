@@ -58,26 +58,20 @@ const ListTasksComponent = (props) => {
                 ]))
               }
             </tbody>
-            <tfoot>
-              <tr>
-                <td colSpan="3">
-                  <ReactPaginate
-                    activeClassName={'active'}
-                    breakClassName={'break-me'}
-                    breakLabel={<a href="">...</a>}
-                    containerClassName={'pagination'}
-                    marginPagesDisplayed={2}
-                    nextLabel={'next'}
-                    onPageChange={onPageChange}
-                    pageCount={totalPages}
-                    pageRangeDisplayed={5}
-                    previousLabel={'previous'}
-                    subContainerClassName={'pages pagination'}
-                  />
-                </td>
-              </tr>
-            </tfoot>
           </table>
+          <ReactPaginate
+            activeClassName={'active'}
+            breakClassName={'break-me'}
+            breakLabel={<a href="">...</a>}
+            containerClassName={'pagination'}
+            marginPagesDisplayed={2}
+            nextLabel={'next'}
+            onPageChange={onPageChange}
+            pageCount={totalPages}
+            pageRangeDisplayed={5}
+            previousLabel={'previous'}
+            subContainerClassName={'pages pagination'}
+          />
         </div>
       </div>
     </div>
