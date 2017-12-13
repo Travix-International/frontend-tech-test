@@ -1,33 +1,39 @@
 import React, { Component } from 'react';
 // import Link from 'next/link';
+import { Spinner } from 'travix-ui-kit';
+import withRedux from 'next-redux-wrapper';
 
-import { Header } from '../common/';
+import initStore from './../store';
+
+import { getLang, changeLang } from './../actions/langActions';
+
+import { Header } from '../common/index';
 
 class Home extends Component {
-	handleOnClick() {
-		try {
-			fetch('/tasks').then(res => res.json().then(e => console.log(e))).catch(reason => console.log(reason));
-		} catch (e) {
-			console.log(e);
-		}
+	componentWillMount() {
+		this.props.getLang();
+	}
+
+	componentDidMount() {
+		setTimeout(() => {
+			this.props.changeLang();
+		}, 3000);
 	}
 
 	render() {
 		return (
 			<div className="home_page">
-				<Header title={'home custom'} />
-				<button onClick={this.handleOnClick.bind(this)}>
-					Dummy Application
-				</button>
-				<button href='/weather'>
-					Weather Application
-				</button>
-				<button href='/blogger'>
-					Blogger Application
-				</button>
+				<Header lang={this.props.lang} title={'home custom'} />
+				<Spinner size='xl' />
 			</div>
 		);
 	}
 }
 
-export default Home;
+function mapStateToProps(state) {
+	return {
+		lang: state.lang
+	};
+}
+
+export default withRedux(initStore, mapStateToProps, { getLang, changeLang })(Home);

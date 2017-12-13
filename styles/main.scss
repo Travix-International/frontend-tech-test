@@ -1,9 +1,10 @@
-@import '../node_modules/travix-ui-kit/dist/ui-bundle.css';
+@import 'variables';
 
 body {
   margin: 0;
   div.home_page {
     background: #212121;
+    @include gradient(45deg, $grid-seventh, $grid-eighth);
     display: flex;
     justify-content: center;
     align-items: center;
