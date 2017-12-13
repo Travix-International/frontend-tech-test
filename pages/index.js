@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import Link from 'next/link';
 
-import stylesheet from '../styles/index.scss';
+import { Header } from '../common/';
 
 class Home extends Component {
 	handleOnClick() {
@@ -15,7 +15,7 @@ class Home extends Component {
 	render() {
 		return (
 			<div className="home_page">
-				<style dangerouslySetInnerHTML={{ __html: stylesheet }} />
+				<Header title={'home custom'} />
 				<button onClick={this.handleOnClick.bind(this)}>
 					Dummy Application
 				</button>
