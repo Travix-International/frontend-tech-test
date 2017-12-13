@@ -2,3 +2,6 @@ node_modules/
 *~
 #*
 .vs_code/
+.next/
+.idea/
+package-lock.json

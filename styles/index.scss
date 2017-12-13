@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  div.home_page {
+    background: #212121;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    a, button {
+      flex: 1;
+      margin: 0 50px;
+      background: #b90000;
+      padding: 20px;
+      float: left;
+      max-height: 150px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 25px;
+      text-decoration: none;
+      line-height: 150px;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: yellow;
+      border-radius: 20px;
+    }
+  }
+}
