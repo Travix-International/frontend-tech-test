@@ -34,6 +34,7 @@ module.exports = require('./webpack.base')({
   devtool: 'eval-source-map',
 
   entry: [
+    'react-hot-loader/patch',
     path.join(process.cwd(), 'src/app.js'),
   ],
 
@@ -51,6 +52,7 @@ module.exports = require('./webpack.base')({
   devServer: {
     contentBase: path.join(process.cwd(), 'dist'),
     hot: true,
+    inline: true,
     port: 8080,
   },
 })

@@ -10,13 +10,14 @@ export default class App extends React.Component {
   }
 
   render() {
-    const text = 'HOLA BB YAY FUNCIONA'
-    const buttonText = 'click me'
+    const text = 'HOLA BB YAY FUNCIONA lalala'
+    const buttonText = 'click me pretty dalplease'
 
     return (
       <div style={{ textAlign: 'center' }}>
         <Note>
           {text}
+          <br />
           <Button kind="primary">
             {buttonText}
           </Button>
