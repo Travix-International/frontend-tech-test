@@ -10,7 +10,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const text = 'HOLA BB YAY FUNCIONA lalala'
+    const text = 'HOLA BB YAY FUNCIONA'
     const buttonText = 'click me pretty dalplease'
 
     return (

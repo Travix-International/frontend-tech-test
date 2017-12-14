@@ -3,9 +3,11 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CircularDependencyPlugin = require('circular-dependency-plugin')
 
+const port = 8080
+
 const plugins = [
-  new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
+  new webpack.NamedModulesPlugin(),
   new HtmlWebpackPlugin({
     template: 'src/index.html',
     filename: 'index.html',
@@ -35,6 +37,8 @@ module.exports = require('./webpack.base')({
 
   entry: [
     'react-hot-loader/patch',
+    `webpack-dev-server/client?http://localhost:${port}`,
+    'webpack/hot/only-dev-server',
     path.join(process.cwd(), 'src/app.js'),
   ],
 
@@ -53,6 +57,6 @@ module.exports = require('./webpack.base')({
     contentBase: path.join(process.cwd(), 'dist'),
     hot: true,
     inline: true,
-    port: 8080,
+    port,
   },
 })
