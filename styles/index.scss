@@ -1,0 +1,7 @@
+@import 'variables';
+@import 'main';
+
+.home_page {
+  @include gradient(45deg, $grid-seventh, $grid-eighth);
+  height: 100vh;
+}

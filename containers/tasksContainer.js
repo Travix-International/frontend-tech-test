@@ -9,10 +9,7 @@ import { getLang, changeLang } from './../actions/langActions';
 
 import { Header } from '../common/index';
 
-import stylesheet from '../styles/index.scss';
-
-
-export class Home extends Component {
+class TasksContainer extends Component {
 	componentWillMount() {
 		this.props.getLang();
 	}
@@ -20,7 +17,6 @@ export class Home extends Component {
 	render() {
 		return (
 			<div className="home_page">
-				<style dangerouslySetInnerHTML={{ __html: stylesheet }} />
 				<Header lang={this.props.lang} title={this.props.lang.home_title} />
 				<Spinner size='xl' />
 			</div>
@@ -34,4 +30,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default withRedux(initStore, mapStateToProps, { getLang, changeLang })(Home);
+export default withRedux(initStore, mapStateToProps, { getLang, changeLang })(TasksContainer);

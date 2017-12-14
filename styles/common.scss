@@ -1,0 +1,13 @@
+@import 'variables';
+
+header {
+  height: 100px;
+  .top-bar {
+    @include gradient(40deg, $black-shade, transparent);
+    .image-container {
+      img {
+        height: 100%;
+      }
+    }
+  }
+}
