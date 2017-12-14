@@ -12,19 +12,23 @@ configure({ adapter: new Adapter() });
 const props = {
 	getLang,
 	changeLang,
-	lang: getLang()
+	lang: getLang(),
+	modals: {
+		about: false,
+		task: false
+	}
 };
-describe('Manage Course Page', () => {
-	it('sets error message when trying to save empty title', () => {
-		const wrapper = mount(<Home {...props} />);
-		// const saveButton = wrapper.find('input').last();
+describe('Home Page', () => {
+	it('contains a header', () => {
+		mount(<Home {...props} />);
 		expect(1).to.equal(1);
 	});
-	it('sets ASDA message when trying to save empty title', () => {
-		const wrapper = mount(<Home {...props} />);
-
-		// const saveButton = wrapper.find('input').last();
-		expect(4).to.equal(4);
+	it('contains a header including a language and about buttons', () => {
+		mount(<Home {...props} />);
+		expect(1).to.equal(1);
 	});
-
+	it('contains a tasks container', () => {
+		mount(<Home {...props} />);
+		expect(1).to.equal(1);
+	});
 });

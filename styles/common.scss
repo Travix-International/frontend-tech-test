@@ -1,12 +1,26 @@
 @import 'variables';
 
 header {
-  height: 100px;
   .top-bar {
-    @include gradient(40deg, $black-shade, transparent);
+    height: 100px;
+    overflow: hidden;
+    @include gradient(180deg, $black-shade, $grid-fifth);
+    border-bottom: 1px solid $black-shade;
+    & > div {
+      float: left;
+      overflow: hidden;
+    }
     .image-container {
+      width: 50%;
       img {
-        height: 100%;
+        width: 160px;
+      }
+    }
+    .buttons-container {
+      width: 50%;
+      & > button {
+        margin: 25px;
+        float: right;
       }
     }
   }

@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'main';
+@import 'common';
 
 .home_page {
   @include gradient(45deg, $grid-seventh, $grid-eighth);

@@ -1,6 +1,10 @@
 const InitialStates = {
 	tasks: [],
-	lang: {}
+	lang: {},
+	modal: {
+		about: false,
+		task: false
+	}
 };
 
 export default InitialStates;
