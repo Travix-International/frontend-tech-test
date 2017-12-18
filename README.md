@@ -36,3 +36,14 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 * dynamic-ui (web-sockets...?)
 * using the `made in Travix` technologies
 * ... Impress us!
+
+# Developer notes
+
+## Server side
+
+* API endpoints were simplified.
+  * Endpoints base path was renamed to `/api/tasks`
+  * Actions can be obtained from METHOD, `/delete, /update...` are redundant.
+* To ease deployment all config values were moved to environment variables.
+  * `STORAGE_FILE`: JSON file where tasks will be stored. Default: `./tasks.json`
+  * `LISTENER_PORT`: Port where server will be listening. Default: `9001`
