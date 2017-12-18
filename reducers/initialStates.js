@@ -4,7 +4,10 @@ const InitialStates = {
 	modal: {
 		about: false,
 		task: false
-	}
+	},
+	promises: {},
+	status: {},
+	currentTask: {}
 };
 
 export default InitialStates;

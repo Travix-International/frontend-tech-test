@@ -3,20 +3,29 @@ import React from 'react';
 import { expect } from 'chai';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import Router from 'next/router';
 
-import { Home } from './index';
+import { Home } from './../pages/index';
 
 import { getLang, changeLang } from './../actions/langActions';
+import { requestTasksGet } from '../actions/tasksActions';
+
+// creating new instance of router
+const mockedRouter = { push: () => {}, prefetch: () => {} };
+Router.router = mockedRouter;
 
 configure({ adapter: new Adapter() });
 const props = {
 	getLang,
 	changeLang,
+	requestTasksGet,
+	tasks: [],
 	lang: getLang(),
 	modals: {
 		about: false,
 		task: false
-	}
+	},
+	promises: {}
 };
 describe('Home Page', () => {
 	it('contains a header', () => {

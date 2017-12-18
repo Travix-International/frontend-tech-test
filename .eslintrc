@@ -4,7 +4,8 @@
     max-len: "off",
     no-useless-escape: "off",
     global-require: "off",
-    react/no-multi-comp: "off"
+    react/no-multi-comp: "off",
+    no-unused-expressions: "off"
   },
   globals: {
     navigator: true,
@@ -13,6 +14,7 @@
     fetch: true,
     XMLHttpRequest: true,
     describe: true,
-    it: true
+    it: true,
+    beforeEach: true
   }
 }

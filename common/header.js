@@ -12,7 +12,6 @@ const Header = (props) => (
 					<span >
 						{props.lang.lang}
 					</span>
-
 				</Button>
 				<Button onClick={props.openAbout}>
 					<span>{props.lang.about} </span>

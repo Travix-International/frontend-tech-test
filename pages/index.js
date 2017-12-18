@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
-// import Link from 'next/link';
-import { Spinner, Modal } from 'travix-ui-kit';
+import Link from 'next/link';
+import { Modal, Button } from 'travix-ui-kit';
 import withRedux from 'next-redux-wrapper';
+import NotificationSystem from 'react-notification-system';
 
 import initStore from './../store';
 
 import { getLang, changeLang } from './../actions/langActions';
 import { toggleAboutModal, toggleTaskModal } from './../actions/modalsActions';
+import { requestTaskDelete, requestTaskUpdate, requestTasksGet } from '../actions/tasksActions';
 
 import { HeadContainer, Header } from '../common/index';
 
-import stylesheet from '../styles/index.scss';
+import ToDoList from '../components/toDoList';
 
+import stylesheet from '../styles/index.scss';
 
 export class Home extends Component {
 	constructor(props) {
@@ -19,48 +22,116 @@ export class Home extends Component {
 		this.changeLang = this.changeLang.bind(this);
 		this.openAbout = this.openAbout.bind(this, true);
 		this.closeAbout = this.closeAbout.bind(this, false);
+		this.loadMore = this.loadMore.bind(this);
+		this.deleteTask = this.deleteTask.bind(this);
+		this.updateTask = this.updateTask.bind(this);
+		this.handleNoMoreData = this.handleNoMoreData.bind(this);
 	}
+
 	componentWillMount() {
 		this.props.getLang();
+		if (this.props.tasks.length === 0) {
+			return this.props.requestTasksGet({ lastId: 0, count: 10, callback: this.callback });
+		}
 	}
+
+	componentDidMount() {
+		window.errorEvent = document.createEvent('Event');
+		window.errorEvent.initEvent('noMoreData', true, true);
+		document.addEventListener('noMoreData', this.handleNoMoreData, false);
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener('noMoreData', this.handleNoMoreData, false);
+	}
+
 	changeLang() {
 		this.props.changeLang();
 	}
+
 	openAbout(data) {
 		this.props.toggleAboutModal(data);
 	}
+
 	closeAbout(data) {
 		this.props.toggleAboutModal(data);
 	}
+
+	loadMore() {
+		const lastItem = this.props.tasks[this.props.tasks.length - 1];
+		this.props.requestTasksGet({ lastId: lastItem.id, count: 10 });
+	}
+
+	deleteTask(data) {
+		this.props.requestTaskDelete(data);
+	}
+
+	updateTask(data) {
+		this.props.requestTaskUpdate(data);
+	}
+
+	handleNoMoreData(e) {
+		this.refs.notificationSystem.addNotification({
+			message: this.props.lang[e.error],
+			level: 'error'
+		});
+	}
+
 	render() {
 		return (
 			<div className="home_page">
 				<style dangerouslySetInnerHTML={{ __html: stylesheet }} />
 				<HeadContainer title={this.props.lang.home_title} />
 				<Header changeLang={this.changeLang} openAbout={this.openAbout} lang={this.props.lang} />
-				<Modal
-					active={this.props.modals.about}
-					onClose={this.closeAbout}
-				>
+				<Modal active={this.props.modals.about} onClose={this.closeAbout}>
 					<p>{this.props.lang.about_content}</p>
 				</Modal>
-				<Spinner size='m' />
+				<div className='content'>
+					<div className='content-top'>
+						<Link prefetch href={{ pathname: '/todo' }} as='/todo'>
+							<Button>
+								<span className='back_icon'>+</span>
+								<span className='back_text'>{this.props.lang.new_task}</span>
+							</Button>
+						</Link>
+					</div>
+					<div className='content-bottom'>
+						<ToDoList
+							lang={this.props.lang}
+							tasks={this.props.tasks}
+							deleteTask={this.deleteTask}
+							updateTask={this.updateTask}
+							loadMore={this.loadMore}
+							promises={this.props.promises}
+							status={this.props.status}
+						/>
+					</div>
+				</div>
+				<NotificationSystem ref='notificationSystem' />
 			</div>
 		);
 	}
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ lang, modals, promises, tasks, status, task }) {
 	return {
-		lang: state.lang,
-		modals: state.modals
+		lang,
+		modals,
+		promises,
+		tasks,
+		status,
+		task
 	};
 }
+
 const actionsToBind = {
 	getLang,
 	changeLang,
 	toggleAboutModal,
 	toggleTaskModal,
+	requestTaskDelete,
+	requestTaskUpdate,
+	requestTasksGet
 };
 
 export default withRedux(initStore, mapStateToProps, actionsToBind)(Home);

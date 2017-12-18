@@ -40,15 +40,15 @@ $input-light: #fff;
 $button-lightGreen: #01ae84;
 $black-shade: rgba(0,0,0,0.6);
 
-$grid-first: #084442;
+$grid-first: #ac0000;
 $grid-second: #16081e;
-$grid-third: #361935;
+$grid-third: #1c1c21;
 $grid-forth: #181823;
 $grid-fifth: #3f0a27;
 $grid-sixth: #150e19;
 $grid-seventh: #ffe600;
 $grid-eighth: #ffb700;
-$grid-ninth: #ffb700;
+$grid-ninth: #866100;
 
 @mixin backgroundSize($size) {
   -webkit-background-size: ($size);
@@ -103,8 +103,22 @@ $grid-ninth: #ffb700;
   -webkit-column-count: $count;
   -moz-column-count: $count;
 }
-@mixin box-shadow($option1, $option2) {
-  -webkit-box-shadow: $option1, $option2;
-  -moz-box-shadow: $option1, $option2;
-  box-shadow: $option1, $option2;
+@mixin box-shadow($option) {
+  -webkit-box-shadow: $option;
+  -moz-box-shadow: $option;
+  box-shadow: $option;
+}
+@mixin placeholder-color ($color) {
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &::-moz-placeholder {
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+  &:-moz-placeholder {
+    color: $color;
+  }
 }

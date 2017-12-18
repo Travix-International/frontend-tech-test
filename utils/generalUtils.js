@@ -15,18 +15,22 @@ module.exports = {
 			document.cookie = `${name}=${value}${expires}; path=/`;
 		}
 	},
-	getDataFromApi: async (uri, parameters) => {
-		let mainURL = 'https://api.iph-uat.adaa.gov.sa/iph/';
-		if (parameters) {
-			const parametersKeys = Object.keys(parameters).map((key) => `${key}=${parameters[key]}`).join('&');
-			mainURL = `${mainURL}${uri}?${parametersKeys}`;
-		}
+	asyncGetDataFromApi: async URL => {
 		try {
-			const response = await fetch(mainURL);
-			const responseJson = await response.json();
-			return responseJson;
+			const response = await fetch(URL);
+			return await response.json();
 		} catch (error) {
 			console.log(error);
 		}
 	},
+	getDataFromApi: URL => fetch(URL).then(response => response.json()),
+	setDataFromApi: (URL, data, method) => fetch(URL, {
+		method,
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data)
+	}).then(response => response.json()).catch(reason => console.log(reason))
 };
+

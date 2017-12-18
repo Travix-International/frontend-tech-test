@@ -23,5 +23,20 @@ header {
         float: right;
       }
     }
+    @media only screen and (max-width: 615px) {
+      .image-container {
+        width: 25%;
+        overflow: visible;
+      }
+      .buttons-container {
+        width: 75%;
+        & > button {
+          margin: 25px 20px;
+          float: right;
+          font-size: 15px;
+        }
+      }
+
+    }
   }
 }

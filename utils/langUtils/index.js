@@ -6,20 +6,20 @@ module.exports = {
 	langEn,
 	langAr,
 	currentEnglish: generalUtils.getCookie('lang') !== 'ar',
+	updateDomFont() {
+		if (process.browser) {
+			// document.body.style.fontFamily = this.currentEnglish ? 'Etelka-Light' : 'ITCHandel';
+		}
+	},
 	changeLang() {
 		this.currentEnglish = !this.currentEnglish;
 		const langForCookie = this.currentEnglish ? 'en' : 'ar';
 		generalUtils.createCookie('lang', langForCookie, 30);
-
-		if (this.currentEnglish && process.browser) {
-			document.body.style.fontFamily = 'Etelka-Light';
-		} else {
-			document.body.style.fontFamily = 'ITCHandel';
-		}
-
+		this.updateDomFont();
 		return this.getLang();
 	},
 	getLang() {
+		this.updateDomFont();
 		return this.currentEnglish ? this.langEn : this.langAr;
 	}
 };
