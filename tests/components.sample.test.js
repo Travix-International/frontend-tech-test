@@ -10,15 +10,14 @@ import ToDoList from './../components/toDoList';
 import SingleTask from './../components/singleTask';
 
 import { getLang } from './../actions/langActions';
-import { deleteTask, updateTask, loadMore } from '../actions/tasksActions';
 
 configure({ adapter: new Adapter() });
 const props = {
-	lang: getLang(),
+	lang: getLang().payload,
 	tasks: tasks.tasks,
-	deleteTask,
-	updateTask,
-	loadMore,
+	deleteTask: () => Promise.resolve(),
+	updateTask: () => Promise.resolve(),
+	loadMore: () => Promise.resolve(),
 	promises: {
 		TASKS_GET_REQUESTED: true
 	},
@@ -40,13 +39,44 @@ describe('Tasks List', () => {
 });
 
 describe('Single Task', () => {
+	const valueFormatter = (date) => new Date(Array.isArray(date) ? date[0] : date)
+		.toDateString()
+		.split(' ')
+		.slice(1)
+		.join(' ');
 	beforeEach(() => {
 		wrapper = mount(< SingleTask {...props} details={props.tasks[3]} />);
 	});
+
 	it('contains update status button', () => {
-		expect(wrapper.find('.done-section')).to.exist;
+		expect(wrapper.find('.done-section').length).to.equal(1);
 	});
-	it('contains a delete task button', () => {
-		expect(wrapper.find('.content-section')).to.exist;
+
+	describe('contains the task details', () => {
+		it('has the task details container', () => {
+			expect(wrapper.find('.content-section').length).to.equal(1);
+		});
+		it('contains the right title', () => {
+			expect(wrapper.find('.content-section').find('h3').html()).to.equal(`<h3>${props.tasks[3].title}</h3>`);
+		});
+		it('contains the right formatted date', () => {
+			expect(wrapper.find('.content-section').find('small').html()).to.equal(`<small>${valueFormatter(props.tasks[3].date)}</small>`);
+		});
+		it('contains the right description', () => {
+			expect(wrapper.find('.content-section').find('p').html()).to.equal(`<p>${props.tasks[3].description}</p>`);
+		});
+	});
+
+	describe('delete button behaviour', () => {
+		it('has the right title before action', () => {
+			expect(wrapper.find('Badge').props().title).to.equal(props.lang.delete);
+		});
+		it('changes the title correctly after performing a click action', () => {
+			const deleteButton = wrapper.find('Badge');
+			deleteButton.simulate('click');
+			wrapper.setProps({ promises: { ...props.promises, [props.tasks[3].id]: true } });
+			// stupid but we need to find the child again so the new props get applied
+			expect(wrapper.find('Badge').props().title).to.equal(props.lang.deleting);
+		});
 	});
 });

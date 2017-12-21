@@ -9,14 +9,14 @@ import {
 
 import generalUtils from '../utils/generalUtils';
 
-function getTasksApiCall({ lastId, count }) {
-	return generalUtils.getDataFromApi(`/tasks/${lastId}/${count}`);
+function getTasksApiCall({ lastId, count, testURL }) {
+	return generalUtils.getDataFromApi(`${testURL || ''}/tasks/${lastId}/${count}`);
 }
 
-function* getTasks({ payload }) {
+export function* getTasks({ payload }) {
 	try {
-		const getResponse = yield call(getTasksApiCall, payload);
 		yield call(delay, 1000);
+		const getResponse = yield call(getTasksApiCall, payload);
 		if (getResponse.error) {
 			window.errorEvent.error = getResponse.error;
 			document.dispatchEvent(window.errorEvent);

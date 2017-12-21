@@ -11,7 +11,7 @@ import sagas from './../sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const initStore = (initialState) => {
+export const initStore = (initialState) => {
 	const store = createStore(
 		reducers,
 		initialState,

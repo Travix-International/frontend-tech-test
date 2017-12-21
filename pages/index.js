@@ -4,7 +4,7 @@ import { Modal, Button } from 'travix-ui-kit';
 import withRedux from 'next-redux-wrapper';
 import NotificationSystem from 'react-notification-system';
 
-import initStore from './../store';
+import { initStore } from './../store';
 
 import { getLang, changeLang } from './../actions/langActions';
 import { toggleAboutModal, toggleTaskModal } from './../actions/modalsActions';
@@ -16,7 +16,7 @@ import ToDoList from '../components/toDoList';
 
 import stylesheet from '../styles/index.scss';
 
-export class Home extends Component {
+class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.changeLang = this.changeLang.bind(this);
@@ -31,7 +31,7 @@ export class Home extends Component {
 	componentWillMount() {
 		this.props.getLang();
 		if (this.props.tasks.length === 0) {
-			return this.props.requestTasksGet({ lastId: 0, count: 10, callback: this.callback });
+			return this.props.requestTasksGet({ lastId: 0, count: 10 });
 		}
 	}
 
