@@ -115,6 +115,17 @@ test('post /tasks cb', (t) => {
       },
     },
   }));
+
+  // invalid creating task
+  tasks.postCb({
+    body: {
+      iamnotvalid: 'invalid',
+    },
+  }, spiedRes);
+  t.true(spiedRes.status.calledWith(400));
+  t.true(spiedRes.json.calledWith({
+    message: `task.iamnotvalid is not allowed`,
+  }));
 });
 
 test('patch /tasks/:id cb', (t) => {

@@ -5,6 +5,10 @@ import schemas from '../schemas';
 import tasksContainer from '../../tasks.json';
 
 const router = express.Router();
+const POSSIBLE_KEYS = [
+  'title',
+  'description',
+];
 
 /**
  * GET /tasks
@@ -68,8 +72,11 @@ export const patchCb = (req, res) => {
 
     if (task !== undefined) {
       // only update when info is given from body
+      // and in POSSIBLE_KEYS
       Object.keys(req.body).map((key) => {
-        task[key] = req.body[key];
+        if (POSSIBLE_KEYS.indexOf(key) > -1) {
+          task[key] = req.body[key];
+        }
         return false;
       });
       const response = normalize(task, schemas.task);
@@ -95,12 +102,26 @@ router.patch('/tasks/:id', bodyParser.json(), patchCb);
  * Return status code 201, and created instance
  */
 export const postCb = (req, res) => {
-  const { title, description } = req.body;
   const task = {
     id: tasksContainer.tasks.length,
-    title,
-    description,
   };
+  let hasFoundInvalidKey = false;
+  // only create when valid info is given
+  // and in POSSIBLE_KEYS
+  Object.keys(req.body).some((key) => {
+    if (POSSIBLE_KEYS.indexOf(key) > -1) {
+      task[key] = req.body[key];
+    } else {
+      hasFoundInvalidKey = key;
+      return hasFoundInvalidKey;
+    }
+    return false;
+  });
+  if (hasFoundInvalidKey) {
+    return res.status(400).json({
+      message: `task.${hasFoundInvalidKey} is not allowed`,
+    });
+  }
 
   tasksContainer.tasks.push(task);
 
