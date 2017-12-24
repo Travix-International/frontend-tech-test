@@ -107,7 +107,7 @@ router.post('/tasks/:title/:description', postCb);
  *
  * id: Number
  *
- * Delete the task linked to the  given id.
+ * Delete the task linked to the given id.
  * If the task is found and deleted as well, return a status code 204.
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
