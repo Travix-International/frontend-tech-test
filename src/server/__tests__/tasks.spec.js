@@ -146,6 +146,32 @@ test('patch /tasks/:id cb', (t) => {
       },
     },
   }));
+
+  // id isNaN
+  tasks.patchCb({
+    params: {
+      id: 'isNaN',
+      title: 'mock_title_mod',
+      description: 'mock_desc_mod',
+    },
+  }, spiedRes);
+  t.true(spiedRes.status.calledWith(400));
+  t.true(spiedRes.json.calledWith({
+    message: 'Bad request',
+  }));
+
+  // if id not found
+  tasks.patchCb({
+    params: {
+      id: '1',
+      title: 'mock_title_mod',
+      description: 'mock_desc_mod',
+    },
+  }, spiedRes);
+  t.true(spiedRes.status.calledWith(404));
+  t.true(spiedRes.json.calledWith({
+    message: 'Not found',
+  }));
 });
 
 test('delete /tasks/:id cb', (t) => {
@@ -158,6 +184,8 @@ test('delete /tasks/:id cb', (t) => {
   });
   const tasks = mock.reRequire('../tasks');
   const spiedRes = createSpiedRes();
+
+  // success
   tasks.deleteCb({
     params: {
       id: 0,
@@ -165,4 +193,26 @@ test('delete /tasks/:id cb', (t) => {
   }, spiedRes);
   t.true(spiedRes.status.calledWith(204));
   t.false(spiedRes.json.called);
+
+  // id isNaN
+  tasks.deleteCb({
+    params: {
+      id: 'isNaN',
+    },
+  }, spiedRes);
+  t.true(spiedRes.status.calledWith(400));
+  t.true(spiedRes.json.calledWith({
+    message: 'Bad request',
+  }));
+
+  // id not found
+  tasks.deleteCb({
+    params: {
+      id: '0',
+    },
+  }, spiedRes);
+  t.true(spiedRes.status.calledWith(404));
+  t.true(spiedRes.json.calledWith({
+    message: 'Not found',
+  }));
 });
