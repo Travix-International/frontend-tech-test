@@ -13,9 +13,10 @@ class ToDoList extends Component {
 		this.props.loadMore();
 	}
 	renderTasks() {
-		return this.props.tasks.map((task) => (
+		return this.props.tasks.map((task, key) => (
 			<SingleTask
 				key={task.id}
+				taskIndex={key}
 				details={task}
 				lang={this.props.lang}
 				deleteTask={this.props.deleteTask}

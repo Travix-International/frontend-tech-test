@@ -17,11 +17,26 @@ class ToDoFormClass extends Component {
 
 	}
 	onSubmit(props) {
+		const data = {
+			id: props.id,
+			title: props.title,
+			date: props.date,
+			description: props.description,
+			done: props.done,
+		};
 		if (this.props.initialValues.title) {
-			this.props.updateTask({ ...props, cameFrom: 'edit' });
+			this.props.updateTask({
+				...data,
+				taskIndex: props.taskIndex,
+				task: data
+			});
 		} else {
 			this.props.reset();
-			this.props.addTask(props);
+			this.props.addTask({
+				title: props.title,
+				date: props.date,
+				description: props.description
+			});
 		}
 	}
 	render() {
@@ -31,7 +46,7 @@ class ToDoFormClass extends Component {
 					onSubmit={this.props.handleSubmit(this.onSubmit)}
 					className='new-post'
 				>
-					<h2>{this.props.lang.new_task_title}</h2>
+					<h2>{this.props.initialValues.title ? this.props.lang.edit_task_title : this.props.lang.new_task_title}</h2>
 					<h4>{this.props.initialValues.title ? this.props.lang.edit_task_form_text : this.props.lang.new_task_form_text}</h4>
 					<Fields
 						names={Object.keys(this.props.fields)}

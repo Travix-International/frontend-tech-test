@@ -18,8 +18,9 @@ export function* getTasks({ payload }) {
 		yield call(delay, 1000);
 		const getResponse = yield call(getTasksApiCall, payload);
 		if (getResponse.error) {
-			window.errorEvent.error = getResponse.error;
-			document.dispatchEvent(window.errorEvent);
+			window.actionEvent.message = getResponse.error;
+			window.actionEvent.level = 'error';
+			document.dispatchEvent(window.actionEvent);
 			yield put({ type: TASKS_GET_FAILED, payload: getResponse });
 		} else {
 			yield put({ type: TASKS_GET_SUCCEEDED, payload: getResponse });

@@ -150,9 +150,6 @@
               color: $grid-eighth;
               justify-content: flex-start;
               overflow: hidden;
-              @media only screen and (max-width: 615px) {
-                width: calc(100% - 240px);
-              }
               h3 {
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -167,6 +164,19 @@
               p {
                 margin: 0;
                 line-height: 25px;
+              }
+              @media only screen and (max-width: 615px) {
+                width: calc(100% - 240px);
+                h3 {
+                  font-size: 17px;
+                }
+                small {
+                  font-size: 10px;
+                }
+                p {
+                  font-size: 14px;
+                  line-height: 18px;
+                }
               }
             }
             .edit-section {
@@ -221,9 +231,9 @@
           }
 
           .load-more-container .ui-spinner {
-            position: relative;
+            position: absolute;
             left: calc(50% - 30px);
-            bottom: -20px;
+            bottom: 27px;
           }
         }
       }

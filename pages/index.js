@@ -3,12 +3,13 @@ import Link from 'next/link';
 import { Modal, Button } from 'travix-ui-kit';
 import withRedux from 'next-redux-wrapper';
 import NotificationSystem from 'react-notification-system';
+import io from 'socket.io-client';
 
 import { initStore } from './../store';
 
 import { getLang, changeLang } from './../actions/langActions';
 import { toggleAboutModal, toggleTaskModal } from './../actions/modalsActions';
-import { requestTaskDelete, requestTaskUpdate, requestTasksGet } from '../actions/tasksActions';
+import { requestTaskDelete, requestTaskUpdate, requestTasksGet, applyTaskUpdate } from '../actions/tasksActions';
 
 import { HeadContainer, Header } from '../common/index';
 
@@ -26,6 +27,9 @@ class Home extends Component {
 		this.deleteTask = this.deleteTask.bind(this);
 		this.updateTask = this.updateTask.bind(this);
 		this.handleNoMoreData = this.handleNoMoreData.bind(this);
+		this.state = {
+			test: 120
+		};
 	}
 
 	componentWillMount() {
@@ -36,14 +40,22 @@ class Home extends Component {
 	}
 
 	componentDidMount() {
-		window.errorEvent = document.createEvent('Event');
-		window.errorEvent.initEvent('noMoreData', true, true);
+		window.actionEvent = document.createEvent('Event');
+		window.actionEvent.initEvent('noMoreData', true, true);
 		document.addEventListener('noMoreData', this.handleNoMoreData, false);
+		this.socket = io();
+		this.socket.on('taskStatusChanged', this.handleTaskStatusChanged);
 	}
 
 	componentWillUnmount() {
 		document.removeEventListener('noMoreData', this.handleNoMoreData, false);
+		this.socket.off('taskStatusChanged', this.handleTaskStatusChanged);
+		this.socket.close();
 	}
+
+	handleTaskStatusChanged = data => {
+		this.props.applyTaskUpdate(data);
+	};
 
 	changeLang() {
 		this.props.changeLang();
@@ -67,13 +79,17 @@ class Home extends Component {
 	}
 
 	updateTask(data) {
+		this.socket.emit('taskStatusChanged', data);
 		this.props.requestTaskUpdate(data);
+		setTimeout(() => {
+			this.props.applyTaskUpdate(data);
+		}, 500);
 	}
 
 	handleNoMoreData(e) {
 		this.refs.notificationSystem.addNotification({
-			message: this.props.lang[e.error],
-			level: 'error'
+			message: this.props.lang[e.message],
+			level: e.level
 		});
 	}
 
@@ -131,7 +147,8 @@ const actionsToBind = {
 	toggleTaskModal,
 	requestTaskDelete,
 	requestTaskUpdate,
-	requestTasksGet
+	requestTasksGet,
+	applyTaskUpdate
 };
 
 export default withRedux(initStore, mapStateToProps, actionsToBind)(Home);

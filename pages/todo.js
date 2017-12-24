@@ -4,12 +4,13 @@ import Router from 'next/router';
 import { Modal, Button } from 'travix-ui-kit';
 import withRedux from 'next-redux-wrapper';
 import NotificationSystem from 'react-notification-system';
+import io from 'socket.io-client';
 
-import initStore from './../store';
+import { initStore } from './../store';
 
 import { getLang, changeLang } from './../actions/langActions';
 import { toggleAboutModal } from './../actions/modalsActions';
-import { requestTaskPost, requestTaskGet, requestTaskUpdate, deleteCurrentTask } from './../actions/tasksActions';
+import { requestTaskPost, requestTaskGet, requestTaskUpdate, deleteCurrentTask, applyTaskUpdate } from './../actions/tasksActions';
 
 import { HeadContainer, Header } from '../common/index';
 
@@ -24,6 +25,7 @@ class ToDo extends Component {
 		this.openAbout = this.openAbout.bind(this, true);
 		this.closeAbout = this.closeAbout.bind(this, false);
 		this.handleTaskUpdated = this.handleTaskUpdated.bind(this);
+		this.updateTask = this.updateTask.bind(this);
 	}
 
 	componentWillMount() {
@@ -31,6 +33,11 @@ class ToDo extends Component {
 	}
 
 	componentDidMount() {
+		window.actionEvent = document.createEvent('Event');
+		window.actionEvent.initEvent('taskUpdated', true, true);
+		document.addEventListener('taskUpdated', this.handleTaskUpdated, false);
+		this.socket = io();
+		this.socket.on('taskStatusChanged', this.handleTaskStatusChanged);
 		if (this.props.url.query.id) {
 			if (this.props.url.query.id.split('-').length === 5) {
 				return this.props.requestTaskGet(this.props.url.query.id);
@@ -40,25 +47,28 @@ class ToDo extends Component {
 					message: this.props.lang.bad_task_id,
 					level: 'error'
 				});
-				setTimeout(() => Router.push('/'), 500);
+				setTimeout(() => Router.push('/'), 2000);
 			});
 		}
-		window.updatedEvent = document.createEvent('Event');
-		window.updatedEvent.initEvent('taskUpdated', true, true);
-		document.addEventListener('taskUpdated', this.handleTaskUpdated, false);
 	}
 
 	componentWillUnmount() {
 		this.props.deleteCurrentTask();
 		document.removeEventListener('taskUpdated', this.handleTaskUpdated, false);
+		this.socket.off('taskStatusChanged', this.handleTaskStatusChanged);
+		this.socket.close();
 	}
 
-	handleTaskUpdated() {
-		debugger
+	handleTaskStatusChanged = data => {
+		this.props.applyTaskUpdate(data);
+	};
+
+	handleTaskUpdated(e) {
 		this.refs.notificationSystem.addNotification({
-			message: this.props.lang.changes_been_saved,
-			level: 'error'
+			message: this.props.lang[e.message],
+			level: e.level
 		});
+		setTimeout(() => Router.push('/'), 2000);
 	}
 
 	changeLang() {
@@ -71,6 +81,14 @@ class ToDo extends Component {
 
 	closeAbout(data) {
 		this.props.toggleAboutModal(data);
+	}
+
+	updateTask(data) {
+		this.socket.emit('taskStatusChanged', data);
+		this.props.requestTaskUpdate(data);
+		setTimeout(() => {
+			this.props.applyTaskUpdate(data);
+		}, 500);
 	}
 
 	render() {
@@ -94,10 +112,10 @@ class ToDo extends Component {
 					</div>
 					<div className='content-bottom'>
 						<ToDoForm
-							initialValues={this.props.task}
+							initialValues={this.props.url.query.id ? this.props.task : {}}
 							lang={this.props.lang}
 							addTask={this.props.requestTaskPost}
-							updateTask={this.props.requestTaskUpdate}
+							updateTask={this.updateTask}
 							promises={this.props.promises}
 						/>
 					</div>
@@ -124,7 +142,8 @@ const actionsToBind = {
 	requestTaskPost,
 	requestTaskGet,
 	requestTaskUpdate,
-	deleteCurrentTask
+	deleteCurrentTask,
+	applyTaskUpdate
 };
 
 export default withRedux(initStore, mapStateToProps, actionsToBind)(ToDo);

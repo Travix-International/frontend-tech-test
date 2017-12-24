@@ -17,9 +17,9 @@ function newStateHelper(data) {
 function currentTaskReducer(state = InitialStates.currentTask, action) {
 	switch (action.type) {
 		case TASK_UPDATE_SUCCEEDED:
-			return action.payload.type === 'edit' ? newStateHelper(action.payload.task) : state;
-		case TASK_GET_SUCCEEDED:
 			return newStateHelper(action.payload.task);
+		case TASK_GET_SUCCEEDED:
+			return newStateHelper({ ...action.payload.task, taskIndex: action.payload.taskIndex });
 		case CURRENT_TASK_DELETE:
 			return InitialStates.currentTask;
 		default:

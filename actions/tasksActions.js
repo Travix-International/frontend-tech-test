@@ -4,7 +4,8 @@ import {
 	TASK_UPDATE_REQUESTED,
 	TASK_GET_REQUESTED,
 	TASKS_GET_REQUESTED,
-	CURRENT_TASK_DELETE
+	CURRENT_TASK_DELETE,
+	TASK_UPDATE_SUCCEEDED
 } from './actionTypes';
 
 function requestTaskPost(data) {
@@ -31,11 +32,16 @@ function deleteCurrentTask() {
 	return { type: CURRENT_TASK_DELETE };
 }
 
+function applyTaskUpdate(data) {
+	return { type: TASK_UPDATE_SUCCEEDED, payload: data };
+}
+
 export {
 	requestTaskPost,
 	requestTaskDelete,
 	requestTaskUpdate,
 	requestTaskGet,
 	requestTasksGet,
-	deleteCurrentTask
+	deleteCurrentTask,
+	applyTaskUpdate
 };

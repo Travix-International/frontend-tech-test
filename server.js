@@ -1,23 +1,47 @@
-const next = require('next');
-
-const express = require('express');
+const app = require('express')();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const fs = require('fs');
-const bodyParser = require('body-parser');
+const next = require('next');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
-const handle = app.getRequestHandler();
+const nextApp = next({ dev });
+const nextHandler = nextApp.getRequestHandler();
 
-const tasksContainer = require('./tasks.json');
+const bodyParser = require('body-parser');
 
-app.prepare().then(() => {
-	const server = express();
+const fileName = 'tasks';
+const tasksContainer = require(`./${fileName}.json`);
+
+const structureTaskData = ({ id, title, date, description, done }) => {
+	const task = { id, title, date, description, done };
+	Object.keys(task).forEach(property => {
+		if (task[property] === undefined) {
+			delete task[property];
+		}
+	});
+	return task;
+};
+// socket.io server
+io.on('connection', socket => {
+	// socket.io server
+	socket.on('taskStatusChanged', data => {
+		const taskIndex = tasksContainer.tasks.findIndex(item => item.id === data.id);
+		socket.broadcast.emit('taskStatusChanged', {
+			message: 'updated_successfully',
+			task: { ...tasksContainer.tasks[taskIndex], done: data.done, title: data.title, date: data.date, description: data.description },
+			taskIndex,
+		});
+	});
+});
+
+nextApp.prepare().then(() => {
 	/* API calls configuration starts */
-	server.use(bodyParser.urlencoded({ extended: true }));
-	server.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({ extended: true }));
+	app.use(bodyParser.json());
 	// all tasks
-	server.get('/tasks/:lastId/:count', (req, res) => {
+	app.get('/tasks/:lastId/:count', (req, res) => {
 		const lastId = req.params.lastId;
 		const count = parseInt(req.params.count, 10);
 		if (lastId !== 0) {
@@ -35,11 +59,12 @@ app.prepare().then(() => {
 	});
 
 	// view single task
-	server.get('/task/:id', (req, res) => {
+	app.get('/task/:id', (req, res) => {
 		const id = req.params.id;
 		if (id.split('-').length === 5) {
 			const task = tasksContainer.tasks.find((item) => item.id === id);
-			return res.status(task ? 200 : 404).json(task ? { task } : { message: 'no_item_found' });
+			const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
+			return res.status(task ? 200 : 404).json(task ? { task, taskIndex } : { message: 'bad_task_id' });
 		}
 		return res.status(400).json({
 			message: 'Bad request.',
@@ -47,31 +72,29 @@ app.prepare().then(() => {
 	});
 
 	// update single task
-	server.put('/task/update/:id', (req, res) => {
+	app.put('/task/update/:id', (req, res) => {
 		const id = req.params.id;
 		if (id.split('-').length === 5) {
 			const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
 			if (taskIndex || taskIndex === 0) {
 				const taskToUpdate = tasksContainer.tasks[taskIndex];
-				const type = req.body.cameFrom;
-				const updateData = req.body;
-				delete updateData.cameFrom;
+				const updateData = structureTaskData((req.body.task || req.body));
 				tasksContainer.tasks[taskIndex] = { ...taskToUpdate, ...updateData };
 				const json = JSON.stringify(tasksContainer);
-				fs.writeFile('tasks.json', json, 'utf8', error => {
+				fs.writeFile(`./${fileName}.json`, json, 'utf8', error => {
 					if (error) {
 						return error;
 					}
 				});
-				return res.status(200).json({
+				const resObj = {
 					message: 'updated_successfully',
 					taskIndex,
-					task: tasksContainer.tasks[taskIndex],
-					type
-				});
+					task: tasksContainer.tasks[taskIndex]
+				};
+				return res.status(200).json(resObj);
 			}
 			return res.status(404).json({
-				message: 'no_item_found',
+				message: 'bad_task_id',
 			});
 		}
 		return res.status(400).json({
@@ -80,7 +103,7 @@ app.prepare().then(() => {
 	});
 
 	// create single task
-	server.post('/task/create/:title/:date/:description', (req, res) => {
+	app.post('/task/create/:title/:date/:description', (req, res) => {
 		const S4 = () => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 		const GUID = (`${S4() + S4()}-${S4()}-4${S4().substr(0, 3)}-${S4()}-${S4() + S4() + S4()}`).toLowerCase();
 		const task = {
@@ -91,25 +114,25 @@ app.prepare().then(() => {
 		};
 		tasksContainer.tasks.push(task);
 		const json = JSON.stringify(tasksContainer);
-		fs.writeFile('tasks.json', json, 'utf8', error => {
+		fs.writeFile(`./${fileName}.json`, json, 'utf8', error => {
 			if (error) {
 				return error;
 			}
 		});
 		return res.status(201).json({
-			message: 'Resource created',
+			message: 'new_task_created',
 		});
 	});
 
 	// delete single task
-	server.delete('/task/delete/:id', (req, res) => {
+	app.delete('/task/delete/:id', (req, res) => {
 		const id = req.params.id;
 		if (id.split('-').length === 5) {
 			const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
 			if (taskIndex || taskIndex === 0) {
 				tasksContainer.tasks.splice(taskIndex, 1);
 				const json = JSON.stringify(tasksContainer);
-				fs.writeFile('tasks.json', json, 'utf8', error => {
+				fs.writeFile(`./${fileName}.json`, json, 'utf8', error => {
 					if (error) {
 						return error;
 					}
@@ -131,18 +154,18 @@ app.prepare().then(() => {
 	/* API calls configuration ends */
 
 	/* Routing configuration starts */
-	server.get('/', (req, res) => app.render(req, res, '/', req.params));
+	app.get('/', (req, res) => nextApp.render(req, res, '/', req.params));
 
-	server.get('/todo/:route', (req, res) => app.render(req, res, '/todo', Object.assign({ route: req.params.route }, req.query)));
-	server.get('/todo/:route/:id', (req, res) => app.render(req, res, '/todo', Object.assign({
+	app.get('/todo/:route', (req, res) => nextApp.render(req, res, '/todo', Object.assign({ route: req.params.route }, req.query)));
+	app.get('/todo/:route/:id', (req, res) => nextApp.render(req, res, '/todo', Object.assign({
 		route: req.params.route,
 		id: req.params.id
 	}, req.query)));
 
-	server.get('*', (req, res) => handle(req, res));
 	/* Routing configuration ends */
+	app.get('*', (req, res) => nextHandler(req, res));
 
-	server.listen(port, err => {
+	server.listen(port, (err) => {
 		if (err) throw err;
 		console.log(`> Ready on http://localhost:${port}`);
 	});

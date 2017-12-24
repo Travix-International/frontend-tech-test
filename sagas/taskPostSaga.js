@@ -8,12 +8,15 @@ import {
 import generalUtils from '../utils/generalUtils';
 
 function postTaskApiCall(payload) {
-	return generalUtils.setDataFromApi(`/task/create/${payload.title}/${payload.date[0]}/${payload.description}`, payload, 'POST').then(response => console.log(response)).catch(reason => console.log(reason));
+	return generalUtils.setDataFromApi(`/task/create/${payload.title}/${payload.date[0]}/${payload.description}`, payload, 'POST');
 }
 
 function* postTask({ payload }) {
 	try {
 		const postResponse = yield call(postTaskApiCall, payload);
+		window.actionEvent.message = postResponse.message;
+		window.actionEvent.level = 'success';
+		document.dispatchEvent(window.actionEvent);
 		yield put({ type: TASK_POST_SUCCEEDED, payload: postResponse });
 	} catch (reason) {
 		yield put({ type: TASK_POST_FAILED, payload: reason });

@@ -14,10 +14,20 @@ function getTaskApiCall(payload) {
 }
 function* getTask({ payload }) {
 	try {
-		const getResponse = yield call(getTaskApiCall, payload);
 		yield call(delay, 1000);
-		yield put({ type: TASK_GET_SUCCEEDED, payload: getResponse });
+		const getResponse = yield call(getTaskApiCall, payload);
+		if (getResponse.message) {
+			window.actionEvent.message = getResponse.message;
+			window.actionEvent.level = 'error';
+			document.dispatchEvent(window.actionEvent);
+			yield put({ type: TASK_GET_FAILED, payload: getResponse });
+		} else {
+			yield put({ type: TASK_GET_SUCCEEDED, payload: getResponse });
+		}
 	} catch (reason) {
+		window.actionEvent.message = reason.message;
+		window.actionEvent.level = 'error';
+		document.dispatchEvent(window.actionEvent);
 		yield put({ type: TASK_GET_FAILED, payload: reason });
 	}
 }

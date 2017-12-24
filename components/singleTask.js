@@ -40,11 +40,11 @@ class SingleTask extends Component {
 	updateTask() {
 		if (!this.state.updating && !this.state.deleting) {
 			this.setState({ updating: true }, () => this.props.updateTask({
-				id: this.props.details.id,
-				cameFrom: 'update',
+				taskIndex: this.props.taskIndex,
+				task: { ...this.props.details, done: !this.props.details.done },
+				...this.props.details,
 				done: !this.props.details.done
 			}));
-			console.log(this.state.updating);
 		}
 	}
 
@@ -83,10 +83,11 @@ class SingleTask extends Component {
 							<span className='edit-icon'>&#x270E;</span>
 						</Button>
 					</Link>
-					<Button onClick={this.deleteTask} className='delete-button' style={this.state.deleting && this.props.promises[this.props.details.id] ? { height: 0 } : { height: 'block' }}>
+					<Button onClick={this.deleteTask} className='delete-button' style={this.state.deleting && this.props.promises[this.props.details.id] ? { display: 'none' } : { display: '' }}>
 						<span>&#x2718;</span>
 					</Button>
-					{this.state.updating && this.props.promises[this.props.details.id] && <Spinner size='m' />}
+
+					{this.state.deleting && this.props.promises[this.props.details.id] && <Spinner size='m' />}
 				</div>
 			</div>
 		);
