@@ -13,7 +13,9 @@ const createSpiedRes = () => {
 
 test('get /tasks cb', (t) => {
   mock('../../../tasks.json', {
-    tasks: [],
+    tasks: [{
+      id: 0,
+    }],
   });
   // why we reRequire here
   // https://www.npmjs.com/package/mock-require#mockrerequirepath
@@ -21,7 +23,16 @@ test('get /tasks cb', (t) => {
   const spiedRes = createSpiedRes();
   tasks.getCb(null, spiedRes);
   t.true(spiedRes.status.calledWith(200));
-  t.true(spiedRes.json.calledWith({ tasks: [] }));
+  t.true(spiedRes.json.calledWith({
+    result: [0],
+    entities: {
+      tasks: {
+        0: {
+          id: 0,
+        },
+      },
+    },
+  }));
 });
 
 test('get /tasks/:id cb', (t) => {
@@ -43,10 +54,15 @@ test('get /tasks/:id cb', (t) => {
   }, spiedRes);
   t.true(spiedRes.status.calledWith(200));
   t.true(spiedRes.json.calledWith({
-    task: {
-      id: 0,
-      description: 'mock_desc',
-      title: 'mock_title',
+    result: 0,
+    entities: {
+      tasks: {
+        0: {
+          id: 0,
+          description: 'mock_desc',
+          title: 'mock_title',
+        },
+      },
     },
   }));
 
@@ -86,10 +102,21 @@ test('post /tasks cb', (t) => {
     },
   }, spiedRes);
   t.true(spiedRes.status.calledWith(201));
-  t.true(spiedRes.json.calledWith({ message: 'Resource created' }));
+  t.true(spiedRes.json.calledWith({
+    result: 0,
+    entities: {
+      tasks: {
+        0: {
+          id: 0,
+          title: 'mock_title',
+          description: 'mock_desc',
+        },
+      },
+    },
+  }));
 });
 
-test('put /tasks/:id cb', (t) => {
+test('patch /tasks/:id cb', (t) => {
   mock('../../../tasks.json', {
     tasks: [{
       id: 0,
@@ -99,7 +126,7 @@ test('put /tasks/:id cb', (t) => {
   });
   const tasks = mock.reRequire('../tasks');
   const spiedRes = createSpiedRes();
-  tasks.putCb({
+  tasks.patchCb({
     params: {
       id: 0,
       title: 'mock_title_mod',
@@ -108,9 +135,16 @@ test('put /tasks/:id cb', (t) => {
   }, spiedRes);
   t.true(spiedRes.status.calledWith(200));
   t.true(spiedRes.json.calledWith({
-    id: 0,
-    title: 'mock_title_mod',
-    description: 'mock_desc_mod',
+    result: 0,
+    entities: {
+      tasks: {
+        0: {
+          id: 0,
+          title: 'mock_title_mod',
+          description: 'mock_desc_mod',
+        },
+      },
+    },
   }));
 });
 
@@ -129,8 +163,6 @@ test('delete /tasks/:id cb', (t) => {
       id: 0,
     },
   }, spiedRes);
-  t.true(spiedRes.status.calledWith(200));
-  t.true(spiedRes.json.calledWith({
-    message: 'Updated successfully',
-  }));
+  t.true(spiedRes.status.calledWith(204));
+  t.false(spiedRes.json.called);
 });

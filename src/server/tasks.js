@@ -1,4 +1,6 @@
 import express from 'express';
+import { normalize } from 'normalizr';
+import schemas from '../schemas';
 import tasksContainer from '../../tasks.json';
 
 const router = express.Router();
@@ -9,7 +11,8 @@ const router = express.Router();
  * Return the list of tasks with status code 200.
  */
 export const getCb = (req, res) => {
-  return res.status(200).json(tasksContainer);
+  const response = normalize(tasksContainer.tasks, [schemas.task]);
+  return res.status(200).json(response);
 };
 router.get('/tasks', getCb);
 
@@ -31,9 +34,8 @@ export const getWithIdCb = (req, res) => {
     const task = tasksContainer.tasks.find((item) => { return item.id === id; });
 
     if (task !== undefined) {
-      return res.status(200).json({
-        task,
-      });
+      const response = normalize(task, schemas.task);
+      return res.status(200).json(response);
     }
     return res.status(404).json({
       message: 'Not found.',
@@ -46,18 +48,18 @@ export const getWithIdCb = (req, res) => {
 router.get('/tasks/:id', getWithIdCb);
 
 /**
- * PUT /task/update/:id/:title/:description
+ * PATCH /task/update/:id/:title/:description
  *
  * id: Number
  * title: string
  * description: string
  *
  * Update the task with the given id.
- * If the task is found and update as well, return a status code 204.
+ * If the task is found and update as well, return a status code 200 and updated task.
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-export const putCb = (req, res) => {
+export const patchCb = (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -66,7 +68,8 @@ export const putCb = (req, res) => {
     if (task !== undefined) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(200).json(task);
+      const response = normalize(task, schemas.task);
+      return res.status(200).json(response);
     }
     return res.status(404).json({
       message: 'Not found',
@@ -76,7 +79,7 @@ export const putCb = (req, res) => {
     message: 'Bad request',
   });
 };
-router.put('/tasks/:id/:title/:description', putCb);
+router.patch('/tasks/:id/:title/:description', patchCb);
 
 /**
  * POST /task/create/:title/:description
@@ -85,7 +88,7 @@ router.put('/tasks/:id/:title/:description', putCb);
  * description: string
  *
  * Add a new task to the array tasksContainer.tasks with the given title and description.
- * Return status code 201.
+ * Return status code 201, and created instance
  */
 export const postCb = (req, res) => {
   const task = {
@@ -96,9 +99,9 @@ export const postCb = (req, res) => {
 
   tasksContainer.tasks.push(task);
 
-  return res.status(201).json({
-    message: 'Resource created',
-  });
+  const response = normalize(task, schemas.task);
+
+  return res.status(201).json(response);
 };
 router.post('/tasks/:title/:description', postCb);
 
@@ -114,18 +117,14 @@ router.post('/tasks/:title/:description', postCb);
  */
 export const deleteCb = (req, res) => {
   const id = parseInt(req.params.id, 10);
-  // console.log(id);
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-    // console.log(task);
 
     if (task !== undefined) {
       const taskIndex = tasksContainer.tasks.indexOf(task);
       tasksContainer.tasks.splice(taskIndex, 1);
-      return res.status(200).json({
-        message: 'Updated successfully',
-      });
+      return res.status(204);
     }
     return res.status(404).json({
       message: 'Not found',

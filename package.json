@@ -15,7 +15,8 @@
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "normalizr": "^3.2.4"
   },
   "devDependencies": {
     "ava": "^0.24.0",
@@ -36,7 +37,8 @@
   "ava": {
     "files": [
       "src/**/__tests__/**/*.js",
-      "src/**/*.spec.js"
+      "src/**/*.spec.js",
+      "!src/server/__tests__/index.spec.js"
     ],
     "require": [
       "babel-register"
