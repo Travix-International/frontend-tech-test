@@ -1,5 +1,6 @@
 import express from 'express';
 import { normalize } from 'normalizr';
+import bodyParser from 'body-parser';
 import schemas from '../schemas';
 import tasksContainer from '../../tasks.json';
 
@@ -66,8 +67,9 @@ export const patchCb = (req, res) => {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== undefined) {
-      task.title = req.params.title;
-      task.description = req.params.description;
+      const { title, description } = req.body;
+      task.title = title;
+      task.description = description;
       const response = normalize(task, schemas.task);
       return res.status(200).json(response);
     }
@@ -79,10 +81,10 @@ export const patchCb = (req, res) => {
     message: 'Bad request',
   });
 };
-router.patch('/tasks/:id/:title/:description', patchCb);
+router.patch('/tasks/:id', bodyParser.json(), patchCb);
 
 /**
- * POST /task/create/:title/:description
+ * POST /task
  *
  * title: string
  * description: string
@@ -91,10 +93,11 @@ router.patch('/tasks/:id/:title/:description', patchCb);
  * Return status code 201, and created instance
  */
 export const postCb = (req, res) => {
+  const { title, description } = req.body;
   const task = {
     id: tasksContainer.tasks.length,
-    title: req.params.title,
-    description: req.params.description,
+    title,
+    description,
   };
 
   tasksContainer.tasks.push(task);
@@ -103,7 +106,7 @@ export const postCb = (req, res) => {
 
   return res.status(201).json(response);
 };
-router.post('/tasks/:title/:description', postCb);
+router.post('/tasks', bodyParser.json(), postCb);
 
 /**
  * DELETE /task/delete/:id
@@ -124,7 +127,7 @@ export const deleteCb = (req, res) => {
     if (task !== undefined) {
       const taskIndex = tasksContainer.tasks.indexOf(task);
       tasksContainer.tasks.splice(taskIndex, 1);
-      return res.status(204);
+      return res.status(204).end();
     }
     return res.status(404).json({
       message: 'Not found',

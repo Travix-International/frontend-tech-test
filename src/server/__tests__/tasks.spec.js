@@ -7,6 +7,7 @@ const createSpiedRes = () => {
   const res = {
     status: sinon.stub().returnsThis(),
     json: sinon.stub().returnsThis(),
+    end: sinon.stub().returnsThis(),
   };
   return res;
 };
@@ -96,7 +97,7 @@ test('post /tasks cb', (t) => {
   const tasks = mock.reRequire('../tasks');
   const spiedRes = createSpiedRes();
   tasks.postCb({
-    params: {
+    body: {
       title: 'mock_title',
       description: 'mock_desc',
     },
@@ -129,6 +130,8 @@ test('patch /tasks/:id cb', (t) => {
   tasks.patchCb({
     params: {
       id: 0,
+    },
+    body: {
       title: 'mock_title_mod',
       description: 'mock_desc_mod',
     },
@@ -193,6 +196,7 @@ test('delete /tasks/:id cb', (t) => {
   }, spiedRes);
   t.true(spiedRes.status.calledWith(204));
   t.false(spiedRes.json.called);
+  t.true(spiedRes.end.called);
 
   // id isNaN
   tasks.deleteCb({

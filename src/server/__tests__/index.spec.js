@@ -8,43 +8,76 @@ test('/tasks CRUD', async (t) => {
 
   t.is(getRes.status, 200);
   t.true(/json/.test(getRes.headers['content-type']));
-  t.is(getRes.text, JSON.stringify({
-    tasks: [],
-  }));
+  t.deepEqual(JSON.parse(getRes.text), {
+    result: [],
+    entities: {},
+  });
 
   const postRes = await request(app)
-    .post('/tasks/job1/job1descrip');
+    .post('/tasks')
+    .send({
+      'title': 'mock_title',
+      description: 'mock_desc',
+    })
+    .set('Content-Type', 'application/json')
+    .set('Accept', 'application/json');
 
   t.is(postRes.status, 201);
-  t.is(postRes.text, JSON.stringify({ message: 'Resource created' }));
+  t.deepEqual(JSON.parse(postRes.text), {
+    result: 0,
+    entities: {
+      tasks: {
+        0: {
+          id: 0,
+          title: 'mock_title',
+          description: 'mock_desc',
+        },
+      },
+    },
+  });
 
   const getIdRes = await request(app)
     .get('/tasks/0');
 
   t.is(getIdRes.status, 200);
-  t.is(getIdRes.text, JSON.stringify({
-    task: {
-      id: 0,
-      title: 'job1',
-      description: 'job1descrip',
+  t.deepEqual(JSON.parse(getIdRes.text), {
+    result: 0,
+    entities: {
+      tasks: {
+        0: {
+          id: 0,
+          title: 'mock_title',
+          description: 'mock_desc',
+        },
+      },
     },
-  }));
+  });
 
-  const putRes = await request(app)
-    .put('/tasks/0/job1mod/job1descmod');
+  const patchRes = await request(app)
+    .patch('/tasks/0')
+    .send({
+      title: 'mock_title_mod',
+      description: 'mock_desc_mod',
+    })
+    .set('Content-Type', 'application/json')
+    .set('Accept', 'application/json');
 
-  t.is(putRes.status, 200);
-  t.is(putRes.text, JSON.stringify({
-    id: 0,
-    title: 'job1mod',
-    description: 'job1descmod',
-  }));
+  t.is(patchRes.status, 200);
+  t.deepEqual(JSON.parse(patchRes.text), {
+    result: 0,
+    entities: {
+      tasks: {
+        0: {
+          id: 0,
+          title: 'mock_title_mod',
+          description: 'mock_desc_mod',
+        },
+      },
+    },
+  });
 
   const deleteRes = await request(app)
     .delete('/tasks/0');
 
-  t.is(deleteRes.status, 200);
-  t.is(deleteRes.text, JSON.stringify({
-    message: 'Updated successfully',
-  }));
+  t.is(deleteRes.status, 204);
 });
