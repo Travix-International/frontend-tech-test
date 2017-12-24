@@ -1,6 +1,7 @@
 'use strict';
 
-const tasksMiddleware = require('./tasks');
+import tasksMiddleware from './tasks';
+
 const app = require('express')();
 
 app.use(tasksMiddleware);

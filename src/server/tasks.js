@@ -1,5 +1,5 @@
-const express = require('express');
-const tasksContainer = require('../../tasks.json');
+import express from 'express';
+import tasksContainer from '../../tasks.json';
 
 const router = express.Router();
 
@@ -8,9 +8,10 @@ const router = express.Router();
  *
  * Return the list of tasks with status code 200.
  */
-router.get('/tasks', (req, res) => {
+export const getCb = (req, res) => {
   return res.status(200).json(tasksContainer);
-});
+};
+router.get('/tasks', getCb);
 
 /**
  * Get /task/:id
@@ -23,7 +24,7 @@ router.get('/tasks', (req, res) => {
  * If not found return status code 404.
  * If id is not valid number return status code 400.
  */
-router.get('/tasks/:id', (req, res) => {
+export const getWithIdCb = (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -41,7 +42,8 @@ router.get('/tasks/:id', (req, res) => {
   return res.status(400).json({
     message: 'Bad request.',
   });
-});
+};
+router.get('/tasks/:id', getWithIdCb);
 
 /**
  * PUT /task/update/:id/:title/:description
@@ -55,7 +57,7 @@ router.get('/tasks/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-router.put('/tasks/:id/:title/:description', (req, res) => {
+export const putCb = (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -73,7 +75,8 @@ router.put('/tasks/:id/:title/:description', (req, res) => {
   return res.status(400).json({
     message: 'Bad request',
   });
-});
+};
+router.put('/tasks/:id/:title/:description', putCb);
 
 /**
  * POST /task/create/:title/:description
@@ -84,7 +87,7 @@ router.put('/tasks/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-router.post('/tasks/:title/:description', (req, res) => {
+export const postCb = (req, res) => {
   const task = {
     id: tasksContainer.tasks.length,
     title: req.params.title,
@@ -96,7 +99,8 @@ router.post('/tasks/:title/:description', (req, res) => {
   return res.status(201).json({
     message: 'Resource created',
   });
-});
+};
+router.post('/tasks/:title/:description', postCb);
 
 /**
  * DELETE /task/delete/:id
@@ -108,7 +112,7 @@ router.post('/tasks/:title/:description', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-router.delete('/tasks/:id', (req, res) => {
+export const deleteCb = (req, res) => {
   const id = parseInt(req.params.id, 10);
   // console.log(id);
 
@@ -130,6 +134,7 @@ router.delete('/tasks/:id', (req, res) => {
   return res.status(400).json({
     message: 'Bad request',
   });
-});
+};
+router.delete('/tasks/:id', deleteCb);
 
-module.exports = router;
+export default router;
