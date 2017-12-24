@@ -161,12 +161,14 @@ test('patch /tasks/:id cb', (t) => {
     },
   }));
 
-  // info not given situation
+  // info not given/invalid key situation
   tasks.patchCb({
     params: {
       id: 0,
     },
-    body: {},
+    body: {
+      invalidkey: 'iamnotvalid',
+    },
   }, spiedRes);
   t.true(spiedRes.status.calledWith(200));
   t.true(spiedRes.json.calledWith({
