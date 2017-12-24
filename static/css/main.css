@@ -1,0 +1,93 @@
+@font-face {
+  font-family: Etelka-Light;
+  src: url("/static/fonts/Etelka-Light-Pro.otf") format("opentype"); }
+
+@font-face {
+  font-family: Etelka-Medium;
+  src: url("/static/fonts/Etelka-Medium-Pro.otf") format("opentype"); }
+
+@font-face {
+  font-family: Etelka-Text-Pro;
+  src: url("/static/fonts/Etelka-Text-Pro.otf") format("opentype"); }
+
+@font-face {
+  font-family: Etelka-Text-Pro-B;
+  src: url("/static/fonts/Etelka-Text-Pro-Bold.otf") format("opentype"); }
+
+@font-face {
+  font-family: ITCHandel;
+  src: url("/static/fonts/ITC-Handel-Gothic-Arabic.otf") format("opentype"); }
+
+@font-face {
+  font-family: ITCHandel-Medium;
+  src: url("/static/fonts/ITC-Handel-Gothic-Arabic-Medium.otf") format("opentype"); }
+
+@font-face {
+  font-family: Etelka-Light;
+  src: url("/static/fonts/Etelka-Light-Pro.otf") format("opentype"); }
+
+@font-face {
+  font-family: Etelka-Medium;
+  src: url("/static/fonts/Etelka-Medium-Pro.otf") format("opentype"); }
+
+@font-face {
+  font-family: Etelka-Text-Pro;
+  src: url("/static/fonts/Etelka-Text-Pro.otf") format("opentype"); }
+
+@font-face {
+  font-family: Etelka-Text-Pro-B;
+  src: url("/static/fonts/Etelka-Text-Pro-Bold.otf") format("opentype"); }
+
+@font-face {
+  font-family: ITCHandel;
+  src: url("/static/fonts/ITC-Handel-Gothic-Arabic.otf") format("opentype"); }
+
+@font-face {
+  font-family: ITCHandel-Medium;
+  src: url("/static/fonts/ITC-Handel-Gothic-Arabic-Medium.otf") format("opentype"); }
+
+header {
+  height: 100px; }
+  header .top-bar {
+    background: rgba(0, 0, 0, 0.6);
+    background: -moz-linear-gradient(40deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+    background: -webkit-linear-gradient(40deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+    background: linear-gradient(40deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$first', endColorstr='$second',GradientType=1 ); }
+    header .top-bar .image-container img {
+      height: 100%; }
+
+@font-face {
+  font-family: Etelka-Light;
+  src: url("/static/fonts/Etelka-Light-Pro.otf") format("opentype"); }
+
+@font-face {
+  font-family: Etelka-Medium;
+  src: url("/static/fonts/Etelka-Medium-Pro.otf") format("opentype"); }
+
+@font-face {
+  font-family: Etelka-Text-Pro;
+  src: url("/static/fonts/Etelka-Text-Pro.otf") format("opentype"); }
+
+@font-face {
+  font-family: Etelka-Text-Pro-B;
+  src: url("/static/fonts/Etelka-Text-Pro-Bold.otf") format("opentype"); }
+
+@font-face {
+  font-family: ITCHandel;
+  src: url("/static/fonts/ITC-Handel-Gothic-Arabic.otf") format("opentype"); }
+
+@font-face {
+  font-family: ITCHandel-Medium;
+  src: url("/static/fonts/ITC-Handel-Gothic-Arabic-Medium.otf") format("opentype"); }
+
+.home_page {
+  background: #ffe600;
+  background: -moz-linear-gradient(45deg, #ffe600 0%, #ffb700 100%);
+  background: -webkit-linear-gradient(45deg, #ffe600 0%, #ffb700 100%);
+  background: linear-gradient(45deg, #ffe600 0%, #ffb700 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$first', endColorstr='$second',GradientType=1 );
+  height: 100vh; }
+
+body {
+  margin: 0; }

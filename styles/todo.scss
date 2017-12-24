@@ -1,0 +1,142 @@
+@import 'variables';
+@import 'main';
+@import 'common';
+
+.todo_page {
+  display: block;
+  float: left;
+  width: 100%;
+  height: 100%;
+  .content {
+    position: relative;
+    .content-top {
+      display: block;
+      position: absolute;
+      float: left;
+      width: calc(100% - 100px);
+      padding: 50px;
+      & > button {
+        float: right;
+        margin: 0 25px;
+        span {
+          &.back_icon {
+            display: none;
+          }
+        }
+      }
+      @media only screen and (max-width: 1440px) {
+        width: calc(100% - 150px);
+        padding: 0 75px;
+        & > button {
+          float: right;
+          margin: 25px 0;
+        }
+      }
+      @media only screen and (max-width: 615px) {
+        position: absolute;
+        z-index: 1;
+        padding: 0 25px;
+        margin: 0;
+        & > button {
+          float: left;
+          margin-top: 60px;
+          span {
+            &.back_icon {
+              display: block;
+            }
+            &.back_text {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    .content-bottom {
+      display: block;
+      float: left;
+      width: 100%;
+      .form-container {
+        width: 700px;
+        margin: 50px calc((100% - 850px) / 2);
+        padding: 20px 75px 50px 75px;
+        position: relative;
+        @include gradient(45deg, $grid-third, $grid-forth);
+        @include border-radius(10px);
+        @include box-shadow(-16px 13px 31px 10px rgba(0, 0, 0, 0.47));
+        .input-with-status-error * {
+          box-sizing: border-box;
+        }
+        .input-with-status-valid * {
+          box-sizing: border-box;
+        }
+        .ui-input_valid + .ui-input-status:before {
+          content: '✅';
+        }
+        .ui-input_error + .ui-input-status:before {
+          content: '✗';
+        }
+        h2, h4 {
+          color: $grid-eighth;
+          text-align: center;
+        }
+        .input-field {
+          padding-bottom: 25px;
+          input, textarea {
+            color: $grid-eighth;
+            background: $grid-third;
+            @include placeholder-color($grid-ninth);
+            &:disabled {
+              color: $grid-ninth;
+            }
+          }
+          p {
+            color: $grid-first;
+            margin: 0;
+          }
+        }
+        .button-container {
+          min-height: 50px;
+          button {
+            float: right;
+            font-size: 20px;
+          }
+        }
+        .ui-spinner {
+          position: absolute;
+          left: calc(50% - 30px);
+          bottom: 50px;
+        }
+      }
+      @media only screen and (max-width: 1440px) {
+        .form-container {
+          width: calc(100% - 300px);
+          margin: 100px 75px;
+          padding: 20px 75px 50px 75px;
+        }
+      }
+      @media only screen and (max-width: 615px) {
+        .form-container {
+          width: calc(100% - 100px);
+          margin: 25px;
+          padding: 20px 25px 50px 25px;
+        }
+      }
+      @media only screen and (max-width: 800px) {
+        .form-container {
+          .button-container {
+            min-height: 50px;
+            button {
+              width: calc(100% - 100px);
+              margin: 0 50px;
+            }
+          }
+          .ui-spinner {
+            position: relative;
+            left: calc(50% - 30px);
+            bottom: -20px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,8 +4,10 @@
   "description": "test back - front",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "mocha find ./tests -name '*test.js' --require ignore-styles --require isomorphic-fetch setup.js --require babel-register --recursive",
+    "test:watch": "npm test -- --watch",
+    "dev": "node server.js",
+    "start": "npm-run-all -p dev test:watch"
   },
   "keywords": [
     "test",
@@ -14,6 +16,46 @@
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "body-parser": "^1.18.2",
+    "express": "^4.14.0",
+    "fs": "0.0.1-security",
+    "next": "^4.2.1",
+    "next-redux-wrapper": "^1.3.5",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-notification-system": "^0.2.16",
+    "react-redux": "^5.0.6",
+    "recompose": "^0.26.0",
+    "redux": "^3.7.2",
+    "redux-form": "^7.2.0",
+    "redux-saga": "^0.16.0",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4",
+    "travix-ui-kit": "^0.7.7"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.2.3",
+    "babel-plugin-wrap-in-js": "^1.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.1.2",
+    "css-loader": "^0.28.7",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
+    "eslint-config-rallycoding": "^3.2.0",
+    "ignore-styles": "^5.0.1",
+    "jsdom": "^10.1.0",
+    "mocha": "^4.0.1",
+    "next-redux-saga": "^1.0.1",
+    "node-sass": "^4.7.2",
+    "npm-run-all": "^4.1.2",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-loader": "^2.0.9",
+    "raw-loader": "^0.5.1",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-saga-test-plan": "^3.3.1",
+    "request": "^2.83.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.10.0"
   }
 }

@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    [
+      "wrap-in-js",
+      {
+        "extensions": [
+          "css$",
+          "scss$"
+        ]
+      }
+    ]
+  ],
+  "presets": [
+    "es2015",
+    "next/babel"
+  ],
+  "ignore": []
+}

@@ -1,0 +1,249 @@
+@import 'variables';
+@import 'main';
+@import 'common';
+
+.home_page {
+  display: block;
+  float: left;
+  width: 100%;
+  height: 100%;
+  * {
+    @include transition(all, ease-in-out, 0.3s);
+  }
+  .content {
+    position: relative;
+    .content-top {
+      display: block;
+      position: absolute;
+      float: left;
+      width: calc(100% - 100px);
+      padding: 50px;
+      & > button {
+        float: right;
+        margin: 0 25px;
+        span {
+          &.back_icon {
+            display: none;
+          }
+        }
+      }
+      @media only screen and (max-width: 1440px) {
+        width: calc(100% - 150px);
+        padding: 0 75px;
+        & > button {
+          float: right;
+          margin: 25px 0;
+        }
+      }
+      @media only screen and (max-width: 615px) {
+        position: absolute;
+        z-index: 1;
+        padding: 0 25px;
+        margin: 0;
+        & > button {
+          float: left;
+          margin: 0;
+          top: 35px;
+          span {
+            &.back_icon {
+              display: block;
+            }
+            &.back_text {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    .content-bottom {
+      display: block;
+      float: left;
+      width: 100%;
+      .tasks-list-container {
+        width: 800px;
+        margin: 50px calc((100% - 850px) / 2);
+        padding: 20px 0 65px 0;
+        position: relative;
+        @include gradient(45deg, $grid-third, $grid-forth);
+        @include border-radius(10px);
+        @include box-shadow(-16px 13px 31px 10px rgba(0, 0, 0, 0.47));
+        .load-more-container {
+          & > span {
+            color: $grid-eighth;
+            float: left;
+            line-height: 45px;
+            width: 100%;
+            text-align: center;
+          }
+          button {
+            position: absolute;
+            right: 25px;
+            bottom: 25px;
+            font-size: 20px;
+            top: auto;
+          }
+          .ui-spinner {
+            position: absolute;
+            left: calc(50% - 30px);
+            bottom: 20px;
+          }
+        }
+        .list-container {
+          padding: 0 20px;
+          .single-task-container {
+            border-bottom: 2px dotted black;
+            @include gradient(45deg, #101010, #2f2f2f);
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+            &:last-child {
+              border: none;
+              margin-bottom: 25px;
+            }
+            &:hover {
+              @include gradient(45deg, #2f2f2f, #101010);
+              cursor: pointer;
+            }
+            &.delete {
+              opacity: 0.5;
+              @include gradient(45deg, tomato, firebrick);
+            }
+            &.update {
+              opacity: 0.5;
+              @include gradient(45deg, #9C27B0, #FFEB3B);
+            }
+            .ui-badge-badge {
+              position: absolute;
+              right: 180px;
+              color: black;
+              &:hover {
+                background: firebrick;
+                color: $grid-seventh;
+              }
+              @media only screen and (max-width: 615px) {
+                display: none;
+              }
+            }
+            .done-section, .content-section, .edit-section {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              padding: 15px;
+              button {
+                font-size: 40px;
+                height: 50px;
+                width: 50px;
+                line-height: 40px;
+                text-align: center;
+                padding: 0;
+              }
+            }
+            .done-section {
+              width: 100px;
+              align-items: center;
+              @media only screen and (max-width: 615px) {
+                width: 50px;
+              }
+            }
+            .content-section {
+              width: calc(100% - 200px);
+              color: $grid-eighth;
+              justify-content: flex-start;
+              overflow: hidden;
+              h3 {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                margin: 0;
+                text-transform: uppercase;
+              }
+              small {
+                color: $grid-ninth;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+              p {
+                margin: 0;
+                line-height: 25px;
+              }
+              @media only screen and (max-width: 615px) {
+                width: calc(100% - 240px);
+                h3 {
+                  font-size: 17px;
+                }
+                small {
+                  font-size: 10px;
+                }
+                p {
+                  font-size: 14px;
+                  line-height: 18px;
+                }
+              }
+            }
+            .edit-section {
+              padding: 0;
+              width: 100px;
+              align-items: center;
+              flex-direction: row;
+              justify-content: space-between;
+              @media only screen and (max-width: 615px) {
+                width: 130px;
+                padding-right: 10px;
+              }
+              button {
+                &.delete-button {
+                  display: none;
+                  @media only screen and (max-width: 615px) {
+                    display: block;
+                  }
+                }
+                &.edit-button {
+                  span {
+                    font-size: 30px;
+                  }
+                }
+              }
+              & > .ui-spinner {
+                display: none;
+                @media only screen and (max-width: 615px) {
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+      }
+      @media only screen and (max-width: 1440px) {
+        .tasks-list-container {
+          width: calc(100% - 150px);
+          margin: 100px 75px;
+        }
+      }
+      @media only screen and (max-width: 800px) {
+        .tasks-list-container {
+          width: calc(100% - 25px);
+          margin: 100px 12.5px;
+          .button-container {
+            min-height: 50px;
+            button {
+              width: calc(100% - 100px);
+              margin: 0 50px;
+            }
+          }
+
+          .load-more-container .ui-spinner {
+            position: absolute;
+            left: calc(50% - 30px);
+            bottom: 27px;
+          }
+        }
+      }
+      @media only screen and (max-width: 615px) {
+        .tasks-list-container {
+          width: calc(100% - 50px);
+          margin: 25px;
+          padding: 70px 0 50px 0;
+        }
+      }
+    }
+  }
+}

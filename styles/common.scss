@@ -1,0 +1,42 @@
+@import 'variables';
+
+header {
+  .top-bar {
+    height: 100px;
+    overflow: hidden;
+    @include gradient(180deg, $black-shade, $grid-fifth);
+    border-bottom: 1px solid $black-shade;
+    & > div {
+      float: left;
+      overflow: hidden;
+    }
+    .image-container {
+      width: 50%;
+      img {
+        width: 160px;
+      }
+    }
+    .buttons-container {
+      width: 50%;
+      & > button {
+        margin: 25px;
+        float: right;
+      }
+    }
+    @media only screen and (max-width: 615px) {
+      .image-container {
+        width: 25%;
+        overflow: visible;
+      }
+      .buttons-container {
+        width: 75%;
+        & > button {
+          margin: 25px 20px;
+          float: right;
+          font-size: 15px;
+        }
+      }
+
+    }
+  }
+}

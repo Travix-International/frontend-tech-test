@@ -1,0 +1,22 @@
+{
+  extends: "rallycoding",
+  rules: {
+    max-len: "off",
+    no-useless-escape: "off",
+    global-require: "off",
+    react/no-multi-comp: "off",
+    no-unused-expressions: "off"
+  },
+  globals: {
+    navigator: true,
+    window: true,
+    document: true,
+    fetch: true,
+    XMLHttpRequest: true,
+    describe: true,
+    it: true,
+    beforeEach: true,
+    beforeAll: true,
+    afterAll: true
+  }
+}
