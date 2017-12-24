@@ -67,9 +67,11 @@ export const patchCb = (req, res) => {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== undefined) {
-      const { title, description } = req.body;
-      task.title = title;
-      task.description = description;
+      // only update when info is given from body
+      Object.keys(req.body).map((key) => {
+        task[key] = req.body[key];
+        return false;
+      });
       const response = normalize(task, schemas.task);
       return res.status(200).json(response);
     }

@@ -150,6 +150,27 @@ test('patch /tasks/:id cb', (t) => {
     },
   }));
 
+  // info not given situation
+  tasks.patchCb({
+    params: {
+      id: 0,
+    },
+    body: {},
+  }, spiedRes);
+  t.true(spiedRes.status.calledWith(200));
+  t.true(spiedRes.json.calledWith({
+    result: 0,
+    entities: {
+      tasks: {
+        0: {
+          id: 0,
+          title: 'mock_title_mod',
+          description: 'mock_desc_mod',
+        },
+      },
+    },
+  }));
+
   // id isNaN
   tasks.patchCb({
     params: {
