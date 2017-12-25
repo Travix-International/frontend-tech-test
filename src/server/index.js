@@ -1,5 +1,4 @@
-'use strict';
-
+import logger from './log';
 import tasksMiddleware from './tasks';
 
 const app = require('express')();
@@ -7,7 +6,7 @@ const app = require('express')();
 app.use(tasksMiddleware);
 
 app.listen(9001, () => {
-  process.stdout.write('the server is available on http://localhost:9001/\n');
+  logger.debug('the server is available on http://localhost:9001/');
 });
 
-module.exports = app;
+export default app;

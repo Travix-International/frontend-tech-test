@@ -32,6 +32,6 @@ function baseConfig(platform) {
       ],
     },
   };
-};
+}
 
 export default baseConfig;

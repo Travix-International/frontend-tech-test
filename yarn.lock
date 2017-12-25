@@ -3106,7 +3106,7 @@ isobject@^2.0.0:
   dependencies:
     isarray "1.0.0"
 
-isomorphic-fetch@^2.1.1:
+isomorphic-fetch@^2.1.1, isomorphic-fetch@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz#611ae1acf14f5e81f729507472819fe9733558a9"
   dependencies:
@@ -5001,6 +5001,12 @@ tough-cookie@~2.3.0:
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.3.tgz#0b618a5565b6dea90bf3425d04d55edc475a7561"
   dependencies:
     punycode "^1.4.1"
+
+travix-logger@^0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/travix-logger/-/travix-logger-0.6.4.tgz#1915586134b077ceda4df868003adacbd778c9e6"
+  dependencies:
+    isomorphic-fetch "^2.2.1"
 
 trim-newlines@^1.0.0:
   version "1.0.0"
