@@ -39,7 +39,31 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 
 # Developer notes
 
-## Server side
+## Setup
+
+1. Install both front and backend dependencies.
+
+`yarn install-all`
+
+2. Build UI.
+
+`yarn build-ui`
+
+3. Start server.
+
+`yarn start`
+
+It will listen on `localhost:9001` by default.
+
+To use server with big tasks file you should run
+
+    `STORAGE_FILE=tasks.big.json yarn start`
+
+## Testing
+
+Server with `yarn test`, UI with `yarn test-ui`
+
+## Server notes
 
 * API endpoints were simplified.
   * Endpoints base path was renamed to `/api/tasks`
@@ -47,11 +71,3 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 * To ease deployment all config values were moved to environment variables.
   * `STORAGE_FILE`: JSON file where tasks will be stored. Default: `./tasks.json`
   * `LISTENER_PORT`: Port where server will be listening. Default: `9001`
-
-## Testing
-
-* Build frontend
-  `yarn build`
-
-* Test with big tasks file
-  `STORAGE_FILE=tasks.big.json yarn start`
