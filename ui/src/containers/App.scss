@@ -1,0 +1,24 @@
+body {
+  background: #e8e8e8;
+
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+
+  padding: 0;
+  min-width: 200px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.app {
+  text-align: center;
+  height: 100%;
+  color: #4d4d4d;
+
+  .title {
+    font-size: 50px;
+    font-weight: 100;
+    text-align: center;
+  }
+}

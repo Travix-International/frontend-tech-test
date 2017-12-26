@@ -1,0 +1,39 @@
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+.search-todo {
+  background: rgba(0, 0, 0, 0.003);
+  margin-bottom: 5px;
+  margin-bottom: 5px;
+
+  .input {
+    border: 1px solid #d0d0d0;
+    box-sizing: border-box;
+    color: inherit;
+    font: inherit;
+    padding: 10px;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    text-align: center;
+    width: 100%;
+
+    @include placeholder {
+      font-style: italic;
+      font-weight: 300;
+      color: #aaa;
+    }
+  }
+  width: 100%;
+}

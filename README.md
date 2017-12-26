@@ -1,6 +1,6 @@
 # Travix test
 
-Travix Front-End Tech Interview Test 
+Travix Front-End Tech Interview Test
 
 # Introduction
 
@@ -22,17 +22,52 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 
 # Requirements
 
-* React 15+
-* Redux or Flux or [FrintJS](https://frint.js.org) or other alternatives that implement a unidirectional data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
+* [x] React 15+
+* [x] Redux or Flux or [FrintJS](https://frint.js.org) or other alternatives that implement a unidirectional data flow
+* [x] SASS or LESS
+* [x] Must be responsive
+* [x] We have big tasks files for testing the application (very huge)
 
 # Bonus
 
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us!
+* [x] unit-tests for the UI
+* [x] integration-test (one (or more) just in order to show that you know what is it (: )
+* [x] evolution - unit-tests for the server
+* [ ] dynamic-ui (web-sockets...?)
+* [ ] using the `made in Travix` technologies
+* [ ] ... Impress us!
+
+# Developer notes
+
+## Setup
+
+1. Install both front and backend dependencies.
+
+`yarn install-all`
+
+2. Build UI.
+
+`yarn build-ui`
+
+3. Start server.
+
+`yarn start`
+
+It will listen on `localhost:9001` by default.
+
+To use server with big tasks file you should run
+
+    `STORAGE_FILE=tasks.big.json yarn start`
+
+## Testing
+
+Server with `yarn test`, UI with `yarn test-ui`
+
+## Server notes
+
+* API endpoints were simplified.
+  * Endpoints base path was renamed to `/api/tasks`
+  * Actions can be obtained from METHOD, `/delete, /update...` are redundant.
+* To ease deployment all config values were moved to environment variables.
+  * `STORAGE_FILE`: JSON file where tasks will be stored. Default: `./tasks.json`
+  * `LISTENER_PORT`: Port where server will be listening. Default: `9001`

@@ -1,0 +1,7 @@
+export const ADD_TODO = 'ADD_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
+export const EDIT_TODO = 'EDIT_TODO';
+export const RECEIVE_TODOS = 'RECEIVE_TODOS';
+export const REFRESH_VISIBLE_TODOS = 'REFRESH_VISIBLE_TODOS';
+export const REQUEST_TODOS = 'REQUEST_TODOS';
+export const SEARCH_TODOS = 'SEARCH_TODOS';

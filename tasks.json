@@ -1,3 +1,6 @@
 {
-  "tasks": []
+  "tasks": [
+    { "id": 1, "title": "a task", "completed": false },
+    { "id": 2, "title": "another test task", "completed": false }
+  ]
 }
