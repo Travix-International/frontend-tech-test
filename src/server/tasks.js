@@ -21,6 +21,20 @@ const watcher = (error, object) => {
 // travix persistent doesn't support relative path
 const taskJSONPath = path.resolve(__dirname, '../../tasks.json');
 
+// logger.debug('try log', 'message', {meta: 'meta'});
+// logger.info('try info', 'message', {meta: 'meta'});
+// logger.warn('try warn', 'message', {meta: 'meta'});
+// logger.error('try error', 'message', {meta: 'meta'});
+// process.on('uncaughtException', (err) => {
+//   logger.exception('try exception', err, 'message', {meta: 'meta'});
+// });
+//
+// try {
+//   a
+// } catch (err) {
+//   logger.exception('try exception', err, 'message', {meta: 'meta'});
+// }
+
 /**
  * GET /tasks
  *
