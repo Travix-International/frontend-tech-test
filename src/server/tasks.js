@@ -1,8 +1,10 @@
+import path from 'path';
 import express from 'express';
 import { normalize } from 'normalizr';
 import bodyParser from 'body-parser';
+import persistent from 'travix-persistent-object';
 import schemas from '../schemas';
-import tasksContainer from '../../tasks.json';
+import logger from './log';
 
 const router = express.Router();
 const POSSIBLE_KEYS = [
@@ -10,14 +12,27 @@ const POSSIBLE_KEYS = [
   'description',
 ];
 
+const watcher = (error, object) => {
+  error
+    ? logger.error('PERSISTENT_ERROR', error, { isTrack: true })
+    : logger.info('PERSISTENT_SAVED', object);
+};
+
+// travix persistent doesn't support relative path
+const taskJSONPath = path.resolve(__dirname, '../../tasks.json');
+
 /**
  * GET /tasks
  *
  * Return the list of tasks with status code 200.
  */
 export const getCb = (req, res) => {
-  const response = normalize(tasksContainer.tasks, [schemas.task]);
-  return res.status(200).json(response);
+  return persistent(taskJSONPath, { watcher })
+    .then((tasksJSON) => {
+      logger.info('LOAD:', tasksJSON);
+      const response = normalize(tasksJSON.tasks, [schemas.task]);
+      return res.status(200).json(response);
+    });
 };
 router.get('/tasks', getCb);
 
@@ -36,15 +51,20 @@ export const getWithIdCb = (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find((item) => { return item.id === id; });
+    return persistent(taskJSONPath, { watcher })
+      .then((tasksJSON) => {
+        const task = tasksJSON.tasks.find((item) => { return item.id === id; });
+        logger.info('LOAD:', tasksJSON);
+        logger.info('FIND_TASK:', task);
 
-    if (task !== undefined) {
-      const response = normalize(task, schemas.task);
-      return res.status(200).json(response);
-    }
-    return res.status(404).json({
-      message: 'Not found.',
-    });
+        if (task !== undefined) {
+          const response = normalize(task, schemas.task);
+          return res.status(200).json(response);
+        }
+        return res.status(404).json({
+          message: 'Not found.',
+        });
+      });
   }
   return res.status(400).json({
     message: 'Bad request.',
@@ -68,23 +88,26 @@ export const patchCb = (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    return persistent(taskJSONPath, { watcher })
+      .then((tasksJSON) => {
+        const task = tasksJSON.tasks.find(item => item.id === id);
 
-    if (task !== undefined) {
-      // only update when info is given from body
-      // and in POSSIBLE_KEYS
-      Object.keys(req.body).map((key) => {
-        if (POSSIBLE_KEYS.indexOf(key) > -1) {
-          task[key] = req.body[key];
+        if (task !== undefined) {
+          // only update when info is given from body
+          // and in POSSIBLE_KEYS
+          Object.keys(req.body).map((key) => {
+            if (POSSIBLE_KEYS.indexOf(key) > -1) {
+              task[key] = req.body[key];
+            }
+            return false;
+          });
+          const response = normalize(task, schemas.task);
+          return res.status(200).json(response);
         }
-        return false;
+        return res.status(404).json({
+          message: 'Not found',
+        });
       });
-      const response = normalize(task, schemas.task);
-      return res.status(200).json(response);
-    }
-    return res.status(404).json({
-      message: 'Not found',
-    });
   }
   return res.status(400).json({
     message: 'Bad request',
@@ -102,32 +125,35 @@ router.patch('/tasks/:id', bodyParser.json(), patchCb);
  * Return status code 201, and created instance
  */
 export const postCb = (req, res) => {
-  const task = {
-    id: tasksContainer.tasks.length,
-  };
-  let hasFoundInvalidKey = false;
-  // only create when valid info is given
-  // and in POSSIBLE_KEYS
-  Object.keys(req.body).some((key) => {
-    if (POSSIBLE_KEYS.indexOf(key) > -1) {
-      task[key] = req.body[key];
-    } else {
-      hasFoundInvalidKey = key;
-      return hasFoundInvalidKey;
-    }
-    return false;
-  });
-  if (hasFoundInvalidKey) {
-    return res.status(400).json({
-      message: `task.${hasFoundInvalidKey} is not allowed`,
+  return persistent(taskJSONPath, { watcher })
+    .then((tasksJSON) => {
+      const task = {
+        id: tasksJSON.tasks.length,
+      };
+      let hasFoundInvalidKey = false;
+      // only create when valid info is given
+      // and in POSSIBLE_KEYS
+      Object.keys(req.body).some((key) => {
+        if (POSSIBLE_KEYS.indexOf(key) > -1) {
+          task[key] = req.body[key];
+        } else {
+          hasFoundInvalidKey = key;
+          return hasFoundInvalidKey;
+        }
+        return false;
+      });
+      if (hasFoundInvalidKey) {
+        return res.status(400).json({
+          message: `task.${hasFoundInvalidKey} is not allowed`,
+        });
+      }
+
+      tasksJSON.tasks.push(task);
+
+      const response = normalize(task, schemas.task);
+
+      return res.status(201).json(response);
     });
-  }
-
-  tasksContainer.tasks.push(task);
-
-  const response = normalize(task, schemas.task);
-
-  return res.status(201).json(response);
 };
 router.post('/tasks', bodyParser.json(), postCb);
 
@@ -145,16 +171,19 @@ export const deleteCb = (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    return persistent(taskJSONPath, { watcher })
+      .then((tasksJSON) => {
+        const task = tasksJSON.tasks.find(item => item.id === id);
 
-    if (task !== undefined) {
-      const taskIndex = tasksContainer.tasks.indexOf(task);
-      tasksContainer.tasks.splice(taskIndex, 1);
-      return res.status(204).end();
-    }
-    return res.status(404).json({
-      message: 'Not found',
-    });
+        if (task !== undefined) {
+          const taskIndex = tasksJSON.tasks.indexOf(task);
+          tasksJSON.tasks.splice(taskIndex, 1);
+          return res.status(204).end();
+        }
+        return res.status(404).json({
+          message: 'Not found',
+        });
+      });
   }
   return res.status(400).json({
     message: 'Bad request',

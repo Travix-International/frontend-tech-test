@@ -1,7 +1,7 @@
 import test from 'ava';
 import mock from 'mock-require';
 import sinon from 'sinon';
-
+import { createMockResponse } from '../../__mocks__/travix-persistent-object';
 
 const createSpiedRes = () => {
   const res = {
@@ -12,12 +12,17 @@ const createSpiedRes = () => {
   return res;
 };
 
+// since we mock travix-persistent-object
+// cbs will be sync instead of async
+// so we don't need to use async/await here
 test('get /tasks cb', (t) => {
-  mock('../../../tasks.json', {
-    tasks: [{
-      id: 0,
-    }],
-  });
+  mock('travix-persistent-object', createMockResponse(
+    {
+      tasks: [{
+        id: 0,
+      }],
+    },
+  ));
   // why we reRequire here
   // https://www.npmjs.com/package/mock-require#mockrerequirepath
   const tasks = mock.reRequire('../tasks');
@@ -37,13 +42,15 @@ test('get /tasks cb', (t) => {
 });
 
 test('get /tasks/:id cb', (t) => {
-  mock('../../../tasks.json', {
-    tasks: [{
-      id: 0,
-      title: 'mock_title',
-      description: 'mock_desc',
-    }],
-  });
+  mock('travix-persistent-object', createMockResponse(
+    {
+      tasks: [{
+        id: 0,
+        title: 'mock_title',
+        description: 'mock_desc',
+      }],
+    },
+  ));
   const tasks = mock.reRequire('../tasks');
   const spiedRes = createSpiedRes();
 
@@ -91,9 +98,11 @@ test('get /tasks/:id cb', (t) => {
 });
 
 test('post /tasks cb', (t) => {
-  mock('../../../tasks.json', {
-    tasks: [],
-  });
+  mock('travix-persistent-object', createMockResponse(
+    {
+      tasks: [],
+    },
+  ));
   const tasks = mock.reRequire('../tasks');
   const spiedRes = createSpiedRes();
   tasks.postCb({
@@ -129,13 +138,15 @@ test('post /tasks cb', (t) => {
 });
 
 test('patch /tasks/:id cb', (t) => {
-  mock('../../../tasks.json', {
-    tasks: [{
-      id: 0,
-      title: 'mock_title',
-      description: 'mock_desc',
-    }],
-  });
+  mock('travix-persistent-object', createMockResponse(
+    {
+      tasks: [{
+        id: 0,
+        title: 'mock_title',
+        description: 'mock_desc',
+      }],
+    },
+  ));
   const tasks = mock.reRequire('../tasks');
   const spiedRes = createSpiedRes();
   tasks.patchCb({
@@ -212,20 +223,22 @@ test('patch /tasks/:id cb', (t) => {
 });
 
 test('delete /tasks/:id cb', (t) => {
-  mock('../../../tasks.json', {
-    tasks: [{
-      id: 0,
-      title: 'mock_title',
-      description: 'mock_desc',
-    }],
-  });
+  mock('travix-persistent-object', createMockResponse(
+    {
+      tasks: [{
+        id: 4,
+        title: 'mock_title',
+        description: 'mock_desc',
+      }],
+    },
+  ));
   const tasks = mock.reRequire('../tasks');
   const spiedRes = createSpiedRes();
 
   // success
   tasks.deleteCb({
     params: {
-      id: 0,
+      id: 4,
     },
   }, spiedRes);
   t.true(spiedRes.status.calledWith(204));

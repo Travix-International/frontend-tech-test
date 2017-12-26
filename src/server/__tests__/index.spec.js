@@ -1,6 +1,14 @@
 import test from 'ava';
+import mock from 'mock-require';
 import request from 'supertest';
-import app from '../';
+import { createMockResponse } from '../../__mocks__/travix-persistent-object';
+
+mock('travix-persistent-object', createMockResponse(
+  {
+    tasks: [],
+  },
+));
+const app = require('../').default;
 
 test('/tasks CRUD', async (t) => {
   const getRes = await request(app)
