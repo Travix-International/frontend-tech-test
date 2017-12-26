@@ -43,6 +43,9 @@ export default function (env) {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
     }),
+    new webpack.DefinePlugin({
+      'process.env.PLATFORM': '"browser"',
+    }),
   );
 
   // modify config for hot env

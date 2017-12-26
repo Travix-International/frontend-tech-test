@@ -1,5 +1,5 @@
 import express from 'express';
-import logger from './log';
+import logger from '../logger';
 import tasksMiddleware from './tasks';
 
 const app = express();

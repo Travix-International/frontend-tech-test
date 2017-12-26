@@ -4,7 +4,7 @@ import { normalize } from 'normalizr';
 import bodyParser from 'body-parser';
 import persistent from 'travix-persistent-object';
 import schemas from '../schemas';
-import logger from './log';
+import logger from '../logger';
 
 const router = express.Router();
 const POSSIBLE_KEYS = [

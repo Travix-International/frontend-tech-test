@@ -19,6 +19,12 @@ export default function serverConfig(env) {
   config.target = 'node';
   config.externals = [nodeExternals()]; // in order to ignore all modules in node_modules folder
 
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env.PLATFORM': '"server"',
+    }),
+  );
+
   if (env === 'hot') {
     config.entry = {
       server: path.resolve(__dirname, 'src/server/renderer'),
