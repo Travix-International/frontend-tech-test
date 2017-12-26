@@ -8,6 +8,9 @@ const app = express();
 // JSON payload parser (middleware)
 app.use(express.json());
 
+// Static files
+app.use('/', express.static('ui/build'));
+
 // Read tasks from file
 let tasks = utils.readTasks();
 
@@ -56,7 +59,7 @@ app.get('/api/tasks/:id', (req, res) => {
 });
 
 /**
- * PUT /api/tasks/:id/:title/:description
+ * PUT /api/tasks/:id
  *
  * id: Number
  * title: string
@@ -86,8 +89,13 @@ app.put('/api/tasks/:id', (req, res) => {
 
   const task = tasks[taskIndex];
 
-  task.title = req.body.title;
-  task.description = req.body.description;
+  const newTask = req.body;
+
+  task.title = newTask.title ? newTask.title : task.title;
+  task.completed =
+    Object.keys(newTask).indexOf('completed') !== -1
+      ? newTask.completed
+      : task.completed;
 
   tasks[taskIndex] = task;
 
@@ -97,7 +105,7 @@ app.put('/api/tasks/:id', (req, res) => {
 });
 
 /**
- * POST /api/tasks/:title/:description
+ * POST /api/tasks
  *
  * title: string
  * description: string
@@ -117,7 +125,7 @@ app.post('/api/tasks', (req, res) => {
   const task = {
     id: nextId,
     title: req.body.title,
-    description: req.body.description
+    completed: false
   };
 
   tasks.push(task);
@@ -167,3 +175,6 @@ app.delete('/api/tasks/:id', (req, res) => {
 app.listen(process.env.LISTENER_PORT || 9001, () => {
   process.stdout.write('Server listening on http://localhost:9001/\n');
 });
+
+module.exports = app;
+
