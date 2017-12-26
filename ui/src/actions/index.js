@@ -1,3 +1,4 @@
+/* global fetch */
 import config from '../config';
 import {
   ADD_TODO,
@@ -73,7 +74,7 @@ export const addTodoApi = title => dispatch =>
     .catch(error => console.error(error));
 
 export const deleteTodoApi = id => (dispatch) => {
-  fetch(`${config.apiBaseUrl}/tasks/${id}`, { method: 'DELETE' }).then((res) => {
+  fetch(`${config.apiBaseUrl}/tasks/${id}`, { method: 'DELETE' }).then(() => {
     dispatch(deleteTodo(id));
   });
 };

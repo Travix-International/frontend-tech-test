@@ -7,7 +7,7 @@ import './TodoList.css';
 
 import TodoItem from './TodoItem';
 
-const TodoList = ({ items, onTodoDelete, onTodoEdit, onTodoToggle }) => {
+const TodoList = ({ items, onTodoDelete, onTodoEdit }) => {
   const rowRenderer = (params) => {
     const item = items[params.index];
 
