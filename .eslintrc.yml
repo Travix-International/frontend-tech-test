@@ -1,2 +1,6 @@
 parser: 'babel-eslint'
 extends: ['travix']
+rules:
+  promise/no-callback-in-promise: 
+    exceptions:
+      - 'next' # src/server/pages.js:48

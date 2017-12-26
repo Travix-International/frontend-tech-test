@@ -1,0 +1,28 @@
+@import '~reset.css/reset.css';
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+input, textarea, button {
+  outline: none;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #2c2c2c;
+  transition: color 200ms ease-in-out;
+
+  &:hover {
+    color: #9a9a9a;
+  }
+}
+
+[class*="page--"] {
+  min-height: 80vh;
+  padding-top: 2rem;
+}
