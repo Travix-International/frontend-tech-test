@@ -1,3 +1,4 @@
+/* global describe, it, expect */
 import React from 'react';
 import { createMockStore } from 'redux-test-utils';
 import { mountWithStore } from '../utils/tests';

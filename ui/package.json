@@ -30,9 +30,6 @@
     "watch-css":
       "yarn build-css && node-sass-chokidar src/ -o src/ --watch --recursive"
   },
-  "jest": {
-    "setupTestFrameworkScriptFile": "./src/setupTests.js"
-  },
   "proxy": "http://localhost:9001",
   "devDependencies": {
     "redux-test-utils": "^0.2.2"
