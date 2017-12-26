@@ -8,7 +8,9 @@
     "test": "yarn lint && mocha . --exit",
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "cd ui && yarn build"
+    "build-ui": "cd ui && yarn build",
+    "test-ui": "cd ui && yarn test",
+    "install-all": "yarn install && cd ui && yarn install"
   },
   "keywords": ["test", "travix"],
   "author": "spartans",
