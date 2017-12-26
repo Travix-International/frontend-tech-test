@@ -59,6 +59,7 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.2",
+    "ignore-styles": "^5.0.1",
     "mock-require": "^2.0.2",
     "node-sass": "^4.7.2",
     "nyc": "^11.4.1",
@@ -82,7 +83,8 @@
       "src/**/*.spec.js"
     ],
     "require": [
-      "babel-register"
+      "babel-register",
+      "ignore-styles"
     ]
   }
 }
