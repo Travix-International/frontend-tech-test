@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { get as _get } from 'lodash';
 import action from '../../actions';
-import AddItem from './AddItem';
+import Item from './Item';
 
 import './style.scss';
 
@@ -29,12 +29,12 @@ export class HomeComponent extends Component {
           <meta content="home page" name="og:title" />
         </Helmet>
 
-        {tasks.map((p) => {
-          return <div key={p.id}>{p.title}</div>;
+        {tasks.map((task) => {
+          return <Item key={task.id} mode="NORMAL" task={task} />;
         })}
 
         {/* Add function */}
-        <AddItem />
+        <Item mode="EDIT" />
 
       </div>
     );
