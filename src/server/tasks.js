@@ -115,12 +115,18 @@ export const patchCb = (req, res) => {
             }
             return false;
           });
-          const response = normalize(task, schemas.task);
-          return res.status(200).json(response);
+          return task;
         }
         return res.status(404).json({
           message: 'Not found',
         });
+      })
+
+      // simulate after persistent update
+      // then send response
+      .then((task) => {
+        const response = normalize(task, schemas.task);
+        return res.status(200).json(response);
       });
   }
   return res.status(400).json({
@@ -163,7 +169,12 @@ export const postCb = (req, res) => {
       }
 
       tasksJSON.tasks.push(task);
+      return task;
+    })
 
+    // simulate after persistent update
+    // then send response
+    .then((task) => {
       const response = normalize(task, schemas.task);
 
       return res.status(201).json(response);
@@ -192,11 +203,14 @@ export const deleteCb = (req, res) => {
         if (task !== undefined) {
           const taskIndex = tasksJSON.tasks.indexOf(task);
           tasksJSON.tasks.splice(taskIndex, 1);
-          return res.status(204).end();
+          return false;
         }
         return res.status(404).json({
           message: 'Not found',
         });
+      })
+      .then(() => {
+        return res.status(204).end();
       });
   }
   return res.status(400).json({
