@@ -16,7 +16,7 @@ export class NavComponent extends Component {
   render() {
     return (
       <nav>
-        <Link to="/">Rib.</Link>
+        <Link to="/">Todo.</Link>
 
         <div className="user-info">
           your are {this.props.dummy}

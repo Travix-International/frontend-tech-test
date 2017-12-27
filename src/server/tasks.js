@@ -168,7 +168,7 @@ export const postCb = (req, res) => {
         });
       }
 
-      tasksJSON.tasks.push(task);
+      tasksJSON.tasks.unshift(task);
       return task;
     })
 

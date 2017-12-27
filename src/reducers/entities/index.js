@@ -1,3 +1,6 @@
-export default (action, state = {}) => {
-  return state;
-};
+import { combineReducers } from 'redux';
+import taskReducer from './task';
+
+export default combineReducers({
+  task: taskReducer,
+});

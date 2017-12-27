@@ -2,19 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
+import { get as _get } from 'lodash';
+import action from '../../actions';
+import AddItem from './AddItem';
 
 import './style.scss';
 
 export class HomeComponent extends Component {
   static propTypes = {
-    dummy: PropTypes.string,
+    fetchTasks: PropTypes.func.isRequired,
+    tasks: PropTypes.array.isRequired,
   }
 
-  static defaultProps = {
-    dummy: 'dummy',
+  componentDidMount() {
+    this.props.fetchTasks();
   }
 
   render() {
+    const { tasks } = this.props;
+
     return (
       <div className="page--home">
         <Helmet>
@@ -22,22 +28,36 @@ export class HomeComponent extends Component {
           <meta content="home page shows posts" name="description" />
           <meta content="home page" name="og:title" />
         </Helmet>
-        Home
-        {this.props.dummy}
+
+        {tasks.map((p) => {
+          return <div key={p.id}>{p.title}</div>;
+        })}
+
+        {/* Add function */}
+        <AddItem />
 
       </div>
     );
   }
 }
 
-export function mapStateToProps() {
+export function mapStateToProps(state) {
+  const taskEntity = _get(state, 'entities.task', {});
+  const taskIds = _get(state, 'pages.home.tasks');
+  const tasks = taskIds.map((id) => {
+    return taskEntity[id] || {};
+  });
+
   return {
-    dummy: 'dummy',
+    tasks,
   };
 }
 
-export function mapDispatchToProps() {
+export function mapDispatchToProps(dispatch) {
   return {
+    fetchTasks: () => {
+      return dispatch(action.fetchTasks());
+    },
   };
 }
 
