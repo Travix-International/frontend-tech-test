@@ -3,6 +3,7 @@ import express from 'express';
 import { normalize } from 'normalizr';
 import bodyParser from 'body-parser';
 import persistent from 'travix-persistent-object';
+import uuidv4 from 'uuid/v4';
 import schemas from '../schemas';
 import logger from '../logger';
 
@@ -62,9 +63,9 @@ router.get('/tasks', getCb);
  * If id is not valid number return status code 400.
  */
 export const getWithIdCb = (req, res) => {
-  const id = parseInt(req.params.id, 10);
+  const id = req.params.id;
 
-  if (!Number.isNaN(id)) {
+  if (id !== undefined) {
     return persistent(taskJSONPath, { watcher })
       .then((tasksJSON) => {
         const task = tasksJSON.tasks.find((item) => { return item.id === id; });
@@ -99,9 +100,9 @@ router.get('/tasks/:id', getWithIdCb);
  * If the provided id is not a valid number return a status code 400.
  */
 export const patchCb = (req, res) => {
-  const id = parseInt(req.params.id, 10);
+  const id = req.params.id;
 
-  if (!Number.isNaN(id)) {
+  if (id !== undefined) {
     return persistent(taskJSONPath, { watcher })
       .then((tasksJSON) => {
         const task = tasksJSON.tasks.find(item => item.id === id);
@@ -148,7 +149,7 @@ export const postCb = (req, res) => {
   return persistent(taskJSONPath, { watcher })
     .then((tasksJSON) => {
       const task = {
-        id: tasksJSON.tasks.length,
+        id: uuidv4(),
       };
       let hasFoundInvalidKey = false;
       // only create when valid info is given
@@ -193,9 +194,9 @@ router.post('/tasks', bodyParser.json(), postCb);
  * If the provided id is not a valid number return a status code 400.
  */
 export const deleteCb = (req, res) => {
-  const id = parseInt(req.params.id, 10);
+  const id = req.params.id;
 
-  if (!Number.isNaN(id)) {
+  if (id !== undefined) {
     return persistent(taskJSONPath, { watcher })
       .then((tasksJSON) => {
         const task = tasksJSON.tasks.find(item => item.id === id);

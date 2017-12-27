@@ -48,8 +48,8 @@ export default function reducer(state = initialState, action) {
     }
 
     case 'DELETE_TASK': {
-      const result = parseInt(_get(payload, 'result'), 10);
-      if (!Number.isNaN(result)) {
+      const result = _get(payload, 'result');
+      if (result !== undefined) {
         const cloneState = _cloneDeep(state);
         delete cloneState[result];
 

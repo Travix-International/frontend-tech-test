@@ -18,8 +18,8 @@ export default function reducer(state = initialState, action) {
     }
 
     case 'POST_TASK': {
-      const result = parseInt(_get(payload, 'result'), 10);
-      if (!Number.isNaN(result)) {
+      const result = _get(payload, 'result');
+      if (result !== undefined) {
         return update(state, {
           tasks: {
             $unshift: [result],
@@ -30,8 +30,8 @@ export default function reducer(state = initialState, action) {
     }
 
     case 'DELETE_TASK': {
-      const result = parseInt(_get(payload, 'result'), 10);
-      if (!Number.isNaN(result)) {
+      const result = _get(payload, 'result');
+      if (result !== undefined) {
         const deletingIndex = state.tasks.indexOf(result);
         return update(state, {
           tasks: {

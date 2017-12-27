@@ -74,10 +74,10 @@ test('get /tasks/:id cb', (t) => {
     },
   }));
 
-  // id isNaN
+  // id is undefined
   tasks.getWithIdCb({
     params: {
-      id: 'NaN',
+      id: undefined,
     },
   }, spiedRes);
   t.true(spiedRes.status.calledWith(400));
@@ -112,18 +112,12 @@ test('post /tasks cb', (t) => {
     },
   }, spiedRes);
   t.true(spiedRes.status.calledWith(201));
-  t.true(spiedRes.json.calledWith({
-    result: 0,
-    entities: {
-      tasks: {
-        0: {
-          id: 0,
-          title: 'mock_title',
-          description: 'mock_desc',
-        },
-      },
-    },
-  }));
+  const taskId = spiedRes.json.args[0][0].result;
+  t.is(taskId.length, 36);
+  const task = spiedRes.json.args[0][0].entities.tasks[taskId];
+  t.is(task.id, taskId);
+  t.is(task.title, 'mock_title');
+  t.is(task.description, 'mock_desc');
 
   // invalid creating task
   tasks.postCb({
@@ -195,10 +189,10 @@ test('patch /tasks/:id cb', (t) => {
     },
   }));
 
-  // id isNaN
+  // id is undefined
   tasks.patchCb({
     params: {
-      id: 'isNaN',
+      id: undefined,
       title: 'mock_title_mod',
       description: 'mock_desc_mod',
     },
@@ -245,10 +239,10 @@ test('delete /tasks/:id cb', (t) => {
   t.false(spiedRes.json.called);
   t.true(spiedRes.end.called);
 
-  // id isNaN
+  // id is undefined
   tasks.deleteCb({
     params: {
-      id: 'isNaN',
+      id: undefined,
     },
   }, spiedRes);
   t.true(spiedRes.status.calledWith(400));
@@ -266,4 +260,27 @@ test('delete /tasks/:id cb', (t) => {
   t.true(spiedRes.json.calledWith({
     message: 'Not found',
   }));
+});
+
+test('do not generate same id', (t) => {
+  mock('travix-persistent-object', createMockResponse(
+    {
+      tasks: [{
+        id: 1,
+        title: 'mock_title',
+        description: 'mock_desc',
+      }],
+    },
+  ));
+  const tasks = mock.reRequire('../tasks');
+  const spiedRes = createSpiedRes();
+  tasks.postCb({
+    body: {
+      title: 'mock_title_mod',
+      description: 'mock_desc_mod',
+    },
+  }, spiedRes);
+  tasks.getCb(null, spiedRes);
+  const argResult = spiedRes.json.args[1][0].result;
+  t.true(argResult[0] !== argResult[1]);
 });

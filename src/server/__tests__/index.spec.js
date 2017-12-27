@@ -31,38 +31,25 @@ test('/tasks CRUD', async (t) => {
     .set('Accept', 'application/json');
 
   t.is(postRes.status, 201);
-  t.deepEqual(JSON.parse(postRes.text), {
-    result: 0,
-    entities: {
-      tasks: {
-        0: {
-          id: 0,
-          title: 'mock_title',
-          description: 'mock_desc',
-        },
-      },
-    },
-  });
+  const postResJSON = JSON.parse(postRes.text);
+  const postResId = postResJSON.result;
+  t.is(postResId.length, 36);
+  t.is(postResJSON.entities.tasks[postResId].id, postResId);
+  t.is(postResJSON.entities.tasks[postResId].title, 'mock_title');
+  t.is(postResJSON.entities.tasks[postResId].description, 'mock_desc');
 
   const getIdRes = await request(app)
-    .get('/tasks/0');
+    .get(`/tasks/${postResId}`);
 
   t.is(getIdRes.status, 200);
-  t.deepEqual(JSON.parse(getIdRes.text), {
-    result: 0,
-    entities: {
-      tasks: {
-        0: {
-          id: 0,
-          title: 'mock_title',
-          description: 'mock_desc',
-        },
-      },
-    },
-  });
+  const getIdResJSON = JSON.parse(getIdRes.text);
+  const getIdResId = getIdResJSON.result;
+  t.is(getIdResJSON.entities.tasks[getIdResId].id, getIdResId);
+  t.is(getIdResJSON.entities.tasks[getIdResId].title, 'mock_title');
+  t.is(getIdResJSON.entities.tasks[getIdResId].description, 'mock_desc');
 
   const patchRes = await request(app)
-    .patch('/tasks/0')
+    .patch(`/tasks/${postResId}`)
     .send({
       title: 'mock_title_mod',
       description: 'mock_desc_mod',
@@ -71,21 +58,14 @@ test('/tasks CRUD', async (t) => {
     .set('Accept', 'application/json');
 
   t.is(patchRes.status, 200);
-  t.deepEqual(JSON.parse(patchRes.text), {
-    result: 0,
-    entities: {
-      tasks: {
-        0: {
-          id: 0,
-          title: 'mock_title_mod',
-          description: 'mock_desc_mod',
-        },
-      },
-    },
-  });
+  const patchResJSON = JSON.parse(patchRes.text);
+  const patchResId = patchResJSON.result;
+  t.is(patchResJSON.entities.tasks[patchResId].id, postResId);
+  t.is(patchResJSON.entities.tasks[patchResId].title, 'mock_title_mod');
+  t.is(patchResJSON.entities.tasks[patchResId].description, 'mock_desc_mod');
 
   const deleteRes = await request(app)
-    .delete('/tasks/0');
+    .delete(`/tasks/${postResId}`);
 
   t.is(deleteRes.status, 204);
 });
