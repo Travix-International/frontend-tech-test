@@ -18,6 +18,10 @@ export default function serverConfig(env) {
 
   config.target = 'node';
   config.externals = [nodeExternals()]; // in order to ignore all modules in node_modules folder
+  config.node = {
+    __dirname: false,
+    __filename: false,
+  };
 
   config.plugins.push(
     new webpack.DefinePlugin({
