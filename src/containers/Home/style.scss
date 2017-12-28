@@ -1,6 +1,32 @@
 .page--home {
   .list--task {
-    width: 70%;
+    width: 50%;
     margin: 0 auto;
+  }
+}
+
+//15"
+@media (max-width: 1440px) {
+  .page--home {
+    .list--task {
+      width: 60%;
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  .page--home {
+    .list--task {
+      width: 70%;
+    }
+  }
+}
+
+//tablet
+@media (max-width: 768px) {
+  .page--home {
+    .list--task {
+      width: 90%;
+    }
   }
 }
