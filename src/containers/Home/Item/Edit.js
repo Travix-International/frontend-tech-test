@@ -39,15 +39,23 @@ export default class MyComponent extends Component {
         <div className="item__left">
           <Button mods={['error']} onClick={onClickDelete} size="s">x</Button>
         </div>
-        <div className="item__middle">
-          <Input mods={['title']} onChange={onChangeTitle} onKeyPress={onKeyPress} placeholder={placeholderTitle} value={valueTitle} />
-          <Input mods={['desc']} onChange={onChangeDesc} onKeyPress={onKeyPress} placeholder={placeholderDesc} value={valueDesc} />
-        </div>
-        <div className="item__right">
-          <Button disabled={isInvalid} mods={['submit']} onClick={onClick} size="s">
-            submit
-          </Button>
-          <Button onClick={onClickSwitch} size="s" variation="ghost-inverted">cancel</Button>
+        <div
+          className="item__right"
+          onMouseEnter={this.onMouseEnter}
+          onMouseLeave={this.onMouseLeave}
+        >
+          <div
+            className="item__right__left"
+          >
+            <Input mods={['title']} onChange={onChangeTitle} onKeyPress={onKeyPress} placeholder={placeholderTitle} value={valueTitle} />
+            <Input mods={['desc']} onChange={onChangeDesc} onKeyPress={onKeyPress} placeholder={placeholderDesc} value={valueDesc} />
+          </div>
+          <div className="item__right__right">
+            <Button disabled={isInvalid} mods={['submit']} onClick={onClick} size="s">
+              submit
+            </Button>
+            <Button mods={['cancel']} onClick={onClickSwitch} size="s" variation="ghost-inverted">cancel</Button>
+          </div>
         </div>
       </div>
     );

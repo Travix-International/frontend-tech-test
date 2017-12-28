@@ -66,34 +66,41 @@ export class MyComponent extends Component {
         className={classNames('mode--normal', {
           'is-done': isDone,
         })}
-        onMouseLeave={this.onMouseLeave}
-        onMouseMove={this.onMouseMove}
       >
         <div className="item__left" onClick={this.onChangeCheckbox}>
           <Checkbox checked={isDone} name={`item-sheckbox-${task.id}`} />
         </div>
-        <div className="item__middle">
-          <div
-            className={classNames('item__title', {
-              'is-done': isDone,
-            })}
-          >
-            {task.title}
-          </div>
-          <div
-            className={classNames('item__desc', {
-              'is-done': isDone,
-            })}
-          >
-            {task.description}
-          </div>
-        </div>
         <div
-          className={classNames('item__right', {
-            'is-selected': isSelected,
-          })}
+          className="item__right"
+          onClick={this.onClickSwitch}
+          onMouseLeave={this.onMouseLeave}
+          onMouseMove={this.onMouseMove}
         >
-          <Button onClick={this.onClickSwitch} size="s">edit</Button>
+          <div
+            className="item__right__left"
+          >
+            <div
+              className={classNames('item__title', {
+                'is-done': isDone,
+              })}
+            >
+              {task.title}
+            </div>
+            <div
+              className={classNames('item__desc', {
+                'is-done': isDone,
+              })}
+            >
+              {task.description}
+            </div>
+          </div>
+          <div
+            className={classNames('item__right__right', {
+              'is-selected': isSelected,
+            })}
+          >
+            <Button size="s">edit</Button>
+          </div>
         </div>
       </div>
     );

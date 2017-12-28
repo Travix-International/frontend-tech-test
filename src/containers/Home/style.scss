@@ -30,3 +30,12 @@
     }
   }
 }
+
+//iPhone6 plus
+@media (max-width: 414px) {
+  .page--home {
+    .list--task {
+      width: 95%;
+    }
+  }
+}

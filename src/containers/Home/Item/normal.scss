@@ -7,6 +7,10 @@
   }
 
   .item__right {
+    cursor: pointer;
+  }
+
+  .item__right__right {
     opacity: 0;
 
     &.is-selected {

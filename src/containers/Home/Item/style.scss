@@ -1,26 +1,28 @@
 .item {
   border-bottom: 1px solid #dedede;
-  padding: 1.2rem 1rem;
+  padding: 1.2rem 0;
 
   .item__left {
     display: flex;
     align-items: center;
-    flex: 0 1 10%;
+    flex: 0 1 15%;
     cursor: pointer;
     justify-content: center;
-  }
-
-  .item__middle {
-    display: flex;
-    flex: 4 1 60%;
-    flex-direction: column;
-    padding: 0 0.5rem;
   }
 
   .item__right {
     display: flex;
     align-items: center;
-    flex: 1 1 30%;
+    flex: 5 1 85%;
+  }
+
+  .item__right__left {
+    flex: 4 1 80%;
+  }
+
+  .item__right__right {
+    display: flex;
+    flex: 2 1 40%;
     flex-wrap: wrap;
     justify-content: center;
   }
