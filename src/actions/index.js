@@ -3,7 +3,7 @@ import request from 'superagent';
 const fetchTasks = () => {
   return (dispatch) => {
     return request
-      .get('http://localhost:9001/tasks')
+      .get('/tasks')
       .then((res) => {
         return dispatch({
           type: 'FETCH_TASKS',
@@ -16,7 +16,7 @@ const fetchTasks = () => {
 const postTask = (task) => {
   return (dispatch) => {
     return request
-      .post('http://localhost:9001/tasks')
+      .post('/tasks')
       .send(task)
       .then((res) => {
         return dispatch({
@@ -32,7 +32,7 @@ const patchTask = (task) => {
   delete task.id;
   return (dispatch) => {
     return request
-      .patch(`http://localhost:9001/tasks/${taskId}`)
+      .patch(`/tasks/${taskId}`)
       .send(task)
       .then((res) => {
         return dispatch({
@@ -47,7 +47,7 @@ const deleteTask = (task) => {
   const taskId = task.id;
   return (dispatch) => {
     return request
-      .delete(`http://localhost:9001/tasks/${taskId}`)
+      .delete(`/tasks/${taskId}`)
       .then(() => {
         return dispatch({
           type: 'DELETE_TASK',
