@@ -47,7 +47,7 @@ export class MyComponent extends Component {
     this.onClickSwitch = this.onClickSwitch.bind(this);
     this.onClickDelete = this.onClickDelete.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
-    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
   }
 
@@ -142,13 +142,14 @@ export class MyComponent extends Component {
     }
   }
 
-  onMouseEnter() {
+  onMouseMove() {
     this.setState({
       isSelected: true,
     });
   }
 
   onMouseLeave() {
+    logger.debug('on mouseleave');
     this.setState({
       isSelected: false,
     });
@@ -166,17 +167,18 @@ export class MyComponent extends Component {
     const { placeholderDesc, valueDesc, placeholderTitle, valueTitle, isInvalid } = this.state;
     return (
       <div className="mode--edit">
-        <div className="item__left" />
+        <div className="item__left">
+          <Button mods={['error']} onClick={this.onClickDelete} size="s">x</Button>
+        </div>
         <div className="item__middle">
-          <Input onChange={this.onChangeTitle} onKeyPress={this.onKeyPress} placeholder={placeholderTitle} value={valueTitle} />
-          <Input onChange={this.onChangeDesc} onKeyPress={this.onKeyPress} placeholder={placeholderDesc} value={valueDesc} />
+          <Input mods={['title']} onChange={this.onChangeTitle} onKeyPress={this.onKeyPress} placeholder={placeholderTitle} value={valueTitle} />
+          <Input mods={['desc']} onChange={this.onChangeDesc} onKeyPress={this.onKeyPress} placeholder={placeholderDesc} value={valueDesc} />
         </div>
         <div className="item__right">
-          <Button disabled={isInvalid} onClick={this.onClick} size="s">
+          <Button disabled={isInvalid} mods={['submit']} onClick={this.onClick} size="s">
             submit
           </Button>
-          <Button onClick={this.onClickSwitch} size="s">cancel</Button>
-          <Button onClick={this.onClickDelete} size="s">delete</Button>
+          <Button onClick={this.onClickSwitch} size="s" variation="ghost-inverted">cancel</Button>
         </div>
       </div>
     );
@@ -191,7 +193,7 @@ export class MyComponent extends Component {
         className={classNames('mode--normal', {
           'is-done': isDone,
         })}
-        onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}
+        onMouseMove={this.onMouseMove}
       >
         <div className="item__left" onClick={this.onChangeCheckbox}>
           <Checkbox checked={isDone} name={`item-sheckbox-${task.id}`} />
@@ -212,11 +214,13 @@ export class MyComponent extends Component {
             {task.description}
           </div>
         </div>
-        {isSelected &&
-          <div className="item__right">
-            <Button onClick={this.onClickSwitch} size="s">edit</Button>
-          </div>
-        }
+        <div
+          className={classNames('item__right', {
+            'is-selected': isSelected,
+          })}
+        >
+          <Button onClick={this.onClickSwitch} size="s">edit</Button>
+        </div>
       </div>
     );
   }
@@ -225,7 +229,7 @@ export class MyComponent extends Component {
     const { mode } = this.props;
 
     return (
-      <div className="item">
+      <div className="item" onMouseLeave={this.onMouseLeave}>
         {mode === 'EDIT' ? (
           this.renderEditMode()
         ) : (

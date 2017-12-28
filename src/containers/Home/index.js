@@ -7,6 +7,7 @@ import action from '../../actions';
 import Item from './Item';
 
 import './style.scss';
+import './buttons.scss';
 
 export class HomeComponent extends Component {
   static propTypes = {
