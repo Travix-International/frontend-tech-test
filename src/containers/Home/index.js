@@ -29,9 +29,11 @@ export class HomeComponent extends Component {
           <meta content="home page" name="og:title" />
         </Helmet>
 
-        {tasks.map((task) => {
-          return <Item key={task.id} mode="NORMAL" task={task} />;
-        })}
+        <div className="list--task">
+          {tasks.map((task) => {
+            return <Item key={task.id} mode="NORMAL" task={task} />;
+          })}
+        </div>
 
         {/* Add function */}
         <Item mode="EDIT" />

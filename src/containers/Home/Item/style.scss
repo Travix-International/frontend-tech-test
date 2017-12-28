@@ -1,0 +1,44 @@
+.item {
+  margin-bottom: 0.6rem;
+
+  .mode--normal, .mode--edit {
+    display: flex;
+    align-content: center;
+  }
+
+  .item__left {
+    display: inline-block;
+    flex-basis: 10%;
+    cursor: pointer;
+  }
+
+  .item__middle {
+    display: inline-block;
+    flex-basis: 70%;
+  }
+
+  .item__right {
+    display: inline-block;
+    flex-basis: 20%;
+  }
+
+  .mode--normal {
+    .ui-checkbox {
+      padding-top: 30%;
+    }
+
+    .item__title {
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+    }
+
+    .item__desc {
+      font-size: 1rem;
+      line-height: 1.2rem;
+    }
+
+    .is-done {
+      text-decoration: line-through;
+    }
+  }
+}

@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 import {
   Input,
   Button,
+  Checkbox,
 } from 'travix-ui-kit';
 import action from '../../../actions';
 import logger from '../../../logger';
+import './style.scss';
 
 export class MyComponent extends Component {
   static propTypes = {
@@ -32,16 +35,20 @@ export class MyComponent extends Component {
       valueTitle: props.task.title || '',
       valueDesc: props.task.description || '',
       mode: props.mode,
+      isSelected: false,
     };
 
     this.state.isInvalid = !this.validate();
 
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDesc = this.onChangeDesc.bind(this);
+    this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
     this.onClick = this.onClick.bind(this);
     this.onClickSwitch = this.onClickSwitch.bind(this);
     this.onClickDelete = this.onClickDelete.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
   }
 
   validate(value, type) {
@@ -139,27 +146,89 @@ export class MyComponent extends Component {
     }
   }
 
+  onMouseEnter() {
+    this.setState({
+      isSelected: true,
+    });
+  }
+
+  onMouseLeave() {
+    this.setState({
+      isSelected: false,
+    });
+  }
+
+  onChangeCheckbox() {
+    const { patchTask, task } = this.props;
+    patchTask({
+      id: task.id,
+      isDone: !task.isDone,
+    });
+  }
+
+  renderEditMode() {
+    const { placeholderDesc, valueDesc, placeholderTitle, valueTitle, isInvalid } = this.state;
+    return (
+      <div className="mode--edit">
+        <div className="item__left" />
+        <div className="item__middle">
+          <Input onChange={this.onChangeTitle} onKeyPress={this.onKeyPress} placeholder={placeholderTitle} value={valueTitle} />
+          <Input onChange={this.onChangeDesc} onKeyPress={this.onKeyPress} placeholder={placeholderDesc} value={valueDesc} />
+        </div>
+        <div className="item__right">
+          <Button disabled={isInvalid} onClick={this.onClick} size="s">
+            submit
+          </Button>
+          <Button onClick={this.onClickSwitch} size="s">cancel</Button>
+          <Button onClick={this.onClickDelete} size="s">delete</Button>
+        </div>
+      </div>
+    );
+  }
+
+  renderNormalMode() {
+    const { isSelected } = this.state;
+    const { task } = this.props;
+    const isDone = task.isDone;
+    return (
+      <div className="mode--normal" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
+        <div className="item__left" onClick={this.onChangeCheckbox}>
+          <Checkbox checked={isDone} name={`item-sheckbox-${task.id}`} />
+        </div>
+        <div className="item__middle">
+          <div
+            className={classNames('item__title', {
+              'is-done': isDone,
+            })}
+          >
+            {task.title}
+          </div>
+          <div
+            className={classNames('item__desc', {
+              'is-done': isDone,
+            })}
+          >
+            {task.description}
+          </div>
+        </div>
+        {isSelected &&
+          <div className="item__right">
+            <Button onClick={this.onClickSwitch} size="s">edit</Button>
+          </div>
+        }
+      </div>
+    );
+  }
+
   render() {
-    const { mode, placeholderDesc, valueDesc, placeholderTitle, valueTitle, isInvalid } = this.state;
+    const { mode } = this.state;
 
     return (
-      <div className="additem">
+      <div className="item">
         {mode === 'EDIT' ? (
-          <div className="mode--edit">
-            <Input onChange={this.onChangeTitle} onKeyPress={this.onKeyPress} placeholder={placeholderTitle} value={valueTitle} />
-            <Input onChange={this.onChangeDesc} onKeyPress={this.onKeyPress} placeholder={placeholderDesc} value={valueDesc} />
-            <Button disabled={isInvalid} onClick={this.onClick}>
-              submit
-            </Button>
-            <Button onClick={this.onClickSwitch}>switch</Button>
-            <Button onClick={this.onClickDelete}>delete</Button>
-          </div>
+          this.renderEditMode()
         ) : (
-          <div className="mode--normal">
-            title: {valueTitle} <br />
-            desc: {valueDesc}
-            <Button onClick={this.onClickSwitch}>switch</Button>
-          </div>
+          this.renderNormalMode()
         )}
       </div>
     );

@@ -11,6 +11,7 @@ const router = express.Router();
 const POSSIBLE_KEYS = [
   'title',
   'description',
+  'isDone',
 ];
 
 const watcher = (error, object) => {
@@ -150,6 +151,7 @@ export const postCb = (req, res) => {
     .then((tasksJSON) => {
       const task = {
         id: uuidv4(),
+        isDone: false,
       };
       let hasFoundInvalidKey = false;
       // only create when valid info is given
