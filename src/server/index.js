@@ -17,7 +17,8 @@ if (process.env.NODE_ENV === 'hot') {
   app.use(renderer({ clientStats: stats }));
 }
 
-app.listen(9001, () => {
+const port = process.env.PORT || 9001;
+app.listen(port, () => {
   logger.debug('the server is available on http://localhost:9001/');
 
   // tracking sample

@@ -4,7 +4,7 @@
   "description": "test back - front",
   "main": "src/server/index.js",
   "scripts": {
-    "test": "yarn run eslint && cross-env NODE_ENV=test nyc ava --verbose",
+    "test": "yarn run eslint && cross-env PORT=9003 NODE_ENV=test nyc ava --verbose",
     "start": "NODE_ENV=hot babel-node src/server/index.js",
     "eslint": "eslint ./",
     "coverage": "nyc report --reporter=lcov",
