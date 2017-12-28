@@ -11,16 +11,14 @@ import './buttons.scss';
 
 export class HomeComponent extends Component {
   static propTypes = {
-    currentEditingTaskId: PropTypes.any.isRequired,
+    currentEditingTaskId: PropTypes.any,
     fetchTasks: PropTypes.func.isRequired,
     tasks: PropTypes.array.isRequired,
   }
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state({
-  //   })
-  // }
+  static defaultProps = {
+    currentEditingTaskId: null,
+  }
 
   componentDidMount() {
     this.props.fetchTasks();

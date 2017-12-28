@@ -1,11 +1,6 @@
 .item {
   margin-bottom: 1rem;
 
-  .mode--normal, .mode--edit {
-    display: flex;
-    align-content: center;
-  }
-
   .item__left {
     display: flex;
     align-items: center;
@@ -27,63 +22,4 @@
     flex-wrap: wrap;
   }
 
-  .mode--edit {
-    .item__left {
-      .ui-button_error {
-        margin: 0 auto;
-      }
-    }
-  }
-
-  .mode--normal {
-    &.is-done {
-      opacity: 0.3; 
-    }
-
-    .ui-checkbox {
-      margin: 0 auto;
-    }
-
-    .item__right {
-      opacity: 0;
-
-      &.is-selected {
-        opacity: 1;
-        transition: opacity 200ms ease-in-out;
-      }
-    }
-
-    .item__title {
-      font-size: 1.2rem;
-      line-height: 1.6rem;
-      margin-bottom: 0.5rem;
-      padding: 2px 0.4rem;
-    }
-
-    .item__desc {
-      font-size: 1rem;
-      line-height: 1.4rem;
-      padding: 2px 0.4rem;
-    }
-
-    .is-done {
-      text-decoration: line-through;
-    }
-  }
-
-  .ui-button_submit {
-    margin-right: 0.5rem;
-  }
-
-  .ui-input_title {
-    font-size: 1.2rem;
-    line-height: 1.6rem;
-    padding: 0.4rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .ui-input_desc {
-    padding: 0.4rem;
-    line-height: 1.4rem;
-  }
 }
