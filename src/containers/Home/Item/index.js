@@ -18,6 +18,7 @@ export class MyComponent extends Component {
     patchTask: PropTypes.func.isRequired,
     postTask: PropTypes.func.isRequired,
     task: PropTypes.object,
+    taskSwitchEditMode: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -34,7 +35,6 @@ export class MyComponent extends Component {
       placeholderDesc: 'description:',
       valueTitle: props.task.title || '',
       valueDesc: props.task.description || '',
-      mode: props.mode,
       isSelected: false,
     };
 
@@ -90,7 +90,7 @@ export class MyComponent extends Component {
   }
 
   onClick() {
-    const { postTask, patchTask, task } = this.props;
+    const { postTask, patchTask, task, taskSwitchEditMode } = this.props;
     const taskId = task.id;
     const { valueTitle, valueDesc } = this.state;
     if (taskId) {
@@ -101,9 +101,7 @@ export class MyComponent extends Component {
         description: valueDesc,
       })
         .then(() => {
-          return this.setState({
-            mode: 'NORMAL',
-          });
+          return taskSwitchEditMode(task.id, 'NORMAL');
         });
       // TODO: handle error when failed
     }
@@ -123,11 +121,9 @@ export class MyComponent extends Component {
   }
 
   onClickSwitch() {
-    let { mode } = this.state;
-    mode = mode === 'EDIT' ? 'NORMAL' : 'EDIT';
-    this.setState({
-      mode,
-    });
+    const { mode, taskSwitchEditMode, task } = this.props;
+    const targetMode = mode === 'EDIT' ? 'NORMAL' : 'EDIT';
+    taskSwitchEditMode(task.id, targetMode);
   }
 
   onClickDelete() {
@@ -191,7 +187,12 @@ export class MyComponent extends Component {
     const { task } = this.props;
     const isDone = task.isDone;
     return (
-      <div className="mode--normal" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
+      <div
+        className={classNames('mode--normal', {
+          'is-done': isDone,
+        })}
+        onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}
+      >
         <div className="item__left" onClick={this.onChangeCheckbox}>
           <Checkbox checked={isDone} name={`item-sheckbox-${task.id}`} />
         </div>
@@ -221,7 +222,7 @@ export class MyComponent extends Component {
   }
 
   render() {
-    const { mode } = this.state;
+    const { mode } = this.props;
 
     return (
       <div className="item">
@@ -245,6 +246,9 @@ export function mapDispatchToProps(dispatch) {
     },
     deleteTask: (task) => {
       return dispatch(action.deleteTask(task));
+    },
+    taskSwitchEditMode: (id, targetMode) => {
+      return dispatch(action.taskSwitchEditMode(id, targetMode));
     },
   };
 }

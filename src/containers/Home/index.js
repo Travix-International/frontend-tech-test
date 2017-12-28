@@ -10,16 +10,23 @@ import './style.scss';
 
 export class HomeComponent extends Component {
   static propTypes = {
+    currentEditingTaskId: PropTypes.any.isRequired,
     fetchTasks: PropTypes.func.isRequired,
     tasks: PropTypes.array.isRequired,
   }
+
+  // constructor(props) {
+  //   super(props);
+  //   this.state({
+  //   })
+  // }
 
   componentDidMount() {
     this.props.fetchTasks();
   }
 
   render() {
-    const { tasks } = this.props;
+    const { currentEditingTaskId, tasks } = this.props;
 
     return (
       <div className="page--home">
@@ -31,7 +38,8 @@ export class HomeComponent extends Component {
 
         <div className="list--task">
           {tasks.map((task) => {
-            return <Item key={task.id} mode="NORMAL" task={task} />;
+            const mode = task.id === currentEditingTaskId ? 'EDIT' : 'NORMAL';
+            return <Item key={task.id} mode={mode} task={task} />;
           })}
         </div>
 
@@ -45,13 +53,16 @@ export class HomeComponent extends Component {
 
 export function mapStateToProps(state) {
   const taskEntity = _get(state, 'entities.task', {});
-  const taskIds = _get(state, 'pages.home.tasks');
+  const pagesHome = _get(state, 'pages.home');
+  const taskIds = _get(pagesHome, 'tasks', []);
   const tasks = taskIds.map((id) => {
     return taskEntity[id] || {};
   });
+  const currentEditingTaskId = _get(pagesHome, 'currentEditingTaskId');
 
   return {
     tasks,
+    currentEditingTaskId,
   };
 }
 

@@ -23,6 +23,10 @@
   }
 
   .mode--normal {
+    &.is-done {
+      opacity: 0.3; 
+    }
+
     .ui-checkbox {
       padding-top: 30%;
     }

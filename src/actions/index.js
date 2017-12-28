@@ -59,9 +59,20 @@ const deleteTask = (task) => {
   };
 };
 
+const taskSwitchEditMode = (id, targetMode) => {
+  return {
+    type: 'TASK_SWITCH_EDIT_MODE',
+    payload: {
+      targetMode,
+      from: id,
+    },
+  };
+};
+
 export default {
   fetchTasks,
   postTask,
   patchTask,
   deleteTask,
+  taskSwitchEditMode,
 };
