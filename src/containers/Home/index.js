@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { get as _get } from 'lodash';
 import action from '../../actions';
 import Item from './Item';
+import AddItem from './AddItem';
+import withEditTask from './withEditTask';
 
 import './style.scss';
 import './buttons.scss';
@@ -26,6 +28,7 @@ export class HomeComponent extends Component {
 
   render() {
     const { currentEditingTaskId, tasks } = this.props;
+    const AddItemComponent = withEditTask(AddItem);
 
     return (
       <div className="page--home">
@@ -35,15 +38,15 @@ export class HomeComponent extends Component {
           <meta content="home page" name="og:title" />
         </Helmet>
 
+        {/* Add function */}
+        <AddItemComponent />
+
         <div className="list--task">
           {tasks.map((task) => {
             const mode = task.id === currentEditingTaskId ? 'EDIT' : 'NORMAL';
             return <Item key={task.id} mode={mode} task={task} />;
           })}
         </div>
-
-        {/* Add function */}
-        <Item mode="EDIT" />
 
       </div>
     );

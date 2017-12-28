@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import withEditTask from './EditHOC';
-import EditItem from './EditItem';
+import withEditTask from '../withEditTask';
+import Edit from './Edit';
 import Normal from './Normal';
 import './style.scss';
 
@@ -20,12 +20,12 @@ export class MyComponent extends Component {
 
   render() {
     const { mode, task } = this.props;
-    const Edit = withEditTask(EditItem, task, mode);
+    const EditItem = withEditTask(Edit, task, mode);
 
     return (
       <div className="item">
         {mode === 'EDIT' ? (
-          <Edit />
+          <EditItem />
         ) : (
           <Normal mode={mode} task={task} />
         )}

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import action from '../../../actions';
-import logger from '../../../logger';
+import action from '../../actions';
+import logger from '../../logger';
 
 // This function takes a component...
-export default function withEditTask(WrappedComponent, task, mode) {
+export default function withEditTask(WrappedComponent, task = {}, mode) {
   // ...and returns another component...
   class MyComponent extends Component {
     static propTypes = {

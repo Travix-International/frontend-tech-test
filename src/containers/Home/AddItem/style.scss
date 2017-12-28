@@ -1,0 +1,20 @@
+.add-item {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+
+  .input--title-wrapper {
+    flex: 2 1 auto;
+    padding-right: 1rem;
+  }
+
+  .input--desc-wrapper {
+    flex: 4 1 auto;
+    padding-right: 1rem;
+  }
+
+  .ui-button_submit {
+    flex: 1 1 auto;
+  }
+}
