@@ -100,7 +100,6 @@ export default function withEditTask(WrappedComponent, task = {}, mode) {
             isInvalid: true,
           });
         });
-      // TODO: handle error when failed
     }
 
     onClickSwitch() {

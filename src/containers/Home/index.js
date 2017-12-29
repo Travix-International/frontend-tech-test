@@ -6,10 +6,14 @@ import { get as _get } from 'lodash';
 import action from '../../actions';
 import Item from './Item';
 import AddItem from './AddItem';
+import ErrorComponent from './Error';
 import withEditTask from './withEditTask';
 
 import './style.scss';
 import './buttons.scss';
+
+// do not create component in render method
+const AddItemComponent = withEditTask(AddItem);
 
 export class HomeComponent extends Component {
   static propTypes = {
@@ -28,7 +32,6 @@ export class HomeComponent extends Component {
 
   render() {
     const { currentEditingTaskId, tasks } = this.props;
-    const AddItemComponent = withEditTask(AddItem);
 
     return (
       <div className="page--home">
@@ -37,6 +40,8 @@ export class HomeComponent extends Component {
           <meta content="home page shows posts" name="description" />
           <meta content="home page" name="og:title" />
         </Helmet>
+
+        <ErrorComponent />
 
         {/* Add function */}
         <AddItemComponent />

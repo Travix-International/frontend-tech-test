@@ -1,4 +1,30 @@
 import request from 'superagent';
+import uuidv4 from 'uuid/v4';
+import logger from '../logger';
+
+function formatError(err) {
+  err.id = uuidv4();
+  return err;
+}
+
+const errorOccurred = (err) => {
+  logger.error('ERROR_OCCURRED', formatError(err), { isTrack: true });
+  return {
+    type: 'ERROR_OCCURRED',
+    payload: {
+      err,
+    },
+  };
+};
+
+const errorHandled = (errId) => {
+  return {
+    type: 'ERROR_HANDLED',
+    payload: {
+      id: errId,
+    },
+  };
+};
 
 const fetchTasks = () => {
   return (dispatch) => {
@@ -23,6 +49,11 @@ const postTask = (task) => {
           type: 'POST_TASK',
           payload: JSON.parse(res.text),
         });
+      })
+      .catch((err) => {
+        err.fromAction = 'POST_TASK';
+        dispatch(errorOccurred(err));
+        throw err;
       });
   };
 };
@@ -39,6 +70,11 @@ const patchTask = (task) => {
           type: 'PATCH_TASK',
           payload: JSON.parse(res.text),
         });
+      })
+      .catch((err) => {
+        err.fromAction = 'PATCH_TASK';
+        dispatch(errorOccurred(err));
+        throw err;
       });
   };
 };
@@ -55,6 +91,11 @@ const deleteTask = (task) => {
             result: taskId,
           },
         });
+      })
+      .catch((err) => {
+        err.fromAction = 'DELETE_TASK';
+        dispatch(errorOccurred(err));
+        throw err;
       });
   };
 };
@@ -70,6 +111,8 @@ const taskSwitchEditMode = (id, targetMode) => {
 };
 
 export default {
+  errorOccurred,
+  errorHandled,
   fetchTasks,
   postTask,
   patchTask,
