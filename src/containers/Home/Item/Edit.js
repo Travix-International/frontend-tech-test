@@ -11,8 +11,8 @@ export default class MyComponent extends Component {
     isInvalid: PropTypes.bool.isRequired,
     onChangeDesc: PropTypes.func.isRequired,
     onChangeTitle: PropTypes.func.isRequired,
-    onClick: PropTypes.func.isRequired,
     onClickDelete: PropTypes.func.isRequired,
+    onClickSubmit: PropTypes.func.isRequired,
     onClickSwitch: PropTypes.func.isRequired,
     onKeyPress: PropTypes.func.isRequired,
     valueDesc: PropTypes.string.isRequired,
@@ -24,8 +24,8 @@ export default class MyComponent extends Component {
       valueDesc,
       valueTitle,
       isInvalid,
+      onClickSubmit,
       onClickSwitch,
-      onClick,
       onKeyPress,
       onChangeDesc,
       onChangeTitle,
@@ -51,7 +51,7 @@ export default class MyComponent extends Component {
             <Input mods={['desc']} onChange={onChangeDesc} onKeyPress={onKeyPress} placeholder={placeholderDesc} value={valueDesc} />
           </div>
           <div className="item__right__right">
-            <Button disabled={isInvalid} mods={['submit']} onClick={onClick} size="s">
+            <Button disabled={isInvalid} mods={['submit']} onClick={onClickSubmit} size="s">
               submit
             </Button>
             <Button mods={['cancel']} onClick={onClickSwitch} size="s" variation="ghost-inverted">cancel</Button>

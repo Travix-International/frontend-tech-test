@@ -28,7 +28,7 @@ export default function withEditTask(WrappedComponent, task = {}, mode) {
 
       this.onChangeTitle = this.onChangeTitle.bind(this);
       this.onChangeDesc = this.onChangeDesc.bind(this);
-      this.onClick = this.onClick.bind(this);
+      this.onClickSubmit = this.onClickSubmit.bind(this);
       this.onClickSwitch = this.onClickSwitch.bind(this);
       this.onClickDelete = this.onClickDelete.bind(this);
       this.onKeyPress = this.onKeyPress.bind(this);
@@ -39,7 +39,7 @@ export default function withEditTask(WrappedComponent, task = {}, mode) {
       const keys = ['valueTitle', 'valueDesc'];
       let isValid;
       logger.debug('validate this.state', this.state);
-      keys.map((key) => {
+      keys.some((key) => {
         let targetValue;
         if (key === changingKey) {
           targetValue = value;
@@ -48,7 +48,8 @@ export default function withEditTask(WrappedComponent, task = {}, mode) {
         }
         isValid = targetValue.length > 0;
         logger.debug('validate', `${isValid}`);
-        return isValid;
+        // quit when find false
+        return !isValid;
       });
       return isValid;
     }
@@ -72,7 +73,10 @@ export default function withEditTask(WrappedComponent, task = {}, mode) {
       this.onChange(value, 'Desc');
     }
 
-    onClick() {
+    onClickSubmit() {
+      if (!this.validate()) {
+        return false;
+      }
       const { postTask, patchTask, taskSwitchEditMode } = this.props;
       const taskId = task.id;
       const { valueTitle, valueDesc } = this.state;
@@ -115,13 +119,13 @@ export default function withEditTask(WrappedComponent, task = {}, mode) {
       return deleteTask({
         id: taskId,
       });
-      // TODO: handle error when failed
+      // error handled in action
     }
 
     onKeyPress(e) {
       const which = e.which;
       if (which === 13) {
-        this.onClick();
+        this.onClickSubmit();
       }
     }
 
@@ -135,8 +139,8 @@ export default function withEditTask(WrappedComponent, task = {}, mode) {
           mode={mode}
           onChangeDesc={this.onChangeDesc}
           onChangeTitle={this.onChangeTitle}
-          onClick={this.onClick}
           onClickDelete={this.onClickDelete}
+          onClickSubmit={this.onClickSubmit}
           onClickSwitch={this.onClickSwitch}
           onKeyPress={this.onKeyPress}
           task={task}

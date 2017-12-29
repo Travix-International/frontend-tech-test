@@ -11,7 +11,7 @@ export default class MyComponent extends Component {
     isInvalid: PropTypes.bool.isRequired,
     onChangeDesc: PropTypes.func.isRequired,
     onChangeTitle: PropTypes.func.isRequired,
-    onClick: PropTypes.func.isRequired,
+    onClickSubmit: PropTypes.func.isRequired,
     onKeyPress: PropTypes.func.isRequired,
     valueDesc: PropTypes.string.isRequired,
     valueTitle: PropTypes.string.isRequired,
@@ -22,7 +22,7 @@ export default class MyComponent extends Component {
       valueDesc,
       valueTitle,
       isInvalid,
-      onClick,
+      onClickSubmit,
       onKeyPress,
       onChangeDesc,
       onChangeTitle,
@@ -38,7 +38,7 @@ export default class MyComponent extends Component {
         <div className="input--desc-wrapper">
           <Input mods={['desc']} onChange={onChangeDesc} onKeyPress={onKeyPress} placeholder={placeholderDesc} value={valueDesc} />
         </div>
-        <Button disabled={isInvalid} mods={['submit']} onClick={onClick} size="s">
+        <Button disabled={isInvalid} mods={['submit']} onClick={onClickSubmit} size="s">
           submit
         </Button>
       </div>
