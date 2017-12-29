@@ -69,3 +69,10 @@ test('/tasks CRUD', async (t) => {
 
   t.is(deleteRes.status, 204);
 });
+
+test('/ returns html layout', async (t) => {
+  const getRes = await request(app)
+    .get('/');
+  t.true(/html/.test(getRes.headers['content-type']));
+  t.true(/page--home/.test(getRes.text));
+});
