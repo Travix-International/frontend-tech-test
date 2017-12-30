@@ -3,6 +3,8 @@ import mock from 'mock-require';
 import sinon from 'sinon';
 import { createMockResponse } from '../../__mocks__/travix-persistent-object';
 
+mock('../socketio', require('../../__mocks__/socketio')());
+
 const createSpiedRes = () => {
   const res = {
     status: sinon.stub().returnsThis(),

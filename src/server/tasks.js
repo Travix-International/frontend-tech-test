@@ -6,6 +6,7 @@ import persistent from 'travix-persistent-object';
 import uuidv4 from 'uuid/v4';
 import schemas from '../schemas';
 import logger from '../logger';
+import io from './socketio';
 
 const router = express.Router();
 const POSSIBLE_KEYS = [
@@ -114,6 +115,7 @@ export const patchCb = (req, res) => {
       // then send response
       .then((task) => {
         const response = normalize(task, schemas.task);
+        io.emit('PATCH_TASK', response);
         return res.status(200).json(response);
       });
   }

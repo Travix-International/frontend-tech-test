@@ -39,22 +39,33 @@ const fetchTasks = () => {
   };
 };
 
+const postTaskAction = (normalizedTask) => {
+  return {
+    type: 'POST_TASK',
+    payload: normalizedTask,
+  };
+};
+
 const postTask = (task) => {
   return (dispatch) => {
     return request
       .post('/tasks')
       .send(task)
       .then((res) => {
-        return dispatch({
-          type: 'POST_TASK',
-          payload: JSON.parse(res.text),
-        });
+        return dispatch(postTaskAction(JSON.parse(res.text)));
       })
       .catch((err) => {
         err.fromAction = 'POST_TASK';
         dispatch(errorOccurred(err));
         throw err;
       });
+  };
+};
+
+const patchTaskAction = (normalizedTask) => {
+  return {
+    type: 'PATCH_TASK',
+    payload: normalizedTask,
   };
 };
 
@@ -66,10 +77,7 @@ const patchTask = (task) => {
       .patch(`/tasks/${taskId}`)
       .send(task)
       .then((res) => {
-        return dispatch({
-          type: 'PATCH_TASK',
-          payload: JSON.parse(res.text),
-        });
+        return dispatch(patchTaskAction(JSON.parse(res.text)));
       })
       .catch((err) => {
         err.fromAction = 'PATCH_TASK';
@@ -114,7 +122,9 @@ export default {
   errorOccurred,
   errorHandled,
   fetchTasks,
+  postTaskAction,
   postTask,
+  patchTaskAction,
   patchTask,
   deleteTask,
   taskSwitchEditMode,

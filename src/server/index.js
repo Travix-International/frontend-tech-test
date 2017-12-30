@@ -1,8 +1,11 @@
 import express from 'express';
 import logger from '../logger';
-import tasksMiddleware from './tasks';
 
 const app = express();
+
+const http = require('http').createServer(app);
+export const io = require('socket.io')(http); // eslint-disable-line
+const tasksMiddleware = require('./tasks').default;
 
 app.use(tasksMiddleware);
 
@@ -18,7 +21,7 @@ if (process.env.NODE_ENV === 'hot') {
 }
 
 const port = process.env.PORT || 9001;
-app.listen(port, () => {
+http.listen(port, () => {
   logger.debug('the server is available on http://localhost:9001/');
 
   // tracking sample

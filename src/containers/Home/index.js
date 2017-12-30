@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { get as _get } from 'lodash';
+import io from 'socket.io-client';
 import action from '../../actions';
 import Item from './Item';
 import AddItem from './AddItem';
 import ErrorComponent from './Error';
 import withEditTask from './withEditTask';
+import logger from '../../logger';
 
 import './style.scss';
 import './buttons.scss';
@@ -19,6 +21,7 @@ export class HomeComponent extends Component {
   static propTypes = {
     currentEditingTaskId: PropTypes.any,
     fetchTasks: PropTypes.func.isRequired,
+    patchTaskAction: PropTypes.func.isRequired,
     tasks: PropTypes.array.isRequired,
   }
 
@@ -27,7 +30,15 @@ export class HomeComponent extends Component {
   }
 
   componentDidMount() {
+    const { patchTaskAction } = this.props;
+
     this.props.fetchTasks();
+    this.socket = io();
+    this.socket.on('connect', () => { logger.debug('connected'); });
+    this.socket.on('PATCH_TASK', (normalizedTask) => {
+      logger.debug('socket on PATCH_TASK', normalizedTask);
+      patchTaskAction(normalizedTask);
+    });
   }
 
   render() {
@@ -77,6 +88,9 @@ export function mapDispatchToProps(dispatch) {
   return {
     fetchTasks: () => {
       return dispatch(action.fetchTasks());
+    },
+    patchTaskAction: (normalizedTask) => {
+      return dispatch(action.patchTaskAction(normalizedTask));
     },
   };
 }
