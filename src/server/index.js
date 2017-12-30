@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'hot') {
   hot(app);
 } else {
   const renderer = require('./renderer').default; // eslint-disable-line global-require
-  const stats = require('../../dist/compilation-stats.json'); // eslint-disable-line global-require
+  const stats = require('../../compilation-stats.json'); // eslint-disable-line global-require
   // Serve static files
   app.use('/assets', express.static('dist/assets'));
   app.use(renderer({ clientStats: stats }));

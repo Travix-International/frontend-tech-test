@@ -10,8 +10,8 @@
     "coverage": "nyc report --reporter=lcov",
     "build:server:dev": "webpack --env=dev --config=webpack.server.babel.js --progress --profile --colors",
     "build:server:prod": "webpack --env=prod --config=webpack.server.babel.js --progress --profile --colors",
-    "build:browser:dev": "webpack --env=dev --config=webpack.browser.babel.js --progress --profile --colors --json > dist/compilation-stats.json",
-    "build:browser:prod": "webpack --env=prod --config=webpack.browser.babel.js --progress --profile --colors --json > dist/compilation-stats.json"
+    "build:browser:dev": "webpack --env=dev --config=webpack.browser.babel.js --progress --profile --colors --json > compilation-stats.json",
+    "build:browser:prod": "webpack --env=prod --config=webpack.browser.babel.js --progress --profile --colors --json > compilation-stats.json"
   },
   "keywords": [
     "test",
