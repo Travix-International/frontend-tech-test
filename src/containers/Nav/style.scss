@@ -1,0 +1,18 @@
+nav {
+  position: relative;
+  text-align: center;
+
+  a {
+    font-size: 1.6rem;
+    display: inline-block;
+    font-family: 'Spectral SC', serif;
+    padding: 2rem 1rem;
+  }
+
+  .user-info {
+    position: absolute;
+    top: 1.8rem;
+    right: 2rem;
+    color: #999;
+  }
+}

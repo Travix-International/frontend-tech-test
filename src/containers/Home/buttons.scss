@@ -1,0 +1,42 @@
+:root {
+  --tx-ui-button-error-normal-bg-top: #d43111;
+  --tx-ui-button-error-normal-bg-bottom: #d43111;
+  --tx-ui-button-error-normal-border: #ad1f03;
+  --tx-ui-button-error-normal-shadow: 0 3px #ad1f03, 0 0 transparent;
+  --tx-ui-button-default-normal-text-shadow: #ad1f03;
+  --tx-ui-button-error-hover-bg-top: #E33614;
+  --tx-ui-button-error-hover-bg-bottom: #E33614;
+  --tx-ui-button-error-hover-top: 0;
+  --tx-ui-button-error-hover-shadow: 0 3px #A31E03, 0 0 transparent;
+}
+
+.ui-button_error {
+  background: linear-gradient(to bottom, var(--tx-ui-button-error-normal-bg-top) 0, var(--tx-ui-button-error-normal-bg-bottom) 100%);
+  border-radius: var(--tx-ui-button-default-normal-border-radius);
+  border: none;
+  box-shadow: var(--tx-ui-button-error-normal-shadow);
+  color: var(--tx-ui-button-default-normal-text);
+  font-family: var(--tx-generic-font-primary-font-family), var(--tx-generic-font-primary-generic-family);
+  font-size: 23px;
+  font-weight: var(--tx-generic-font-primary-weight-bold);
+  position: relative;
+  text-shadow: var(--tx-ui-button-error-normal-text-shadow);
+  top: 0;
+
+  span:before {
+    color: var(--tx-button-icon-color-normal);
+  }
+
+  &:focus,
+  &:hover {
+    background: linear-gradient(to bottom, var(--tx-ui-button-error-hover-bg-top) 0, var(--tx-ui-button-error-hover-bg-bottom) 100%);
+    box-shadow: var(--tx-ui-button-error-hover-shadow);
+    outline: none;
+    top: var(--tx-ui-button-default-hover-top);
+    transition: all .1s ease-in-out;
+
+    span:before {
+      color: var(--tx-button-icon-color-hover);
+    }
+  }
+}

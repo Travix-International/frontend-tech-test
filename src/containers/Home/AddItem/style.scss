@@ -1,0 +1,41 @@
+.add-item {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .input--title-wrapper {
+    flex: 2 1 auto;
+    margin: 0.5rem;
+  }
+
+  .input--desc-wrapper {
+    flex: 4 1 auto;
+    margin: 0.5rem;
+  }
+
+  .ui-button_submit {
+    flex: 1 1 auto;
+    margin: 0 0.5rem;
+  }
+}
+
+//tablet
+@media (max-width: 768px) {
+  .add-item {
+    width: 90%;
+  }
+}
+
+//iPhone6 plus
+@media (max-width: 414px) {
+}
+
+//iPhone6
+@media (max-width: 375px) {
+}
+
+//iPhone5
+@media (max-width: 320px) {
+}

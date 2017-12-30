@@ -1,0 +1,30 @@
+.mode--edit {
+  display: flex;
+  align-content: center;
+
+  .item__left {
+    .ui-button_error {
+      margin: 0 auto;
+    }
+  }
+
+  .ui-button_submit {
+    margin: 0.25rem;
+  }
+
+  .ui-button_cancel {
+    margin: 0.25rem;
+  }
+
+  .ui-input_title {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    padding: 0.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .ui-input_desc {
+    padding: 0.4rem;
+    line-height: 1.4rem;
+  }
+}

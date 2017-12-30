@@ -1,0 +1,81 @@
+@import '~reset.css/reset.css';
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+input, textarea, button {
+  outline: none;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #2c2c2c;
+  transition: color 200ms ease-in-out;
+
+  &:hover {
+    color: #9a9a9a;
+  }
+}
+
+[class*="page--"] {
+  min-height: 80vh;
+}
+
+@media (min-width: 2561px) {
+  html {
+    font-size: 110%;
+  }
+}
+
+//iMac 27-inch
+@media (max-width: 2560px) {
+  html {
+    font-size: 110%;
+  }
+}
+
+//iMac 21.5-inch
+@media (max-width: 1920px) {
+  html {
+    font-size: 100%;
+  }
+}
+
+//15"
+@media (max-width: 1440px) {
+  html {
+    // font-size: 87.5%;
+  }
+}
+
+//tablet
+@media (max-width: 768px) {
+  html {
+    font-size: 90%;
+  }
+}
+
+//iPhone6 plus
+@media (max-width: 414px) {
+  html {
+    font-size: 85%;
+  }
+}
+
+//iPhone6
+@media (max-width: 375px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+//iPhone5
+@media (max-width: 320px) {
+  html {
+  }
+}

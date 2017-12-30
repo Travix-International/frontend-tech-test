@@ -1,0 +1,38 @@
+.mode--normal {
+  display: flex;
+  align-content: center;
+
+  &.is-done {
+    opacity: 0.3; 
+  }
+
+  .item__right {
+    cursor: pointer;
+  }
+
+  .item__right__right {
+    opacity: 0;
+
+    &.is-selected {
+      opacity: 1;
+      transition: opacity 200ms ease-in-out;
+    }
+  }
+
+  .item__title {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    margin-bottom: 0.5rem;
+    padding: 2px 0.4rem;
+  }
+
+  .item__desc {
+    font-size: 1rem;
+    line-height: 1.4rem;
+    padding: 2px 0.4rem;
+  }
+
+  .is-done {
+    text-decoration: line-through;
+  }
+}
