@@ -1,0 +1,30 @@
+@import (reference) '../../common.less';
+
+.app {
+  text-align: center;
+
+  &__header {
+    background-color: @color-dark-grey;
+    color: @color-white;
+    padding: 20px;
+  }
+
+  &__title {
+    font-size: 1.5em;
+  }
+
+  &__body {
+    margin: 0 auto;
+    max-width: 800px;
+  }
+
+  &__add-button {
+    margin: 0 auto;
+  }
+
+  @media (min-width: 500px) {
+    &__add-button {
+      width: 200px;
+    }
+  }
+}
