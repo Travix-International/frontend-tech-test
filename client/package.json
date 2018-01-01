@@ -15,7 +15,6 @@
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
     "eslint": "4.10.0",
-    "eslint-config-react-app": "^2.0.1",
     "eslint-loader": "1.9.0",
     "eslint-plugin-flowtype": "2.39.1",
     "eslint-plugin-import": "2.8.0",
@@ -30,10 +29,14 @@
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
+    "prop-types": "^15.6.0",
     "raf": "3.4.0",
     "react": "^16.2.0",
     "react-dev-utils": "^4.2.1",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
@@ -52,7 +55,8 @@
       "src/**/*.{js,jsx,mjs}"
     ],
     "setupFiles": [
-      "<rootDir>/config/polyfills.js"
+      "<rootDir>/config/polyfills.js",
+      "<rootDir>/config/enzyme.js"
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
@@ -86,12 +90,15 @@
       "react-app"
     ]
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint-config-travix": "^4.0.0",
+    "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-promise": "^3.6.0",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "redux-mock-store": "^1.4.0",
     "stylelint": "^8.4.0",
     "stylelint-config-travix": "^1.2.0"
   }
