@@ -1,0 +1,9 @@
+{
+    "extends": [
+      "travix/base",
+      "travix/promises"
+    ],
+    "env": {
+      "node": true
+    }
+}

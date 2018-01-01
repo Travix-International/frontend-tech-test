@@ -1,0 +1,29 @@
+@import (reference) '../../common.less';
+
+.button {
+  align-items: center;
+  background-color: @primary-button-bg;
+  border: none;
+  border-radius: @control-border-radius;
+  color: @color-white;
+  cursor: pointer;
+  display: flex;
+  font-size: 1em;
+  font-weight: 300;
+  height: 36px;
+  justify-content: center;
+  padding: 0 26px;
+  text-transform: uppercase;
+  width: 100%;
+
+  &__icon {
+    margin-right: 10px;
+  }
+}
+
+@media (min-width: 500px) {
+  .button {
+    min-width: 100px;
+    width: auto;
+  }
+}

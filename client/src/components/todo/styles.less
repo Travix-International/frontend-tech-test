@@ -1,0 +1,63 @@
+@import (reference) '../../common.less';
+
+.todo {
+  border-bottom: 1px solid @color-light-grey;
+  padding: 10px 50px 65px 10px;
+  position: relative;
+  text-align: left;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__title {
+    font-size: 1.1em;
+    font-weight: bold;
+    padding-bottom: 5px;
+  }
+
+  &__description {
+    white-space: pre-line;
+  }
+
+  &__remove,
+  &__edit {
+    background: @color-button-bg;
+    bottom: 10px;
+    cursor: pointer;
+    padding: 10px 20px;
+    position: absolute;
+  }
+
+  &__remove {
+    left: ~"calc(50% - 67px)";
+  }
+
+  &__edit {
+    left: ~"calc(50% + 3px)";
+  }
+
+  @media (min-width: 500px) {
+    & {
+      padding: 20px 50px 20px 10px;
+    }
+
+    &__remove,
+    &__edit {
+      background: none;
+      bottom: auto;
+      padding: 0;
+      top: calc(50% - 10px);
+    }
+
+    &__remove {
+      left: auto;
+      right: 10px;
+    }
+
+    &__edit {
+      left: auto;
+      right: 35px;
+    }
+  }
+}
