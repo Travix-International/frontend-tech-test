@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from '@wepow/aphrodite'
 
-import Note from '../components/Note'
+import Note from '../../components/Note'
 
 /* eslint-disable react/prefer-stateless-function  */
 export default class App extends React.Component {
@@ -10,7 +10,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const text = 'HOLA BB YAY FUNCIONA'
+    const text = 'HOLA'
     const buttonText = 'click me pretty dalplease'
 
     return (
