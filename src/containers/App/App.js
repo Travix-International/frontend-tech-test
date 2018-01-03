@@ -1,7 +1,28 @@
 import React from 'react'
-import { Button } from '@wepow/aphrodite'
+import {
+  BrowserRouter,
+  Route,
+  Link,
+} from 'react-router-dom'
 
-import Note from '../../components/Note'
+const home = 'Home'
+const about = 'About'
+
+const Home = () => (
+  <div>
+    <h2>
+      {home}
+    </h2>
+  </div>
+)
+
+const About = () => (
+  <div>
+    <h2>
+      {about}
+    </h2>
+  </div>
+)
 
 /* eslint-disable react/prefer-stateless-function  */
 export default class App extends React.Component {
@@ -10,19 +31,26 @@ export default class App extends React.Component {
   }
 
   render() {
-    const text = 'HOLA'
-    const buttonText = 'click me pretty dalplease'
-
     return (
-      <div style={{ textAlign: 'center' }}>
-        <Note>
-          {text}
-          <br />
-          <Button kind="primary">
-            {buttonText}
-          </Button>
-        </Note>
-      </div>
+      <BrowserRouter>
+        <div>
+          <ul>
+            <li>
+              <Link to="/">
+                {home}
+              </Link>
+            </li>
+            <li>
+              <Link to="/about">
+                {about}
+              </Link>
+            </li>
+          </ul>
+
+          <Route component={Home} exact path="/" />
+          <Route component={About} path="/about" />
+        </div>
+      </BrowserRouter>
     )
   }
 }
