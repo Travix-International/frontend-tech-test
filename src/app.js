@@ -4,10 +4,14 @@ import { AppContainer } from 'react-hot-loader'
 
 import App from './containers/App'
 
+import configureStore from './configureStore'
+
+const store = configureStore()
+
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
-      <Component />
+      <Component store={store} />
     </AppContainer>,
     document.getElementById('root'),
   )

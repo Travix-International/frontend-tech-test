@@ -1,4 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
+import { Provider } from 'react-redux'
 import {
   BrowserRouter,
   Route,
@@ -24,14 +27,9 @@ const About = () => (
   </div>
 )
 
-/* eslint-disable react/prefer-stateless-function  */
-export default class App extends React.Component {
-  shouldComponentUpdate() {
-    return true
-  }
-
-  render() {
-    return (
+function App({ store }) {
+  return (
+    <Provider store={store}>
       <BrowserRouter>
         <div>
           <ul>
@@ -51,6 +49,13 @@ export default class App extends React.Component {
           <Route component={About} path="/about" />
         </div>
       </BrowserRouter>
-    )
-  }
+    </Provider>
+  )
 }
+
+App.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  store: PropTypes.object,
+}
+
+export default App
