@@ -1,13 +1,13 @@
 {
-  "name": "@wepow/juno",
+  "name": "@wepow/janus",
   "version": "0.0.1",
   "description": "React and redux starter pack for Wepow applications",
   "author": "Enrique Ramírez <me@enrique-ramirez.com>",
   "private": true,
   "license": "UNLICENSED",
-  "homepage": "https://github.com/wepow/juno#readme",
+  "homepage": "https://github.com/wepow/janus#readme",
   "bugs": {
-    "url": "https://github.com/wepow/juno/issues"
+    "url": "https://github.com/wepow/janus/issues"
   },
   "main": "index.js",
   "directories": {
@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:wepow/juno.git"
+    "url": "git@github.com:wepow/janus.git"
   },
   "keywords": [
     "React",
