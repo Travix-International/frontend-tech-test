@@ -55,6 +55,7 @@ module.exports = require('./webpack.base')({
 
   devServer: {
     contentBase: path.join(process.cwd(), 'dist'),
+    historyApiFallback: true,
     hot: true,
     inline: true,
     port,
