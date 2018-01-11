@@ -5,45 +5,19 @@ import { Provider } from 'react-redux'
 import {
   BrowserRouter,
   Route,
-  Link,
 } from 'react-router-dom'
 
-const home = 'Home'
-const about = 'About'
+import MainNav from '../../components/MainNav'
 
-const Home = () => (
-  <div>
-    <h2>
-      {home}
-    </h2>
-  </div>
-)
-
-const About = () => (
-  <div>
-    <h2>
-      {about}
-    </h2>
-  </div>
-)
+import Home from '../Home'
+import About from '../About'
 
 function App({ store }) {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <div>
-          <ul>
-            <li>
-              <Link to="/">
-                {home}
-              </Link>
-            </li>
-            <li>
-              <Link to="/about">
-                {about}
-              </Link>
-            </li>
-          </ul>
+          <MainNav />
 
           <Route component={Home} exact path="/" />
           <Route component={About} path="/about" />
