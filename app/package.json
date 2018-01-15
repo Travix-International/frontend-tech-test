@@ -37,6 +37,10 @@
       "travix/base",
       "travix/react",
       "travix/promises"
-    ]
-  }
+    ],
+    "env": {
+      "browser": true
+    }
+  },
+  "eslintIgnore": ["dist"]
 }
