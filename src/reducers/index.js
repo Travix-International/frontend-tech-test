@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux-immutable'
 
-import home from './home'
+import resources from './resources'
 
 const rootReducer = combineReducers({
-  home,
+  resources,
 })
 
 export default rootReducer
