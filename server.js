@@ -3,6 +3,12 @@
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
 
+// CORS
+app.use(function (req, res, next) {
+  res.set('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 /**
  * GET /tasks
  * 
