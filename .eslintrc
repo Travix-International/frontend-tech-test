@@ -1,18 +1,27 @@
 {
-  "extends": ["airbnb", "plugin:react/all"],
+  "extends": [
+    "airbnb",
+    "plugin:react/all",
+    "plugin:redux-saga/recommended",
+    "plugin:reselect/all"
+  ],
   "env": {
     "jest": true,
     "node": true,
-    "browser": true
+    "browser": true,
+    "es6": true
   },
   "plugins": [
-    "react"
+    "react",
+    "redux-saga",
+    "reselect"
   ],
   "rules": {
     "semi": [2, "never"],
     "arrow-body-style": ["error", "as-needed"],
     "no-underscore-dangle": 0,
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "import/named": 2,
     "react/require-default-props": 0,
     "react/jsx-filename-extension": 0,
     "jsx-a11y/label-has-for": [2, {

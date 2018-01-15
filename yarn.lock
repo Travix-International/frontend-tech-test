@@ -3072,6 +3072,14 @@ eslint-plugin-react@^7.5.1:
     jsx-ast-utils "^2.0.0"
     prop-types "^15.6.0"
 
+eslint-plugin-redux-saga@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-redux-saga/-/eslint-plugin-redux-saga-0.6.0.tgz#62ee216240c93f5c5ac59c65d26f4a681e888503"
+
+eslint-plugin-reselect@^6.6.0:
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-reselect/-/eslint-plugin-reselect-6.6.0.tgz#df1a18e8eb6de0e580852dc555b97b3aff8c906b"
+
 eslint-restricted-globals@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/eslint-restricted-globals/-/eslint-restricted-globals-0.1.1.tgz#35f0d5cbc64c2e3ed62e93b4b1a7af05ba7ed4d7"
