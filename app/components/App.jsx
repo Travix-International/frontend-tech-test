@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Task from './Task.jsx';
+import Task from './Task';
 import { addTask, fetchTasks } from '../actions';
 
 class App extends React.Component {

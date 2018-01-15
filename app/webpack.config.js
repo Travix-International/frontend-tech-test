@@ -12,6 +12,9 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   output: {
     filename: 'dist/app.js',
   },
