@@ -1,8 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const CircularDependencyPlugin = require('circular-dependency-plugin')
-
-const port = 8080
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const plugins = [
   new webpack.optimize.ModuleConcatenationPlugin(),
@@ -12,15 +11,13 @@ const plugins = [
     exclude: /a\.js|node_modules/,
     failOnError: false,
   }),
+  new UglifyJsPlugin(),
 ]
 
 module.exports = require('./webpack.base')({
-  devtool: 'source-map',
+  devtool: undefined,
 
   entry: [
-    'react-hot-loader/patch',
-    `webpack-dev-server/client?http://localhost:${port}`,
-    'webpack/hot/only-dev-server',
     path.join(process.cwd(), 'src/app.js'),
   ],
 
@@ -32,14 +29,6 @@ module.exports = require('./webpack.base')({
   plugins,
 
   performance: {
-    hints: false,
-  },
-
-  devServer: {
-    contentBase: path.join(process.cwd(), 'dist'),
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    port,
+    assetFilter: assetFilename => !(/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename)),
   },
 })
