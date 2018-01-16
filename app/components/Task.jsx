@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Input, Button } from 'travix-ui-kit';
 
 import { editTask, deleteTask } from '../actions';
 
@@ -50,10 +51,10 @@ class Task extends React.Component {
     if (editMode) {
       return (
         <div>
-          <input name="newTitle" onChange={this.handleInputChange} type="text" value={newTitle} />
-          <input name="newDescription" onChange={this.handleInputChange} type="text" value={newDescription} />
-          <button onClick={this.edit}>Save</button>
-          <button onClick={this.toggleEditMode}>Cancel</button>
+          <Input name="newTitle" onChange={this.handleInputChange} type="text" value={newTitle} />
+          <Input name="newDescription" onChange={this.handleInputChange} type="text" value={newDescription} />
+          <Button onClick={this.edit}>Save</Button>
+          <Button onClick={this.toggleEditMode}>Cancel</Button>
         </div>
       );
     }
@@ -62,8 +63,8 @@ class Task extends React.Component {
       <div>
         <h4>{title}</h4>
         <p>{description}</p>
-        <button onClick={this.toggleEditMode}>Edit</button>
-        <button onClick={this.delete}>Delete</button>
+        <Button onClick={this.toggleEditMode} size="xs">Edit</Button>
+        <Button onClick={this.delete} size="xs">Delete</Button>
       </div>
     );
   }

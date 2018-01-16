@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Input, Button, Spinner } from 'travix-ui-kit';
 
 import Task from './Task';
 import { addTask, fetchTasks } from '../actions';
@@ -47,7 +48,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>To-do list</h1>
-        {(status === 'fetching' || status === 'invalid') && <div>Loading...</div>}
+        {(status === 'fetching' || status === 'invalid') && <Spinner size="m" />}
         {status === 'errored' && <div>Error</div>}
         {status === 'succeeded' && <ul>
           {tasks.map((task, i) => (
@@ -58,9 +59,9 @@ class App extends React.Component {
         </ul>}
 
         <div>
-          <input name="newTaskTitle" onChange={this.handleInputChange} type="text" value={this.state.newTaskTitle} />
-          <input name="newTaskDescription" onChange={this.handleInputChange} type="text" value={this.state.newTaskDescription} />
-          <button onClick={this.submitNewTask}>Add</button>
+          <Input name="newTaskTitle" onChange={this.handleInputChange} type="text" value={this.state.newTaskTitle} />
+          <Input name="newTaskDescription" onChange={this.handleInputChange} type="text" value={this.state.newTaskDescription} />
+          <Button onClick={this.submitNewTask}>Add</Button>
         </div>
       </div>
     );
