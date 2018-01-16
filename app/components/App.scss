@@ -1,0 +1,22 @@
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+ul {
+  padding: 0;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+
+  .container {
+    width: 90%;
+    max-width: 768px;
+    padding: 0.8em;
+
+    ul {
+      list-style: none;
+    }
+  }
+}

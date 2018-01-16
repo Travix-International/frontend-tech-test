@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Input, Button } from 'travix-ui-kit';
+import { Input, Button, Checkbox } from 'travix-ui-kit';
 
+import './Task.scss';
 import { editTask, deleteTask } from '../actions';
 
 class Task extends React.Component {
@@ -50,21 +51,30 @@ class Task extends React.Component {
 
     if (editMode) {
       return (
-        <div>
-          <Input name="newTitle" onChange={this.handleInputChange} type="text" value={newTitle} />
-          <Input name="newDescription" onChange={this.handleInputChange} type="text" value={newDescription} />
-          <Button onClick={this.edit}>Save</Button>
-          <Button onClick={this.toggleEditMode}>Cancel</Button>
+        <div className="row edit">
+          <div>
+            <Input name="newTitle" onChange={this.handleInputChange} type="text" value={newTitle} />
+            <Input name="newDescription" onChange={this.handleInputChange} type="text" value={newDescription} />
+          </div>
+          <div>
+            <Button onClick={this.edit}>Save</Button>
+            <Button onClick={this.toggleEditMode}>Cancel</Button>
+          </div>
         </div>
       );
     }
 
     return (
-      <div>
-        <h4>{title}</h4>
-        <p>{description}</p>
-        <Button onClick={this.toggleEditMode} size="xs">Edit</Button>
-        <Button onClick={this.delete} size="xs">Delete</Button>
+      <div className="row element">
+        <Checkbox />
+        <div>
+          <h4>{title}</h4>
+          <p>{description}</p>
+        </div>
+        <div>
+          <Button onClick={this.toggleEditMode} size="xs">Edit</Button>
+          <Button onClick={this.delete} size="xs">Delete</Button>
+        </div>
       </div>
     );
   }

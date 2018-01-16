@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Input, Button, Spinner } from 'travix-ui-kit';
 
+import './App.scss';
 import Task from './Task';
 import { addTask, fetchTasks } from '../actions';
 
@@ -46,22 +47,25 @@ class App extends React.Component {
   render() {
     const { status, tasks } = this.props;
     return (
-      <div>
-        <h1>To-do list</h1>
-        {(status === 'fetching' || status === 'invalid') && <Spinner size="m" />}
-        {status === 'errored' && <div>Error</div>}
-        {status === 'succeeded' && <ul>
-          {tasks.map((task, i) => (
-            <li key={i}>
-              <Task {...task} />
-            </li>
-          ))}
-        </ul>}
+      <div className="app">
+        <div className="container">
+          <h1>Things to do</h1>
+          {(status === 'fetching' || status === 'invalid') && <Spinner size="m" />}
+          {status === 'errored' && <div>Error</div>}
+          {status === 'succeeded' && <ul>
+            {tasks.map((task, i) => (
+              <li key={i}>
+                <Task {...task} />
+              </li>
+            ))}
+          </ul>}
 
-        <div>
-          <Input name="newTaskTitle" onChange={this.handleInputChange} type="text" value={this.state.newTaskTitle} />
-          <Input name="newTaskDescription" onChange={this.handleInputChange} type="text" value={this.state.newTaskDescription} />
-          <Button onClick={this.submitNewTask}>Add</Button>
+          <div>
+            <h2>What do you want to achieve today?</h2>
+            <Input name="newTaskTitle" onChange={this.handleInputChange} type="text" value={this.state.newTaskTitle} />
+            <Input name="newTaskDescription" onChange={this.handleInputChange} type="text" value={this.state.newTaskDescription} />
+            <Button onClick={this.submitNewTask}>Add</Button>
+          </div>
         </div>
       </div>
     );
