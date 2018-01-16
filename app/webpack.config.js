@@ -20,6 +20,10 @@ module.exports = {
           use: 'css-loader',
         }),
       },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract(['css-loader', 'sass-loader']),
+      },
     ],
   },
   resolve: {
