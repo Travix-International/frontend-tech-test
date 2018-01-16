@@ -12,25 +12,57 @@ function json(path) {
   return get(path).then(response => response.json());
 }
 
+function post(path) {
+  return fetch(`${URL}${path}`, { method: 'POST' });
+}
+
+function put(path) {
+  return fetch(`${URL}${path}`, { method: 'PUT' });
+}
+
+function del(path) {
+  return fetch(`${URL}${path}`, { method: 'DELETE' });
+}
+
 /**
  * Actual action creators
  */
 
-export const addTask = task => ({
-  type: 'ADD_TASK',
-  task,
-});
+export const addTask = task => (dispatch) => {
+  dispatch({
+    type: 'ADD_TASK',
+    task,
+  });
 
-export const editTask = (id, task) => ({
-  type: 'EDIT_TASK',
-  id,
-  task,
-});
+  post(`/task/create/${task.title}/${task.description}`)
+    .catch(() => {
+      dispatch({
+        type: 'DELETE_TASK',
+        id: task.id,
+      });
 
-export const deleteTask = id => ({
-  type: 'DELETE_TASK',
-  id,
-});
+      dispatch({ type: 'SHOW_BACKEND_ERROR' });
+    });
+};
+
+export const editTask = task => (dispatch) => {
+  dispatch({
+    type: 'EDIT_TASK',
+    task,
+  });
+
+  put(`/task/update/${task.id}/${task.title}/${task.description}`)
+    .catch(() => dispatch({ type: 'SHOW_BACKEND_ERROR' }));
+};
+
+export const deleteTask = id => (dispatch) => {
+  dispatch({
+    type: 'DELETE_TASK',
+    id,
+  });
+
+  del(`/task/delete/${id}`).catch(() => dispatch({ type: 'SHOW_BACKEND_ERROR' }));
+};
 
 const requestTasks = () => ({
   type: 'REQUEST_TASKS',

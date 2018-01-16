@@ -57,7 +57,7 @@ export default (state = initialState, action) => {
     case 'EDIT_TASK':
       return assign(state, {
         tasks: assign(state.tasks, {
-          data: state.tasks.data.map(task => (task.id === action.id ? action.task : task)),
+          data: state.tasks.data.map(task => (task.id === action.task.id ? action.task : task)),
         }),
       });
     case 'DELETE_TASK':

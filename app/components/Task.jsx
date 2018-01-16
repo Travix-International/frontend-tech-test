@@ -30,7 +30,7 @@ class Task extends React.Component {
   edit() {
     const { dispatch, id } = this.props;
     const { newTitle, newDescription } = this.state;
-    dispatch(editTask(id, { title: newTitle, description: newDescription }));
+    dispatch(editTask({ id, title: newTitle, description: newDescription }));
     this.toggleEditMode();
   }
 
