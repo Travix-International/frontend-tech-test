@@ -1,5 +1,15 @@
 'use strict';
 
+function max(collection, property) {
+  return collection.reduce((prev, current) => {
+    if (current[property] > prev) {
+      prev = current[property];
+    }
+
+    return prev;
+  }, 0);
+}
+
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
 
@@ -97,7 +107,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: max(tasksContainer.tasks, 'id') + 1,
     title: req.params.title,
     description: req.params.description,
   };
