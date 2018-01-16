@@ -22,7 +22,7 @@ app.use(function (req, res, next) {
 
 /**
  * GET /tasks
- * 
+ *
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {

@@ -4,6 +4,9 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
+import 'travix-ui-kit/dist/ui-bundle.css';
+import 'travix-ui-kit/dist/theme.css';
+
 import reducer from './reducers';
 import App from './components/App';
 
