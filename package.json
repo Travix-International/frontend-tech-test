@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@wepow/aphrodite": "git+ssh://git@github.com/wepow/aphrodite.git",
-    "@wepow/hermes": "git+ssh://git@github.com/wepow/hermes",
+    "@wepow/hermes": "git+ssh://git@github.com/wepow/hermes.git",
     "eslint-plugin-redux-saga": "^0.6.0",
     "eslint-plugin-reselect": "^6.6.0",
     "immutable": "^3.8.2",

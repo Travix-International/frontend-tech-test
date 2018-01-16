@@ -220,9 +220,9 @@
     react "^16.2.0"
     react-dom "^16.2.0"
 
-"@wepow/hermes@git+ssh://git@github.com/wepow/hermes":
+"@wepow/hermes@git+ssh://git@github.com/wepow/hermes.git":
   version "2.1.0"
-  resolved "git+ssh://git@github.com/wepow/hermes#a7aa507fd1aedbef5fa459964bd0cfa1f4407baa"
+  resolved "git+ssh://git@github.com/wepow/hermes.git#daef540d63952a73ade4a686b1cd1ffeb23b1408"
   dependencies:
     traverson-hal "^6.0.0"
     traverson-promise "^0.0.9"
