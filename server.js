@@ -83,7 +83,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.sendStatus(204);
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -93,6 +93,43 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     return res.status(400).json({
       message: 'Bad request',
     });
+  }
+});
+
+app.put('/task/complete/:id', (req, res) => {
+  debugger
+  const id = parseInt(req.params.id, 10);
+
+  if (Number.isNaN(id)) {
+    return res.status(400).json({ message: 'Bad request' });
+  }
+
+  const task = tasksContainer.tasks.find(item => item.id === id);
+  if (task == null) {
+    return res.status(404).json({ message: 'Not found' });
+  }
+
+  task.completed = true;
+  return res.sendStatus(204);
+});
+
+app.put('/task/uncomplete/:id', (req, res, next) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+
+    if (Number.isNaN(id)) {
+      return res.status(400).json({ message: 'Bad request' });
+    }
+
+    const task = tasksContainer.tasks.find(item => item.id === id);
+    if (task == null) {
+      return res.status(404).json({ message: 'Not found' });
+    }
+
+    task.completed = false;
+    return res.sendStatus(204);
+  } catch (err) {
+    next(err);
   }
 });
 

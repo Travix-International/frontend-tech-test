@@ -85,7 +85,16 @@ export const fetchTasks = () => (dispatch) => {
     .catch(err => dispatch(failFetchTasks(err)));
 };
 
-export const toggleCompleteTask = id => ({
-  type: 'TOGGLE_COMPLETE_TASK',
-  id,
-});
+export const toggleCompleteTask = id => (dispatch, getState) => {
+  dispatch({
+    type: 'TOGGLE_COMPLETE_TASK',
+    id,
+  });
+
+  const { completed } = getState().tasks.data.find(task => task.id === id);
+  put(`/task/${completed ? 'complete' : 'uncomplete'}/${id}`)
+    .catch(() => dispatch({
+      type: 'TOGGLE_COMPLETE_TASK',
+      id,
+    }));
+};
