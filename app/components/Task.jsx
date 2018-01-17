@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Input, Button, Checkbox } from 'travix-ui-kit';
+import classNames from 'classnames';
 
 import './Task.scss';
-import { editTask, deleteTask } from '../actions';
+import { editTask, deleteTask, toggleCompleteTask } from '../actions';
 
 class Task extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Task extends React.Component {
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.delete = this.delete.bind(this);
     this.edit = this.edit.bind(this);
+    this.toggleCompleted = this.toggleCompleted.bind(this);
 
     this.state = {
       editMode: false,
@@ -36,6 +38,11 @@ class Task extends React.Component {
     this.toggleEditMode();
   }
 
+  toggleCompleted() {
+    const { dispatch, id } = this.props;
+    dispatch(toggleCompleteTask(id));
+  }
+
   // State modifiers
   toggleEditMode() {
     this.setState({ editMode: !this.state.editMode });
@@ -46,7 +53,7 @@ class Task extends React.Component {
   }
 
   render() {
-    const { title, description } = this.props;
+    const { id, title, description, completed } = this.props;
     const { editMode, newTitle, newDescription } = this.state;
 
     if (editMode) {
@@ -64,23 +71,24 @@ class Task extends React.Component {
       );
     }
 
-    return (
-      <div className="row element">
-        <Checkbox />
-        <div>
-          <h4>{title}</h4>
-          <p>{description}</p>
-        </div>
-        <div>
-          <Button onClick={this.toggleEditMode} size="xs">Edit</Button>
-          <Button onClick={this.delete} size="xs">Delete</Button>
-        </div>
-      </div>
-    );
+    return [
+      <div className={classNames('col-9', { completed })}>
+        <Checkbox checked={completed} name={id} onChange={this.toggleCompleted}>
+          <span className="font-heavy">{title}</span>
+          {' '}
+          <span>{description}</span>
+        </Checkbox>
+      </div>,
+      <div className="col-3">
+        <Button onClick={this.toggleEditMode} size="xs">Edit</Button>
+        <Button onClick={this.delete} size="xs">Delete</Button>
+      </div>,
+    ];
   }
 }
 
 Task.propTypes = {
+  completed: PropTypes.bool.isRequired,
   description: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,

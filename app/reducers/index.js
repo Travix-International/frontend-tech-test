@@ -60,6 +60,12 @@ export default (state = initialState, action) => {
           data: state.tasks.data.map(task => (task.id === action.task.id ? action.task : task)),
         }),
       });
+    case 'TOGGLE_COMPLETE_TASK':
+      return assign(state, {
+        tasks: assign(state.tasks, {
+          data: state.tasks.data.map(task => (task.id === action.id ? assign(task, { completed: !task.completed }) : task)),
+        }),
+      });
     case 'DELETE_TASK':
       return assign(state, {
         tasks: assign(state.tasks, {

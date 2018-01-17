@@ -52,19 +52,23 @@ class App extends React.Component {
           <h1>Things to do</h1>
           {(status === 'fetching' || status === 'invalid') && <Spinner size="m" />}
           {status === 'errored' && <div>Error</div>}
-          {status === 'succeeded' && <ul>
+          {status === 'succeeded' && <div className="container">
             {tasks.map((task, i) => (
-              <li key={i}>
+              <div className="row" key={i}>
                 <Task {...task} />
-              </li>
+              </div>
             ))}
-          </ul>}
+          </div>}
 
-          <div>
-            <h2>What do you want to achieve today?</h2>
-            <Input name="newTaskTitle" onChange={this.handleInputChange} type="text" value={this.state.newTaskTitle} />
-            <Input name="newTaskDescription" onChange={this.handleInputChange} type="text" value={this.state.newTaskDescription} />
-            <Button onClick={this.submitNewTask}>Add</Button>
+          <div className="container">
+            <div className="row">
+              <h2>What do you want to achieve today?</h2>
+            </div>
+            <div className="row">
+              <Input name="newTaskTitle" onChange={this.handleInputChange} type="text" value={this.state.newTaskTitle} />
+              <Input name="newTaskDescription" onChange={this.handleInputChange} type="text" value={this.state.newTaskDescription} />
+              <Button onClick={this.submitNewTask}>Add</Button>
+            </div>
           </div>
         </div>
       </div>

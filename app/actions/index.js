@@ -84,3 +84,8 @@ export const fetchTasks = () => (dispatch) => {
     .then(({ tasks }) => dispatch(receiveTasks(tasks)))
     .catch(err => dispatch(failFetchTasks(err)));
 };
+
+export const toggleCompleteTask = id => ({
+  type: 'TOGGLE_COMPLETE_TASK',
+  id,
+});
