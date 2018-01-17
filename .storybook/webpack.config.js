@@ -1,4 +1,14 @@
+const path = require('path')
+
+const nodePaths = (process.env.NODE_PATH || '')
+  .split(process.platform === 'win32' ? ';' : ':')
+  .filter(Boolean)
+  .map(p => path.resolve('./', p))
+
 module.exports = {
+  resolve: {
+    modules: ['src', 'node_modules'].concat(nodePaths),
+  },
   module: {
     rules: [
       {

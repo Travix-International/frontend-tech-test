@@ -7,10 +7,9 @@ import {
   Route,
 } from 'react-router-dom'
 
-import MainNav from '../../components/MainNav'
+import MainNav from 'components/MainNav'
 
-import Home from '../Home'
-import About from '../About'
+import AllToDos from 'containers/AllToDos'
 
 function App({ store }) {
   return (
@@ -19,8 +18,7 @@ function App({ store }) {
         <div>
           <MainNav />
 
-          <Route component={Home} exact path="/" />
-          <Route component={About} path="/about" />
+          <Route component={AllToDos} exact path="/" />
         </div>
       </BrowserRouter>
     </Provider>

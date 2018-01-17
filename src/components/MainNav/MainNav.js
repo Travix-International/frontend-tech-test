@@ -2,19 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function MainNav() {
-  const home = 'Home'
-  const about = 'About'
+  const all = 'All'
 
   return (
     <ul>
       <li>
         <Link to="/">
-          {home}
-        </Link>
-      </li>
-      <li>
-        <Link to="/about">
-          {about}
+          {all}
         </Link>
       </li>
     </ul>

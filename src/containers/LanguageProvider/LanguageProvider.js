@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import { IntlProvider } from 'react-intl'
 
-import { makeSelectLanguage } from '../../selectors/shared'
+import { makeSelectLanguage } from 'selectors/shared'
 
 function LanguageProvider(props) {
   const {

@@ -66,7 +66,7 @@ module.exports = options => ({
     }),
   ]),
   resolve: {
-    modules: ['src', 'node_modules'],
+    modules: [path.resolve('src'), 'node_modules'],
     extensions: [
       '.js',
       '.jsx',

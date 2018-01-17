@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux-immutable'
 
-import home from './home'
-import settings from './settings'
+import todos from 'reducers/todos'
+import settings from 'reducers/settings'
 
 const resourcesReducer = combineReducers({
-  home,
+  todos,
   settings,
 })
 
