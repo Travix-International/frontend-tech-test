@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Input, Button, Checkbox } from 'travix-ui-kit';
-import classNames from 'classnames';
 
 import './Task.scss';
+import TaskLabel from './TaskLabel';
+import EditableTask from './EditableTask';
 import { editTask, deleteTask, toggleCompleteTask } from '../actions';
 
 class Task extends React.Component {
@@ -12,7 +12,6 @@ class Task extends React.Component {
     super(props);
     const { title, description } = this.props;
 
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.delete = this.delete.bind(this);
     this.edit = this.edit.bind(this);
@@ -31,9 +30,8 @@ class Task extends React.Component {
     dispatch(deleteTask(id));
   }
 
-  edit() {
+  edit(newTitle, newDescription) {
     const { dispatch, id } = this.props;
-    const { newTitle, newDescription } = this.state;
     dispatch(editTask({ id, title: newTitle, description: newDescription }));
     this.toggleEditMode();
   }
@@ -48,42 +46,24 @@ class Task extends React.Component {
     this.setState({ editMode: !this.state.editMode });
   }
 
-  handleInputChange({ target: { name, value } }) {
-    this.setState({ [name]: value });
-  }
-
   render() {
     const { id, title, description, completed } = this.props;
-    const { editMode, newTitle, newDescription } = this.state;
+    const { editMode } = this.state;
 
     if (editMode) {
       return (
-        <div className="row edit">
-          <div>
-            <Input name="newTitle" onChange={this.handleInputChange} type="text" value={newTitle} />
-            <Input name="newDescription" onChange={this.handleInputChange} type="text" value={newDescription} />
-          </div>
-          <div>
-            <Button onClick={this.edit}>Save</Button>
-            <Button onClick={this.toggleEditMode}>Cancel</Button>
-          </div>
-        </div>
+        <EditableTask
+          description={description} onCancel={this.toggleEditMode} onSave={this.edit} title={title}
+        />
       );
     }
 
-    return [
-      <div className={classNames('col-9', { completed })}>
-        <Checkbox checked={completed} name={id} onChange={this.toggleCompleted}>
-          <span className="font-heavy">{title}</span>
-          {' '}
-          <span>{description}</span>
-        </Checkbox>
-      </div>,
-      <div className="col-3">
-        <Button onClick={this.toggleEditMode} size="xs">Edit</Button>
-        <Button onClick={this.delete} size="xs">Delete</Button>
-      </div>,
-    ];
+    return (
+      <TaskLabel
+        completed={completed} description={description} id={id} onDelete={this.delete}
+        onToggleCompleted={this.toggleCompleted} onToggleEditMode={this.toggleEditMode} title={title}
+      />
+    );
   }
 }
 
