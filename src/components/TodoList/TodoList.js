@@ -21,9 +21,10 @@ function TodoList(props) {
   return (
     <ul className={classes}>
       {todos.map((todo) => {
-        const _handleComplete = () => handleComplete(todo.get('id'))
-        const _handleDelete = () => handleDelete(todo.get('id'))
-        const _handleEdit = () => handleEdit(todo.get('id'))
+        const id = todo.get('id')
+        const _handleComplete = () => handleComplete({ id })
+        const _handleDelete = () => handleDelete({ id })
+        const _handleEdit = () => handleEdit({ id })
 
         return (
           <TodoRow

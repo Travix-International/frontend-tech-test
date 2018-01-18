@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -11,15 +12,20 @@ import {
   makeSelectAllTodos,
 } from 'redux/selectors/todos'
 
+import {
+  completeTodo,
+} from 'redux/ducks/todos'
+
 function AllToDos(props) {
   const {
+    handleComplete,
     todos,
   } = props
 
   return (
     <div>
       <TodoList
-        handleComplete={console.log}
+        handleComplete={handleComplete}
         handleDelete={console.log}
         handleEdit={console.log}
         todos={todos}
@@ -33,7 +39,10 @@ const mapStateToProps = createStructuredSelector({
 })
 
 AllToDos.propTypes = {
+  handleComplete: PropTypes.func.isRequired,
   todos: ImmutablePropTypes.listOf(todoType).isRequired,
 }
 
-export default connect(mapStateToProps, null)(AllToDos)
+export default connect(mapStateToProps, {
+  handleComplete: completeTodo,
+})(AllToDos)

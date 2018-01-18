@@ -16,12 +16,12 @@ export const CHANGE_LANGUAGE = settings.defineAction('CHANGE_LANGUAGE', [SUCCESS
 const defaultState = fromJS({ language: 'en' })
 
 const reducer = handleActions({
-  [CHANGE_LANGUAGE.ACTION]: (state, action) => state.setIn(['language'], action.payload.language),
+  [CHANGE_LANGUAGE.SUCCESS]: (state, action) => state.setIn(['language'], action.payload.language),
 }, defaultState)
 
 export default reducer
 
 /* Action Creators */
-export const changeLanguage = createAction(CHANGE_LANGUAGE.ACTION)
+export const changeLanguage = createAction(CHANGE_LANGUAGE.SUCCESS)
 
 /* Side Effects */

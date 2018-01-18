@@ -1,13 +1,15 @@
-import { handleActions } from 'redux-actions'
+import { createAction, handleActions } from 'redux-actions'
 import { fromJS } from 'immutable'
 
-// import {
-//   SUCCESS,
-//   ERROR,
-//   domain,
-// } from 'redux/constants'
+import {
+  SUCCESS,
+  domain,
+} from 'redux/constants'
 
 /* Actions */
+const todos = domain.defineAction('todos')
+
+export const COMPLETE_TODO = todos.defineAction('COMPLETE_TODO', [SUCCESS])
 
 /* Reducer */
 const defaultState = fromJS({
@@ -21,10 +23,20 @@ const defaultState = fromJS({
   ],
 })
 
-const reducer = handleActions({}, defaultState)
+const reducer = handleActions({
+  [COMPLETE_TODO.SUCCESS]: (state, action) => {
+    const items = state.get('items')
+
+    return state.setIn(['items'], items.map((item) => {
+      if (item.get('id') !== action.payload.id) { return item }
+      return item.set('done', !item.get('done'))
+    }))
+  },
+}, defaultState)
 
 export default reducer
 
 /* Action Creators */
+export const completeTodo = createAction(COMPLETE_TODO.SUCCESS)
 
 /* Side Effects */
