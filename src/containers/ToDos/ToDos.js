@@ -9,16 +9,18 @@ import todoType from 'types/todo'
 import TodoList from 'components/TodoList'
 
 import {
-  makeSelectAllTodos,
+  makeSelectTodos,
 } from 'redux/selectors/todos'
 
 import {
   completeTodo,
+  deleteTodo,
 } from 'redux/ducks/todos'
 
 function AllToDos(props) {
   const {
     handleComplete,
+    handleDelete,
     todos,
   } = props
 
@@ -26,7 +28,7 @@ function AllToDos(props) {
     <div>
       <TodoList
         handleComplete={handleComplete}
-        handleDelete={console.log}
+        handleDelete={handleDelete}
         handleEdit={console.log}
         todos={todos}
       />
@@ -34,15 +36,19 @@ function AllToDos(props) {
   )
 }
 
-const mapStateToProps = createStructuredSelector({
-  todos: makeSelectAllTodos(),
-})
-
 AllToDos.propTypes = {
   handleComplete: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
   todos: ImmutablePropTypes.listOf(todoType).isRequired,
 }
 
-export default connect(mapStateToProps, {
+const mapStateToProps = createStructuredSelector({
+  todos: makeSelectTodos(),
+})
+
+const mapDispatchToProps = {
   handleComplete: completeTodo,
-})(AllToDos)
+  handleDelete: deleteTodo,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllToDos)

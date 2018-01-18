@@ -9,7 +9,8 @@ import {
 /* Actions */
 const todos = domain.defineAction('todos')
 
-export const COMPLETE_TODO = todos.defineAction('COMPLETE_TODO', [SUCCESS])
+const COMPLETE_TODO = todos.defineAction('COMPLETE_TODO', [SUCCESS])
+const DELETE_TODO = todos.defineAction('DELETE_TODO', [SUCCESS])
 
 /* Reducer */
 const defaultState = fromJS({
@@ -27,10 +28,15 @@ const reducer = handleActions({
   [COMPLETE_TODO.SUCCESS]: (state, action) => {
     const items = state.get('items')
 
-    return state.setIn(['items'], items.map((item) => {
+    return state.set('items', items.map((item) => {
       if (item.get('id') !== action.payload.id) { return item }
       return item.set('done', !item.get('done'))
     }))
+  },
+
+  [DELETE_TODO.SUCCESS]: (state, action) => {
+    const items = state.get('items')
+    return state.set('items', items.filter(item => item.get('id') !== action.payload.id))
   },
 }, defaultState)
 
@@ -38,5 +44,6 @@ export default reducer
 
 /* Action Creators */
 export const completeTodo = createAction(COMPLETE_TODO.SUCCESS)
+export const deleteTodo = createAction(DELETE_TODO.SUCCESS)
 
 /* Side Effects */

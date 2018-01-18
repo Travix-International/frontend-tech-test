@@ -9,7 +9,7 @@ import {
 
 import MainNav from 'components/MainNav'
 
-import AllToDos from 'containers/AllToDos'
+import ToDos from 'containers/ToDos'
 
 function App({ store }) {
   return (
@@ -18,7 +18,7 @@ function App({ store }) {
         <div>
           <MainNav />
 
-          <Route component={AllToDos} exact path="/" />
+          <Route component={ToDos} path="/:filter?" />
         </div>
       </BrowserRouter>
     </Provider>
