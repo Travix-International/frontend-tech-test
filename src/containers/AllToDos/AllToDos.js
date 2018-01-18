@@ -9,7 +9,7 @@ import TodoList from 'components/TodoList'
 
 import {
   makeSelectAllTodos,
-} from 'selectors/todos'
+} from 'redux/selectors/todos'
 
 function AllToDos(props) {
   const {
@@ -21,6 +21,7 @@ function AllToDos(props) {
       <TodoList
         handleComplete={console.log}
         handleDelete={console.log}
+        handleEdit={console.log}
         todos={todos}
       />
     </div>

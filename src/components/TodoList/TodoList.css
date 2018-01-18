@@ -8,13 +8,18 @@
 .todoRow {
   border-bottom: 1px solid #ddd;
   margin: 0;
-  padding: 1.5em 35px;
+  padding: 1.5em 55px 1.5em 35px;
   position: relative;
 }
 
 .todoRow:last-of-type {
   border-bottom: 0;
   padding-bottom: 0;
+}
+
+.todoRow.completed {
+  color: #ccc;
+  text-decoration: line-through;
 }
 
 .checkBox {
@@ -30,7 +35,7 @@
   margin: 0;
 }
 
-.icon {
+.icons {
   cursor: pointer;
   position: absolute;
   right: 0;

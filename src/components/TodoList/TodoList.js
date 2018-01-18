@@ -12,6 +12,7 @@ function TodoList(props) {
   const {
     handleComplete,
     handleDelete,
+    handleEdit,
     todos,
   } = props
 
@@ -22,12 +23,14 @@ function TodoList(props) {
       {todos.map((todo) => {
         const _handleComplete = () => handleComplete(todo.get('id'))
         const _handleDelete = () => handleDelete(todo.get('id'))
+        const _handleEdit = () => handleEdit(todo.get('id'))
 
         return (
           <TodoRow
             key={todo.get('id')}
             handleComplete={_handleComplete}
             handleDelete={_handleDelete}
+            handleEdit={_handleEdit}
             todo={todo}
           />
         )
@@ -39,6 +42,7 @@ function TodoList(props) {
 TodoList.propTypes = {
   handleComplete: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
+  handleEdit: PropTypes.func.isRequired,
   todos: ImmutablePropTypes.listOf(todoType),
 }
 

@@ -10,14 +10,20 @@ function TodoRow(props) {
   const {
     handleComplete,
     handleDelete,
+    handleEdit,
     todo,
   } = props
 
+  let classes = styles.todoRow
+
+  classes = todo.get('done') ? `${classes} ${styles.completed}` : classes
+
   return (
-    <li className={styles.todoRow}>
+    <li className={classes}>
       <div className={styles.checkBox}>
         <Checkbox
           isChecked={todo.get('done')}
+          name="select"
           onChange={handleComplete}
         />
       </div>
@@ -25,7 +31,17 @@ function TodoRow(props) {
       <h1>{todo.get('title')}</h1>
       {todo.get('description')}
 
-      <div className={styles.icon}>
+      <div className={styles.icons}>
+        <Icon
+          name="EDIT"
+          onClick={handleEdit}
+          onKeyDown={handleEdit}
+          role="button"
+          tabIndex={0}
+        />
+
+        {' '}
+
         <Icon
           name="DELETE"
           onClick={handleDelete}
@@ -41,6 +57,7 @@ function TodoRow(props) {
 TodoRow.propTypes = {
   handleComplete: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
+  handleEdit: PropTypes.func.isRequired,
   todo: todoType,
 }
 

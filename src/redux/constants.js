@@ -4,4 +4,4 @@ export const PENDING = 'PENDING'
 export const ERROR = 'ERROR'
 export const SUCCESS = 'SUCCESS'
 
-export const juno = defineAction('juno')
+export const domain = defineAction('juno')

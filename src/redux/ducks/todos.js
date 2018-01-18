@@ -1,5 +1,15 @@
+import { handleActions } from 'redux-actions'
 import { fromJS } from 'immutable'
 
+// import {
+//   SUCCESS,
+//   ERROR,
+//   domain,
+// } from 'redux/constants'
+
+/* Actions */
+
+/* Reducer */
 const defaultState = fromJS({
   items: [
     { title: 'Create a To-do app', description: 'Use all you know about react/redux to do so!', id: 1, done: false },
@@ -11,11 +21,10 @@ const defaultState = fromJS({
   ],
 })
 
-const todos = (state = defaultState, action) => {
-  switch (action.type) {
-    default:
-      return state
-  }
-}
+const reducer = handleActions({}, defaultState)
 
-export default todos
+export default reducer
+
+/* Action Creators */
+
+/* Side Effects */

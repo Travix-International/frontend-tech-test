@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
 import { Map } from 'immutable'
 
-import rootReducer from './reducers'
+import rootReducer from './ducks/reducer'
 
 const initialState = Map()
 
