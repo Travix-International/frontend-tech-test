@@ -5,9 +5,11 @@ import { Input, Button } from 'travix-ui-kit';
 export default class EditableTask extends React.Component {
   constructor(props) {
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.save = this.save.bind(this);
     const { title, description } = props;
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.submit = this.submit.bind(this);
 
     this.state = {
       title,
@@ -19,8 +21,18 @@ export default class EditableTask extends React.Component {
     this.setState({ [name]: value });
   }
 
-  save() {
+  submit() {
     this.props.onSave(this.state.title, this.state.description);
+  }
+
+  handleKeyDown({ keyCode }) {
+    if (keyCode === 13) {
+      this.submit();
+    }
+  }
+
+  componentDidMount() {
+    this.inputTitle.focus();
   }
 
   render() {
@@ -28,13 +40,16 @@ export default class EditableTask extends React.Component {
     const { title, description } = this.state;
 
     return (
-      <div className="row edit">
+      <div className="row edit" onKeyDown={this.handleKeyDown}>
         <div>
-          <Input name="title" onChange={this.handleInputChange} type="text" value={title} />
-          <Input name="description" onChange={this.handleInputChange} type="text" value={description} />
+          <Input
+            name="title" onChange={this.handleInputChange} ref={(input) => { this.inputTitle = input; }}
+            size="s" value={title}
+          />
+          <Input name="description" onChange={this.handleInputChange} size="s" value={description} />
         </div>
         <div>
-          <Button onClick={this.save}>Save</Button>
+          <Button onClick={this.submit}>Save</Button>
           <Button onClick={onCancel}>Cancel</Button>
         </div>
       </div>
