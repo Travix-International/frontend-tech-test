@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect'
 
 import todoType from 'types/todo'
 
+import AddTodoForm from 'components/AddTodoForm'
 import TodoList from 'components/TodoList'
 
 import {
@@ -13,6 +14,8 @@ import {
 } from 'redux/selectors/todos'
 
 import {
+  addTodo,
+  editTodo,
   completeTodo,
   deleteTodo,
 } from 'redux/ducks/todos'
@@ -22,11 +25,15 @@ function ToDos(props) {
     handleComplete,
     handleDelete,
     handleEdit,
+    handleSubmit,
     todos,
   } = props
 
   return (
     <div>
+
+      <AddTodoForm handleSubmit={handleSubmit} />
+
       <TodoList
         handleComplete={handleComplete}
         handleDelete={handleDelete}
@@ -41,6 +48,7 @@ ToDos.propTypes = {
   handleComplete: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
   handleEdit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   todos: ImmutablePropTypes.listOf(todoType).isRequired,
 }
 
@@ -51,7 +59,8 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   handleComplete: completeTodo,
   handleDelete: deleteTodo,
-  handleEdit: console.log,
+  handleEdit: editTodo,
+  handleSubmit: addTodo,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDos)

@@ -33,6 +33,7 @@ describe('<ToDos />', () => {
       handleComplete={noop}
       handleDelete={noop}
       handleEdit={noop}
+      handleSubmit={noop}
       todos={initialState.getIn(['resources', 'todos', 'items'])}
     />)
 
@@ -48,11 +49,13 @@ describe('<ToDos />', () => {
   it('props should match mapDispatchToProps', () => {
     const wrapper = mount(<ConnectedToDos store={store} />)
 
-    wrapper.find('input').first().simulate('change')
+    wrapper.find('input[type="checkbox"]').first().simulate('change')
+    wrapper.find('form').simulate('submit')
     wrapper.find('Icon[name="DELETE"]').first().simulate('click')
+    wrapper.find('Icon[name="EDIT"]').first().simulate('click')
 
     const actions = store.getActions()
 
-    expect(actions).toHaveLength(2)
+    expect(actions).toHaveLength(4)
   })
 })

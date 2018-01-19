@@ -1,5 +1,5 @@
 import { createAction, handleActions } from 'redux-actions'
-import { fromJS } from 'immutable'
+import { fromJS, Map } from 'immutable'
 
 import {
   SUCCESS,
@@ -11,6 +11,8 @@ const todos = domain.defineAction('todos')
 
 export const COMPLETE_TODO = todos.defineAction('COMPLETE_TODO', [SUCCESS])
 export const DELETE_TODO = todos.defineAction('DELETE_TODO', [SUCCESS])
+export const EDIT_TODO = todos.defineAction('EDIT_TODO', [SUCCESS])
+export const ADD_TODO = todos.defineAction('ADD_TODO', [SUCCESS])
 
 /* Reducer */
 const defaultState = fromJS({
@@ -25,6 +27,11 @@ const defaultState = fromJS({
 })
 
 const reducer = handleActions({
+  [ADD_TODO.SUCCESS]: (state, action) => {
+    const items = state.get('items')
+    return state.set('items', items.insert(0, Map(action.payload)))
+  },
+
   [COMPLETE_TODO.SUCCESS]: (state, action) => {
     const items = state.get('items')
 
@@ -38,6 +45,13 @@ const reducer = handleActions({
     const items = state.get('items')
     return state.set('items', items.filter(item => item.get('id') !== action.payload.id))
   },
+
+  [EDIT_TODO.SUCCESS]: (state, action) => {
+    const items = state.get('items')
+    const index = items.findIndex(item => item.get('id') === action.payload.id)
+
+    return state.set('items', items.set(index, fromJS(action.payload)))
+  },
 }, defaultState)
 
 export default reducer
@@ -45,5 +59,7 @@ export default reducer
 /* Action Creators */
 export const completeTodo = createAction(COMPLETE_TODO.SUCCESS)
 export const deleteTodo = createAction(DELETE_TODO.SUCCESS)
+export const editTodo = createAction(EDIT_TODO.SUCCESS)
+export const addTodo = createAction(ADD_TODO.SUCCESS)
 
 /* Side Effects */
