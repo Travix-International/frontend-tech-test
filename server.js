@@ -35,35 +35,28 @@ app.get('/tasks', (req, res) => {
 
 /**
  * Get /task/:id
- * 
+ *
  * id: Number
- * 
+ *
  * Return the task for the given id.
- * 
+ *
  * If found return status code 200 and the resource.
  * If not found return status code 404.
  * If id is not valid number return status code 400.
  */
 app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
-
-  if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
-
-    if (task !== null) {
-      return res.status(200).json({
-        task,
-      });
-    } else {
-      return res.status(404).json({
-        message: 'Not found.',
-      });
-    }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request.',
-    });
+  if (Number.isNaN(id)) {
+    return res.status(400).json({ message: 'Bad request.' });
   }
+
+  const task = tasksContainer.tasks.find(item => item.id === id);
+
+  if (!task) {
+    return res.status(404).json({ message: 'Not found.' });
+  }
+
+  return res.status(200).json(task);
 });
 
 /**
@@ -90,7 +83,7 @@ app.put('/task/:id', (req, res) => {
 
   const task = tasksContainer.tasks.find(item => item.id === id);
 
-  if (task == null) {
+  if (!task) {
     return res.status(404).json({ message: 'Not found' });
   }
 
