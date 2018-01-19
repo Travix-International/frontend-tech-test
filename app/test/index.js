@@ -47,21 +47,4 @@ describe('<Task />', () => {
     expect(wrapper.find('.title').html()).to.equal('Test task');
     expect(wrapper.find('.description').html()).to.equal('This is the description of the task');
   });
-
-  // it('has state', () => {
-  //   const wrapper = mount(<Task
-  //     completed={false}
-  //     description="This is the description of the task"
-  //     id={1}
-  //     store={store}
-  //     title="Test task"
-  //   />);
-  //
-  //   expect(wrapper.props().completed).to.equal(false);
-  //   wrapper.find('.toggle-completed').simulate('click');
-  //   expect(wrapper.props().completed).to.equal(true);
-  //
-  //   // expect(wrapper.find('.title').html()).to.equal('Test task');
-  //   // expect(wrapper.find('.description').html()).to.equal('This is the description of the task');
-  // });
 });
