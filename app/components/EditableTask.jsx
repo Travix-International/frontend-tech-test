@@ -41,16 +41,20 @@ export default class EditableTask extends React.Component {
 
     return (
       <div className="row edit" onKeyDown={this.handleKeyDown}>
-        <div>
-          <Input
-            name="title" onChange={this.handleInputChange} ref={(input) => { this.inputTitle = input; }}
-            size="s" value={title}
-          />
-          <Input name="description" onChange={this.handleInputChange} size="s" value={description} />
+        <div className="container">
+          <div className="col-6">
+            <Input
+              name="title" onChange={this.handleInputChange} ref={(input) => { this.inputTitle = input; }}
+              value={title}
+            />
+          </div>
+          <div className="col-6">
+            <Input name="description" onChange={this.handleInputChange} value={description} />
+          </div>
         </div>
-        <div>
-          <Button onClick={this.submit}>Save</Button>
-          <Button onClick={onCancel}>Cancel</Button>
+        <div className="container center">
+          <Button onClick={this.submit} size="s">Save</Button>
+          <Button onClick={onCancel} size="s">Cancel</Button>
         </div>
       </div>
     );

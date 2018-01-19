@@ -30,7 +30,9 @@ class App extends React.Component {
     return (
       <div className="app">
         <div className="container">
-          <h1>Things to do</h1>
+          <NewTask onSubmit={this.submitNewTask} />
+
+          <h3>Things to do</h3>
           {(status === 'fetching' || status === 'invalid') && <Spinner size="m" />}
           {status === 'errored' && <div>Error</div>}
           {status === 'succeeded' && <div className="container">
@@ -40,8 +42,6 @@ class App extends React.Component {
               </div>
             ))}
           </div>}
-
-          <NewTask onSubmit={this.submitNewTask} />
         </div>
       </div>
     );
