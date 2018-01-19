@@ -3,6 +3,10 @@
  */
 
 const URL = 'http://localhost:9001';
+const headers = {
+  'Accept': 'application/json, text/plain, */*',
+  'Content-Type': 'application/json;charset=utf-8',
+};
 
 function get(path) {
   return fetch(`${URL}${path}`);
@@ -12,12 +16,20 @@ function json(path) {
   return get(path).then(response => response.json());
 }
 
-function post(path) {
-  return fetch(`${URL}${path}`, { method: 'POST' });
+function post(path, body) {
+  return fetch(`${URL}${path}`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body),
+  });
 }
 
-function put(path) {
-  return fetch(`${URL}${path}`, { method: 'PUT' });
+function put(path, body) {
+  return fetch(`${URL}${path}`, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify(body),
+  });
 }
 
 function del(path) {
@@ -34,7 +46,7 @@ export const addTask = task => (dispatch) => {
     task,
   });
 
-  post(`/task/create/${task.title}/${task.description}`)
+  post(`/task`, { title: task.title, description: task.description })
     .catch(() => {
       dispatch({
         type: 'DELETE_TASK',
@@ -51,7 +63,7 @@ export const editTask = task => (dispatch) => {
     task,
   });
 
-  put(`/task/update/${task.id}/${task.title}/${task.description}`)
+  put(`/task/${task.id}`, { title: task.title, description: task.description })
     .catch(() => dispatch({ type: 'SHOW_BACKEND_ERROR' }));
 };
 
@@ -61,7 +73,7 @@ export const deleteTask = id => (dispatch) => {
     id,
   });
 
-  del(`/task/delete/${id}`).catch(() => dispatch({ type: 'SHOW_BACKEND_ERROR' }));
+  del(`/task/${id}`).catch(() => dispatch({ type: 'SHOW_BACKEND_ERROR' }));
 };
 
 const requestTasks = () => ({
@@ -81,7 +93,7 @@ const failFetchTasks = error => ({
 export const fetchTasks = () => (dispatch) => {
   dispatch(requestTasks());
   return json('/tasks')
-    .then(({ tasks }) => dispatch(receiveTasks(tasks)))
+    .then(tasks => dispatch(receiveTasks(tasks)))
     .catch(err => dispatch(failFetchTasks(err)));
 };
 
@@ -92,7 +104,7 @@ export const toggleCompleteTask = id => (dispatch, getState) => {
   });
 
   const { completed } = getState().tasks.data.find(task => task.id === id);
-  put(`/task/${completed ? 'complete' : 'uncomplete'}/${id}`)
+  put(`/task/${id}`, { completed })
     .catch(() => dispatch({
       type: 'TOGGLE_COMPLETE_TASK',
       id,

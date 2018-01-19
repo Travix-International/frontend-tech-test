@@ -11,14 +11,18 @@ function max(collection, property) {
 }
 
 const app = require('express')();
+const bodyParser = require('body-parser');
 const tasksContainer = require('./tasks.json');
 
 // CORS
 app.use(function (req, res, next) {
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
+  res.set('Access-Control-Allow-Headers', '*');
   next();
 });
+
+app.use(bodyParser.json());
 
 /**
  * GET /tasks
@@ -26,7 +30,7 @@ app.use(function (req, res, next) {
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
+  return res.status(200).json(tasksContainer.tasks);
 });
 
 /**
@@ -63,112 +67,88 @@ app.get('/task/:id', (req, res) => {
 });
 
 /**
- * PUT /task/update/:id/:title/:description
- * 
+ * PUT /task/:id
+ *
  * id: Number
- * title: string
- * description: string
- * 
+ *
+ * Body:
+ * - title: string (optional)
+ * - description: string (optional)
+ * - completed: boolean (optional)
+ *
  * Update the task with the given id.
  * If the task is found and update as well, return a status code 204.
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
-  const id = parseInt(req.params.id, 10);
-
-  if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-
-    if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
-      return res.sendStatus(204);
-    } else {
-      return res.status(404).json({
-        message: 'Not found',
-      });
-    }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request',
-    });
-  }
-});
-
-app.put('/task/complete/:id', (req, res) => {
-  debugger
+app.put('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (Number.isNaN(id)) {
-    return res.status(400).json({ message: 'Bad request' });
+    return res.status(400).json({ message: 'The ID should be a number' });
   }
 
   const task = tasksContainer.tasks.find(item => item.id === id);
+
   if (task == null) {
     return res.status(404).json({ message: 'Not found' });
   }
 
-  task.completed = true;
+  task.title = req.body.title === undefined
+    ? task.title
+    : req.body.title;
+
+  task.description = req.body.description === undefined
+    ? task.description
+    : req.body.description;
+
+  task.completed = req.body.completed === undefined
+    ? task.completed
+    : !!req.body.completed;
+
   return res.sendStatus(204);
 });
 
-app.put('/task/uncomplete/:id', (req, res, next) => {
-  try {
-    const id = parseInt(req.params.id, 10);
-
-    if (Number.isNaN(id)) {
-      return res.status(400).json({ message: 'Bad request' });
-    }
-
-    const task = tasksContainer.tasks.find(item => item.id === id);
-    if (task == null) {
-      return res.status(404).json({ message: 'Not found' });
-    }
-
-    task.completed = false;
-    return res.sendStatus(204);
-  } catch (err) {
-    next(err);
-  }
-});
-
 /**
- * POST /task/create/:title/:description
- * 
- * title: string
- * description: string
- * 
+ * POST /task
+ *
+ * Body:
+ * - title: string
+ * - description: string
+ *
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
-  const task = {
-    id: max(tasksContainer.tasks, 'id') + 1,
-    title: req.params.title,
-    description: req.params.description,
-  };
+app.post('/task', (req, res) => {
+  const { title, description } = req.body;
+  if (!title || !description) {
+    return res.status(400).json({ message: 'You should send title and description' });
+  }
 
-  tasksContainer.tasks.push(task);
+  const id = max(tasksContainer.tasks, 'id') + 1;
 
-  return res.status(201).json({
-    message: 'Resource created',
+  tasksContainer.tasks.push({
+    id,
+    title,
+    description,
+    completed: false,
   });
+
+  return res.status(201).json({ message: 'Resource created', id });
 });
 
 /**
- * DELETE /task/delete/:id
- * 
+ * DELETE /task/:id
+ *
  * id: Number
- * 
+ *
  * Delete the task linked to the  given id.
  * If the task is found and deleted as well, return a status code 204.
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/task/delete/:id', (req, res) => {
+app.delete('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
-
   if (!Number.isNaN(id)) {
     const exists = !!tasksContainer.tasks.find(item => item.id === id);
 
