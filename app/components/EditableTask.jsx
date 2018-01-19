@@ -28,6 +28,8 @@ export default class EditableTask extends React.Component {
   handleKeyDown({ keyCode }) {
     if (keyCode === 13) {
       this.submit();
+    } else if (keyCode === 27) {
+      this.props.onCancel();
     }
   }
 
