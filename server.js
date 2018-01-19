@@ -170,16 +170,15 @@ app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-  
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
+    const exists = !!tasksContainer.tasks.find(item => item.id === id);
+
+    if (exists) {
+      tasksContainer.tasks = tasksContainer.tasks.filter(task => task.id !== id);
       return res.status(200).json({
         message: 'Updated successfully',
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
       });
     }
