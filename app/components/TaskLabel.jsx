@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Button, Checkbox } from 'travix-ui-kit';
 
+import './TaskLabel.scss';
+
 const TaskLabel = ({ id, title, description, completed, onToggleCompleted, onToggleEditMode, onDelete }) => [
   <div className={classNames('col-9', { completed })}>
     <Checkbox checked={completed} className="toggle-completed" name={id} onChange={onToggleCompleted}>

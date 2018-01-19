@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import './Task.scss';
 import TaskLabel from './TaskLabel';
 import EditableTask from './EditableTask';
 import { editTask, deleteTask, toggleCompleteTask } from '../actions';
