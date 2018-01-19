@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 const selectTodos = state => state.getIn(['resources', 'todos'])
 
-const getFilter = (state, { match }) => match.params.filter
+const getFilter = (state, { match }) => (match ? match.params.filter : '')
 
 const makeSelectTodos = () => createSelector(
   [getFilter, selectTodos],

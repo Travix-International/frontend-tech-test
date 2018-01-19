@@ -7,6 +7,9 @@
     "production": {
       "minified": true,
       "comments": false
+    },
+    "test": {
+      "presets": ["react", ["env", { "modules": "commonjs" }]]
     }
   }
 }

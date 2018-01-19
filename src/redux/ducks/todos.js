@@ -9,8 +9,8 @@ import {
 /* Actions */
 const todos = domain.defineAction('todos')
 
-const COMPLETE_TODO = todos.defineAction('COMPLETE_TODO', [SUCCESS])
-const DELETE_TODO = todos.defineAction('DELETE_TODO', [SUCCESS])
+export const COMPLETE_TODO = todos.defineAction('COMPLETE_TODO', [SUCCESS])
+export const DELETE_TODO = todos.defineAction('DELETE_TODO', [SUCCESS])
 
 /* Reducer */
 const defaultState = fromJS({

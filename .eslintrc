@@ -14,7 +14,8 @@
   "plugins": [
     "react",
     "redux-saga",
-    "reselect"
+    "reselect",
+    "jest"
   ],
   "rules": {
     "arrow-body-style": ["error", "as-needed"],

@@ -1,16 +1,25 @@
-import { createStore } from 'redux'
-import { Map } from 'immutable'
+import { createStore, applyMiddleware, compose } from 'redux'
+import { fromJS } from 'immutable'
+import createSagaMiddleware from 'redux-saga'
 
-import rootReducer from './ducks/reducer'
+import rootReducer from 'redux/reducer'
 
-const initialState = Map()
+const sagaMiddleware = createSagaMiddleware()
 
-const configureStore = () => {
+const configureStore = (initialState = {}) => {
+  const composeEnhancers =
+    typeof window === 'object' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+      : compose
+
   const store = createStore(
     rootReducer,
-    initialState,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    fromJS(initialState),
+    composeEnhancers(applyMiddleware(sagaMiddleware)),
   )
+
+  store.runSaga = sagaMiddleware.run
 
   return store
 }

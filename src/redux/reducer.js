@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux-immutable'
 
 /* Resources reducers imports */
-import todos from './todos'
-import settings from './settings'
+import todos from 'redux/ducks/todos'
+import settings from 'redux/ducks/settings'
 
 /* UI reducers imports */
 
