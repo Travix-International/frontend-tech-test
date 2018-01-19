@@ -3,9 +3,7 @@ import configureStore from 'redux-mock-store'
 import { shallow, mount } from 'enzyme'
 import { fromJS } from 'immutable'
 
-import ConnectedToDos, {
-  ToDos,
-} from 'containers/ToDos/ToDos'
+import ConnectedToDos, { ToDos } from 'containers/ToDos/ToDos'
 
 describe('<ToDos />', () => {
   const initialState = fromJS({

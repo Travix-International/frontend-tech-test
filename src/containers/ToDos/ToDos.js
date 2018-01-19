@@ -55,7 +55,4 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDos)
-export {
-  ToDos,
-  mapDispatchToProps,
-}
+export { ToDos }
