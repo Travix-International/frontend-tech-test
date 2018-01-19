@@ -1,27 +1,12 @@
 'use strict';
 
-function max(collection, property) {
-  return collection.reduce((prev, current) => {
-    if (current[property] > prev) {
-      prev = current[property];
-    }
-
-    return prev;
-  }, 0);
-}
-
 const app = require('express')();
 const bodyParser = require('body-parser');
-const tasksContainer = require('./tasks.json');
+const tasksContainer = require('./data');
+const { max } = require('./utils');
+const cors = require('./cors');
 
-// CORS
-app.use(function (req, res, next) {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
-  res.set('Access-Control-Allow-Headers', '*');
-  next();
-});
-
+app.use(cors);
 app.use(bodyParser.json());
 
 /**
