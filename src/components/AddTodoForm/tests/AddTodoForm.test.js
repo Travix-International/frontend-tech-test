@@ -5,19 +5,9 @@ import AddTodoForm from 'components/AddTodoForm'
 
 describe('<AddTodoForm />', () => {
   it('should render the addTodoForm', () => {
-    const handler = jest.fn()
-    const wrapper = shallow(<AddTodoForm handleSubmit={handler} />)
+    const wrapper = shallow(<AddTodoForm />)
 
     expect(wrapper.find('form')).toHaveLength(1)
     expect(wrapper.find('Input')).toHaveLength(2)
-  })
-
-  it('should trigger handleSubmit on form submit', () => {
-    const handler = jest.fn()
-    const wrapper = shallow(<AddTodoForm handleSubmit={handler} />)
-
-    wrapper.find('form').simulate('submit')
-
-    expect(handler).toHaveBeenCalled()
   })
 })

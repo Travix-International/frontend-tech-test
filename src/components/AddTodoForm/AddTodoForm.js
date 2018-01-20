@@ -1,4 +1,5 @@
 import React from 'react'
+import { Field, reduxForm } from 'redux-form/immutable'
 import PropTypes from 'prop-types'
 import {
   Input,
@@ -19,8 +20,6 @@ function AddTodoForm(props) {
 
   const { handleSubmit } = props
 
-  console.log('RENDERED')
-
   return (
     <form className={globalStyles.typography} onSubmit={handleSubmit}>
       <fieldset className={styles.addTodoForm}>
@@ -33,11 +32,12 @@ function AddTodoForm(props) {
             </Col>
 
             <Col tagName="span" xs={9}>
-              <Input
+              <Field
+                component={Input}
                 isBlock
                 isDark
                 name="title"
-                placeholder="Do a To-Do app!"
+                placeholder={titleLabel}
                 type="text"
               />
             </Col>
@@ -49,11 +49,12 @@ function AddTodoForm(props) {
             </Col>
 
             <Col tagName="span" xs={9}>
-              <Input
+              <Field
+                component={Input}
                 isBlock
                 isDark
                 name="description"
-                placeholder="Make it all pretty and shinny!"
+                placeholder={descriptionLabel}
                 type="text"
               />
             </Col>
@@ -71,7 +72,9 @@ function AddTodoForm(props) {
 }
 
 AddTodoForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func,
 }
 
-export default AddTodoForm
+export default reduxForm({
+  form: 'addTodo',
+})(AddTodoForm)

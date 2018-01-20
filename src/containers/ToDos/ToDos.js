@@ -29,10 +29,14 @@ function ToDos(props) {
     todos,
   } = props
 
+  function onSubmit(vals) {
+    console.log(vals, handleSubmit)
+  }
+
   return (
     <div>
 
-      <AddTodoForm handleSubmit={handleSubmit} />
+      <AddTodoForm onSubmit={onSubmit} />
 
       <TodoList
         handleComplete={handleComplete}

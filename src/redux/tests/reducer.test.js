@@ -10,4 +10,8 @@ describe('rootReducer', () => {
   it('should return initial immutable state', () => {
     expect(rootReducer(undefined, {})).toBeImmutableMap()
   })
+
+  it('should contain a form reducer', () => {
+    expect(rootReducer(undefined, {}).toJS()).toHaveProperty('form')
+  })
 })

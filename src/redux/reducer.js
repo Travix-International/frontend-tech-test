@@ -1,3 +1,4 @@
+import { reducer as formReducer } from 'redux-form'
 import { combineReducers } from 'redux-immutable'
 
 /* Resources reducers imports */
@@ -15,6 +16,9 @@ const resources = combineReducers({
 /* UI Reducer */
 
 /* Root Reducer */
-const rootReducer = combineReducers({ resources })
+const rootReducer = combineReducers({
+  resources,
+  form: formReducer,
+})
 
 export default rootReducer
