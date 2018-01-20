@@ -4,8 +4,8 @@
   "description": "test back - front",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "FILE=test-fixture.json mocha test",
+    "start": "node server"
   },
   "keywords": [
     "test",
@@ -14,6 +14,14 @@
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "eslint": "^4.15.0",
+    "eslint-config-travix": "^4.0.0",
+    "mocha": "^5.0.0"
   }
 }
