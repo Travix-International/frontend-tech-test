@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import rootReducer from '../reducers';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
 import TodosApp from './todosApp';
+import {Provider} from 'react-redux';
 
-const store = createStore(rootReducer);
+//const store = createStore(rootReducer);
+import store from '../store';
 
 export default class App extends Component {
 	render() {
