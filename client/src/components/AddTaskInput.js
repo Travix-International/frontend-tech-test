@@ -10,7 +10,7 @@ class AddTaskInput extends Component {
     handleAddTask(event) {
         event && event.preventDefault();
         const title = event.target.inputTodoTitle.value;
-        this.props.addTodo(title);
+        this.props.addNewTask(title);
         event.target.inputTodoTitle.value = '';
     }
 

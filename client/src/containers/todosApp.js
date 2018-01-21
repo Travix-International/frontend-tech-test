@@ -1,17 +1,29 @@
 import React, {Component} from 'react';
-import * as actions from '../actions/todoActions';
-import {bindActionCreators} from 'redux';
+//import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import TasksList from '../components/TasksList';
 import AddTaskInput from '../components/AddTaskInput';
+import {getAllTasks, addNewTask} from '../actions/todoActions';
+
 
 class todosApp extends Component {
+
+    componentDidMount() {
+        this.props.getAllTasks();
+    }
+
     render() {
         return (
-            <div className="container">
-                <h1>Let's get some stuff done quickly</h1>
-                <AddTaskInput {...this.props} />
-                <TasksList {...this.props} />
+            <div className="wrapper">
+                <header>
+                    <div className="container">
+                        <h1>Let's get some work done !</h1>
+                        <AddTaskInput {...this.props} />
+                    </div>
+                </header>
+                <div className="container">
+                    <TasksList {...this.props} />
+                </div>
             </div>
         )
     }
@@ -21,8 +33,10 @@ function mapStateToProps(state) {
    return state;
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(actions, dispatch);
-}
+//function mapDispatchToProps(dispatch) {
+//    return bindActionCreators({getAllTasks, addNewTask}, dispatch);
+//}
+
+const mapDispatchToProps = {getAllTasks, addNewTask};
 
 export default connect(mapStateToProps, mapDispatchToProps)(todosApp);
