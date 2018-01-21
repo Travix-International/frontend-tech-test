@@ -12,21 +12,21 @@ export const actionCreators = {
 		}
 	},
 
-	addTodo: (task) => {
+	postTask: (task) => {
 		return {
 			type: types.ADD_TODO,
 			task
 		}
 	},
 
-	modifyTodo: (id) => {
+	updateTask: (id) => {
 		return {
 			type: types.MODIFY_TODO,
 			id
 		}
 	},
 
-	deleteTodo: (id) => {
+	deleteTask: (id) => {
 		return {
 			type: types.DELETE_TODO,
 			id
@@ -52,16 +52,19 @@ export const getAllTasks = () => dispatch => {
 
 export const addNewTask = (task) => {
     return dispatch => {
-        axios.get(`/tasks`)
-        .then((response) => {
-          return response.data;
-        })
-        .then((data) => {
-          dispatch(actionCreators.addTodo(task));
-        })
-        .catch((err) => {
-          console.error.bind(err);
-        })
+        axios.post(`/task/create/${task}/${task}`, {})
+		.then(function (response) {
+			console.log('response', response);
+			dispatch(actionCreators.postTask(task));
+		})
+        //.then((response) => {
+			//	console.log('res', response);
+			//dispatch(actionCreators.postTask(task));
+        //  //return response.data;
+        //})
+        //.catch((err) => {
+        //  console.error.bind(err);
+        //})
     }
 }
 
