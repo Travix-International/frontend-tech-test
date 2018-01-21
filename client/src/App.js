@@ -3,16 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  state = {tasks: []}
+
+  componentDidMount() {
+    fetch('/tasks')
+      .then(res => res.json())
+      .then(tasks => this.setState({ tasks : tasks.tasks }));
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>Users</h1>
+        {this.state.tasks.map(task =>
+          <div key={task.id}>{task.title}</div>
+        )}
       </div>
     );
   }
