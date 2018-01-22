@@ -10,6 +10,12 @@ import {
   styles as globalStyles,
 } from '@wepow/aphrodite'
 
+import {
+  required,
+  length,
+  makeValidate,
+} from 'utils/formValidations'
+
 import styles from './AddTodoForm.css'
 
 function AddTodoForm(props) {
@@ -76,8 +82,14 @@ AddTodoForm.propTypes = {
   handleSubmit: PropTypes.func,
 }
 
+const validations = {
+  title: [required(), length({ max: 25 })],
+  description: [required()],
+}
+
 export default reduxForm({
   form: 'addTodo',
+  validate: makeValidate(validations),
 })(AddTodoForm)
 
 export { AddTodoForm }
