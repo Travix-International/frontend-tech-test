@@ -14,7 +14,9 @@ import styles from './AddTodoForm.css'
 
 function AddTodoForm(props) {
   const titleLabel = 'New todo title:'
+  const titlePlaceholder = 'Create a todo application.'
   const descriptionLabel = 'New todo description:'
+  const descriptionPlaceholder = 'Use react, redux, sagas, jest, webpack...'
   const saveButton = 'Add new todo'
 
   const { handleSubmit } = props
@@ -35,7 +37,7 @@ function AddTodoForm(props) {
                   isBlock
                   isDark
                   name="title"
-                  placeholder={titleLabel}
+                  placeholder={titlePlaceholder}
                   type="text"
                 />
               </Col>
@@ -52,7 +54,7 @@ function AddTodoForm(props) {
                   isBlock
                   isDark
                   name="description"
-                  placeholder={descriptionLabel}
+                  placeholder={descriptionPlaceholder}
                   type="text"
                 />
               </Col>

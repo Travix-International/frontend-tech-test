@@ -14,8 +14,11 @@ describe('<MainNav />', () => {
 
   it('should render a <strong> tag for the current filter', () => {
     const wrapper = shallow(<MainNav filter="active" />)
+    const wrapper2 = shallow(<MainNav filter="done" />)
 
     expect(wrapper.find('Link')).toHaveLength(2)
     expect(wrapper.find('strong')).toHaveLength(1)
+    expect(wrapper2.find('Link')).toHaveLength(2)
+    expect(wrapper2.find('strong')).toHaveLength(1)
   })
 })

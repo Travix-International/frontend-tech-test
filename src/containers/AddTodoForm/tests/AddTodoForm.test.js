@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { AddTodoForm } from 'components/AddTodoForm/AddTodoForm'
+import { AddTodoForm } from 'containers/AddTodoForm/AddTodoForm'
 
 describe('<AddTodoForm />', () => {
   it('should render the addTodoForm', () => {

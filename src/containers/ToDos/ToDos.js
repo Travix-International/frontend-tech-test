@@ -7,8 +7,9 @@ import { createStructuredSelector } from 'reselect'
 import todoType from 'types/todo'
 import matchType from 'types/match'
 
+import AddTodoForm from 'containers/AddTodoForm'
+
 import MainNav from 'components/MainNav'
-import AddTodoForm from 'components/AddTodoForm'
 import TodoList from 'components/TodoList'
 
 import {
