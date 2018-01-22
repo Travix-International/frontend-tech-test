@@ -13,61 +13,60 @@ import {
 import styles from './AddTodoForm.css'
 
 function AddTodoForm(props) {
-  const legend = 'Create New Todo'
-  const titleLabel = 'Title'
-  const descriptionLabel = 'Description'
-  const saveButton = 'Add Todo'
+  const titleLabel = 'New todo title:'
+  const descriptionLabel = 'New todo description:'
+  const saveButton = 'Add new todo'
 
   const { handleSubmit } = props
 
   return (
-    <form className={globalStyles.typography} onSubmit={handleSubmit}>
-      <fieldset className={styles.addTodoForm}>
-        <h1 className={globalStyles.heading1}>{legend}</h1>
+    <Container isFluid>
+      <form className={globalStyles.typography} onSubmit={handleSubmit}>
+        <fieldset className={styles.addTodoForm}>
+          <Container isFluid tagName="ul">
+            <Row middle="xs" start="xs" tagName="li" top="xs">
+              <Col tagName="span" xs={3}>
+                {titleLabel}
+              </Col>
 
-        <Container isFluid tagName="ul">
-          <Row middle="xs" start="xs" tagName="li" top="xs">
-            <Col tagName="span" xs={3}>
-              {titleLabel}
-            </Col>
+              <Col tagName="span" xs={9}>
+                <Field
+                  component={Input}
+                  isBlock
+                  isDark
+                  name="title"
+                  placeholder={titleLabel}
+                  type="text"
+                />
+              </Col>
+            </Row>
 
-            <Col tagName="span" xs={9}>
-              <Field
-                component={Input}
-                isBlock
-                isDark
-                name="title"
-                placeholder={titleLabel}
-                type="text"
-              />
-            </Col>
-          </Row>
+            <Row middle="xs" start="xs" tagName="li" top="xs">
+              <Col tagName="span" xs={3}>
+                {descriptionLabel}
+              </Col>
 
-          <Row middle="xs" start="xs" tagName="li" top="xs">
-            <Col tagName="span" xs={3}>
-              {descriptionLabel}
-            </Col>
+              <Col tagName="span" xs={9}>
+                <Field
+                  component={Input}
+                  isBlock
+                  isDark
+                  name="description"
+                  placeholder={descriptionLabel}
+                  type="text"
+                />
+              </Col>
+            </Row>
+          </Container>
 
-            <Col tagName="span" xs={9}>
-              <Field
-                component={Input}
-                isBlock
-                isDark
-                name="description"
-                placeholder={descriptionLabel}
-                type="text"
-              />
-            </Col>
-          </Row>
-        </Container>
-
-        <Container isFluid>
-          <Row end="xs">
-            <Button isBlock kind="primary" type="submit">{saveButton}</Button>
-          </Row>
-        </Container>
-      </fieldset>
-    </form>
+          <Container isFluid>
+            <Row end="xs">
+              <Button isBlock kind="primary" type="submit">{saveButton}</Button>
+            </Row>
+          </Container>
+        </fieldset>
+      </form>
+    </Container>
   )
 }
 

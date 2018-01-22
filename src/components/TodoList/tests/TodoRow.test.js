@@ -26,7 +26,7 @@ describe('<TodoRow />', () => {
   })
 
   it('should render a todo row', () => {
-    expect(wrapper.find('li')).toHaveLength(1)
+    expect(wrapper.find('Row[tagName="li"]')).toHaveLength(1)
     expect(wrapper.hasClass('todoRow')).toEqual(true)
   })
 

@@ -1,0 +1,26 @@
+.mainNav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mainNav li {
+  text-align: center;
+}
+
+.mainNav a,
+.mainNav strong {
+  background: #eee;
+  border-radius: 5px 5px 0 0;
+  color: #bbb;
+  display: block;
+  font-weight: bold;
+  padding: 1em 0;
+  text-decoration: none;
+}
+
+.mainNav strong {
+  background: #fff;
+  border-bottom: 0;
+  color: #0c7ce1;
+}

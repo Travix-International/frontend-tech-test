@@ -24,7 +24,7 @@ describe('<TodoList />', () => {
     const first = wrapper.find('TodoRow').first()
 
     expect(wrapper.find('ul')).toHaveLength(1)
-    expect(wrapper.hasClass('todoList')).toEqual(true)
+    expect(wrapper.find('ul').hasClass('todoList')).toEqual(true)
     expect(wrapper.find('TodoRow')).toHaveLength(4)
     expect(first.props()).toHaveProperty('handleComplete')
     expect(first.props()).toHaveProperty('handleDelete')

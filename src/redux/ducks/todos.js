@@ -20,8 +20,8 @@ export const ADD_TODO = todos.defineAction('ADD_TODO', [SUCCESS])
 export const DELETE_TODO = todos.defineAction('DELETE_TODO', [SUCCESS])
 
 /* Reducer */
-const array = Array(100).fill().map((val, index) => ({
-  title: `My todo ${index}`,
+const array = Array(2).fill().map((val, index) => ({
+  title: `My todo ${index + 1}`,
   description: 'This is one of my todos',
   id: b(),
   done: Math.random() >= 0.5,

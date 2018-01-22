@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 import todoType from 'types/todo'
+import matchType from 'types/match'
 
 import MainNav from 'components/MainNav'
 import AddTodoForm from 'components/AddTodoForm'
@@ -27,6 +28,7 @@ function ToDos(props) {
     handleDelete,
     handleEdit,
     handleSubmit,
+    match: { params } = { params: {} },
     todos,
   } = props
 
@@ -36,7 +38,7 @@ function ToDos(props) {
 
   return (
     <div>
-      <MainNav />
+      <MainNav filter={params.filter} />
 
       <AddTodoForm onSubmit={onSubmit} />
 
@@ -55,6 +57,7 @@ ToDos.propTypes = {
   handleDelete: PropTypes.func.isRequired,
   handleEdit: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  match: matchType,
   todos: ImmutablePropTypes.listOf(todoType).isRequired,
 }
 

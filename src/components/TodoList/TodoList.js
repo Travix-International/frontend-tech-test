@@ -1,7 +1,10 @@
 import React from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import PropTypes from 'prop-types'
-import { styles as globalStyles } from '@wepow/aphrodite'
+import {
+  Container,
+  styles as globalStyles,
+} from '@wepow/aphrodite'
 
 import todoType from 'types/todo'
 
@@ -19,24 +22,26 @@ function TodoList(props) {
   const classes = `${styles.todoList} ${globalStyles.typography}`
 
   return (
-    <ul className={classes}>
-      {todos.map((todo) => {
-        const id = todo.get('id')
-        const _handleComplete = () => handleComplete({ id })
-        const _handleDelete = () => handleDelete({ id })
-        const _handleEdit = () => handleEdit({ id })
+    <Container isFluid>
+      <ul className={classes}>
+        {todos.map((todo) => {
+          const id = todo.get('id')
+          const _handleComplete = () => handleComplete({ id })
+          const _handleDelete = () => handleDelete({ id })
+          const _handleEdit = () => handleEdit({ id })
 
-        return (
-          <TodoRow
-            key={id}
-            handleComplete={_handleComplete}
-            handleDelete={_handleDelete}
-            handleEdit={_handleEdit}
-            todo={todo}
-          />
-        )
-      })}
-    </ul>
+          return (
+            <TodoRow
+              key={id}
+              handleComplete={_handleComplete}
+              handleDelete={_handleDelete}
+              handleEdit={_handleEdit}
+              todo={todo}
+            />
+          )
+        })}
+      </ul>
+    </Container>
   )
 }
 

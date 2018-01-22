@@ -1,7 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { is } from 'immutable'
-import { Checkbox, Icon } from '@wepow/aphrodite'
+import {
+  Checkbox,
+  Col,
+  Icon,
+  Row,
+} from '@wepow/aphrodite'
 
 import todoType from 'types/todo'
 
@@ -26,8 +31,8 @@ class TodoRow extends React.Component {
     classes = todo.get('done') ? `${classes} ${styles.completed}` : classes
 
     return (
-      <li className={classes}>
-        <div className={styles.checkBox}>
+      <Row className={classes} middle="xs" tagName="li" top="xs">
+        <Col xs={1}>
           <Checkbox
             input={{
               name: 'select',
@@ -35,12 +40,14 @@ class TodoRow extends React.Component {
               onChange: handleComplete,
             }}
           />
-        </div>
+        </Col>
 
-        <h1>{todo.get('title')}</h1>
-        {todo.get('description')}
+        <Col xs={10}>
+          <h1>{todo.get('title')}</h1>
+          {todo.get('description')}
+        </Col>
 
-        <div className={styles.icons}>
+        <Col className={styles.actions} xs={1}>
           <Icon
             name="EDIT"
             onClick={handleEdit}
@@ -58,8 +65,8 @@ class TodoRow extends React.Component {
             role="button"
             tabIndex={0}
           />
-        </div>
-      </li>
+        </Col>
+      </Row>
     )
   }
 }
