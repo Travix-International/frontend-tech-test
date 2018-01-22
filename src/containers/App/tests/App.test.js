@@ -24,10 +24,6 @@ describe('<App />', () => {
     expect(wrapper.find('BrowserRouter')).toHaveLength(1)
   })
 
-  it('should render the <MainNav />', () => {
-    expect(wrapper.find('MainNav')).toHaveLength(1)
-  })
-
   it('should render some <Route />s', () => {
     expect(wrapper.find('Route').length).not.toBe(0)
   })

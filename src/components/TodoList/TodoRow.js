@@ -1,57 +1,67 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { is } from 'immutable'
 import { Checkbox, Icon } from '@wepow/aphrodite'
 
 import todoType from 'types/todo'
 
 import styles from './TodoList.css'
 
-function TodoRow(props) {
-  const {
-    handleComplete,
-    handleDelete,
-    handleEdit,
-    todo,
-  } = props
+class TodoRow extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    const { props } = this
+    return !is(nextProps.todo, props.todo)
+  }
 
-  let classes = styles.todoRow
+  render() {
+    const {
+      handleComplete,
+      handleDelete,
+      handleEdit,
+      todo,
+    } = this.props
 
-  classes = todo.get('done') ? `${classes} ${styles.completed}` : classes
+    let classes = styles.todoRow
 
-  return (
-    <li className={classes}>
-      <div className={styles.checkBox}>
-        <Checkbox
-          isChecked={todo.get('done')}
-          name="select"
-          onChange={handleComplete}
-        />
-      </div>
+    classes = todo.get('done') ? `${classes} ${styles.completed}` : classes
 
-      <h1>{todo.get('title')}</h1>
-      {todo.get('description')}
+    return (
+      <li className={classes}>
+        <div className={styles.checkBox}>
+          <Checkbox
+            input={{
+              name: 'select',
+              checked: todo.get('done'),
+              onChange: handleComplete,
+            }}
+          />
+        </div>
 
-      <div className={styles.icons}>
-        <Icon
-          name="EDIT"
-          onClick={handleEdit}
-          onKeyDown={handleEdit}
-          role="button"
-          tabIndex={0}
-        />
+        <h1>{todo.get('title')}</h1>
+        {todo.get('description')}
 
-        {' '}
+        <div className={styles.icons}>
+          <Icon
+            name="EDIT"
+            onClick={handleEdit}
+            onKeyDown={handleEdit}
+            role="button"
+            tabIndex={0}
+          />
 
-        <Icon
-          name="DELETE"
-          onClick={handleDelete}
-          onKeyDown={handleDelete}
-          role="button"
-          tabIndex={0}
-        />
-      </div>
-    </li>
-  )
+          {' '}
+
+          <Icon
+            name="DELETE"
+            onClick={handleDelete}
+            onKeyDown={handleDelete}
+            role="button"
+            tabIndex={0}
+          />
+        </div>
+      </li>
+    )
+  }
 }
 
 TodoRow.propTypes = {

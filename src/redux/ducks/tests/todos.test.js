@@ -89,7 +89,7 @@ describe('todos duck', () => {
         initialState.set('items', initialState.get('items').insert(0, Map(fixture)))
       )
 
-      expect(reducer(undefined, addTodo(newTodo))).toEqual(getExpected(newTodo))
+      expect(reducer(initialState, addTodo(newTodo))).toEqual(getExpected(newTodo))
     })
 
     it('should handle completeTodo', () => {
@@ -100,9 +100,9 @@ describe('todos duck', () => {
         }))
       )
 
-      expect(reducer(undefined, completeTodo(fixture1))).toEqual(getExpected(fixture1))
-      expect(reducer(undefined, completeTodo(fixture2))).toEqual(getExpected(fixture2))
-      expect(reducer(undefined, completeTodo(fixture3))).toEqual(getExpected(fixture3))
+      expect(reducer(initialState, completeTodo(fixture1))).toEqual(getExpected(fixture1))
+      expect(reducer(initialState, completeTodo(fixture2))).toEqual(getExpected(fixture2))
+      expect(reducer(initialState, completeTodo(fixture3))).toEqual(getExpected(fixture3))
     })
 
     it('should handle deleteTodo', () => {
@@ -110,9 +110,9 @@ describe('todos duck', () => {
         initialState.set('items', initialState.get('items').filter(item => item.get('id') !== fixture.id))
       )
 
-      expect(reducer(undefined, deleteTodo(fixture1))).toEqual(getExpected(fixture1))
-      expect(reducer(undefined, deleteTodo(fixture2))).toEqual(getExpected(fixture2))
-      expect(reducer(undefined, deleteTodo(fixture3))).toEqual(getExpected(fixture3))
+      expect(reducer(initialState, deleteTodo(fixture1))).toEqual(getExpected(fixture1))
+      expect(reducer(initialState, deleteTodo(fixture2))).toEqual(getExpected(fixture2))
+      expect(reducer(initialState, deleteTodo(fixture3))).toEqual(getExpected(fixture3))
     })
 
     it('should handle editTodo', () => {
@@ -122,7 +122,7 @@ describe('todos duck', () => {
         return initialState.set('items', initialState.get('items').set(index, fromJS(fixture)))
       }
 
-      expect(reducer(undefined, editTodo(editedTodo))).toEqual(getExpected(editedTodo))
+      expect(reducer(initialState, editTodo(editedTodo))).toEqual(getExpected(editedTodo))
     })
   })
 })

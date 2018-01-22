@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect'
 
 import todoType from 'types/todo'
 
+import MainNav from 'components/MainNav'
 import AddTodoForm from 'components/AddTodoForm'
 import TodoList from 'components/TodoList'
 
@@ -30,11 +31,12 @@ function ToDos(props) {
   } = props
 
   function onSubmit(vals) {
-    console.log(vals, handleSubmit)
+    handleSubmit(vals)
   }
 
   return (
     <div>
+      <MainNav />
 
       <AddTodoForm onSubmit={onSubmit} />
 
@@ -62,9 +64,9 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   handleComplete: completeTodo,
-  handleDelete: deleteTodo,
   handleEdit: editTodo,
   handleSubmit: addTodo,
+  handleDelete: deleteTodo,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDos)

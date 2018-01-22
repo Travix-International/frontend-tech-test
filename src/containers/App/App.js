@@ -7,8 +7,6 @@ import {
   Route,
 } from 'react-router-dom'
 
-import MainNav from 'components/MainNav'
-
 import ToDos from 'containers/ToDos'
 
 function App({ store }) {
@@ -16,8 +14,6 @@ function App({ store }) {
     <Provider store={store}>
       <BrowserRouter>
         <div>
-          <MainNav />
-
           <Route component={ToDos} path="/:filter?" />
         </div>
       </BrowserRouter>

@@ -6,10 +6,10 @@ import TodoList from 'components/TodoList'
 
 describe('<TodoList />', () => {
   const todos = fromJS([
-    { title: 'A todo', description: 'Do me!', id: 1, done: false },
-    { title: 'A todo', description: 'Do me!', id: 2, done: true },
-    { title: 'A todo', description: 'Do me!', id: 3, done: false },
-    { title: 'A todo', description: 'Do me!', id: 4, done: true },
+    { title: 'A todo', description: 'Do me!', id: '1', done: false },
+    { title: 'A todo', description: 'Do me!', id: '2', done: true },
+    { title: 'A todo', description: 'Do me!', id: '3', done: false },
+    { title: 'A todo', description: 'Do me!', id: '4', done: true },
   ])
 
   it('should render a list of todos', () => {

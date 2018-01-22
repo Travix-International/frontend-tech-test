@@ -8,7 +8,7 @@ describe('<TodoRow />', () => {
   const todo = fromJS({
     title: 'A todo',
     description: 'Do me!',
-    id: 1,
+    id: '1',
     done: false,
   })
 
@@ -34,7 +34,7 @@ describe('<TodoRow />', () => {
     const doneTodo = fromJS({
       title: 'A todo',
       description: 'Do me!',
-      id: 2,
+      id: '2',
       done: true,
     })
     const doneWrapper = shallow(<TodoRow
@@ -60,5 +60,13 @@ describe('<TodoRow />', () => {
   it('should trigger handleComplete when the checkbox changes', () => {
     wrapper.find('Checkbox').dive().find('input').simulate('change')
     expect(handler).toHaveBeenCalledTimes(1)
+  })
+
+  it('should update only when the todo prop has changed', () => {
+    const shouldNotUpdate = wrapper.instance().shouldComponentUpdate({ todo })
+    const shouldUpdate = wrapper.instance().shouldComponentUpdate({ todo: todo.set('id', '2') })
+
+    expect(shouldUpdate).toBe(true)
+    expect(shouldNotUpdate).toBe(false)
   })
 })

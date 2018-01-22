@@ -28,7 +28,7 @@ function TodoList(props) {
 
         return (
           <TodoRow
-            key={todo.get('id')}
+            key={id}
             handleComplete={_handleComplete}
             handleDelete={_handleDelete}
             handleEdit={_handleEdit}

@@ -78,3 +78,5 @@ AddTodoForm.propTypes = {
 export default reduxForm({
   form: 'addTodo',
 })(AddTodoForm)
+
+export { AddTodoForm }
