@@ -18,7 +18,9 @@ class AddTaskInput extends Component {
         return (
             <div>
                 <form onSubmit={this.handleAddTask}>
-                    <input name="inputTodoTitle" type="text" placeholder="Add your new task here" />
+                    <input id="inputTodoTitle" name="inputTodoTitle" type="text" placeholder="+ Add your new task here" />
+                    <input id="inputTodoDescription" name="inputTodoDescription" type="text" placeholder="add description" />
+                    <input type="submit" name="submit" value="submit" />
                 </form>
             </div>
         )
