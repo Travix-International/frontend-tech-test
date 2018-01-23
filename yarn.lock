@@ -214,8 +214,8 @@
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.34.tgz#7a8f795afd8a404a9c4af9539b24c75d3996914e"
 
 "@wepow/aphrodite@git+ssh://git@github.com/wepow/aphrodite.git":
-  version "0.0.3"
-  resolved "git+ssh://git@github.com/wepow/aphrodite.git#6823385aec2dc3bcc15737b702f9bae5e59b510d"
+  version "0.0.4"
+  resolved "git+ssh://git@github.com/wepow/aphrodite.git#62953a76487bdd234c7b23f9341a53e9f2e03448"
   dependencies:
     flexboxgrid2 "^7.1.0"
     prop-types "^15.6.0"
