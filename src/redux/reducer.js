@@ -16,6 +16,16 @@ const resources = combineReducers({
 
 /* UI Reducer */
 
+/* Utils */
+const clearReduxForm = state => (
+  state
+    .set('values', Map({}))
+    .set(
+      'fields',
+      state.get('fields').map(field => field.set('touched', false)),
+    )
+)
+
 /* Root Reducer */
 const rootReducer = combineReducers({
   resources,
@@ -23,9 +33,7 @@ const rootReducer = combineReducers({
     addTodo: (state, action) => {
       switch (action.type) {
         case ADD_TODO.SUCCESS:
-          return state
-            .set('values', Map({}))
-            .set('fields', state.get('fields').map(field => field.set('touched', false)))
+          return clearReduxForm(state)
         default:
           return state
       }
