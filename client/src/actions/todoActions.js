@@ -12,18 +12,19 @@ export const actionCreators = {
 		}
 	},
 
-	postTask: (title, desc) => {
+	postTask: (title, description) => {
 		return {
 			type: types.ADD_TODO,
 			title,
-			desc
+			description
 		}
 	},
 
-	updateTask: (id) => {
+	toggleTask: (id, completed) => {
 		return {
-			type: types.MODIFY_TODO,
-			id
+			type: types.TOGGLE_TODO,
+			id,
+			completed
 		}
 	},
 
@@ -53,11 +54,14 @@ export const getAllTasks = () => dispatch => {
 export const addNewTask = (title, desc = '') => {
     return dispatch => {
 		//todo: make the description optional
-		const qs = desc === '' ? `${title}/${title}` : `${title}/${desc}`;
+		const qs = desc === '' ? `${title}` : `${title}/${desc}`;
 
         axios.post(`/task/create/${qs}`, {})
 		.then(function (response) {
 			dispatch(actionCreators.postTask(title, desc));
+		})
+		.catch((err) => {
+			console.error.bind(err);
 		})
     }
 }
@@ -72,6 +76,18 @@ export const deleteTask = (id) => dispatch => {
 	.catch((err) => {
 		console.error.bind(err);
 	})
+}
+
+export const toggleTask = (id, completed) => {
+	return dispatch => {
+		axios.put(`/task/update/${id}/null/null/${completed}`)
+		.then(function (response) {
+			dispatch(actionCreators.toggleTask(id, completed));
+		})
+		.catch((err) => {
+			console.error.bind(err);
+		})
+	}
 }
 
 export default actionCreators;
