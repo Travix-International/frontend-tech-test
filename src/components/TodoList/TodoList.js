@@ -1,6 +1,7 @@
 import React from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import PropTypes from 'prop-types'
+import { Map } from 'immutable'
 import {
   Container,
   styles as globalStyles,
@@ -25,10 +26,10 @@ function TodoList(props) {
     <Container isFluid>
       <ul className={classes}>
         {todos.map((todo) => {
-          const id = todo.get('id')
-          const _handleComplete = () => handleComplete({ id })
-          const _handleDelete = () => handleDelete({ id })
-          const _handleEdit = () => handleEdit({ id })
+          const id = Map({ id: todo.get('id') })
+          const _handleComplete = () => handleComplete(id)
+          const _handleDelete = () => handleDelete(id)
+          const _handleEdit = () => handleEdit(id)
 
           return (
             <TodoRow

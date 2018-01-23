@@ -50,7 +50,7 @@ export const makeValidate = validations => (values) => {
   const errors = {}
 
   Object.keys(validations).forEach((field) => {
-    const value = values[field]
+    const value = values.get(field)
 
     errors[field] = validations[field]
       .map(validate => validate(value, values))

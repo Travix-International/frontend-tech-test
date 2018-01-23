@@ -1,5 +1,6 @@
-import { reducer as formReducer } from 'redux-form'
+import { reducer as formReducer } from 'redux-form/immutable'
 import { combineReducers } from 'redux-immutable'
+import { Map } from 'immutable'
 
 /* Resources reducers imports */
 import todos, { ADD_TODO } from 'redux/ducks/todos'
@@ -22,7 +23,9 @@ const rootReducer = combineReducers({
     addTodo: (state, action) => {
       switch (action.type) {
         case ADD_TODO.SUCCESS:
-          return undefined
+          return state
+            .set('values', Map({}))
+            .set('fields', state.get('fields').map(field => field.set('touched', false)))
         default:
           return state
       }

@@ -89,6 +89,7 @@ const validations = {
 
 export default reduxForm({
   form: 'addTodo',
+  touchOnBlur: false,
   validate: makeValidate(validations),
 })(AddTodoForm)
 

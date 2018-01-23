@@ -1,5 +1,5 @@
 import { createAction, handleActions } from 'redux-actions'
-import { fromJS, Map } from 'immutable'
+import { fromJS } from 'immutable'
 
 import {
   SUCCESS,
@@ -35,14 +35,14 @@ const reducer = handleActions({
   [ADD_TODO.SUCCESS]: (state, action) => {
     const items = state.get('items')
     const { id, done } = action.payload
-    return state.set('items', items.insert(0, Map({ ...action.payload, id: id || b(), done: done || false })))
+    return state.set('items', items.insert(0, action.payload.merge({ id: id || b(), done: done || false })))
   },
 
   [COMPLETE_TODO.SUCCESS]: (state, action) => {
     const items = state.get('items')
 
     return state.set('items', items.map((item) => {
-      if (item.get('id') !== action.payload.id) { return item }
+      if (item.get('id') !== action.payload.get('id')) { return item }
       return item.set('done', !item.get('done'))
     }))
   },
@@ -56,7 +56,7 @@ const reducer = handleActions({
 
   [DELETE_TODO.SUCCESS]: (state, action) => {
     const items = state.get('items')
-    return state.set('items', items.filter(item => item.get('id') !== action.payload.id))
+    return state.set('items', items.filter(item => item.get('id') !== action.payload.get('id')))
   },
 }, defaultState)
 
