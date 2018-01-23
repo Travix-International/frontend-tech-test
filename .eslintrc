@@ -1,0 +1,11 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "travix/base",
+    "travix/promises",
+    "travix/react"
+  ],
+  "globals": {
+    "document": true
+  }
+}

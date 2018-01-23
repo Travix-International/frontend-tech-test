@@ -1,11 +1,14 @@
 {
-  "name": "test-candidates",
+  "name": "todoApp",
   "version": "0.0.1",
   "description": "test back - front",
   "main": "server.js",
   "scripts": {
+    "build": "webpack --config webpack.config.prod",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "concurrently --kill-others \"npm run start:client\" \"npm run start:server\"",
+    "start:client": "webpack-dev-server --open",
+    "start:server": "node server.js"
   },
   "keywords": [
     "test",
@@ -14,6 +17,30 @@
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.16.2",
+    "frint": "^5.3.0",
+    "frint-react": "^5.3.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
+    "babel-preset-travix": "^1.1.1",
+    "clean-webpack-plugin": "^0.1.17",
+    "concurrently": "^3.5.1",
+    "eslint": "^4.16.0",
+    "eslint-config-travix": "^4.0.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "install": "^0.10.4",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
   }
 }
