@@ -36,6 +36,7 @@ describe('<ToDos />', () => {
       handleDelete={noop}
       handleEdit={noop}
       handleSubmit={noop}
+      requestTodos={noop}
       todos={initialState.getIn(['resources', 'todos', 'items'])}
     />)
 
@@ -49,6 +50,7 @@ describe('<ToDos />', () => {
       handleDelete={noop}
       handleEdit={noop}
       handleSubmit={noop}
+      requestTodos={noop}
       todos={initialState.getIn(['resources', 'todos', 'items'])}
     />)
 
@@ -80,6 +82,23 @@ describe('<ToDos />', () => {
     const actions = store.getActions()
     const todosActions = actions.filter(action => action.type.includes('/todos/'))
 
-    expect(todosActions).toHaveLength(4)
+    expect(todosActions).toHaveLength(5)
+  })
+
+  it('should update only when todos or match props has changed', () => {
+    const noop = jest.fn()
+    const wrapper = shallow(<ToDos
+      handleComplete={noop}
+      handleDelete={noop}
+      handleEdit={noop}
+      handleSubmit={noop}
+      requestTodos={noop}
+      todos={fromJS([])}
+    />)
+    const shouldUpdate = wrapper.instance().shouldComponentUpdate({ todos: initialState.getIn(['resources', 'todos', 'items']) })
+    const shouldNotUpdate = wrapper.instance().shouldComponentUpdate({ todos: fromJS([]) })
+
+    expect(shouldUpdate).toBe(true)
+    expect(shouldNotUpdate).toBe(false)
   })
 })

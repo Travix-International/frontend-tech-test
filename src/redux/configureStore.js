@@ -3,6 +3,7 @@ import { fromJS } from 'immutable'
 import createSagaMiddleware from 'redux-saga'
 
 import rootReducer from 'redux/reducer'
+import rootSaga from 'redux/saga'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -19,7 +20,7 @@ const configureStore = (initialState = {}) => {
     composeEnhancers(applyMiddleware(sagaMiddleware)),
   )
 
-  store.runSaga = sagaMiddleware.run
+  sagaMiddleware.run(rootSaga)
 
   return store
 }

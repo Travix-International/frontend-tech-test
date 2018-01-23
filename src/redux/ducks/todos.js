@@ -1,9 +1,12 @@
 import { createAction, handleActions } from 'redux-actions'
-import { fromJS } from 'immutable'
+import { takeLatest } from 'redux-saga/effects'
+import { fromJS, Map } from 'immutable'
 
 import {
-  SUCCESS,
   domain,
+  ERROR,
+  PENDING,
+  SUCCESS,
 } from 'redux/constants'
 
 // Temprorary uuid function.
@@ -18,6 +21,7 @@ export const COMPLETE_TODO = todos.defineAction('COMPLETE_TODO', [SUCCESS])
 export const EDIT_TODO = todos.defineAction('EDIT_TODO', [SUCCESS])
 export const ADD_TODO = todos.defineAction('ADD_TODO', [SUCCESS])
 export const DELETE_TODO = todos.defineAction('DELETE_TODO', [SUCCESS])
+export const LOAD_TODOS = todos.defineAction('LOAD_TODOS', [PENDING, SUCCESS, ERROR])
 
 /* Reducer */
 const array = Array(2).fill().map((val, index) => ({
@@ -35,7 +39,7 @@ const reducer = handleActions({
   [ADD_TODO.SUCCESS]: (state, action) => {
     const items = state.get('items')
     const { id, done } = action.payload
-    return state.set('items', items.insert(0, action.payload.merge({ id: id || b(), done: done || false })))
+    return state.set('items', items.insert(0, Map({ id: id || b(), done: done || false }).merge(action.payload)))
   },
 
   [COMPLETE_TODO.SUCCESS]: (state, action) => {
@@ -67,5 +71,19 @@ export const completeTodo = createAction(COMPLETE_TODO.SUCCESS)
 export const editTodo = createAction(EDIT_TODO.SUCCESS)
 export const addTodo = createAction(ADD_TODO.SUCCESS)
 export const deleteTodo = createAction(DELETE_TODO.SUCCESS)
+export const loadTodos = createAction(LOAD_TODOS.ACTION)
 
 /* Side Effects */
+function* loadTodosSaga(action) {
+  try {
+    yield console.log('HELLO FROM SAGA', action)
+  } catch (err) {
+    yield console.log(err)
+  }
+}
+
+/* eslint-disable */
+export const todosWatchers = [
+  takeLatest(LOAD_TODOS.ACTION, loadTodosSaga),
+]
+/* eslint-enable */

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import { is } from 'immutable'
 
 import todoType from 'types/todo'
 import matchType from 'types/match'
@@ -21,36 +22,52 @@ import {
   editTodo,
   completeTodo,
   deleteTodo,
+  loadTodos,
 } from 'redux/ducks/todos'
 
-function ToDos(props) {
-  const {
-    handleComplete,
-    handleDelete,
-    handleEdit,
-    handleSubmit,
-    match: { params } = { params: {} },
-    todos,
-  } = props
+// eslint-disable-next-line react/prefer-stateless-function
+class ToDos extends React.Component {
+  componentWillMount() {
+    const { requestTodos } = this.props
 
-  function onSubmit(vals) {
-    handleSubmit(vals)
+    requestTodos()
   }
 
-  return (
-    <div>
-      <MainNav filter={params.filter} />
+  shouldComponentUpdate(nextProps) {
+    const { props } = this
 
-      <AddTodoForm onSubmit={onSubmit} />
+    return !is(nextProps.todos, props.todos)
+  }
 
-      <TodoList
-        handleComplete={handleComplete}
-        handleDelete={handleDelete}
-        handleEdit={handleEdit}
-        todos={todos}
-      />
-    </div>
-  )
+  render() {
+    const {
+      handleComplete,
+      handleDelete,
+      handleEdit,
+      handleSubmit,
+      match: { params } = { params: {} },
+      todos,
+    } = this.props
+
+    function onSubmit(vals) {
+      handleSubmit(vals)
+    }
+
+    return (
+      <div>
+        <MainNav filter={params.filter} />
+
+        <AddTodoForm onSubmit={onSubmit} />
+
+        <TodoList
+          handleComplete={handleComplete}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          todos={todos}
+        />
+      </div>
+    )
+  }
 }
 
 ToDos.propTypes = {
@@ -59,6 +76,7 @@ ToDos.propTypes = {
   handleEdit: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   match: matchType,
+  requestTodos: PropTypes.func,
   todos: ImmutablePropTypes.listOf(todoType).isRequired,
 }
 
@@ -71,6 +89,7 @@ const mapDispatchToProps = {
   handleEdit: editTodo,
   handleSubmit: addTodo,
   handleDelete: deleteTodo,
+  requestTodos: loadTodos,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDos)

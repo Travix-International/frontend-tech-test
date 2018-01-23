@@ -17,7 +17,7 @@ const resources = combineReducers({
 /* UI Reducer */
 
 /* Utils */
-const clearReduxForm = state => (
+export const clearReduxForm = state => (
   state
     .set('values', Map({}))
     .set(

@@ -1,4 +1,4 @@
-import { fromJS, Map } from 'immutable'
+import { fromJS, is, Map } from 'immutable'
 import * as matchers from 'jest-immutable-matchers'
 
 import reducer, {
@@ -19,7 +19,7 @@ describe('todos duck', () => {
 
   describe('actions', () => {
     it('completeTodo', () => {
-      const fixture = { id: 1337 }
+      const fixture = { id: '1337' }
       const expected = {
         type: COMPLETE_TODO.SUCCESS,
         payload: fixture,
@@ -29,7 +29,7 @@ describe('todos duck', () => {
     })
 
     it('deleteTodo', () => {
-      const fixture = { id: 1337 }
+      const fixture = { id: '1337' }
       const expected = {
         type: DELETE_TODO.SUCCESS,
         payload: fixture,
@@ -39,7 +39,7 @@ describe('todos duck', () => {
     })
 
     it('editTodo', () => {
-      const fixture = { id: 1337 }
+      const fixture = { id: '1337' }
       const expected = {
         type: EDIT_TODO.SUCCESS,
         payload: fixture,
@@ -49,7 +49,7 @@ describe('todos duck', () => {
     })
 
     it('addTodo', () => {
-      const fixture = { id: 1337 }
+      const fixture = { id: '1337' }
       const expected = {
         type: ADD_TODO.SUCCESS,
         payload: fixture,
@@ -60,21 +60,21 @@ describe('todos duck', () => {
   })
 
   describe('reducer', () => {
-    const fixture1 = { id: 1 }
-    const fixture2 = { id: 2 }
-    const fixture3 = { id: 3 }
+    const fixture1 = { id: '1' }
+    const fixture2 = { id: '2' }
+    const fixture3 = { id: '3' }
 
     let initialState
 
     beforeAll(() => {
       initialState = fromJS({
         items: [
-          { title: 'Create a To-do app', description: 'Use all you know about react/redux to do so!', id: 1, done: false },
-          { title: 'Create a Pull Request', description: 'Submit yoursolution for review!', id: 2, done: true },
-          { title: 'Eat!', description: 'It\'s apparently quite important', id: 3, done: false },
-          { title: 'Rest!', description: 'Like eating, it seems like this is also really important', id: 4, done: false },
-          { title: 'Have social life!', description: 'Ok, now we\'re just being ridiculous...', id: 5, done: true },
-          { title: 'Work!', description: 'THERE\'S NOT ENOUGH TIME!', id: 6, done: false },
+          { title: 'Create a To-do app', description: 'Use all you know about react/redux to do so!', id: '1', done: false },
+          { title: 'Create a Pull Request', description: 'Submit yoursolution for review!', id: '2', done: true },
+          { title: 'Eat!', description: 'It\'s apparently quite important', id: '3', done: false },
+          { title: 'Rest!', description: 'Like eating, it seems like this is also really important', id: '4', done: false },
+          { title: 'Have social life!', description: 'Ok, now we\'re just being ridiculous...', id: '5', done: true },
+          { title: 'Work!', description: 'THERE\'S NOT ENOUGH TIME!', id: '6', done: false },
         ],
       })
     })
@@ -84,35 +84,35 @@ describe('todos duck', () => {
     })
 
     it('should handle addTodo', () => {
-      const newTodo = { title: 'I am new!', description: 'Just created!', id: 7, done: false }
+      const newTodo = Map({ title: 'I am new!', description: 'Just created!', id: 7, done: false })
       const getExpected = fixture => (
-        initialState.set('items', initialState.get('items').insert(0, Map(fixture)))
+        initialState.set('items', initialState.get('items').insert(0, fixture))
       )
 
-      expect(reducer(initialState, addTodo(newTodo))).toEqual(getExpected(newTodo))
+      expect(is(reducer(initialState, addTodo(newTodo)), getExpected(newTodo))).toEqual(true)
     })
 
     it('should handle completeTodo', () => {
       const getExpected = fixture => (
         initialState.set('items', initialState.get('items').map((item) => {
-          if (item.get('id') !== fixture.id) { return item }
+          if (item.get('id') !== fixture.get('id')) { return item }
           return item.set('done', !item.get('done'))
         }))
       )
 
-      expect(reducer(initialState, completeTodo(fixture1))).toEqual(getExpected(fixture1))
-      expect(reducer(initialState, completeTodo(fixture2))).toEqual(getExpected(fixture2))
-      expect(reducer(initialState, completeTodo(fixture3))).toEqual(getExpected(fixture3))
+      expect(reducer(initialState, completeTodo(Map(fixture1)))).toEqual(getExpected(Map(fixture1)))
+      expect(reducer(initialState, completeTodo(Map(fixture2)))).toEqual(getExpected(Map(fixture2)))
+      expect(reducer(initialState, completeTodo(Map(fixture3)))).toEqual(getExpected(Map(fixture3)))
     })
 
     it('should handle deleteTodo', () => {
       const getExpected = fixture => (
-        initialState.set('items', initialState.get('items').filter(item => item.get('id') !== fixture.id))
+        initialState.set('items', initialState.get('items').filter(item => item.get('id') !== fixture.get('id')))
       )
 
-      expect(reducer(initialState, deleteTodo(fixture1))).toEqual(getExpected(fixture1))
-      expect(reducer(initialState, deleteTodo(fixture2))).toEqual(getExpected(fixture2))
-      expect(reducer(initialState, deleteTodo(fixture3))).toEqual(getExpected(fixture3))
+      expect(reducer(initialState, deleteTodo(Map(fixture1)))).toEqual(getExpected(Map(fixture1)))
+      expect(reducer(initialState, deleteTodo(Map(fixture2)))).toEqual(getExpected(Map(fixture2)))
+      expect(reducer(initialState, deleteTodo(Map(fixture3)))).toEqual(getExpected(Map(fixture3)))
     })
 
     it('should handle editTodo', () => {

@@ -1,3 +1,4 @@
+import { Map } from 'immutable'
 import {
   required,
   length,
@@ -37,9 +38,9 @@ describe('formValidations', () => {
         test: [required(), length({ exact: 3 })],
       })
 
-      expect(validate({ test: '' }).test).not.toEqual(undefined)
-      expect(validate({ test: '1' }).test).not.toEqual(undefined)
-      expect(validate({ test: '123' }).test).toEqual(undefined)
+      expect(validate(Map({ test: '' })).test).not.toEqual(undefined)
+      expect(validate(Map({ test: '1' })).test).not.toEqual(undefined)
+      expect(validate(Map({ test: '123' })).test).toEqual(undefined)
     })
   })
 })
