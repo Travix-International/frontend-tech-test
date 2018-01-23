@@ -2,7 +2,7 @@ import { reducer as formReducer } from 'redux-form'
 import { combineReducers } from 'redux-immutable'
 
 /* Resources reducers imports */
-import todos from 'redux/ducks/todos'
+import todos, { ADD_TODO } from 'redux/ducks/todos'
 import settings from 'redux/ducks/settings'
 
 /* UI reducers imports */
@@ -18,7 +18,16 @@ const resources = combineReducers({
 /* Root Reducer */
 const rootReducer = combineReducers({
   resources,
-  form: formReducer,
+  form: formReducer.plugin({
+    addTodo: (state, action) => {
+      switch (action.type) {
+        case ADD_TODO.SUCCESS:
+          return undefined
+        default:
+          return state
+      }
+    },
+  }),
 })
 
 export default rootReducer
