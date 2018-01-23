@@ -30,3 +30,7 @@
 .todoRow .actions {
   text-align: right;
 }
+
+.todoRow .actions svg {
+  cursor: pointer;
+}
