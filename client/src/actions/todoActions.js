@@ -12,10 +12,11 @@ export const actionCreators = {
 		}
 	},
 
-	postTask: (task) => {
+	postTask: (title, desc) => {
 		return {
 			type: types.ADD_TODO,
-			task
+			title,
+			desc
 		}
 	},
 
@@ -49,23 +50,28 @@ export const getAllTasks = () => dispatch => {
 	})
 }
 
-
-export const addNewTask = (task) => {
+export const addNewTask = (title, desc = '') => {
     return dispatch => {
-        axios.post(`/task/create/${task}/${task}`, {})
+		//todo: make the description optional
+		const qs = desc === '' ? `${title}/${title}` : `${title}/${desc}`;
+
+        axios.post(`/task/create/${qs}`, {})
 		.then(function (response) {
-			console.log('response', response);
-			dispatch(actionCreators.postTask(task));
+			dispatch(actionCreators.postTask(title, desc));
 		})
-        //.then((response) => {
-			//	console.log('res', response);
-			//dispatch(actionCreators.postTask(task));
-        //  //return response.data;
-        //})
-        //.catch((err) => {
-        //  console.error.bind(err);
-        //})
     }
+}
+
+export const deleteTask = (id) => dispatch => {
+	axios.delete(`task/delete/${id}`)
+	.then((response) => {
+		if (response.status === 200) {
+			dispatch(actionCreators.deleteTask(id));
+		}
+	})
+	.catch((err) => {
+		console.error.bind(err);
+	})
 }
 
 export default actionCreators;

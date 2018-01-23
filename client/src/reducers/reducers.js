@@ -6,12 +6,19 @@ const initTasksState = [];
 const tasks = (state = initTasksState, action) => {
     switch (action.type) {
         case types.GET_TASKS:
-            console.log('get all tasks');
             return state.concat(action.tasks)
         case types.ADD_TODO:
             return [
                 ...state,
-                {id: state.length, title: action.task}
+                {
+                   id: state.length ? state[state.length -1]['id'] + 1 : 0,
+                   title: action.title,
+                   description: action.desc
+                }
+            ]
+        case types.DELETE_TODO:
+            return [
+                ...state.filter(task => task.id !== action.id)
             ]
         default:
             return state;

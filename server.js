@@ -89,8 +89,9 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
+  const length = tasksContainer.tasks.length;
   const task = {
-    id: tasksContainer.tasks.length,
+    id: length ? tasksContainer.tasks[length-1]['id'] + 1 : 0,
     title: req.params.title,
     description: req.params.description,
   };
@@ -117,9 +118,11 @@ app.delete('/task/delete/:id', (req, res) => {
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-  
+    console.log('taskId: ', id);
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+      const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);;
+
+      console.log('taskIndex: ', taskIndex);
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',

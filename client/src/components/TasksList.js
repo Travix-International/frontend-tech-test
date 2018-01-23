@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import TaskItem from './TaskItem';
 
 class TasksList extends Component {
 
@@ -6,7 +7,7 @@ class TasksList extends Component {
         const {tasks} = this.props;
         return (
            <ol className="todos">
-               {tasks.map((v,k) => <li key={k}>{v.title}</li>)}
+               {tasks.map((task,index) => <TaskItem {...this.props} key={index} task={task} />)}
            </ol>
         )
     }

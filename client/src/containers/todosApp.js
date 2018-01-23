@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import TasksList from '../components/TasksList';
 import AddTaskInput from '../components/AddTaskInput';
-import {getAllTasks, addNewTask} from '../actions/todoActions';
+import {getAllTasks, addNewTask, deleteTask} from '../actions/todoActions';
 
 
 class todosApp extends Component {
@@ -37,6 +37,6 @@ function mapStateToProps(state) {
 //    return bindActionCreators({getAllTasks, addNewTask}, dispatch);
 //}
 
-const mapDispatchToProps = {getAllTasks, addNewTask};
+const mapDispatchToProps = {getAllTasks, addNewTask, deleteTask};
 
 export default connect(mapStateToProps, mapDispatchToProps)(todosApp);
