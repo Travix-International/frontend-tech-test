@@ -35,7 +35,7 @@ class ToDos extends React.Component {
   shouldComponentUpdate(nextProps) {
     const { props } = this
 
-    return !is(nextProps.todos, props.todos)
+    return !is(nextProps.todos, props.todos) || !is(nextProps.match, props.match)
   }
 
   render() {
