@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as types from '../constants/ActionTypes';
+import {parseBoolean} from '../utils/helpers'
 
 /////////////// ACTION CREATORS ///////////////////
 
@@ -25,6 +26,28 @@ export const actionCreators = {
 			type: types.TOGGLE_TODO,
 			id,
 			completed
+		}
+	},
+
+	updateTask: (id, task) => {
+		return {
+			type: types.UPDATE_TODO,
+			id,
+			task
+		}
+	},
+
+	editTask: (id) => {
+		return {
+			type: types.EDIT_MODE,
+			id
+		}
+	},
+
+	closeEditTask: (id) => {
+		return {
+			type: types.CLOSE_EDIT_MODE,
+			id
 		}
 	},
 
@@ -81,7 +104,7 @@ export const deleteTask = (id) => dispatch => {
 
 export const toggleTask = (id, completed) => {
 	return dispatch => {
-		axios.put(`/task/update/${id}/null/null/${completed}`)
+		axios.put(`/task/toggle/${id}/${completed}`)
 		.then(function (response) {
 			dispatch(actionCreators.toggleTask(id, completed));
 		})
@@ -89,6 +112,26 @@ export const toggleTask = (id, completed) => {
 			console.error.bind(err);
 		})
 	}
+}
+
+export const updateTask = (id, title, description, completed) => {
+	return dispatch => {
+		axios.put(`/task/update/${id}/${title}/${description}/${completed}`)
+		.then(function (response) {
+			dispatch(actionCreators.updateTask(id, {id, title, description, completed: parseBoolean(completed) }));
+		})
+		.catch((err) => {
+			console.error.bind(err);
+		})
+	}
+}
+
+export const editTask = (id) => dispatch => {
+	dispatch(actionCreators.editTask(id));
+}
+
+export const closeEditTask = (id) => dispatch => {
+	dispatch(actionCreators.closeEditTask(id));
 }
 
 export default actionCreators;

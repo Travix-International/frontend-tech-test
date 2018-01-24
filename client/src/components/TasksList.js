@@ -15,7 +15,7 @@ class TasksList extends Component {
                    {tasks.filter(task => !task.completed).map((task,index) => <TaskItem {...this.props} key={index} task={task} />)}
                </ol>
 
-               <ToggleDisplay show={completedTasks.length}>
+               <ToggleDisplay show={!!completedTasks.length}>
                    <h3>completed tasks</h3>
                    <ol className="todos">
                     {completedTasks.map((task,index) => <TaskItem {...this.props} key={index} task={task} />)}

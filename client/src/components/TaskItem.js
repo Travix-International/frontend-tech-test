@@ -8,7 +8,8 @@ export default class TaskItem extends Component {
         this.deleteTask = this.deleteTask.bind(this);
         //console.log('tasks status:', this.props.task.title, this.props.task.completed);
         this.state = {
-            completed: this.props.task.completed
+            completed: this.props.task.completed,
+            id: this.props.task.id
         }
     }
 
@@ -28,6 +29,7 @@ export default class TaskItem extends Component {
 
     editTask(id, e) {
         e && e.stopPropagation();
+        this.props.editTask(id);
     }
 
     render() {
@@ -38,12 +40,12 @@ export default class TaskItem extends Component {
                 <div>
                     <span><input checked={this.state.completed} type="checkbox" value={task.id} onChange={this.toggleTask.bind(this, task.id)} /></span>
                     <span className="title">{task.title}</span>
-                    <ToggleDisplay show={task.description}>
+                    <ToggleDisplay show={!!task.description.length}>
                         <p>{task.description}</p>
                     </ToggleDisplay>
                 </div>
                 <div className="btn-group">
-                    <button onClick={this.editTask.bind(this, task)} className="btn">Edit</button>
+                    <button onClick={this.editTask.bind(this, this.state.id)} className="btn">Edit</button>
                     <button onClick={this.deleteTask.bind(this, task.id)} className="btn last">Delete</button>
                 </div>
             </li>

@@ -3,8 +3,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import TasksList from '../components/TasksList';
 import AddTaskInput from '../components/AddTaskInput';
-import {getAllTasks, addNewTask, deleteTask, toggleTask} from '../actions/todoActions';
-
+import TaskEdit from '../components/TaskEdit';
+import {getAllTasks, addNewTask, deleteTask, toggleTask, editTask, closeEditTask, updateTask} from '../actions/todoActions';
 
 class todosApp extends Component {
 
@@ -24,6 +24,7 @@ class todosApp extends Component {
                 <div className="container">
                     <TasksList {...this.props} />
                 </div>
+                {this.props.editqueue.editable && <TaskEdit {...this.props} />}
             </div>
         )
     }
@@ -37,6 +38,6 @@ function mapStateToProps(state) {
 //    return bindActionCreators({getAllTasks, addNewTask}, dispatch);
 //}
 
-const mapDispatchToProps = {getAllTasks, addNewTask, deleteTask, toggleTask};
+const mapDispatchToProps = {getAllTasks, addNewTask, deleteTask, toggleTask, editTask, closeEditTask, updateTask};
 
 export default connect(mapStateToProps, mapDispatchToProps)(todosApp);

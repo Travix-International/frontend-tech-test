@@ -31,6 +31,15 @@ export const tasks = (state = initTasksState, action) => {
                 ...state.slice(index + 1)
             ]
 
+        case types.UPDATE_TODO:
+            return state.map(task => {
+                if (task.id !== action.id) {
+                    return task;
+                }
+
+                return action.task
+            });
+
         case types.DELETE_TODO:
             return state.filter(task => task.id !== action.id)
 
@@ -40,10 +49,19 @@ export const tasks = (state = initTasksState, action) => {
 }
 
 //declare more reducers as needed below
-export const editqueue = (state = [], action) => {
+const initEditState = {
+    queue: [],
+    editable: false
+}
+
+export const editqueue = (state = initEditState, action) => {
     switch(action.type) {
         case types.EDIT_MODE:
-            return [...state, action.id]
+            return {...state, editable: true, queue: [action.id]}
+
+        case types.CLOSE_EDIT_MODE:
+            return {...state, editable: false}
+
         default:
             return state;
     }
