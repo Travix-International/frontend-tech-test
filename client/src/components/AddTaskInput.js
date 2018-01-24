@@ -23,7 +23,7 @@ class AddTaskInput extends Component {
                 <form onSubmit={this.handleAddTask}>
                     <input id="inputTodoTitle" name="inputTodoTitle" type="text" placeholder="+ Add your new task here" />
                     <input id="inputTodoDescription" name="inputTodoDescription" type="text" placeholder="add description" />
-                    <input type="submit" name="submit" value="submit" />
+                    <input className="btn light" type="submit" name="submit" value="Add Task" />
                 </form>
             </div>
         )

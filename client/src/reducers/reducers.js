@@ -3,7 +3,7 @@ import * as types from '../constants/ActionTypes';
 const initTasksState = [];
 
 //declare the tasks reducer
-const tasks = (state = initTasksState, action) => {
+export const tasks = (state = initTasksState, action) => {
     switch (action.type) {
         case types.GET_TASKS:
             return [...action.tasks]
@@ -14,7 +14,7 @@ const tasks = (state = initTasksState, action) => {
                 {
                    id: state.length ? state[state.length -1]['id'] + 1 : 0,
                    title: action.title,
-                   description: action.desc,
+                   description: action.description,
                    completed: false
                 }
             ]
@@ -38,6 +38,13 @@ const tasks = (state = initTasksState, action) => {
             return state;
     }
 }
-export default tasks;
 
 //declare more reducers as needed below
+export const editqueue = (state = [], action) => {
+    switch(action.type) {
+        case types.EDIT_MODE:
+            return [...state, action.id]
+        default:
+            return state;
+    }
+}

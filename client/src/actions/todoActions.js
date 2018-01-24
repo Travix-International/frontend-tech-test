@@ -55,6 +55,7 @@ export const addNewTask = (title, desc = '') => {
     return dispatch => {
 		//todo: make the description optional
 		const qs = desc === '' ? `${title}` : `${title}/${desc}`;
+		console.log('description', desc);
 
         axios.post(`/task/create/${qs}`, {})
 		.then(function (response) {

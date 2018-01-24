@@ -2,7 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: #0C568A;
+  background: #0b0e19 url(logo.svg);
+  background-size: 500px;
 }
 
 * {
@@ -26,10 +27,6 @@ input[type=text] {
 
 input[type=text] + input[type=text] {
   margin-top: 1rem;
-}
-
-input[type=submit] {
-  display: none;
 }
 
 input[type=text]#inputTodoTitle {
@@ -61,7 +58,7 @@ ol.todos {
 
 ol.todos li {
   padding: 0.75rem 0;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.9);
   padding: 1rem;
   margin-bottom: 2px;
   border-radius: 4px;
@@ -70,6 +67,10 @@ ol.todos li {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+ol.todos li.completed {
+  background: rgba(255,255,255,0.6);
 }
 
 .btn {
@@ -92,6 +93,16 @@ ol.todos li {
   margin-left: 0;
 }
 
+.btn.light {
+  background: white;
+  color: #2196F3;
+  margin: 1rem 0;
+}
+
+.btn.light:hover {
+  background: #FFF;
+}
+
 .btn:hover {
   background: #2196F3;
   text-decoration: none;
@@ -110,7 +121,31 @@ ol.todos li {
   margin-right: 0.5rem;
 }
 
-.todos li .completed {
+.todos li.completed .title {
   text-decoration: line-through;
 }
 
+h3 {
+  color: #FFF;
+  text-transform: uppercase;
+  margin-top: 2rem;
+}
+
+p {
+  color: gray;
+  font-size: smaller;
+  margin-bottom: 0;
+  margin-left: 1.4rem;
+}
+
+.blocker {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background: rgba(255,255,255,0.8);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
