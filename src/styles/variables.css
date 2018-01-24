@@ -1,0 +1,17 @@
+@import './_colors.css';
+@import './_spacings.css';
+@import './_typography.css';
+
+/** Miscelaneous variables */
+:root {
+  --opacity70: 70%;
+  --opacity45: 45%;
+  --opacity25: 25%;
+  --opacity14: 14%;
+  --opacity10: 10%;
+  --borderRadius: 3px;
+  --borderRadiusMore: 4px;
+  --borderRadiusLess: 2px;
+  --componentHeight: 36px;
+}
+

@@ -1,0 +1,8 @@
+/** Margins and paddings */
+:root {
+  --desktopGutter: 20px;
+  --desktopGutterMore: 30px;
+  --desktopGutterLess: 10px;
+  --desktopGutterMini: 4px;
+  --lineHeight: 20px;
+}

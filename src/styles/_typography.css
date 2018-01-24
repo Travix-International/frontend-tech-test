@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+/** Typography variables */
+:root {
+  --fontFamily: Roboto, Arial, Helvetica, sans-serif;
+  --fontSize: 13px;
+
+  --typography: {
+    font-family: var(--fontFamily);
+    font-size: var(--fontSize);
+    line-height: var(--lineHeight);
+  };
+
+  --heading1Buff: 9px;
+  --heading1: {
+    color: var(--textColor);
+    font-family: var(--fontFamily);
+    font-size: calc(var(--fontSize) + var(--heading1Buff));
+    line-height: calc(var(--fontSize) + var(--heading1Buff) + 2px);
+    margin: 6px 0 12px;
+  };
+
+  --heading2Buff: 7px;
+  --heading2: {
+    color: var(--secondaryTextColor);
+    font-family: var(--fontFamily);
+    font-size: calc(var(--fontSize) + var(--heading2Buff));
+    line-height: calc(var(--fontSize) + var(--heading2Buff) + 2px);
+    margin: 5.5px 0 11px;
+  };
+}

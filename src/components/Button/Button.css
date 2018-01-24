@@ -1,0 +1,187 @@
+@import '../../styles/variables.css';
+
+/**
+ * Main button styles
+ * ------------------
+ * Global styles shared by all buttons.
+ * This is the base for each kind.
+ */
+.button {
+  @apply --typography;
+
+  background: color(var(--alternate2Color) a(var(--opacity10)));
+  border-radius: var(--borderRadius);
+  border: 1px solid color(var(--alternate2Color) a(var(--opacity25)));
+  box-sizing: border-box;
+  color: var(--alternate1Color);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  height: var(--componentHeight);
+  line-height: var(--componentHeight);
+  margin: var(--desktopGutterLess) var(--desktopGutterMini);
+  outline: 0;
+  padding: 0 var(--desktopGutterMore);
+  text-decoration: none;
+  transition: 0.4s width, 1s border-radius, 0.6s padding, 0.6s background;
+}
+
+.button:first-child {
+  margin-left: 0;
+}
+
+.button:last-child {
+  margin-right: 0;
+}
+
+.button:hover {
+  box-shadow: 0 2px 2px color(var(--shadowColor) a(var(--opacity10)));
+}
+
+/* Disabled */
+.button[disabled],
+.button[disabled]:hover {
+  background: color(var(--alternate2Color) a(var(--opacity10)));
+  border: 0;
+  box-shadow: none;
+  color: var(--primary3Color);
+  cursor: not-allowed;
+}
+
+a.button[disabled] {
+  pointer-events: none;
+}
+
+/* Block, Short, Slim styles */
+.block {
+  display: block;
+  margin: var(--desktopGutterLess) auto;
+  text-align: center;
+  width: 100%;
+}
+
+.block:first-child,
+.block:last-child {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.short {
+  height: 30px;
+  line-height: 30px;
+  padding: 0 26px;
+}
+
+.slim {
+  height: 26px;
+  line-height: 26px;
+  padding: 0 36px;
+}
+
+/**
+ * Button Kinds
+ * ------------
+ * The different kinds of buttons.
+ * Each is meant to represent a kind of action.
+ */
+
+/* Primary */
+.primary {
+  background: var(--accent2Color);
+  border-color: color(var(--shadowColor) a(var(--opacity10)));
+  color: var(--alternateTextColor);
+}
+
+.primary.working {
+  border-color: var(--accent2Color);
+  border-right: 1px solid transparent;
+}
+
+/* Secondary */
+.secondary {
+  background: var(--accent1Color);
+  border-color: color(var(--shadowColor) a(var(--opacity10)));
+  color: var(--alternateTextColor);
+}
+
+.secondary.working {
+  border-color: var(--accent1Color);
+  border-right: 1px solid transparent;
+}
+
+/* Flat */
+.flat {
+  background: none;
+  border-color: transparent;
+  color: var(--secondaryTextColor);
+}
+
+.flat:hover {
+  background: color(var(--alternate2Color) a(var(--opacity14)));
+  box-shadow: none;
+}
+
+.flat.working {
+  border: 1px solid color(var(--alternate2Color) a(var(--opacity25)));
+  border-right: 1px solid transparent;
+}
+
+/* Destructive */
+.destructive {
+  background: var(--accent3Color);
+  border-color: color(var(--shadowColor) a(var(--opacity10)));
+  color: var(--alternateTextColor);
+}
+
+.destructive.working {
+  border-color: var(--accent3Color);
+  border-right: 1px solid transparent;
+}
+
+/* Warning */
+.warning {
+  background: var(--accent4Color);
+  border-color: var(--accent4Color);
+  color: color(var(--shadowColor) a(var(--opacity45)));
+}
+
+.warning.working {
+  border-color: var(--accent4Color);
+  border-right: 1px solid transparent;
+}
+
+/**
+ * Modyfiers
+ * ---------
+ * Styles for button states.
+ */
+
+/* Working */
+.working {
+  animation: spinner 0.7s linear infinite;
+  animation-delay: 0.3s;
+  background: transparent;
+  border-color: color(var(--shadowColor) a(var(--opacity25)));
+  border-radius: var(--componentHeight);
+  border-right: 1px solid transparent;
+  padding: 0;
+  text-indent: -9999em;
+  width: var(--componentHeight);
+}
+
+.working:hover {
+  background: transparent;
+  box-shadow: none;
+  cursor: wait;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotateZ(0);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
