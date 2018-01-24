@@ -1,4 +1,8 @@
+@import '../../styles/variables.css';
+
 .addTodoForm {
+  @apply --typography;
+
   background: #fff;
   border: 0;
   margin: 0;

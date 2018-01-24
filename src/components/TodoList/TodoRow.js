@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { is } from 'immutable'
+
 import {
-  Checkbox,
   Col,
-  Icon,
   Row,
-} from '@wepow/aphrodite'
+} from 'components/Grid'
+import Checkbox from 'components/Checkbox'
+import Icon from 'components/Icon'
 
 import todoType from 'types/todo'
 

@@ -1,0 +1,68 @@
+@import '../../styles/variables.css';
+
+/**
+ * Main checkbox styles
+ * --------------------
+ * Global styles shared by all checkboxes.
+ * This is the base for each kind.
+ */
+.checkbox {
+  cursor: pointer;
+}
+
+.checkbox span {
+  background: var(--alternate3Color);
+  border: 2px solid var(--primary2Color);
+  border-radius: 3px;
+  display: inline-block;
+  height: 14px;
+  margin: -1px var(--desktopGutterMini) 0;
+  position: relative;
+  vertical-align: middle;
+  width: 14px;
+}
+
+.checkbox svg {
+  fill: var(--alternate3Color);
+  left: 1px;
+  position: absolute;
+  top: 1px;
+}
+
+.checkbox input {
+  height: 1px;
+  opacity: 0;
+  visibility: hidden;
+  width: 1px;
+}
+
+.checkbox input:focus {
+  border: 0;
+  outline: 0;
+}
+
+/**
+ * Modyfiers
+ * ---------
+ * Styles for checkbox states.
+ */
+
+/* Checked */
+.checked span {
+  background: var(--accent1Color);
+  border-color: var(--accent1Color);
+}
+
+/* Disabled */
+.disabled {
+  cursor: not-allowed;
+}
+
+.disabled span {
+  background: color(var(--primary3Color) a(var(--opacity25)));
+  border-color: color(var(--primary3Color) a(var(--opacity25)));
+}
+
+.disabled svg {
+  fill: color(var(--primary3Color) a(var(--opacity45)));
+}

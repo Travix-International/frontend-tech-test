@@ -1,0 +1,32 @@
+@import './variables.css';
+
+/**
+ * Global Styles
+ * -------------
+ * Styles for global tags. Thread carefully.
+ */
+
+:global(body) {
+  background: var(--canvasColor);
+}
+
+:global(p) {
+  margin: var(--desktopGutterMini) 0 var(--desktopGutter);
+}
+
+.bodyFont {
+  font-family: var(--fontFamily);
+}
+
+.typography {
+  @apply --typography;
+}
+
+/** Headings */
+.heading1 {
+  @apply --heading1;
+}
+
+.heading2 {
+  @apply --heading2;
+}

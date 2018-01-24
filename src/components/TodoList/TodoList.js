@@ -2,12 +2,12 @@ import React from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import PropTypes from 'prop-types'
 import { Map } from 'immutable'
-import {
-  Container,
-  styles as globalStyles,
-} from '@wepow/aphrodite'
 
 import todoType from 'types/todo'
+
+import {
+  Container,
+} from 'components/Grid'
 
 import styles from './TodoList.css'
 import TodoRow from './TodoRow'
@@ -19,11 +19,9 @@ function TodoList(props) {
     todos,
   } = props
 
-  const classes = `${styles.todoList} ${globalStyles.typography}`
-
   return (
     <Container isFluid>
-      <ul className={classes}>
+      <ul className={styles.todoList}>
         {todos.map((todo) => {
           const id = Map({ id: todo.get('id') })
           const _handleComplete = () => handleComplete(id)

@@ -1,0 +1,102 @@
+@import '../../styles/variables.css';
+
+/**
+ * Main input styles
+ * ------------------
+ * Global styles shared by all inputs.
+ * This is the base for each kind.
+ */
+
+.wrapper {
+  position: relative;
+}
+
+.input {
+  composes: typography from '../../styles/theme.css';
+  background: color(var(--canvasColor) a(var(--opacity70)));
+  border-radius: var(--borderRadius);
+  border: 1px solid color(var(--canvasColor));
+  box-sizing: border-box;
+  color: var(--textColor);
+  display: inline-block;
+  font-size: 13px;
+  height: var(--componentHeight);
+  line-height: var(--componentHeight);
+  margin: var(--desktopGutterLess) var(--desktopGutterMini);
+  padding: 0 var(--desktopGutterLess);
+}
+
+.input:hover {
+  border: 1px solid color(var(--primary3Color) a(var(--opacity45)));
+}
+
+.input:focus {
+  background: color(var(--alternateTextColor));
+  border: 1px solid color(var(--primary3Color));
+  box-shadow: 0 0 0 4px color(var(--primary3Color) a(var(--opacity25))) inset;
+  color: var(--textColor);
+  outline: none;
+}
+
+.input::placeholder {
+  color: color(var(--primary2Color) a(var(--opacity25)));
+}
+
+/* Disabled */
+.input[disabled],
+.input[disabled]:hover {
+  border: none;
+  cursor: not-allowed;
+}
+
+/* Block */
+.block {
+  display: block;
+  width: 100%;
+}
+
+.wrapper.block {
+  margin: var(--desktopGutterLess) auto;
+}
+
+/**
+ * Input Kinds
+ * ------------
+ * The different kinds of inputs.
+ */
+.dark {
+  background: color(var(--primary3Color) a(var(--opacity14)));
+  color: var(--textColor);
+}
+
+/**
+ * Modyfiers
+ * ---------
+ * Styles for input states.
+ */
+
+/* Error */
+.error,
+.error:hover {
+  border-color: var(--accent3Color);
+}
+
+.error:focus {
+  border-color: var(--accent3Color);
+  box-shadow: 0 0 0 4px color(var(--accent3Color) a(var(--opacity25))) inset;
+}
+
+.errorMessage {
+  border-collapse: separate;
+  color: var(--accent3Color);
+  composes: typography from '../../styles/theme.css';
+  font-size: 13px;
+  font-style: normal;
+  line-height: 1.2;
+  text-align: right;
+}
+
+.errorMessage svg {
+  fill: var(--accent3Color);
+  margin-right: 0.25em;
+}

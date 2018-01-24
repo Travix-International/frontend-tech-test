@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+
 import {
   Container,
   Row,
   Col,
-  styles as globalStyles,
-} from '@wepow/aphrodite'
+} from 'components/Grid'
 
 import styles from './MainNav.css'
 
@@ -18,7 +18,7 @@ function MainNav(props) {
   const done = 'Done'
 
   return (
-    <Container className={globalStyles.typography} isFluid>
+    <Container isFluid>
       <Row className={styles.mainNav} middle="xs" start="xs" tagName="ul" top="xs">
         <Col tagName="li" xs={4}>
           {filter === undefined

@@ -1,14 +1,14 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form/immutable'
 import PropTypes from 'prop-types'
+
 import {
-  Input,
-  Button,
-  Row,
   Col,
   Container,
-  styles as globalStyles,
-} from '@wepow/aphrodite'
+  Row,
+} from 'components/Grid'
+import Button from 'components/Button'
+import Input from 'components/Input'
 
 import {
   required,
@@ -29,7 +29,7 @@ function AddTodoForm(props) {
 
   return (
     <Container isFluid>
-      <form className={globalStyles.typography} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <fieldset className={styles.addTodoForm}>
           <Container isFluid tagName="ul">
             <Row middle="xs" start="xs" tagName="li" top="xs">

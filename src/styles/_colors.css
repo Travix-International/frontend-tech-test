@@ -1,0 +1,17 @@
+:root {
+  --textColor: #454c65;
+  --secondaryTextColor: #5d739d;
+  --alternateTextColor: #fff;
+  --primary1Color: #454c65;
+  --primary2Color: #5d739d;
+  --primary3Color: #a4b7d9;
+  --accent1Color: #0c7ce1;
+  --accent2Color: #69c14c;
+  --accent3Color: #f36b78;
+  --accent4Color: #f3ce62;
+  --alternate1Color: #1b3e66;
+  --alternate2Color: #0e4f8a;
+  --alternate3Color: #fff;
+  --canvasColor: #f5f7f9;
+  --shadowColor: #000;
+}
