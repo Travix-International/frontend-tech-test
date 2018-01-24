@@ -6,16 +6,6 @@ import { Map } from 'immutable'
 import todos, { ADD_TODO } from 'redux/ducks/todos'
 import settings from 'redux/ducks/settings'
 
-/* UI reducers imports */
-
-/* Resources reducer */
-const resources = combineReducers({
-  todos,
-  settings,
-})
-
-/* UI Reducer */
-
 /* Utils */
 export const clearReduxForm = state => (
   state
@@ -26,19 +16,32 @@ export const clearReduxForm = state => (
     )
 )
 
+/* UI reducers imports */
+
+/* Resources reducer */
+const resources = combineReducers({
+  todos,
+  settings,
+})
+
+/* Input reducer */
+const form = formReducer.plugin({
+  addTodo: (state, action) => {
+    switch (action.type) {
+      case ADD_TODO.SUCCESS:
+        return clearReduxForm(state)
+      default:
+        return state
+    }
+  },
+})
+
+/* UI Reducer */
+
 /* Root Reducer */
 const rootReducer = combineReducers({
   resources,
-  form: formReducer.plugin({
-    addTodo: (state, action) => {
-      switch (action.type) {
-        case ADD_TODO.SUCCESS:
-          return clearReduxForm(state)
-        default:
-          return state
-      }
-    },
-  }),
+  form,
 })
 
 export default rootReducer

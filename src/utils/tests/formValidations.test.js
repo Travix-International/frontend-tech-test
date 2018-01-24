@@ -15,6 +15,12 @@ describe('formValidations', () => {
   })
 
   describe('length', () => {
+    it('should validate an exact length', () => {
+      expect(length({ exact: 3 })('12345')).not.toEqual(undefined)
+      expect(length({ exact: 3 })('1')).not.toEqual(undefined)
+      expect(length({ exact: 3 })('123')).toEqual(undefined)
+    })
+
     it('should validate a minimum length', () => {
       expect(length({ min: 5 })('1')).not.toEqual(undefined)
       expect(length({ min: 5 })('12345')).toEqual(undefined)
@@ -25,10 +31,9 @@ describe('formValidations', () => {
       expect(length({ max: 5 })('12345')).toEqual(undefined)
     })
 
-    it('should validate an exact length', () => {
-      expect(length({ exact: 3 })('12345')).not.toEqual(undefined)
-      expect(length({ exact: 3 })('1')).not.toEqual(undefined)
-      expect(length({ exact: 3 })('123')).toEqual(undefined)
+    it('should return undefined when no params are passed', () => {
+      expect(length({ max: 5 })()).toEqual(undefined)
+      expect(length()()).toEqual(undefined)
     })
   })
 

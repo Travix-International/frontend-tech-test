@@ -17,6 +17,7 @@
     "prebuild": "yarn lint",
     "start:dev": "cross-env NODE_ENV=development webpack-dev-server --hot --config config/webpack/webpack.dev.js",
     "start:storybook": "start-storybook -p 9001 -c .storybook",
+    "start:server": "node server.js",
     "lint": "eslint src/**/*.js && stylelint src/**/*.css",
     "precommit": "lint-staged && yarn test",
     "test": "jest",
@@ -46,8 +47,10 @@
   "dependencies": {
     "@wepow/aphrodite": "git+ssh://git@github.com/wepow/aphrodite.git",
     "@wepow/hermes": "git+ssh://git@github.com/wepow/hermes.git",
+    "body-parser": "^1.18.2",
     "eslint-plugin-redux-saga": "^0.6.0",
     "eslint-plugin-reselect": "^6.6.0",
+    "express": "^4.16.2",
     "immutable": "^3.8.2",
     "normalizr": "^3.2.4",
     "prop-types": "^15.6.0",
@@ -63,7 +66,8 @@
     "redux-form": "^7.2.1",
     "redux-immutable": "^4.0.0",
     "redux-saga": "^0.16.0",
-    "reselect": "^3.0.1"
+    "reselect": "^3.0.1",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.10",

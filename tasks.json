@@ -1,3 +1,10 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "title": "Create a React/Redux todo app",
+      "description": "Make it real nice, with sagas and ducks and everything in-between",
+      "id": "1",
+      "done": false
+    }
+  ]
 }

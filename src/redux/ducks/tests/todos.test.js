@@ -1,15 +1,20 @@
 import { fromJS, is, Map } from 'immutable'
+import { put, call } from 'redux-saga/effects'
 import * as matchers from 'jest-immutable-matchers'
 
 import reducer, {
   ADD_TODO,
   COMPLETE_TODO,
   DELETE_TODO,
-  EDIT_TODO,
+  LOAD_TODOS,
   addTodo,
   completeTodo,
   deleteTodo,
-  editTodo,
+  loadTodos,
+  createTodoSaga,
+  completeTodoSaga,
+  deleteTodoSaga,
+  loadTodosSaga,
 } from 'redux/ducks/todos'
 
 describe('todos duck', () => {
@@ -21,7 +26,7 @@ describe('todos duck', () => {
     it('completeTodo', () => {
       const fixture = { id: '1337' }
       const expected = {
-        type: COMPLETE_TODO.SUCCESS,
+        type: COMPLETE_TODO.ACTION,
         payload: fixture,
       }
 
@@ -31,31 +36,29 @@ describe('todos duck', () => {
     it('deleteTodo', () => {
       const fixture = { id: '1337' }
       const expected = {
-        type: DELETE_TODO.SUCCESS,
+        type: DELETE_TODO.ACTION,
         payload: fixture,
       }
 
       expect(deleteTodo(fixture)).toEqual(expected)
     })
 
-    it('editTodo', () => {
-      const fixture = { id: '1337' }
-      const expected = {
-        type: EDIT_TODO.SUCCESS,
-        payload: fixture,
-      }
-
-      expect(editTodo(fixture)).toEqual(expected)
-    })
-
     it('addTodo', () => {
       const fixture = { id: '1337' }
       const expected = {
-        type: ADD_TODO.SUCCESS,
+        type: ADD_TODO.ACTION,
         payload: fixture,
       }
 
       expect(addTodo(fixture)).toEqual(expected)
+    })
+
+    it('loadTodos', () => {
+      const expected = {
+        type: LOAD_TODOS.ACTION,
+      }
+
+      expect(loadTodos()).toEqual(expected)
     })
   })
 
@@ -89,7 +92,10 @@ describe('todos duck', () => {
         initialState.set('items', initialState.get('items').insert(0, fixture))
       )
 
-      expect(is(reducer(initialState, addTodo(newTodo)), getExpected(newTodo))).toEqual(true)
+      expect(is(reducer(initialState, {
+        type: ADD_TODO.SUCCESS,
+        payload: newTodo,
+      }), getExpected(newTodo))).toEqual(true)
     })
 
     it('should handle completeTodo', () => {
@@ -100,9 +106,18 @@ describe('todos duck', () => {
         }))
       )
 
-      expect(reducer(initialState, completeTodo(Map(fixture1)))).toEqual(getExpected(Map(fixture1)))
-      expect(reducer(initialState, completeTodo(Map(fixture2)))).toEqual(getExpected(Map(fixture2)))
-      expect(reducer(initialState, completeTodo(Map(fixture3)))).toEqual(getExpected(Map(fixture3)))
+      expect(reducer(initialState, {
+        type: COMPLETE_TODO.SUCCESS,
+        payload: Map(fixture1),
+      })).toEqual(getExpected(Map(fixture1)))
+      expect(reducer(initialState, {
+        type: COMPLETE_TODO.SUCCESS,
+        payload: Map(fixture2),
+      })).toEqual(getExpected(Map(fixture2)))
+      expect(reducer(initialState, {
+        type: COMPLETE_TODO.SUCCESS,
+        payload: Map(fixture3),
+      })).toEqual(getExpected(Map(fixture3)))
     })
 
     it('should handle deleteTodo', () => {
@@ -110,19 +125,150 @@ describe('todos duck', () => {
         initialState.set('items', initialState.get('items').filter(item => item.get('id') !== fixture.get('id')))
       )
 
-      expect(reducer(initialState, deleteTodo(Map(fixture1)))).toEqual(getExpected(Map(fixture1)))
-      expect(reducer(initialState, deleteTodo(Map(fixture2)))).toEqual(getExpected(Map(fixture2)))
-      expect(reducer(initialState, deleteTodo(Map(fixture3)))).toEqual(getExpected(Map(fixture3)))
+      expect(reducer(initialState, {
+        type: DELETE_TODO.SUCCESS,
+        payload: Map(fixture1),
+      })).toEqual(getExpected(Map(fixture1)))
+      expect(reducer(initialState, {
+        type: DELETE_TODO.SUCCESS,
+        payload: Map(fixture2),
+      })).toEqual(getExpected(Map(fixture2)))
+      expect(reducer(initialState, {
+        type: DELETE_TODO.SUCCESS,
+        payload: Map(fixture3),
+      })).toEqual(getExpected(Map(fixture3)))
     })
 
-    it('should handle editTodo', () => {
-      const editedTodo = { title: 'I have changed', description: 'New year, new me', id: 1, done: true }
-      const getExpected = (fixture) => {
-        const index = initialState.get('items').findIndex(item => item.get('id') === fixture.id)
-        return initialState.set('items', initialState.get('items').set(index, fromJS(fixture)))
-      }
+    it('should handle loadTodos', () => {
+      const loadedTodos = fromJS([
+        { title: 'Get the triforce of courage', description: 'Need it for kicking ass', id: 'hyrule-123', done: true },
+        { title: 'Get the triforce of wisdow', description: 'Need it for solving puzzles', id: 'hyrule-124', done: true },
+        { title: 'Get the triforce of power', description: 'Take it from that pig-face!', id: 'hyrule-125', done: false },
+      ])
+      const getExpected = fixture => initialState.set('items', fixture)
 
-      expect(reducer(initialState, editTodo(editedTodo))).toEqual(getExpected(editedTodo))
+      expect(reducer(initialState, {
+        type: LOAD_TODOS.SUCCESS,
+        payload: loadedTodos,
+      })).toEqual(getExpected(loadedTodos))
+    })
+  })
+
+  describe('sagas', () => {
+    describe('createTodoSaga', () => {
+      const fixture = { payload: fromJS({}) }
+      let generator
+
+      beforeEach(() => {
+        generator = createTodoSaga(fixture)
+      })
+
+      it('should call an api function and dispatch ADD_TODO.SUCCESS on success', () => {
+        const callDescriptor = generator.next().value
+        const response = { name: 'Link' }
+        const putDescriptor = generator.next(response).value
+
+        expect(callDescriptor).toMatchSnapshot()
+        // eslint-disable-next-line
+        expect(putDescriptor).toEqual(put({ type: ADD_TODO.SUCCESS, payload: fromJS(response) }))
+      })
+
+      it('should call ADD_TODO.ERROR on error', () => {
+        const callDescriptor = generator.next().value
+        const response = new Error('Ganon wins!')
+        const putDescriptor = generator.throw(response).value
+
+        expect(callDescriptor).toMatchSnapshot()
+        // eslint-disable-next-line
+        expect(putDescriptor).toEqual(put({ type: ADD_TODO.ERROR, payload: { error: response } }))
+      })
+    })
+
+    describe('completeTodoSaga', () => {
+      const fixture = { payload: fromJS({}) }
+      let generator
+
+      beforeEach(() => {
+        generator = completeTodoSaga(fixture)
+      })
+
+      it('should call an api function and dispatch COMPLETE_TODO.SUCCESS on success', () => {
+        const callDescriptor = generator.next().value
+        const response = { name: 'Zelda' }
+        const putDescriptor = generator.next(response).value
+
+        expect(callDescriptor).toMatchSnapshot()
+        // eslint-disable-next-line
+        expect(putDescriptor).toEqual(put({ type: COMPLETE_TODO.SUCCESS, payload: fromJS(response) }))
+      })
+
+      it('should call COMPLETE_TODO.ERROR on error', () => {
+        const callDescriptor = generator.next().value
+        const response = new Error('Ganon wins!')
+        const putDescriptor = generator.throw(response).value
+
+        expect(callDescriptor).toMatchSnapshot()
+        // eslint-disable-next-line
+        expect(putDescriptor).toEqual(put({ type: COMPLETE_TODO.ERROR, payload: { error: response } }))
+      })
+    })
+
+    describe('deleteTodoSaga', () => {
+      const fixture = { payload: fromJS({}) }
+      let generator
+
+      beforeEach(() => {
+        generator = deleteTodoSaga(fixture)
+      })
+
+      it('should call an api function and dispatch DELETE_TODO.SUCCESS on success', () => {
+        const callDescriptor = generator.next().value
+        const response = { name: 'Ganon' }
+        const putDescriptor = generator.next(response).value
+
+        expect(callDescriptor).toMatchSnapshot()
+        // eslint-disable-next-line
+        expect(putDescriptor).toEqual(put({ type: DELETE_TODO.SUCCESS, payload: fromJS(response) }))
+      })
+
+      it('should call DELETE_TODO.ERROR on error', () => {
+        const callDescriptor = generator.next().value
+        const response = new Error('Ganon wins!')
+        const putDescriptor = generator.throw(response).value
+
+        expect(callDescriptor).toMatchSnapshot()
+        // eslint-disable-next-line
+        expect(putDescriptor).toEqual(put({ type: DELETE_TODO.ERROR, payload: { error: response } }))
+      })
+    })
+
+    describe('loadTodosSaga', () => {
+      const fixture = { payload: fromJS({}) }
+      let generator
+
+      beforeEach(() => {
+        generator = loadTodosSaga(fixture)
+      })
+
+      it('should call an api function and dispatch LOAD_TODOS.SUCCESS on success', () => {
+        const callDescriptor = generator.next().value
+        const response = { name: 'Ingo' }
+        const putDescriptor = generator.next(response).value
+
+        expect(callDescriptor).toMatchSnapshot()
+        // eslint-disable-next-line
+        expect(putDescriptor).toEqual(put({ type: LOAD_TODOS.SUCCESS, payload: fromJS(response) }))
+      })
+
+      it('should call LOAD_TODOS.ERROR on error', () => {
+        const callDescriptor = generator.next().value
+        const response = new Error('Ganon wins!')
+        const putDescriptor = generator.throw(response).value
+
+        expect(callDescriptor).toMatchSnapshot()
+        // eslint-disable-next-line
+        expect(putDescriptor).toEqual(put({ type: LOAD_TODOS.ERROR, payload: { error: response } }))
+      })
     })
   })
 })

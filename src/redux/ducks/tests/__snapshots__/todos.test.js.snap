@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`todos duck sagas completeTodoSaga should call COMPLETE_TODO.ERROR on error 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [
+      Object {},
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;
+
+exports[`todos duck sagas completeTodoSaga should call an api function and dispatch COMPLETE_TODO.SUCCESS on success 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [
+      Object {},
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;
+
+exports[`todos duck sagas createTodoSaga should call ADD_TODO.ERROR on error 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [
+      Object {},
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;
+
+exports[`todos duck sagas createTodoSaga should call an api function and dispatch ADD_TODO.SUCCESS on success 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [
+      Object {},
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;
+
+exports[`todos duck sagas deleteTodoSaga should call DELETE_TODO.ERROR on error 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [
+      Object {},
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;
+
+exports[`todos duck sagas deleteTodoSaga should call an api function and dispatch DELETE_TODO.SUCCESS on success 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [
+      Object {},
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;
+
+exports[`todos duck sagas loadTodosSaga should call LOAD_TODOS.ERROR on error 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;
+
+exports[`todos duck sagas loadTodosSaga should call an api function and dispatch LOAD_TODOS.SUCCESS on success 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;

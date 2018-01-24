@@ -34,7 +34,6 @@ describe('<ToDos />', () => {
     const wrapper = shallow(<ToDos
       handleComplete={noop}
       handleDelete={noop}
-      handleEdit={noop}
       handleSubmit={noop}
       requestTodos={noop}
       todos={initialState.getIn(['resources', 'todos', 'items'])}
@@ -48,7 +47,6 @@ describe('<ToDos />', () => {
     const wrapper = shallow(<ToDos
       handleComplete={noop}
       handleDelete={noop}
-      handleEdit={noop}
       handleSubmit={noop}
       requestTodos={noop}
       todos={initialState.getIn(['resources', 'todos', 'items'])}
@@ -77,12 +75,11 @@ describe('<ToDos />', () => {
     wrapper.find('input[type="checkbox"]').first().simulate('change')
     wrapper.find('form').simulate('submit')
     wrapper.find('Icon[name="DELETE"]').first().simulate('click')
-    wrapper.find('Icon[name="EDIT"]').first().simulate('click')
 
     const actions = store.getActions()
     const todosActions = actions.filter(action => action.type.includes('/todos/'))
 
-    expect(todosActions).toHaveLength(5)
+    expect(todosActions).toHaveLength(4)
   })
 
   it('should update only when todos or match props has changed', () => {
@@ -90,7 +87,6 @@ describe('<ToDos />', () => {
     const wrapper = shallow(<ToDos
       handleComplete={noop}
       handleDelete={noop}
-      handleEdit={noop}
       handleSubmit={noop}
       requestTodos={noop}
       todos={fromJS([])}

@@ -20,7 +20,6 @@ describe('<TodoRow />', () => {
     wrapper = shallow(<TodoRow
       handleComplete={handler}
       handleDelete={handler}
-      handleEdit={handler}
       todo={todo}
     />)
   })
@@ -40,16 +39,10 @@ describe('<TodoRow />', () => {
     const doneWrapper = shallow(<TodoRow
       handleComplete={handler}
       handleDelete={handler}
-      handleEdit={handler}
       todo={doneTodo}
     />)
 
     expect(doneWrapper.hasClass('completed')).toEqual(true)
-  })
-
-  it('should trigger handleEdit when the edit icon is clicked', () => {
-    wrapper.find('Icon[name="EDIT"]').simulate('click')
-    expect(handler).toHaveBeenCalledTimes(1)
   })
 
   it('should trigger handleDelete when the delete icon is clicked', () => {

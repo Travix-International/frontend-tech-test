@@ -1,6 +1,7 @@
 import * as matchers from 'jest-immutable-matchers'
 import { fromJS } from 'immutable'
 
+import { ADD_TODO } from 'redux/ducks/todos'
 import rootReducer, { clearReduxForm } from 'redux/reducer'
 
 describe('rootReducer', () => {
@@ -20,10 +21,28 @@ describe('rootReducer', () => {
     const initialState = fromJS({
       values: { test: 'hello' },
       fields: {
-        test: { visited: true, touched: true } },
+        test: { visited: true, touched: true },
+      },
     })
 
     expect(clearReduxForm(initialState).get('values').size).toEqual(0)
     expect(clearReduxForm(initialState).getIn(['fields', 'test', 'touched'])).toEqual(false)
+  })
+
+  it('addTodo reducer should clearReduxForm on ADD_TODO.SUCCESS', () => {
+    const initialState = fromJS({
+      form: {
+        addTodo: {
+          values: { test: 'hello' },
+          fields: {
+            test: { visited: true, touched: true },
+          },
+        },
+      },
+      resources: {},
+    })
+
+    expect(rootReducer(initialState, { type: ADD_TODO.SUCCESS }).getIn(['form', 'addTodo', 'values']).size).toEqual(0)
+    expect(rootReducer(initialState, { type: ADD_TODO.SUCCESS }).getIn(['form', 'addTodo', 'fields', 'test', 'touched'])).toEqual(false)
   })
 })

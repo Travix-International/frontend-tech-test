@@ -19,7 +19,6 @@ import {
 
 import {
   addTodo,
-  editTodo,
   completeTodo,
   deleteTodo,
   loadTodos,
@@ -43,7 +42,6 @@ class ToDos extends React.Component {
     const {
       handleComplete,
       handleDelete,
-      handleEdit,
       handleSubmit,
       match: { params } = { params: {} },
       todos,
@@ -62,7 +60,6 @@ class ToDos extends React.Component {
         <TodoList
           handleComplete={handleComplete}
           handleDelete={handleDelete}
-          handleEdit={handleEdit}
           todos={todos}
         />
       </div>
@@ -73,7 +70,6 @@ class ToDos extends React.Component {
 ToDos.propTypes = {
   handleComplete: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
-  handleEdit: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   match: matchType,
   requestTodos: PropTypes.func,
@@ -86,7 +82,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   handleComplete: completeTodo,
-  handleEdit: editTodo,
   handleSubmit: addTodo,
   handleDelete: deleteTodo,
   requestTodos: loadTodos,

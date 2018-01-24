@@ -17,7 +17,6 @@ describe('<TodoList />', () => {
     const wrapper = shallow(<TodoList
       handleComplete={noop}
       handleDelete={noop}
-      handleEdit={noop}
       todos={todos}
     />)
 
@@ -28,6 +27,5 @@ describe('<TodoList />', () => {
     expect(wrapper.find('TodoRow')).toHaveLength(4)
     expect(first.props()).toHaveProperty('handleComplete')
     expect(first.props()).toHaveProperty('handleDelete')
-    expect(first.props()).toHaveProperty('handleEdit')
   })
 })

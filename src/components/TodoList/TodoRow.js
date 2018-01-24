@@ -22,7 +22,6 @@ class TodoRow extends React.Component {
     const {
       handleComplete,
       handleDelete,
-      handleEdit,
       todo,
     } = this.props
 
@@ -49,16 +48,6 @@ class TodoRow extends React.Component {
 
         <Col className={styles.actions} xs={1}>
           <Icon
-            name="EDIT"
-            onClick={handleEdit}
-            onKeyDown={handleEdit}
-            role="button"
-            tabIndex={0}
-          />
-
-          {' '}
-
-          <Icon
             name="DELETE"
             onClick={handleDelete}
             onKeyDown={handleDelete}
@@ -74,7 +63,6 @@ class TodoRow extends React.Component {
 TodoRow.propTypes = {
   handleComplete: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
-  handleEdit: PropTypes.func.isRequired,
   todo: todoType,
 }
 

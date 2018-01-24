@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions'
-import { takeLatest } from 'redux-saga/effects'
-import { fromJS, Map } from 'immutable'
+import { takeLatest, put, call } from 'redux-saga/effects'
+import { fromJS } from 'immutable'
 
 import {
   domain,
@@ -9,37 +9,32 @@ import {
   SUCCESS,
 } from 'redux/constants'
 
-// Temprorary uuid function.
-// Taken from https://gist.github.com/jed/982883
-// eslint-disable-next-line
-function b(a){return a?(a^Math.random()*16>>a/4).toString(16):([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,b)}
+import {
+  completeTask,
+  createTask,
+  deleteTask,
+  loadTasks,
+} from 'utils/api'
 
 /* Actions */
 const todos = domain.defineAction('todos')
 
-export const COMPLETE_TODO = todos.defineAction('COMPLETE_TODO', [SUCCESS])
-export const EDIT_TODO = todos.defineAction('EDIT_TODO', [SUCCESS])
-export const ADD_TODO = todos.defineAction('ADD_TODO', [SUCCESS])
-export const DELETE_TODO = todos.defineAction('DELETE_TODO', [SUCCESS])
+export const ADD_TODO = todos.defineAction('ADD_TODO', [SUCCESS, ERROR])
+export const COMPLETE_TODO = todos.defineAction('COMPLETE_TODO', [SUCCESS, ERROR])
+export const DELETE_TODO = todos.defineAction('DELETE_TODO', [SUCCESS, ERROR])
 export const LOAD_TODOS = todos.defineAction('LOAD_TODOS', [PENDING, SUCCESS, ERROR])
 
 /* Reducer */
-const array = Array(2).fill().map((val, index) => ({
-  title: `My todo ${index + 1}`,
-  description: 'This is one of my todos',
-  id: b(),
-  done: Math.random() >= 0.5,
-}))
-
 const defaultState = fromJS({
-  items: array,
+  items: [],
 })
 
 const reducer = handleActions({
+  [LOAD_TODOS.SUCCESS]: (state, action) => state.set('items', action.payload),
+
   [ADD_TODO.SUCCESS]: (state, action) => {
     const items = state.get('items')
-    const { id, done } = action.payload
-    return state.set('items', items.insert(0, Map({ id: id || b(), done: done || false }).merge(action.payload)))
+    return state.set('items', items.insert(0, action.payload))
   },
 
   [COMPLETE_TODO.SUCCESS]: (state, action) => {
@@ -51,13 +46,6 @@ const reducer = handleActions({
     }))
   },
 
-  [EDIT_TODO.SUCCESS]: (state, action) => {
-    const items = state.get('items')
-    const index = items.findIndex(item => item.get('id') === action.payload.id)
-
-    return state.set('items', items.set(index, fromJS(action.payload)))
-  },
-
   [DELETE_TODO.SUCCESS]: (state, action) => {
     const items = state.get('items')
     return state.set('items', items.filter(item => item.get('id') !== action.payload.get('id')))
@@ -67,23 +55,53 @@ const reducer = handleActions({
 export default reducer
 
 /* Action Creators */
-export const completeTodo = createAction(COMPLETE_TODO.SUCCESS)
-export const editTodo = createAction(EDIT_TODO.SUCCESS)
-export const addTodo = createAction(ADD_TODO.SUCCESS)
-export const deleteTodo = createAction(DELETE_TODO.SUCCESS)
+export const addTodo = createAction(ADD_TODO.ACTION)
+export const completeTodo = createAction(COMPLETE_TODO.ACTION)
+export const deleteTodo = createAction(DELETE_TODO.ACTION)
 export const loadTodos = createAction(LOAD_TODOS.ACTION)
 
 /* Side Effects */
-function* loadTodosSaga(action) {
+export function* createTodoSaga(action) {
   try {
-    yield console.log('HELLO FROM SAGA', action)
+    const response = yield call(createTask, action.payload.toJS())
+    yield put({ type: ADD_TODO.SUCCESS, payload: fromJS(response) })
   } catch (err) {
-    yield console.log(err)
+    yield put({ type: ADD_TODO.ERROR, payload: { error: err } })
+  }
+}
+
+export function* completeTodoSaga(action) {
+  try {
+    const response = yield call(completeTask, action.payload.toJS())
+    yield put({ type: COMPLETE_TODO.SUCCESS, payload: fromJS(response) })
+  } catch (err) {
+    yield put({ type: COMPLETE_TODO.ERROR, payload: { error: err } })
+  }
+}
+
+export function* deleteTodoSaga(action) {
+  try {
+    const response = yield call(deleteTask, action.payload.toJS())
+    yield put({ type: DELETE_TODO.SUCCESS, payload: fromJS(response) })
+  } catch (err) {
+    yield put({ type: DELETE_TODO.ERROR, payload: { error: err } })
+  }
+}
+
+export function* loadTodosSaga() {
+  try {
+    const response = yield call(loadTasks)
+    yield put({ type: LOAD_TODOS.SUCCESS, payload: fromJS(response) })
+  } catch (err) {
+    yield put({ type: LOAD_TODOS.ERROR, payload: { error: err } })
   }
 }
 
 /* eslint-disable */
 export const todosWatchers = [
+  takeLatest(ADD_TODO.ACTION, createTodoSaga),
+  takeLatest(COMPLETE_TODO.ACTION, completeTodoSaga),
+  takeLatest(DELETE_TODO.ACTION, deleteTodoSaga),
   takeLatest(LOAD_TODOS.ACTION, loadTodosSaga),
 ]
 /* eslint-enable */
