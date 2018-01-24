@@ -1,2 +1,3 @@
-require('../stories/todoList')
 require('../stories/addTodoForm')
+require('../stories/mainNav')
+require('../stories/todoList')
