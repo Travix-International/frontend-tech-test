@@ -4,6 +4,8 @@ const app = require('express')()
 const bodyParser = require('body-parser')
 const tasksContainer = require('./tasks.json')
 
+const port = 1337
+
 // uuid function.
 // Taken from https://gist.github.com/jed/982883
 // eslint-disable-next-line
@@ -96,6 +98,6 @@ app.put('/task/:id/complete', (req, res) => {
   })
 })
 
-app.listen(9001, () => {
-  process.stdout.write('the server is available on http://localhost:9001/\n')
+app.listen(port, () => {
+  process.stdout.write(`the server is available on http://localhost:${port}/\n`)
 })

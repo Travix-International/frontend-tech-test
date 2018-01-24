@@ -1,6 +1,6 @@
 import 'whatwg-fetch'
 
-const url = 'http://localhost:9001'
+const url = 'http://localhost:1337'
 const headers = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
