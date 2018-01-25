@@ -1,8 +1,13 @@
+$blue: #2196F3;
+$black: #0b0e19;
+$M: 767px;
+$container: 800px;
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: #0b0e19 url(logo.svg);
+  background: $black url(../logo.svg);
   background-size: 500px;
 }
 
@@ -23,28 +28,25 @@ input[type=text] {
   margin: 0 auto;
   border-radius: 4px;
   border-width: 0;
-}
-
-input[type=text] + input[type=text] {
-  margin-top: 1rem;
-}
-
-input[type=text]#inputTodoTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-input[type=text]#inputTodoDescription {
-  height: 5rem;
+  &#inputTodoTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  &#inputTodoDescription {
+    height: 5rem;
+  }
+  & + input[type=text] {
+    margin-top: 1rem;
+  }
 }
 
 .container {
-  max-width: 800px;
+  max-width: $container;
   margin: 0 auto;
 }
 
 header {
-  background-color: #2196F3;
+  background-color: $blue;
   color: #FFF;
   padding: 1rem 0 2.5rem;
   margin-bottom: 1rem;
@@ -54,26 +56,43 @@ ol.todos {
   margin: 0;
   padding: 0;
   list-style: none;
+  input[type=checkbox] {
+    margin-right: 0.5rem;
+  }
+
+  li {
+    padding: 0.75rem 0;
+    background: rgba(255,255,255,0.9);
+    padding: 1rem;
+    margin-bottom: 2px;
+    border-radius: 4px;
+    border-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &.completed {
+      background: rgba(255,255,255,0.75);
+      .title {
+        text-decoration: line-through;
+      }
+    }
+
+    & > div {
+      flex: 2;
+    }
+
+    & > div:last-of-type {
+      flex: 1;
+      text-align: right;
+    }
+
+  }
 }
 
-ol.todos li {
-  padding: 0.75rem 0;
-  background: rgba(255,255,255,0.9);
-  padding: 1rem;
-  margin-bottom: 2px;
-  border-radius: 4px;
-  border-width: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
 
-ol.todos li.completed {
-  background: rgba(255,255,255,0.75);
-}
-
-h3 + ol {
+h3 + ol.todos {
   margin-bottom: 2rem !important;
 }
 
@@ -91,43 +110,31 @@ h3 + ol {
   margin: 1px 1rem;
   min-width: 5rem;
   cursor: pointer;
+
+  &.last {
+    margin-left: 0;
+  }
+
+  &.light {
+    background: white;
+    color: #2196F3;
+    margin: 1rem 0;
+  }
+
+  &.light:hover {
+    background: #FFF;
+  }
+
+  &:hover {
+    background: #2196F3;
+    text-decoration: none;
+  }
+
 }
 
-.btn.last {
-  margin-left: 0;
-}
 
-.btn.light {
-  background: white;
-  color: #2196F3;
-  margin: 1rem 0;
-}
 
-.btn.light:hover {
-  background: #FFF;
-}
 
-.btn:hover {
-  background: #2196F3;
-  text-decoration: none;
-}
-
-.todos > li > div {
-  flex: 2;
-}
-
-.todos > li > div:last-of-type {
-  flex: 1;
-  text-align: right;
-}
-
-.todos input[type=checkbox] {
-  margin-right: 0.5rem;
-}
-
-.todos li.completed .title {
-  text-decoration: line-through;
-}
 
 h3 {
   color: #FFF;
