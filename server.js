@@ -64,13 +64,53 @@ app.put('/task/update/:id/:title/:description?/:completed?', (req, res) => {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (typeof task !== 'undefined' && task !== null) {
-      if (req.params.title && JSON.parse(req.params.title) !== null) {
+
+      if (req.params.title) {
         task.title = req.params.title;
       }
-      if (req.params.description && JSON.parse(req.params.description) !== null) {
+      if (req.params.description) {
         task.description = req.params.description;
       }
-      if (req.params.completed && JSON.parse(req.params.completed) !== null) {
+      if (req.params.completed) {
+        task.completed = JSON.parse(req.params.completed);
+      }
+      return res.status(200).json({
+        message: `Resource id ${id} was updated successfully`,
+        resource: task
+      });
+    } else {
+      return res.status(404).json({
+        message: 'Not found',
+      });
+    }
+  } else {
+    return res.status(400).json({
+      message: 'Bad request',
+    });
+  }
+});
+
+/**
+ * PUT /task/update/:id/:completed
+ *
+ * id: Number
+ * title: string
+ * description: string
+ *
+ * Update the task with the given id.
+ * If the task is found and update as well, return a status code 204.
+ * If the task is not found, return a status code 404.
+ * If the provided id is not a valid number return a status code 400.
+ */
+app.put('/task/toggle/:id/:completed', (req, res) => {
+  const id = parseInt(req.params.id, 10);
+
+  if (!Number.isNaN(id)) {
+    const task = tasksContainer.tasks.find(item => item.id === id);
+
+    if (typeof task !== 'undefined' && task !== null) {
+
+      if (req.params.completed) {
         task.completed = JSON.parse(req.params.completed);
       }
       return res.status(200).json({
