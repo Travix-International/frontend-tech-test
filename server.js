@@ -57,16 +57,65 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
+app.put('/task/update/:id/:title/:description?/:completed?', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
-      return res.status(204);
+    if (typeof task !== 'undefined' && task !== null) {
+
+      if (req.params.title) {
+        task.title = req.params.title;
+      }
+      if (req.params.description) {
+        task.description = req.params.description;
+      }
+      if (req.params.completed) {
+        task.completed = JSON.parse(req.params.completed);
+      }
+      return res.status(200).json({
+        message: `Resource id ${id} was updated successfully`,
+        resource: task
+      });
+    } else {
+      return res.status(404).json({
+        message: 'Not found',
+      });
+    }
+  } else {
+    return res.status(400).json({
+      message: 'Bad request',
+    });
+  }
+});
+
+/**
+ * PUT /task/update/:id/:completed
+ *
+ * id: Number
+ * title: string
+ * description: string
+ *
+ * Update the task with the given id.
+ * If the task is found and update as well, return a status code 204.
+ * If the task is not found, return a status code 404.
+ * If the provided id is not a valid number return a status code 400.
+ */
+app.put('/task/toggle/:id/:completed', (req, res) => {
+  const id = parseInt(req.params.id, 10);
+
+  if (!Number.isNaN(id)) {
+    const task = tasksContainer.tasks.find(item => item.id === id);
+
+    if (typeof task !== 'undefined' && task !== null) {
+
+      if (req.params.completed) {
+        task.completed = JSON.parse(req.params.completed);
+      }
+      return res.status(200).json({
+        message: `Resource id ${id} was updated successfully`
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -88,11 +137,13 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task/create/:title/:description?', (req, res) => {
+  const length = tasksContainer.tasks.length;
   const task = {
-    id: tasksContainer.tasks.length,
+    id: length ? tasksContainer.tasks[length-1]['id'] + 1 : 0,
     title: req.params.title,
-    description: req.params.description,
+    description: req.params.description ? req.params.description : '',
+    completed: false
   };
 
   tasksContainer.tasks.push(task);
@@ -117,9 +168,9 @@ app.delete('/task/delete/:id', (req, res) => {
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-  
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+      const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);;
+
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',
