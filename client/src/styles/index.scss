@@ -40,6 +40,12 @@ input[type=text] {
   }
 }
 
+@media all and (max-width: $M) {
+  .wrapper > .container {
+    padding: 0 15px;
+  }
+}
+
 .container {
   max-width: $container;
   margin: 0 auto;
@@ -50,6 +56,10 @@ header {
   color: #FFF;
   padding: 1rem 0 2.5rem;
   margin-bottom: 1rem;
+  //create some padding for mobile layout
+  @media all and (max-width: $M){
+    padding: 1rem 15px;
+  }
 }
 
 ol.todos {
@@ -115,6 +125,13 @@ h3 + ol.todos {
     margin-left: 0;
   }
 
+  &.delete {
+    background: #b71c1c;
+    &:hover {
+      background: #b71c1c;
+    }
+  }
+
   &.light {
     background: white;
     color: #2196F3;
@@ -131,10 +148,6 @@ h3 + ol.todos {
   }
 
 }
-
-
-
-
 
 h3 {
   color: #FFF;
@@ -163,14 +176,13 @@ p {
   box-sizing: border-box;
   background-color: rgba(0,0,0,0.8);
   text-align: center;
-}
-
-.blocker:before {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -.05em;
+  &:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -.05em;
+  }
 }
 
 .modal {

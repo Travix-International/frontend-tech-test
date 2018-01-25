@@ -28,6 +28,10 @@ input[type=text] {
   input[type=text] + input[type=text] {
     margin-top: 1rem; }
 
+@media all and (max-width: 767px) {
+  .wrapper > .container {
+    padding: 0 15px; } }
+
 .container {
   max-width: 800px;
   margin: 0 auto; }
@@ -37,6 +41,9 @@ header {
   color: #FFF;
   padding: 1rem 0 2.5rem;
   margin-bottom: 1rem; }
+  @media all and (max-width: 767px) {
+    header {
+      padding: 1rem 15px; } }
 
 ol.todos {
   margin: 0;
@@ -84,6 +91,10 @@ h3 + ol.todos {
   cursor: pointer; }
   .btn.last {
     margin-left: 0; }
+  .btn.delete {
+    background: #b71c1c; }
+    .btn.delete:hover {
+      background: #b71c1c; }
   .btn.light {
     background: white;
     color: #2196F3;
@@ -119,13 +130,12 @@ p {
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.8);
   text-align: center; }
-
-.blocker:before {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -.05em; }
+  .blocker:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -.05em; }
 
 .modal {
   display: inline-block;
