@@ -4,11 +4,11 @@ const webpack = require('webpack');
 module.exports = {
   entry: `${__dirname}/index.js`,
   output: {
-    path: `${__dirname}/build`,
     filename: 'bundle.js',
+    publicPath: '/',
   },
   devServer: {
-    contentBase: './build',
+    historyApiFallback: true,
     hot: true,
   },
   module: {
@@ -26,6 +26,9 @@ module.exports = {
         ],
       },
     }],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
     new HtmlWebpackPlugin({
