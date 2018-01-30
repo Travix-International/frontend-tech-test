@@ -3,6 +3,8 @@ import { Route, Switch } from 'frint-router-react';
 import HomePage from './HomePage';
 import ItemPage from './ItemPage';
 
+import './root.scss';
+
 export default function Root() {
   return (
     <Switch>

@@ -6,6 +6,8 @@ import { of } from 'rxjs/observable/of';
 import { map, merge, scan } from 'rxjs/operators';
 import { Button, Input } from 'travix-ui-kit';
 
+import './index.scss';
+
 function Form(props) {
   function todoAction() {
     if (props.title.trim() === '') {
@@ -30,7 +32,7 @@ function Form(props) {
   }
 
   return (
-    <form onSubmit={submit}>
+    <form className="ui-form" onSubmit={submit}>
       <label htmlFor="titleInput">
         {props.formTitle}
       </label>
@@ -50,6 +52,7 @@ function Form(props) {
       />
       <Button
         onClick={todoAction}
+        size="s"
         type="button"
       >
         {props.actionBtnTitle}

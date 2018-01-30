@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, Card } from 'travix-ui-kit';
 import PropTypes from 'prop-types';
 import { observe, streamProps } from 'frint-react';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -6,33 +7,56 @@ import Form from '../Form';
 
 import { removeTodo, updateTodo } from '../../actions/todos';
 
+import './index.scss';
+
 function Item(props) {
   const { todo } = props;
 
   return (
-    <div style={{ background: '#f1f1f1', border: '1px solid #e1e1e1', marginBottom: '15px', padding: '15px', borderRadius: '4px' }}>
-      {!props.showEditForm && (
-        <div>
-          {todo.title}
+    <Card
+      checked
+    >
+      {!props.showEditForm && ([
+        <h3 key="todoTitle">{todo.title}</h3>,
+        <p key="todoDescription">{todo.description}</p>,
+        <p key="todoActions">
+          <Button
+            onClick={props.edit}
+            size="s"
+            type="button"
+          >
+            Edit
+          </Button>
+          <Button
+            onClick={props.removeTodo}
+            size="s"
+            type="button"
+          >
+            Delete
+          </Button>
+        </p>,
+      ])}
 
-          [<a href={null} onClick={props.edit}>edit</a>]
-          [<a href={null} onClick={props.removeTodo}>x</a>]
-        </div>
-      )}
-
-      {props.showEditForm && (
-        <div>
-          <Form
-            action={props.updateTodo}
-            actionBtnTitle="Update"
-            formTitle="Edit Todo item"
-            todoDescription={todo.description}
-            todoTitle={todo.title}
-          />
-          [<a href={null} onClick={props.cancelEdit}>cancel</a>]
-        </div>
-      )}
-    </div>
+      {props.showEditForm && ([
+        <Form
+          action={props.updateTodo}
+          actionBtnTitle="Update"
+          formTitle="Edit Todo item"
+          key="editItemForm"
+          todoDescription={todo.description}
+          todoTitle={todo.title}
+        />,
+        <Button
+          className="cancelButton"
+          key="cancelEditBtn"
+          onClick={props.cancelEdit}
+          size="s"
+          type="button"
+        >
+          Cancel
+        </Button>,
+      ])}
+    </Card>
   );
 }
 

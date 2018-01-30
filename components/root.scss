@@ -1,0 +1,15 @@
+#root {
+  font-family: Roboto;
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 16px 32px;
+
+  .ui-link {
+    color: var(--tx-generic-color-active);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

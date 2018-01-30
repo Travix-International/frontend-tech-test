@@ -6,17 +6,15 @@ import { map, scan } from 'rxjs/operators';
 
 function Root(props) {
   return (
-    <div>
-      <ul>
-        {props.todoList.map(todo => (
-          <li key={todo.id}>
-            <Link to={`/${todo.id}`}>
-              {todo.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className="ui-list ui-list_align_vertical">
+      {props.todoList.map(todo => (
+        <li className="ui-list__item" key={todo.id}>
+          <Link className="ui-link" to={`/${todo.id}`}>
+            {todo.title}
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }
 

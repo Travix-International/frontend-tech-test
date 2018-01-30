@@ -8,14 +8,12 @@ import Item from '../Item';
 function ItemPage(props) {
   const { id, todo } = props;
 
-  return (
-    <div>
-      <Link to="/">
-        Back to Dashboard
-      </Link>
-      <Item id={id} todo={todo} />
-    </div>
-  );
+  return ([
+    <Link className="ui-link" key="itemPageLink" to="/">
+      Back to Dashboard
+    </Link>,
+    <Item id={id} key="item" todo={todo} />,
+  ]);
 }
 
 ItemPage.propTypes = {

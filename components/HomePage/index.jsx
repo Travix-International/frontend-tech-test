@@ -7,17 +7,16 @@ import List from '../List';
 import { addTodo } from '../../actions/todos';
 
 function HomePage(props) {
-  return (
-    <div>
-      <h3>Dashboard</h3>
-      <Form
-        action={props.addTodo}
-        actionBtnTitle="Add"
-        formTitle="Create a new Todo item"
-      />
-      <List />
-    </div>
-  );
+  return ([
+    <h2 key="dashboardTitle">Dashboard</h2>,
+    <Form
+      action={props.addTodo}
+      actionBtnTitle="Add"
+      formTitle="Create a new Todo item"
+      key="dashboardForm"
+    />,
+    <List key="dashboardList" />,
+  ]);
 }
 
 HomePage.propTypes = {
