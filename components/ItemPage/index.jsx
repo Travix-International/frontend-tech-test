@@ -6,20 +6,25 @@ import { map, scan } from 'rxjs/operators';
 import Item from '../Item';
 
 function ItemPage(props) {
-  const { todo } = props;
+  const { id, todo } = props;
 
   return (
     <div>
       <Link to="/">
         Back to Dashboard
       </Link>
-      <Item todo={todo} />
+      <Item id={id} todo={todo} />
     </div>
   );
 }
 
 ItemPage.propTypes = {
-  todo: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
+  todo: PropTypes.object,
+};
+
+ItemPage.defaultProps = {
+  todo: {},
 };
 
 export default observe((app, { value }) => {
@@ -32,11 +37,20 @@ export default observe((app, { value }) => {
   const stateProps$ = state$
     .pipe(
       map((state) => {
+        if (state.server) {
+          return {
+            ...state,
+            id,
+          };
+        }
         const todo = state.todoList.filter(i => i.id === id)[0];
         if (!todo) {
-          return router.go('/');
+          return router.replace('/', state);
         }
-        return { todo };
+        return {
+          id,
+          todo,
+        };
       }),
     );
 

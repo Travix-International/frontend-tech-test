@@ -1,6 +1,7 @@
 import {
   TODO_ADD,
   TODO_DELETE,
+  TODO_FETCH,
   TODO_UPDATE,
 } from '../constants';
 
@@ -14,11 +15,15 @@ export default function (state = INITIAL_STATE, action) {
         {
           title: action.title,
           description: action.description,
+          id: action.id,
         },
       ];
 
     case TODO_DELETE:
       return state.filter(todo => todo.id !== action.id);
+
+    case TODO_FETCH:
+      return action.todoList;
 
     case TODO_UPDATE:
       return state.map((todo) => {

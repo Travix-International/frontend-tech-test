@@ -5,7 +5,7 @@ import { BrowserRouterService } from 'frint-router';
 import rootReducer from './reducers';
 
 import RootComponent from './components/Root';
-import todoList from './mocks/todoList';
+import { fetchTodos } from './actions/todos';
 
 const todoApp = new (createApp({
   name: 'TodoApp',
@@ -19,14 +19,13 @@ const todoApp = new (createApp({
       name: 'store',
       useFactory({ app }) {
         const Store = createStore({
-          initialState: {
-            todoList,
-          },
           reducer: rootReducer,
           deps: { app },
         });
 
-        return new Store();
+        const store = new Store();
+        store.dispatch(fetchTodos());
+        return store;
       },
       deps: ['app'],
     },

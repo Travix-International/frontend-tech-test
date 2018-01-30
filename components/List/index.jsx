@@ -8,8 +8,8 @@ function Root(props) {
   return (
     <div>
       <ul>
-        {props.todoList.map((todo, id) => (
-          <li key={todo.id || id}>
+        {props.todoList.map(todo => (
+          <li key={todo.id}>
             <Link to={`/${todo.id}`}>
               {todo.title}
             </Link>

@@ -1,7 +1,19 @@
 'use strict';
 
 const app = require('express')();
+const bodyParser = require('body-parser');
+const shortid = require('shortid');
 const tasksContainer = require('./tasks.json');
+
+// enable CORS
+app.use((req, res, next) => {
+  res.set('Access-Control-Allow-Headers', '*');
+  res.set('Access-Control-Allow-Methods', 'DELETE, GET, POST, PUT');
+  res.set('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+app.use(bodyParser.json()); // support json encoded bodies
 
 /**
  * GET /tasks
@@ -22,9 +34,9 @@ app.get('/tasks', (req, res) => res.status(200).json(tasksContainer));
  * If id is not valid number return status code 400.
  */
 app.get('/task/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+  const id = req.params.id;
 
-  if (!Number.isNaN(id)) {
+  if (id) {
     const task = tasksContainer.find(item => item.id === id);
 
     if (task !== null) {
@@ -51,20 +63,29 @@ app.get('/task/:id', (req, res) => {
  * description: string
  *
  * Update the task with the given id.
- * If the task is found and update as well, return a status code 204.
+ * If the task is found and update as well, return a status code 200.
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+app.put('/task/:id', (req, res) => {
+  const id = req.params.id;
 
-  if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+  if (id) {
+    const updatedTasks = tasksContainer.tasks.map((item) => {
+      if (item.id === id) {
+        item.title = req.body.title;
+        item.description = req.body.description;
+      }
 
-    if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
-      return res.status(204);
+      return item;
+    });
+
+    if (updatedTasks !== tasksContainer.tasks) {
+      tasksContainer.tasks = updatedTasks;
+      return res.status(200).json({
+        message: 'Resource created',
+        tasks: updatedTasks,
+      });
     }
 
     return res.status(404).json({
@@ -78,7 +99,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
 });
 
 /**
- * POST /task/create/:title/:description
+ * POST /task
  *
  * title: string
  * description: string
@@ -86,41 +107,41 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
-    title: req.params.title,
-    description: req.params.description,
+    id: shortid.generate(),
+    title: req.body.title,
+    description: req.body.description,
   };
 
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
     message: 'Resource created',
+    task,
   });
 });
 
 /**
- * DELETE /task/delete/:id
+ * DELETE /task/:id
  *
  * id: Number
  *
  * Delete the task linked to the  given id.
- * If the task is found and deleted as well, return a status code 204.
+ * If the task is found and deleted as well, return a status code 200.
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/task/delete/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+app.delete('/task/:id', (req, res) => {
+  const id = req.params.id;
 
-  if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+  if (id) {
+    const filteredTasks = tasksContainer.tasks.filter(item => item.id !== id);
 
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
+    if (filteredTasks.length !== tasksContainer.tasks.length) {
+      tasksContainer.tasks = filteredTasks;
       return res.status(200).json({
-        message: 'Updated successfully',
+        message: 'Deleted successfully',
       });
     }
 

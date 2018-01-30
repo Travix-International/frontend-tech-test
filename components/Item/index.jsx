@@ -45,7 +45,7 @@ Item.propTypes = {
   updateTodo: PropTypes.func.isRequired,
 };
 
-export default observe((app, { value: { todo } }) => {
+export default observe((app, { value: { id } }) => {
   const showEditForm$ = new BehaviorSubject(false);
   const store = app.get('store');
   const router = app.get('router');
@@ -65,11 +65,11 @@ export default observe((app, { value: { todo } }) => {
       },
       cancelEdit,
       updateTodo: (...args) => {
-        store.dispatch(updateTodo(todo.id, ...args));
+        store.dispatch(updateTodo(id, ...args));
         cancelEdit();
       },
       removeTodo: () => {
-        store.dispatch(removeTodo(todo.id));
+        store.dispatch(removeTodo(id));
         router.push('/');
       },
     })
