@@ -10,9 +10,6 @@ import './index.scss';
 
 function Form(props) {
   function todoAction() {
-    if (props.title.trim() === '') {
-      return;
-    }
     props.clearTitle();
     props.clearDescription();
     props.action(props.title.trim(), props.description.trim());
@@ -51,6 +48,7 @@ function Form(props) {
         value={props.description}
       />
       <Button
+        disabled={props.title.trim() === ''}
         onClick={todoAction}
         size="s"
         type="button"
