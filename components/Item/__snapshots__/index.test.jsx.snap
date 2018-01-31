@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Item view mode snapshot test DOM structure renders correctly 1`] = `
+<div
+  className="ui-card ui-card_checked"
+  onClick={null}
+>
+  <h3>
+    Todo Title
+  </h3>
+  <p>
+    Todo Description
+  </p>
+  <p>
+    <button
+      className="ui-button ui-button_size_s ui-button_variation_default"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Edit
+    </button>
+    <button
+      className="ui-button ui-button_size_s ui-button_variation_default"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Delete
+    </button>
+  </p>
+</div>
+`;

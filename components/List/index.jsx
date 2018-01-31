@@ -4,7 +4,7 @@ import { observe } from 'frint-react';
 import { Link } from 'frint-router-react';
 import { map, scan } from 'rxjs/operators';
 
-function Root(props) {
+export function ListRender(props) {
   return (
     <ul className="ui-list ui-list_align_vertical">
       {props.todoList.map(todo => (
@@ -18,7 +18,7 @@ function Root(props) {
   );
 }
 
-Root.propTypes = {
+ListRender.propTypes = {
   todoList: PropTypes.array.isRequired,
 };
 
@@ -40,4 +40,4 @@ export default observe((app) => {
       todoList: [],
     }),
   );
-})(Root);
+})(ListRender);

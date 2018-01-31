@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Item view mode snapshot test DOM structure renders correctly 1`] = `
+<ul
+  className="ui-list ui-list_align_vertical"
+>
+  <li
+    className="ui-list__item"
+  >
+    <a
+      className="ui-link"
+      href="/1"
+      onClick={[Function]}
+    >
+      First todo
+    </a>
+  </li>
+  <li
+    className="ui-list__item"
+  >
+    <a
+      className="ui-link"
+      href="/2"
+      onClick={[Function]}
+    >
+      Second todo
+    </a>
+  </li>
+  <li
+    className="ui-list__item"
+  >
+    <a
+      className="ui-link"
+      href="/3"
+      onClick={[Function]}
+    >
+      Third todo
+    </a>
+  </li>
+</ul>
+`;

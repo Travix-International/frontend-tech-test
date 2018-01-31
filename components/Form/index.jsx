@@ -8,7 +8,7 @@ import { Button, Input } from 'travix-ui-kit';
 
 import './index.scss';
 
-function Form(props) {
+export function FormRender(props) {
   function todoAction() {
     props.clearTitle();
     props.clearDescription();
@@ -59,7 +59,7 @@ function Form(props) {
   );
 }
 
-Form.propTypes = {
+FormRender.propTypes = {
   action: PropTypes.func.isRequired,
   actionBtnTitle: PropTypes.string.isRequired,
   changeDescription: PropTypes.func.isRequired,
@@ -103,4 +103,4 @@ export default observe((app, { value: { action, todoDescription = '', todoTitle 
       };
     }),
   );
-})(Form);
+})(FormRender);

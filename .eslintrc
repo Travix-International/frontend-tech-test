@@ -8,5 +8,9 @@
   "globals": {
     "document": true,
     "fetch": true
+  },
+  "env": {
+    "browser": true,
+    "jest": true
   }
 }

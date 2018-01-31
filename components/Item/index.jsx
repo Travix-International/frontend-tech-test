@@ -9,7 +9,7 @@ import { removeTodo, updateTodo } from '../../actions/todos';
 
 import './index.scss';
 
-function Item(props) {
+export function ItemRender(props) {
   const { todo } = props;
 
   return (
@@ -59,19 +59,20 @@ function Item(props) {
   );
 }
 
-Item.propTypes = {
+ItemRender.propTypes = {
   cancelEdit: PropTypes.func,
   edit: PropTypes.func,
   removeTodo: PropTypes.func,
-  showEditForm: PropTypes.bool.isRequired,
+  showEditForm: PropTypes.bool,
   todo: PropTypes.object.isRequired,
   updateTodo: PropTypes.func,
 };
 
-Item.defaultProps = {
+ItemRender.defaultProps = {
   cancelEdit: () => {},
   edit: () => {},
   removeTodo: () => {},
+  showEditForm: false,
   updateTodo: () => {},
 };
 
@@ -121,4 +122,4 @@ export default observe((app, params$) => {
       actions => ({ ...actions }),
     )
     .get$();
-})(Item);
+})(ItemRender);
