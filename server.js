@@ -20,7 +20,9 @@ app.use(bodyParser.json()); // support json encoded bodies
  *
  * Return the list of tasks with status code 200.
  */
-app.get('/tasks', (req, res) => res.status(200).json(tasksContainer));
+app.get('/tasks', (req, res) => {
+  return setTimeout(() => res.status(200).json(tasksContainer), 12000);
+});
 
 /**
  * Get /task/:id
