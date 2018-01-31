@@ -6,18 +6,26 @@ import {
   TODO_UPDATE,
 } from '../constants';
 
-const INITIAL_STATE = false;
+const INITIAL_STATE = {
+  loading: false,
+};
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case SERVER_REQUESTED:
-      return true;
+      return {
+        ...state,
+        loading: true,
+      };
 
     case TODO_ADD:
     case TODO_DELETE:
     case TODO_FETCH:
     case TODO_UPDATE:
-      return false;
+      return {
+        ...state,
+        loading: false,
+      };
 
     default:
       return state;

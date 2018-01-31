@@ -3,26 +3,26 @@ import PropTypes from 'prop-types';
 import { Link } from 'frint-router-react';
 import { observe } from 'frint-react';
 import { map, scan } from 'rxjs/operators';
+import { LoadingOverlay } from 'travix-ui-kit';
 import Item from '../Item';
 
 function ItemPage(props) {
-  const { id, todo } = props;
+  const { loading, todo } = props;
 
-  return ([
+  return (<LoadingOverlay
+    loading={loading}
+    spinner
+  >
     <Link className="ui-link" key="itemPageLink" to="/">
       Back to Dashboard
-    </Link>,
-    <Item id={id} key="item" todo={todo} />,
-  ]);
+    </Link>
+    <Item key="item" todo={todo} />
+  </LoadingOverlay>);
 }
 
 ItemPage.propTypes = {
-  id: PropTypes.string.isRequired,
-  todo: PropTypes.object,
-};
-
-ItemPage.defaultProps = {
-  todo: {},
+  loading: PropTypes.bool.isRequired,
+  todo: PropTypes.object.isRequired,
 };
 
 export default observe((app, { value }) => {
@@ -35,19 +35,18 @@ export default observe((app, { value }) => {
   const stateProps$ = state$
     .pipe(
       map((state) => {
-        if (state.server) {
-          return {
-            ...state,
-            id,
-          };
+        let todo = {};
+
+        if (!state.app.loading && state.todoList.length) {
+          todo = state.todoList.filter(i => i.id === id)[0];
+          if (!todo) {
+            return router.replace('/', state);
+          }
         }
-        const todo = state.todoList.filter(i => i.id === id)[0];
-        if (!todo) {
-          return router.replace('/', state);
-        }
+
         return {
-          id,
           todo,
+          loading: state.app.loading,
         };
       }),
     );

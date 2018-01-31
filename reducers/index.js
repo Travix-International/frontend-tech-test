@@ -1,9 +1,9 @@
 import { combineReducers } from 'frint-store';
 
-import server from './app';
+import app from './app';
 import todoList from './todos';
 
 export default combineReducers({
-  server,
+  app,
   todoList,
 });

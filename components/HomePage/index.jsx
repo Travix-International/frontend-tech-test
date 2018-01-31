@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observe } from 'frint-react';
 import { of } from 'rxjs/observable/of';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { map, merge, scan } from 'rxjs/operators';
 import { LoadingOverlay } from 'travix-ui-kit';
 import Form from '../Form';
@@ -10,31 +9,19 @@ import List from '../List';
 import { addTodo } from '../../actions/todos';
 
 function HomePage(props) {
-  if (props.loading) {
-    return (<LoadingOverlay
-      loading
-      spinner
-    >
-      <h2 key="dashboardTitle">Dashboard</h2>
-      <Form
-        action={props.addTodo}
-        actionBtnTitle="Add"
-        formTitle="Create a new Todo item"
-        key="dashboardForm"
-      />
-    </LoadingOverlay>);
-  }
-
-  return ([
-    <h2 key="dashboardTitle">Dashboard</h2>,
+  return (<LoadingOverlay
+    loading={props.loading}
+    spinner
+  >
+    <h2 key="dashboardTitle">Dashboard</h2>
     <Form
       action={props.addTodo}
       actionBtnTitle="Add"
       formTitle="Create a new Todo item"
       key="dashboardForm"
-    />,
-    <List key="dashboardList" />,
-  ]);
+    />
+    <List key="dashboardList" />
+  </LoadingOverlay>);
 }
 
 HomePage.propTypes = {
@@ -44,17 +31,12 @@ HomePage.propTypes = {
 
 export default observe((app) => {
   const store = app.get('store');
-  const loading$ = new BehaviorSubject(false).pipe(
-    map(loading => ({ loading })),
-  );
 
-  const state$ = store.getState$();
-
-  const stateProps$ = state$
+  const stateProps$ = store.getState$()
     .pipe(
-      map((state) => {
-        loading$.next(state.server);
-      }),
+      map(state => ({
+        loading: state.app.loading,
+      })),
     );
 
   const actions$ = of({
@@ -62,7 +44,7 @@ export default observe((app) => {
   });
 
   return stateProps$.pipe(
-    merge(actions$, loading$),
+    merge(actions$),
     scan((props, emitted) => ({
       ...props,
       ...emitted,

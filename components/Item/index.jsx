@@ -16,61 +16,70 @@ function Item(props) {
     <Card
       checked
     >
-      {!props.showEditForm && ([
-        <h3 key="todoTitle">{todo.title}</h3>,
-        <p key="todoDescription">{todo.description}</p>,
-        <p key="todoActions">
+      {props.showEditForm
+        ? ([
+          <Form
+            action={props.updateTodo}
+            actionBtnTitle="Update"
+            formTitle="Edit Todo item"
+            key="editItemForm"
+            todoDescription={todo.description}
+            todoTitle={todo.title}
+          />,
           <Button
-            onClick={props.edit}
+            className="cancelButton"
+            key="cancelEditBtn"
+            onClick={props.cancelEdit}
             size="s"
             type="button"
           >
-            Edit
-          </Button>
-          <Button
-            onClick={props.removeTodo}
-            size="s"
-            type="button"
-          >
-            Delete
-          </Button>
-        </p>,
-      ])}
-
-      {props.showEditForm && ([
-        <Form
-          action={props.updateTodo}
-          actionBtnTitle="Update"
-          formTitle="Edit Todo item"
-          key="editItemForm"
-          todoDescription={todo.description}
-          todoTitle={todo.title}
-        />,
-        <Button
-          className="cancelButton"
-          key="cancelEditBtn"
-          onClick={props.cancelEdit}
-          size="s"
-          type="button"
-        >
-          Cancel
-        </Button>,
-      ])}
+            Cancel
+          </Button>])
+        : ([
+          <h3 key="todoTitle">{todo.title}</h3>,
+          <p key="todoDescription">{todo.description}</p>,
+          <p key="todoActions">
+            <Button
+              onClick={props.edit}
+              size="s"
+              type="button"
+            >
+              Edit
+            </Button>
+            <Button
+              onClick={props.removeTodo}
+              size="s"
+              type="button"
+            >
+              Delete
+            </Button>
+          </p>])
+      }
     </Card>
   );
 }
 
 Item.propTypes = {
-  cancelEdit: PropTypes.func.isRequired,
-  edit: PropTypes.func.isRequired,
-  removeTodo: PropTypes.func.isRequired,
+  cancelEdit: PropTypes.func,
+  edit: PropTypes.func,
+  removeTodo: PropTypes.func,
   showEditForm: PropTypes.bool.isRequired,
   todo: PropTypes.object.isRequired,
-  updateTodo: PropTypes.func.isRequired,
+  updateTodo: PropTypes.func,
 };
 
-export default observe((app, { value: { id } }) => {
+Item.defaultProps = {
+  cancelEdit: () => {},
+  edit: () => {},
+  removeTodo: () => {},
+  updateTodo: () => {},
+};
+
+export default observe((app, params$) => {
   const showEditForm$ = new BehaviorSubject(false);
+  const todo$ = new BehaviorSubject({});
+  const actions$ = new BehaviorSubject({});
+
   const store = app.get('store');
   const router = app.get('router');
 
@@ -78,24 +87,38 @@ export default observe((app, { value: { id } }) => {
     showEditForm$.next(false);
   };
 
+  params$.subscribe(({ todo }) => {
+    todo$.next(todo);
+    if (todo.id) {
+      actions$.next({
+        edit: () => {
+          showEditForm$.next(true);
+        },
+        cancelEdit,
+        updateTodo: (...args) => {
+          store.dispatch(updateTodo(todo.id, ...args));
+          cancelEdit();
+        },
+        removeTodo: () => {
+          store.dispatch(removeTodo(todo.id));
+          router.push('/');
+        },
+      });
+    }
+  });
+
   return streamProps()
     .set(
       showEditForm$,
       showEditForm => ({ showEditForm }),
     )
-    .set({
-      edit: () => {
-        showEditForm$.next(true);
-      },
-      cancelEdit,
-      updateTodo: (...args) => {
-        store.dispatch(updateTodo(id, ...args));
-        cancelEdit();
-      },
-      removeTodo: () => {
-        store.dispatch(removeTodo(id));
-        router.push('/');
-      },
-    })
+    .set(
+      todo$,
+      todo => ({ todo }),
+    )
+    .set(
+      actions$,
+      actions => ({ ...actions }),
+    )
     .get$();
 })(Item);
