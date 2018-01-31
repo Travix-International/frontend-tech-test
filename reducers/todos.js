@@ -1,6 +1,7 @@
 import {
   TODO_ADD,
   TODO_DELETE,
+  TODO_FAILED,
   TODO_FETCH,
   TODO_UPDATE,
 } from '../constants';
@@ -37,6 +38,7 @@ export default function (state = INITIAL_STATE, action) {
         return todo;
       });
 
+    case TODO_FAILED:
     default:
       return state;
   }
