@@ -1,11 +1,15 @@
 {
-  "name": "test-candidates",
+  "name": "todoApp",
   "version": "0.0.1",
   "description": "test back - front",
   "main": "server.js",
+  "repository": "https://github.com/andrii-m/frontend-tech-test",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "build": "webpack --config webpack.config.prod",
+    "test": "jest",
+    "start": "concurrently --kill-others \"npm run start:client\" \"npm run start:server\"",
+    "start:client": "webpack-dev-server --open",
+    "start:server": "node server.js"
   },
   "keywords": [
     "test",
@@ -14,6 +18,61 @@
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "frint": "^5.3.0",
+    "frint-react": "^5.3.0",
+    "frint-router": "^5.3.0",
+    "frint-router-react": "^5.3.0",
+    "frint-store": "^5.3.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "rxjs": "^5.5.6",
+    "shortid": "^2.2.8",
+    "travix-ui-kit": "^0.7.10",
+    "whatwg-fetch": "^2.0.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.2.5",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
+    "babel-preset-travix": "^1.1.1",
+    "clean-webpack-plugin": "^0.1.17",
+    "concurrently": "^3.5.1",
+    "css-loader": "^0.28.9",
+    "cssnano": "^3.10.0",
+    "eslint": "^4.16.0",
+    "eslint-config-travix": "^4.0.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.5.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
+    "html-webpack-plugin": "^2.30.1",
+    "identity-obj-proxy": "^3.0.0",
+    "install": "^0.10.4",
+    "jest": "^22.1.4",
+    "node-sass": "^4.7.2",
+    "postcss-autoreset": "^2.0.1",
+    "postcss-flexbugs-fixes": "^3.3.0",
+    "postcss-loader": "^2.0.10",
+    "react-test-renderer": "^16.2.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.20.1",
+    "stylelint": "^8.4.0",
+    "stylelint-config-travix": "^1.2.0",
+    "stylelint-webpack-plugin": "^0.10.1",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "identity-obj-proxy"
+    }
   }
 }

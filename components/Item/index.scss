@@ -1,0 +1,17 @@
+.ui-card {
+  margin-top: 15px;
+  padding: 15px;
+  position: relative;
+
+  .ui-button {
+    margin: 10px 15px 0 0;
+
+    &.cancelButton {
+      bottom: 15px;
+      left: 110px;
+      position: absolute;
+      top: auto;
+    }
+  }
+}
+

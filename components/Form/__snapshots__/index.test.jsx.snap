@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form snapshot test DOM structure renders correctly 1`] = `
+<form
+  className="ui-form"
+  onSubmit={[Function]}
+>
+  <label
+    htmlFor="titleInput"
+  >
+    Form Title
+  </label>
+  <div
+    className="ui-input-container"
+  >
+    <input
+      className="ui-input"
+      disabled={false}
+      id="titleInput"
+      name={undefined}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="Todo title..."
+      type="text"
+      value="Title"
+    />
+  </div>
+  <div
+    className="ui-input-container"
+  >
+    <textarea
+      className="ui-input"
+      disabled={false}
+      name={undefined}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="Todo description..."
+      type="text"
+      value="Description"
+    />
+  </div>
+  <button
+    className="ui-button ui-button_size_s ui-button_variation_default"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+    Action
+  </button>
+</form>
+`;

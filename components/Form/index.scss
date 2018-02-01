@@ -1,0 +1,13 @@
+.ui-form {
+  width: 50%;
+
+  .ui-input-container {
+    margin: 15px 0;
+  }
+}
+
+@media (max-width: 800px) {
+  .ui-form {
+    width: 80%;
+  }
+}
