@@ -2,6 +2,7 @@ import './styles.scss';
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import uuid from 'uuid/v1'
 
 import { getTodos } from '../../actions/todoActions';
 
@@ -21,10 +22,11 @@ class TodoBox extends React.Component {
       <div class="todo-box">
         {this.props.todos.map(todo => {
         return <Todo
-          key={todo.id}
+          key={uuid()}
           id={todo.id}
           title={todo.title}
           description={todo.description}
+          complete={todo.complete}
           dispatch={this.props.dispatch}
          />;
        })}

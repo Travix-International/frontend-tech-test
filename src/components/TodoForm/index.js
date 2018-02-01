@@ -10,7 +10,7 @@ const initialState = () => {
     title: '',
     description: ''
   };
-}
+};
 
 class TodoForm extends React.Component {
   constructor(props){
@@ -18,22 +18,25 @@ class TodoForm extends React.Component {
     this.state = initialState();
     this.setTitle = this.setTitle.bind(this);
     this.setDescription = this.setDescription.bind(this);
-    this.setTitle = this.setTitle.bind(this);
     this.saveTodo = this.saveTodo.bind(this);
   }
 
   setTitle(e){
+    e.preventDefault();
     this.setState({title: e.target.value})
   }
 
   setDescription(e){
-    this.setState({desc: e.target.value})
+    e.preventDefault();
+    this.setState({description: e.target.value})
   }
 
   saveTodo(e){
     e.preventDefault();
-    const todo = {title: this.state.title, description: this.state.desc};
+    const todo = {title: this.state.title, description: this.state.description, complete: false};
     this.setState(initialState());
+    this.inpTitle.value = '';
+    this.inpDesc.value = '';
     this.context.store.dispatch(addTodo(todo));
   }
 
@@ -41,8 +44,8 @@ class TodoForm extends React.Component {
     return (
       <div class="todo-form">
         <div class="todo-form-container">
-          <div class="todo-form-control"><input vale={this.state.title} placeholder={'title'} onChange={this.setTitle} /></div>
-          <div class="todo-form-control"><input vale={this.state.description} placeholder={'description'} onChange={this.setDescription} /></div>
+          <div class="todo-form-control"><input ref={(elm) => this.inpTitle = elm} type="text" name="title"  vale={this.state.title} placeholder={'title'} onChange={this.setTitle} /></div>
+          <div class="todo-form-control"><input ref={(elm) => this.inpDesc = elm} type="text" name="description" vale={this.state.description} placeholder={'description'} onChange={this.setDescription} /></div>
           <div class="todo-form-control"><button onClick={this.saveTodo}>add</button></div>
         </div>
       </div>

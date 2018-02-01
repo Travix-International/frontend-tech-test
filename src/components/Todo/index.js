@@ -10,8 +10,7 @@ const initialState = () => {
     id: null,
     title: '',
     description: '',
-    updateTitle: false,
-    updateDesc: false
+    complete: false
   }
 };
 
@@ -19,19 +18,12 @@ class Todo extends React.Component {
   constructor(props){
     super(props);
     this.state = initialState();
-    this.editTitle = this.editTitle.bind(this);
     this.updateTitle = this.updateTitle.bind(this);
     this.saveTitle = this.saveTitle.bind(this);
-    this.editDesc = this.editDesc.bind(this);
     this.updateDesc = this.updateDesc.bind(this);
     this.saveDesc = this.saveDesc.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
-  }
-
-  editTitle(e){
-    e.preventDefault();
-    this.setState({updateTitle: true});
-    document.querySelector('.todo-title').focus();
+    this.toggleTodo = this.toggleTodo.bind(this);
   }
 
   saveTitle(e){
@@ -40,7 +32,8 @@ class Todo extends React.Component {
     this.props.dispatch(editTodo({
       id: this.state.id,
       title: this.state.title,
-      description: this.state.description
+      description: this.state.description,
+      complete: this.state.complete
     }));
   }
 
@@ -49,19 +42,14 @@ class Todo extends React.Component {
     this.setState({title: e.target.value});
   }
 
-  editDesc(e){
-    e.preventDefault();
-    this.setState({updateDesc: true});
-    document.querySelector('.todo-description').focus();
-  }
-
   saveDesc(e){
     e.preventDefault();
     this.setState({updateDesc: false});
     this.props.dispatch(editTodo({
       id: this.state.id,
       title: this.state.title,
-      description: this.state.description
+      description: this.state.description,
+      complete: this.state.complete
     }));
   }
 
@@ -92,11 +80,24 @@ class Todo extends React.Component {
     }
   }
 
+  toggleTodo(e){
+    e.preventDefault();
+    const flag = this.state.complete ? false : true;
+    this.setState({complete: flag});
+    this.props.dispatch(editTodo({
+      id: this.state.id,
+      title: this.state.title,
+      description: this.state.description,
+      complete: this.state.complete
+    }));
+  }
+
   componentWillMount() {
     this.setState({
       id: this.props.id,
       title: this.props.title,
-      description: this.props.description
+      description: this.props.description,
+      complete: this.props.complete
     });
   }
 
@@ -108,21 +109,24 @@ class Todo extends React.Component {
     return (
       <div class="todo" ref={(elm) => this.todoElm = elm}>
         <div class="todo-title-content">
-          {this.state.updateTitle ? <input placeholder={'Title'} class="todo-title" onChange={this.updateTitle} onBlur={this.saveTitle} value={this.state.title} /> :
-          <h3 class="todo-title" onClick={this.editTitle}>{this.state.title}</h3>}
+          <input placeholder={'Title'} disabled={this.state.complete} class="todo-title" onClick={this.focusElement} onChange={this.updateTitle} onBlur={this.saveTitle} value={this.state.title} />
         </div>
         <div class="todo-description-content">
-          {this.state.updateDesc ? <textarea placeholder={'Description'} class="todo-description" onChange={this.updateDesc} onBlur={this.saveDesc} value={this.state.description}></textarea> :
-          <p class="todo-description" onClick={this.editDesc}>{this.state.description}</p>}
+          <textarea placeholder={'Description'} disabled={this.state.complete} class="todo-description" onClick={this.focusElement} onChange={this.updateDesc} onBlur={this.saveDesc} value={this.state.description}></textarea>
         </div>
         <i class="fa fa-thumbtack todo-pin"></i>
         <i class="fa fa-trash todo-icon-delete" aria-hidden="true"></i>
+        <i class="fa fa-check-circle todo-icon-complete"></i>
+        <i class="todo-complete" onClick={this.toggleTodo}></i>
         <i class="todo-delete" onClick={this.removeTodo}></i>
         <div class="todo-colors">
           <span class="yellow" onClick={this.changeColor.bind(this, 1)}></span>
           <span class="blue" onClick={this.changeColor.bind(this, 2)}></span>
           <span class="purple" onClick={this.changeColor.bind(this, 3)}></span>
         </div>
+        {this.state.complete ? <div class="todo-done">
+          <span>- Done -</span>
+        </div>: ''}
       </div>
     );
   }
@@ -132,6 +136,7 @@ Todo.propTypes = {
   id: PropTypes.number,
   title: PropTypes.string,
   description: PropTypes.string,
+  complete: PropTypes.bool,
   dispatch: PropTypes.func
 };
 

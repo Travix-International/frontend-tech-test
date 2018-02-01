@@ -70,6 +70,7 @@ app.put('/task/update', (req, res) => {
     if (task !== null) {
       task.title = req.body.title;
       task.description = req.body.description;
+      task.complete = req.body.complete || false;
       return res.status(204).json({
         message: 'task updated',
       });
