@@ -8,7 +8,12 @@ const postcssAutoreset = require('postcss-autoreset');
 const cssnano = require('cssnano');
 
 module.exports = {
-  entry: `${__dirname}/index.js`,
+  entry: [
+    `${__dirname}/index.js`,
+    `${__dirname}/assets/css/fonts.css`,
+    `${__dirname}/assets/css/theme.css`,
+    `${__dirname}/assets/css/ui-bundle.css`,
+  ],
   output: {
     path: `${__dirname}/build`,
     filename: 'bundle.js',
@@ -110,6 +115,10 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
+    new ExtractTextPlugin({
+      filename: '[name]-[chunkhash].css',
+      allChunks: true,
+    }),
     new CleanWebpackPlugin(['build']),
     new HtmlWebpackPlugin({
       title: 'TodoApp',
