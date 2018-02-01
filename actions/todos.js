@@ -18,12 +18,17 @@ export const failTodo = error => dispatch => dispatch({
   type: TODO_FAILED,
 });
 
-export const addTodo = (t, d) => dispatch => createTodo(t, d)
-  .then(({ task }) => dispatch({
-    type: TODO_ADD,
-    ...task,
-  }))
-  .catch(er => dispatch(failTodo(er)));
+export const addTodo = (t, d) => (dispatch) => {
+  dispatch({
+    type: SERVER_REQUESTED,
+  });
+  return createTodo(t, d)
+    .then(({ task }) => dispatch({
+      type: TODO_ADD,
+      ...task,
+    }))
+    .catch(er => dispatch(failTodo(er)));
+};
 
 export const fetchTodos = () => (dispatch) => {
   dispatch({
@@ -37,18 +42,28 @@ export const fetchTodos = () => (dispatch) => {
     .catch(er => dispatch(failTodo(er)));
 };
 
-export const removeTodo = id => dispatch => deleteTodo(id)
-  .then(() => dispatch({
-    type: TODO_DELETE,
-    id,
-  }))
-  .catch(er => dispatch(failTodo(er)));
+export const removeTodo = id => (dispatch) => {
+  dispatch({
+    type: SERVER_REQUESTED,
+  });
+  return deleteTodo(id)
+    .then(() => dispatch({
+      type: TODO_DELETE,
+      id,
+    }))
+    .catch(er => dispatch(failTodo(er)));
+};
 
-export const updateTodo = (id, title, description) => dispatch => editTodo(id, title, description)
-  .then(() => dispatch({
-    type: TODO_UPDATE,
-    id,
-    title,
-    description,
-  }))
-  .catch(er => dispatch(failTodo(er)));
+export const updateTodo = (id, title, description) => (dispatch) => {
+  dispatch({
+    type: SERVER_REQUESTED,
+  });
+  return editTodo(id, title, description)
+    .then(() => dispatch({
+      type: TODO_UPDATE,
+      id,
+      title,
+      description,
+    }))
+    .catch(er => dispatch(failTodo(er)));
+};
