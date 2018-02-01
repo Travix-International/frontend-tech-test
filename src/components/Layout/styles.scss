@@ -1,4 +1,11 @@
-.hello {
+.layout {
+  background-image: url(./bg.jpg);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.layout-container {
+  max-width: 1200px;
+  margin: 0 auto;
   font-size: 16px;
-  color: red;
+  padding-top: 100px;
 }

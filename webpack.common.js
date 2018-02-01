@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const extractSass = new ExtractTextPlugin({
-    filename: '[name].build.css'
+    filename: '[name].[hash].css'
 });
 
 module.exports = {
@@ -16,7 +16,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].build.js'
+    filename: '[name].[hash].js'
   },
   plugins: [
     new CleanWebpackPlugin(['dist/*.*']),

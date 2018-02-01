@@ -1,0 +1,127 @@
+$colorbase: #FFF55C;
+$color1: #FFF55C;
+$color2: #B3E5FC;
+$color3: #E1BEE7;
+$font: 'Montserrat';
+$shadow: #212121;
+
+.todo {
+  background-color: $colorbase;
+  border-radius: 2px;
+  box-shadow: 2px 2px 0px $shadow;
+  font-size: 16px;
+  margin: 10px;
+  min-height: 200px;
+  position: relative;
+  width: 100%;
+
+  &.yellow {
+    background-color: $color1;
+  }
+
+  &.blue {
+    background-color: $color2;
+  }
+
+  &.purple {
+    background-color: $color3;
+  }
+
+  @media only screen and (min-width: 400px){
+    width: 45%;
+  }
+
+  @media only screen and (min-width: 600px){
+    width: 30%;
+  }
+}
+
+.todo-title {
+  background: transparent;
+  border: 0px;
+  display:block;
+  font-family: $font;
+  font-size: 1.2em;
+  font-weight: 700;
+  height: 20px;
+  margin: 10px 0px;
+  padding: 0px 0px 0px 10px;
+  outline: none;
+}
+
+
+.todo-description{
+  background: transparent;
+  border: 0px;
+  font-family: $font;
+  font-size: 0.9em;
+  font-weight: 400;
+  height: 100px;
+  margin: 0px 10px;
+  padding: 0px;
+  outline: none;
+  width: 95%;
+}
+
+.todo-description-content {
+  margin: 10px 0px;
+}
+
+.todo-title-content {
+  margin: 15px 0px;
+}
+
+.todo-delete {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.todo-icon-delete {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 1.5em;
+  padding: 5px 5px 0px 0px;
+}
+
+.todo-pin {
+  position: absolute;
+  font-size: 2em;
+  top: -19px;
+  left: -19px;
+  padding: 5px 0px 0px 5px;
+  transform: rotate(-45deg)
+}
+
+.todo-colors {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  margin-bottom: 5px;
+
+  span {
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: top;
+    border: 1px solid black;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+
+    &.yellow {
+      background-color: $color1;
+    }
+    &.blue {
+      background-color: $color2;
+    }
+    &.purple {
+      background-color: $color3;
+    }
+  }
+}

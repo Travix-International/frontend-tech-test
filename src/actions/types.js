@@ -1,0 +1,3 @@
+export const GET_TODOS = 'GET_TODOS';
+export const REQUEST_PENDING = 'GET_TODOS_PENDING';
+export const REQUEST_REJECTED = 'GET_TODOS_REJECTED';

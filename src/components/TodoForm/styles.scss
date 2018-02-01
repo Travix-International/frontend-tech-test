@@ -1,0 +1,26 @@
+.todo-form {
+  background-color: white;
+  left: 0px;
+  padding: 10px;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  z-index: 100;
+}
+
+.todo-form-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.todo-form-control {
+  display: inline-block;
+  vertical-align: top;
+  width: 33.3333%;
+
+  input, button {
+    border-radius: 2px;
+    display: block;
+    width: 95%;
+  }
+}
