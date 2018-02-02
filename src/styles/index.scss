@@ -1,0 +1,11 @@
+.hi {
+  backface-visibility: hidden;
+
+  &__black-child {
+    background: black;
+  }
+
+  &__second-black-child {
+    padding-block-start: 0%;
+  }
+}
