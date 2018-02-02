@@ -18,44 +18,25 @@ class Todo extends React.Component {
   constructor(props){
     super(props);
     this.state = initialState();
-    this.updateTitle = this.updateTitle.bind(this);
-    this.saveTitle = this.saveTitle.bind(this);
-    this.updateDesc = this.updateDesc.bind(this);
-    this.saveDesc = this.saveDesc.bind(this);
+    this.updateField = this.updateField.bind(this);
+    this.saveTodo = this.saveTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
     this.toggleTodo = this.toggleTodo.bind(this);
   }
 
-  saveTitle(e){
+  updateField(field, e){
     e.preventDefault();
-    this.setState({updateTitle: false});
+    this.setState({[field]: e.target.value});
+  }
+
+  saveTodo(e){
+    e.preventDefault();
     this.props.dispatch(editTodo({
       id: this.state.id,
       title: this.state.title,
       description: this.state.description,
       complete: this.state.complete
     }));
-  }
-
-  updateTitle(e){
-    e.preventDefault();
-    this.setState({title: e.target.value});
-  }
-
-  saveDesc(e){
-    e.preventDefault();
-    this.setState({updateDesc: false});
-    this.props.dispatch(editTodo({
-      id: this.state.id,
-      title: this.state.title,
-      description: this.state.description,
-      complete: this.state.complete
-    }));
-  }
-
-  updateDesc(e){
-    e.preventDefault();
-    this.setState({description: e.target.value});
   }
 
   removeTodo(e){
@@ -75,8 +56,6 @@ class Todo extends React.Component {
       case 3:
         this.todoElm.classList.add('purple');
         break;
-      default:
-        break;
     }
   }
 
@@ -88,7 +67,7 @@ class Todo extends React.Component {
       id: this.state.id,
       title: this.state.title,
       description: this.state.description,
-      complete: this.state.complete
+      complete: flag
     }));
   }
 
@@ -101,7 +80,7 @@ class Todo extends React.Component {
     });
   }
 
-  componentWillUnMount(){
+  componentWillUnmount(){
     this.setState(initialState());
   }
 
@@ -109,10 +88,10 @@ class Todo extends React.Component {
     return (
       <div class="todo" ref={(elm) => this.todoElm = elm}>
         <div class="todo-title-content">
-          <input placeholder={'Title'} disabled={this.state.complete} class="todo-title" onClick={this.focusElement} onChange={this.updateTitle} onBlur={this.saveTitle} value={this.state.title} />
+          <input placeholder={'Title'} disabled={this.state.complete} class="todo-title" onChange={this.updateField.bind(this, 'title')} onBlur={this.saveTodo} value={this.state.title} />
         </div>
         <div class="todo-description-content">
-          <textarea placeholder={'Description'} disabled={this.state.complete} class="todo-description" onClick={this.focusElement} onChange={this.updateDesc} onBlur={this.saveDesc} value={this.state.description}></textarea>
+          <textarea placeholder={'Description'} disabled={this.state.complete} class="todo-description" onChange={this.updateField.bind(this, 'description')} onBlur={this.saveTodo} value={this.state.description}></textarea>
         </div>
         <i class="fa fa-thumbtack todo-pin"></i>
         <i class="fa fa-trash todo-icon-delete" aria-hidden="true"></i>

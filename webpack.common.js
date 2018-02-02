@@ -1,10 +1,9 @@
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const extractSass = new ExtractTextPlugin({
-    filename: '[name].[hash].css'
+    filename: '[name].bundle.css'
 });
 
 module.exports = {
@@ -16,10 +15,9 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[hash].js'
+    filename: '[name].bundle.js'
   },
   plugins: [
-    new CleanWebpackPlugin(['dist/*.*']),
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
@@ -60,6 +58,7 @@ module.exports = {
             'react'
           ],
           plugins: [
+            'istanbul',
             'react-html-attrs',
             'transform-object-rest-spread'
           ]
@@ -71,7 +70,6 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'eslint-loader',
         options: {
-          cache: true,
           formatter: require('eslint-friendly-formatter')
         }
       }
