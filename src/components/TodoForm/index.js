@@ -16,19 +16,12 @@ class TodoForm extends React.Component {
   constructor(props){
     super(props);
     this.state = initialState();
-    this.setTitle = this.setTitle.bind(this);
-    this.setDescription = this.setDescription.bind(this);
+    this.updateState = this.updateState.bind(this);
     this.saveTodo = this.saveTodo.bind(this);
   }
 
-  setTitle(e){
-    e.preventDefault();
-    this.setState({title: e.target.value})
-  }
-
-  setDescription(e){
-    e.preventDefault();
-    this.setState({description: e.target.value})
+  updateState(field, e){
+    this.setState({[field]: e.target.value});
   }
 
   saveTodo(e){
@@ -44,9 +37,9 @@ class TodoForm extends React.Component {
     return (
       <div class="todo-form">
         <div class="todo-form-container">
-          <div class="todo-form-control"><input ref={(elm) => this.inpTitle = elm} type="text" name="title"  vale={this.state.title} placeholder={'title'} onChange={this.setTitle} /></div>
-          <div class="todo-form-control"><input ref={(elm) => this.inpDesc = elm} type="text" name="description" vale={this.state.description} placeholder={'description'} onChange={this.setDescription} /></div>
-          <div class="todo-form-control"><button onClick={this.saveTodo}>add</button></div>
+          <div class="todo-form-control"><input class="todo-form-title" ref={(elm) => this.inpTitle = elm} type="text" name="title"  vale={this.state.title} placeholder={'title'} onChange={this.updateState.bind(this, 'title')} /></div>
+          <div class="todo-form-control"><input class="todo-form-description" ref={(elm) => this.inpDesc = elm} type="text" name="description" vale={this.state.description} placeholder={'description'} onChange={this.updateState.bind(this, 'description')} /></div>
+          <div class="todo-form-control"><button class="todo-form-button" onClick={this.saveTodo}>add</button></div>
         </div>
       </div>
     );
@@ -55,10 +48,6 @@ class TodoForm extends React.Component {
 
 TodoForm.contextTypes = {
   store: PropTypes.object
-};
-
-TodoForm.propTypes = {
-  dispatch: PropTypes.func
 };
 
 export default TodoForm;
