@@ -26,7 +26,7 @@ class TodoForm extends React.Component {
 
   saveTodo(e){
     e.preventDefault();
-    const todo = {title: this.state.title, description: this.state.description, complete: false};
+    const todo = {title: this.state.title, description: this.state.description, color: 1, complete: false};
     this.setState(initialState());
     this.inpTitle.value = '';
     this.inpDesc.value = '';

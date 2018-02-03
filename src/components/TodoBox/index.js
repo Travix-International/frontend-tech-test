@@ -26,6 +26,7 @@ class TodoBox extends React.Component {
           id={todo.id}
           title={todo.title}
           description={todo.description}
+          color={todo.color}
           complete={todo.complete}
           dispatch={this.props.dispatch}
          />;

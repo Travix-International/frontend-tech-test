@@ -10,6 +10,7 @@ const initialState = () => {
     id: null,
     title: '',
     description: '',
+    color: 1,
     complete: false
   }
 };
@@ -22,6 +23,7 @@ class Todo extends React.Component {
     this.saveTodo = this.saveTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
     this.toggleTodo = this.toggleTodo.bind(this);
+    this.selectClass = this.selectClass.bind(this);
   }
 
   updateField(field, e){
@@ -35,6 +37,7 @@ class Todo extends React.Component {
       id: this.state.id,
       title: this.state.title,
       description: this.state.description,
+      color: this.state.color,
       complete: this.state.complete
     }));
   }
@@ -45,18 +48,31 @@ class Todo extends React.Component {
   }
 
   changeColor(id) {
-    this.todoElm.classList.remove('yellow', 'blue', 'purple');
-    switch(id){
+    console.log(id);
+   this.setState({color: id});
+    this.props.dispatch(editTodo({
+      id: this.state.id,
+      title: this.state.title,
+      description: this.state.description,
+      color: id,
+      complete: this.state.complete
+    }));
+  }
+
+  selectClass(){
+    let colorClass = 'todo';
+    switch(this.state.color){
       case 1:
-        this.todoElm.classList.add('yellow');
+        colorClass += ' yellow';
         break;
       case 2:
-        this.todoElm.classList.add('blue');
+        colorClass += ' blue';
         break;
       case 3:
-        this.todoElm.classList.add('purple');
+        colorClass += ' purple';
         break;
     }
+    return colorClass;
   }
 
   toggleTodo(e){
@@ -67,6 +83,7 @@ class Todo extends React.Component {
       id: this.state.id,
       title: this.state.title,
       description: this.state.description,
+      color: this.state.color,
       complete: flag
     }));
   }
@@ -76,6 +93,7 @@ class Todo extends React.Component {
       id: this.props.id,
       title: this.props.title,
       description: this.props.description,
+      color: this.props.color,
       complete: this.props.complete
     });
   }
@@ -86,7 +104,7 @@ class Todo extends React.Component {
 
   render(){
     return (
-      <div class="todo" ref={(elm) => this.todoElm = elm}>
+      <div className={this.selectClass()} ref={(elm) => this.todoElm = elm} >
         <div class="todo-title-content">
           <input placeholder={'Title'} disabled={this.state.complete} class="todo-title" onChange={this.updateField.bind(this, 'title')} onBlur={this.saveTodo} value={this.state.title} />
         </div>
@@ -115,6 +133,7 @@ Todo.propTypes = {
   id: PropTypes.number,
   title: PropTypes.string,
   description: PropTypes.string,
+  color: PropTypes.number,
   complete: PropTypes.bool,
   dispatch: PropTypes.func
 };

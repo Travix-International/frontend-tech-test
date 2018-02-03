@@ -8,9 +8,8 @@ module.exports = merge(common, {
     contentBase: './dist',
     hot: true,
     proxy: {
-      "/api": {
-        target: "http://localhost:9001",
-        pathRewrite: {"^/api" : ""}
+      "/": {
+        target: "http://localhost:9001"
       }
     }
   },

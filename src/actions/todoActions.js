@@ -10,7 +10,7 @@ export function getTodos() {
   return (dispatch) => {
     dispatch({type: REQUEST_PENDING});
     axios({
-      url: '/api/tasks',
+      url: '/task',
       method: 'GET'
     }).then((response) => {
       dispatch({type: GET_TODOS, payload: response.data});
@@ -24,7 +24,7 @@ export function addTodo(todo) {
   return (dispatch) => {
     dispatch({type: REQUEST_PENDING});
     axios({
-      url: 'api/task/create',
+      url: '/task/create',
       method: 'POST',
       data: todo
     }).then(() => {
@@ -38,7 +38,7 @@ export function addTodo(todo) {
 export function removeTodo(id) {
   return (dispatch) => {
     axios({
-      url: 'api/task/delete',
+      url: '/task/delete',
       method: 'DELETE',
       data: {id}
     }).then(() => {
@@ -52,7 +52,7 @@ export function removeTodo(id) {
 export function editTodo(todo) {
   return (dispatch) => {
     axios({
-      url: 'api/task/update',
+      url: '/task/update',
       method: 'PUT',
       data: todo
     }).then(() => {

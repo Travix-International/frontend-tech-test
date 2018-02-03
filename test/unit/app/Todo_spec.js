@@ -32,11 +32,11 @@ describe('<Todo />', function(){
   it('should change todo color adding css class on click color icons', function(){
     const wrapper = mount(<Todo id={1} title={'hello'} description={'world'} complete={false} dispatch={(obj)=> obj} />);
     wrapper.find('.todo-colors .yellow').simulate('click');
-    expect(wrapper.find('.todo .yellow')).to.have.length(1);
+    expect(wrapper.state().color).to.equal(1);
     wrapper.find('.todo-colors .blue').simulate('click');
-    expect(wrapper.find('.todo .blue')).to.have.length(1);
+    expect(wrapper.state().color).to.equal(2);
     wrapper.find('.todo-colors .purple').simulate('click');
-    expect(wrapper.find('.todo .purple')).to.have.length(1);
+    expect(wrapper.state().color).to.equal(3);
   });
 
   it('should execute removeTodo when click on todo-delete icon', function(){
