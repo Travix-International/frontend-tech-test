@@ -31,7 +31,7 @@ app.get('/api/tasks', (req, res) => {
   const tasks = tasksContainer.tasks.filter(item => item.status !== taskStatus.deleted);
 
   return res.status(200).json({
-    meta: { message: 'RESOURCE_SUCCESS' },
+    meta: { message: 'SUCCESS' },
     data: tasks,
   });
 });
@@ -57,7 +57,7 @@ app.get('/api/task/:id', (req, res) => {
 
     if (task !== null && typeof task !== 'undefined' && task.status) {
       return res.status(200).json({
-        meta: { message: 'RESOURCE_SUCCESS' },
+        meta: { message: 'SUCCESS' },
         data: task,
       });
     }
@@ -67,7 +67,7 @@ app.get('/api/task/:id', (req, res) => {
     });
   }
   return res.status(400).json({
-    meta: { message: 'RESOURCE_BAD_REQUEST' },
+    meta: { message: 'BAD_REQUEST' },
     data: {},
   });
 });
@@ -106,7 +106,7 @@ app.put('/api/task/update/:id/:title/:description/:status', (req, res) => {
     });
   }
   return res.status(400).json({
-    meta: { message: 'RESOURCE_BAD_REQUEST' },
+    meta: { message: 'BAD_REQUEST' },
     data: {},
   });
 });
@@ -170,7 +170,7 @@ app.delete('/api/task/delete/:id', (req, res) => {
     });
   }
   return res.status(400).json({
-    meta: { message: 'RESOURCE_BAD_REQUEST' },
+    meta: { message: 'BAD_REQUEST' },
     data: {},
   });
 });
