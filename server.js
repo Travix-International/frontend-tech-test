@@ -4,6 +4,22 @@ const app = express();
 const tasksContainer = require('./tasks.json');
 const path = require('path');
 
+const taskStatus = {
+  active: 'ACTIVE',
+  complete: 'COMPLETED',
+  deleted: 'DELETED',
+};
+
+/*
+  Data model:
+  tasks: [{
+    id: :id,
+    title: :title,
+    description: :description,
+    status: :status,
+  }]
+*/
+
 app.use(express.static(path.join(__dirname, './dist')));
 
 /**
@@ -11,7 +27,14 @@ app.use(express.static(path.join(__dirname, './dist')));
  *
  * Return the list of tasks with status code 200.
  */
-app.get('/api/tasks', (req, res) => res.status(200).json(tasksContainer));
+app.get('/api/tasks', (req, res) => {
+  const tasks = tasksContainer.tasks.filter(item => item.status !== taskStatus.deleted);
+
+  return res.status(200).json({
+    meta: { message: 'RESOURCE_SUCCESS' },
+    data: tasks,
+  });
+});
 
 /**
  * Get /api/task/:id
@@ -30,21 +53,21 @@ app.get('/api/task/:id', (req, res) => {
   if (!Number.isNaN(id)) {
     // Fix small bug that uses tasks.Container instead of tasksContainer
     // const task = tasks.Container.find(item => item.id === id);
-    const task = tasksContainer.find(item => item.id === id);
+    const task = tasksContainer.tasks.find(item => item.id === id && item.status !== taskStatus.deleted);
 
-    if (task !== null) {
+    if (task !== null && typeof task !== 'undefined' && task.status) {
       return res.status(200).json({
-        task,
+        meta: { message: 'RESOURCE_SUCCESS' },
+        data: task,
       });
     }
     return res.status(404).json({
-      meta: { message: 'Not found.' },
+      meta: { message: 'RESOURCE_NOT_FOUND' },
       data: {},
     });
   }
   return res.status(400).json({
-    // message: 'Bad request.',
-    meta: { message: 'Not found.' },
+    meta: { message: 'RESOURCE_BAD_REQUEST' },
     data: {},
   });
 });
@@ -57,27 +80,34 @@ app.get('/api/task/:id', (req, res) => {
  * description: string
  *
  * Update the task with the given id.
- * If the task is found and update as well, return a status code 204.
+ * If the task is found and update as well, return a status code 200.
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/api/task/update/:id/:title/:description', (req, res) => {
+app.put('/api/task/update/:id/:title/:description/:status', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    const task = tasksContainer.tasks.find(item => item.id === id && item.status !== taskStatus.deleted);
 
-    if (task !== null) {
+    if (task !== null && typeof task !== 'undefined') {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      task.status = req.params.status;
+
+      return res.status(200).json({
+        meta: { message: 'RESOURCE_UPDATED' },
+        data: task,
+      });
     }
     return res.status(404).json({
-      message: 'Not found',
+      meta: { message: 'RESOURCE_RESOURCE_NOT_FOUND' },
+      data: {},
     });
   }
   return res.status(400).json({
-    message: 'Bad request',
+    meta: { message: 'RESOURCE_BAD_REQUEST' },
+    data: {},
   });
 });
 
@@ -95,12 +125,16 @@ app.post('/api/task/create/:title/:description', (req, res) => {
     id: tasksContainer.tasks.length,
     title: req.params.title,
     description: req.params.description,
+    status: taskStatus.active,
   };
 
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
-    message: 'Resource created',
+    meta: {
+      message: 'RESOURCE_CREATED',
+    },
+    data: task,
   });
 });
 
@@ -110,7 +144,7 @@ app.post('/api/task/create/:title/:description', (req, res) => {
  * id: Number
  *
  * Delete the task linked to the  given id.
- * If the task is found and deleted as well, return a status code 204.
+ * If the task is found and deleted as well, return a status code 200.
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
@@ -118,30 +152,35 @@ app.delete('/api/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    const task = tasksContainer.tasks.find(item => item.id === id && item.status !== taskStatus.deleted);
 
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
+    if (task !== null && typeof task !== 'undefined') {
+      // const taskIndex = tasksContainer.tasks;
+      // tasksContainer.tasks.splice(taskIndex, 1);
+      task.status = taskStatus.deleted;
+
       return res.status(200).json({
-        message: 'Updated successfully',
+        meta: { message: 'RESOURCE_DELETED' },
+        data: {},
       });
     }
     return res.status(404).json({
-      message: 'Not found',
+      meta: { message: 'RESOURCE_NOT_FOUND' },
+      data: {},
     });
   }
   return res.status(400).json({
-    message: 'Bad request',
+    meta: { message: 'RESOURCE_BAD_REQUEST' },
+    data: {},
   });
 });
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/src/index.html`);
 });
 
 const server = app.listen(9001, () => {
-  process.stdout.write('the server is available on http://localhost:9001/\n');
+  process.stdout.write('\n\n\n\nThe server is available on http://localhost:9001/\n');
 });
 
 module.exports = server;
