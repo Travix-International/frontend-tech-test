@@ -1,6 +1,6 @@
-const SHOW_ALL = 'show_all';
-const SHOW_COMPLETED = 'show_completed';
-const SHOW_ACTIVE = 'show_active';
+const SHOW_ALL = 'SHOW_ALL';
+const SHOW_COMPLETED = 'SHOW_COMPLETED';
+const SHOW_ACTIVE = 'SHOW_ACTIVE';
 
 export default {
   SHOW_ALL,
