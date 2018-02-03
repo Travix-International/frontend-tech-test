@@ -101,7 +101,7 @@ app.put('/api/task/update/:id/:title/:description/:status', (req, res) => {
       });
     }
     return res.status(404).json({
-      meta: { message: 'RESOURCE_RESOURCE_NOT_FOUND' },
+      meta: { message: 'RESOURCE_NOT_FOUND' },
       data: {},
     });
   }
