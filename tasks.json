@@ -4,25 +4,29 @@
       "id": 0,
       "title": "Test title 0",
       "description": "Test description",
-      "status": "COMPLETED"
+      "completed": true,
+      "deleted": false
     },
     {
       "id": 1,
       "title": "Test title 1",
       "description": "Test description",
-      "status": "DELETED"
+      "completed": false,
+      "deleted": false
     },
     {
       "id": 2,
       "title": "Test title 2",
       "description": "Test description",
-      "status": "ACTIVE"
+      "completed": true,
+      "deleted": false
     },
     {
       "id": 3,
       "title": "Test title 3",
       "description": "Test description",
-      "status": "ACTIVE"
+      "completed": false,
+      "deleted": true
     }
   ]
 }

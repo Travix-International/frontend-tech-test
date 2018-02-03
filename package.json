@@ -11,18 +11,24 @@
     "test-app": "jest --env=jsdom --watchAll",
     "test-api": "mocha \"__tests__/API/**/*.test.js\" --watch",
     "test-e2e": "wdio wdio.conf.js",
-    "test-e2e-watch": "wdio wdio.conf.js --watch"
+    "test-e2e-watch": "wdio wdio.conf.js --watch",
+    "build:ui": "travix-ui-kit -j ./js/ -c ./css/",
+    "build:ui-watch": "travix-ui-kit -j ./js/ -c ./css/"
   },
   "author": "Michael Castro",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "jest": "^22.1.4",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "travix-ui-kit": "^0.7.10"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-jest": "^22.1.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
@@ -38,6 +44,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",
     "extract-text-webpack-plugin": "^3.0.2",
+    "jest": "^22.1.4",
     "mocha": "^5.0.0",
     "node-sass": "^4.7.2",
     "postcss-loader": "^2.0.10",
@@ -53,16 +60,25 @@
   "jest": {
     "verbose": true,
     "setupTestFrameworkScriptFile": "<rootDir>config/setupTests.js",
-    "collectCoverageFrom": ["src/javascript/**/*.{js,jsx}"],
-    "testPathIgnorePatterns": ["<rootDir>[/\\\\](build|docs|node_modules|.tmp|dist)[/\\\\]"],
+    "collectCoverageFrom": [
+      "src/javascript/**/*.{js,jsx}"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>[/\\\\](build|docs|node_modules|.tmp|dist)[/\\\\]"
+    ],
     "testEnvironment": "jsdom",
     "testURL": "http://localhost",
-    "roots": ["<rootDir>/src/", "<rootDir>/__tests__/app"],
+    "roots": [
+      "<rootDir>/src/javascript",
+      "<rootDir>/__tests__/app"
+    ],
     "testRegex": "__tests__/app|\\.(test|spec)\\.js?$",
     "transform": {
       "^.+\\.jsx?$": "<rootDir>/node_modules/babel-jest",
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/fileTransform.js"
     },
-    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"]
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ]
   }
 }

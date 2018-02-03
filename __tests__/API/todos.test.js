@@ -19,7 +19,8 @@ describe('Tasks', () => {
         res.body.data[0].should.have.property('id');
         res.body.data[0].should.have.property('title');
         res.body.data[0].should.have.property('description');
-        res.body.data[0].should.have.property('status');
+        res.body.data[0].should.have.property('completed');
+        res.body.data[0].should.not.have.property('deleted');
         done();
       });
   });
@@ -36,7 +37,8 @@ describe('Tasks', () => {
         res.body.data.should.have.property('id');
         res.body.data.should.have.property('title');
         res.body.data.should.have.property('description');
-        res.body.data.should.have.property('status');
+        res.body.data.should.have.property('completed');
+        res.body.data.should.not.have.property('deleted');
         done();
       });
   });
@@ -53,7 +55,7 @@ describe('Tasks', () => {
         res.body.data.should.not.have.property('id');
         res.body.data.should.not.have.property('title');
         res.body.data.should.not.have.property('description');
-        res.body.data.should.not.have.property('status');
+        res.body.data.should.not.have.property('completed');
         done();
       });
   });
@@ -70,20 +72,21 @@ describe('Tasks', () => {
         res.body.data.should.not.have.property('id');
         res.body.data.should.not.have.property('title');
         res.body.data.should.not.have.property('description');
-        res.body.data.should.not.have.property('status');
+        res.body.data.should.not.have.property('completed');
         done();
       });
   });
 
-  it('should update a SINGLE task on /api/task/update/:id/:title/:description/:status PUT', (done) => {
+  it('should update a SINGLE task on /api/task/update/:id PUT', (done) => {
     const id = 0;
     const title = 'Test title 0';
     const description = 'Test description';
-    const status = 'COMPLETED';
+    const completed = true;
 
     chai
       .request(server)
-      .put(`/api/task/update/${id}/${title}/${description}/${status}`)
+      .put(`/api/task/update/${id}`)
+      .send({ title, description, completed })
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
@@ -93,11 +96,11 @@ describe('Tasks', () => {
         res.body.data.should.have.property('id');
         res.body.data.should.have.property('title');
         res.body.data.should.have.property('description');
-        res.body.data.should.have.property('status');
+        res.body.data.should.have.property('completed');
         res.body.data.id.should.equal(id);
         res.body.data.title.should.equal(title);
         res.body.data.description.should.equal(description);
-        res.body.data.status.should.equal(status);
+        res.body.data.completed.should.equal(completed);
         done();
       });
   });
@@ -106,11 +109,12 @@ describe('Tasks', () => {
     const id = -1;
     const title = 'Test title 0';
     const description = 'Test description';
-    const status = 'COMPLETED';
+    const completed = true;
 
     chai
       .request(server)
-      .put(`/api/task/update/${id}/${title}/${description}/${status}`)
+      .put(`/api/task/update/${id}`)
+      .send({ title, description, completed })
       .end((err, res) => {
         res.should.have.status(404);
         res.should.be.json;
@@ -119,20 +123,21 @@ describe('Tasks', () => {
         res.body.data.should.not.have.property('id');
         res.body.data.should.not.have.property('title');
         res.body.data.should.not.have.property('description');
-        res.body.data.should.not.have.property('status');
+        res.body.data.should.not.have.property('completed');
         done();
       });
   });
 
-  it('should return bad request for NaN values on :id on /api/task/update/:id/:title/:description/:status PUT', (done) => {
+  it('should return bad request for NaN values on :id on /api/task/update/:id PUT', (done) => {
     const id = 'string';
     const title = 'Test title 0';
     const description = 'Test description';
-    const status = 'COMPLETED';
+    const completed = true;
 
     chai
       .request(server)
-      .put(`/api/task/update/${id}/${title}/${description}/${status}`)
+      .put(`/api/task/update/${id}`)
+      .send({ title, description, completed })
       .end((err, res) => {
         res.should.have.status(400);
         res.should.be.json;
@@ -141,7 +146,7 @@ describe('Tasks', () => {
         res.body.data.should.not.have.property('id');
         res.body.data.should.not.have.property('title');
         res.body.data.should.not.have.property('description');
-        res.body.data.should.not.have.property('status');
+        res.body.data.should.not.have.property('completed');
         done();
       });
   });
@@ -153,6 +158,7 @@ describe('Tasks', () => {
     chai
       .request(server)
       .post(`/api/task/create/${title}/${description}`)
+      .send({ title, description })
       .end((err, res) => {
         res.should.have.status(201);
         res.should.be.json;
@@ -162,16 +168,20 @@ describe('Tasks', () => {
         res.body.data.should.have.property('id');
         res.body.data.should.have.property('title');
         res.body.data.should.have.property('description');
-        res.body.data.should.have.property('status');
+        res.body.data.should.have.property('completed');
+        res.body.data.should.not.have.property('deleted');
         res.body.data.title.should.equal(title);
         res.body.data.description.should.equal(description);
-        res.body.data.status.should.equal('ACTIVE');
+        res.body.data.completed.should.equal(false);
         done();
       });
   });
 
   it('should delete a SINGLE task on /api/task/delete/:id DELETE', (done) => {
-    const id = 0;
+    // To make things a bit faster, I simply assume there is an item in the store
+    // that has the id 2 and use it. Best way to do this would be to mock the creation
+    // of a todo item and then delete it as follows.
+    const id = 2;
 
     chai
       .request(server)
@@ -185,7 +195,7 @@ describe('Tasks', () => {
         res.body.data.should.not.have.property('id');
         res.body.data.should.not.have.property('title');
         res.body.data.should.not.have.property('description');
-        res.body.data.should.not.have.property('status');
+        res.body.data.should.not.have.property('completed');
         done();
       });
   });
@@ -204,7 +214,7 @@ describe('Tasks', () => {
         res.body.data.should.not.have.property('id');
         res.body.data.should.not.have.property('title');
         res.body.data.should.not.have.property('description');
-        res.body.data.should.not.have.property('status');
+        res.body.data.should.not.have.property('completed');
         done();
       });
   });
@@ -223,7 +233,7 @@ describe('Tasks', () => {
         res.body.data.should.not.have.property('id');
         res.body.data.should.not.have.property('title');
         res.body.data.should.not.have.property('description');
-        res.body.data.should.not.have.property('status');
+        res.body.data.should.not.have.property('completed');
         done();
       });
   });

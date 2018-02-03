@@ -1,11 +1,16 @@
-.hi {
-  backface-visibility: hidden;
+@import 'reset';
+@import '../../node_modules/travix-ui-kit/dist/theme.css';
+@import '../../node_modules/travix-ui-kit/dist/ui-bundle.css';
 
-  &__black-child {
+.todo-app {
+  max-width: 500px;
+  margin: auto;
+
+  &__title-input {
     background: black;
   }
 
-  &__second-black-child {
+  &__title-description {
     padding-block-start: 0%;
   }
 }
