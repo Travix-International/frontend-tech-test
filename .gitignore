@@ -4,3 +4,5 @@ node_modules/
 .vs_code/
 dist/
 coverage/
+npm-debug.log
+bower_components/

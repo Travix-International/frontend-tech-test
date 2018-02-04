@@ -1,0 +1,27 @@
+{
+  "name": "test-candidates",
+  "description": "test back - front",
+  "main": "server.js",
+  "authors": [
+    "spartans"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "test",
+    "travix"
+  ],
+  "homepage": "https://github.com/dexxo/frontend-tech-test",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-strings": "normalize#^1.1.0",
+    "font-awesome": "fontawesome#^4.7.0",
+    "normalize-css": "^7.0.0"
+  }
+}

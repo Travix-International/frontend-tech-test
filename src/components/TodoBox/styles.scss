@@ -1,3 +1,9 @@
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 .todo-box {
   display: flex;
   flex-wrap: wrap;

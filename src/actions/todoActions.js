@@ -1,5 +1,6 @@
 import {
   REQUEST_PENDING,
+  REQUEST_FULFILL,
   REQUEST_REJECTED,
   GET_TODOS
 } from './types';
@@ -13,6 +14,7 @@ export function getTodos() {
       url: '/task',
       method: 'GET'
     }).then((response) => {
+      dispatch({type: REQUEST_FULFILL});
       dispatch({type: GET_TODOS, payload: response.data});
     }).catch((error) => {
       dispatch({type: REQUEST_REJECTED, payload: error});

@@ -1,7 +1,8 @@
 import {
-  REQUEST_PENDING,
   GET_TODOS,
-  REQUEST_REJECTED
+  REQUEST_PENDING,
+  REQUEST_REJECTED,
+  REQUEST_FULFILL
 } from '../actions/types';
 
 const initialState = {
@@ -14,6 +15,9 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case REQUEST_PENDING: {
       return {...state, sending: true};
+    }
+    case REQUEST_FULFILL: {
+      return {...state, sending: false};
     }
     case REQUEST_REJECTED: {
       return {...state, sending: false, error: action.payload};

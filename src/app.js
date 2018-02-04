@@ -1,3 +1,6 @@
+import '../bower_components/normalize-css/normalize.css';
+import '../bower_components/font-awesome/css/font-awesome.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

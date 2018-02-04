@@ -23,9 +23,9 @@ describe('<Todo />', function(){
 
   it('should change todo complete state when click check icon', function () {
    const wrapper = mount(<Todo id={1} title={'hello'} description={'world'} complete={false} dispatch={(obj)=> obj} />);
-    wrapper.find('.todo-complete').simulate('click');
+    wrapper.find('.todo-icon-complete').simulate('click');
     expect(wrapper.state().complete).to.be.equal(true);
-    wrapper.find('.todo-complete').simulate('click');
+    wrapper.find('.todo-icon-complete').simulate('click');
     expect(wrapper.state().complete).to.be.equal(false);
   });
 
@@ -39,10 +39,10 @@ describe('<Todo />', function(){
     expect(wrapper.state().color).to.equal(3);
   });
 
-  it('should execute removeTodo when click on todo-delete icon', function(){
+  it('should execute removeTodo when click on todo-icon-delete icon', function(){
     const spyRemove = sinon.spy(Todo.prototype, 'removeTodo');
     const wrapper = mount(<Todo id={1} title={'hello'} description={'world'} complete={false} dispatch={(obj)=> obj} />);
-    wrapper.find('.todo-delete').simulate('click');
+    wrapper.find('.todo-icon-delete').simulate('click');
     expect(spyRemove.calledOnce).to.be.equal(true);
   });
 

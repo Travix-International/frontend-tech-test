@@ -1,3 +1,6 @@
+$btncolor: #03A9F4;
+$btnshadowcolor: #B0E6FA;
+
 .todo-form {
   background-color: white;
   left: 0px;
@@ -5,7 +8,13 @@
   position: fixed;
   right: 0px;
   top: 0px;
+  border-bottom: 4px solid black;
+  border-radius: 0px 0px 2px 2px;
   z-index: 100;
+}
+
+.todo-form-title {
+  border-radius: 5px;
 }
 
 .todo-form-container {
@@ -22,5 +31,25 @@
     border-radius: 2px;
     display: block;
     width: 95%;
+  }
+
+  input {
+    @media screen and (min-width: 600px) {
+      height: 37px;
+    }
+  }
+
+  button {
+    text-transform: uppercase;
+    border: 0px;
+    outline: none;
+    background-color: $btncolor;
+    color: white;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px 2px $btnshadowcolor;
+    
+    @media screen and (min-width: 600px) {
+      height: 40px;
+    }
   }
 }

@@ -48,7 +48,6 @@ class Todo extends React.Component {
   }
 
   changeColor(id) {
-    console.log(id);
    this.setState({color: id});
     this.props.dispatch(editTodo({
       id: this.state.id,
@@ -111,11 +110,9 @@ class Todo extends React.Component {
         <div class="todo-description-content">
           <textarea placeholder={'Description'} disabled={this.state.complete} class="todo-description" onChange={this.updateField.bind(this, 'description')} onBlur={this.saveTodo} value={this.state.description}></textarea>
         </div>
-        <i class="fa fa-thumbtack todo-pin"></i>
-        <i class="fa fa-trash todo-icon-delete" aria-hidden="true"></i>
-        <i class="fa fa-check-circle todo-icon-complete"></i>
-        <i class="todo-complete" onClick={this.toggleTodo}></i>
-        <i class="todo-delete" onClick={this.removeTodo}></i>
+        <i class="fa fa-thumb-tack todo-pin"></i>
+        <i class="fa fa-trash todo-icon-delete" onClick={this.removeTodo}></i>
+        <i className={this.state.complete ? 'fa fa-check-circle todo-icon-complete green' : 'fa fa-check-circle todo-icon-complete'} onClick={this.toggleTodo}></i>
         <div class="todo-colors">
           <span class="yellow" onClick={this.changeColor.bind(this, 1)}></span>
           <span class="blue" onClick={this.changeColor.bind(this, 2)}></span>

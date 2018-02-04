@@ -2,7 +2,7 @@ $colorbase: #FFF55C;
 $color1: #FFF55C;
 $color2: #B3E5FC;
 $color3: #E1BEE7;
-$complete: #CDDC39;
+$complete: #8BC34A;
 $font: 'Montserrat';
 $shadow: #212121;
 
@@ -11,29 +11,35 @@ $shadow: #212121;
   border-radius: 2px;
   box-shadow: 2px 2px 0px $shadow;
   font-size: 16px;
-  margin: 10px;
   min-height: 200px;
+  margin-bottom: 15px;
+  flex-grow: 1;
   position: relative;
-  width: 100%;
-
+  align-self: center;
+  flex-basis: auto;
+  
   &.yellow {
     background-color: $color1;
   }
-
+  
   &.blue {
     background-color: $color2;
   }
-
+  
   &.purple {
     background-color: $color3;
   }
-
+  
   @media only screen and (min-width: 400px){
-    width: 45%;
+    margin: 15px;
+    display: inline-block;
+    vertical-align: top;
+    flex-basis: 45%;
   }
 
-  @media only screen and (min-width: 600px){
-    width: 30%;
+  @media only screen and (min-width: 992px){
+    flex-basis: 30%;
+    max-width: 370px;
   }
 }
 
@@ -74,40 +80,26 @@ $shadow: #212121;
   margin: 15px 0px;
 }
 
-.todo-delete {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  z-index: 2;
-}
-
-.todo-complete {
-  cursor: pointer;
-  height: 30px;
-  position: absolute;
-  right: 35px;
-  top: 0px;
-  width: 30px;
-  z-index: 2;
-}
-
 .todo-icon-delete {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 6px;
+  right: 8px;
   font-size: 1.5em;
-  padding: 5px 5px 0px 0px;
 }
 
 .todo-icon-complete {
   position: absolute;
-  top: 0px;
+  top: 9px;
   right: 35px;
   font-size: 1.5em;
-  padding: 5px 5px 0px 0px;
+  border-radius: 50%;
+  cursor: pointer;
+  line-height: 0.9;
+
+  &.green {
+    color: $complete;
+    background-color: white;
+  }
 }
 
 .todo-pin {
