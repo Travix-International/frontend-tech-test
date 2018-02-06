@@ -4,7 +4,8 @@ import TodoBox from '../components/TodoBox';
 
 const mapStateToProps = ({todo}) => {
   return {
-    todos: todo.todoList
+    todos: todo.todoList,
+    currPage: todo.currPage
   };
 };
 

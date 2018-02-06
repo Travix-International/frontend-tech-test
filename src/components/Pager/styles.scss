@@ -1,0 +1,36 @@
+.pager {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 100;
+    background-color: white;
+
+    .pagination {
+        padding: 0px;
+        margin: 0px auto;
+        max-width: 1200px;
+        line-height: 30px;
+        list-style: none;
+        text-align: center;
+
+        li {
+            float: left;
+            padding: 0px 5px;
+            margin: 0px 3px;
+            width: 29px;
+
+            &.disabled {
+                cursor: not-allowed;
+            }
+
+            &.active {
+                border: 1px solid black;
+            }
+
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+}

@@ -39,12 +39,12 @@ class Todo extends React.Component {
       description: this.state.description,
       color: this.state.color,
       complete: this.state.complete
-    }));
+    }, this.props.currPage));
   }
 
   removeTodo(e){
     e.preventDefault();
-    this.props.dispatch(removeTodo(this.props.id));
+    this.props.dispatch(removeTodo(this.props.id, this.props.currPage));
   }
 
   changeColor(id) {
@@ -55,7 +55,7 @@ class Todo extends React.Component {
       description: this.state.description,
       color: id,
       complete: this.state.complete
-    }));
+    }, this.props.currPage));
   }
 
   selectClass(){
@@ -84,7 +84,7 @@ class Todo extends React.Component {
       description: this.state.description,
       color: this.state.color,
       complete: flag
-    }));
+    }, this.props.currPage));
   }
 
   componentWillMount() {
@@ -132,6 +132,7 @@ Todo.propTypes = {
   description: PropTypes.string,
   color: PropTypes.number,
   complete: PropTypes.bool,
+  currPage: PropTypes.number,
   dispatch: PropTypes.func
 };
 

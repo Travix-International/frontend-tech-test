@@ -8,7 +8,35 @@ const router = express.Router();
  * Return the list of tasks with status code 200.
  */
 router.get('/', (req, res) => {
-  return res.status(200).json(tasksContainer);
+
+  function paginate(array, page_size, page_number) {
+    --page_number; // because pages logically start with 1, but technically with 0
+    return array.slice(page_number * page_size, (page_number + 1) * page_size);
+  }
+
+  const rows = { tasks: paginate(tasksContainer.tasks, 100, 1)};
+
+  return res.status(200).json(rows);
+});
+
+
+/**
+ * GET /page/:page
+ *
+ * Return the list of tasks with status code 200.
+ */
+router.get('/page/:num', (req, res) => {
+  let currPage = parseInt(req.params.num, 10) || 1;
+  let totalItems = tasksContainer.tasks.length;
+
+  function paginate(array, page_size, page_number) {
+    --page_number;
+    return array.slice(page_number * page_size, (page_number + 1) * page_size);
+  }
+
+  const rows = { tasks: paginate(tasksContainer.tasks, 100, currPage), totalItems, currPage };
+
+  return res.status(200).json(rows);
 });
 
 /**

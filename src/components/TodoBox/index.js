@@ -29,6 +29,7 @@ class TodoBox extends React.Component {
           color={todo.color}
           complete={todo.complete}
           dispatch={this.props.dispatch}
+          currPage={this.props.currPage}
          />;
        })}
       </div>
@@ -38,6 +39,7 @@ class TodoBox extends React.Component {
 
 TodoBox.propTypes = {
   todos: PropTypes.array,
+  currPage: PropTypes.number,
   dispatch: PropTypes.func
 }
 

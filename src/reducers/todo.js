@@ -7,6 +7,8 @@ import {
 
 const initialState = {
   todoList: [],
+  totalItems: 0,
+  currPage: 0,
   sending: false,
   error: null
 };
@@ -23,7 +25,12 @@ export default function(state = initialState, action) {
       return {...state, sending: false, error: action.payload};
     }
     case GET_TODOS: {
-      return {...state, sending: false, todoList: action.payload.tasks};
+      return { ...state, 
+        sending: false,
+        todoList: action.payload.tasks,
+        totalItems: action.payload.totalItems,
+        currPage: action.payload.currPage
+      };
     }
     default:
       return state;
