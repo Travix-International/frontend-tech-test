@@ -1,0 +1,43 @@
+{
+  parser: "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "max-len": [1, 120, 2, {
+        "ignoreComments": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true
+      }
+    ],
+    "no-console": ["error", { allow: ["log"] }],
+    "no-useless-escape": off,
+    "react/no-unknown-property": ["error", {"ignore": ["class", "for"]}]
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "env": {
+      "browser": true,
+      "node": true,
+      "mocha": true
+  },
+  "globals": {
+      "$": true,
+      "jQuery": true,
+      "Drupal": true,
+      "Promise": true,
+      "dataLayer": true,
+      "MobileDetect": true,
+      "moment": true,
+      "sinon": true,
+      "chai": true,
+      "it": false,
+      "expect": false,
+      "before": false,
+      "after": false,
+      "afterEach": false,
+      "beforeEach": false,
+      "describe": false,
+  }
+}

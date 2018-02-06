@@ -1,0 +1,18 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.layout {
+  background-image: url(./bg.jpg);
+  min-height: 768px;
+  padding-bottom: 50px;
+}
+
+.layout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 100px;
+}
