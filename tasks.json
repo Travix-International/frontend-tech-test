@@ -1,3 +1,10 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Travix Frontend Tech Test",
+      "description": "Create a simple TODO app using React and Redux",
+      "completed": true
+    }
+  ]
 }
