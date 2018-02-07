@@ -1,0 +1,123 @@
+@import 'colors';
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  color: $text;
+  background-color: $base-color-2;
+}
+
+#appContainer {
+  max-width: 800px;
+  padding-top: 15px;
+
+  .todoForm {
+    background-color: transparent;
+
+    .form-group {
+      .label-container {
+        margin-bottom: 5px;
+        label {
+          color: #ffffff;
+        }
+      }
+      .input-container {
+        margin-bottom: 10px;
+        input {
+          width: 90%;
+          line-height: 1.5em;
+          padding: .5em;
+          border-radius: 0;
+          box-shadow: none;
+          border: 1px solid $grey-light;
+          font-size: 18px;
+          color: $base-color-3;
+          outline: none;
+        }
+      }
+
+      &.has-error {
+        .label-container {
+          label {
+            color: $error;
+          }
+        }
+        .input-container {
+          margin-bottom: 0;
+          input {
+            border: 1px solid $error;
+          }
+        }
+        .error-message {
+          margin-bottom: 10px;
+          label {
+            color: $error;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    button {
+      border-radius: 0;
+      font-size: 18px;
+      text-shadow: none;
+      margin-bottom: 10px;
+      line-height: 1.5em;
+      padding: .5em;
+      box-shadow: none;
+      border: 1px solid transparent;
+      background-color: $base-color-1;
+      color: $base-color-3;
+      cursor: pointer;
+      &:hover {
+        box-shadow: none;
+        border: 1px solid transparent;
+        color: $base-color-2;
+      }
+      &[disabled] {
+        color: $grey-light;
+        background-color: $grey-lightest;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .todoListContainer {
+    margin-top: 15px;
+
+    .todoItem {
+      background-color: #ffffff;
+      border: 1px solid $grey-light;
+      margin-bottom: 15px;
+      border-radius: 0;
+      padding: 15px;
+      -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+      -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+
+      .todoTitle {
+        color: $base-color-2;
+        margin: 10px 0;
+        font-size: 18px;
+      }
+      .todoDescription {
+        color: $base-color-1;
+        margin: 10px 0;
+        font-size: 12px;
+      }
+
+      &.completed {
+        .todoTitle, .todoDescription {
+          text-decoration: line-through;
+          color: $grey;
+        }
+      }
+
+      .todoForm {
+        label {
+          color: $base-color-2;
+        }
+      }
+    }
+  }
+}
