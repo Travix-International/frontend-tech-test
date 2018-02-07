@@ -8,6 +8,20 @@
     "test",
     "travix"
   ],
+  "scripts": {
+    "test": "jest",
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./config/test.config.js",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx"
+    ],
+    "moduleNameMapper": {
+      "\\.(css)$": "<rootDir>/node_modules/jest-css-modules"
+    }
+  },
   "dependencies": {
     "axios": "^0.17.1",
     "babel-preset-es2015": "^6.24.1",
