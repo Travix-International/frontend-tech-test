@@ -1,18 +1,13 @@
 {
-  "name": "test-candidates",
+  "name": "cuzzo",
   "version": "0.0.1",
-  "description": "test back - front",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
+  "description": "",
+  "author": "Umberto Di Lorenzo <dilorenzo@gmail.com>",
+  "license": "UNLICENSED",
   "keywords": [
     "test",
     "travix"
   ],
-  "author": "spartans",
-  "license": "ISC",
   "dependencies": {
     "express": "^4.14.0"
   }
