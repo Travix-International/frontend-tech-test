@@ -11,10 +11,10 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "concurrently --kill-others \"npm run start:dev\" \"npm run start:server\"",
-    "start:server": "node server.js",
-    "start:dev": "cross-env NODE_ENV=development webpack-dev-server --hot --config config/webpack.dev.js",
-    "start:deploy": "webpack-dev-server --config config/webpack.prod.js"
+    "start": "concurrently --kill-others \"npm run dev\" \"npm run server\"",
+    "server": "node server.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --config config/webpack.dev.js",
+    "deploy": "webpack-dev-server --config config/webpack.prod.js"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "./config/test.config.js",
