@@ -7,7 +7,7 @@
     "start": "concurrently \"yarn run webpack\" \"node server.js\"",
     "webpack": "webpack-dev-server",
     "build-webpack": "webpack",
-    "dev": "react-scripts start",
+    "dev": "concurrently \"react-scripts start\" \"node server.js\"",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test"
@@ -21,6 +21,7 @@
   "dependencies": {
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
+    "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
     "css-loader": "^0.28.9",
     "enzyme": "^3.3.0",
@@ -34,8 +35,12 @@
     "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "^1.1.0",
     "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.1",
     "webpack-dev-server": "^2.11.1"

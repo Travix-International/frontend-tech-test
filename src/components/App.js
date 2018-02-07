@@ -1,25 +1,29 @@
 import React from 'react'
-import Footer from './Footer'
-import AddTodo from '../containers/AddTodo'
-import VisibleTodoList from '../containers/VisibleTodoList'
+import { Switch, Route } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
-import { withStyles } from 'material-ui/styles'
+import List from './List'
+import AddTask from './AddTask'
 
-const App = () => (
-  <div>
-    <AppBar className="header" position="static">
-      <Toolbar>
-        <Typography type="title" color="inherit">
-          Title
-        </Typography>
-      </Toolbar>
-    </AppBar>
-    <AddTodo />
-    <VisibleTodoList />
-    <Footer />
-  </div>
-)
+class App extends React.Component {
+  render() {
+    return (
+      <section>
+        <AppBar className="header" position="static">
+          <Toolbar>
+            <Typography type="title" color="inherit">
+              Test Travix
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Switch>
+          <Route exact path="/" component={List} />
+          <Route path="/add" component={AddTask} />
+        </Switch>
+      </section>
+    )
+  }
+}
 
 export default App
