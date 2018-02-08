@@ -21,8 +21,7 @@ export default function Todo(props) {
   } = props;
   
   return (
-    
-    <Row middle={"xs"}>
+    <Row className={"todoItemContainer"} middle={"xs"}>
       <Col
         lg={12}
         md={12}
