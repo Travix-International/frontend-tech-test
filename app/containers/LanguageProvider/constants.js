@@ -1,0 +1,3 @@
+export const actionTypes = {
+  CHANGE_LOCALE: 'TODO_APP/LANGUAGE_PROVIDER/CHANGE_LOCALE'
+};

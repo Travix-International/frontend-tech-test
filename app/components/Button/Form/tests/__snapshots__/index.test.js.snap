@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ButtonForm /> should render component 1`] = `
+<div
+  className="Wrapper__Wrapper-dXHlXX ggGEtw"
+>
+  <button
+    className="StyledButton__StyledButton-iQSVZX fjLvae"
+    onClick={undefined}
+  >
+    Test
+  </button>
+</div>
+`;
+
+exports[`<ButtonForm /> should render component when is loading 1`] = `
+<div
+  className="Wrapper__Wrapper-dXHlXX ggGEtw"
+>
+  <button
+    className="StyledButton__StyledButton-iQSVZX fjLvae"
+    onClick={undefined}
+  >
+    <div
+      className="Wrapper__Wrapper-cZxMuO fNDNpp"
+      height="1em"
+      width="1em"
+    >
+      <div
+        className="Circle__CirclePrimitive-doUHun cEgePr"
+      />
+      <div
+        className="Circle__CirclePrimitive-iczIjT gCBYdH"
+      />
+      <div
+        className="Circle__CirclePrimitive-cmIcdf hWqTMY"
+      />
+      <div
+        className="Circle__CirclePrimitive-jOiEYJ gvkDDz"
+      />
+      <div
+        className="Circle__CirclePrimitive-eAcCGr fQYIRr"
+      />
+      <div
+        className="Circle__CirclePrimitive-fQPULp ijToqU"
+      />
+      <div
+        className="Circle__CirclePrimitive-egCDAQ bQEvSu"
+      />
+      <div
+        className="Circle__CirclePrimitive-kwRWka kpvgpv"
+      />
+      <div
+        className="Circle__CirclePrimitive-jnKZUF kElwxJ"
+      />
+      <div
+        className="Circle__CirclePrimitive-jSRngu htSGkR"
+      />
+      <div
+        className="Circle__CirclePrimitive-gbjHSq fBGPCV"
+      />
+      <div
+        className="Circle__CirclePrimitive-blqIGF bnGgtd"
+      />
+    </div>
+  </button>
+</div>
+`;
+
+exports[`<ButtonForm /> should render component when is secondary 1`] = `
+<div
+  className="Wrapper__Wrapper-dXHlXX ggGEtw"
+>
+  <button
+    className="StyledButton__StyledButton-iQSVZX eueAcV"
+    onClick={undefined}
+  >
+    Test
+  </button>
+</div>
+`;

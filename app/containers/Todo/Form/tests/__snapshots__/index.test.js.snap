@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoForm /> should render component 1`] = `
+<form
+  className="Form__Form-PASBS rsOuw"
+  onSubmit={undefined}
+>
+  <label
+    htmlFor="title"
+  >
+    <span
+      className="Wrapper-dyuznp ejfftc"
+    >
+      <input
+        className="StyledInput__Input-eYzgai fmVHMz"
+        name="title"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        type="text"
+        value={undefined}
+      />
+      <label
+        className="Label-ghyrbC bcBwfc"
+      >
+        <label
+          className="LabelContent-iptDuP ccpyDu"
+        >
+          Title
+        </label>
+      </label>
+    </span>
+  </label>
+  <label
+    htmlFor="description"
+  >
+    <span
+      className="Wrapper-dyuznp ejfftc"
+    >
+      <input
+        className="StyledInput__Input-eYzgai fmVHMz"
+        name="description"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        type="text"
+        value={undefined}
+      />
+      <label
+        className="Label-ghyrbC bcBwfc"
+      >
+        <label
+          className="LabelContent-iptDuP ccpyDu"
+        >
+          Description
+        </label>
+      </label>
+    </span>
+  </label>
+  <div
+    className="SubmitButton__SubmitButton-iZeMNu fhFgOJ Wrapper__Wrapper-dXHlXX ggGEtw"
+  >
+    <button
+      className="StyledButton__StyledButton-iQSVZX hrAcih"
+      disabled={true}
+      onClick={undefined}
+      type="submit"
+    >
+      <span>
+        Save
+      </span>
+    </button>
+  </div>
+</form>
+`;

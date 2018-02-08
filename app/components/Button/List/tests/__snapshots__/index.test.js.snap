@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ButtonList /> should render component 1`] = `
+<button
+  className="List__StyledButton-aKrnx dNpyqf"
+>
+  Test
+</button>
+`;

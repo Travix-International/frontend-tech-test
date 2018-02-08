@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InputList /> should render component 1`] = `
+<input
+  className="List__Input-kOyobO iWGCK"
+  onChange={[Function]}
+/>
+`;
+
+exports[`<InputList /> should render component when disabled 1`] = `
+<input
+  className="List__Input-kOyobO dDgqIv"
+  disabled={true}
+  onChange={[Function]}
+/>
+`;

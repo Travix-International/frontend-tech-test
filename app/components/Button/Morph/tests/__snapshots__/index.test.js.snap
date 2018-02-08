@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ButtonMorph /> should render component 1`] = `
+<div
+  className="Wrapper__Wrapper-cZxMuO EuirG"
+  height={0}
+  width={0}
+>
+  <button
+    className="StyledButton__StyledButton-iQSVZX hLfwzM"
+    onClick={[Function]}
+  />
+  <div
+    className="Content__Wrapper-eLRsKp brQpMH"
+  >
+    Test
+  </div>
+</div>
+`;
+
+exports[`<ButtonMorph /> should render component when is collapsed 1`] = `
+<div
+  className="Wrapper__Wrapper-cZxMuO dZhHwo"
+  height={0}
+  width={0}
+>
+  <button
+    className="StyledButton__StyledButton-iQSVZX hLfwzM"
+    onClick={[Function]}
+  />
+  <div
+    className="Content__Wrapper-eLRsKp cfLXOa"
+  >
+    Test
+  </div>
+</div>
+`;

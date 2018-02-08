@@ -1,0 +1,13 @@
+{
+  "TodoApp.Containers.NotFoundPage.Header": "Page not found",
+  "TodoApp.Containers.Todo.Header": "Todos",
+  "TodoApp.Containers.Todo.Title": "Title",
+  "TodoApp.Containers.Todo.Description": "Description",
+  "TodoApp.Containers.Todo.Placeholder.Title": "Title",
+  "TodoApp.Containers.Todo.Placeholder.Description": "Description",
+  "TodoApp.Containers.Todo.NoResult": "No todos found",
+  "TodoApp.Containers.Todo.Add": "Add",
+  "TodoApp.Containers.Todo.Save": "Save",
+  "TodoApp.Containers.Todo.Close": "Close",
+  "TodoApp.Containers.Todo.Delete": "Delete"
+}

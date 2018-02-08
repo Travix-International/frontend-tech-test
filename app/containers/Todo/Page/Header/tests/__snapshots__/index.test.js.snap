@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoHeader /> should render component  1`] = `
+<div
+  className="Wrapper-dyuznp kPzvGi"
+>
+  <label
+    className="Label-ghyrbC jzJWbd"
+  >
+    <span>
+      Title
+    </span>
+  </label>
+  <label
+    className="Label-ghyrbC jzJWbd"
+  >
+    <span>
+      Description
+    </span>
+  </label>
+  <label
+    className="Label-ghyrbC jzJWbd"
+  />
+</div>
+`;

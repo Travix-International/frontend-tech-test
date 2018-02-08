@@ -36,3 +36,23 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 * dynamic-ui (web-sockets...?)
 * using the `made in Travix` technologies
 * ... Impress us!
+
+# Start
+
+First install dependencies:
+
+``
+$ npm install
+``
+
+Start project and open http://localhost:3000:
+
+``
+$ npm start
+``
+
+To run test:
+
+``
+$ npm test
+``

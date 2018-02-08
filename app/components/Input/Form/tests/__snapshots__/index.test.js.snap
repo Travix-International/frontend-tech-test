@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InputForm /> should render component 1`] = `
+<span
+  className="Wrapper-dyuznp ejfftc"
+>
+  <input
+    className="StyledInput__Input-eYzgai fmVHMz"
+    name={undefined}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type={undefined}
+    value={undefined}
+  />
+  <label
+    className="Label-ghyrbC bcBwfc"
+  >
+    <label
+      className="LabelContent-iptDuP ccpyDu"
+    />
+  </label>
+</span>
+`;
+
+exports[`<InputForm /> should render component when focus and blur 1`] = `
+<span
+  className="Wrapper-dyuznp ejfftc"
+>
+  <input
+    className="StyledInput__Input-eYzgai fmVHMz"
+    name={undefined}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type={undefined}
+    value={undefined}
+  />
+  <label
+    className="Label-ghyrbC hAVxok"
+  >
+    <label
+      className="LabelContent-iptDuP guCoYu"
+    />
+  </label>
+</span>
+`;
+
+exports[`<InputForm /> should render component when focus and blur 2`] = `
+<span
+  className="Wrapper-dyuznp ejfftc"
+>
+  <input
+    className="StyledInput__Input-eYzgai fmVHMz"
+    name={undefined}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type={undefined}
+    value={undefined}
+  />
+  <label
+    className="Label-ghyrbC bcBwfc"
+  >
+    <label
+      className="LabelContent-iptDuP ccpyDu"
+    />
+  </label>
+</span>
+`;
+
+exports[`<InputForm /> should render component with value 1`] = `
+<span
+  className="Wrapper-dyuznp ejfftc"
+>
+  <input
+    className="StyledInput__Input-eYzgai fmVHMz"
+    name={undefined}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type={undefined}
+    value="value"
+  />
+  <label
+    className="Label-ghyrbC hAVxok"
+  >
+    <label
+      className="LabelContent-iptDuP guCoYu"
+    />
+  </label>
+</span>
+`;

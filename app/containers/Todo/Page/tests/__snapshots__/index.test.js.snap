@@ -1,0 +1,297 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoPage /> should render component when loading 1`] = `
+<div>
+  <ButtonMorph
+    collapsedText={
+      <FormattedMessage
+        defaultMessage="Close"
+        id="TodoApp.Containers.Todo.Close"
+        values={Object {}}
+      />
+    }
+    text={
+      <FormattedMessage
+        defaultMessage="Add"
+        id="TodoApp.Containers.Todo.Add"
+        values={Object {}}
+      />
+    }
+  >
+    <TodoForm />
+  </ButtonMorph>
+  <div
+    className="Wrapper-dyuznp kPzvGi"
+  >
+    <label
+      className="Label-ghyrbC jzJWbd"
+    >
+      <span>
+        Title
+      </span>
+    </label>
+    <label
+      className="Label-ghyrbC jzJWbd"
+    >
+      <span>
+        Description
+      </span>
+    </label>
+    <label
+      className="Label-ghyrbC jzJWbd"
+    />
+  </div>
+  <div
+    className="Wrapper__Wrapper-cZxMuO efaGAC"
+    height="4em"
+    width="4em"
+  >
+    <div
+      className="Circle__CirclePrimitive-doUHun cEgePr"
+    />
+    <div
+      className="Circle__CirclePrimitive-iczIjT gCBYdH"
+    />
+    <div
+      className="Circle__CirclePrimitive-cmIcdf hWqTMY"
+    />
+    <div
+      className="Circle__CirclePrimitive-jOiEYJ gvkDDz"
+    />
+    <div
+      className="Circle__CirclePrimitive-eAcCGr fQYIRr"
+    />
+    <div
+      className="Circle__CirclePrimitive-fQPULp ijToqU"
+    />
+    <div
+      className="Circle__CirclePrimitive-egCDAQ bQEvSu"
+    />
+    <div
+      className="Circle__CirclePrimitive-kwRWka kpvgpv"
+    />
+    <div
+      className="Circle__CirclePrimitive-jnKZUF kElwxJ"
+    />
+    <div
+      className="Circle__CirclePrimitive-jSRngu htSGkR"
+    />
+    <div
+      className="Circle__CirclePrimitive-gbjHSq fBGPCV"
+    />
+    <div
+      className="Circle__CirclePrimitive-blqIGF bnGgtd"
+    />
+  </div>
+</div>
+`;
+
+exports[`<TodoPage /> should render component with no results 1`] = `
+<div>
+  <ButtonMorph
+    collapsedText={
+      <FormattedMessage
+        defaultMessage="Close"
+        id="TodoApp.Containers.Todo.Close"
+        values={Object {}}
+      />
+    }
+    text={
+      <FormattedMessage
+        defaultMessage="Add"
+        id="TodoApp.Containers.Todo.Add"
+        values={Object {}}
+      />
+    }
+  >
+    <TodoForm />
+  </ButtonMorph>
+  <div
+    className="Wrapper-dyuznp kPzvGi"
+  >
+    <label
+      className="Label-ghyrbC jzJWbd"
+    >
+      <span>
+        Title
+      </span>
+    </label>
+    <label
+      className="Label-ghyrbC jzJWbd"
+    >
+      <span>
+        Description
+      </span>
+    </label>
+    <label
+      className="Label-ghyrbC jzJWbd"
+    />
+  </div>
+  <section
+    className="sc-bdVaJa haSShM"
+  >
+    <span>
+      No todos found
+    </span>
+  </section>
+</div>
+`;
+
+exports[`<TodoPage /> should render component with results 1`] = `
+<div>
+  <ButtonMorph
+    collapsedText={
+      <FormattedMessage
+        defaultMessage="Close"
+        id="TodoApp.Containers.Todo.Close"
+        values={Object {}}
+      />
+    }
+    text={
+      <FormattedMessage
+        defaultMessage="Add"
+        id="TodoApp.Containers.Todo.Add"
+        values={Object {}}
+      />
+    }
+  >
+    <TodoForm />
+  </ButtonMorph>
+  <div
+    className="Wrapper-dyuznp kPzvGi"
+  >
+    <label
+      className="Label-ghyrbC jzJWbd"
+    >
+      <span>
+        Title
+      </span>
+    </label>
+    <label
+      className="Label-ghyrbC jzJWbd"
+    >
+      <span>
+        Description
+      </span>
+    </label>
+    <label
+      className="Label-ghyrbC jzJWbd"
+    />
+  </div>
+  <div
+    className={undefined}
+    style={
+      Object {
+        "height": 0,
+        "overflow": "visible",
+        "width": 0,
+      }
+    }
+  >
+    <div
+      aria-label="grid"
+      aria-readonly={true}
+      className="ReactVirtualized__Grid ReactVirtualized__List"
+      id={undefined}
+      onScroll={[Function]}
+      role="grid"
+      style={
+        Object {
+          "WebkitOverflowScrolling": "touch",
+          "boxSizing": "border-box",
+          "direction": "ltr",
+          "height": 500,
+          "overflowX": "hidden",
+          "overflowY": "hidden",
+          "position": "relative",
+          "width": 0,
+          "willChange": "transform",
+        }
+      }
+      tabIndex={0}
+    />
+  </div>
+</div>
+`;
+
+exports[`<TodoPage /> should render item 1`] = `
+<form
+  className="Form-gTeswK gmdZtt"
+  onSubmit={[Function]}
+  style="style"
+>
+  <div
+    className="InputWrapper-bpDXXy fyOYOy"
+  >
+    <input
+      className="List__Input-kOyobO iWGCK"
+      name="title"
+      onChange={[Function]}
+      type="text"
+      value={undefined}
+    />
+  </div>
+  <div
+    className="InputWrapper-bpDXXy fyOYOy"
+  >
+    <input
+      className="List__Input-kOyobO iWGCK"
+      name="description"
+      onChange={[Function]}
+      type="text"
+      value={undefined}
+    />
+  </div>
+  <div
+    className="ButtonsWrapper-WUhrK gfburx"
+  >
+    <button
+      className="List__StyledButton-aKrnx jRzqmE"
+      disabled={true}
+      type="submit"
+    >
+      <svg
+        height="1.438944em"
+        viewBox="0 0 29.978 29.978"
+        width="1.438944em"
+      >
+        <g>
+          <path
+            d="M25.462,19.105v6.848H4.515v-6.848H0.489v8.861c0,1.111,0.9,2.012,2.016,2.012h24.967c1.115,0,2.016-0.9,2.016-2.012 v-8.861H25.462z"
+          />
+          <path
+            d="M14.62,18.426l-5.764-6.965c0,0-0.877-0.828,0.074-0.828s3.248,0,3.248,0s0-0.557,0-1.416c0-2.449,0-6.906,0-8.723 c0,0-0.129-0.494,0.615-0.494c0.75,0,4.035,0,4.572,0c0.536,0,0.524,0.416,0.524,0.416c0,1.762,0,6.373,0,8.742 c0,0.768,0,1.266,0,1.266s1.842,0,2.998,0c1.154,0,0.285,0.867,0.285,0.867s-4.904,6.51-5.588,7.193 C15.092,18.979,14.62,18.426,14.62,18.426z"
+          />
+        </g>
+      </svg>
+    </button>
+    <button
+      className="List__StyledButton-aKrnx dNpyqf"
+      disabled={undefined}
+      onClick={[Function]}
+      type="button"
+    >
+      <svg
+        height="1.536em"
+        viewBox="0 0 512 512"
+        width="1.536em"
+      >
+        <g>
+          <g>
+            <path
+              d="M425.298,51.358h-91.455V16.696c0-9.22-7.475-16.696-16.696-16.696H194.854c-9.22,0-16.696,7.475-16.696,16.696v34.662 H86.703c-9.22,0-16.696,7.475-16.696,16.696v51.357c0,9.22,7.475,16.696,16.696,16.696h338.593c9.22,0,16.696-7.475,16.696-16.696 V68.054C441.993,58.832,434.518,51.358,425.298,51.358z M300.45,51.358h-88.9V33.391h88.9V51.358z"
+            />
+          </g>
+        </g>
+        <g>
+          <g>
+            <path
+              d="M93.192,169.497l13.844,326.516c0.378,8.937,7.735,15.988,16.68,15.988h264.568c8.945,0,16.302-7.051,16.68-15.989 l13.843-326.515H93.192z M205.53,444.105c0,9.22-7.475,16.696-16.696,16.696c-9.22,0-16.696-7.475-16.696-16.696V237.391 c0-9.22,7.475-16.696,16.696-16.696c9.22,0,16.696,7.475,16.696,16.696V444.105z M272.693,444.105 c0,9.22-7.475,16.696-16.696,16.696s-16.696-7.475-16.696-16.696V237.391c0-9.22,7.475-16.696,16.696-16.696 s16.696,7.475,16.696,16.696V444.105z M339.856,444.105c0,9.22-7.475,16.696-16.696,16.696s-16.696-7.475-16.696-16.696V237.391 c0-9.22,7.475-16.696,16.696-16.696s16.696,7.475,16.696,16.696V444.105z"
+            />
+          </g>
+        </g>
+      </svg>
+    </button>
+  </div>
+</form>
+`;
