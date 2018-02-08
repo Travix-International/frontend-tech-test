@@ -4,14 +4,19 @@ import { bindActionCreators } from 'redux';
 import TodoList from '../../components/TodoList/';
 
 import todoListActions from '../../actions/todoListActions';
+import paginationActions from '../../actions/paginationActions';
 
 const mapStateToProps = state => ({
-  isLoading: state.server.isAwaitingServer,
-  todos: state.todoList.todos
+  todos: state.todoList.todos,
+  pageNumber: state.pagination.pageNumber,
+  pageSize: state.pagination.pageSize,
+  totalPages: state.pagination.totalPages
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  onTodoClick: todoListActions.toggleTodo
+  onTodoClick: todoListActions.toggleTodo,
+  changePage: paginationActions.changePage,
+  togglePagination: paginationActions.togglePagination
 }, dispatch);
 
 const VisibleTodoList = connect(
