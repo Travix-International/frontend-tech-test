@@ -4,7 +4,39 @@
   margin: 4rem 0;
 
   &-task {
+    width: 300px;
 
+    &-card {
+      &-title {
+        position: relative;
+        font-size: 21px;
+        text-transform: capitalize;
+
+        &:after {
+          background-color: #FF8E53;
+          bottom: 0;
+          content: ' ';
+          height: 2px;
+          left: 0;
+          position: absolute;
+          width: 100%;
+        }
+      }
+
+      &-description {
+        text-transform: capitalize;
+      }
+
+      &-link {
+        text-decoration: none;
+        width: 100%;
+      }
+
+      &-btn{
+        font-weight: bold;
+        width: 100%;
+      }
+    }
   }
 
   &-legend {

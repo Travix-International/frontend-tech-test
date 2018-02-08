@@ -16,13 +16,9 @@ export const getTodoById = id =>
     .then(callback(200));
 
 export const addTodo = (title, description) =>
-  fetch(`${serverUrl}/task/create`, {
+  fetch(`${serverUrl}/task/create/${title}/${description}`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({
-      title,
-      description,
-    }),
   }).then(callback(201));
 
 export const deleteTodo = id =>
@@ -41,6 +37,7 @@ export const updateTodo = (id, title, description) =>
   }).then(callback(200));
 
 const callback = status => (resp) => {
+  debugger;
   if (resp.status === status) {
     return resp.json();
   }

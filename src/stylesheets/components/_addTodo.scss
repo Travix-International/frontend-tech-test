@@ -3,3 +3,19 @@
   margin: 3rem;
   justify-content: center;
 }
+
+.add-task {
+  display: flex;
+  margin: 3rem;
+  flex-flow: column;
+
+  .legend {
+    font-size: 21px;
+  }
+
+  .submit {
+    margin: 12px;
+    margin-top: 2rem;
+    max-width: 100px;
+  }
+}

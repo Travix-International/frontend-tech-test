@@ -1,7 +1,7 @@
 import {
-  GET_TODOS, GET_TODO, UPDATE_TODOS, CREATE_TODO,
+  GET_TODOS, GET_TODO, CREATE_TODO,
   EDIT_TODO, DELETE_TODO, CHECK_SUCCESS,
-  CHECK_FAILURE
+  CHECK_FAILURE, UPDATE_TODOS
 } from './../constants';
 
 import {
@@ -13,14 +13,14 @@ export const getTodos = () => ({
   type: GET_TODOS
 });
 
-export const getTodo = (todo, id) => ({
-  type: GET_TODO,
-  payload: { todo, id}
-});
-
 export const updateTodos = todos => ({
   type: UPDATE_TODOS,
   payload: { todos }
+});
+
+export const getTodo = (todo, id) => ({
+  type: GET_TODO,
+  payload: { todo, id}
 });
 
 export const createTodo = todo => ({
@@ -53,8 +53,7 @@ export const getTodoTaskList = () => (dispatch) => {
   dispatch(getTodos());
   getTodoList()
     .then((data) => {
-      dispatch(checkSuccess());
-      dispatch(updateTodos(data));
+      dispatch(updateTodos(data.tasks));
     }, (error) => {
       dispatch(checkFailure(error.message));
     });
@@ -71,12 +70,10 @@ export const getTodoId = id => (dispatch) => {
     });
 }
 
-export const createTodoTask = (title, description) => (dispatch) => {
-  dispatch(createTodo());
-  addTodo(title, description)
+export const createTodoTask = (task) => (dispatch) => {
+  return addTodo(task.title, task.description)
     .then((data) => {
-      dispatch(checkSuccess());
-      dispatch(updateTodos(data));
+      return getTodoTaskList();
     }, (error) => {
       dispatch(checkFailure(error.message));
     });
@@ -86,7 +83,6 @@ export const editTodoTask = (id, title, description) => (dispatch) => {
   dispatch(editTodo());
   updateTodo(id, title, description)
     .then((data) => {
-      dispatch(checkSuccess());
       dispatch(updateTodos(data));
     }, (error) => {
       dispatch(checkFailure(error.message));
@@ -97,26 +93,8 @@ export const removeTodoTask = id => (dispatch) => {
   dispatch(removeTodo());
   deleteTodo(id)
     .then((data) => {
-      dispatch(checkSuccess());
       dispatch(updateTodos(data));
     }, (error) => {
       dispatch(checkFailure(error.message));
     });
 }
-
-let nextTodoId = 0
-export const addTodoTest = (text) => ({
-  type: 'ADD_TODO',
-  id: nextTodoId++,
-  text
-})
-
-export const setVisibilityFilter = (filter) => ({
-  type: 'SET_VISIBILITY_FILTER',
-  filter
-})
-
-export const toggleTodo = (id) => ({
-  type: 'TOGGLE_TODO',
-  id
-})

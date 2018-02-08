@@ -5,6 +5,7 @@ import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import List from './List'
 import AddTask from './AddTask'
+import EditTask from './EditTask'
 
 class App extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={List} />
           <Route path="/add" component={AddTask} />
+          <Route path="/edit/:id" component={EditTask} />
         </Switch>
       </section>
     )
