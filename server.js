@@ -17,7 +17,37 @@ app.use(function (req, res, next) {
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
+  return res.status(200).json({
+    tasks: tasksContainer.tasks,
+    totalTasks: tasksContainer.tasks.length,
+    totalPages: 1
+  });
+});
+
+app.get('/tasks/:pageNumber/:pageSize', (req, res) => {
+  const pageNumber = parseInt(req.params.pageNumber, 10);
+  const pageSize = parseInt(req.params.pageSize, 10);
+
+  if (!Number.isNaN(pageNumber) && !Number.isNaN(pageSize)) {
+    const startIndex = (pageNumber - 1) * pageSize;
+    const endIndex = pageNumber * pageSize;
+    const pagedTasks = tasksContainer.tasks.slice(startIndex, endIndex);
+    const totalTasks = tasksContainer.tasks.length;
+    const totalPages = totalTasks % pageSize ? parseInt((totalTasks / pageSize), 10) + 1 : (totalTasks / pageSize);
+
+    // process.stdout.write('startIndex: ' + startIndex + '\nendIndex: ' + endIndex + '\npagedTasks: ' + pagedTasks.length + '\ntotalTask: ' + totalTasks + '\ntotalPages: ' + totalPages + '\n');
+
+    if (pagedTasks.length > 0) {
+      return res.status(200).json({
+        tasks: pagedTasks,
+        totalTasks: totalTasks,
+        totalPages: totalPages
+      });
+    }
+  }
+  return res.status(400).json({
+    message: 'Bad request'
+  });
 });
 
 /**
@@ -36,7 +66,7 @@ app.get('/task/:id', (req, res) => {
   
   if (!Number.isNaN(id))
   {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find((item) => item.id === id);
     
     if (task !== null)
     {
