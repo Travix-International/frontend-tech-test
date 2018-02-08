@@ -21,12 +21,23 @@ const deleteTodo = id =>
       throw new Error(error.message);
     });
 
-const getTodos = () =>
-  axios.get(`${server}/tasks`)
+const getPagedTodos = (pageNumber, pageSize) =>
+  axios.get(`${server}/tasks/${pageNumber}/${pageSize}`)
     .then(response => response.data)
     .catch(error => {
       throw new Error(error.message);
     });
+
+const getTodos = (pageNumber, pageSize) => {
+  if (pageNumber > 0 && pageSize > 0) {
+    return getPagedTodos(pageNumber, pageSize);
+  }
+  return axios.get(`${server}/tasks`)
+    .then(response => response.data)
+    .catch(error => {
+      throw new Error(error.message);
+    });
+};
 
 const toggleTodo = id =>
   axios.put(`${server}/task/toggle/${id}`, JSON.stringify({}), { headers })
@@ -45,6 +56,7 @@ const updateTodo = (id, title, description) =>
 export default {
   addTodo,
   deleteTodo,
+  getPagedTodos,
   getTodos,
   toggleTodo,
   updateTodo
