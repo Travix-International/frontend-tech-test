@@ -18,9 +18,9 @@ export const updateTodos = todos => ({
   payload: { todos }
 });
 
-export const getTodo = (todo, id) => ({
+export const getTodo = (todo) => ({
   type: GET_TODO,
-  payload: { todo, id}
+  payload: { todo }
 });
 
 export const createTodo = todo => ({
@@ -50,7 +50,6 @@ export const checkFailure = error => ({
 });
 
 export const getTodoTaskList = () => (dispatch) => {
-  dispatch(getTodos());
   getTodoList()
     .then((data) => {
       dispatch(updateTodos(data.tasks));
@@ -60,11 +59,9 @@ export const getTodoTaskList = () => (dispatch) => {
 };
 
 export const getTodoId = id => (dispatch) => {
-  dispatch(getTodo());
-  getTodoById()
+  return getTodoById(id)
     .then((data) => {
-      dispatch(checkSuccess());
-      dispatch(getTodo(data));
+      return dispatch(getTodo(data.task));
     }, (error) => {
       dispatch(checkFailure(error.message));
     });
@@ -80,20 +77,18 @@ export const createTodoTask = (task) => (dispatch) => {
 }
 
 export const editTodoTask = (id, title, description) => (dispatch) => {
-  dispatch(editTodo());
-  updateTodo(id, title, description)
+  return updateTodo(id, title, description)
     .then((data) => {
-      dispatch(updateTodos(data));
+      return dispatch(getTodoTaskList());
     }, (error) => {
       dispatch(checkFailure(error.message));
     });
 }
 
-export const removeTodoTask = id => (dispatch) => {
-  dispatch(removeTodo());
+export const removeTodoTask = (id) => (dispatch) => {
   deleteTodo(id)
     .then((data) => {
-      dispatch(updateTodos(data));
+      dispatch(getTodoTaskList());
     }, (error) => {
       dispatch(checkFailure(error.message));
     });

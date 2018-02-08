@@ -15,6 +15,10 @@ class List extends React.Component {
     this.props.getTodos();
   }
 
+  onDelete(e, todo) {
+    this.props.onDelete(todo.id);
+  }
+
   renderLegend() {
     const style = {
       margin: 12,
@@ -32,28 +36,38 @@ class List extends React.Component {
 
   renderTodos() {
     const { todos } = this.props;
+    const style = {
+      margin: 30,
+      padding: 12,
+    }
+
     return (
       <div className="list-task">
         { todos.todos.map((todo) =>
-          <Card className="list-task-card" key={todo.id}>
-            <CardContent>
-              <h2 className="list-task-card-title">{ todo.title }</h2>
-              <p className="list-task-card-description">{ todo.description }</p>
-            </CardContent>
-            <CardActions>
-              <Link className="list-task-card-link" to={`/task/${todo.id}`}>
-                <Button className="list-task-card-btn" raised color="primary" size="small">Edit Task</Button>
-              </Link>
-            </CardActions>
-          </Card>
+            <Card className="list-task-card" key={todo.id}>
+              <CardContent>
+                <h2 className="list-task-card-title">{ todo.title }</h2>
+                <p className="list-task-card-description">{ todo.description }</p>
+                <span className="list-task-card-remove" onClick={((e) => this.onDelete(e, todo))}>Delete</span>
+              </CardContent>
+              <CardActions>
+                <Link className="list-task-card-link" to={`/edit/${todo.id}`}>
+                  <Button className="list-task-card-btn" raised color="primary" size="small">Edit Task</Button>
+                </Link>
+              </CardActions>
+            </Card>
         )}
+        <div className="list-task-button">
+          <Link className="list-task-button-btn" to="/add">
+            <Button raised color="primary" style={style}>Create a new Task</Button>
+          </Link>
+        </div>
       </div>
     );
   }
 
   render() {
     const { todos } = this.props;
-    debugger;
     const content = todos.todos.length > 0 ? this.renderTodos() : this.renderLegend();
 
     return (
@@ -68,6 +82,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getTodos: () => {
       dispatch(ListActions.getTodoTaskList());
+    },
+    onDelete: (id) => {
+      dispatch(ListActions.removeTodoTask(id));
     }
   };
 };

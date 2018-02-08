@@ -11,7 +11,7 @@ export const getTodoList = () =>
   fetch(`${serverUrl}/tasks`)
     .then(callback(200));
 
-export const getTodoById = id =>
+export const getTodoById = (id) =>
   fetch(`${serverUrl}/task/${id}`)
     .then(callback(200));
 
@@ -21,23 +21,18 @@ export const addTodo = (title, description) =>
     headers,
   }).then(callback(201));
 
-export const deleteTodo = id =>
+export const deleteTodo = (id) =>
   fetch(`${serverUrl}/task/delete/${id}`, {
     method: 'DELETE',
   }).then(callback(200));
 
 export const updateTodo = (id, title, description) =>
-  fetch(`${serverUrl}/task/update/${id}`, {
+  fetch(`${serverUrl}/task/update/${id}/${title}/${description}`, {
     method: 'PUT',
     headers,
-    body: JSON.stringify({
-      title,
-      description,
-    }),
-  }).then(callback(200));
+  }).then(callback(204));
 
 const callback = status => (resp) => {
-  debugger;
   if (resp.status === status) {
     return resp.json();
   }

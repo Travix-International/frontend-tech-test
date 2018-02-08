@@ -5,6 +5,7 @@ import {
 
 export const INITIAL_STATE = {
   todos: [],
+  todo: {},
   isFetching: false
 };
 
@@ -20,7 +21,10 @@ const todos = (state = INITIAL_STATE, action) => {
       });
 
     case GET_TODO:
-      return Object.assign({}, state, { isFetching: true });
+      return Object.assign({}, state, {
+        todo: action.payload.todo || {},
+        isFetching: true
+      });
 
     case CREATE_TODO:
       return Object.assign({}, state, {
@@ -30,7 +34,7 @@ const todos = (state = INITIAL_STATE, action) => {
     case EDIT_TODO:
       return Object.assign({}, state, {
         todos: state.todos.map(l => (
-          l.id === action.payload.id ? action.payload.todo : l
+          l.id === action.payload.todo.id ? action.payload.todo : l
         ))
       });
 

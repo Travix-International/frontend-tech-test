@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
@@ -13,9 +13,11 @@ class App extends React.Component {
       <section>
         <AppBar className="header" position="static">
           <Toolbar>
-            <Typography type="title" color="inherit">
-              Test Travix
-            </Typography>
+            <Link className="nav-title" to="/">
+              <Typography type="title" color="inherit">
+                Test Travix
+              </Typography>
+            </Link>
           </Toolbar>
         </AppBar>
         <Switch>
