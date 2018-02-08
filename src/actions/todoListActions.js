@@ -69,9 +69,11 @@ const deleteTodo = createAction(DELETE_TODO, id =>
       });
   });
 
-const fetchTodosSuccess = createAction(FETCH_TODOS_SUCCESS, todos => {
+const fetchTodosSuccess = createAction(FETCH_TODOS_SUCCESS, data => {
   return {
-    todos
+    todos: data.tasks,
+    totalTodos: data.totalTasks,
+    totalPages: data.totalPages
   };
 });
 
@@ -81,12 +83,13 @@ const fetchTodosFail = createAction(FETCH_TODOS_FAIL, error => {
   };
 });
 
-const fetchTodos = createAction(FETCH_TODOS, () =>
+const fetchTodos = createAction(FETCH_TODOS, (pageNumber = 0, pageSize = 0) =>
   dispatch => {
-    serverHelper.getTodos()
+    // if pageNumber and pageSize are 0 we get unpaged data
+    serverHelper.getTodos(pageNumber, pageSize)
       .then(data => {
         if (data && data.tasks && data.tasks.constructor === Array) {
-          dispatch(fetchTodosSuccess(data.tasks));
+          dispatch(fetchTodosSuccess(data));
         }
       })
       .catch(error => {
