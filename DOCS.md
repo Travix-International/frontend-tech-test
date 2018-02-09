@@ -14,8 +14,26 @@ The aim of this project is to develop a mini-application for managing TODO tasks
 
 * PWA implementation
 * Lazy loading components for improved TTI
-* Server Side Rendering
-* Store hydration for Redux.
+
+* Update travix-ui-kit documentation on found inconsistencies:
+
+  * Docs displays The following code for the `Input` component:
+
+          <div>
+            <div style={{ width: '50%' }}>
+                <Input value={state.value !== undefined ? state.value : 'value'} onChange={(e, value) => { setState({ value: e.target.value }); }}/>
+            </div>
+          </div>
+
+          In the `components/input/input.js` file, we can find the following code:
+
+          handleInputChange = (e) => {
+              if (typeof this.props.onChange === 'function') {
+                  this.props.onChange(e);
+              }
+          };
+
+          Which passes `e`, whilst it does not pass `e`.
 
 ## Functional requirements
 
@@ -89,14 +107,6 @@ To test the API suite of tests, run:
 
 ```
 npm run test-api
-```
-
-To test the E2E tests, run:
-
-```
-npm run selenium-setup // Sets up the selenium environment.
-npm run selenium-start // Makes selenium available for tests.
-npm run test-e2e       // Actually runs the tests
 ```
 
 ## Authors

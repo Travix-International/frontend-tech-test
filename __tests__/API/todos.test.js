@@ -151,13 +151,13 @@ describe('Tasks', () => {
       });
   });
 
-  it('should create a SINGLE task on /api/task/create/:title/:description POST', (done) => {
+  it('should create a SINGLE task on /api/task/create POST', (done) => {
     const title = 'Test title';
     const description = 'Test description';
 
     chai
       .request(server)
-      .post(`/api/task/create/${title}/${description}`)
+      .post('/api/task/create')
       .send({ title, description })
       .end((err, res) => {
         res.should.have.status(201);
@@ -187,15 +187,7 @@ describe('Tasks', () => {
       .request(server)
       .delete(`/api/task/delete/${id}`)
       .end((err, res) => {
-        res.should.have.status(200);
-        res.should.be.json;
-        res.body.data.should.be.a('object');
-        res.body.meta.message.should.equal('RESOURCE_DELETED');
-        res.body.data.should.be.a('object');
-        res.body.data.should.not.have.property('id');
-        res.body.data.should.not.have.property('title');
-        res.body.data.should.not.have.property('description');
-        res.body.data.should.not.have.property('completed');
+        res.should.have.status(204);
         done();
       });
   });

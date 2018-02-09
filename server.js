@@ -106,8 +106,8 @@ app.put('/api/task/update/:id', (req, res) => {
         task.description = req.body.description;
       }
 
-      if (typeof req.body.completed !== 'undefined') {
-        task.completed = req.body.completed;
+      if (typeof req.body.toggle !== 'undefined') {
+        task.completed = !task.completed;
       }
 
       return res.status(200).json({
@@ -138,11 +138,11 @@ app.put('/api/task/update/:id', (req, res) => {
  * Added: Remove title and description from URL, makes for shorter URLs and POST requests
  * don't need to be cached.
  */
-app.post('/api/task/create/:title/:description', (req, res) => {
+app.post('/api/task/create', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
-    title: req.params.title,
-    description: req.params.description,
+    id: tasksContainer.tasks.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1, // Here we make sure ids are not repeated in any way.
+    title: req.body.title,
+    description: req.body.description,
     completed: false,
     deleted: false,
   };
@@ -178,10 +178,7 @@ app.delete('/api/task/delete/:id', (req, res) => {
       // tasksContainer.tasks.splice(taskIndex, 1);
       task.deleted = true;
 
-      return res.status(200).json({
-        meta: { message: 'RESOURCE_DELETED' },
-        data: {},
-      });
+      return res.status(204).json({});
     }
     return res.status(404).json({
       meta: { message: 'RESOURCE_NOT_FOUND' },
@@ -195,6 +192,10 @@ app.delete('/api/task/delete/:id', (req, res) => {
 });
 
 app.get('/', (req, res) => {
+  res.sendFile(`${__dirname}/src/index.html`);
+});
+
+app.get('/todo/:id', (req, res) => {
   res.sendFile(`${__dirname}/src/index.html`);
 });
 

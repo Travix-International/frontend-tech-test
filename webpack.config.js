@@ -5,13 +5,14 @@ const webpack = require('webpack');
 
 module.exports = {
   bail: true,
+  devtool: 'eval-source-map',
   entry: [
     path.resolve(__dirname, './src/styles/index.scss'),
-    path.resolve(__dirname, './src/javascript/index.js')
+    path.resolve(__dirname, './src/javascript/index.js'),
   ],
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'travix-bundle.js'
+    filename: 'travix-bundle.js',
   },
   module: {
     rules: [
@@ -20,10 +21,7 @@ module.exports = {
         exclude: [/node_modules/],
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['react', 'env']
-          }
-        }
+        },
       },
       {
         test: /\.s?css$/i,
@@ -36,16 +34,16 @@ module.exports = {
               options: {
                 plugins: [
                   autoprefixer({
-                    browsers: ['last 2 versions', 'iOS >= 8', 'Safari >= 8']
-                  })
-                ]
-              }
+                    browsers: ['last 2 versions', 'iOS >= 8', 'Safari >= 8'],
+                  }),
+                ],
+              },
             },
-            'sass-loader'
-          ]
-        })
-      }
-    ]
+            'sass-loader',
+          ],
+        }),
+      },
+    ],
   },
-  plugins: [new ExtractTextPlugin('travix-bundle.css')]
+  plugins: [new ExtractTextPlugin('travix-bundle.css')],
 };
