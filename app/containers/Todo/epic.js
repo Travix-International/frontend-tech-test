@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { combineEpics } from 'redux-observable';
 
 import request from 'utils/request';
+import { API_URL } from 'containers/App/constants';
 import { actionTypes as at } from './constants';
 import {
   fetchSuccess,
@@ -16,11 +17,9 @@ const onRequest = action$ => {
   return action$
     .ofType(at.FETCH)
     .mergeMap(() => {
-      const requestURL = 'http://localhost:3000/tasks';
-
       return Observable
         .fromPromise(
-          request(requestURL, {
+          request(`${API_URL}/tasks`, {
             method: 'GET',
             headers: {
               'Content-Type': 'json'
@@ -37,11 +36,9 @@ const onUpdate = action$ => {
     .ofType(at.UPDATE)
     .pluck('payload')
     .mergeMap(({ id, title, description, index }) => {
-      const requestURL = `http://localhost:3000/task/update/${id}/${title}/${description}`;
-
       return Observable
         .fromPromise(
-          request(requestURL, {
+          request(`${API_URL}/task/update/${id}/${title}/${description}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'json'
@@ -58,11 +55,9 @@ const onRemove = action$ => {
     .ofType(at.REMOVE)
     .pluck('payload')
     .mergeMap(({ id, index }) => {
-      const requestURL = `http://localhost:3000/task/delete/${id}`;
-
       return Observable
         .fromPromise(
-          request(requestURL, {
+          request(`${API_URL}/task/delete/${id}`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'json'

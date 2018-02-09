@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { combineEpics } from 'redux-observable';
 
 import request from 'utils/request';
+import { API_URL } from 'containers/App/constants';
 import { actionTypes as at } from './constants';
 import { selectTitle, selectDescription } from './selectors';
 import { saveSuccess, saveError } from './actions';
@@ -12,11 +13,10 @@ const onSave = (action$, store) => {
     .mergeMap(() => {
       const title = selectTitle()(store.getState());
       const description = selectDescription()(store.getState());
-      const requestURL = `http://localhost:3000/task/create/${title}/${description}`;
 
       return Observable
         .fromPromise(
-          request(requestURL, {
+          request(`${API_URL}/task/create/${title}/${description}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'json'
