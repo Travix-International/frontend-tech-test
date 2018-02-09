@@ -30,6 +30,7 @@ export default function todos(state = initialState, action) {
       return state.filter(todo => todo.id === action.id);
 
     case actionTypes.CREATE_TODO:
+      console.log(action);
       return [...state, ...[action.todo]];
 
     case actionTypes.EDIT_TODO_TITLE:

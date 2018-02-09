@@ -105,7 +105,7 @@ describe('Tasks', () => {
       });
   });
 
-  it('should return 404 if todo is not found on /api/task/update/:id/:title/:description/:status PUT', (done) => {
+  it('should return 404 if todo is not found on /api/task/update/:id PUT', (done) => {
     const id = -1;
     const title = 'Test title 0';
     const description = 'Test description';
@@ -173,6 +173,51 @@ describe('Tasks', () => {
         res.body.data.title.should.equal(title);
         res.body.data.description.should.equal(description);
         res.body.data.completed.should.equal(false);
+        done();
+      });
+  });
+
+  it('should return 400 on /api/task/create POST if title body parameter is empty', (done) => {
+    const title = '';
+    const description = 'Test description';
+
+    chai
+      .request(server)
+      .post('/api/task/create')
+      .send({ title, description })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.should.be.json;
+        res.body.data.should.be.a('object');
+        res.body.meta.message.should.equal('BAD_REQUEST');
+        res.body.data.should.be.a('object');
+        res.body.data.should.not.have.property('id');
+        res.body.data.should.not.have.property('title');
+        res.body.data.should.not.have.property('description');
+        res.body.data.should.not.have.property('completed');
+        res.body.data.should.not.have.property('deleted');
+        done();
+      });
+  });
+
+  it('should return 400 on /api/task/create POST if title body parameter is mising', (done) => {
+    const description = 'Test description';
+
+    chai
+      .request(server)
+      .post('/api/task/create')
+      .send({ description })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.should.be.json;
+        res.body.data.should.be.a('object');
+        res.body.meta.message.should.equal('BAD_REQUEST');
+        res.body.data.should.be.a('object');
+        res.body.data.should.not.have.property('id');
+        res.body.data.should.not.have.property('title');
+        res.body.data.should.not.have.property('description');
+        res.body.data.should.not.have.property('completed');
+        res.body.data.should.not.have.property('deleted');
         done();
       });
   });

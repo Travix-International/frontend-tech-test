@@ -23,6 +23,9 @@ const removeDeletedProp = (item) => {
   return itemClone;
 };
 
+const createTodo = (title, description = '') => {};
+const deleteTodo = (id) => {};
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.text({ type: 'text/html' }));
 app.use(bodyParser.json({ type: 'application/json' }));
@@ -139,21 +142,28 @@ app.put('/api/task/update/:id', (req, res) => {
  * don't need to be cached.
  */
 app.post('/api/task/create', (req, res) => {
-  const task = {
-    id: tasksContainer.tasks.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1, // Here we make sure ids are not repeated in any way.
-    title: req.body.title,
-    description: req.body.description,
-    completed: false,
-    deleted: false,
-  };
+  if (typeof req.body.title !== 'undefined' && req.body.title.length > 0) {
+    const task = {
+      id: tasksContainer.tasks.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1, // Here we make sure ids are not repeated in any way.
+      title: req.body.title,
+      description: req.body.description,
+      completed: false,
+      deleted: false,
+    };
 
-  tasksContainer.tasks.push(task);
+    tasksContainer.tasks.push(task);
 
-  return res.status(201).json({
-    meta: {
-      message: 'RESOURCE_CREATED',
-    },
-    data: removeDeletedProp(task),
+    return res.status(201).json({
+      meta: {
+        message: 'RESOURCE_CREATED',
+      },
+      data: removeDeletedProp(task),
+    });
+  }
+
+  return res.status(400).json({
+    meta: { message: 'BAD_REQUEST' },
+    data: {},
   });
 });
 
@@ -195,12 +205,57 @@ app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/src/index.html`);
 });
 
-app.get('/todo/:id', (req, res) => {
-  res.sendFile(`${__dirname}/src/index.html`);
+app.get('/socket-client', (req, res) => {
+  res.sendFile(`${__dirname}/src/socket-client.html`);
 });
 
 const server = app.listen(9001, () => {
   process.stdout.write('\n\n\n\nThe server is available on http://localhost:9001/\n');
+});
+
+// Basic socket.io implementation of create and delete actions
+const io = require('socket.io')(server);
+
+io.on('connection', (socket) => {
+  console.log('user connected');
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+
+  socket.on('CREATE_TODO', (payload) => {
+    const { title, description } = payload;
+
+    console.log(typeof payload, payload, title, description);
+
+    if (typeof title !== 'undefined' && title.length > 0) {
+      const task = {
+        id: tasksContainer.tasks.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1, // Here we make sure ids are not repeated in any way.
+        title,
+        description,
+        completed: false,
+        deleted: false,
+      };
+
+      tasksContainer.tasks.push(task);
+
+      console.log(removeDeletedProp(task));
+      console.log(JSON.stringify(removeDeletedProp(task)));
+      io.emit('CREATE_TODO', removeDeletedProp(task));
+    }
+  });
+
+  socket.on('DELETE_TODO', (payload) => {
+    const { id } = payload;
+    const task = tasksContainer.tasks.find(item => item.id === id && !item.deleted);
+
+    if (task !== null && typeof task !== 'undefined') {
+      // const taskIndex = tasksContainer.tasks;
+      // tasksContainer.tasks.splice(taskIndex, 1);
+      task.deleted = true;
+      io.emit('DELETE_TODO', { id });
+    }
+  });
 });
 
 module.exports = server;
