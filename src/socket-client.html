@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Todo client</title>
+
+    <style>
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="button" data-todo-create>Create todo with Web Sockets</button>
+    <button class="button" data-todo-delete>Delete todo with Web Sockets and id 0</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+
+    <script>
+        var createBtn = document.querySelector('[data-todo-create]');
+        var deleteBtn = document.querySelector('[data-todo-delete]');
+        var socket = io();
+
+        function createTodo() {
+            socket.emit('CREATE_TODO', { 'title': 'Todo with Sockets', 'description': 'Todo description with Sockets' });
+        }
+
+        function deleteTodo() {
+            socket.emit('DELETE_TODO', { 'id': 0 });
+        }
+
+        createBtn.addEventListener('click', createTodo);
+        deleteBtn.addEventListener('click', deleteTodo);
+    </script>
+</body>
+
+</html>

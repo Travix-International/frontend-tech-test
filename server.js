@@ -1,141 +1,261 @@
-'use strict';
+const express = require('express');
 
-const app = require('express')();
+const app = express();
 const tasksContainer = require('./tasks.json');
+const path = require('path');
+const bodyParser = require('body-parser');
+
+/*
+  Data model:
+  tasks: [{
+    id: :number,
+    title: :string,
+    description: :string,
+    completed: :boolean,
+    deleted: :boolean
+  }]
+*/
+
+const removeDeletedProp = (item) => {
+  const itemClone = Object.assign({}, item);
+  delete itemClone.deleted; // We don't need the Front-end to know if a key has been deleted.
+
+  return itemClone;
+};
+
+const createTodo = (title, description = '') => {};
+const deleteTodo = (id) => {};
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.text({ type: 'text/html' }));
+app.use(bodyParser.json({ type: 'application/json' }));
+
+app.use(express.static(path.join(__dirname, './dist')));
 
 /**
- * GET /tasks
- * 
+ * GET /api/tasks
+ *
  * Return the list of tasks with status code 200.
  */
-app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
-});
+app.get('/api/tasks', (req, res) =>
+  res.status(200).json({
+    meta: { message: 'SUCCESS' },
+    data: tasksContainer.tasks.filter(item => !item.deleted).map(item => removeDeletedProp(item)),
+  }));
 
 /**
- * Get /task/:id
- * 
+ * Get /api/task/:id
+ *
  * id: Number
- * 
+ *
  * Return the task for the given id.
- * 
+ *
  * If found return status code 200 and the resource.
  * If not found return status code 404.
  * If id is not valid number return status code 400.
  */
-app.get('/task/:id', (req, res) => {
+app.get('/api/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    // Fix small bug that uses tasks.Container instead of tasksContainer
+    // const task = tasks.Container.find(item => item.id === id);
+    const task = tasksContainer.tasks.find(item => item.id === id && !item.deleted);
 
-    if (task !== null) {
+    if (task !== null && typeof task !== 'undefined') {
       return res.status(200).json({
-        task,
-      });
-    } else {
-      return res.status(404).json({
-        message: 'Not found.',
+        meta: { message: 'SUCCESS' },
+        data: removeDeletedProp(task),
       });
     }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request.',
+    return res.status(404).json({
+      meta: { message: 'RESOURCE_NOT_FOUND' },
+      data: {},
     });
   }
-});
-
-/**
- * PUT /task/update/:id/:title/:description
- * 
- * id: Number
- * title: string
- * description: string
- * 
- * Update the task with the given id.
- * If the task is found and update as well, return a status code 204.
- * If the task is not found, return a status code 404.
- * If the provided id is not a valid number return a status code 400.
- */
-app.put('/task/update/:id/:title/:description', (req, res) => {
-  const id = parseInt(req.params.id, 10);
-
-  if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-
-    if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
-      return res.status(204);
-    } else {
-      return res.status(404).json({
-        message: 'Not found',
-      });
-    }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request',
-    });
-  }
-});
-
-/**
- * POST /task/create/:title/:description
- * 
- * title: string
- * description: string
- * 
- * Add a new task to the array tasksContainer.tasks with the given title and description.
- * Return status code 201.
- */
-app.post('/task/create/:title/:description', (req, res) => {
-  const task = {
-    id: tasksContainer.tasks.length,
-    title: req.params.title,
-    description: req.params.description,
-  };
-
-  tasksContainer.tasks.push(task);
-
-  return res.status(201).json({
-    message: 'Resource created',
+  return res.status(400).json({
+    meta: { message: 'BAD_REQUEST' },
+    data: {},
   });
 });
 
 /**
- * DELETE /task/delete/:id
- * 
+ * PUT /api/task/update/:id/:title/:description
+ *
  * id: Number
- * 
- * Delete the task linked to the  given id.
- * If the task is found and deleted as well, return a status code 204.
+ * title: string
+ * description: string
+ *
+ * Update the task with the given id.
+ * If the task is found and update as well, return a status code 200.
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
+ *
+ * Added: Remove id, title and description from URL. Makes for shorter URLs and
+ * PUT requests don't need to be cached.
  */
-app.delete('/task/delete/:id', (req, res) => {
+app.put('/api/task/update/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-  
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
+    const task = tasksContainer.tasks.find(item => item.id === id && !item.deleted);
+
+    if (task !== null && typeof task !== 'undefined') {
+      if (typeof req.body.title !== 'undefined') {
+        task.title = req.body.title;
+      }
+
+      if (typeof req.body.description !== 'undefined') {
+        task.description = req.body.description;
+      }
+
+      if (typeof req.body.toggle !== 'undefined') {
+        task.completed = !task.completed;
+      }
+
       return res.status(200).json({
-        message: 'Updated successfully',
-      });
-    } else {
-      return es.status(404).json({
-        message: 'Not found',
+        meta: { message: 'RESOURCE_UPDATED' },
+        data: removeDeletedProp(task),
       });
     }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request',
+    return res.status(404).json({
+      meta: { message: 'RESOURCE_NOT_FOUND' },
+      data: {},
     });
   }
+  return res.status(400).json({
+    meta: { message: 'BAD_REQUEST' },
+    data: {},
+  });
 });
 
-app.listen(9001, () => {
-  process.stdout.write('the server is available on http://localhost:9001/\n');
+/**
+ * POST /api/task/create/:title/:description
+ *
+ * title: string
+ * description: string
+ *
+ * Add a new task to the array tasksContainer.tasks with the given title and description.
+ * Return status code 201.
+ *
+ * Added: Remove title and description from URL, makes for shorter URLs and POST requests
+ * don't need to be cached.
+ */
+app.post('/api/task/create', (req, res) => {
+  if (typeof req.body.title !== 'undefined' && req.body.title.length > 0) {
+    const task = {
+      id: tasksContainer.tasks.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1, // Here we make sure ids are not repeated in any way.
+      title: req.body.title,
+      description: req.body.description,
+      completed: false,
+      deleted: false,
+    };
+
+    tasksContainer.tasks.push(task);
+
+    return res.status(201).json({
+      meta: {
+        message: 'RESOURCE_CREATED',
+      },
+      data: removeDeletedProp(task),
+    });
+  }
+
+  return res.status(400).json({
+    meta: { message: 'BAD_REQUEST' },
+    data: {},
+  });
 });
+
+/**
+ * DELETE /api/task/delete/:id
+ *
+ * id: Number
+ *
+ * Delete the task linked to the  given id.
+ * If the task is found and deleted as well, return a status code 200.
+ * If the task is not found, return a status code 404.
+ * If the provided id is not a valid number return a status code 400.
+ */
+app.delete('/api/task/delete/:id', (req, res) => {
+  const id = parseInt(req.params.id, 10);
+
+  if (!Number.isNaN(id)) {
+    const task = tasksContainer.tasks.find(item => item.id === id && !item.deleted);
+
+    if (task !== null && typeof task !== 'undefined') {
+      // const taskIndex = tasksContainer.tasks;
+      // tasksContainer.tasks.splice(taskIndex, 1);
+      task.deleted = true;
+
+      return res.status(204).json({});
+    }
+    return res.status(404).json({
+      meta: { message: 'RESOURCE_NOT_FOUND' },
+      data: {},
+    });
+  }
+  return res.status(400).json({
+    meta: { message: 'BAD_REQUEST' },
+    data: {},
+  });
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(`${__dirname}/src/index.html`);
+});
+
+app.get('/socket-client', (req, res) => {
+  res.sendFile(`${__dirname}/src/socket-client.html`);
+});
+
+const server = app.listen(9001, () => {
+  process.stdout.write('\n\n\n\nThe server is available on http://localhost:9001/\n');
+});
+
+// Basic socket.io implementation of create and delete actions
+const io = require('socket.io')(server);
+
+io.on('connection', (socket) => {
+  console.log('user connected');
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+
+  socket.on('CREATE_TODO', (payload) => {
+    const { title, description } = payload;
+
+    console.log(typeof payload, payload, title, description);
+
+    if (typeof title !== 'undefined' && title.length > 0) {
+      const task = {
+        id: tasksContainer.tasks.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1, // Here we make sure ids are not repeated in any way.
+        title,
+        description,
+        completed: false,
+        deleted: false,
+      };
+
+      tasksContainer.tasks.push(task);
+
+      console.log(removeDeletedProp(task));
+      console.log(JSON.stringify(removeDeletedProp(task)));
+      io.emit('CREATE_TODO', removeDeletedProp(task));
+    }
+  });
+
+  socket.on('DELETE_TODO', (payload) => {
+    const { id } = payload;
+    const task = tasksContainer.tasks.find(item => item.id === id && !item.deleted);
+
+    if (task !== null && typeof task !== 'undefined') {
+      // const taskIndex = tasksContainer.tasks;
+      // tasksContainer.tasks.splice(taskIndex, 1);
+      task.deleted = true;
+      io.emit('DELETE_TODO', { id });
+    }
+  });
+});
+
+module.exports = server;
