@@ -61,16 +61,25 @@
   "jest": {
     "verbose": true,
     "setupTestFrameworkScriptFile": "<rootDir>config/setupTests.js",
-    "collectCoverageFrom": ["src/javascript/**/*.{js,jsx}"],
-    "testPathIgnorePatterns": ["<rootDir>[/\\\\](build|docs|node_modules|.tmp|dist)[/\\\\]"],
+    "collectCoverageFrom": [
+      "src/javascript/**/*.{js,jsx}"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>[/\\\\](build|docs|node_modules|.tmp|dist)[/\\\\]"
+    ],
     "testEnvironment": "jsdom",
     "testURL": "http://localhost",
-    "roots": ["<rootDir>/src/javascript", "<rootDir>/__tests__/app"],
+    "roots": [
+      "<rootDir>/src/javascript",
+      "<rootDir>/__tests__/app"
+    ],
     "testRegex": "__tests__/app|\\.(test|spec)\\.js?$",
     "transform": {
       "^.+\\.jsx?$": "<rootDir>/node_modules/babel-jest",
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/fileTransform.js"
     },
-    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"]
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ]
   }
 }
