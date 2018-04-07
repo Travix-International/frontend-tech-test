@@ -1,24 +1,42 @@
 'use strict';
 
 const app = require('express')();
+const bodyParser = require('body-parser');
 const tasksContainer = require('./tasks.json');
 
+app.use(bodyParser.json()); // for parsing application/json
+
 /**
- * GET /tasks
- * 
+ * GET /task?pn={Number}&tpp={Number}&includeCompleted={bool}
+ *
+ * pn: Number Page Number
+ * tpp: Number Tasks Per Page
+
+ *
  * Return the list of tasks with status code 200.
+ * If no query string given it returns all of the tasks
  */
-app.get('/tasks', (req, res) => {
+app.get('/task', (req, res) => {
+  // Can also use Range header for this
+  const pageNumber = parseInt(req.query.pn, 10);
+  const tasksPerPage = parseInt(req.query.tpp, 10);
+
+  if (!Number.isNaN(pageNumber) && !Number.isNaN(tasksPerPage)) {
+    const start = (pageNumber - 1) * tasksPerPage;
+    const end = (pageNumber - 1) * tasksPerPage + tasksPerPage;
+    const pagedTasks = tasksContainer.tasks.slice(start, end);
+    return res.status(200).json({ tasks: pagedTasks });
+  }
   return res.status(200).json(tasksContainer);
 });
 
 /**
  * Get /task/:id
- * 
+ *
  * id: Number
- * 
+ *
  * Return the task for the given id.
- * 
+ *
  * If found return status code 200 and the resource.
  * If not found return status code 404.
  * If id is not valid number return status code 400.
@@ -27,72 +45,67 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
         task,
       });
-    } else {
-      return res.status(404).json({
-        message: 'Not found.',
-      });
     }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request.',
+    return res.status(404).json({
+      message: 'Not found.',
     });
   }
+  return res.status(400).json({
+    message: 'Bad request.',
+  });
 });
 
 /**
- * PUT /task/update/:id/:title/:description
- * 
+ * PUT /task/:id
+ *
  * id: Number
- * title: string
- * description: string
- * 
- * Update the task with the given id.
+ *
+ * Update the task with the given id with the fields in request body.
  * If the task is found and update as well, return a status code 204.
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
+app.put('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
-      return res.status(204);
-    } else {
-      return res.status(404).json({
-        message: 'Not found',
+    if (task) {
+      const updatedTask = req.body;
+      Object.keys(updatedTask).forEach(key => {
+        task[key] = updatedTask[key];
       });
+      return res.status(204).end();
     }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request',
+    return res.status(404).json({
+      message: 'Not found',
     });
   }
+  return res.status(400).json({
+    message: 'Bad request',
+  });
 });
 
 /**
- * POST /task/create/:title/:description
- * 
- * title: string
- * description: string
- * 
- * Add a new task to the array tasksContainer.tasks with the given title and description.
+ * POST /task
+ *
+ *
+ * Add a new task to the array tasksContainer.tasks with the object in request body.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task', (req, res) => {
+  const postedTask = req.body;
   const task = {
     id: tasksContainer.tasks.length,
-    title: req.params.title,
-    description: req.params.description,
+    title: postedTask.title,
+    description: postedTask.description,
   };
 
   tasksContainer.tasks.push(task);
@@ -103,37 +116,35 @@ app.post('/task/create/:title/:description', (req, res) => {
 });
 
 /**
- * DELETE /task/delete/:id
- * 
+ * DELETE /task/:id
+ *
  * id: Number
- * 
+ *
  * Delete the task linked to the  given id.
  * If the task is found and deleted as well, return a status code 204.
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/task/delete/:id', (req, res) => {
+app.delete('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-  
+
     if (task !== null) {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',
       });
-    } else {
-      return es.status(404).json({
-        message: 'Not found',
-      });
     }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request',
+    return res.status(404).json({
+      message: 'Not found',
     });
   }
+  return res.status(400).json({
+    message: 'Bad request',
+  });
 });
 
 app.listen(9001, () => {
