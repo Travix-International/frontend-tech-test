@@ -1,0 +1,17 @@
+@import './variables.scss';
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  background: $dominant-bg-color; /* fallback for old browsers */
+  background: $bg-color;
+}
+
+* {
+  color: $font-color-light;
+}

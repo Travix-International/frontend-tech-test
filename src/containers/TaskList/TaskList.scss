@@ -1,0 +1,15 @@
+@import '../../scss/variables.scss';
+
+.TaskList__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+@media screen and (max-width: $responsive-small-device) {
+  .TaskList__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+  }
+}

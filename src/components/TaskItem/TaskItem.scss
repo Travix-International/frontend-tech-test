@@ -1,0 +1,27 @@
+@import '../../scss/variables.scss';
+
+.Task__wrapper {
+  width: 12rem;
+  height: 12rem;
+  padding: 0.4rem;
+  margin: 0.8rem;
+  background-color: #123123;
+  box-shadow: orange;
+}
+
+.Task__descriptionWrapper {
+  font-size: 14px;
+}
+
+@media screen and (max-width: $responsive-small-device) {
+  .Task__wrapper {
+    width: initial;
+    height: initial;
+    border-radius: 0.5rem;
+    margin: 0.3rem 0.8rem 0.3rem 0.8rem;
+  }
+
+  .Task__descriptionWrapper {
+    display: none;
+  }
+}

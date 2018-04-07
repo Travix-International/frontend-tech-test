@@ -18,12 +18,16 @@
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "express": "^4.14.0",
+    "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-redux": "^5.0.7",
-    "redux": "^3.7.2"
+    "react-truncate": "^2.3.0",
+    "redux": "^3.7.2",
+    "travix-ui-kit": "^0.9.5"
   },
   "devDependencies": {
     "autoprefixer": "^8.2.0",
