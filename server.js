@@ -5,6 +5,14 @@ const bodyParser = require('body-parser');
 const tasksContainer = require('./tasks.json');
 
 app.use(bodyParser.json()); // for parsing application/json
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
 
 /**
  * GET /task?pn={Number}&tpp={Number}&includeCompleted={bool}
@@ -79,8 +87,8 @@ app.put('/task/:id', (req, res) => {
 
     if (task) {
       const updatedTask = req.body;
-      Object.keys(updatedTask).forEach(key => {
-        task[key] = updatedTask[key];
+      Object.keys(task).forEach(key => {
+        if (updatedTask[key]) task[key] = updatedTask[key];
       });
       return res.status(204).end();
     }
