@@ -9,15 +9,16 @@ import './Main.scss';
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showEditor: false, selectedTask: null };
+    this.state = { showEditor: false };
     this.handleTaskSelection = this.handleTaskSelection.bind(this);
     this.handleNewTaskAction = this.handleNewTaskAction.bind(this);
+    this.handleEditorClose = this.handleEditorClose.bind(this);
   }
 
   handleNewTaskAction() {
     this.setState({
       showEditor: true,
-      selectedTask: null,
+      selectedTask: {},
     });
   }
 
@@ -25,6 +26,12 @@ class Main extends React.Component {
     this.setState({
       showEditor: true,
       selectedTask: task,
+    });
+  }
+
+  handleEditorClose() {
+    this.setState({
+      showEditor: false,
     });
   }
 
@@ -36,7 +43,7 @@ class Main extends React.Component {
         <TaskList handleTaskSelection={this.handleTaskSelection} />
         {this.state.showEditor && (
           <TaskEditor
-            newItem={this.state.selectedTask === null}
+            onPanelClose={this.handleEditorClose}
             task={this.state.selectedTask}
           />
         )}

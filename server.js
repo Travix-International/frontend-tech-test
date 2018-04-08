@@ -11,6 +11,7 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
   );
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   next();
 });
 
@@ -39,12 +40,10 @@ app.get('/task', (req, res) => {
       totalRecords: tasksContainer.tasks.length,
     });
   }
-  return res
-    .status(200)
-    .json({
-      tasks: tasksContainer.tasks,
-      totalRecords: tasksContainer.tasks.length,
-    });
+  return res.status(200).json({
+    tasks: tasksContainer.tasks,
+    totalRecords: tasksContainer.tasks.length,
+  });
 });
 
 /**
@@ -99,7 +98,7 @@ app.put('/task/:id', (req, res) => {
       Object.keys(task).forEach(key => {
         if (updatedTask[key]) task[key] = updatedTask[key];
       });
-      return res.status(204).end();
+      return res.status(200).json({ task });
     }
     return res.status(404).json({
       message: 'Not found',
@@ -127,9 +126,7 @@ app.post('/task', (req, res) => {
 
   tasksContainer.tasks.push(task);
 
-  return res.status(201).json({
-    message: 'Resource created',
-  });
+  return res.status(200).json({ task });
 });
 
 /**
@@ -151,9 +148,7 @@ app.delete('/task/:id', (req, res) => {
     if (task !== null) {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
-      return res.status(200).json({
-        message: 'Updated successfully',
-      });
+      return res.status(204).end();
     }
     return res.status(404).json({
       message: 'Not found',

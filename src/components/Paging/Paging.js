@@ -10,7 +10,11 @@ const Paging = ({ currentPage, totalRecords, onPageClicked }) => {
   for (let i = -1; i < 5; i += 1) {
     if (currentPage + i <= totalPage && currentPage + i > 0)
       pageLinks.push(
-        <a href="#" onClick={() => onPageClicked(currentPage + i)}>
+        <a
+          href="#"
+          key={`page_${i}`}
+          onClick={() => onPageClicked(currentPage + i)}
+        >
           {currentPage + i}
         </a>
       );

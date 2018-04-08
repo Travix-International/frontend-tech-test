@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   SlidingPanel,
@@ -7,23 +8,23 @@ import {
   Input,
   Button,
 } from 'travix-ui-kit';
+import { createTask, updateTask, getTask, deleteTask } from './actions';
 
 class TaskEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { task: { title: '', description: '' } };
+    this.state = { task: props.task };
     this.titleChange = this.titleChange.bind(this);
     this.descriptionChange = this.descriptionChange.bind(this);
+    this.saveChanges = this.saveChanges.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
+    this.slidingPanelRef = React.createRef();
   }
 
-  static getDerivedStateFromProps(nextProps) {
-    if (nextProps.task !== null)
+  static getDerivedStateFromProps(nextProps, prevProps) {
+    if (!nextProps.inProgress)
       return {
         task: nextProps.task,
-      };
-    if (nextProps.newItem)
-      return {
-        task: { title: '', description: '' },
       };
     return null;
   }
@@ -42,17 +43,32 @@ class TaskEditor extends React.Component {
     });
   }
 
-  saveChanges() {}
+  saveChanges() {
+    if (!this.state.task.id) this.props.createTask(this.state.task);
+    else this.props.updateTask(this.state.task);
+  }
 
-  deleteTask() {}
+  deleteTask() {
+    this.props.deleteTask(this.state.task.id);
+    this.slidingPanelRef.current.active = false;
+  }
 
   render() {
+    if (this.props.inProgress) return null;
     return (
-      <SlidingPanel active>
+      <SlidingPanel
+        active
+        onClose={this.props.onPanelClose}
+        ref={this.slidingPanelRef}
+      >
         <SlidingPanelContent>
           <label>
             Title:
-            <Input onChange={this.titleChange} value={this.state.task.title} />
+            <Input
+              onChange={this.titleChange}
+              type="text"
+              value={this.state.task.title}
+            />
           </label>
           <br />
           <label>
@@ -76,7 +92,7 @@ class TaskEditor extends React.Component {
           <Button key="2" onClick={this.saveChanges} size="xs">
             Save
           </Button>
-          {!this.props.newItem && (
+          {this.state.task.id && (
             <Button key="3" onClick={this.deleteTask} size="xs">
               Delete
             </Button>
@@ -87,12 +103,21 @@ class TaskEditor extends React.Component {
   }
 }
 
-TaskEditor.defaultProps = {
-  newItem: true,
+const mapStateToProps = (state, ownProps) => {
+  if (!ownProps.task.id && state.TaskEditorReducer.task.id > 0)
+    return {
+      inProgress: state.TaskEditorReducer.inProgress,
+      task: state.TaskEditorReducer.task,
+    };
+  return {
+    inProgress: state.TaskEditorReducer.inProgress,
+    task: ownProps.task,
+  };
 };
 
-TaskEditor.propTypes = {
-  newItem: PropTypes.bool,
-};
-
-export default TaskEditor;
+export default connect(mapStateToProps, {
+  createTask,
+  updateTask,
+  getTask,
+  deleteTask,
+})(TaskEditor);
