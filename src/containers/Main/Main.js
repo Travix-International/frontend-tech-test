@@ -74,6 +74,9 @@ class Main extends React.Component {
             task={this.state.selectedTask}
           />
         )}
+        <div>
+          <small>By Ozgu Karaca</small>
+        </div>
       </div>
     );
   }

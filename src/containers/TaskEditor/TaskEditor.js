@@ -10,6 +10,8 @@ import {
 } from 'travix-ui-kit';
 import { createTask, updateTask, getTask, deleteTask } from './actions';
 
+import './TaskEditor.scss';
+
 class TaskEditor extends React.Component {
   constructor(props) {
     super(props);
@@ -73,6 +75,7 @@ class TaskEditor extends React.Component {
           <label>
             Description:
             <Input
+              className="SlidingPanel__description"
               multiline
               onChange={this.descriptionChange}
               value={this.state.task.description}
