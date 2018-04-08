@@ -7,15 +7,12 @@ import './ToolBox.scss';
 class ToolBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      searchText: '',
-    };
-    this.searchInput = React.createRef();
+    this.searchInputRef = React.createRef();
     this.searchTask = this.searchTask.bind(this);
   }
 
   searchTask() {
-    this.setState({ searchText: this.searchInput.current.value });
+    this.props.onSearch(this.searchInputRef.current.input.value);
   }
 
   render() {
@@ -25,7 +22,7 @@ class ToolBox extends React.Component {
           <div className="ToolBox__searchInput">
             <Input
               placeholder="Task Title"
-              ref={this.searchInput}
+              ref={this.searchInputRef}
               type="text"
             />
           </div>
@@ -45,6 +42,7 @@ class ToolBox extends React.Component {
 
 ToolBox.propTypes = {
   onAddNewClicked: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default ToolBox;

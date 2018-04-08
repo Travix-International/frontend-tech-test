@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const tasksContainer = require('./tasks.json');
 
 app.use(bodyParser.json()); // for parsing application/json
+
+// CORS
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
@@ -16,11 +18,10 @@ app.use((req, res, next) => {
 });
 
 /**
- * GET /task?pn={Number}&tpp={Number}
+ * GET /task?pn={Number}&tpp={Number}&search={string}
  *
  * pn: Number Page Number
  * tpp: Number Tasks Per Page
-
  *
  * Return the list of tasks with status code 200.
  * If no query string given it returns all of the tasks
@@ -29,20 +30,26 @@ app.get('/task', (req, res) => {
   // Can also use Range header for this
   const pageNumber = parseInt(req.query.pn, 10);
   const tasksPerPage = parseInt(req.query.tpp, 10);
+  const searchString = req.query.search;
+  let allTasks = tasksContainer.tasks;
+  if (searchString !== '') {
+    const regex = new RegExp(searchString, 'i');
+    allTasks = tasksContainer.tasks.filter(item => regex.test(item.title));
+  }
 
   if (!Number.isNaN(pageNumber) && !Number.isNaN(tasksPerPage)) {
     const start = (pageNumber - 1) * tasksPerPage;
     const end = (pageNumber - 1) * tasksPerPage + tasksPerPage;
-    const pagedTasks = tasksContainer.tasks.slice(start, end);
+    const pagedTasks = allTasks.slice(start, end);
     return res.status(200).json({
       tasks: pagedTasks,
       pageNumber: pageNumber,
-      totalRecords: tasksContainer.tasks.length,
+      totalRecords: allTasks.length,
     });
   }
   return res.status(200).json({
     tasks: tasksContainer.tasks,
-    totalRecords: tasksContainer.tasks.length,
+    totalRecords: allTasks.length,
   });
 });
 

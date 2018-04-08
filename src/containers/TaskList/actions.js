@@ -6,9 +6,9 @@ import {
 } from './constants';
 import { SERVER_URL } from '../../constants';
 
-export const fetchTasks = (currentPage, tasksPerPage) => {
+export const fetchTasks = (currentPage, tasksPerPage, filterBy) => {
   const request = axios.get(
-    `${SERVER_URL}?pn=${currentPage}&tpp=${tasksPerPage}`
+    `${SERVER_URL}?pn=${currentPage}&tpp=${tasksPerPage}&search=${filterBy}`
   );
   return dispatch => {
     dispatch({ type: FETCH_TASKS_PENDING });

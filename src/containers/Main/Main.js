@@ -9,11 +9,16 @@ import './Main.scss';
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showEditor: false, updatedDate: Date.now() };
+    this.state = {
+      showEditor: false,
+      updatedDate: Date.now(),
+      searchParam: '',
+    };
     this.handleTaskSelection = this.handleTaskSelection.bind(this);
     this.handleNewTaskAction = this.handleNewTaskAction.bind(this);
     this.handleEditorClose = this.handleEditorClose.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   handleNewTaskAction() {
@@ -27,6 +32,12 @@ class Main extends React.Component {
     this.setState({
       showEditor: true,
       selectedTask: task,
+    });
+  }
+
+  handleSearch(searchParam) {
+    this.setState({
+      searchParam: searchParam,
     });
   }
 
@@ -47,8 +58,12 @@ class Main extends React.Component {
     return (
       <div className="Main">
         <h1>Best To-Do App</h1>
-        <ToolBox onAddNewClicked={this.handleNewTaskAction} />
+        <ToolBox
+          onAddNewClicked={this.handleNewTaskAction}
+          onSearch={this.handleSearch}
+        />
         <TaskList
+          filterBy={this.state.searchParam}
           handleTaskSelection={this.handleTaskSelection}
           updatedDate={this.state.updatedDate}
         />
