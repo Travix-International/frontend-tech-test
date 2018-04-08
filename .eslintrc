@@ -6,5 +6,9 @@
     "browser": true,
     "es6": true,
     "node": true
+  },
+  "rules": {
+    "react/jsx-no-bind": 0,
+    "import/prefer-default-export": 0
   }
 }

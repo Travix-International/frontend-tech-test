@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 });
 
 /**
- * GET /task?pn={Number}&tpp={Number}&includeCompleted={bool}
+ * GET /task?pn={Number}&tpp={Number}
  *
  * pn: Number Page Number
  * tpp: Number Tasks Per Page
@@ -33,9 +33,18 @@ app.get('/task', (req, res) => {
     const start = (pageNumber - 1) * tasksPerPage;
     const end = (pageNumber - 1) * tasksPerPage + tasksPerPage;
     const pagedTasks = tasksContainer.tasks.slice(start, end);
-    return res.status(200).json({ tasks: pagedTasks });
+    return res.status(200).json({
+      tasks: pagedTasks,
+      pageNumber: pageNumber,
+      totalRecords: tasksContainer.tasks.length,
+    });
   }
-  return res.status(200).json(tasksContainer);
+  return res
+    .status(200)
+    .json({
+      tasks: tasksContainer.tasks,
+      totalRecords: tasksContainer.tasks.length,
+    });
 });
 
 /**

@@ -1,9 +1,20 @@
 .ToolBox__wrapper {
   display: flex;
+  justify-content: space-between;
   padding: 2rem 0 1rem 0;
+}
+
+.ToolBox__searchContainer {
+  display: flex;
+  margin-right: 3rem;
 }
 
 .ToolBox__searchInput {
   width: 20rem;
   margin-right: 0.2rem;
+}
+
+.ToolBox__addNewBtn {
+  display: flex;
+  margin-right: 3.5rem;
 }
