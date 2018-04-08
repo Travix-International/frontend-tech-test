@@ -9,10 +9,11 @@ import './Main.scss';
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showEditor: false };
+    this.state = { showEditor: false, updatedDate: Date.now() };
     this.handleTaskSelection = this.handleTaskSelection.bind(this);
     this.handleNewTaskAction = this.handleNewTaskAction.bind(this);
     this.handleEditorClose = this.handleEditorClose.bind(this);
+    this.handleEditorChange = this.handleEditorChange.bind(this);
   }
 
   handleNewTaskAction() {
@@ -35,14 +36,25 @@ class Main extends React.Component {
     });
   }
 
+  handleEditorChange() {
+    this.setState({
+      showEditor: false,
+      updatedDate: Date.now(),
+    });
+  }
+
   render() {
     return (
       <div className="Main">
         <h1>Best To-Do App</h1>
         <ToolBox onAddNewClicked={this.handleNewTaskAction} />
-        <TaskList handleTaskSelection={this.handleTaskSelection} />
+        <TaskList
+          handleTaskSelection={this.handleTaskSelection}
+          updatedDate={this.state.updatedDate}
+        />
         {this.state.showEditor && (
           <TaskEditor
+            onChange={this.handleEditorChange}
             onPanelClose={this.handleEditorClose}
             task={this.state.selectedTask}
           />

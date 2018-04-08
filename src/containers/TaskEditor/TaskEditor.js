@@ -21,7 +21,7 @@ class TaskEditor extends React.Component {
     this.slidingPanelRef = React.createRef();
   }
 
-  static getDerivedStateFromProps(nextProps, prevProps) {
+  static getDerivedStateFromProps(nextProps) {
     if (!nextProps.inProgress)
       return {
         task: nextProps.task,
@@ -49,8 +49,7 @@ class TaskEditor extends React.Component {
   }
 
   deleteTask() {
-    this.props.deleteTask(this.state.task.id);
-    this.slidingPanelRef.current.active = false;
+    this.props.deleteTask(this.state.task.id, () => this.props.onChange());
   }
 
   render() {
@@ -102,6 +101,16 @@ class TaskEditor extends React.Component {
     );
   }
 }
+
+TaskEditor.propTypes = {
+  createTask: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired,
+  inProgress: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onPanelClose: PropTypes.func.isRequired,
+  task: PropTypes.shape().isRequired,
+  updateTask: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state, ownProps) => {
   if (!ownProps.task.id && state.TaskEditorReducer.task.id > 0)

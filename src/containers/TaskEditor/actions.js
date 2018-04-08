@@ -30,13 +30,14 @@ export const getTask = id => {
   };
 };
 
-export const deleteTask = id => {
+export const deleteTask = (id, fn) => {
   const request = axios.delete(`${SERVER_URL}${id}`);
   return dispatch => {
     dispatch({ type: DELETE_TASK_PENDING });
     return request
       .then(({ data }) => {
         dispatch({ type: DELETE_TASK_FULFILLED });
+        fn();
         return data;
       })
       .catch(error => {

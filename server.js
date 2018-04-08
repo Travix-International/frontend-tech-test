@@ -143,10 +143,9 @@ app.delete('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
 
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+    if (taskIndex !== -1) {
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(204).end();
     }

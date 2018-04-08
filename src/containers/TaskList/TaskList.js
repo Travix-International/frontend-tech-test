@@ -14,6 +14,11 @@ class TaskList extends React.Component {
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.updatedDate !== this.props.updatedDate)
+      this.props.fetchTasks(this.props.pageNumber, TASKS_PER_PAGE);
+  }
+
   handlePageChange(page) {
     this.props.fetchTasks(page, TASKS_PER_PAGE);
   }
@@ -44,6 +49,7 @@ TaskList.defaultProps = {
   tasks: [],
   pageNumber: 1,
   totalRecords: 0,
+  updatedDate: 0,
 };
 
 TaskList.propTypes = {
@@ -53,6 +59,7 @@ TaskList.propTypes = {
   pageNumber: PropTypes.number,
   tasks: PropTypes.array,
   totalRecords: PropTypes.number,
+  updatedDate: PropTypes.number,
 };
 
 const mapStateToProps = state => ({
