@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TaskItem from '../../components/TaskItem';
 import './TaskList.scss';
 import { TASKS_PER_PAGE } from '../../constants';
 import { fetchTasks } from './actions';
-// import { tasks } from '../../../tasks.json';
+import Paging from '../../components/Paging';
 
 class TaskList extends React.Component {
   constructor(props) {
     super(props);
     props.fetchTasks(1, TASKS_PER_PAGE);
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+
+  handlePageChange(page) {
+    this.props.fetchTasks(page, TASKS_PER_PAGE);
   }
 
   render() {
@@ -22,23 +27,38 @@ class TaskList extends React.Component {
         task={task}
       />
     ));
-    return <div className="TaskList__wrapper">{taskUi}</div>;
+    return (
+      <Fragment>
+        <div className="TaskList__wrapper">{taskUi}</div>{' '}
+        <Paging
+          currentPage={this.props.pageNumber}
+          onPageClicked={this.handlePageChange}
+          totalRecords={this.props.totalRecords}
+        />
+      </Fragment>
+    );
   }
 }
 
 TaskList.defaultProps = {
   tasks: [],
+  pageNumber: 1,
+  totalRecords: 0,
 };
 
 TaskList.propTypes = {
   fetching: PropTypes.bool.isRequired,
   fetchTasks: PropTypes.func.isRequired,
   handleTaskSelection: PropTypes.func.isRequired,
+  pageNumber: PropTypes.number,
   tasks: PropTypes.array,
+  totalRecords: PropTypes.number,
 };
 
 const mapStateToProps = state => ({
   tasks: state.TaskListReducer.tasks,
+  pageNumber: state.TaskListReducer.pageNumber,
+  totalRecords: state.TaskListReducer.totalRecords,
   fetching: state.TaskListReducer.fetching,
 });
 

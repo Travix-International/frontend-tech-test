@@ -3,7 +3,6 @@ import React from 'react';
 import ToolBox from '../ToolBox';
 import TaskList from '../TaskList';
 import TaskEditor from '../TaskEditor';
-import Paging from '../../components/Paging';
 
 import './Main.scss';
 
@@ -13,7 +12,6 @@ class Main extends React.Component {
     this.state = { showEditor: false, selectedTask: null };
     this.handleTaskSelection = this.handleTaskSelection.bind(this);
     this.handleNewTaskAction = this.handleNewTaskAction.bind(this);
-    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   handleNewTaskAction() {
@@ -30,23 +28,12 @@ class Main extends React.Component {
     });
   }
 
-  handlePageChange(page) {
-    this.setState({
-      currentPage: page,
-    });
-  }
-
   render() {
     return (
       <div className="Main">
         <h1>Best To-Do App</h1>
         <ToolBox onAddNewClicked={this.handleNewTaskAction} />
         <TaskList handleTaskSelection={this.handleTaskSelection} />
-        <Paging
-          currentPage={1}
-          onPageClicked={this.handlePageChange}
-          totalPage={100}
-        />
         {this.state.showEditor && (
           <TaskEditor
             newItem={this.state.selectedTask === null}
