@@ -67,13 +67,14 @@ export const createTask = task => {
   };
 };
 
-export const updateTask = task => {
+export const updateTask = (task, fn) => {
   const request = axios.put(`${SERVER_URL}${task.id}`, task);
   return dispatch => {
     dispatch({ type: SAVE_TASK_PENDING });
     return request
       .then(({ data }) => {
         dispatch({ type: SAVE_TASK_FULFILLED, payload: data });
+        fn();
         return data;
       })
       .catch(error => {

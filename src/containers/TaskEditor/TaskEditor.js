@@ -45,7 +45,7 @@ class TaskEditor extends React.Component {
 
   saveChanges() {
     if (!this.state.task.id) this.props.createTask(this.state.task);
-    else this.props.updateTask(this.state.task);
+    else this.props.updateTask(this.state.task, () => this.props.onChange());
   }
 
   deleteTask() {
