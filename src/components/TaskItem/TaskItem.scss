@@ -5,8 +5,12 @@
   height: 12rem;
   padding: 0.4rem;
   margin: 0.8rem;
-  background-color: #123123;
-  box-shadow: orange;
+}
+
+@for $i from 1 through 6 {
+  .Task__wrapperBg--#{$i} {
+    background-color: nth($taskcolors, random(length($taskcolors)));
+  }
 }
 
 .Task__descriptionWrapper {

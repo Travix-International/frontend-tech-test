@@ -4,18 +4,24 @@ import Truncate from 'react-truncate';
 
 import './TaskItem.scss';
 
-const TaskItem = ({ task, onTaskSelected }) => (
-  <div className="Task__wrapper" onClick={() => onTaskSelected(task)}>
-    <h3>{task.title}</h3>
-    <Truncate
-      className="Task__descriptionWrapper"
-      ellipsis={<span>...</span>}
-      lines={5}
+const TaskItem = ({ task, onTaskSelected }) => {
+  const rnd = Math.floor(Math.random() * 6) + 1;
+  return (
+    <div
+      className={`Task__wrapper Task__wrapperBg--${rnd}`}
+      onClick={() => onTaskSelected(task)}
     >
-      <span>{task.description}</span>
-    </Truncate>
-  </div>
-);
+      <h3>{task.title}</h3>
+      <Truncate
+        className="Task__descriptionWrapper"
+        ellipsis={<span>...</span>}
+        lines={5}
+      >
+        <span>{task.description}</span>
+      </Truncate>
+    </div>
+  );
+};
 
 TaskItem.propTypes = {
   onTaskSelected: PropTypes.func.isRequired,
