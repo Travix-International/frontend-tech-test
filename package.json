@@ -5,9 +5,10 @@
   "main": "server.js",
   "private": true,
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "server": "node server.js",
+    "test": "jest src/*",
+    "test:watch": "jest src/* --watch",
+    "server": "node server/server.js",
+    "test:server": "jest server/*",
     "lint": "stylelint src/**/*.scss && eslint .",
     "build": "webpack",
     "start:dev": "webpack-dev-server --hot"
