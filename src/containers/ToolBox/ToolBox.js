@@ -20,18 +20,14 @@ class ToolBox extends React.Component {
       <div className="ToolBox__wrapper">
         <div className="ToolBox__searchContainer">
           <div className="ToolBox__searchInput">
-            <Input
-              placeholder="Task Title"
-              ref={this.searchInputRef}
-              type="text"
-            />
+            <Input placeholder="Task Title" ref={this.searchInputRef} type="text" />
           </div>
-          <Button onClick={this.searchTask} size="s">
+          <Button className="ToolBox__searchButton" onClick={this.searchTask} size="s">
             Search
           </Button>
         </div>
-        <div className="ToolBox__addNewBtn">
-          <Button onClick={this.props.onAddNewClicked} size="s">
+        <div className="ToolBox__addNewBtnWrapper">
+          <Button className="ToolBox__addNewBtn" onClick={this.props.onAddNewClicked} size="s">
             Add New
           </Button>
         </div>

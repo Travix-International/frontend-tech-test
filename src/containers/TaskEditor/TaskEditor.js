@@ -57,19 +57,11 @@ class TaskEditor extends React.Component {
   render() {
     if (this.props.inProgress) return null;
     return (
-      <SlidingPanel
-        active
-        onClose={this.props.onPanelClose}
-        ref={this.slidingPanelRef}
-      >
+      <SlidingPanel active onClose={this.props.onPanelClose} ref={this.slidingPanelRef}>
         <SlidingPanelContent>
           <label>
             Title:
-            <Input
-              onChange={this.titleChange}
-              type="text"
-              value={this.state.task.title}
-            />
+            <Input onChange={this.titleChange} type="text" value={this.state.task.title} />
           </label>
           <br />
           <label>
@@ -83,19 +75,19 @@ class TaskEditor extends React.Component {
           </label>
         </SlidingPanelContent>
         <SlidingPanelFooter>
-          <Button
-            dataAttrs={{ rel: 'close' }}
-            key="1"
-            size="xs"
-            variation="ghost"
-          >
+          <Button dataAttrs={{ rel: 'close' }} key="1" size="xs" variation="ghost">
             Close
           </Button>
-          <Button key="2" onClick={this.saveChanges} size="xs">
+          <Button className="TaskEditor__saveButton" key="2" onClick={this.saveChanges} size="xs">
             Save
           </Button>
           {this.state.task.id && (
-            <Button key="3" onClick={this.deleteTask} size="xs">
+            <Button
+              className="TaskEditor__deleteButton"
+              key="3"
+              onClick={this.deleteTask}
+              size="xs"
+            >
               Delete
             </Button>
           )}
