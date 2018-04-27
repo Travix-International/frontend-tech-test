@@ -31,17 +31,20 @@ module.exports = {
                 loader: 'babel-loader',
             },
             {
-                test: /\scss?$/,
-                use: [
-                    {
-                        loader: "sass-loader",
-                        options: {
-                            modules: true,
-                            camelCase: true,
-                            localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                        },
-                    },
-                ],
+                test: /\.scss$/,
+                use: [{
+                    loader: "style-loader"
+                }, {
+                    loader: "css-loader",
+                    options: {
+                        sourceMap: true,
+                    }
+                }, {
+                    loader: "sass-loader",
+                    options: {
+                        sourceMap: true,
+                    }
+                }]
             },
         ],
     },

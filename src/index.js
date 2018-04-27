@@ -1,12 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import ToDoList from './pages/ToDoList/index';
-
-console.log(ToDoList);
+import ToDoApp from './pages/ToDoApp/index';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 render((
-    <Router>
-        <ToDoList/>
-    </Router>
+    <Provider store={store}>
+        <ToDoApp/>
+    </Provider>
 ), document.getElementById('root'));
