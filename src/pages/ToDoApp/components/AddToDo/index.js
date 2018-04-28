@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { addToDo } from '../../../../redux/actions/index';
 import { connect } from 'react-redux';
+import * as styles from './index.scss';
 
 
 class AddToDo extends Component {
@@ -31,7 +32,7 @@ class AddToDo extends Component {
                        placeholder="input ToDo"
                        onChange={this.handleChange}
                 />
-                <button className="add-to-do" onClick={this.handleClick}>Add ToDo</button>
+                <button className={styles.add} onClick={this.handleClick}>Add ToDo</button>
             </div>
         )
     }
