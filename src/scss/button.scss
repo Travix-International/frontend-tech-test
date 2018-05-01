@@ -1,0 +1,19 @@
+@import '~scss/variables.scss';
+
+.btn {
+  font-size: $font-size-base;
+}
+
+.btn-transparent {
+  color: $text-color;
+  background-color: transparent;
+  text-transform: none;
+  border: 1px solid transparent;
+
+  &:hover,
+  &:focus {
+    border-color: transparent;
+    color: darken($text-color, 0.2);
+    background-color: rgba($button-primary-focus-background-color, 0.2);
+  }
+}

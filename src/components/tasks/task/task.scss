@@ -1,0 +1,132 @@
+@import 'scss/variables.scss';
+
+@mixin label($background-color, $color) {
+  background-color: $background-color;
+  color: $color;
+}
+
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xll: 1366px
+);
+
+$percentages: (
+  xs: 100%,
+  sm: percentage(1 / 2),
+  md: percentage(1 / 3),
+  lg: percentage(1 / 4),
+  xl: percentage(1 / 5),
+  xll: percentage(1 / 6)
+);
+
+.task-container {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+
+  @media (min-width: map-get($breakpoints, 'xs')) {
+    flex: 0 0 map-get($percentages, 'xs');
+    max-width: map-get($percentages, 'xs');
+  }
+
+  @media (min-width: map-get($breakpoints, 'sm')) {
+    flex: 0 0 map-get($percentages, 'sm');
+    max-width: map-get($percentages, 'sm');
+  }
+
+  @media (min-width: map-get($breakpoints, 'md')) {
+    flex: 0 0 map-get($percentages, 'md');
+    max-width: map-get($percentages, 'md');
+  }
+
+  @media (min-width: map-get($breakpoints, 'lg')) {
+    flex: 0 0 map-get($percentages, 'lg');
+    max-width: map-get($percentages, 'lg');
+  }
+
+  @media (min-width: map-get($breakpoints, 'xl')) {
+    flex: 0 0 map-get($percentages, 'xl');
+    max-width: map-get($percentages, 'xl');
+  }
+
+  @media (min-width: map-get($breakpoints, 'xll')) {
+    flex: 0 0 map-get($percentages, 'xll');
+    max-width: map-get($percentages, 'xll');
+  }
+
+  &__content {
+    background-color: $task-container-color;
+    padding: 10px 10px;
+    box-shadow: $zdepth-shadow-2;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    word-break: break-word;
+
+    &__title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__name {
+      font-weight: 600;
+    }
+
+    &__status {
+      margin-top: 10px;
+      margin-bottom: 5px;
+      font-weight: 500;
+
+      &__label {
+        padding: 2px;
+        border-radius: 4px;
+      }
+
+      .label-done {
+        @include label($done-label-background-color, #fff);
+      }
+
+      .label-todo {
+        @include label($todo-label-background-color, #fff);
+      }
+    }
+
+    &__description {
+      margin-top: 10px;
+    }
+
+    &__sub-tasks {
+      margin-top: 10px;
+    }
+
+    &__textarea {
+      margin-top: 10px;
+      box-shadow: $zdepth-shadow-2;
+      border: 1px solid transparent;
+      display: flex;
+    }
+
+    .btn {
+      margin-top: 10px;
+    }
+  }
+}
+
+.task-container {
+  &__content {
+    &__title {
+      .btn {
+        margin-top: 0;
+        align-self: baseline;
+      }
+    }
+  }
+}
+
+.task-container:last-child {
+  margin-bottom: 0;
+}

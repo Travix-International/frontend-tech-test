@@ -1,0 +1,100 @@
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "extends": "airbnb",
+  "rules": {
+    "semi": ["error", "never"],
+    "class-methods-use-this": [0],
+    "linebreak-style": [0, "unix"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prop-types": [1],
+    "no-param-reassign": [1],
+    "jsx-a11y/no-static-element-interactions": [0],
+    "max-len": ["error", 120],
+    "react/prefer-stateless-function": [0],
+    "import/no-extraneous-dependencies": 0,
+    "import/no-duplicates": [0],
+    "import/prefer-default-export": [0],
+    "react/forbid-prop-types": [0],
+    "no-unused-vars": [1],
+    "guard-for-in": [0],
+    "no-restricted-syntax": [0],
+    "no-extra-parens": [0],
+    "new-cap": [0],
+    "react/no-string-refs": [0],
+    "no-nested-ternary": [0],
+    "import/no-named-as-default": [0],
+    "react/jsx-indent": [0],
+    "comma-dangle": ["error", "never"],
+    "import/extensions": ["error", "never"],
+    "react/require-default-props": [0],
+    "react/no-unused-prop-types": [1],
+    "react/no-array-index-key": [0],
+    "react/no-find-dom-node": [0]
+  },
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack/webpack.config.dev.js"
+      },
+      "node": {
+        "paths": ["src", "configs"]
+      }
+    }
+  },
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "ecmaFeatures": {
+        "experimentalObjectRestSpread": true,
+        "experimentalDecorators": true,
+        "jsx": true
+    },
+    "sourceType": "module"
+  }
+}
+
+// {
+//   "env": {
+//     "browser": true,
+//     "jest": true
+//   },
+//   "extends": "airbnb",
+//   "parser": "babel-eslint",
+//   "settings": {
+//     "import/resolver": {
+//       "webpack": {
+//         "config": "webpack/webpack.config.dev.js"
+//       }
+//     }
+//   },
+//   "rules": {
+//     "arrow-parens": [
+//       "error",
+//       "as-needed"
+//     ],
+//     "no-confusing-arrow": 0,
+//     "no-shadow": 0,
+//     "no-underscore-dangle": 0,
+//     "semi": [
+//       1,
+//       "never"
+//     ],
+//     "import/no-extraneous-dependencies": 0,
+//     "import/prefer-default-export": 0,
+//     "import/no-duplicates": 0,
+//     "react/jsx-filename-extension": [
+//       1,
+//       {
+//         "extensions": [
+//           ".js"
+//         ]
+//       }
+//     ]
+//   }
+// }

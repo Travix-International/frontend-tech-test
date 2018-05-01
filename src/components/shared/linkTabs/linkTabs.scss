@@ -1,0 +1,30 @@
+@import 'scss/variables.scss';
+
+.link_tabs {
+  &__labels {
+    margin: 5px 0 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      font-size: $font-size-base;
+      font-weight: 600;
+      line-height: 16px;
+      text-transform: uppercase;
+
+      .link {
+        cursor: pointer;
+        padding: 8px 20px;
+        display: block;
+        color: $text-color;
+        text-decoration: none;
+        border-bottom: 4px solid transparent;
+
+        &.active {
+          color: $highlight-blue;
+          border-bottom-color: $highlight-blue;
+        }
+      }
+    }
+  }
+}

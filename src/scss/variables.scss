@@ -1,0 +1,34 @@
+// Colors
+$background: #fff !default;
+$text-color: #333 !default;
+$light-text-color: #aeb9bd !default;
+$block-color: #e2e4e6 !default;
+$highlight-blue: #0062cc !default;
+$highlight-orange: #c76837 !default;
+
+$link-color: #45788e !default;
+$link-hover-decoration: underline !default;
+
+$header-background-color: #fff;
+$header-tabs-color: $text-color;
+$header-tabs-active-color: $highlight-blue;
+
+$task-container-color: $block-color;
+$sub-task-container-background-color: #fff;
+
+$button-primary-background-color: $highlight-blue;
+$button-primary-focus-background-color: $highlight-blue;
+
+$done-label-background-color: #14892c;
+$todo-label-background-color: #e0b226;
+
+
+// Depth shadows
+$zdepth-shadow-1: 0 2px 6px 0 rgba(0, 0, 0, 0.8) !default;
+$zdepth-shadow-2: 0 2px 4px 0 rgba(0, 0, 0, 0.1) !default;
+
+// Layer levels
+$z-index-higher: 200 !default;
+
+// Font sizes
+$font-size-base: 14px;

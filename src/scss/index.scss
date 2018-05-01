@@ -1,0 +1,14 @@
+@import '~scss/variables.scss';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~normalize.css/normalize.css';
+@import './button.scss';
+
+body {
+  background-color: $background;
+  font-size: $font-size-base;
+  color: $text-color;
+}
+
+label {
+  font-weight: 500;
+}

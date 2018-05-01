@@ -1,0 +1,14 @@
+@import 'scss/variables.scss';
+
+.sub-task-container {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color: $sub-task-container-background-color;
+  box-shadow: $zdepth-shadow-2;
+  cursor: pointer;
+}
+
+.sub-task-container:last-child {
+  margin-bottom: 0;
+}

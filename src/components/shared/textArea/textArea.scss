@@ -1,0 +1,25 @@
+@import "~scss/variables.scss";
+
+.textarea-container {
+  padding: 11px 10px 13px;
+  min-height: 70px;
+  max-height: 70px;
+  line-height: 16px;
+  width: 100%;
+  resize: none;
+  color: $text-color;
+  font-size: $font-size-base;
+  border-radius: 4px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus::-webkit-input-placeholder {
+    color: $light-text-color;
+  }
+
+  &::-webkit-input-placeholder {
+    font-style: italic;
+  }
+}

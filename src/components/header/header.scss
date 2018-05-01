@@ -1,0 +1,30 @@
+@import '~scss/variables';
+
+.header {
+  position: relative;
+  background-color: $header-background-color;
+  box-shadow: $zdepth-shadow-1;
+  z-index: $z-index-higher;
+
+  > .header-container {
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+
+    .create-task-container {
+      margin-left: 15px;
+    }
+  }
+
+  & .link_tabs__labels li .link {
+    color: $header-tabs-color;
+
+    &.active {
+      color: $header-tabs-active-color;
+      border-bottom-color: $header-tabs-active-color;
+    }
+  }
+}
