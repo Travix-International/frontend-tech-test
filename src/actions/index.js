@@ -26,7 +26,7 @@ export function createTask({ name, description }) {
       const data = await request.body({ name, description }).send()
       dispatch({
         type: types.TASK_POST_COMPLETED,
-        payload: data.tasks
+        payload: data.task
       })
     } catch (e) {
       dispatch({ type: types.TASK_POST_FAILED, payload: e })
@@ -43,7 +43,7 @@ export function updateTask({ id, name, description, status, subTasks }) {
       const data = await request.body({ name, description, status, subTasks }).send()
       dispatch({
         type: types.TASK_UPDATE_COMPLETED,
-        payload: data.tasks
+        payload: data.task
       })
     } catch (e) {
       dispatch({ type: types.TASK_UPDATE_FAILED, payload: e })
@@ -60,7 +60,7 @@ export function deleteTask({ id }) {
       const data = await request.send()
       dispatch({
         type: types.TASK_DELETE_COMPLETED,
-        payload: data.tasks
+        payload: data.task
       })
     } catch (e) {
       dispatch({ type: types.TASK_DELETE_FAILED, payload: e })
@@ -77,7 +77,7 @@ export function createSubTask({ id, name, description }) {
       const data = await request.body({ name, description }).send()
       dispatch({
         type: types.SUB_TASK_POST_COMPLETED,
-        payload: data.tasks
+        payload: data.task
       })
     } catch (e) {
       dispatch({ type: types.SUB_TASK_POST_FAILED, payload: e })
@@ -94,7 +94,7 @@ export function updateSubTask({ id, parentId, name, description, status }) {
       const data = await request.body({ name, description, status }).send()
       dispatch({
         type: types.SUB_TASK_UPDATE_COMPLETED,
-        payload: data.tasks
+        payload: data.task
       })
     } catch (e) {
       dispatch({ type: types.SUB_TASK_UPDATE_FAILED, payload: e })
@@ -111,7 +111,7 @@ export function deleteSubTask({ parentId, id }) {
       const data = await request.send()
       dispatch({
         type: types.SUB_TASK_DELETE_COMPLETED,
-        payload: data.tasks
+        payload: data.task
       })
     } catch (e) {
       dispatch({ type: types.SUB_TASK_DELETE_FAILED, payload: e })

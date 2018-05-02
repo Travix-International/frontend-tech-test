@@ -76,8 +76,7 @@ app.put('/task/update/:id', (req, res) => {
       task.status = req.body.status;
       task.subTasks = req.body.subTasks;
       return res.status(200).json({
-        task,
-        tasks: tasksContainer.tasks
+        task
       });
     } else {
       return res.status(404).json({
@@ -113,8 +112,7 @@ app.post('/task/create', (req, res) => {
 
   return res.status(201).json({
     message: 'Resource created',
-    task,
-    tasks: tasksContainer.tasks
+    task
   });
 });
 
@@ -135,10 +133,11 @@ app.delete('/task/delete/:id', (req, res) => {
     const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
   
     if (taskIndex >= 0) {
+      const task = tasksContainer.tasks[taskIndex]
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Deleted successfully',
-        tasks: tasksContainer.tasks
+        task
       });
     } else {
       return es.status(404).json({
@@ -170,7 +169,7 @@ app.post('/subtask/create/:id', (req, res) => {
     return res.status(201).json({
       message: 'Resource created',
       subTask,
-      tasks: tasksContainer.tasks
+      task
     });
   } else {
     return res.status(400).json({
@@ -204,7 +203,7 @@ app.put('/subtask/update/:parentId/:id', (req, res) => {
 
     return res.status(200).json({
       subtask,
-      tasks: tasksContainer.tasks
+      task
     });
   } else {
     return res.status(400).json({
@@ -232,10 +231,12 @@ app.delete('/subtask/delete/:parentId/:id', (req, res) => {
       });
     }
 
+    const subTask = task.subTasks[subtaskIndex]
     task.subTasks.splice(subtaskIndex, 1);
     return res.status(200).json({
       message: 'Deleted successfully',
-      tasks: tasksContainer.tasks
+      subTask,
+      task
     });
   } else {
     return res.status(400).json({
