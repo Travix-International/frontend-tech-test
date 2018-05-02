@@ -8,7 +8,7 @@
     "start": "concurrently --kill-others \"npm run webpack-server\" \"npm run server\"",
     "lint": "eslint src",
     "test": "react-scripts test --env=jsdom",
-    "server-test": "mocha -R spec serverTests.js"
+    "server-test": "mocha -R spec server.spec.js"
   },
   "author": "Aliaksandr Kuzniatsou",
   "devDependencies": {

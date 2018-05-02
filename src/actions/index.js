@@ -1,12 +1,12 @@
 import * as types from 'constants/actionTypes'
 import RequestBuilder from '../services/RequestBuilder'
+import dataAccess from '../services'
 
 export function loadTasks() {
   return async (dispatch) => {
     try {
       dispatch({ type: types.TASKS_FETCH_STARTED })
-      const request = new RequestBuilder({ method: 'GET', url: 'tasks' })
-      const data = await request.send()
+      const data = await dataAccess.tasksService.loadTasks()
       dispatch({
         type: types.TASKS_FETCH_COMPLETED,
         payload: data.tasks
@@ -18,12 +18,11 @@ export function loadTasks() {
   }
 }
 
-export function createTask({ name, description }) {
+export function createTask(task) {
   return async (dispatch) => {
     try {
       dispatch({ type: types.TASK_POST_STARTED })
-      const request = new RequestBuilder({ method: 'POST', url: 'task/create' })
-      const data = await request.body({ name, description }).send()
+      const data = await dataAccess.taskService.createTask(task)
       dispatch({
         type: types.TASK_POST_COMPLETED,
         payload: data.task
@@ -35,12 +34,11 @@ export function createTask({ name, description }) {
   }
 }
 
-export function updateTask({ id, name, description, status, subTasks }) {
+export function updateTask(task) {
   return async (dispatch) => {
     try {
       dispatch({ type: types.TASK_UPDATE_STARTED })
-      const request = new RequestBuilder({ method: 'PUT', url: `task/update/${id}` })
-      const data = await request.body({ name, description, status, subTasks }).send()
+      const data = await dataAccess.taskService.updateTask(task)
       dispatch({
         type: types.TASK_UPDATE_COMPLETED,
         payload: data.task
@@ -52,12 +50,11 @@ export function updateTask({ id, name, description, status, subTasks }) {
   }
 }
 
-export function deleteTask({ id }) {
+export function deleteTask(task) {
   return async (dispatch) => {
     try {
       dispatch({ type: types.TASK_DELETE_STARTED })
-      const request = new RequestBuilder({ method: 'DELETE', url: `task/delete/${id}` })
-      const data = await request.send()
+      const data = await dataAccess.taskService.deleteTask(task)
       dispatch({
         type: types.TASK_DELETE_COMPLETED,
         payload: data.task
@@ -69,12 +66,11 @@ export function deleteTask({ id }) {
   }
 }
 
-export function createSubTask({ id, name, description }) {
+export function createSubTask(task) {
   return async (dispatch) => {
     try {
       dispatch({ type: types.SUB_TASK_POST_STARTED })
-      const request = new RequestBuilder({ method: 'POST', url: `subtask/create/${id}` })
-      const data = await request.body({ name, description }).send()
+      const data = await dataAccess.subtaskService.createSubTask(task)
       dispatch({
         type: types.SUB_TASK_POST_COMPLETED,
         payload: data.task
@@ -86,12 +82,11 @@ export function createSubTask({ id, name, description }) {
   }
 }
 
-export function updateSubTask({ id, parentId, name, description, status }) {
+export function updateSubTask(task) {
   return async (dispatch) => {
     try {
       dispatch({ type: types.SUB_TASK_UPDATE_STARTED })
-      const request = new RequestBuilder({ method: 'PUT', url: `subtask/update/${parentId}/${id}` })
-      const data = await request.body({ name, description, status }).send()
+      const data = await dataAccess.subtaskService.updateSubTask(task)
       dispatch({
         type: types.SUB_TASK_UPDATE_COMPLETED,
         payload: data.task
@@ -103,12 +98,11 @@ export function updateSubTask({ id, parentId, name, description, status }) {
   }
 }
 
-export function deleteSubTask({ parentId, id }) {
+export function deleteSubTask(task) {
   return async (dispatch) => {
     try {
       dispatch({ type: types.SUB_TASK_DELETE_STARTED })
-      const request = new RequestBuilder({ method: 'DELETE', url: `subtask/delete/${parentId}/${id}` })
-      const data = await request.send()
+      const data = await dataAccess.subtaskService.deleteSubTask(task)
       dispatch({
         type: types.SUB_TASK_DELETE_COMPLETED,
         payload: data.task

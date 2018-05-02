@@ -6,7 +6,7 @@ export default class RequestBuilder {
       method,
       mode,
       responseType,
-      url: `${baseUrl}${url}`,
+      url: `${baseUrl}${url}/`,
       body: null
     }
 
@@ -24,7 +24,7 @@ export default class RequestBuilder {
   }
 
   url(url) {
-    this.request.url = `${baseUrl}${url}`
+    this.request.url = `${this.request.url}${url}/`
     return this
   }
 
