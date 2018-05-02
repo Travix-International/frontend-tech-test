@@ -14,6 +14,7 @@ module.exports = {
     }
   },
   entry: [
+    'babel-polyfill',
     'webpack-dev-server/client',
     'webpack/hot/only-dev-server',
     resolve(__dirname, 'hotReload'),

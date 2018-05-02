@@ -22,7 +22,7 @@ Spinner.propTypes = {
 }
 
 Spinner.defaultProps = {
-  color: '#c76837',
+  color: '#0062cc',
   size: 15,
   loading: true
 }
