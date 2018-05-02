@@ -10,25 +10,26 @@ const rootReducer = (state = {}, action) => {
                     {
                         id: action.id,
                         text: action.text,
-                        complited: false
-                    }
-                ]
+                        complited: false,
+                    },
+                ],
             };
         case TOGGLE_TODO:
             return {
                 ...state,
-                toDoList: state.toDoList.map(todo =>
-                    (todo.id == action.id)
+                toDoList: state.toDoList.map(todo => {
+                    return (todo.id === action.id)
                         ? { ...todo, complited: !todo.complited }
-                        : todo)
+                        : todo;
+                }),
             };
         case DELETE_TODO:
             return {
                 ...state,
-                toDoList: state.toDoList.filter(todo => todo.id !== action.id)
+                toDoList: state.toDoList.filter(todo => todo.id !== action.id),
             };
         default:
-            return state
+            return state;
     }
 };
 

@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
-const ToDoItem = ({toDo, toggleToDO, deleteToDO}) => (
+const ToDoItem = ({ toDo, toggleToDO, deleteToDO }) => (
     <li>
-        <div className="text" onClick={toggleToDO}>
+        <div
+            className="text"
+            onClick={toggleToDO}
+        >
             {toDo.text}
         </div>
         <button
