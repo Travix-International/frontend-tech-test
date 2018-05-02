@@ -6,6 +6,13 @@ npm i
 npm run start
 ```
 
+### Run unit-tests:
+```
+
+npm run test
+
+```
+
 ### Run unit-tests for the server:
 ```
 
