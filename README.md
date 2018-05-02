@@ -1,7 +1,7 @@
 ### Get started!
 ```
 git clone
-cd task-manager
+cd frontend-tech-test
 npm i
 npm run start
 ```
