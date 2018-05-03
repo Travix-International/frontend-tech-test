@@ -4,19 +4,20 @@
   "description": "test back - front",
   "main": "lib/server.js",
   "scripts": {
-    "dev:server": "NODE_PATH=./lib BABEL_ENV=server pm2 start lib/server.js --watch --interpreter babel-node",
+    "build-node": "BABEL_ENV=server babel lib -d build --copy-files",
+    "build-webpack": "webpack -p",
+    "prestart": "NODE_ENV=production yarn build-node && yarn build-webpack",
+    "start": "node build/server.js",
+    "dev:server":
+      "NODE_PATH=./lib BABEL_ENV=server pm2 start lib/server.js --watch --interpreter babel-node",
     "dev:webpack": "webpack -wd",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "test-report": "jest --coverage"
   },
   "jest": {
-    "setupFiles": [
-      "./setupTests.js"
-    ]
+    "setupFiles": ["./setupTests.js"]
   },
-  "keywords": [
-    "test",
-    "travix"
-  ],
+  "keywords": ["test", "travix"],
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
@@ -71,5 +72,8 @@
     "redux-immutable-state-invariant": "^2.1.0",
     "stylelint": "^9.2.0",
     "stylelint-config-travix": "^1.2.0"
+  },
+  "engines": {
+    "node": "8.11.1"
   }
 }
