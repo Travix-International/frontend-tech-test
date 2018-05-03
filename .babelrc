@@ -1,6 +1,16 @@
 {
   "env": {
     "server": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ]
+      ],
       "plugins": [
         [
           "css-modules-transform",
@@ -8,7 +18,9 @@
             "generateScopedName": "[name]__[hash:3]",
             "extensions": [".scss"]
           }
-        ]
+        ],
+        "transform-runtime",
+        "transform-async-to-generator"
       ]
     }
   },

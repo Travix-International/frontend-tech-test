@@ -4,3 +4,4 @@ node_modules/
 .vs_code/
 .env
 build/
+try-it-on-heroku.sh
