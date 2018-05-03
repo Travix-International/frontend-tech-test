@@ -1,0 +1,16 @@
+{
+  "env": {
+    "server": {
+      "plugins": [
+        [
+          "css-modules-transform",
+          {
+            "generateScopedName": "[name]__[hash:3]",
+            "extensions": [".scss"]
+          }
+        ]
+      ]
+    }
+  },
+  "presets": ["env", "react", "stage-0"]
+}
