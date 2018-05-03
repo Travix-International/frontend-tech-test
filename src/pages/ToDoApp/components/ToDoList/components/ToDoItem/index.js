@@ -7,7 +7,7 @@ const ToDoItem = ({ toDo, toggleToDO, deleteToDO }) => (
             className="text"
             onClick={toggleToDO}
         >
-            {toDo.text}
+            {toDo.title}
         </div>
         <button
             className="delete"

@@ -1,7 +1,12 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions/index';
+import { GET_TODO, ADD_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions/index';
 
 const rootReducer = (state = {}, action) => {
     switch (action.type) {
+        case GET_TODO:
+            return {
+                ...state,
+                toDoList: action.toDoList,
+            };
         case ADD_TODO:
             return {
                 ...state,
@@ -9,7 +14,7 @@ const rootReducer = (state = {}, action) => {
                     ...state.toDoList,
                     {
                         id: action.id,
-                        text: action.text,
+                        title: action.title,
                         complited: false,
                     },
                 ],

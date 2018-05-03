@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToDo } from '../../../../redux/actions/index';
+import { addToDoItem } from '../../../../redux/actions/index';
 import * as styles from './index.scss';
 
 
@@ -47,7 +47,7 @@ class AddToDo extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    add: text => dispatch(addToDo(text)),
+    add: title => dispatch(addToDoItem(title)),
 });
 
 export default connect(null, mapDispatchToProps)(AddToDo);

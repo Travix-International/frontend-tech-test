@@ -28,7 +28,7 @@ module.exports = {
                 },
             },
         },
-        port: 3002
+        port: 3002,
     },
 
     mode: 'none',
@@ -43,21 +43,21 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [{
-                    loader: "style-loader"
+                    loader: 'style-loader',
                 }, {
-                    loader: "css-loader",
+                    loader: 'css-loader',
                     options: {
                         sourceMap: true,
                         module: true,
                         camelCase: true,
-                        localIdentName: '[path][name]__[local]--[hash:base64:5]'
-                    }
+                        localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                    },
                 }, {
-                    loader: "sass-loader",
+                    loader: 'sass-loader',
                     options: {
                         sourceMap: true,
-                    }
-                }]
+                    },
+                }],
             },
         ],
     },

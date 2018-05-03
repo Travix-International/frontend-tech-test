@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ToDoItem from './components/ToDoItem/index';
-import { toggleToDo, deleteToDo } from '../../../../redux/actions/index';
+import { getToDoItems, toggleToDo, deleteToDoItem } from '../../../../redux/actions/index';
 
 class ToDoList extends Component {
+    componentWillMount() {
+        this.props.actions.getToDoItems();
+    }
     render() {
         return (
             <ul>
@@ -13,7 +16,7 @@ class ToDoList extends Component {
                         key={toDo.id}
                         toDo={toDo}
                         toggleToDO={() => this.props.actions.toggleToDo(toDo.id)}
-                        deleteToDO={() => this.props.actions.deleteToDO(toDo.id)}
+                        deleteToDO={() => this.props.actions.deleteToDoItem(toDo.id)}
                     />))}
             </ul>
         );
@@ -23,8 +26,9 @@ class ToDoList extends Component {
 const mapStateToProps = ({toDoList}) => ({toDoList});
 const mapDispatchToProps = dispatch => ({
     actions: {
-        toggleToDo: bindActionCreators(id => toggleToDo(id), dispatch),
-        deleteToDO: bindActionCreators(id => deleteToDo(id), dispatch),
+        getToDoItems: bindActionCreators(getToDoItems, dispatch),
+        toggleToDo: bindActionCreators(toggleToDo, dispatch),
+        deleteToDoItem: bindActionCreators(deleteToDoItem, dispatch),
     },
 });
 
