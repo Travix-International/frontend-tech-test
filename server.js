@@ -62,7 +62,9 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
         if (task !== null) {
             task.title = req.params.title;
             task.description = req.params.description;
-            return res.status(204);
+            return res.status(204).json({
+                message: 'Updated successfully',
+            });
         } else {
             return res.status(404).json({
                 message: 'Not found',
@@ -86,15 +88,17 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
     const task = {
-        id: tasksContainer.tasks.length,
+        id: Date.now(),
         title: req.params.title,
         description: req.params.description,
+        completed: false,
     };
 
     tasksContainer.tasks.push(task);
 
     return res.status(201).json({
         message: 'Resource created',
+        data: task
     });
 });
 
@@ -112,16 +116,44 @@ app.delete('/task/delete/:id', (req, res) => {
     const id = parseInt(req.params.id, 10);
 
     if (!Number.isNaN(id)) {
-        const task = tasksContainer.tasks.find(item => item.id === id);
+        const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
 
-        if (task !== null) {
-            const taskIndex = tasksContainer.tasks;
+        if (taskIndex !== -1) {
             tasksContainer.tasks.splice(taskIndex, 1);
             return res.status(200).json({
                 message: 'Updated successfully',
             });
         } else {
             return es.status(404).json({
+                message: 'Not found',
+            });
+        }
+    } else {
+        return res.status(400).json({
+            message: 'Bad request',
+        });
+    }
+});
+
+/**
+ * PUT /task/update/:id
+ *
+ * id: Number
+ *
+ * Update the task with the given id.
+ * If the task is found and update as well, return a status code 204.
+ * If the task is not found, return a status code 404.
+ * If the provided id is not a valid number return a status code 400.
+ */
+app.put('/task/toggle/:id', (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    if (!Number.isNaN(id)) {
+        const task = tasksContainer.tasks.find(item => item.id === id);
+        if (task) {
+            task.completed = !task.completed;
+            res.status(204).send();
+        } else {
+            res.status(404).json({
                 message: 'Not found',
             });
         }

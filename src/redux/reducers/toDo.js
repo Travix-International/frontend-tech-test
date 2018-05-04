@@ -1,4 +1,4 @@
-import { GET_TODO, ADD_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions/index';
+import { GET_TODO, ADD_TODO, TOGGLE_TODO, DELETE_TODO, UPDATE_TODO } from '../actions/index';
 
 const rootReducer = (state = {}, action) => {
     switch (action.type) {
@@ -15,7 +15,7 @@ const rootReducer = (state = {}, action) => {
                     {
                         id: action.id,
                         title: action.title,
-                        complited: false,
+                        completed: false,
                     },
                 ],
             };
@@ -24,7 +24,7 @@ const rootReducer = (state = {}, action) => {
                 ...state,
                 toDoList: state.toDoList.map(todo => {
                     return (todo.id === action.id)
-                        ? { ...todo, complited: !todo.complited }
+                        ? { ...todo, completed: !todo.completed }
                         : todo;
                 }),
             };
@@ -33,6 +33,15 @@ const rootReducer = (state = {}, action) => {
                 ...state,
                 toDoList: state.toDoList.filter(todo => todo.id !== action.id),
             };
+        case UPDATE_TODO:
+            return {
+                ...state,
+                toDoList: state.toDoList.map(todo => {
+                    return (todo.id === action.id)
+                        ? { ...todo, title: action.title }
+                        : todo;
+                }),
+            }
         default:
             return state;
     }
