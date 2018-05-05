@@ -45,16 +45,18 @@
   background: $color-secondary;
 }
 
-.delete {
+.options {
+  margin-top: 20px;
+}
+
+.delete,
+.edit {
   @extend .text-button;
-  bottom: 20px;
   color: $color-light;
   font-size: 13px;
   font-weight: 300;
-  position: absolute;
-  right: 20px;
 }
 
-.description {
-  max-width: 85%;
+.edit {
+  margin-right: 20px;
 }

@@ -283,14 +283,16 @@ p {
 
 /* Button
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.Task__8ca, .Task__43f, .Task__d8d {
+.Task__8ca, .Task__43f, .Task__d8d,
+.Task__141 {
   background: none;
   border: 0;
   cursor: pointer;
   font-weight: bold;
   font-size: 1.5em; }
 
-.Task__43f, .Task__d8d {
+.Task__43f, .Task__d8d,
+.Task__141 {
   font-size: 15px;
   text-transform: uppercase; }
 
@@ -317,44 +319,45 @@ p {
 .Task__a3f {
   background: #5a5a5a; }
 
-.Task__d8d {
-  bottom: 20px;
+.Task__d25 {
+  margin-top: 20px; }
+
+.Task__d8d,
+.Task__141 {
   color: #f9f9f9;
   font-size: 13px;
-  font-weight: 300;
-  position: absolute;
-  right: 20px; }
+  font-weight: 300; }
 
-.Task__200 {
-  max-width: 85%; }
+.Task__141 {
+  margin-right: 20px; }
 @charset "UTF-8";
 /* font */
 /* colors */
 /* spacing */
 /* Checkbox
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.AddTaskModal__b21 input[type='checkbox'] {
+.TaskModal__7b4 input[type='checkbox'] {
   opacity: 0;
   position: absolute; }
 
-.AddTaskModal__b21 label {
+.TaskModal__7b4 label {
   position: relative;
   display: inline-block;
   /*20px width of fake checkbox + 8px distance between fake checkbox and text*/
   padding-left: 28px;
   /*Outer box of the fake checkbox*/
   /*Checkmark of the fake checkbox*/ }
-  .AddTaskModal__b21 label::before, .AddTaskModal__b21 label::after {
+  .TaskModal__7b4 label::before, .TaskModal__7b4 label::after {
     position: absolute;
     content: '';
     /*Needed for the line-height to take effect*/
     display: inline-block; }
-  .AddTaskModal__b21 label::before {
+  .TaskModal__7b4 label::before {
     height: 20px;
     width: 20px;
     border: 1px solid;
     left: 0px; }
-  .AddTaskModal__b21 label::after {
+  .TaskModal__7b4 label::after {
     height: 7px;
     width: 14px;
     border-left: 2px solid;
@@ -364,21 +367,21 @@ p {
     top: 5px; }
 
 /*Hide the checkmark by default*/
-.AddTaskModal__b21 label::after {
+.TaskModal__7b4 label::after {
   content: none; }
 
 /*Unhide on the checked state*/
-.AddTaskModal__876 label::after {
+.TaskModal__c9d label::after {
   content: ''; }
 
 /*Adding focus styles on the outer-box of the fake checkbox*/
-.AddTaskModal__b21 input[type='checkbox']:focus + label::before {
+.TaskModal__7b4 input[type='checkbox']:focus + label::before {
   outline: #3b99fc auto 5px; }
 
 /* Text boxes
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.AddTaskModal__c4d, .AddTaskModal__438,
-.AddTaskModal__86a {
+.TaskModal__4a7, .TaskModal__cc0,
+.TaskModal__d26 {
   border: 0;
   border-bottom: 1px solid #e7525b;
   background: transparent;
@@ -386,9 +389,9 @@ p {
   outline: none;
   transition: border 0.2 ease;
   width: 100%; }
-  .AddTaskModal__c4d:focus, .AddTaskModal__438:focus,
-  .AddTaskModal__86a:focus, .AddTaskModal__c4d:hover, .AddTaskModal__438:hover,
-  .AddTaskModal__86a:hover {
+  .TaskModal__4a7:focus, .TaskModal__cc0:focus,
+  .TaskModal__d26:focus, .TaskModal__4a7:hover, .TaskModal__cc0:hover,
+  .TaskModal__d26:hover {
     border-bottom-color: #fad8da; }
 
 ::-webkit-input-placeholder {
@@ -409,33 +412,33 @@ p {
 
 /* Button
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.AddTaskModal__31b, .AddTaskModal__e58 {
+.TaskModal__896, .TaskModal__869 {
   background: none;
   border: 0;
   cursor: pointer;
   font-weight: bold;
   font-size: 1.5em; }
 
-.AddTaskModal__31b {
+.TaskModal__896 {
   font-size: 15px;
   text-transform: uppercase; }
 
-.AddTaskModal__438,
-.AddTaskModal__86a {
+.TaskModal__cc0,
+.TaskModal__d26 {
   color: #f9f9f9; }
 
-.AddTaskModal__438 {
+.TaskModal__cc0 {
   font-size: 4rem;
   margin-bottom: 40px; }
 
-.AddTaskModal__86a {
+.TaskModal__d26 {
   resize: none;
   font-size: 2.5rem; }
 
-.AddTaskModal__46b {
+.TaskModal__d0c {
   background: #dc1c27; }
 
-.AddTaskModal__31b, .AddTaskModal__e58 {
+.TaskModal__896, .TaskModal__869 {
   color: #ed7f85;
   margin-top: 40px;
   font-size: 4.5rem; }
