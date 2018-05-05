@@ -8,16 +8,20 @@
     "build-webpack": "webpack -p",
     "prestart": "NODE_ENV=production yarn build-node && yarn build-webpack",
     "start": "node build/server.js",
-    "dev:server":
-      "NODE_PATH=./lib BABEL_ENV=server pm2 start lib/server.js --watch --interpreter babel-node",
+    "dev:server": "NODE_PATH=./lib BABEL_ENV=server pm2 start lib/server.js --watch --interpreter babel-node",
     "dev:webpack": "webpack -wd",
     "test": "jest --watchAll",
     "test-report": "jest --coverage"
   },
   "jest": {
-    "setupFiles": ["./setupTests.js"]
+    "setupFiles": [
+      "./setupTests.js"
+    ]
   },
-  "keywords": ["test", "travix"],
+  "keywords": [
+    "test",
+    "travix"
+  ],
   "author": "spartans",
   "license": "ISC",
   "dependencies": {

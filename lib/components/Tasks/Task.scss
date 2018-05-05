@@ -1,0 +1,60 @@
+@import '../../scss/_settings.scss';
+@import '../../scss/_objects.scss';
+
+.root {
+  background: #dc1c27;
+  background: linear-gradient(
+    to bottom,
+    $color-brand 0%,
+    $color-brand-light 100%
+  );
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 4px;
+  color: $color-light;
+  padding: 20px 15px;
+  position: relative;
+  margin-bottom: $spacing-1;
+
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+}
+
+.checkbox {
+  @extend .checkbox;
+
+  label {
+    font-size: 1.5em;
+
+    &::before {
+      top: 9px;
+    }
+
+    &::after {
+      top: 14px;
+    }
+  }
+}
+
+.checked {
+  @extend .checkbox--checked;
+}
+
+.complete {
+  background: $color-secondary;
+}
+
+.delete {
+  @extend .text-button;
+  bottom: 20px;
+  color: $color-light;
+  font-size: 13px;
+  font-weight: 300;
+  position: absolute;
+  right: 20px;
+}
+
+.description {
+  max-width: 85%;
+}

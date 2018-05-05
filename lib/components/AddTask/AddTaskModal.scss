@@ -1,0 +1,29 @@
+@import '../../scss/_settings.scss';
+@import '../../scss/_objects.scss';
+
+.title,
+.description {
+  color: $color-light;
+  @extend .text-box;
+}
+
+.title {
+  font-size: 4rem;
+  margin-bottom: $spacing-1 * 2;
+}
+
+.description {
+  resize: none;
+  font-size: 2.5rem;
+}
+
+.root {
+  background: $color-brand;
+}
+
+.button {
+  @extend .button;
+  color: lighten($color-brand-light, 10);
+  margin-top: $spacing-1 * 2;
+  font-size: 4.5rem;
+}
