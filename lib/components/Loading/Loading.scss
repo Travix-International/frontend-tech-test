@@ -2,21 +2,24 @@
 
 .root {
   display: inline-block;
-  position: relative;
-  width: 38px;
   height: 38px;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  width: 38px;
+  z-index: 3;
 }
 
 .root div {
+  animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border: 5px solid $color-dark;
+  border-color: $color-dark transparent transparent transparent;
+  border-radius: 50%;
   box-sizing: border-box;
   display: block;
+  height: 38px;
   position: absolute;
   width: 38px;
-  height: 38px;
-  border: 5px solid $color-secondary;
-  border-radius: 50%;
-  animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: $color-secondary transparent transparent transparent;
 }
 
 .root div:nth-child(1) {
@@ -35,6 +38,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

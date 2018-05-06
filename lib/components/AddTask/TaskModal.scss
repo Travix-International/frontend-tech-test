@@ -3,8 +3,9 @@
 
 .title,
 .description {
-  color: $color-light;
   @extend .text-box;
+
+  color: $color-light;
 }
 
 .title {
@@ -13,8 +14,8 @@
 }
 
 .description {
-  resize: none;
   font-size: 2.5rem;
+  resize: none;
 }
 
 .root {
@@ -23,7 +24,8 @@
 
 .button {
   @extend .button;
+
   color: lighten($color-brand-light, 10);
-  margin-top: $spacing-1 * 2;
   font-size: 4.5rem;
+  margin-top: $spacing-1 * 2;
 }

@@ -105,12 +105,13 @@ $color-placeholder: lighten($color-brand-light, 20);
   background: none;
   border: 0;
   cursor: pointer;
-  font-weight: bold;
   font-size: 1.5em;
+  font-weight: bold;
 }
 
 .text-button {
   @extend .button;
+
   font-size: 15px;
   text-transform: uppercase;
 }
