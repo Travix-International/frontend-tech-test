@@ -7,4 +7,8 @@ build/
 try-it-on-heroku.sh
 public/bundle.css
 public/bundle.js
+public/vendor.js
+public/bundle.css.map
+public/bundle.js.map
+public/vendor.js.map
 coverage/

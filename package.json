@@ -8,23 +8,31 @@
     "build-webpack": "webpack -p",
     "prestart": "NODE_ENV=production yarn build-node && yarn build-webpack",
     "start": "node build/server.js",
-    "dev:server":
-      "NODE_PATH=./lib BABEL_ENV=server pm2 start lib/server.js --watch --interpreter babel-node",
+    "dev:server": "NODE_PATH=./lib BABEL_ENV=server pm2 start lib/server.js --watch --interpreter babel-node",
     "dev:webpack": "webpack -wd",
     "test": "jest --coverage",
     "test-watch": "jest --watch"
   },
   "jest": {
-    "setupFiles": ["./setupTests.js"],
-    "moduleFileExtensions": ["js"],
-    "moduleDirectories": ["node_modules", "lib"],
+    "setupFiles": [
+      "./setupTests.js"
+    ],
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "lib"
+    ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-        "<rootDir>/__mocks__/fileMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(scss)$": "identity-obj-proxy"
     }
   },
-  "keywords": ["test", "travix"],
+  "keywords": [
+    "test",
+    "travix"
+  ],
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
@@ -58,7 +66,6 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
-    "react-transition-group": "^2.3.1",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0",
     "sass-loader": "^7.0.1",
