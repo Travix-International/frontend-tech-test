@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskModal renders correctly 1`] = `
+<div
+  className="root root"
+>
+  <div
+    className="content"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        className="title"
+        defaultValue=""
+        id="todo-text"
+        name="title"
+        placeholder="title"
+        type="text"
+      />
+      <textarea
+        className="description"
+        defaultValue=""
+        id="todo-description"
+        maxLength="140"
+        name="description"
+        placeholder="description (max 140 characters)"
+        rows="5"
+      />
+      <input
+        className="button"
+        type="submit"
+        value="Add"
+      />
+    </form>
+  </div>
+  <div
+    className="footer"
+  >
+    <button
+      className="cancel"
+      onClick={[Function]}
+    >
+      Cancel
+    </button>
+  </div>
+</div>
+`;

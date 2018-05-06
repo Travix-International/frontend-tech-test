@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskList renders correctly 1`] = `
+<div
+  className="root"
+>
+  <ul
+    className="list"
+  >
+    <li
+      className="root "
+    >
+      <div
+        className="checkbox "
+      >
+        <label
+          htmlFor="todo-1"
+        >
+          Wash the dishes
+        </label>
+        <input
+          checked={false}
+          id="todo-1"
+          name="checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+      </div>
+      <p
+        className="description"
+      >
+        Yet another generic task
+      </p>
+      <div
+        className="options"
+      >
+        <button
+          className="edit"
+          onClick={[Function]}
+        >
+          Edit
+        </button>
+        <button
+          className="delete"
+          onClick={[Function]}
+        >
+          Delete
+        </button>
+      </div>
+    </li>
+    <li
+      className="root "
+    >
+      <div
+        className="checkbox "
+      >
+        <label
+          htmlFor="todo-3"
+        >
+          Take over the world
+        </label>
+        <input
+          checked={false}
+          id="todo-3"
+          name="checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+      </div>
+      <p
+        className="description"
+      >
+        Send an invite to Gru and Megamind
+      </p>
+      <div
+        className="options"
+      >
+        <button
+          className="edit"
+          onClick={[Function]}
+        >
+          Edit
+        </button>
+        <button
+          className="delete"
+          onClick={[Function]}
+        >
+          Delete
+        </button>
+      </div>
+    </li>
+    <li
+      className="root complete"
+    >
+      <div
+        className="checkbox checked"
+      >
+        <label
+          htmlFor="todo-2"
+        >
+          Do the laundry
+        </label>
+        <input
+          checked={true}
+          id="todo-2"
+          name="checkbox"
+          onChange={[Function]}
+          type="checkbox"
+        />
+      </div>
+      <p
+        className="description"
+      >
+        Existence is pain
+      </p>
+      <div
+        className="options"
+      >
+        <button
+          className="edit"
+          onClick={[Function]}
+        >
+          Edit
+        </button>
+        <button
+          className="delete"
+          onClick={[Function]}
+        >
+          Delete
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
+`;

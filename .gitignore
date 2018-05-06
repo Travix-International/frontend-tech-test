@@ -7,3 +7,4 @@ build/
 try-it-on-heroku.sh
 public/bundle.css
 public/bundle.js
+coverage/

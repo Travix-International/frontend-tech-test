@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddTaskButton renders correctly 1`] = `
+<section
+  className="root"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="filters"
+    >
+      <div
+        className="checkbox checkbox--checked"
+      >
+        <input
+          checked={true}
+          id="show-completed"
+          name="show-completed"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          htmlFor="show-completed"
+        >
+          Show completed
+        </label>
+      </div>
+    </div>
+    <button
+      className="button"
+      onClick={[Function]}
+    >
+      Add Task
+    </button>
+  </div>
+</section>
+`;

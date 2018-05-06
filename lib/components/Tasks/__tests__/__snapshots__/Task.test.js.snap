@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Task renders correctly 1`] = `
+<li
+  className="root "
+>
+  <div
+    className="checkbox "
+  >
+    <label
+      htmlFor="todo-1"
+    >
+      Wash the dishes
+    </label>
+    <input
+      checked={false}
+      id="todo-1"
+      name="checkbox"
+      onChange={[Function]}
+      type="checkbox"
+    />
+  </div>
+  <p
+    className="description"
+  >
+    Yet another generic task
+  </p>
+  <div
+    className="options"
+  >
+    <button
+      className="edit"
+      onClick={[Function]}
+    >
+      Edit
+    </button>
+    <button
+      className="delete"
+      onClick={[Function]}
+    >
+      Delete
+    </button>
+  </div>
+</li>
+`;
