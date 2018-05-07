@@ -1,7 +1,7 @@
 .form-to-do {
     display: flex;
     .input-to-do {
-        flex-grow: 3;
+        width: 70%;
         padding: 16px 16px 16px 60px;
         border: none;
         background: rgba(0, 0, 0, 0.003);
@@ -9,6 +9,8 @@
         font-size: 24px;
     }
     .add-to-do {
-        flex-grow: 1;
+        width: 30%;
+        background: #b7bcf9;
+        border: 1px solid
     }
 }
