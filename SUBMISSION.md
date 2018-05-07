@@ -32,7 +32,7 @@ _Please note: The demo of the application has been deployed on a free tier insta
 
 ## Areas that can be improved
 
-Things I would do differently in an actual production app include:
+Things I would do differently in an actual production app include but are not limited to:
 
 ### Managing a high volume of tasks
 
@@ -46,7 +46,7 @@ A very simple lazy loading has been implemented to avoid pushing too many tasks 
 
 This is unrealistic in a real production app as there could be too many tasks to send so a different approach will be required.
 
-Server implemented is very simple. In a real application would require load balancing, caching recently created tasks with Memcache or Redis and other strategies to ensure consistency, especially when notifying all clients with websockets.
+Server implemented is very simple. A real application would require load balancing, caching recently created tasks with Memcache or Redis and other strategies to ensure consistency, especially when notifying all clients with Websockets.
 
 ### User Experience
 
@@ -54,7 +54,7 @@ Current application does not provide any features for the user to search for tas
 
 ### Offline First PWA
 
-Currently this application treats the network as always available. A real world application would offline first with a network-first strategy for updates but fallback to IndexDB/WebSQL or localstorage if the network is unavailable.
+Currently this application treats the network as always available. A real world application would be offline first with a network-first strategy for updates but fallback to IndexDB/WebSQL or localstorage if the network is unavailable.
 
 ### Security
 
