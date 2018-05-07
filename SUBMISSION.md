@@ -28,6 +28,7 @@ _Please note: The demo of the application has been deployed on a free tier insta
 * Websockets
 * MongoDB - easy automatic sharding, consistent, fast in-place updates, partition tolerance and inbuilt high availability with replication and automatic failover.
 * Made in Travix: `eslint-config-travix` and `stylelint-config-travix`
+* PM2 - automate load balancing and zero downtime restarts
 
 ## Areas that can be improved
 
