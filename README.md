@@ -2,37 +2,35 @@
 
 Travix Front-End Tech Interview Test 
 
-# Introduction
+# Getting started
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+Task | Description
+-----|------------
+npm install | install all packages
+npm start | run server and client
+npm run server | run only server
+npm run client | run only client
+npm run eslint | check code style
 
-Using your application we must be able to create, modify and delete a task.
+![image](https://user-images.githubusercontent.com/21290021/39865900-1fb0980c-5457-11e8-9b59-923505a62bbd.png)
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
+# Features
 
-However this server is not perfect. It could be improved and tested as well.
+* Create task - type task and after press Enter or click on button "Add ToDo".
+* Modify task - double click on the task and edit it, after press Enter.
+* Cancel modify editing - click on non modifying aria.
+* Delete - hover on selected task, then you should see 'x' button and press on it.
+* Complete task - press on checkbox to the left of selected task.
 
-So your mission is to develop the front-end from scratch using a front-end framework.
+# Technologies
+* React 16
+* Redux
+* Express
+* Webpack
+* ES6
+* SASS
 
-We are also expecting from you a usable, responsive UI.
+# Note
 
-# Process
-
-Fork the repository into your account. Once your code is ready, send a pull-request to this repository and we will review it.
-
-# Requirements
-
-* React 15+
-* Redux or Flux or [FrintJS](https://frint.js.org) or other alternatives that implement a unidirectional data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
-
-# Bonus
-
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us!
+* Project is running on http://localhost:3002/
+* The server is available on http://localhost:9001/
