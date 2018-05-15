@@ -1,15 +1,37 @@
 /**
- * Function called to return a not found response
+ * Utility to return a not found response (404)
  * @param res
  * @returns {any | Promise<any>}
  */
-const notFound = (res) => res.status(404).json({message: "Not found."});
+const notFound = (res) => res.status(404).json({message: 'Not found.'});
 
 /**
- * Function called to return a bad request response
+ * Utility to return a bad request response (400)
  * @param res
  * @returns {any | Promise<any>}
  */
-const badRequest = (res) => res.status(500).json({message: "Bad request"});
+const badRequest = (res) => res.status(400).json({message: 'Bad request'});
 
-module.exports = {notFound, badRequest};
+/**
+ * Utility to return a no content response (204). No content will be sent back to the client.
+ * @param res
+ * @returns {*|number}
+ */
+const noContent = (res) => res.status(204).end();
+
+/**
+ * Utility to return a created response (201).
+ * @param res
+ * @returns {ServerResponse}
+ */
+const created = (res) => res.status(201).end();
+
+const okWithJsonContent = (res) => (content) => res.status(200).json(content);
+
+module.exports = {
+  notFound,
+  badRequest,
+  noContent,
+  created,
+  okWithJsonContent
+};
