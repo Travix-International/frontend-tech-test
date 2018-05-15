@@ -5,7 +5,7 @@ import TextArea from 'components/shared/textArea'
 import Dropdown from 'components/shared/dropdown'
 import { MAX_TASK_NAME_LENGTH, MAX_TASK_DESCRIPTION_LENGTH } from 'constants'
 import { TASK_STATUSES_OPTIONS } from 'constants/taskStatuses'
-import './updateTaskModal.scss'
+import styles from './updateTaskModal.scss'
 
 class UpdateTaskModal extends Component {
   constructor(props) {
@@ -85,17 +85,19 @@ class UpdateTaskModal extends Component {
     return (
       <Modal isOpen toggle={toggle}>
         <ModalHeader toggle={toggle}>{title}</ModalHeader>
-        <ModalBody className="update-task-modal">
+        <ModalBody className={styles['update-task-modal']}>
           <label htmlFor="editStatus">Status</label>
-          <Dropdown
-            id="editStatus"
-            isOpen={this.state.dropdownOpen}
-            toggle={this.dropdownToggle}
-            options={TASK_STATUSES_OPTIONS}
-            value={this.state.status}
-            setValue={this.setStatus}
-            direction="right"
-          />
+          <div className={styles.dropdown}>
+            <Dropdown
+              id="editStatus"
+              isOpen={this.state.dropdownOpen}
+              toggle={this.dropdownToggle}
+              options={TASK_STATUSES_OPTIONS}
+              value={this.state.status}
+              setValue={this.setStatus}
+              direction="right"
+            />
+          </div>
           <label htmlFor="editName">Name</label>
           <TextArea
             id="editName"

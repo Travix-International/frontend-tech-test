@@ -71,6 +71,10 @@ $percentages: (
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      .edit-btn {
+        align-self: baseline;
+      }
     }
 
     &__name {
@@ -112,19 +116,8 @@ $percentages: (
       display: flex;
     }
 
-    .btn {
+    .add-btn {
       margin-top: 10px;
-    }
-  }
-}
-
-.task-container {
-  &__content {
-    &__title {
-      .btn {
-        margin-top: 0;
-        align-self: baseline;
-      }
     }
   }
 }

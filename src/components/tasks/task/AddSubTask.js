@@ -5,6 +5,7 @@ import TextArea from 'components/shared/textArea'
 import { Button } from 'reactstrap'
 import { createSubTask } from 'actions'
 import { MAX_SUB_TASK_NAME_LENGTH } from 'constants'
+import styles from './task.scss'
 
 class AddSubTask extends Component {
   constructor(props) {
@@ -26,13 +27,14 @@ class AddSubTask extends Component {
     return (
       <div>
         <TextArea
-          className="task-container__content__textarea"
+          className={styles['task-container__content__textarea']}
           maxLength={MAX_SUB_TASK_NAME_LENGTH}
           onChange={this.setSubTaskTextAreaValue}
           value={subTaskTextAreaValue}
         />
         <Button
           color="primary"
+          className={styles['add-btn']}
           disabled={!subTaskTextAreaValue}
           onClick={() => {
             createSubTaskAction({ id, name: subTaskTextAreaValue, description: '' })

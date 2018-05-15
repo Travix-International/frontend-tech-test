@@ -8,7 +8,7 @@ import Header from './header/Header'
 import ToDoTasks from './tasks/ToDoTasks'
 import DoneTasks from './tasks/DoneTasks'
 
-import './app.scss'
+import styles from './app.scss'
 
 const AllTasks = () => <Async load={import('./tasks/AllTasks')} />
 
@@ -20,9 +20,9 @@ class App extends Component {
   render() {
     const { location } = this.props
     return (
-      <div className="app">
+      <div className={styles.app}>
         <Header location={location} />
-        <div className="tasks">
+        <div className={styles.tasks}>
           <Switch>
             <Route exact path="/" component={AllTasks} />
             <Route path="/todo" component={ToDoTasks} />

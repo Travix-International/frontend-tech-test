@@ -18,6 +18,7 @@ module.exports = {
     'webpack-dev-server/client',
     'webpack/hot/only-dev-server',
     resolve(__dirname, 'hotReload'),
+    resolve(__dirname, '../src/scss/libs.css'),
     resolve(__dirname, '../src/scss/index.scss')
   ],
   output: {
@@ -41,8 +42,26 @@ module.exports = {
         use: 'babel-loader'
       },
       {
-        test: /\.scss/,
-        loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract(['css-loader'])
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                sourceMap: true,
+                importLoaders: 2,
+                localIdentName: '[name]__[local]___[hash:base64:5]'
+              }
+            },
+            'sass-loader'
+          ]
+        })
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
@@ -57,7 +76,9 @@ module.exports = {
       title: 'task-manager',
       template: '../webpack/template.html'
     }),
-    new ExtractTextPlugin('bundle.css')
+    new ExtractTextPlugin('bundle.css', {
+      allChunks: true
+    })
   ],
   performance: { hints: false }
 }

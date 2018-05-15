@@ -9,7 +9,7 @@ import { TASK_STATUSES, TASK_STATUSES_LABELS } from 'constants/taskStatuses'
 import UpdateTaskModal from './updateTaskModal/UpdateTaskModal'
 import SubTasks from './subTasks/SubTasks'
 import AddSubTask from './AddSubTask'
-import './task.scss'
+import styles from './task.scss'
 
 class Task extends Component {
   constructor(props) {
@@ -43,29 +43,29 @@ class Task extends Component {
     const { displayUpdateTaskModal } = this.state
 
     return (
-      <div className="task-container">
-        <div className="task-container__content">
-          <div className="task-container__content__title">
-            <div className="task-container__content__name">
+      <div className={styles['task-container']}>
+        <div className={styles['task-container__content']}>
+          <div className={styles['task-container__content__title']}>
+            <div className={styles['task-container__content__name']}>
               {name}
             </div>
             <Button
               title="Edit task"
-              className="btn-transparent"
+              className={classnames('btn-transparent', styles['edit-btn'])}
               onClick={this.toggleDisplayUpdateTaskModal}
             >
               <i className="fa fa-edit" />
             </Button>
           </div>
-          <div className="task-container__content__status">
-            Status: <span className={classnames('task-container__content__status__label',
-              { 'label-done': TASK_STATUSES.DONE === status },
-              { 'label-todo': TASK_STATUSES.TODO === status })}
+          <div className={styles['task-container__content__status']}>
+            Status: <span className={classnames(styles['task-container__content__status__label'],
+              { [styles['label-done']]: TASK_STATUSES.DONE === status },
+              { [styles['label-todo']]: TASK_STATUSES.TODO === status })}
             >
               {TASK_STATUSES_LABELS[status]}
             </span>
           </div>
-          {description && <div className="task-container__content__description">
+          {description && <div className={styles['task-container__content__description']}>
             {description}
           </div>}
           <SubTasks

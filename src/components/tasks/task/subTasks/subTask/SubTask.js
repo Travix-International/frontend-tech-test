@@ -4,7 +4,7 @@ import { findDOMNode } from 'react-dom'
 import { DragSource, DropTarget } from 'react-dnd'
 import flow from 'lodash/flow'
 import { TASK_STATUSES } from 'constants/taskStatuses'
-import './subTask.scss'
+import styles from './subTask.scss'
 
 const subTaskSource = {
   beginDrag(props) {
@@ -59,8 +59,8 @@ class SubTask extends Component {
 
     return connectDragSource(
       connectDropTarget(
-        <div className="sub-task-container" style={style} title={description} onClick={onClick}>
-          <div className="sub-task-container__name">
+        <div className={styles['sub-task-container']} style={style} title={description} onClick={onClick}>
+          <div className={styles['sub-task-container__name']}>
             {name}
           </div>
         </div>

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import classNames from 'classnames'
 import TextAreaAutosize from 'react-textarea-autosize'
-import './textArea.scss'
+import styles from './textArea.scss'
 
 const onChangeHandler = (e, onChange) => {
   if (onChange) {
@@ -13,7 +13,7 @@ const onChangeHandler = (e, onChange) => {
 function TextArea({ placeholder, value, maxLength, onChange, ...props }) {
   return (
     <TextAreaAutosize
-      className={classNames('textarea-container', props.className)}
+      className={classNames(styles['textarea-container'], props.className)}
       placeholder={placeholder}
       value={value}
       maxLength={maxLength}

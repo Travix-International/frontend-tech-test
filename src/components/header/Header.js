@@ -2,14 +2,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import NavigationLinks from './NavigationLinks'
 import CreateTask from './CreateTask'
-import './header.scss'
+import styles from './header.scss'
 
 export default function Header(props) {
   const { location } = props
 
   return (
-    <header className="header">
-      <nav className="header-container">
+    <header className={styles.header}>
+      <nav className={styles['header-container']}>
         <NavigationLinks location={location} />
         <CreateTask />
       </nav>

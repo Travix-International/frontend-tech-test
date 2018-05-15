@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { PropagateLoader } from 'react-spinners'
-import './spinner.scss'
+import styles from './spinner.scss'
 
 export default function Spinner({ color, size, loading }) {
   return (
-    <div className="spinner">
+    <div className={styles.spinner}>
       <PropagateLoader
         color={color}
         size={size}

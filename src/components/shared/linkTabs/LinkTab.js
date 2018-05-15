@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 import LinkLabel from './LinkLabel'
-import './linkTabs.scss'
+import styles from './linkTabs.scss'
 
 const getPath = (pathname, pathCategory, pathCategoryIndex, isCutAfter) => {
   const pathArr = pathname.split('/')
@@ -53,7 +53,7 @@ export default function LinkTab(props) {
 
   const newPathname = getPath(pathname, pathCategory, pathCategoryIndex, cutAfter)
   const linkAddress = getLinkAdress(newPathname, query, queryProperties, saveQuery)
-  const className = classnames('link', { active: isTabActive(pathname, pathCategory, pathCategoryIndex) })
+  const className = classnames(styles.link, { [styles.active]: isTabActive(pathname, pathCategory, pathCategoryIndex) })
 
   return (
     <li>
