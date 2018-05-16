@@ -1,8 +1,9 @@
 'use strict';
 
 const app = require('express')();
-const tasksContainer = require('./tasks.json');
 const tasksHandlers = require('./server/handlers/tasks.handlers');
+
+let tasksContainer = require('./tasks.json');
 
 /**
  * GET /tasks
@@ -36,7 +37,11 @@ app.get('/tasks/:id', (req, res) => tasksHandlers.getSingleTask(req, res)(tasksC
  * If the task is not found, add a new task (HTTP PUT behaviour) and returns a status code 201.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/tasks/:id/:title/:description', (req, res) => tasksHandlers.updateOrCreateTask(req, res)(tasksContainer));
+app.put('/tasks/:id/:title/:description', (req, res) => {
+  const result = tasksHandlers.updateOrCreateTask(req, res)(tasksContainer);
+  tasksContainer = result.tasksList;
+  return result.status;
+});
 
 /**
  * POST /tasks/:title/:description
@@ -47,7 +52,11 @@ app.put('/tasks/:id/:title/:description', (req, res) => tasksHandlers.updateOrCr
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/tasks/:title/:description', (req, res) => tasksHandlers.updateOrCreateTask(req, res)(tasksContainer));
+app.post('/tasks/:title/:description', (req, res) => {
+  const result = tasksHandlers.updateOrCreateTask(req, res)(tasksContainer);
+  tasksContainer = result.tasksList;
+  return result.status;
+});
 
 /**
  * DELETE /tasks/:id
@@ -59,7 +68,11 @@ app.post('/tasks/:title/:description', (req, res) => tasksHandlers.updateOrCreat
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/tasks/:id', (req, res) => tasksHandlers.deleteTask(req, res)(tasksContainer));
+app.delete('/tasks/:id', (req, res) => {
+  const result = tasksHandlers.deleteTask(req, res)(tasksContainer);
+  tasksContainer = result.tasksList;
+  return result.status;
+});
 
 app.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');

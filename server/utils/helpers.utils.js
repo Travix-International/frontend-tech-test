@@ -8,11 +8,10 @@ const findTaskById = (tasksList, idToSearch) =>
   tasksList && tasksList.tasks && tasksList.tasks.find((el) => el.id === idToSearch);
 
 /**
- * Utility to get the exact postion of a task inside the task list
+ * Utility to get the exact position of a task inside the task list
  * @param tasksList
  * @param taskToSearch
  * @returns {number}
- * TODO: FIX ME
  */
 const getTaskPosition = (tasksList, taskToSearch) => tasksList.tasks.indexOf(taskToSearch);
 
@@ -23,31 +22,68 @@ const getTaskPosition = (tasksList, taskToSearch) => tasksList.tasks.indexOf(tas
  * @param description
  * @returns {{id: *, title: *, description: *}}
  */
-const createTask = (id, title, description) => {
-  return {
+const createTask = (id, title, description) => (
+  {
     id: id,
     title: title,
     description: description
-  }
-}
+  });
 
 /**
  * Utility to update a task
  * @param task
  * @param newTitle
  * @param newDescription
- * @returns {} - new task with new title and description
+ * @returns {{id: *, title: *, description: *}}
  */
-const updateTask = (task, newTitle, newDescription) => {
-  const clonedTask = {...task};
-  clonedTask.title = newTitle;
-  clonedTask.description = newDescription;
-  return clonedTask;
-}
+const updateTask = (task, newTitle, newDescription) => (
+  {
+    ...task,
+    title: newTitle,
+    description: newDescription
+  });
+
+/**
+ * Update a task inside the list
+ * @param tasksList
+ * @param taskToModify
+ * @returns {{tasks: []}}
+ */
+const updateTaskInList = (tasksList, taskToModify) => (
+  {
+    tasks: tasksList.tasks.map((task) => task.id === taskToModify.id ? taskToModify : task)
+  });
+
+/**
+ * Add a task to the list
+ * @param tasksList
+ * @param id
+ * @param title
+ * @param description
+ * @returns {{tasks: []}}
+ */
+const addTaskToList = (tasksList, id, title, description) => (
+  {
+    tasks: [
+      ...tasksList.tasks,
+      createTask(id ? id : tasksList.tasks.length, title, description)
+    ]
+  });
+
+/**
+ * Remove a task from the list
+ * @param tasksList
+ * @param taskToRemove
+ * @returns {T[]}
+ */
+const deleteTaskFromList = (tasksList, taskToRemove) => ({...tasksList}.splice(getTaskPosition(taskToRemove), 1));
 
 module.exports = {
   findTaskById,
   getTaskPosition,
   createTask,
-  updateTask
+  updateTask,
+  updateTaskInList,
+  addTaskToList,
+  deleteTaskFromList
 };
