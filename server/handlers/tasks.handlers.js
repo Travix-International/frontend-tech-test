@@ -7,7 +7,7 @@ const helpersUtils = require('../utils/helpers.utils');
  * @returns {function(*=): (any | Promise<any>)}
  */
 const getAllTasks = (res) => (tasksFromFile) => {
-  return res.status(200).json(tasksFromFile);
+  return responseUtils.okWithJsonContent(res)(tasksFromFile);
 };
 
 /**
@@ -18,11 +18,11 @@ const getAllTasks = (res) => (tasksFromFile) => {
  */
 const getSingleTask = (req, res) => (tasksList) => {
   const id = parseInt(req.params.id, 10);
-  const findRequestedTaskAndCreateResponse = () => {
-    const task = helpersUtils.findTaskById(tasksList, id); // check if bind is needed
+  if (Number.isNaN(id)) {
+    const task = helpersUtils.findTaskById(tasksList, id);
     return task ? responseUtils.okWithJsonContent(res)({task}) : responseUtils.notFound(res);
-  };
-  Number.isNaN(id) ? responseUtils.badRequest(res) : findRequestedTaskAndCreateResponse();
+  }
+  return responseUtils.badRequest(res);
 };
 
 /**

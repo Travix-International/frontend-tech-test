@@ -26,6 +26,11 @@ const noContent = (res) => res.status(204).end();
  */
 const created = (res) => res.status(201).end();
 
+/**
+ * Utility to return an ok response with body content (200).
+ * @param res
+ * @returns {function(*=): (*|Promise<any>)}
+ */
 const okWithJsonContent = (res) => (content) => res.status(200).json(content);
 
 module.exports = {

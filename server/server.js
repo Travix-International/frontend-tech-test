@@ -1,9 +1,9 @@
 'use strict';
 
 const app = require('express')();
-const tasksHandlers = require('./server/handlers/tasks.handlers');
+const tasksHandlers = require('./handlers/tasks.handlers');
 
-let tasksContainer = require('./tasks.json');
+let tasksContainer = require('../tasks.json');
 
 /**
  * GET /tasks

@@ -76,7 +76,13 @@ const addTaskToList = (tasksList, id, title, description) => (
  * @param taskToRemove
  * @returns {T[]}
  */
-const deleteTaskFromList = (tasksList, taskToRemove) => ({...tasksList}.splice(getTaskPosition(taskToRemove), 1));
+const deleteTaskFromList = (tasksList, taskToRemove) => (
+  {
+    tasks: [
+      ...tasksList.tasks.slice(0, getTaskPosition(tasksList, taskToRemove)),
+      ...tasksList.tasks.slice(getTaskPosition(tasksList, taskToRemove) + 1)
+    ]
+  });
 
 module.exports = {
   findTaskById,
