@@ -1,3 +1,5 @@
+'use strict';
+
 const responseUtils = require('../utils/response.utils');
 const helpersUtils = require('../utils/helpers.utils');
 
@@ -18,7 +20,7 @@ const getAllTasks = (res) => (tasksFromFile) => {
  */
 const getSingleTask = (req, res) => (tasksList) => {
   const id = parseInt(req.params.id, 10);
-  if (Number.isNaN(id)) {
+  if (!Number.isNaN(id)) {
     const task = helpersUtils.findTaskById(tasksList, id);
     return task ? responseUtils.okWithJsonContent(res)({task}) : responseUtils.notFound(res);
   }
@@ -66,7 +68,7 @@ const deleteTask = (req, res) => (tasksList) => {
   if (!Number.isNaN(id)) {
     const task = helpersUtils.findTaskById(tasksList, id);
     return {
-      status: task ? responseUtils.okWithJsonContent(res)({message: 'Update successfully'}) : responseUtils.notFound(res),
+      status: task ? responseUtils.okWithJsonContent(res)({message: `Task with id ${task.id} deleted successfully`}) : responseUtils.accepted(res),
       tasksList: task ? helpersUtils.deleteTaskFromList(tasksList, helpersUtils.getTaskPosition(tasksList, task)) : tasksList
     }
   }

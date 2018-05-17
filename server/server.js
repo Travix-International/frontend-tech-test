@@ -3,7 +3,7 @@
 const app = require('express')();
 const tasksHandlers = require('./handlers/tasks.handlers');
 
-let tasksContainer = require('../tasks.json');
+let tasksContainer = require('./tasks.json') || { tasks: [] };
 
 /**
  * GET /tasks
@@ -64,8 +64,8 @@ app.post('/tasks/:title/:description', (req, res) => {
  * id: Number
  *
  * Delete the task linked to the  given id.
- * If the task is found and deleted as well, return a status code 204.
- * If the task is not found, return a status code 404.
+ * If the task is found and deleted as well, return a status code 200.
+ * If the task is not found, return a status code 202.
  * If the provided id is not a valid number return a status code 400.
  */
 app.delete('/tasks/:id', (req, res) => {
@@ -74,7 +74,7 @@ app.delete('/tasks/:id', (req, res) => {
   return result.status;
 });
 
-app.listen(9001, () => {
+app.listen(8080, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });
 

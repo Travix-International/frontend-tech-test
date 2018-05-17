@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Utility to find a task by id in the task list
  * @param tasksList
