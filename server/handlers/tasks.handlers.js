@@ -67,7 +67,7 @@ const deleteTask = (req, res) => (tasksList) => {
     const task = helpersUtils.findTaskById(tasksList, id);
     return {
       status: task ? responseUtils.okWithJsonContent(res)({message: 'Update successfully'}) : responseUtils.notFound(res),
-      tasksList: task ? helpersUtils.deleteTaskFromList(tasksList, task) : tasksList
+      tasksList: task ? helpersUtils.deleteTaskFromList(tasksList, helpersUtils.getTaskPosition(tasksList, task)) : tasksList
     }
   }
   return {

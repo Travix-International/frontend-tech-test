@@ -46,12 +46,12 @@ const updateTask = (task, newTitle, newDescription) => (
 /**
  * Update a task inside the list
  * @param tasksList
- * @param taskToModify
+ * @param updatedTask
  * @returns {{tasks: []}}
  */
-const updateTaskInList = (tasksList, taskToModify) => (
+const updateTaskInList = (tasksList, updatedTask) => (
   {
-    tasks: tasksList.tasks.map((task) => task.id === taskToModify.id ? taskToModify : task)
+    tasks: tasksList.tasks.map((task) => task.id === updatedTask.id ? updatedTask : task)
   });
 
 /**
@@ -73,14 +73,14 @@ const addTaskToList = (tasksList, id, title, description) => (
 /**
  * Remove a task from the list
  * @param tasksList
- * @param taskToRemove
+ * @param taskPositionInList
  * @returns {T[]}
  */
-const deleteTaskFromList = (tasksList, taskToRemove) => (
+const deleteTaskFromList = (tasksList, taskPositionInList) => (
   {
     tasks: [
-      ...tasksList.tasks.slice(0, getTaskPosition(tasksList, taskToRemove)),
-      ...tasksList.tasks.slice(getTaskPosition(tasksList, taskToRemove) + 1)
+      ...tasksList.tasks.slice(0, taskPositionInList),
+      ...tasksList.tasks.slice(taskPositionInList + 1)
     ]
   });
 
