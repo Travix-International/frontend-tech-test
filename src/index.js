@@ -1,13 +1,14 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/scss/index.scss';
-import App from './App';
+import RootApp from './App';
 import registerServiceWorker from './registerServiceWorker';
-import store from "./js/store/index";
-import { addTask } from "./js/actions/index";
+import store from './store/index';
+import addTask from './actions/index';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+/* eslint-disable */
+ReactDOM.render(RootApp(), document.getElementById('root'));
 registerServiceWorker();
 
 window.store = store;
 window.addTask = addTask;
+/* eslint-enable */
