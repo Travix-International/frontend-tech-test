@@ -1,85 +1,83 @@
 'use strict';
 
-const responseUtils = require('../utils/response.utils');
+const responseStatusUtils = require('../utils/response-status.util');
 const helpersUtils = require('../utils/helpers.utils');
 
 /**
- * Retrieve the full list of tasks.
- * @param res
- * @returns {function(*=): (any | Promise<any>)}
- */
-const getAllTasks = (res) => (tasksFromFile) => {
-  return responseUtils.okWithJsonContent(res)(tasksFromFile);
-};
-
-/**
  * Retrieve single task
- * @param req - request from the client
- * @param res - response to the client
- * @returns {Function} - a function returning a json containing the requested task
+ * @param tasksList
+ * @param idFromRequest
+ * @returns {*}
  */
-const getSingleTask = (req, res) => (tasksList) => {
-  const id = parseInt(req.params.id, 10);
+const getSingleTask = (tasksList, idFromRequest) => {
+  const id = parseInt(idFromRequest, 10);
   if (!Number.isNaN(id)) {
     const task = helpersUtils.findTaskById(tasksList, id);
-    return task ? responseUtils.okWithJsonContent(res)({task}) : responseUtils.notFound(res);
+    return {
+      status: task ? responseStatusUtils.responseStatus.OK.response(task) : responseStatusUtils.responseStatus.NOT_FOUND,
+      task: task
+    }
   }
-  return responseUtils.badRequest(res);
+  return {
+    status: responseStatusUtils.responseStatus.BAD_REQUEST,
+  };
 };
 
 /**
  * Create or update a task. This will be used as handler for both POST and PUT
- * @param req
- * @param res
- * @returns {Function}
+ * @param tasksList
+ * @param title
+ * @param description
+ * @param idFromRequest
+ * @returns {*}
  */
-const updateOrCreateTask = (req, res) => (tasksList) => {
-  if (!req.params.id) {
+const updateOrCreateTask = (tasksList, title, description, idFromRequest = undefined) => {
+  if (!idFromRequest) {
     return {
-      status: responseUtils.created(res),
-      tasksList: helpersUtils.addTaskToList(tasksList, tasksList.tasks.length, req.params.title, req.params.description)
+      status: responseStatusUtils.responseStatus.CREATED,
+      tasksList: helpersUtils.addTaskToList(tasksList, tasksList.tasks.length, title, description)
     }
   }
-  const id = parseInt(req.params.id, 10);
+  const id = parseInt(idFromRequest, 10);
   if (!Number.isNaN(id)) {
     const task = helpersUtils.findTaskById(tasksList, id);
     return {
-      status: task ? responseUtils.noContent(res) : responseUtils.created(res),
+      status: task ? responseStatusUtils.responseStatus.NO_CONTENT : responseStatusUtils.responseStatus.CREATED,
       tasksList: task ?
-        helpersUtils.updateTaskInList(tasksList, helpersUtils.updateTask(task, req.params.title, req.params.description)) :
-        helpersUtils.addTaskToList(tasksList, id, req.params.title, req.params.description)
+        helpersUtils.updateTaskInList(tasksList, helpersUtils.updateTask(task, title, description)) :
+        helpersUtils.addTaskToList(tasksList, id, title, description)
     }
   }
   return {
-    status: responseUtils.badRequest(res),
+    status: responseStatusUtils.responseStatus.BAD_REQUEST,
     tasksList: tasksList
   };
 };
 
 /**
  * Delete a single task form the list
- * @param req
- * @param res
- * @returns {Function}
+ * @param tasksList
+ * @param idFromRequest
+ * @returns {*}
  */
-const deleteTask = (req, res) => (tasksList) => {
-  const id = parseInt(req.params.id, 10);
+const deleteTask = (tasksList, idFromRequest) => {
+  const id = parseInt(idFromRequest, 10);
 
   if (!Number.isNaN(id)) {
     const task = helpersUtils.findTaskById(tasksList, id);
     return {
-      status: task ? responseUtils.okWithJsonContent(res)({message: `Task with id ${task.id} deleted successfully`}) : responseUtils.accepted(res),
+      status: task ? responseStatusUtils.responseStatus.OK.response({message: `Task with id ${task.id} deleted successfully`}) :
+        responseStatusUtils.responseStatus.ACCEPTED,
       tasksList: task ? helpersUtils.deleteTaskFromList(tasksList, helpersUtils.getTaskPosition(tasksList, task)) : tasksList
     }
   }
   return {
-    status: responseUtils.badRequest(res),
+    status: responseStatusUtils.responseStatus.BAD_REQUEST,
     tasksList: tasksList
   };
 };
 
 module.exports = {
-  getAllTasks,
   getSingleTask,
   updateOrCreateTask,
   deleteTask

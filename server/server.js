@@ -1,16 +1,35 @@
 'use strict';
 
 const app = require('express')();
+const cors = require('cors');
+const { responseStatus } = require('./utils/response-status.util');
 const tasksHandlers = require('./handlers/tasks.handlers');
 
-let tasksContainer = require('./tasks.json') || { tasks: [] };
+let tasksContainer = require('./tasks.json') || {tasks: []};
+
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200,
+  credentials: true,
+  methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'DELETE', 'PATCH'],
+  allowedHeaders: [
+    'Origin',
+    'X-Requested-With',
+    'Content-Type',
+    'Accept',
+    'Cache-Control',
+    'Expires'
+  ]
+}
+
+app.use(cors(corsOptions));
 
 /**
  * GET /tasks
  *
  * Return the list of tasks with status code 200.
  */
-app.get('/tasks', (req, res) => tasksHandlers.getAllTasks(res)(tasksContainer));
+  app.get('/tasks', (req, res) => responseStatus.OK.response(tasksContainer)(res));
 
 /**
  * Get /tasks/:id
@@ -23,7 +42,7 @@ app.get('/tasks', (req, res) => tasksHandlers.getAllTasks(res)(tasksContainer));
  * If not found return status code 404.
  * If id is not valid number return status code 400.
  */
-app.get('/tasks/:id', (req, res) => tasksHandlers.getSingleTask(req, res)(tasksContainer));
+app.get('/tasks/:id', (req, res) => tasksHandlers.getSingleTask(tasksContainer, req.params.id).status.response(res));
 
 /**
  * PUT /tasks/:id/:title/:description
@@ -38,9 +57,9 @@ app.get('/tasks/:id', (req, res) => tasksHandlers.getSingleTask(req, res)(tasksC
  * If the provided id is not a valid number return a status code 400.
  */
 app.put('/tasks/:id/:title/:description', (req, res) => {
-  const result = tasksHandlers.updateOrCreateTask(req, res)(tasksContainer);
-  tasksContainer = result.tasksList;
-  return result.status;
+  const result = tasksHandlers.updateOrCreateTask(tasksContainer, req.params.title, req.params.description, req.params.id);
+  tasksContainer = {...result.tasksList};
+  return result.status.response(res);
 });
 
 /**
@@ -53,9 +72,9 @@ app.put('/tasks/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/tasks/:title/:description', (req, res) => {
-  const result = tasksHandlers.updateOrCreateTask(req, res)(tasksContainer);
-  tasksContainer = result.tasksList;
-  return result.status;
+  const result = tasksHandlers.updateOrCreateTask(tasksContainer, req.params.title, req.params.description);
+  tasksContainer = {...result.tasksList};
+  return result.status.response(res);
 });
 
 /**
@@ -69,13 +88,13 @@ app.post('/tasks/:title/:description', (req, res) => {
  * If the provided id is not a valid number return a status code 400.
  */
 app.delete('/tasks/:id', (req, res) => {
-  const result = tasksHandlers.deleteTask(req, res)(tasksContainer);
-  tasksContainer = result.tasksList;
-  return result.status;
+  const result = tasksHandlers.deleteTask(tasksContainer, req.params.id);
+  tasksContainer = {...result.tasksList};
+  return result.status.response(res);
 });
 
-app.listen(8080, () => {
+app.listen(9002, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });
 
-module.exports = { app, tasksContainer };
+module.exports = {app, tasksContainer};
