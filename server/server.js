@@ -74,7 +74,7 @@ app.put('/tasks/:id/:title/:description', (req, res) => {
 app.post('/tasks/:title/:description', (req, res) => {
   const result = tasksHandlers.updateOrCreateTask(tasksContainer, req.params.title, req.params.description);
   tasksContainer = {...result.tasksList};
-  return result.status.response(res);
+  return result.status(res);
 });
 
 /**
