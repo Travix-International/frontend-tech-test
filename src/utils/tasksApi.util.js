@@ -6,17 +6,13 @@ const axiosInstance = axios.create({
 });
 
 export const load = () => axiosInstance
-  .get('/tasks')
-  .then(response => response.data);
+  .get('/tasks');
 
 export const create = task => axiosInstance
-  .post('/tasks/', task)
-  .then(response => response.data);
+  .post(`/tasks/${task.title}/${task.description}`);
 
-export const update = (id, updates) => axiosInstance
-  .put(`/tasks/${id}`, updates)
-  .then(response => response.data);
+export const update = (task) => axiosInstance
+  .put(`/tasks/${task.id}/${task.title}/${task.description}`);
 
 export const remove = id => axiosInstance
-  .delete(`/tasks/${id}`)
-  .then(response => response.data);
+  .delete(`/tasks/${id}`);

@@ -35,7 +35,7 @@ const updateOrCreateTask = (tasksList, title, description, idFromRequest = undef
   if (!idFromRequest) {
     return {
       status: responseStatusUtils.responseStatus.CREATED,
-      tasksList: helpersUtils.addTaskToList(tasksList, tasksList.tasks.length, title, description)
+      tasksList: helpersUtils.addTaskToList(tasksList, Date.now(), title, description)
     }
   }
   const id = parseInt(idFromRequest, 10);

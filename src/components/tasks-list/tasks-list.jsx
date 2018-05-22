@@ -1,26 +1,53 @@
-import { compose, branch, renderComponent } from 'recompose';
+import React, {Component} from 'react';
+import Task from '../task/task';
+import EditTask from '../edit-task/edit-task';
 
-import EmptyTasksList from '../empty-tasks-list/empty-tasks-list';
-import BaseTasksList from './base-tasks-list';
-import Loading from '../loading/loading';
 
-import withModel from '../../utils/hoc.util';
-import { load } from '../../utils/tasksApi.util';
+// TodoTable is a Stateless component
 
-const model = async () => load().tasks;
+const TasksList = (props) => {
+  return (
 
-const TasksList = branch(
-  ({ tasks }) => !tasks || (tasks && tasks.length === 0),
-  renderComponent(EmptyTasksList),
-)(BaseTasksList);
+    <div className="container">
+      <div className="row">
+        <div className="col">
+          {/* This maps the todos recieved as a prop */}
 
-export const enhance = compose(
-  withModel(model, []),
-  branch(
-    ({ data }) => !data,
-    renderComponent(Loading),
-  ),
-);
+          {props
+            .tasks
+            .map(task => {
 
-export default enhance(TasksList);
+              // If the todo is being edited, EditTodo Component is rendered here
+              if (task) {
+                if (task.editing) {
+                  return <EditTask
+                    editTask={props.editTask}
+                    cancelEditing={e => props.cancelEditing(task.id)}
+                    key={task.id}
+                    task={task}/>
+                } else {
 
+                  // Is the todo is not being edited the TodoRow stateless component is returned
+
+                  return <Task
+                    task={task}
+                    key={task.id}
+                    completeTask={e => props.completeTask(task)}
+                    startEditing={e => props.startEditing(task.id)}
+                    deleteTask={e => props.deleteTask(task)}
+                  />
+                }
+              }
+            })}
+
+          {/* This EditTodo component is used as a Create new Todo Component */}
+          {/* Thus by using the same component for both use, we can reuse a lot of the codes */}
+
+          <EditTask createTask={props.createTask}/>
+        </div>
+      </div>
+    </div>
+  )
+};
+
+export default TasksList;

@@ -74,7 +74,7 @@ app.put('/tasks/:id/:title/:description', (req, res) => {
 app.post('/tasks/:title/:description', (req, res) => {
   const result = tasksHandlers.updateOrCreateTask(tasksContainer, req.params.title, req.params.description);
   tasksContainer = {...result.tasksList};
-  return result.status(res);
+  return result.status.response(res);
 });
 
 /**
@@ -90,10 +90,10 @@ app.post('/tasks/:title/:description', (req, res) => {
 app.delete('/tasks/:id', (req, res) => {
   const result = tasksHandlers.deleteTask(tasksContainer, req.params.id);
   tasksContainer = {...result.tasksList};
-  return result.status.response(res);
+  return typeof result.status === 'function' ? result.status(res) : result.status.response(res);
 });
 
-app.listen(9002, () => {
+app.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });
 

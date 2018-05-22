@@ -7,7 +7,7 @@ const responseStatusCodes = {
   accepted: 202,
   bad_request: 400,
   no_content: 204
-}
+};
 
 /**
  * Utility to return a not found response status (404)

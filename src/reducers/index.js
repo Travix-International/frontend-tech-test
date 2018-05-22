@@ -1,15 +1,12 @@
-import ADD_TASK from '../constants/action-types';
+import {combineReducers} from 'redux'
+import {TasksListReducer} from './tasks.reducer'
 
-const initialState = {
-  tasks: [],
-};
-const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_TASK:
-      return { ...state, articles: [...state.articles, action.payload] };
-    default:
-      return state;
-  }
-};
+
+//One root reducer for the whole app. This is done so that the app will have one single reducer to manage lots of other resources.
+// And also communication between the reducers will be easier to maintain.
+
+const rootReducer = combineReducers({
+  tasks: TasksListReducer
+});
 
 export default rootReducer;
