@@ -1,0 +1,70 @@
+@import "../../index.less";
+
+
+.task{
+  border: 1px solid @todo-border-color;
+  margin: 10px 0px;
+  background-color: @todo-background-color;
+  box-shadow: rgba(0, 0, 0, 0.10) 0px 6px 8px, rgba(0, 0, 0, 0.23) 0px 3px 3px;
+  height: 110px;
+}
+
+.task-title{
+  margin: 5px;
+  font-size: 1.8em;
+}
+
+.task-description{
+  margin: 5px;
+  height: 60px;
+  overflow-y: auto;
+  font-size: 1.4em;
+}
+
+.edit-group{
+  padding: 5px;
+}
+
+.edit-input{
+  display:block;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #757575;
+  background-color: @todo-background-color;
+  margin: 5px;
+}
+
+.edit-input:focus{
+  outline:none;
+}
+
+.edit-textarea{
+  display:block;
+  width:100%;
+  height: 65px;
+  border:none;
+  border-bottom:1px solid #757575;
+  background-color: @todo-background-color;
+  margin: 5px;
+} 
+
+.edit-textarea:focus{
+  outline:none;
+}
+
+.task-operations{
+  float: right;
+}
+
+.task-operations span{
+  margin: 5px;
+}
+
+.completed-task{
+  background-color: @completed-todo-background;
+  box-shadow: rgba(101,191,104, 0.10) 0px 6px 8px, rgba(101,191,104, 0.23) 0px 3px 3px;
+}
+
+.completed-task .task-title, .completed-task .task-description{
+  text-decoration: line-through;
+}
