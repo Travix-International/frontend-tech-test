@@ -8,3 +8,5 @@
 - LESS CSS
 - jest
 - Websocket support
+- Run test `npm test`
+- Start app `npm start`
