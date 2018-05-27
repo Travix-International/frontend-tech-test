@@ -6,7 +6,7 @@
     "build-css": "node-less-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-less-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
-    "server":"node ./src/server/server.js",
+    "server": "node ./src/server/server.js",
     "start": "npm-run-all -p watch-css start-js server",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
