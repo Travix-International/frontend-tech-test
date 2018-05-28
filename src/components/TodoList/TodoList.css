@@ -1,3 +1,6 @@
 .add-button {
   margin: 15px;
 }
+.infinite-scroll-component {
+  overflow: unset !important;
+}

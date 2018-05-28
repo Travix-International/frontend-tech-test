@@ -3,9 +3,9 @@ import Api from '../api';
 import * as Actions from '../actions';
 import * as Constants from '../constants';
 
-function* fetchTodos() {
+function* fetchTodos({length, offset}) {
     try {
-        const response = yield call(Api.getTodos);
+        const response = yield call(Api.getTodos,{length, offset});
         yield put(Actions.getTodoList({ tasks: response.tasks }));
     } catch (e) {
       yield put(Actions.showMessage({
@@ -18,7 +18,7 @@ function* fetchTodos() {
 function* addTodo({ task }) {
     try {
         const response = yield call(Api.addTodo, {task});
-        yield put(Actions.addedSuccessfully(response.todo));
+        yield put(Actions.addedSuccessfully(task.id));
         yield put(Actions.showMessage({
           message: response.message,
           type: Constants.SUCCESS_TOAST
@@ -34,7 +34,6 @@ function* addTodo({ task }) {
 function* updateTodo({ task }) {
     try {
         const response = yield call(Api.updateTodo, {task});
-        yield put(Actions.updatedSuccessfully(response.todo));
         yield put(Actions.showMessage({
           message: response.message,
           type: Constants.SUCCESS_TOAST
@@ -50,7 +49,6 @@ function* updateTodo({ task }) {
 function* deleteTodo({ id }) {
     try {
         const response = yield call(Api.deleteTodo, {id});
-        yield put(Actions.deletedSuccessfully(id));
         yield put(Actions.showMessage({
           message: response.message,
           type: Constants.SUCCESS_TOAST

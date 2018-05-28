@@ -5,7 +5,9 @@ import './TodoList.css';
 import 'react-toastify/dist/ReactToastify.css';
 import * as Constants from '../../constants';
 import Websocket from 'react-websocket';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
+const NUM_OF_TODOS_IN_PAGE = 20;
 
 class TodoList extends Component {
 
@@ -16,14 +18,8 @@ class TodoList extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-       tasks: nextProps.tasks
-    });
-  }
-
   componentDidMount(){
-    this.props.fetchTodos();
+    this.props.fetchTodos(NUM_OF_TODOS_IN_PAGE, 0);
   }
 
   createNewEmptyTodo(){
@@ -31,7 +27,7 @@ class TodoList extends Component {
   }
 
   renderTasks(){
-    const { tasks } = this.state;
+    const { tasks } = this.props;
     return (
         <div>
         {
@@ -48,7 +44,13 @@ class TodoList extends Component {
   }
 
   handleSocketMessage(data){
-    this.props.fetchTodos();
+    data = JSON.parse(data);
+    this.props.handleSocketMessage(data);
+  }
+
+  fetchMoreData = () => {
+    const offset = this.props.tasks.length;
+    this.props.fetchTodos(NUM_OF_TODOS_IN_PAGE, offset);
   }
 
   render() {
@@ -58,9 +60,18 @@ class TodoList extends Component {
         <div className="col-md-12">
           <Button onClick={() => this.createNewEmptyTodo()} className="btn btn-success add-button">Add New TODO</Button>
         </div>
-        {
-          this.renderTasks()
-        }
+        <InfiniteScroll
+          dataLength={this.props.tasks.length}
+          next={this.fetchMoreData}
+          hasMore={true}
+          loader={<h4>Loading...</h4>}
+          endMessage={
+            <p style={{textAlign: 'center'}}>
+              <b>You have seen it all</b>
+            </p>
+          }>
+          {this.renderTasks()}
+        </InfiniteScroll>
       </div>
     );
   }

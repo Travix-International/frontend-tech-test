@@ -14,10 +14,6 @@ export const SERVER_URL = "http://"+ window.location.hostname + ":9001";
 
 export const FETCH_TODOS = "FETCH_TODOS";
 
-export const UPDATED_SUCCESSFULLY = "UPDATED_SUCCESSFULLY";
-
-export const DELETED_SUCCESSFULLY = "DELETED_SUCCESSFULLY";
-
 export const COMPLETE_TODO = "COMPLETE_TODO";
 
 export const SHOW_TOAST = "SHOW_TOAST";
@@ -31,3 +27,5 @@ export const DELETE_TODO_LOCALLY = "DELETE_TODO_LOCALLY";
 export const WEBSOCKET_URL = "ws://"+ window.location.hostname +":9002/";
 
 export const MARK_MESSAGE_AS_READ = "MARK_MESSAGE_AS_READ";
+
+export const SOCKET_MESSAGE = "SOCKET_MESSAGE";

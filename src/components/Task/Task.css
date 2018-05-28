@@ -11,17 +11,16 @@
 }
 .task-description {
   margin: 5px;
-  height: 65px;
+  height: 60px;
   overflow-y: auto;
   font-size: 1.4em;
 }
 .edit-group {
   padding: 5px;
-  height: 100%;
 }
 .edit-input {
   display: block;
-  width: 85%;
+  width: 300px;
   border: none;
   border-bottom: 1px solid #757575;
   background-color: #ddd;

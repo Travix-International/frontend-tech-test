@@ -29,8 +29,8 @@ const executer = async (request) => {
 };
 
 export default {
-    getTodos(params) {
-      const req = request('GET', '/tasks/');
+    getTodos({length, offset}) {
+      const req = request('GET', '/tasks/', length + "/" + offset);
       return executer(req);
     },
     addTodo(params) {

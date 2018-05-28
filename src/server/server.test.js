@@ -5,12 +5,12 @@ const app = require('./server');
 describe('Test the root path', () => {
 
     it('should fetch tasks', async () => {
-      const response = await request(app).get('/tasks');
+      const response = await request(app).get('/tasks/20/0');
       expect(response.statusCode).toBe(200);
     });
 
     it('It should update item', async () => {
-      const tasks = (await request(app).get('/tasks')).body.tasks;
+      const tasks = (await request(app).get('/tasks/20/0')).body.tasks;
       if(tasks.length > 0){
           const newTitle = "new title";
           const task = tasks[0];

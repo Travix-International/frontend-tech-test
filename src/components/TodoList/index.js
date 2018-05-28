@@ -6,19 +6,21 @@ import TodoList from './TodoListComponent'
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchTodos: () => {
-          dispatch(Actions.fetchTodos());
+        fetchTodos: (len, offset) => {
+          dispatch(Actions.fetchTodos(len, offset));
         },
         createNewEmptyTodo: (tasks) =>{
           dispatch(Actions.newEmptyTodo(tasks));
+        },
+        handleSocketMessage: (msg) => {
+          dispatch(Actions.handleSocketMessage(msg));
         }
     };
 };
 
 const mapStateToProps = ( state ) => {
   return {
-    tasks: state.todos.tasks,
-    toastMessage:state.toastMessage
+    tasks: state.todos.tasks
   }
 };
 

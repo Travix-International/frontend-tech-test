@@ -2,15 +2,15 @@ import * as Constants from '../constants';
 
 
 const todos = (state = { tasks:[] }, action) => {
-    const { type, tasks } = action;
+    const { type } = action;
     switch (type) {
     case Constants.LIST_TODOS:
       return {
-        tasks
+        tasks: state.tasks.concat(action.tasks)
       };
     case Constants.EMPTY_TODO:
       return {
-        tasks:[
+        tasks: [
             {
               id: Math.random() * 999,
               title:"",
@@ -18,21 +18,27 @@ const todos = (state = { tasks:[] }, action) => {
               isEditable: true,
               isNew: true
             },
-            ...tasks,
-          ]
+            ...state.tasks
+        ]
       }
-    case Constants.DELETED_SUCCESSFULLY:
-      return {tasks:state.tasks.filter(todo => todo.id !== action.id)};
     case Constants.DELETE_TODO_LOCALLY:
       return {tasks:state.tasks.filter(todo => todo.id !== action.id)};
-    // case Constants.SHOW_TOAST:
-    //   return {
-    //     tasks:state.tasks,
-    //     toastMessage: {
-    //       message: toastMessage.message,
-    //       messageType: toastMessage.type
-    //     }
-    //   };
+    case Constants.ADDED_SUCCESSFULLY:
+      return {tasks:state.tasks.filter(todo => todo.id !== action.id)};
+    case Constants.SOCKET_MESSAGE:
+      const msg = action.msg;
+      const updatedTask = msg.data;
+      let tasks = state.tasks;
+      if(msg.action === "update"){
+       return {tasks: tasks.map(
+          (el)=> el.id === updatedTask.id ? Object.assign({}, updatedTask, {}) : el
+        )}
+      }else if (msg.action === "delete"){
+        return {tasks:tasks.filter(item => item.id !== updatedTask)};
+      }else if (msg.action === "create"){
+        return {tasks:[updatedTask,...tasks]};
+      }
+      break;
     default:
         return state;
     }

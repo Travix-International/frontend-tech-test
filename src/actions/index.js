@@ -10,9 +10,9 @@ export const addTodo = (task) => ({
   task
 });
 
-export const addedSuccessfully = (payload) => ({
+export const addedSuccessfully = (id) => ({
   type: Constants.ADDED_SUCCESSFULLY,
-  payload
+  id
 });
 
 export const updateTodo = (task) => ({
@@ -20,20 +20,12 @@ export const updateTodo = (task) => ({
   task
 });
 
-export const updatedSuccessfully = (payload) => ({
-  type: Constants.UPDATED_SUCCESSFULLY,
-  payload
-});
 
 export const deleteTodo = (id) => ({
   type: Constants.DELETE_TODO,
   id
 });
 
-export const deletedSuccessfully = (id) => ({
-  type: Constants.DELETED_SUCCESSFULLY,
-  id
-});
 
 export const deleteTodoLocally = (id) => ({
   type: Constants.DELETE_TODO_LOCALLY,
@@ -41,9 +33,10 @@ export const deleteTodoLocally = (id) => ({
 });
 
 
-export const fetchTodos = (payload) => ({
+export const fetchTodos = (length, offset) => ({
     type: Constants.FETCH_TODOS,
-    payload
+    length,
+    offset
 });
 
 export const getTodoList = (payload) => ({
@@ -58,4 +51,9 @@ export const showMessage = (toastMessage) => ({
 
 export const markMessageAsRead = () => ({
   type: Constants.MARK_MESSAGE_AS_READ
+});
+
+export const handleSocketMessage = (msg) => ({
+  type: Constants.SOCKET_MESSAGE,
+  msg
 });

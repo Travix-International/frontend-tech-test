@@ -12,7 +12,7 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
   });
-  ws.send('connection established');
+
 });
 wss.broadcast = function broadcast(data) {
   wss.clients.forEach(function each(client) {
@@ -27,8 +27,11 @@ wss.broadcast = function broadcast(data) {
  *
  * Return the list of tasks with status code 200.
  */
-app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
+app.get('/tasks/:length/:offset', (req, res) => {
+  const length = parseInt(req.params.length);
+  const offset = parseInt(req.params.offset);
+  const result = {tasks:tasksContainer.tasks.slice(offset, offset + length)};
+  return res.status(200).json(result);
 });
 
 /**
@@ -86,7 +89,7 @@ app.put('/task/update/:id/:title/:description/:isComplete', (req, res) => {
       task.title = req.params.title;
       task.description = req.params.description;
       task.isComplete = req.params.isComplete;
-      wss.broadcast({status:"update"})
+      wss.broadcast({action:"update",data:task})
       return res.status(200).json({
         message: 'Updated successfully',
       });;
@@ -118,8 +121,8 @@ app.post('/task/create/:title/:description', (req, res) => {
     description: req.params.description,
   };
 
-  tasksContainer.tasks.push(task);
-  wss.broadcast({status:"update"})
+  tasksContainer.tasks = [task,...tasksContainer.tasks];
+  wss.broadcast({action:"create",data:task})
 
   return res.status(201).json({
     message: 'Resource created',
@@ -144,7 +147,7 @@ app.delete('/task/delete/:id', (req, res) => {
     if (taskIndex > -1) {
       // const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
-      wss.broadcast({status:"update"})
+      wss.broadcast({action:"delete",data:id})
 
       return res.status(200).json({
         message: 'Deleted successfully',
