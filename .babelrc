@@ -1,0 +1,8 @@
+{
+  "presets": [
+    "travix",
+  ],
+  "env": {
+    "presets": ["react-hmre"],
+  }
+}

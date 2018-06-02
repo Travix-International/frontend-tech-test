@@ -1,11 +1,21 @@
 'use strict';
 
+const webpack = require('webpack');
+const config = require('./webpack.config.js');
+
+const compiler = webpack(config);
+const path = require('path');
+
+const express = require('express');
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
 
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, './src/index.html'));
+});
 /**
  * GET /tasks
- * 
+ *
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
@@ -14,11 +24,11 @@ app.get('/tasks', (req, res) => {
 
 /**
  * Get /task/:id
- * 
+ *
  * id: Number
- * 
+ *
  * Return the task for the given id.
- * 
+ *
  * If found return status code 200 and the resource.
  * If not found return status code 404.
  * If id is not valid number return status code 400.
@@ -47,11 +57,11 @@ app.get('/task/:id', (req, res) => {
 
 /**
  * PUT /task/update/:id/:title/:description
- * 
+ *
  * id: Number
  * title: string
  * description: string
- * 
+ *
  * Update the task with the given id.
  * If the task is found and update as well, return a status code 204.
  * If the task is not found, return a status code 404.
@@ -81,10 +91,10 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
 
 /**
  * POST /task/create/:title/:description
- * 
+ *
  * title: string
  * description: string
- * 
+ *
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
@@ -104,9 +114,9 @@ app.post('/task/create/:title/:description', (req, res) => {
 
 /**
  * DELETE /task/delete/:id
- * 
+ *
  * id: Number
- * 
+ *
  * Delete the task linked to the  given id.
  * If the task is found and deleted as well, return a status code 204.
  * If the task is not found, return a status code 404.
@@ -117,7 +127,7 @@ app.delete('/task/delete/:id', (req, res) => {
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-  
+
     if (task !== null) {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
@@ -139,3 +149,11 @@ app.delete('/task/delete/:id', (req, res) => {
 app.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });
+
+app.use('/static', express.static(path.resolve(__dirname, 'static')));
+
+app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+}));
+app.use(require('webpack-hot-middleware')(compiler));
