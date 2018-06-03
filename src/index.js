@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { render } from 'react-dom'
+import { Provider } from 'react-redux';
+import configureStore from './store';
+import App from './components/app';
 
-class App extends React.Component {
-    render(){
-        return(
-            <div>
-                <h1>Project set up</h1>
-            </div>
-        )
-    }
-}
+const store = configureStore();
 
-ReactDOM.render(<App />, document.getElementById('root'));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
