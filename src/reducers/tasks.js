@@ -2,13 +2,13 @@ import axios from "axios";
 /////////////////CONSTANTS/////////////////////
 const GET_ALL_TASKS = "GET_ALL_TASKS";
 const POST_TASK = "POST_TASK";
-const EDIT_TASK = "EDIT_TASK";
+const UPDATE_TASK = "UPDATE_TASK";
 const DELETE_TASK = "DELETE_TASK";
 /////////////////ACTIONS//////////////
 const getTasks = (tasks) => ({type: GET_ALL_TASKS, tasks});
 let nextTodoId = 0;
 const addTask = (task) => ({type: POST_TASK, id: nextTodoId++, task});
-const taskEdit = (id) => ({type: EDIT_TASK, id });
+const taskUpdate = (id, task) => ({type: UPDATE_TASK, id });
 const taskDelete = (id) => ({type: DELETE_TASK, id});
 /////////////////REDUCER/////////////////////
 //initiate your starting state
@@ -25,7 +25,7 @@ const reducer = (state = initial, action) => {
       task['id'] = id;
       let updatedTasks = [task].concat(state.tasks);
       return Object.assign({}, state, {tasks: updatedTasks, id:id});
-    case EDIT_TASK:
+    case UPDATE_TASK:
       let newArr = state.tasks.map((task) => {
         if(task.id === action.id) {
           task.title = prompt('Please, choose the new title');
@@ -66,7 +66,7 @@ export const getAllTasks = () => dispatch => {
 
 export const postNewTask = (task, description) => dispatch => {
   dispatch(addTask({title: task, description: description }));
-  axios.post(`/task/create/${task}/${description}`, {type_slug: "tasks", title: task, content: "New Task"})
+  axios.post(`/task/create/${task}/${description}`)
     .then((response) => {
       console.log(response.data);
     })
@@ -75,10 +75,11 @@ export const postNewTask = (task, description) => dispatch => {
     })
 };
 
-export const editTask = (id) => (dispatch) => {
-  dispatch(taskEdit(id));
-
-  axios.put(`/task/update/${id}/${task}/${description}`, {title: title, description:description })
+export const editTask = (id, task) => (dispatch) => {
+  dispatch(taskUpdate(id));
+  const title = task.title;
+  const description = task.description;
+  axios.put(`/task/update/${id}/${title}/${description}`)
     .then((response) => {
       console.log(response.data);
     })
@@ -93,7 +94,7 @@ export const deleteTask = (id) => dispatch => {
   dispatch(taskDelete(id));
 console.log(id);
 
-  axios.delete(`/task/delete/${id}`, {id: id })
+  axios.delete(`/task/delete/${id}`)
     .then((response) => {
     console.log(response.data)
     })

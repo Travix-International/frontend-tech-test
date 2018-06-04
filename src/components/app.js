@@ -45,7 +45,7 @@ class App extends Component {
         </div>
       </div>
       <div className="container">
-      { console.log(this.props.tasks)}
+      
         {
             this.props.tasks && this.props.tasks.tasks.map((task) => {
             return (
