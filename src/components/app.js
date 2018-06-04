@@ -16,16 +16,21 @@ class App extends Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12">
-              <h1>Travix Todo List</h1>
+              <h1>Todo List</h1>
               <form onSubmit={evt => {
                evt.preventDefault();
-               this.props.postNewTask(evt.target.taskName.value);
+               this.props.postNewTask(evt.target.taskName.value,evt.target.taskDescription.value);
                evt.target.taskName.value = "";
+               evt.target.taskDescription.value = "";
               }
              }>
               <div className="form-group">
-              <label for="exampleInputEmail1">Add New To-Do</label>
+              <label for="exampleInputEmail1">Add New Task</label>
               <input name="taskName" placeholder="Enter new task" />
+              </div>
+              <div className="form-group">
+              <label for="todoDescription">Add description</label>
+              <input name="taskDescription" placeholder="Enter description" />
               </div>
               <button type="submit">Add</button>
             </form>
@@ -44,7 +49,7 @@ class App extends Component {
         {
             this.props.tasks && this.props.tasks.tasks.map((task) => {
             return (
-              <Task key={task._id} Obj={task} isComplete={task.metafields[0].value} Name={task.title}/>
+              <Task id={task.id} Obj={task} Name={task.title} Description={task.description}/>
             )
           })
         }

@@ -2,13 +2,14 @@ import axios from "axios";
 /////////////////CONSTANTS/////////////////////
 const GET_ALL_TASKS = "GET_ALL_TASKS";
 const POST_TASK = "POST_TASK";
-const CHANGE_STATUS = "CHANGE_STATUS";
+const EDIT_TASK = "EDIT_TASK";
 const DELETE_TASK = "DELETE_TASK";
 /////////////////ACTIONS//////////////
 const getTasks = (tasks) => ({type: GET_ALL_TASKS, tasks});
-const addTask = (task) => ({type: POST_TASK, task});
-const changeStatus = (task) => ({type: CHANGE_STATUS, task});
-const taskDelete = (slug) => ({type: DELETE_TASK, slug});
+let nextTodoId = 0;
+const addTask = (task) => ({type: POST_TASK, id: nextTodoId++, task});
+const taskEdit = (id) => ({type: EDIT_TASK, id });
+const taskDelete = (id) => ({type: DELETE_TASK, id});
 /////////////////REDUCER/////////////////////
 //initiate your starting state
 let initial = {
@@ -19,17 +20,24 @@ const reducer = (state = initial, action) => {
     case GET_ALL_TASKS:
       return Object.assign({}, state, {tasks: action.tasks.objects});
     case POST_TASK:
-      let updatedTasks = [action.task].concat(state.tasks);
-      return Object.assign({}, state, {tasks: updatedTasks});
-    case CHANGE_STATUS:
+      let id = action.id;
+      let task = action.task;
+      task['id'] = id;
+      let updatedTasks = [task].concat(state.tasks);
+      return Object.assign({}, state, {tasks: updatedTasks, id:id});
+    case EDIT_TASK:
       let newArr = state.tasks.map((task) => {
-        if(task.slug === action.task.slug) task.metafields[0].value = !task.metafields[0].value;
+        if(task.id === action.id) {
+          task.title = prompt('Please, choose the new title');
+          task.description = prompt('Please, choose the new description');
+        };
         return task;
       });
       return Object.assign({}, state, {tasks: newArr});
     case DELETE_TASK:
+
       let arr = state.tasks.filter((task) => {
-        return !(task.slug === action.slug);
+        return !(task.id === action.id);
       });
       return Object.assign({}, state, {tasks: arr});
     default:
@@ -56,17 +64,9 @@ export const getAllTasks = () => dispatch => {
     })
 };
 
-export const postNewTask = (task) => dispatch => {
-  dispatch(addTask({title: task, metafields: [{value: false}], slug: formatSlug(task)}));
-  axios.post(`/task/create/{title}/{content}`, {type_slug: "tasks", title: task, content: "New Task",
-    metafields: [
-      {
-        title: "Is Complete",
-        key: "is_complete",
-        value: false,
-        type: "text"
-      }
-    ]})
+export const postNewTask = (task, description) => dispatch => {
+  dispatch(addTask({title: task, description: description }));
+  axios.post(`/task/create/${task}/${description}`, {type_slug: "tasks", title: task, content: "New Task"})
     .then((response) => {
       console.log(response.data);
     })
@@ -75,17 +75,10 @@ export const postNewTask = (task) => dispatch => {
     })
 };
 
-export const putChangeStatus = (task, bool) => (dispatch) => {
-  dispatch(changeStatus(task));
-  axios.put(`https://api.cosmicjs.com/v1/your-bucket-slug-name/edit-object`, {slug: task.slug,
-    metafields: [
-      {
-        title: "Is Complete",
-        key: "is_complete",
-        value: !bool,
-        type: "text"
-      }
-    ]})
+export const editTask = (id) => (dispatch) => {
+  dispatch(taskEdit(id));
+
+  axios.put(`/task/update/${id}/${task}/${description}`, {title: title, description:description })
     .then((response) => {
       console.log(response.data);
     })
@@ -94,18 +87,17 @@ export const putChangeStatus = (task, bool) => (dispatch) => {
     })
 };
 
-export const deleteTask = (slug) => (dispatch) => {
-  dispatch(taskDelete(slug));
-  axios.delete(`https://api.cosmicjs.com/v1/your-bucket-slug-name/${slug}`)
+export const deleteTask = (id) => dispatch => {
+
+
+  dispatch(taskDelete(id));
+console.log(id);
+
+  axios.delete(`/task/delete/${id}`, {id: id })
     .then((response) => {
     console.log(response.data)
     })
     .catch((err) => {
       console.error.bind(err);
     })
-};
-
-const formatSlug = (title) => {
-  let lower = title.toLowerCase();
-  return lower.split(" ").join("-");
 };

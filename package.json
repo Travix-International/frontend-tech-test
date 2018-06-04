@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "build": "webpack",
     "dev": "webpack-dev-server",
-    "start": "babel-node server.js"
+    "start": "webpack && babel-node server.js"
   },
   "keywords": [
     "test",
