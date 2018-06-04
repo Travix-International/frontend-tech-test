@@ -1,56 +1,59 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-
-import { bindActionCreators } from 'redux';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { getAllTasks, postNewTask } from '../reducers/tasks';
+import Task from './task';
 
-import TodoList from './todoList';
-import AddTask from './addTask';
-import * as TaskActions from '../actions/taskActions';
-
-
-
-
-class App extends React.Component {
-
-    render(){
-
-      const { tasks, actions } = this.props;
-        return(
-
-          <div className="app">
-            <h3 className="text-center"> Todo List </h3>
-            <AddTask add={ actions.addTask } />
-            <div className="container">
-              <TodoList tasks={ tasks } remove={ actions.removeTask } />
-            </div>
+class App extends Component {
+  constructor(props){
+    super(props);
+  }
+  componentDidMount(){
+    getAllTasks();
+  }
+  render() {
+    return (
+      <div>
+        <div className="container">
+          <div className="row">
+            <div className="col-xs-12">
+              <h1>Travix Todo List</h1>
+              <form onSubmit={evt => {
+               evt.preventDefault();
+               this.props.postNewTask(evt.target.taskName.value);
+               evt.target.taskName.value = "";
+              }
+             }>
+              <div className="form-group">
+              <label for="exampleInputEmail1">Add New To-Do</label>
+              <input name="taskName" placeholder="Enter new task" />
+              </div>
+              <button type="submit">Add</button>
+            </form>
           </div>
-
-
-        )
-    }
-
-}
-
-App.propTypes = {
-  tasks: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
-}
-
-function mapStateToProps(state) {
-  return {
-    tasks: state.tasks
+        </div>
+      </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-12">
+            <h3>You have {this.props.tasks.tasks.length} tasks</h3>
+          </div>
+        </div>
+      </div>
+      <div className="container">
+      { console.log(this.props.tasks)}
+        {
+            this.props.tasks && this.props.tasks.tasks.map((task) => {
+            return (
+              <Task key={task._id} Obj={task} isComplete={task.metafields[0].value} Name={task.title}/>
+            )
+          })
+        }
+      </div>
+      </div>
+    )
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(TaskActions, dispatch)
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+const mapState = ({tasks}) => ({tasks});
+const mapDispatch = {getAllTasks, postNewTask};
+export default connect(mapState, mapDispatch)(App);
