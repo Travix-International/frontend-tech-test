@@ -1,31 +1,23 @@
 import axios from "axios";
-/////////////////CONSTANTS/////////////////////
-const GET_ALL_TASKS = "GET_ALL_TASKS";
-const POST_TASK = "POST_TASK";
-const UPDATE_TASK = "UPDATE_TASK";
-const DELETE_TASK = "DELETE_TASK";
-/////////////////ACTIONS//////////////
-const getTasks = (tasks) => ({type: GET_ALL_TASKS, tasks});
-let nextTodoId = 0;
-const addTask = (task) => ({type: POST_TASK, id: nextTodoId++, task});
-const taskUpdate = (id, task) => ({type: UPDATE_TASK, id });
-const taskDelete = (id) => ({type: DELETE_TASK, id});
-/////////////////REDUCER/////////////////////
-//initiate your starting state
+import { getTasks, addTask, taskUpdate, taskDelete } from '../actions/taskActions';
+import * as types from '../constants/appConstants';
+
+/////////////// CONFIGURING REDUCER ///////////////////
+
 let initial = {
   tasks: []
 };
 const reducer = (state = initial, action) => {
   switch (action.type) {
-    case GET_ALL_TASKS:
+    case types.GET_ALL_TASKS:
       return Object.assign({}, state, {tasks: action.tasks.tasks});
-    case POST_TASK:
+    case types.POST_TASK:
       let id = action.id;
       let task = action.task;
       task['id'] = id;
       let updatedTasks = [task].concat(state.tasks);
       return Object.assign({}, state, {tasks: updatedTasks, id:id});
-    case UPDATE_TASK:
+    case types.UPDATE_TASK:
       let newArr = state.tasks.map((task) => {
         if(task.id === action.id) {
           task.title = prompt('Please, choose the new title');
@@ -34,7 +26,7 @@ const reducer = (state = initial, action) => {
         return task;
       });
       return Object.assign({}, state, {tasks: newArr});
-    case DELETE_TASK:
+    case types.DELETE_TASK:
 
       let arr = state.tasks.filter((task) => {
         return !(task.id === action.id);
