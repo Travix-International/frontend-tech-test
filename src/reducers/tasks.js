@@ -18,7 +18,7 @@ let initial = {
 const reducer = (state = initial, action) => {
   switch (action.type) {
     case GET_ALL_TASKS:
-      return Object.assign({}, state, {tasks: action.tasks.objects});
+      return Object.assign({}, state, {tasks: action.tasks.tasks});
     case POST_TASK:
       let id = action.id;
       let task = action.task;
