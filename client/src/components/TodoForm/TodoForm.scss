@@ -1,0 +1,25 @@
+form {
+  margin-bottom: 20px;
+}
+
+.TodoForm {
+  padding: 12px;
+  border: 1px solid #ced4da;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+.btn {
+  width: 100%;
+  border-radius: 0;
+}
+
+
+p.error {
+  color: red;
+  margin: 0;
+  font-size: .8rem;
+}
