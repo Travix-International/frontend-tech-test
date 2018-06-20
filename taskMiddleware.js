@@ -1,3 +1,5 @@
+'use strict';
+
 const { tasks } = require('./tasks.json');
 
 /**
