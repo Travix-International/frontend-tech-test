@@ -1,7 +1,7 @@
 'use strict';
 
 const app = require('express')();
-const tasksContainer = require('./tasks.json');
+const { tasks } = require('./tasks.json');
 const taskMiddleware = require('./taskMiddleware');
 
 /**
@@ -10,7 +10,9 @@ const taskMiddleware = require('./taskMiddleware');
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
+  return res.status(200).json({
+    tasks,
+  });
 });
 
 /**
@@ -54,17 +56,17 @@ app.put('/task/update/:id/:title/:description', taskMiddleware, (req, res) => {
  * title: string
  * description: string
  * 
- * Add a new task to the array tasksContainer.tasks with the given title and description.
+ * Add a new task to the array taskContainer.tasks with the given title and description.
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: tasks.length,
     title: req.params.title,
     description: req.params.description,
   };
 
-  tasksContainer.tasks.push(task);
+  tasks.push(task);
 
   return res.status(201).json({
     message: 'Resource created',
@@ -81,11 +83,11 @@ app.post('/task/create/:title/:description', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/task/delete/:id', (req, res) => {
-  const taskIndex = tasksContainer.tasks.indexOf(res.locals.task);
+app.delete('/task/delete/:id', taskMiddleware, (req, res) => {
+  const taskIndex = tasks.indexOf(res.locals.task);
   // Check for valid taskIndex
   if (taskIndex !== -1) {
-    tasksContainer.tasks.splice(taskIndex, 1);
+    tasks.splice(taskIndex, 1);
     return res.status(200).json({
       message: 'Updated successfully',
     });
