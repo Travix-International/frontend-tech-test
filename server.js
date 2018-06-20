@@ -29,7 +29,7 @@ app.get('/task/:id', (req, res) => {
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find((item) => parseInt(item.id, 10) === id);
 
-    if (task !== null) {
+    if (task !== undefined) {
       return res.status(200).json({
         task,
       });
