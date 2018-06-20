@@ -119,13 +119,19 @@ app.delete('/task/delete/:id', (req, res) => {
     const task = tasksContainer.tasks.find(item => item.id === id);
   
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
-      return res.status(200).json({
-        message: 'Updated successfully',
-      });
+      const taskIndex = tasksContainer.tasks.indexOf(task);
+      if (taskIndex !== -1) {
+        tasksContainer.tasks.splice(taskIndex, 1);
+        return res.status(200).json({
+          message: 'Updated successfully',
+        });
+      } else {
+        return res.status(404).json({
+          message: 'Not found',
+        });
+      }
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
       });
     }
