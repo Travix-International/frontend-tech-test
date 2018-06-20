@@ -27,7 +27,7 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find((item) => parseInt(item.id, 10) === id);
+    const task = tasksContainer.tasks.find((item) => item.id === id);
 
     if (task !== undefined) {
       return res.status(200).json({
