@@ -3,6 +3,10 @@
 const app = require('express')();
 const { tasks } = require('./tasks.json');
 const taskMiddleware = require('./taskMiddleware');
+const cors = require('cors');
+
+// Enable cors
+app.use(cors());
 
 /**
  * GET /tasks
