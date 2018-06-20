@@ -2,6 +2,7 @@
 
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
+const taskMiddleware = require('./taskMiddleware');
 
 /**
  * GET /tasks
@@ -23,26 +24,10 @@ app.get('/tasks', (req, res) => {
  * If not found return status code 404.
  * If id is not valid number return status code 400.
  */
-app.get('/task/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
-
-  if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find((item) => item.id === id);
-
-    if (task !== undefined) {
-      return res.status(200).json({
-        task,
-      });
-    } else {
-      return res.status(404).json({
-        message: 'Not found.',
-      });
-    }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request.',
-    });
-  }
+app.get('/task/:id', taskMiddleware, (req, res) => {
+  return res.status(200).json({
+    task: res.locals.task,
+  });
 });
 
 /**
@@ -57,26 +42,10 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
-  const id = parseInt(req.params.id, 10);
-
-  if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-
-    if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
-      return res.status(204);
-    } else {
-      return res.status(404).json({
-        message: 'Not found',
-      });
-    }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request',
-    });
-  }
+app.put('/task/update/:id/:title/:description', taskMiddleware, (req, res) => {
+  res.locals.task.title = req.params.title;
+  res.locals.task.description = req.params.description;
+  return res.status(204);
 });
 
 /**
@@ -113,33 +82,18 @@ app.post('/task/create/:title/:description', (req, res) => {
  * If the provided id is not a valid number return a status code 400.
  */
 app.delete('/task/delete/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
-
-  if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-  
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks.indexOf(task);
-      if (taskIndex !== -1) {
-        tasksContainer.tasks.splice(taskIndex, 1);
-        return res.status(200).json({
-          message: 'Updated successfully',
-        });
-      } else {
-        return res.status(404).json({
-          message: 'Not found',
-        });
-      }
-    } else {
-      return res.status(404).json({
-        message: 'Not found',
-      });
-    }
-  } else {
-    return res.status(400).json({
-      message: 'Bad request',
+  const taskIndex = tasksContainer.tasks.indexOf(res.locals.task);
+  // Check for valid taskIndex
+  if (taskIndex !== -1) {
+    tasksContainer.tasks.splice(taskIndex, 1);
+    return res.status(200).json({
+      message: 'Updated successfully',
     });
   }
+  // taskIndex is invalid
+  return res.status(404).json({
+    message: 'Not found',
+  });
 });
 
 app.listen(9001, () => {
