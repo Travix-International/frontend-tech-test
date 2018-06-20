@@ -1,20 +1,38 @@
 const React = require('react');
 const { connect } = require('react-redux');
 const Task = require('../components/Task');
+const { listTasks } = require('../actions');
 
-const List = ({ tasks }) => (
-  <ul>
-    {tasks.map((task, index) => (
-      <Task
-        key={index}
-        {...task}
-      />
-    ))}
-  </ul>
-);
+class List extends React.Component {
+  componentDidMount () {
+    this.props.listTasks();
+  }
+  
+  render() {
+    return (
+      <ul>
+        {this.props.tasks.map((task, index) => (
+          <Task
+            key={index}
+            {...task}
+          />
+        ))}
+      </ul>
+    )
+  }
+};
 
 const mapStateToProps = state => ({
   tasks: state.tasks,
 });
 
-module.exports = connect(mapStateToProps)(List);
+const mapDispatchToProps = dispatch => ({
+  listTasks() {
+    dispatch(listTasks());
+  },
+});
+
+module.exports = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(List);

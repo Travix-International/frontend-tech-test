@@ -15,6 +15,11 @@ const reducers = (state = defaultState, action) => {
           },
         ],
       };
+    case 'LIST_TASKS':
+      return {
+        ...state,
+        tasks: action.data,
+      };
     default:
       return state;
   }
