@@ -18,9 +18,9 @@ const CreateTask = ({ dispatch }) => {
         }
       }}
     >
-      <label for="title">Title</label>
+      <label htmlFor="title">Title</label>
       <input id="title" ref={el => titleElement = el} />
-      <label for="description">Description</label>
+      <label htmlFor="description">Description</label>
       <textarea id="description" ref={el => descriptionElement = el}></textarea>
       <button type="submit">Create</button>
     </form>

@@ -2,14 +2,14 @@ const { get, post } = require('axios');
 
 const baseURL = '//localhost:9001';
 
-export const createTask = ({ title, description }) => {
-  post(`${baseURL}/task/create/${title}/${description}`);
-  return {
-    type: 'CREATE_TASK',
-    title,
-    description,
-  };
-};
+export const createTask = ({ title, description }) => (dispatch) => (
+  post(`${baseURL}/task/create/${title}/${description}`)
+    .then(res => dispatch({
+      type: 'CREATE_TASK',
+      data: res.data.task,
+    }))
+    .then(() => dispatch(listTasks()))
+);
 
 export const listTasks = () => (dispatch) => (
   get(`${baseURL}/tasks`)

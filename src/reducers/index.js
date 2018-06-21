@@ -9,10 +9,7 @@ const reducers = (state = defaultState, action) => {
         ...state,
         tasks: [
           ...state.tasks,
-          {
-            title: action.title,
-            description: action.description,
-          },
+          action,
         ],
       };
     case 'LIST_TASKS':

@@ -1,10 +1,12 @@
 const React = require('react');
+const { connect } = require('react-redux');
+const { updateTask } = require('../actions');
 
-const Task = ({ title, description }) => (
+const Task = ({ id, title, description }) => (
   <li>
-    <p>title: {title}</p>
-    <p>description: {description}</p>
+    <header>({id}) {title}</header>
+    <p>{description}</p>
   </li>
 );
 
-module.exports = Task;
+module.exports = connect()(Task);
