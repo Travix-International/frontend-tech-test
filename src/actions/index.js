@@ -19,13 +19,15 @@ export const deleteTask = (id) => (dispatch) => {
   });
 };
 
-export const updateTask = ({ id, title, description }) => (dispatch) => (
+export const updateTask = ({ id, title, description }) => (dispatch) => {
   axios.put(`${baseURL}/task/update/${id}/${title}/${description}`)
-    .then(res => dispatch({
-      type: 'UPDATE_TASK',
-      id,
-    }))
-);
+  return dispatch({
+    type: 'UPDATE_TASK',
+    id,
+    title,
+    description,
+  });
+};
 
 export const listTasks = () => (dispatch) => (
   axios.get(`${baseURL}/tasks`)

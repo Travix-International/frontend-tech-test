@@ -17,6 +17,11 @@ const reducers = (state = initialState, action) => {
         ...state,
         tasks: state.tasks.filter(task => task.id !== action.id),
       };
+    case 'UPDATE_TASK':
+      return {
+        ...state,
+        tasks: state.tasks.map(task => task.id === action.id ? action : task),
+      };
     case 'LIST_TASKS':
       return {
         ...state,
