@@ -15,7 +15,7 @@ export const deleteTask = (id) => (dispatch) => {
   axios.delete(`${baseURL}/task/delete/${id}`);
   return dispatch({
     type: 'DELETE_TASK',
-    id,
+    data: { id },
   });
 };
 
@@ -23,9 +23,11 @@ export const updateTask = ({ id, title, description }) => (dispatch) => {
   axios.put(`${baseURL}/task/update/${id}/${title}/${description}`)
   return dispatch({
     type: 'UPDATE_TASK',
-    id,
-    title,
-    description,
+    data: {
+      id,
+      title,
+      description,
+    },
   });
 };
 

@@ -15,12 +15,12 @@ const reducers = (state = initialState, action) => {
     case 'DELETE_TASK':
       return {
         ...state,
-        tasks: state.tasks.filter(task => task.id !== action.id),
+        tasks: state.tasks.filter(task => task.id !== action.data.id),
       };
     case 'UPDATE_TASK':
       return {
         ...state,
-        tasks: state.tasks.map(task => task.id === action.id ? action : task),
+        tasks: state.tasks.map(task => task.id === action.data.id ? action.data : task),
       };
     case 'LIST_TASKS':
       return {
