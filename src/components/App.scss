@@ -25,6 +25,11 @@
   }
 }
 
+main {
+  position: relative;
+  padding: 1.5rem 1rem;
+}
+
 @media (min-width: 1024px) {
   body {
     padding-left: 512px;
@@ -36,5 +41,13 @@
     left: 0;
     top: 0;
     bottom: 0;
+  }
+  
+  main {
+    overflow: hidden;
+    margin-top: 0;
+    margin-bottom: 0;
+    min-width: 512px;
+    padding: 2rem 3rem;
   }
 }

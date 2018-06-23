@@ -8,7 +8,9 @@ const App = () => (
       <h1 className="banner__logo">Travix</h1>
       <CreateTask />
     </header>
-    <List />
+    <main>
+      <List />
+    </main>
   </div>
 );
 
