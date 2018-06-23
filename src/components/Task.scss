@@ -1,0 +1,60 @@
+.task {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  border-radius: .5rem;
+  background-color: #fff;
+  border: none;
+  margin: .5rem auto;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #888;
+  padding: 1rem 3rem;
+  position: relative;
+  
+  &--completed {
+    text-decoration: line-through;
+    background-color: transparent;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent .5rem, #fff .5rem, #fff 1rem);
+    color: lighten(#888, 20%);
+    
+    .task__title {
+      color: lighten(#888, 20%);
+    }
+  }
+      
+  &__title {
+    font-family: 'Varela Round';
+    color: #0087cd;
+    font-size: 1.5rem;
+  }
+  
+  &__description {
+    margin-bottom: 0;
+  }
+
+  &__toggleButton {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+
+  &__deleteButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    
+    svg {
+      fill: #888;
+    }
+    
+    &:active svg,
+    &:hover svg {
+      fill: darken(#888, 20%);
+    }
+  }
+}

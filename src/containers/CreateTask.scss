@@ -9,6 +9,7 @@
     width: 100%;
     max-width: 500px;
     border-radius: .5rem;
+    background-color: #fff;
     border: none;
     padding: 1rem;
     margin: .5rem auto;
@@ -35,7 +36,7 @@
     &:active,
     &:hover {
       background-color: #fff;
-      color: #0085d6;
+      color: #0087cd;
     }
   }
 }
