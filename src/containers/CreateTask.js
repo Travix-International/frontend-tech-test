@@ -22,11 +22,13 @@ const CreateTask = ({ dispatch }) => {
       <input
         className="createTask__title card"
         placeholder="Title"
+        required
         ref={el => titleElement = el}
       />
       <textarea
         className="createTask__description card"
         placeholder="Description"
+        required
         ref={el => descriptionElement = el}
       ></textarea>
       <button
