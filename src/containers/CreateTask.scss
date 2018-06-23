@@ -3,19 +3,10 @@
   display: block;
   padding: 1rem;
   
-  &__title,
-  &__description {
-    display: block;
-    width: 100%;
-    max-width: 500px;
-    border-radius: .5rem;
-    background-color: #fff;
-    border: none;
-    padding: 1rem;
-    margin: .5rem auto;
-    font-size: 1rem;
-    font-weight: 300;
-    color: #888;
+  &__title.card,
+  &__description.card {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   &__button {

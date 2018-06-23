@@ -8,9 +8,9 @@ const Task = ({ id, title, description, completed, dispatch }) => {
   let titleElement;
   let descriptionElement;
   return (
-    <li className={`task${completed ? ' task--completed' : ''}`}>
+    <li className={`card task${completed ? ' task--completed' : ''}`}>
       <header
-        className="task__title"
+        className="card__title"
         ref={el => titleElement = el}
         contentEditable={!completed}
         suppressContentEditableWarning={!completed}
@@ -21,7 +21,7 @@ const Task = ({ id, title, description, completed, dispatch }) => {
         }))}
       >{title}</header>
       <p
-        className="task__description"
+        className="card__description"
         ref={el => descriptionElement = el}
         contentEditable={!completed}
         suppressContentEditableWarning={!completed}

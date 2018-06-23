@@ -13,3 +13,34 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background-color: #f4f4f4;
 }
+
+.card {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  border-radius: .5rem;
+  background-color: #fff;
+  border: none;
+  margin: .5rem auto;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #888;
+  padding: 1rem 3rem;
+  position: relative;
+  
+  &__title {
+    font-family: 'Varela Round';
+    color: #0087cd;
+    font-size: 1.5rem;
+  }
+  
+  &__description {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    max-width: none;
+  }
+}

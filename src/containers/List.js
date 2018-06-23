@@ -1,6 +1,7 @@
 const React = require('react');
 const { connect } = require('react-redux');
 const Task = require('../components/Task');
+const NoResults = require('../components/NoResults');
 const { listTasks } = require('../actions');
 
 class List extends React.Component {
@@ -20,8 +21,7 @@ class List extends React.Component {
           ))}
         </ol>
       :
-        // Zero results
-        <p className="task--noTask">Seems like there are no tasks.</p>
+        <NoResults />
     )
   }
 };

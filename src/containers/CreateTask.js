@@ -20,12 +20,12 @@ const CreateTask = ({ dispatch }) => {
       }}
     >
       <input
-        className="createTask__title"
+        className="createTask__title card"
         placeholder="Title"
         ref={el => titleElement = el}
       />
       <textarea
-        className="createTask__description"
+        className="createTask__description card"
         placeholder="Description"
         ref={el => descriptionElement = el}
       ></textarea>
