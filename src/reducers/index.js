@@ -1,15 +1,15 @@
-const defaultState = {
+const initialState = {
   tasks: [],
 };
 
-const reducers = (state = defaultState, action) => {
+const reducers = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_TASK':
       return {
         ...state,
         tasks: [
           ...state.tasks,
-          action,
+          action.data,
         ],
       };
     case 'LIST_TASKS':

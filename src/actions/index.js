@@ -8,15 +8,14 @@ export const createTask = ({ title, description }) => (dispatch) => (
       type: 'CREATE_TASK',
       data: res.data.task,
     }))
-    .then(() => dispatch(listTasks()))
 );
 
 export const deleteTask = (id) => (dispatch) => (
   axios.delete(`${baseURL}/task/delete/${id}`)
     .then(res => dispatch({
       type: 'DELETE_TASK',
+      id,
     }))
-    .then(() => dispatch(listTasks()))
 );
 
 export const updateTask = ({ id, title, description }) => (dispatch) => (

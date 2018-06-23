@@ -51,9 +51,7 @@ app.get('/task/:id', taskMiddleware, (req, res) => {
 app.put('/task/update/:id/:title/:description', taskMiddleware, (req, res) => {
   res.locals.task.title = req.params.title;
   res.locals.task.description = req.params.description;
-  return res.status(201).json({
-    task: res.locals.task,
-  });
+  return res.status(204);
 });
 
 /**
@@ -75,7 +73,7 @@ app.post('/task/create/:title/:description', (req, res) => {
   tasks.push(task);
 
   return res.status(201).json({
-    message: 'Resource created',
+    task,
   });
 });
 
