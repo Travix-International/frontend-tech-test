@@ -1,0 +1,18 @@
+.task__deleteButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  
+  svg {
+    fill: #888;
+  }
+  
+  &:active svg,
+  &:hover svg {
+    fill: darken(#888, 20%);
+  }
+}

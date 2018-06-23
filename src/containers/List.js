@@ -11,14 +11,14 @@ class List extends React.Component {
   render() {
     return (
       this.props.tasks.length ?
-        <ul className="tasks">
+        <ol className="tasks">
           {this.props.tasks.map((task, index) => (
             <Task
               key={index}
               {...task}
             />
           ))}
-        </ul>
+        </ol>
       :
         // Zero results
         <p className="task--noTask">Seems like there are no tasks.</p>

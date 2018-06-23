@@ -3,12 +3,20 @@ const { connect } = require('react-redux');
 const { toggleTask } = require('../actions');
 
 const ToggleButton = ({ id, completed, dispatch }) => (
-  <input
-    className="task__toggleButton"
-    type="checkbox"
-    checked={completed}
-    onChange={() => dispatch(toggleTask(id))}
-  />
+  <div className="task__toggleButton">
+    <input
+      className="task__toggleButtonInput"
+      id="toggleButton"
+      type="checkbox"
+      hidden
+      checked={completed}
+      onChange={() => dispatch(toggleTask(id))}
+    />
+    <label
+      className="task__toggleButtonFake"
+      htmlFor="toggleButton"
+    />
+  </div>
 );
 
 module.exports = connect()(ToggleButton);

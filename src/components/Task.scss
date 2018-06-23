@@ -1,3 +1,6 @@
+@import "./ToggleButton.scss";
+@import "./DeleteButton.scss";
+
 .task {
   display: block;
   width: 100%;
@@ -11,6 +14,7 @@
   color: #888;
   padding: 1rem 3rem;
   position: relative;
+  transition: background-color 100ms linear;
   
   &--completed {
     text-decoration: line-through;
@@ -31,30 +35,5 @@
   
   &__description {
     margin-bottom: 0;
-  }
-
-  &__toggleButton {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-  }
-
-  &__deleteButton {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    padding: 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-    
-    svg {
-      fill: #888;
-    }
-    
-    &:active svg,
-    &:hover svg {
-      fill: darken(#888, 20%);
-    }
   }
 }
