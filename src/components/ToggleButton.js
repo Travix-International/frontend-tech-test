@@ -6,7 +6,7 @@ const ToggleButton = ({ id, completed, dispatch }) => (
   <div className="task__toggleButton">
     <input
       className="task__toggleButtonInput"
-      id="toggleButton"
+      id={`toggleButton-${id}`}
       type="checkbox"
       hidden
       checked={completed}
@@ -14,7 +14,7 @@ const ToggleButton = ({ id, completed, dispatch }) => (
     />
     <label
       className="task__toggleButtonFake"
-      htmlFor="toggleButton"
+      htmlFor={`toggleButton-${id}`}
     />
   </div>
 );
