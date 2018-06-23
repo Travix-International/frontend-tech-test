@@ -13,9 +13,3 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background-color: #f4f4f4;
 }
-
-@media (min-width: 1024px) {
-  body {
-    background-image: linear-gradient(to right, #0087cd, #0087cd 512px, #f4f4f4 512px, #f4f4f4);
-  }
-}

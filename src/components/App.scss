@@ -26,10 +26,15 @@
 }
 
 @media (min-width: 1024px) {
+  body {
+    padding-left: 512px;
+  }
+  
   .banner {
     width: 512px;
-    float: left;
-    // Delegate visual responsability to the body
-    background-image: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
   }
 }
