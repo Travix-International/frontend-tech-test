@@ -30,3 +30,14 @@
     }
   }
 }
+
+@media (min-width: 1024px) {
+  .task__toggleButton {
+    opacity: 0;
+    transition: opacity 100ms linear;
+    
+    @at-root .task:hover & {
+      opacity: 1;
+    }
+  }
+}

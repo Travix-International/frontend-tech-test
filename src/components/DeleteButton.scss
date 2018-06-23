@@ -16,3 +16,14 @@
     fill: darken(#888, 20%);
   }
 }
+
+@media (min-width: 1024px) {
+  .task__deleteButton {
+    opacity: 0;
+    transition: opacity 100ms linear;
+    
+    @at-root .task:hover & {
+      opacity: 1;
+    }
+  }
+}
