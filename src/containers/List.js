@@ -11,7 +11,7 @@ class List extends React.Component {
   render() {
     return (
       this.props.tasks.length ?
-        <ul>
+        <ul className="tasks">
           {this.props.tasks.map((task, index) => (
             <Task
               key={index}
@@ -21,7 +21,7 @@ class List extends React.Component {
         </ul>
       :
         // Zero results
-        <p>Seems like there are no tasks to do.</p>
+        <p className="task--noTask">Seems like there are no tasks.</p>
     )
   }
 };

@@ -6,8 +6,9 @@ const Task = ({ id, title, description, completed, dispatch }) => {
   let titleElement;
   let descriptionElement;
   return (
-    <li className={`task ${completed ? 'task--completed' : ''}`}>
+    <li className={`task${completed ? ' task--completed' : ''}`}>
       <header
+        className="task__title"
         ref={el => titleElement = el}
         contentEditable
         suppressContentEditableWarning
@@ -18,6 +19,7 @@ const Task = ({ id, title, description, completed, dispatch }) => {
         }))}
       >{title}</header>
       <p
+        className="task__description"
         ref={el => descriptionElement = el}
         contentEditable
         suppressContentEditableWarning
@@ -28,11 +30,13 @@ const Task = ({ id, title, description, completed, dispatch }) => {
         }))}
       >{description}</p>
       <input
+        className="task__toggleButton"
         type="checkbox"
         checked={completed}
         onChange={() => dispatch(toggleTask(id))}
       />
       <button
+        className="task__deleteButton"
         onClick={() => dispatch(deleteTask(id))}
       >Delete</button>
     </li>

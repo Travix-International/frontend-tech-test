@@ -7,6 +7,7 @@ const CreateTask = ({ dispatch }) => {
   let descriptionElement;
   return (
     <form
+      className="createTask"
       onSubmit={(event) => {
         event.preventDefault();
         const title = titleElement.value.trim();
@@ -18,11 +19,20 @@ const CreateTask = ({ dispatch }) => {
         }
       }}
     >
-      <label htmlFor="title">Title</label>
-      <input id="title" ref={el => titleElement = el} />
-      <label htmlFor="description">Description</label>
-      <textarea id="description" ref={el => descriptionElement = el}></textarea>
-      <button type="submit">Create</button>
+      <input
+        className="createTask__title"
+        placeholder="Title"
+        ref={el => titleElement = el}
+      />
+      <textarea
+        className="createTask__description"
+        placeholder="Description"
+        ref={el => descriptionElement = el}
+      ></textarea>
+      <button
+        className="createTask__button"
+        type="submit"
+      >Create task</button>
     </form>
   );
 };

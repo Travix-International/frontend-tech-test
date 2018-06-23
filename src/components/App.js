@@ -3,10 +3,14 @@ const CreateTask = require('../containers/CreateTask');
 const List = require('../containers/List');
 
 const App = () => (
-  <main>
-    <CreateTask />
+  <div>
+    <header role="banner">
+      <h1 className="banner__logo">Traxix</h1>
+      <h2 className="banner__title">We <strong>manage</strong> tasks</h2>
+      <CreateTask />
+    </header>
     <List />
-  </main>
+  </div>
 );
 
 module.exports = App;
