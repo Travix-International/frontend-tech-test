@@ -6,3 +6,13 @@
   list-style: none;
   border-radius: .5rem;
 }
+
+@media (min-width: 1024px) {
+  .tasks {
+    overflow: hidden;
+    margin-top: 0;
+    margin-bottom: 0;
+    min-width: 512px;
+    padding: 2rem 2rem 2rem 3rem;
+  }
+}
