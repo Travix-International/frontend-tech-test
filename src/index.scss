@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css?family=Muli:300|Varela+Round");
+@import "./components/App.scss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Muli', sans-serif;
+  margin: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

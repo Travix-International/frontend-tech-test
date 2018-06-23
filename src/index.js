@@ -6,6 +6,8 @@ const App = require('./components/App');
 const { Provider } = require('react-redux');
 const store = require('./store');
 
+require('./index.css');
+
 render(
   <Provider store={store}>
     <App />

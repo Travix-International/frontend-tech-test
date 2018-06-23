@@ -4,9 +4,8 @@ const List = require('../containers/List');
 
 const App = () => (
   <div>
-    <header role="banner">
-      <h1 className="banner__logo">Traxix</h1>
-      <h2 className="banner__title">We <strong>manage</strong> tasks</h2>
+    <header className="banner" role="banner">
+      <h1 className="banner__logo">Travix</h1>
       <CreateTask />
     </header>
     <List />
