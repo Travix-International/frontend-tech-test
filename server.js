@@ -9,6 +9,15 @@ const cors = require('cors');
 app.use(cors());
 
 /**
+ * GET /
+ * 
+ * Redirect to tasks
+ */
+app.get('/', (req, res) => {
+  return res.redirect('/tasks');
+});
+
+/**
  * GET /tasks
  * 
  * Return the list of tasks with status code 200.
