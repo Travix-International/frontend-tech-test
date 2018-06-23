@@ -4,19 +4,20 @@ const baseURL = '//localhost:9001';
 
 export const createTask = ({ title, description }) => (dispatch) => (
   axios.post(`${baseURL}/task/create/${title}/${description}`)
+    // Wait until the "id" is created
     .then(res => dispatch({
       type: 'CREATE_TASK',
       data: res.data.task,
     }))
 );
 
-export const deleteTask = (id) => (dispatch) => (
-  axios.delete(`${baseURL}/task/delete/${id}`)
-    .then(res => dispatch({
-      type: 'DELETE_TASK',
-      id,
-    }))
-);
+export const deleteTask = (id) => (dispatch) => {
+  axios.delete(`${baseURL}/task/delete/${id}`);
+  return dispatch({
+    type: 'DELETE_TASK',
+    id,
+  });
+};
 
 export const updateTask = ({ id, title, description }) => (dispatch) => (
   axios.put(`${baseURL}/task/update/${id}/${title}/${description}`)

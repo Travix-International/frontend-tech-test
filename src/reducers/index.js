@@ -12,6 +12,11 @@ const reducers = (state = initialState, action) => {
           action.data,
         ],
       };
+    case 'DELETE_TASK':
+      return {
+        ...state,
+        tasks: state.tasks.filter(task => task.id !== action.id),
+      };
     case 'LIST_TASKS':
       return {
         ...state,
