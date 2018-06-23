@@ -12,8 +12,8 @@ const Task = ({ id, title, description, completed, dispatch }) => {
       <header
         className="task__title"
         ref={el => titleElement = el}
-        contentEditable
-        suppressContentEditableWarning
+        contentEditable={!completed}
+        suppressContentEditableWarning={!completed}
         onBlur={() => dispatch(updateTask({
           id,
           title: titleElement.textContent.trim(),
@@ -23,8 +23,8 @@ const Task = ({ id, title, description, completed, dispatch }) => {
       <p
         className="task__description"
         ref={el => descriptionElement = el}
-        contentEditable
-        suppressContentEditableWarning
+        contentEditable={!completed}
+        suppressContentEditableWarning={!completed}
         onBlur={() => dispatch(updateTask({
           id,
           title: titleElement.textContent.trim(),
