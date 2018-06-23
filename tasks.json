@@ -3,7 +3,8 @@
     {
       "id": 0,
       "title": "First task ever",
-      "description": "Make a to-do list"
+      "description": "Make a to-do list",
+      "completed": false
     }
   ]
 }

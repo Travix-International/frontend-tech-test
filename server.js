@@ -55,6 +55,21 @@ app.put('/task/update/:id/:title/:description', taskMiddleware, (req, res) => {
 });
 
 /**
+ * PUT /task/toggle_state/:id
+ * 
+ * id: Number
+ * 
+ * Toggle task between completed or incompleted
+ * If the task is found and update as well, return a status code 204.
+ * If the task is not found, return a status code 404.
+ * If the provided id is not a valid number return a status code 400.
+ */
+app.put('/task/toggle_state/:id', taskMiddleware, (req, res) => {
+  res.locals.task.completed = !res.locals.task.completed;
+  return res.status(204);
+});
+
+/**
  * POST /task/create/:title/:description
  * 
  * title: string
@@ -70,6 +85,7 @@ app.post('/task/create/:title/:description', (req, res) => {
     id: Math.max(...tasks.map(task => task.id)) + 1 || 0,
     title: req.params.title,
     description: req.params.description,
+    completed: false,
   };
 
   tasks.push(task);
