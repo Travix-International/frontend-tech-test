@@ -31,6 +31,14 @@ export const updateTask = ({ id, title, description }) => (dispatch) => {
   });
 };
 
+export const toggleTask = (id) => (dispatch) => {
+  axios.put(`${baseURL}/task/toggle_state/${id}`)
+  return dispatch({
+    type: 'TOGGLE_TASK',
+    data: { id },
+  });
+};
+
 export const listTasks = () => (dispatch) => (
   axios.get(`${baseURL}/tasks`)
     .then(res => dispatch({

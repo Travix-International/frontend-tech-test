@@ -1,12 +1,12 @@
 const React = require('react');
 const { connect } = require('react-redux');
-const { updateTask, deleteTask } = require('../actions');
+const { updateTask, deleteTask, toggleTask } = require('../actions');
 
-const Task = ({ id, title, description, dispatch }) => {
+const Task = ({ id, title, description, completed, dispatch }) => {
   let titleElement;
   let descriptionElement;
   return (
-    <li>
+    <li className={`task ${completed ? 'task--completed' : ''}`}>
       <header
         ref={el => titleElement = el}
         contentEditable
@@ -27,7 +27,14 @@ const Task = ({ id, title, description, dispatch }) => {
           description: descriptionElement.textContent.trim(),
         }))}
       >{description}</p>
-      <button onClick={() => dispatch(deleteTask(id))}>Delete</button>
+      <input
+        type="checkbox"
+        checked={completed}
+        onChange={() => dispatch(toggleTask(id))}
+      />
+      <button
+        onClick={() => dispatch(deleteTask(id))}
+      >Delete</button>
     </li>
   );
 };

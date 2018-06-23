@@ -22,6 +22,14 @@ const reducers = (state = initialState, action) => {
         ...state,
         tasks: state.tasks.map(task => task.id === action.data.id ? action.data : task),
       };
+    case 'TOGGLE_TASK':
+      return {
+        ...state,
+        tasks: state.tasks.map(task => task.id === action.data.id ? {
+          ...task,
+          completed: !task.completed
+        } : task),
+      };
     case 'LIST_TASKS':
       return {
         ...state,
