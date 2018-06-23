@@ -10,14 +10,18 @@ class List extends React.Component {
   
   render() {
     return (
-      <ul>
-        {this.props.tasks.map((task, index) => (
-          <Task
-            key={index}
-            {...task}
-          />
-        ))}
-      </ul>
+      this.props.tasks.length ?
+        <ul>
+          {this.props.tasks.map((task, index) => (
+            <Task
+              key={index}
+              {...task}
+            />
+          ))}
+        </ul>
+      :
+        // Zero results
+        <p>Seems like there are no tasks to do.</p>
     )
   }
 };
