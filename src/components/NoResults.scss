@@ -1,0 +1,26 @@
+.noResults {
+  &.card {
+    padding-bottom: 3rem;
+    margin: 2rem auto;
+    text-align: center;
+    max-width: 500px;
+  }
+
+  &__emoticon {
+    background-image: linear-gradient(#0087cd, #22B7BB);
+    display: block;
+    width: 132px;
+    height: 132px;
+    border-radius: 100%;
+    position: relative;
+    margin: 2rem auto;
+    
+    svg {
+      width: 66px;
+      height: 66px;
+      position: absolute;
+      top: (132px - 66px) / 2;
+      left: (132px - 66px) / 2;
+    }
+  }
+}
