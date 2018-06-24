@@ -5,6 +5,8 @@ const { tasks } = require('./tasks.json');
 const taskMiddleware = require('./taskMiddleware');
 const cors = require('cors');
 
+const port = process.env.PORT || 9001;
+
 // Enable cors
 app.use(cors());
 
@@ -137,8 +139,8 @@ app.delete('/task/delete/:id', taskMiddleware, (req, res) => {
   });
 });
 
-app.listen(9001, () => {
-  process.stdout.write('the server is available on http://localhost:9001/\n');
+app.listen(port, () => {
+  process.stdout.write(`the server is available on http://localhost:${port}/\n`);
 });
 
 module.exports = app;
