@@ -5,8 +5,12 @@ const NoResults = require('../components/NoResults');
 const { listTasks } = require('../actions');
 
 class List extends React.Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.listTasks();
+  }
+
+  componentDidUpdate() {
+    window.scrollTo(0, 0);
   }
 
   render() {
