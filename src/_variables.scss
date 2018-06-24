@@ -1,0 +1,20 @@
+$travix-blue: #0087cd;
+$travix-green: #22b7bb;
+
+$font-family-primary: 'Muli', sans-serif;
+$font-family-secondary: 'Varela Round', sans-serif;
+
+$font-color: #888;
+$font-color-dark: darken($font-color, 20%);
+$font-color-light: lighten($font-color, 20%);
+
+$background-dark: #f4f4f4;
+$background-light: #fff;
+
+$submit-button-primary-color: $background-light;
+$submit-button-secondary-color: $travix-blue;
+
+$breakpoint: 1024px;
+$elements-max-width: $breakpoint / 2;
+
+$transitions-timing: 100ms;

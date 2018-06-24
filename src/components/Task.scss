@@ -1,13 +1,17 @@
+@import "../_variables.scss";
 @import "./ToggleButton.scss";
 @import "./DeleteButton.scss";
+
+$stripes-size: 1rem;
+$stripes-half-size: $stripes-size / 2;
 
 .card.task--completed {
   text-decoration: line-through;
   background-color: transparent;
-  background-image: repeating-linear-gradient(45deg, transparent, transparent .5rem, #fff .5rem, #fff 1rem);
-  color: lighten(#888, 20%);
+  background-image: repeating-linear-gradient(45deg, transparent, transparent $stripes-half-size, $background-light $stripes-half-size, $background-light $stripes-size);
+  color: $font-color-light;
   
   .card__title {
-    color: lighten(#888, 20%);
+    color: $font-color-light;
   }
 }

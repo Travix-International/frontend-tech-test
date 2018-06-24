@@ -1,26 +1,31 @@
+@import "../_variables.scss";
+
+$emoticon-size: 132px;
+$emoticon-half-size: $emoticon-size / 2;
+
 .noResults {
   &.card {
     padding-bottom: 3rem;
     margin: 2rem auto;
     text-align: center;
-    max-width: 500px;
+    max-width: $elements-max-width;
   }
 
   &__emoticon {
-    background-image: linear-gradient(#0087cd, #22B7BB);
+    background-image: linear-gradient($travix-blue, $travix-green);
     display: block;
-    width: 132px;
-    height: 132px;
+    width: $emoticon-size;
+    height: $emoticon-size;
     border-radius: 100%;
     position: relative;
     margin: 2rem auto;
     
     svg {
-      width: 66px;
-      height: 66px;
+      width: $emoticon-half-size;
+      height: $emoticon-half-size;
       position: absolute;
-      top: (132px - 66px) / 2;
-      left: (132px - 66px) / 2;
+      top: ($emoticon-size - $emoticon-half-size) / 2;
+      left: ($emoticon-size - $emoticon-half-size) / 2;
     }
   }
 }

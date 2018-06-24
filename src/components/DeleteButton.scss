@@ -1,3 +1,5 @@
+@import "../_variables.scss";
+
 .task__deleteButton {
   position: absolute;
   top: 1rem;
@@ -8,19 +10,19 @@
   cursor: pointer;
   
   svg {
-    fill: #888;
+    fill: $font-color;
   }
   
   &:active svg,
   &:hover svg {
-    fill: darken(#888, 20%);
+    fill: $font-color-dark;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: $breakpoint) {
   .task__deleteButton {
     opacity: 0;
-    transition: opacity 100ms linear;
+    transition: opacity $transitions-timing linear;
     
     @at-root .task:hover & {
       opacity: 1;
