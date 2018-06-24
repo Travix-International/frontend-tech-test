@@ -21,7 +21,7 @@ describe('GET /tasks', () => {
       .then(res => {
         expect(res.tasks).toHaveLength(1);
         expect(res.tasks[0].title).toEqual('First task ever');
-        expect(parseInt(res.total, 10)).toEqual(1);
+        expect(parseInt(res.total, 10)).toEqual(2);
         expect(parseInt(res.limit, 10)).toEqual(1);
         expect(parseInt(res.page, 10)).toEqual(1);
       })
