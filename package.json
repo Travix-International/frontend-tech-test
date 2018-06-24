@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "test back - front",
   "main": "server.js",
+  "homepage": "http://lean8086.github.io/frontend-tech-test",
   "scripts": {
     "start-backend": "node server.js",
     "start-frontend": "react-scripts start",
