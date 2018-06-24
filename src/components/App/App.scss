@@ -1,6 +1,6 @@
 @import "../../_variables.scss";
-@import "../../containers/CreateTask/CreateTask.scss";
-@import "../../containers/List/List.scss";
+@import "../CreateTask/CreateTask.scss";
+@import "../List/List.scss";
 
 .banner {
   background-image: linear-gradient($travix-blue 82%, $travix-green);

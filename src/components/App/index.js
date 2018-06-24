@@ -1,6 +1,6 @@
 const React = require('react');
-const CreateTask = require('../../containers/CreateTask');
-const List = require('../../containers/List');
+const CreateTask = require('../CreateTask');
+const List = require('../List');
 
 const App = () => (
   <div>
