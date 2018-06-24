@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const baseURL = '//localhost:9001';
+const baseURL = process.env.NODE_ENV === 'production' ? 'https://test-candidates-yhhdkjwpko.now.sh/' : '//localhost:9001';
 
 export const createTask = ({ title, description }) => dispatch => (
   axios.post(`${baseURL}/task/create/${title}/${description}`)
