@@ -3,6 +3,7 @@ const { connect } = require('react-redux');
 const Task = require('../components/Task');
 const NoResults = require('../components/NoResults');
 const { listTasks } = require('../actions');
+const PropTypes = require('prop-types');
 
 class List extends React.Component {
   componentDidMount() {
@@ -10,11 +11,17 @@ class List extends React.Component {
   }
 
   componentDidUpdate() {
-    window.scrollTo(0, 0);
+    if (this.props.tasks) {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  list() {
+    this.props.listTasks(this.props.page + 1);
   }
 
   render() {
-    const { tasks, page, total, limit, listTasks } = this.props;
+    const { tasks, page, total, limit } = this.props;
     return (
       tasks.length ?
         <ol className="tasks">
@@ -28,7 +35,7 @@ class List extends React.Component {
             {page * limit < total &&
               <button
                 className="tasks__nextButton"
-                onClick={() => listTasks(this.props.page + 1)}
+                onClick={this.list}
               >Load more</button>}
           </li>
         </ol>
@@ -36,6 +43,20 @@ class List extends React.Component {
         <NoResults />
     )
   }
+};
+
+List.propTypes = {
+  limit: PropTypes.number,
+  listTasks: PropTypes.func.isRequired,
+  page: PropTypes.number,
+  tasks: PropTypes.array.isRequired,
+  total: PropTypes.number,
+};
+
+List.defaultProps = {
+  limit: 10,
+  page: 0,
+  total: 0,
 };
 
 const mapStateToProps = state => ({

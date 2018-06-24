@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const baseURL = '//localhost:9001';
 
-export const createTask = ({ title, description }) => (dispatch) => (
+export const createTask = ({ title, description }) => dispatch => (
   axios.post(`${baseURL}/task/create/${title}/${description}`)
     // Wait until the "id" is created
     .then(res => dispatch({
@@ -11,7 +11,7 @@ export const createTask = ({ title, description }) => (dispatch) => (
     }))
 );
 
-export const deleteTask = (id) => (dispatch) => {
+export const deleteTask = id => (dispatch) => {
   axios.delete(`${baseURL}/task/delete/${id}`);
   return dispatch({
     type: 'DELETE_TASK',
@@ -31,7 +31,7 @@ export const updateTask = ({ id, title, description }) => (dispatch) => {
   });
 };
 
-export const toggleTask = (id) => (dispatch) => {
+export const toggleTask = id => (dispatch) => {
   axios.put(`${baseURL}/task/toggle_state/${id}`)
   return dispatch({
     type: 'TOGGLE_TASK',
@@ -39,7 +39,7 @@ export const toggleTask = (id) => (dispatch) => {
   });
 };
 
-export const listTasks = (page = 1) => (dispatch) => (
+export const listTasks = (page = 1) => dispatch => (
   axios.get(`${baseURL}/tasks?limit=10&page=${page}`)
     .then(res => dispatch({
       type: 'LIST_TASKS',

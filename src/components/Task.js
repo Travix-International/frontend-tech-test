@@ -3,39 +3,60 @@ const { connect } = require('react-redux');
 const { updateTask } = require('../actions');
 const ToggleButton = require('./ToggleButton');
 const DeleteButton = require('./DeleteButton');
+const PropTypes = require('prop-types');
 
-const Task = ({ id, title, description, completed, dispatch }) => {
-  let titleElement;
-  let descriptionElement;
-  return (
-    <li className={`card task${completed ? ' task--completed' : ''}`}>
-      <header
-        className="card__title"
-        ref={el => titleElement = el}
-        contentEditable={!completed}
-        suppressContentEditableWarning={!completed}
-        onBlur={() => dispatch(updateTask({
-          id,
-          title: titleElement.textContent.trim(),
-          description: descriptionElement.textContent.trim(),
-        }))}
-      >{title}</header>
-      <p
-        className="card__description"
-        ref={el => descriptionElement = el}
-        contentEditable={!completed}
-        suppressContentEditableWarning={!completed}
-        onBlur={() => dispatch(updateTask({
-          id,
-          title: titleElement.textContent.trim(),
-          description: descriptionElement.textContent.trim(),
-        }))}
-      >{description}</p>
+class Task extends React.Component {
+  constructor() {
+    super();
+    this.titleElement = React.createRef();
+    this.descriptionElement = React.createRef();
+    this.update = this.update.bind(this);
+  }
 
-      <ToggleButton id={id} completed={completed} />
-      <DeleteButton id={id} />
-    </li>
-  );
+  update() {
+    this.props.dispatch(updateTask({
+      id: this.props.id,
+      title: this.titleElement.textContent.trim(),
+      description: this.descriptionElement.textContent.trim(),
+    }))
+  }
+
+  render() {
+    const { id, title, description, completed } = this.props;
+    return (
+      <li className={`card task${completed ? ' task--completed' : ''}`}>
+        <header
+          className="card__title"
+          contentEditable={!completed}
+          onBlur={this.update}
+          ref={this.titleElement}
+          suppressContentEditableWarning={!completed}
+        >{title}</header>
+        <p
+          className="card__description"
+          contentEditable={!completed}
+          onBlur={this.update}
+          ref={this.descriptionElement}
+          suppressContentEditableWarning={!completed}
+        >{description}</p>
+
+        <ToggleButton completed={completed} id={id} />
+        <DeleteButton id={id} />
+      </li>
+    );
+  };
+};
+
+Task.propTypes = {
+  completed: PropTypes.bool,
+  description: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+};
+
+Task.defaultProps = {
+  completed: false,
 };
 
 module.exports = connect()(Task);
