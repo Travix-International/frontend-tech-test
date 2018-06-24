@@ -99,7 +99,7 @@ app.post('/task/create/:title/:description', (req, res) => {
   const task = {
     // Determine the new id based on the maximum defined id, because if I define the id based on
     // tasks.length, when the user delete one task the length can be the same than an existing id
-    id: Math.max(...tasks.map(task => task.id)) + 1 || 0,
+    id: tasks.length ? Math.max(...tasks.map(task => task.id)) + 1 : 0,
     title: req.params.title,
     description: req.params.description,
     completed: false,
