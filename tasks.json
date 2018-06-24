@@ -5,6 +5,12 @@
       "title": "First task ever",
       "description": "Make a to-do list",
       "completed": false
+    },
+    {
+      "id": 1,
+      "title": "Second test task",
+      "description": "Delete some items",
+      "completed": false
     }
   ]
 }

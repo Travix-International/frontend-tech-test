@@ -1,8 +1,6 @@
 const request = require('supertest');
 const app = require('../../server');
-const mock = require('./mock.json');
-
-jest.mock('./mock.json');
+const tasks = require('../../tasks.json');
 
 describe('GET /tasks', () => {
   test('should respond with a 200', () => (
