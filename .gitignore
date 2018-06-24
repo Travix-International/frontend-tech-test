@@ -2,6 +2,7 @@ node_modules/
 *~
 #*
 .vs_code/
+.vscode/
 .DS_Store
 src/**/*.css
 build/
