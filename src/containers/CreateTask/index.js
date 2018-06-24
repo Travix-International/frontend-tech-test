@@ -19,6 +19,7 @@ class CreateTask extends React.Component {
     if (title.length && description.length) {
       this.props.dispatch(createTask({ title, description }));
       this.titleElement.current.value = this.descriptionElement.current.value = '';
+      window.scrollTo(0, 0);
     }
   }
 

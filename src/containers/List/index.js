@@ -10,12 +10,6 @@ class List extends React.Component {
     this.props.listTasks();
   }
 
-  componentDidUpdate() {
-    if (this.props.tasks) {
-      window.scrollTo(0, 0);
-    }
-  }
-
   list() {
     this.props.listTasks(this.props.page + 1);
   }
