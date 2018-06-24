@@ -16,8 +16,8 @@ class Task extends React.Component {
   update() {
     this.props.dispatch(updateTask({
       id: this.props.id,
-      title: this.titleElement.textContent.trim(),
-      description: this.descriptionElement.textContent.trim(),
+      title: this.titleElement.current.textContent.trim(),
+      description: this.descriptionElement.current.textContent.trim(),
     }))
   }
 
