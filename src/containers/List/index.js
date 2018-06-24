@@ -1,8 +1,8 @@
 const React = require('react');
 const { connect } = require('react-redux');
-const Task = require('../components/Task');
-const NoResults = require('../components/NoResults');
-const { listTasks } = require('../actions');
+const Task = require('../../components/Task');
+const NoResults = require('../../components/NoResults');
+const { listTasks } = require('../../actions');
 const PropTypes = require('prop-types');
 
 class List extends React.Component {

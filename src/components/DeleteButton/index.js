@@ -1,6 +1,6 @@
 const React = require('react');
 const { connect } = require('react-redux');
-const { deleteTask } = require('../actions');
+const { deleteTask } = require('../../actions');
 const PropTypes = require('prop-types');
 
 const DeleteButton = ({ id, dispatch }) => (

@@ -1,6 +1,6 @@
-@import "../_variables.scss";
-@import "./ToggleButton.scss";
-@import "./DeleteButton.scss";
+@import "../../_variables.scss";
+@import "../ToggleButton/ToggleButton.scss";
+@import "../DeleteButton/DeleteButton.scss";
 
 $stripes-size: 1rem;
 $stripes-half-size: $stripes-size / 2;
@@ -10,7 +10,7 @@ $stripes-half-size: $stripes-size / 2;
   background-color: transparent;
   background-image: repeating-linear-gradient(45deg, transparent, transparent $stripes-half-size, $background-light $stripes-half-size, $background-light $stripes-size);
   color: $font-color-light;
-  
+
   .card__title {
     color: $font-color-light;
   }

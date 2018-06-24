@@ -1,5 +1,5 @@
-@import "../_variables.scss";
-@import "../_mixins.scss";
+@import "../../_variables.scss";
+@import "../../_mixins.scss";
 
 .task__toggleButton {
   // Clickable area
@@ -11,7 +11,7 @@
     height: 3rem;
     display: block;
     cursor: pointer;
-    
+
     // Element to be a fake checkbox
     &:after {
       content: "";
@@ -25,7 +25,7 @@
       left: 1rem;
       @include transition(background-color);
     }
-    
+
     // Completed task = checked fake checkbox
     @at-root .task--completed &:after {
       background-color: $font-color-light;
@@ -38,7 +38,7 @@
   .task__toggleButton {
     opacity: 0;
     @include transition(opacity);
-    
+
     @at-root .task:hover & {
       opacity: 1;
     }

@@ -1,11 +1,11 @@
-@import "../_variables.scss";
-@import "../_mixins.scss";
+@import "../../_variables.scss";
+@import "../../_mixins.scss";
 
 .createTask {
   margin: 0 auto;
   display: block;
   padding: 1rem;
-  
+
   &__title.card,
   &__description.card {
     padding-left: 1rem;

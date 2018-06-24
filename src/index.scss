@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Muli:300|Varela+Round");
 @import "./_variables.scss";
-@import "./components/App.scss";
+@import "./components/App/App.scss";
 
 *,
 *::before,
@@ -28,13 +28,13 @@ body {
   color: $font-color;
   padding: 1rem 3rem;
   position: relative;
-  
+
   &__title {
     font-family: $font-family-secondary;
     color: $travix-blue;
     font-size: 1.5rem;
   }
-  
+
   &__description {
     margin-bottom: 0;
   }

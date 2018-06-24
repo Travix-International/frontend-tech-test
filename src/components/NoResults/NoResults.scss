@@ -1,4 +1,4 @@
-@import "../_variables.scss";
+@import "../../_variables.scss";
 
 $emoticon-size: 132px;
 $emoticon-half-size: $emoticon-size / 2;
@@ -19,7 +19,7 @@ $emoticon-half-size: $emoticon-size / 2;
     border-radius: 100%;
     position: relative;
     margin: 2rem auto;
-    
+
     svg {
       width: $emoticon-half-size;
       height: $emoticon-half-size;

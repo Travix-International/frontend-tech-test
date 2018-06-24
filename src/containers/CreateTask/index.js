@@ -1,6 +1,6 @@
 const React = require('react');
 const { connect } = require('react-redux');
-const { createTask } = require('../actions');
+const { createTask } = require('../../actions');
 const PropTypes = require('prop-types');
 
 class CreateTask extends React.Component {

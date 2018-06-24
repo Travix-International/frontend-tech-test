@@ -1,8 +1,8 @@
 const React = require('react');
 const { connect } = require('react-redux');
-const { updateTask } = require('../actions');
-const ToggleButton = require('./ToggleButton');
-const DeleteButton = require('./DeleteButton');
+const { updateTask } = require('../../actions');
+const ToggleButton = require('../ToggleButton');
+const DeleteButton = require('../DeleteButton');
 const PropTypes = require('prop-types');
 
 class Task extends React.Component {

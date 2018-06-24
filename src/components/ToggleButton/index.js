@@ -1,6 +1,6 @@
 const React = require('react');
 const { connect } = require('react-redux');
-const { toggleTask } = require('../actions');
+const { toggleTask } = require('../../actions');
 const PropTypes = require('prop-types');
 
 const ToggleButton = ({ id, completed, dispatch }) => (

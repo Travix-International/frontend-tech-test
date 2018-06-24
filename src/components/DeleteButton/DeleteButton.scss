@@ -1,5 +1,5 @@
-@import "../_variables.scss";
-@import "../_mixins.scss";
+@import "../../_variables.scss";
+@import "../../_mixins.scss";
 
 .task__deleteButton {
   position: absolute;
@@ -9,11 +9,11 @@
   background: none;
   border: none;
   cursor: pointer;
-  
+
   svg {
     fill: $font-color;
   }
-  
+
   &:active svg,
   &:hover svg {
     fill: $font-color-dark;
@@ -24,7 +24,7 @@
   .task__deleteButton {
     opacity: 0;
     @include transition(opacity);
-    
+
     @at-root .task:hover & {
       opacity: 1;
     }

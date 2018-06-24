@@ -1,6 +1,6 @@
-@import "../_variables.scss";
-@import "../containers/CreateTask.scss";
-@import "../containers/List.scss";
+@import "../../_variables.scss";
+@import "../../containers/CreateTask/CreateTask.scss";
+@import "../../containers/List/List.scss";
 
 .banner {
   background-image: linear-gradient($travix-blue 82%, $travix-green);
@@ -15,7 +15,7 @@
     height: 82px;
     font-size: 0;
     margin: 2rem auto;
-    
+
     &::after {
       content: "tasks";
       font-size: 1rem;
@@ -35,7 +35,7 @@ main {
   body {
     padding-left: $elements-max-width;
   }
-  
+
   .banner {
     width: $elements-max-width;
     position: fixed;
@@ -43,7 +43,7 @@ main {
     top: 0;
     bottom: 0;
   }
-  
+
   main {
     overflow: hidden;
     margin-top: 0;
