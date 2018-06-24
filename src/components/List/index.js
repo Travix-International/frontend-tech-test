@@ -31,7 +31,6 @@ class List extends React.Component {
             />
           ))}
           <li className="tasks__nextContainer">
-            {console.log(page, limit, total)}
             {(page * limit < total) &&
               <button
                 className="tasks__nextButton"
