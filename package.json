@@ -6,7 +6,7 @@
   "scripts": {
     "start-backend": "node server.js",
     "start-frontend": "react-scripts start",
-    "build-js": "NODE_ENV=production react-scripts build",
+    "build": "NODE_ENV=production react-scripts build",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "test": "react-scripts test --env=jsdom",
