@@ -39,10 +39,13 @@ export const toggleTask = (id) => (dispatch) => {
   });
 };
 
-export const listTasks = () => (dispatch) => (
-  axios.get(`${baseURL}/tasks`)
+export const listTasks = (page = 1) => (dispatch) => (
+  axios.get(`${baseURL}/tasks?limit=10&page=${page}`)
     .then(res => dispatch({
       type: 'LIST_TASKS',
+      page: res.data.page,
+      total: res.data.total,
+      limit: res.data.limit,
       data: res.data.tasks,
     }))
 );

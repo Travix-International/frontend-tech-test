@@ -30,6 +30,9 @@ app.get('/tasks', (req, res) => {
   const sample = limit ? tasks.slice(limit * (page - 1), limit * page) : tasks;
   return res.status(200).json({
     tasks: sample,
+    total: tasks.length,
+    limit,
+    page,
   });
 });
 

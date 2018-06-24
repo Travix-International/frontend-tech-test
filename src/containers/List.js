@@ -8,17 +8,25 @@ class List extends React.Component {
   componentDidMount () {
     this.props.listTasks();
   }
-  
+
   render() {
+    const { tasks, page, total, limit, listTasks } = this.props;
     return (
-      this.props.tasks.length ?
+      tasks.length ?
         <ol className="tasks">
-          {this.props.tasks.map((task, index) => (
+          {tasks.map((task, index) => (
             <Task
               key={index}
               {...task}
             />
           ))}
+          <li className="tasks__nextContainer">
+            {page * limit < total &&
+              <button
+                className="tasks__nextButton"
+                onClick={() => listTasks(this.props.page + 1)}
+              >Load more</button>}
+          </li>
         </ol>
       :
         <NoResults />
@@ -28,11 +36,14 @@ class List extends React.Component {
 
 const mapStateToProps = state => ({
   tasks: state.tasks,
+  page: state.page || 0,
+  total: state.total,
+  limit: state.limit,
 });
 
 const mapDispatchToProps = dispatch => ({
-  listTasks() {
-    dispatch(listTasks());
+  listTasks(page) {
+    dispatch(listTasks(page));
   },
 });
 

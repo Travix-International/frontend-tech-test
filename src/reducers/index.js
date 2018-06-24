@@ -33,7 +33,13 @@ const reducers = (state = initialState, action) => {
     case 'LIST_TASKS':
       return {
         ...state,
-        tasks: action.data,
+        page: parseInt(action.page, 10),
+        total: parseInt(action.total, 10),
+        limit: parseInt(action.limit, 10),
+        tasks: [
+          ...state.tasks,
+          ...action.data,
+        ],
       };
     default:
       return state;

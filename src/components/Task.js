@@ -31,7 +31,7 @@ const Task = ({ id, title, description, completed, dispatch }) => {
           description: descriptionElement.textContent.trim(),
         }))}
       >{description}</p>
-      
+
       <ToggleButton id={id} completed={completed} />
       <DeleteButton id={id} />
     </li>
