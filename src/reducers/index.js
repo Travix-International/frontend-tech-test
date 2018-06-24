@@ -8,8 +8,8 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         tasks: [
-          ...state.tasks,
           action.data,
+          ...state.tasks,
         ],
       };
     case 'DELETE_TASK':

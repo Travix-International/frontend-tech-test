@@ -105,7 +105,7 @@ app.post('/task/create/:title/:description', (req, res) => {
     completed: false,
   };
 
-  tasks.push(task);
+  tasks.unshift(task);
 
   return res.status(201).json({
     task,
