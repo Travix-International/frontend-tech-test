@@ -6,6 +6,11 @@ const { listTasks } = require('../../actions');
 const PropTypes = require('prop-types');
 
 class List extends React.Component {
+  constructor() {
+    super();
+    this.list = this.list.bind(this);
+  }
+
   componentDidMount() {
     this.props.listTasks();
   }
@@ -26,7 +31,8 @@ class List extends React.Component {
             />
           ))}
           <li className="tasks__nextContainer">
-            {page * limit < total &&
+            {console.log(page, limit, total)}
+            {(page * limit < total) &&
               <button
                 className="tasks__nextButton"
                 onClick={this.list}
