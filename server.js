@@ -30,7 +30,7 @@ app.get('/tasks', (req, res) => {
   const sample = limit ? tasks.slice(limit * (page - 1), limit * page) : tasks;
   return res.status(200).json({
     tasks: sample,
-    total: tasks.length,
+    total: sample.length,
     limit,
     page,
   });
@@ -140,3 +140,5 @@ app.delete('/task/delete/:id', taskMiddleware, (req, res) => {
 app.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });
+
+module.exports = app;

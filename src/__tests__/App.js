@@ -1,6 +1,6 @@
 const React = require('react');
 const { shallow } = require('enzyme');
-const App = require('./App');
+const App = require('../components/App');
 
 describe('<App/>', () => {
   it('render the application', () => {
