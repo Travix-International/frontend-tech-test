@@ -1,4 +1,5 @@
 @import "../_variables.scss";
+@import "../_mixins.scss";
 
 .task__toggleButton {
   // Clickable area
@@ -22,7 +23,7 @@
       position: absolute;
       top: 1.3rem;
       left: 1rem;
-      transition: background-color $transitions-timing linear;
+      @include transition(background-color);
     }
     
     // Completed task = checked fake checkbox
@@ -36,7 +37,7 @@
 @media (min-width: $breakpoint) {
   .task__toggleButton {
     opacity: 0;
-    transition: opacity $transitions-timing linear;
+    @include transition(opacity);
     
     @at-root .task:hover & {
       opacity: 1;

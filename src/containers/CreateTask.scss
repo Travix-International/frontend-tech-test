@@ -1,4 +1,5 @@
 @import "../_variables.scss";
+@import "../_mixins.scss";
 
 .createTask {
   margin: 0 auto;
@@ -23,7 +24,7 @@
     border: 2px solid $submit-button-primary-color;
     border-radius: 5px;
     color: $submit-button-primary-color;
-    transition: color $transitions-timing linear, background-color $transitions-timing linear;
+    @include transition(background-color);
     cursor: pointer;
 
     &:active,

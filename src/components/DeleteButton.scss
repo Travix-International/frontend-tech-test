@@ -1,4 +1,5 @@
 @import "../_variables.scss";
+@import "../_mixins.scss";
 
 .task__deleteButton {
   position: absolute;
@@ -22,7 +23,7 @@
 @media (min-width: $breakpoint) {
   .task__deleteButton {
     opacity: 0;
-    transition: opacity $transitions-timing linear;
+    @include transition(opacity);
     
     @at-root .task:hover & {
       opacity: 1;
