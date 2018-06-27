@@ -1,0 +1,31 @@
+header {
+  border: 2px solid #000;
+  background: #000;
+  color: #fff;
+  
+  div {
+  	display: inline-block;
+  	vertical-align: middle;
+  }
+  img {
+  	width: 100%;
+    height: auto;
+  }
+  .logo {
+	  width: 50px;
+    height: 50px;
+    margin: 0 10px;
+  }
+  .appTitle {
+  	width: 80%;
+  	text-align: center;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  header {
+    .appTitle {
+      width: 70%;
+    }
+  }
+}

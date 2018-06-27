@@ -1,0 +1,143 @@
+
+body {
+  font: 100% $font-stack;
+  color: $black;
+  font-size: $regular-font-size;
+}
+ 
+button {
+    border: none;
+}
+
+.button {
+  color: #ffffff;
+  font-size: 14px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.button.blue {
+  background: $blue-color;
+  @include buttonGradient($blue-color,$blue-color-gradient-end);
+}
+
+.button.blue:hover {
+  background: $blue-color-gradient-start;
+  @include buttonGradient($blue-color-gradient-start, $blue-color);
+}
+
+.button.red {
+  background: $red-color;
+  @include buttonGradient($red-color, $red-color-gradient-end);
+}
+
+.button.red:hover {
+  background: $red-color-gradient-start;
+  @include buttonGradient($red-color-gradient-start, $red-color);
+}
+
+.button.green {
+  background: $green-color;
+  @include buttonGradient($green-color, $green-color-gradient-end);
+}
+
+.button.green:hover {
+  background: $green-color-gradient-start;
+  @include buttonGradient($green-color-gradient-start, $green-color);
+}
+
+main {
+	.tasksList{
+		border: 1px solid $black;
+		padding: 20px;
+		background: $light-grey;
+
+    .task {
+      width: 45%;
+      margin-right: 2%;
+      display: inline-block;
+      vertical-align: middle;
+    }
+	}
+
+	.task  {
+		border: 1px solid $black;
+		padding: 10px;
+		margin-bottom: 10px;
+		position: relative;
+		min-height: 100px;
+		background: $white;
+    vertical-align: middle;
+
+		
+		h2 {
+			font-weight: bold;
+      word-wrap: break-word;
+		}
+    .description{
+      min-height: 50px;
+      margin: 0 0 10px 10px;
+      font-style: italic;
+      word-wrap: break-word;
+    }
+
+	}
+
+
+	.controls {
+	    position: absolute;
+	    bottom: 20px;
+	}
+  
+  .arrow {
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: inline-block;
+    color: inherit;
+  }
+
+  .arrow:after {
+    content: "\02C3";
+    margin-left: 5px;
+    font-size: 25px;
+    vertical-align: middle;
+  }
+
+  .arrow:hover:after {
+    margin-left:10px;
+  }
+
+  fieldset {
+    padding: 20px;
+
+    .form-item {
+      margin-bottom: 10px;
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input[type="text"], textarea {
+        padding: 5px 10px;
+        border: 1px solid #d9d9d9;
+
+      }
+    }
+  }
+
+}
+
+
+@media screen and (max-width: 768px) {
+  main {
+    .tasksList {
+      .task {
+        width: 95%;
+      }
+    }
+  }
+}

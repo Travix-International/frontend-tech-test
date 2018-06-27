@@ -1,4 +1,4 @@
-node_modules/
-*~
-#*
-.vs_code/
+.git
+*.log
+node_modules
+.DS_Store

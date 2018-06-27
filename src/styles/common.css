@@ -1,0 +1,55 @@
+$font-stack: Helvetica, sans-serif;
+$black: #000;
+$blue-color: #3498db;
+$blue-color-gradient-start: #3cb0fd;
+$blue-color-gradient-end: #2980b9;
+$green-color: #34d95a;
+$green-color-gradient-start: #3cfa3c;
+$green-color-gradient-end: #2cb841;
+$red-color: #f00836;
+$red-color-gradient-start: #f51e1e;
+$red-color-gradient-end: #e00b36;
+$light-grey: #f6f6f6;
+$white: #fff;
+
+$regular-font-size: 16px;
+
+$pad-20: 20px;
+
+h1,h2 {
+	margin-bottom: 20px;
+}
+
+h1 {
+	font-size: 2rem;
+}
+
+h2{
+	font-size: 1rem;
+}
+p {
+	margin-bottom: 10px;
+}
+.marginTop_10 {
+	margin-top: 10px;
+}
+.pad_10 {
+	padding: 20px;
+}
+.pad_20 {
+	padding: 20px;
+}
+.underline {
+	text-decoration: underline;;
+}
+.bold {
+	font-weight: bold;
+}
+
+@mixin buttonGradient($color, $gradient-end-color) {
+  background-image: -webkit-linear-gradient(top, $color, $gradient-end-color);
+  background-image: -moz-linear-gradient(top, $color, $gradient-end-color);
+  background-image: -ms-linear-gradient(top, $color, $gradient-end-color);
+  background-image: -o-linear-gradient(top, $color, $gradient-end-color);
+  background-image: linear-gradient(to bottom, $color, $gradient-end-color);
+}
