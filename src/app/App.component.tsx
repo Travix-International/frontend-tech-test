@@ -1,12 +1,14 @@
 import * as React from 'react';
 import {Route} from 'react-router-dom';
 import {Switch} from "react-router";
+import ReduxToastr from "react-redux-toastr";
 import {ErrorWrapper} from "./viewModels/ErrorWrapper";
 import asyncComponent from '../util/asyncComponent';
-// import {store} from '../Index.component';
-import ReduxToastr from "react-redux-toastr";
 import {routePaths} from "./constants/App.route-paths";
-// import {injectAsyncReducer} from "../store";
+import Header from "./App.Header.component";
+import {injectAsyncReducer} from "../store";
+import {store} from "../Index.component";
+import {Container} from "semantic-ui-react";
 
 export interface AppComponentStateProps {
     loading: boolean;
@@ -26,7 +28,9 @@ class AppComponent extends React.Component<AppComponentStateProps & AppComponent
         }
 
         return (
-            <div className="app-container">
+            <Container>
+                <Header />
+
                 <Switch>
                     <Route
                         exact={true}
@@ -34,32 +38,14 @@ class AppComponent extends React.Component<AppComponentStateProps & AppComponent
                         component={asyncComponent(async () => await import('./routes/Home/Home.component'))}
                     />
 
-                    {/* To-do logic */}
-
-                    {/*<Route exact={true} path={routePaths.todo.list}*/}
-                           {/*component={asyncComponent(async () => {*/}
-                               {/*const container = await import('./routes/Todos/Todos.container');*/}
-                               {/*const reducer = await import('./routes/Todos/Todos.reducer');*/}
-                               {/*injectAsyncReducer(store, reducer.REDUCER_NAME__COMPANIES, reducer.default);*/}
-                               {/*return container;*/}
-                           {/*})}/>*/}
-                    {/*<Route exact={true} path={routePaths.todo.new}*/}
-                           {/*component={asyncComponent(async () => {*/}
-                               {/*const container = await import('./routes/Todo/New');*/}
-                               {/*const reducer = await import('./routes/Todo/Todo.reducer');*/}
-                               {/*injectAsyncReducer(store, reducer.REDUCER_NAME__COMPANY, reducer.default);*/}
-                               {/*return container;*/}
-                           {/*})}/>*/}
-                    {/*<Route path={routePaths.todo.edit}*/}
-                           {/*component={asyncComponent(async () => {*/}
-                               {/*const container = await import('./routes/Todo/Edit');*/}
-                               {/*const reducer = await import('./routes/Todo/Todo.reducer');*/}
-                               {/*injectAsyncReducer(store, reducer.REDUCER_NAME__COMPANY, reducer.default);*/}
-                               {/*return container;*/}
-                           {/*})}/>*/}
+                    <Route exact={true} path={routePaths.tasks}
+                       component={asyncComponent(async () => {
+                           const container = await import('./routes/Tasks/Tasks.container');
+                           const reducer = await import('./routes/Tasks/Tasks.reducer');
+                           injectAsyncReducer(store, reducer.REDUCER_NAME__TASKS, reducer.default);
+                           return container;
+                       })}/>
                 </Switch>
-
-                {/*<Footer/>*/}
 
                 <ReduxToastr
                     timeOut={4000}
@@ -70,7 +56,7 @@ class AppComponent extends React.Component<AppComponentStateProps & AppComponent
                     transitionOut="bounceOutUp"
                     progressBar={true}
                 />
-            </div>
+            </Container>
         );
     }
 }

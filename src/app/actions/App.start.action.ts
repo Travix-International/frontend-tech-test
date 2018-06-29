@@ -1,6 +1,5 @@
 import actionCreatorFactory from 'typescript-fsa';
 import { Dispatch } from 'redux';
-import { toastr } from 'react-redux-toastr';
 
 import { ErrorWrapper } from '../viewModels/ErrorWrapper';
 import CommonUtils from '../../helpers/CommonUtilities';
@@ -23,7 +22,7 @@ export default function submit() {
 
         async function catchAction(exception: ErrorWrapper) {
             dispatch(asyncActions.failed({ params: {}, error: exception }));
-            toastr.error('Error', 'Error has occurred');
+            CommonUtils.showErrorToast('Error', 'Error has occurred');
             CommonUtils.scrollToTop();
         }
 

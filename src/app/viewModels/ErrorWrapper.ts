@@ -25,3 +25,5 @@ export class ValidationFailure {
     errorMessage: string;
     errorCode: string;
 }
+
+export default ErrorWrapper;

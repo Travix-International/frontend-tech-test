@@ -1,5 +1,6 @@
 import { animateScroll } from 'react-scroll';
 import {ErrorWrapper} from "../app/viewModels/ErrorWrapper";
+import {toastr} from "react-redux-toastr";
 
 export default class CommonUtilities {
     public static ReactScrollDefaultOptions = { duration: 500, smooth: 'easeInOutQuint' };
@@ -8,6 +9,14 @@ export default class CommonUtilities {
         if (process.env.NODE_ENV !== 'production') {
             console.log(...params);
         }
+    }
+
+    public static showSuccessToast(title: string, message: string) {
+        toastr.success(title, message);
+    }
+
+    public static showErrorToast(title: string, message: string) {
+        toastr.error(title, message);
     }
 
     public static scrollToTop() {

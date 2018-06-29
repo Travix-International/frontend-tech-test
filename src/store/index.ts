@@ -44,6 +44,7 @@ export default function configureStore(initialState: any = {}) { // TODO: use ty
 export function injectAsyncReducer(store: Store<any>, name: string, asyncReducer: Reducer<any>) { // TODO: Fix anys
     asyncReducers[name] = asyncReducer;
     store.replaceReducer(createReducer(asyncReducers));
+    store.dispatch({ type: 'RESET' });
 }
 
 export {history};
