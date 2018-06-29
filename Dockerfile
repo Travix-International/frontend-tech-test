@@ -7,4 +7,4 @@ RUN yarn build
 RUN cd build
 EXPOSE 5000
 RUN yarn global add serve
-CMD ["serve", "-s", "build"]
+CMD ["node", "server"]

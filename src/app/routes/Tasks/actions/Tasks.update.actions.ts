@@ -26,11 +26,11 @@ export function start(id: number) {
 
         async function mainAction() {
             dispatch(startActions.started({}));
-            const item = await TaskApi.getSingle(id);
-            if (!item) {
+            const response = await TaskApi.getSingle(id);
+            if (!response || !response.task) { // TODO: Fix this - use status codes
                 throw `Item with Id ${id} not found`;
             }
-            dispatch(initialize(taskFormName, item));
+            dispatch(initialize(taskFormName, response.task));
             dispatch(startActions.done({ params: {}, result: {id} }));
         }
 

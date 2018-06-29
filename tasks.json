@@ -1,3 +1,7 @@
 {
-  "tasks": []
+  "tasks": [{
+    "id": 1,
+    "title": "foo",
+    "description": "bar"
+  }]
 }

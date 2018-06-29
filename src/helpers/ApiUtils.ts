@@ -17,8 +17,9 @@ export default class ApiUtils {
             method: 'POST',
             responseType: 'json'
         };
+        const stringifiedData = data ? JSON.stringify(data) : null;
 
-        return await ApiUtils.handleApi(axios.post<T>(URL, JSON.stringify(data), config));
+        return await ApiUtils.handleApi(axios.post<T>(URL, stringifiedData, config));
     }
 
     public static async handlePut<T>(URL: string, data: object | null): Promise<T> {
@@ -27,8 +28,9 @@ export default class ApiUtils {
             method: 'PUT',
             responseType: 'json'
         };
+        const stringifiedData = data ? JSON.stringify(data) : null;
 
-        return await ApiUtils.handleApi(axios.put<T>(URL, JSON.stringify(data), config));
+        return await ApiUtils.handleApi(axios.put<T>(URL, stringifiedData, config));
     }
 
     public static async handleDelete(URL: string, data: any|null = null): Promise<boolean> {

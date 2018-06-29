@@ -64,8 +64,8 @@ class TasksComponent extends React.Component<TasksComponentProps> {
         return (
             <div>
                 {/* Adding */}
-                <Modal isOpen={pendingAdd} toggle={this.handleCreateCancel}>
-                    <Modal.Header toggle={this.handleCreateCancel}>Creating</Modal.Header>
+                <Modal size="tiny" className="scrolling" open={pendingAdd} onClose={this.handleCreateCancel}>
+                    <Modal.Header>Creating</Modal.Header>
                     <Modal.Content>
                         <TaskFormComponent />
                     </Modal.Content>
@@ -76,8 +76,8 @@ class TasksComponent extends React.Component<TasksComponentProps> {
                 </Modal>
 
                 {/* Updating */}
-                <Modal isOpen={!!pendingUpdateId && pendingUpdateId > 0} toggle={this.handleDeleteCancel}>
-                    <Modal.Header toggle={this.handleDeleteCancel}>Updating</Modal.Header>
+                <Modal size="tiny" className="scrolling" open={!!pendingUpdateId && pendingUpdateId > 0} onClose={this.handleDeleteCancel}>
+                    <Modal.Header>Updating</Modal.Header>
                     <Modal.Content>
                         <TaskFormComponent />
                     </Modal.Content>
@@ -88,8 +88,8 @@ class TasksComponent extends React.Component<TasksComponentProps> {
                 </Modal>
 
                 {/* Deleting */}
-                <Modal isOpen={!!pendingDeleteId && pendingDeleteId > 0} toggle={this.handleDeleteCancel}>
-                    <Modal.Header toggle={this.handleDeleteCancel}>Deleting</Modal.Header>
+                <Modal size="tiny" className="scrolling" open={!!pendingDeleteId && pendingDeleteId > 0} onClose={this.handleDeleteCancel}>
+                    <Modal.Header>Deleting</Modal.Header>
                     <Modal.Content>Do you want to delete this</Modal.Content>
                     <Modal.Actions>
                         <Button negative={true} onClick={this.handleDeleteCancel} content="No" disabled={confirmLoading} />
@@ -98,12 +98,13 @@ class TasksComponent extends React.Component<TasksComponentProps> {
                 </Modal>
 
                 <Container>
+                    <Button positive={true} onClick={e => this.handleCreateStart()}>Add new task</Button>
                     <Header as="h2">
                         <i className="fa fa-key"/> Tasks
                     </Header>
                     <BootstrapTable
                         data={data}
-                        version="4"
+                        version="3"
                         tableContainerClass="table vm no-th-brd pro-of-month table-hover"
                         tableBodyClass="bg-white"
                         bordered={false}
@@ -146,15 +147,11 @@ class TasksComponent extends React.Component<TasksComponentProps> {
 
     actionFormat(cell: any, row: any): JSX.Element {
         return (
-            <span>
-                <Button onClick={e => this.handleUpdateStart(row.id)} className="btn btn-xs btn-info">
-                    <i className="fa fa-pencil" title="Edit" />
-                </Button>
-                &nbsp;
-                <Button onClick={e => this.handleDeleteStart(row.id)} className="btn btn-xs btn-danger">
-                    <i className="fa fa-trash-o" title="Delete" />
-                </Button>
-            </span>
+            <Button.Group>
+                <Button primary={true} onClick={e => this.handleUpdateStart(row.id)}>Update</Button>
+                <Button.Or />
+                <Button negative={true} onClick={e => this.handleDeleteStart(row.id)}>Delete</Button>
+            </Button.Group>
         );
     }
 }
