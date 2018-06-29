@@ -53,8 +53,12 @@ Client app uses port 3000, server app uses 5000.
 
 ## Deployment
 
-For continuous integration it is used CircleCI.
-It uses Docker.
+For continuous integration it is used CircleCI. Picture: https://gyazo.com/0f85a980b40c67a1a484a98ac8e8284a
+CircleCI uses Docker to build images.
 
 To build docker image, use `docker build -t <image-name> .`.
 To run docker image locally, use `docker run -p 5000:5000 <image-name>`.
+
+## Try out
+
+Go to https://travixfrontendjevgenirum.azurewebsites.net to see deployed app

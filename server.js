@@ -76,6 +76,15 @@ app.put('/api/task/update/:id/:title/:description', (req, res) => {
         if (task !== null) {
             task.title = req.params.title;
             task.description = req.params.description;
+
+            const validationResult = validateTask(task);
+            if (!validationResult.valid) {
+                return res.status(400).json({
+                    message: 'Validation failed',
+                    validationResult
+                });
+            }
+
             return res.status(204).json({
                 message: 'Updated'
             });
@@ -106,6 +115,14 @@ app.post('/api/task/create/:title/:description', (req, res) => {
         title: req.params.title,
         description: req.params.description,
     };
+
+    const validationResult = validateTask(task);
+    if (!validationResult.valid) {
+        return res.status(400).json({
+            message: 'Validation failed',
+            validationResult
+        });
+    }
 
     tasksContainer.tasks.push(task);
 
@@ -161,3 +178,35 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(5000, () => {
     process.stdout.write('the server is available on http://localhost:5000/\n');
 });
+
+/**
+ * Validates task model
+ * @param task
+ * @returns {valid: boolean, validationFields: Array | undefined}
+ */
+function validateTask(task) {
+    if (!task) {
+        return {
+            valid: false
+        }
+    }
+
+    const validationFields = [];
+    if (!task.title) {
+        error.push({name: 'title', message: 'Title is empty'})
+    }
+    if (!task.description) {
+        error.push({name: 'description', message: 'Description is empty'})
+    }
+
+    if (validationFields.length > 0) {
+        return {
+            valid: false,
+            validationFields
+        }
+    }
+
+    return {
+        valid: true
+    }
+}
