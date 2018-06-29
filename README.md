@@ -36,3 +36,25 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 * dynamic-ui (web-sockets...?)
 * using the `made in Travix` technologies
 * ... Impress us!
+
+# Developer's notes
+
+## Getting started
+
+Install dependencies:
+`yarn`
+
+To run application in development mode, use:
+`yarn start` in one terminal to start frontend app and `yarn server` in another to start backend app.
+
+Alternatively, run `yarn dev` to run those processes simultaneously.
+
+Client app uses port 3000, server app uses 5000.
+
+## Deployment
+
+For continuous integration it is used CircleCI.
+It uses Docker.
+
+To build docker image, use `docker build -t <image-name> .`.
+To run docker image locally, use `docker run -p 5000:5000 <image-name>`.
