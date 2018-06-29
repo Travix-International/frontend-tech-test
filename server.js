@@ -76,7 +76,9 @@ app.put('/api/task/update/:id/:title/:description', (req, res) => {
         if (task !== null) {
             task.title = req.params.title;
             task.description = req.params.description;
-            return res.status(204);
+            return res.status(204).json({
+                message: 'Updated'
+            });
         } else {
             return res.status(404).json({
                 message: 'Not found',

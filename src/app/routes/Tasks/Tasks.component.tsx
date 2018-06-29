@@ -4,7 +4,8 @@ import { BootstrapTable, Options, TableHeaderColumn } from 'react-bootstrap-tabl
 import CommonUtilities from '../../../helpers/CommonUtilities';
 import TasksResponseViewModel from "./viewModels/TasksResponseViewModel";
 import TaskFormComponent from './Tasks.form.component';
-import {Button, Container, Header, Modal} from "semantic-ui-react";
+import {Button, Container, Header} from "semantic-ui-react";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 export interface TasksComponentStateProps extends TasksReduxState {}
 export interface TasksComponentDispatchProps {
@@ -63,38 +64,38 @@ class TasksComponent extends React.Component<TasksComponentProps> {
 
         return (
             <div>
-                {/* Adding */}
-                <Modal size="tiny" className="scrolling" open={pendingAdd} onClose={this.handleCreateCancel}>
-                    <Modal.Header>Creating</Modal.Header>
-                    <Modal.Content>
+                {/* Creating */}
+                <Modal isOpen={pendingAdd} toggle={this.handleCreateCancel}>
+                    <ModalHeader toggle={this.handleCreateCancel}>Creating</ModalHeader>
+                    <ModalBody>
                         <TaskFormComponent />
-                    </Modal.Content>
-                    <Modal.Actions>
+                    </ModalBody>
+                    <ModalFooter>
                         <Button negative={true} onClick={this.handleCreateCancel} content="Cancel" disabled={confirmLoading} />
                         <Button positive={true} onClick={this.handleCreateSubmit} content="Save" disabled={confirmLoading} icon="checkmark"/>
-                    </Modal.Actions>
+                    </ModalFooter>
                 </Modal>
 
                 {/* Updating */}
-                <Modal size="tiny" className="scrolling" open={!!pendingUpdateId && pendingUpdateId > 0} onClose={this.handleDeleteCancel}>
-                    <Modal.Header>Updating</Modal.Header>
-                    <Modal.Content>
+                <Modal isOpen={!!pendingUpdateId && pendingUpdateId > 0} toggle={this.handleDeleteCancel}>
+                    <ModalHeader>Updating</ModalHeader>
+                    <ModalBody>
                         <TaskFormComponent />
-                    </Modal.Content>
-                    <Modal.Actions>
+                    </ModalBody>
+                    <ModalFooter>
                         <Button negative={true} onClick={this.handleUpdateCancel} content="Cancel" disabled={confirmLoading} />
                         <Button positive={true} onClick={this.handleUpdateSubmit} content="Save" disabled={confirmLoading} icon="checkmark"/>
-                    </Modal.Actions>
+                    </ModalFooter>
                 </Modal>
 
                 {/* Deleting */}
-                <Modal size="tiny" className="scrolling" open={!!pendingDeleteId && pendingDeleteId > 0} onClose={this.handleDeleteCancel}>
-                    <Modal.Header>Deleting</Modal.Header>
-                    <Modal.Content>Do you want to delete this</Modal.Content>
-                    <Modal.Actions>
+                <Modal isOpen={!!pendingDeleteId && pendingDeleteId > 0} toggle={this.handleDeleteCancel}>
+                    <ModalHeader>Deleting</ModalHeader>
+                    <ModalBody>Do you want to delete this</ModalBody>
+                    <ModalFooter>
                         <Button negative={true} onClick={this.handleDeleteCancel} content="No" disabled={confirmLoading} />
                         <Button positive={true} onClick={this.handleDeleteSubmit} content="Yes" disabled={confirmLoading} icon="checkmark"/>
-                    </Modal.Actions>
+                    </ModalFooter>
                 </Modal>
 
                 <Container>
