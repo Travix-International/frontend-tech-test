@@ -62,6 +62,10 @@ class TasksComponent extends React.Component<TasksComponentProps, TasksComponent
         this.handleDeleteCancel = this.handleDeleteCancel.bind(this);
         this.handleDeleteSubmit = this.handleDeleteSubmit.bind(this);
         this.actionFormat = this.actionFormat.bind(this);
+
+        this.handleSortChange = this.handleSortChange.bind(this);
+        this.handlePageChange = this.handlePageChange.bind(this);
+        this.handleSizePerPageList = this.handleSizePerPageList.bind(this);
     }
 
     render() {
@@ -75,29 +79,9 @@ class TasksComponent extends React.Component<TasksComponentProps, TasksComponent
             sizePerPage: sizePerPage,
             sizePerPageList: [ 5, 10, 25 ],
 
-            onSortChange: (sortName: any, sortOrder: SortOrder) => {
-                const searchOptions = this.state.searchOptions;
-                searchOptions.sortName = sortName;
-                searchOptions.sortOrder = sortOrder;
-                this.setState({searchOptions});
-
-                this.onSearch$.next()
-            },
-            onPageChange: (page: number, sizePerPage: number) => {
-                const searchOptions = this.state.searchOptions;
-                searchOptions.page = page;
-                searchOptions.sizePerPage = sizePerPage;
-                this.setState({searchOptions});
-
-                this.onSearch$.next()
-            },
-            onSizePerPageList: (sizePerPage: number) => {
-                const searchOptions = this.state.searchOptions;
-                searchOptions.sizePerPage = sizePerPage;
-                this.setState({searchOptions});
-
-                this.onSearch$.next()
-            }
+            onSortChange: this.handleSortChange,
+            onPageChange: this.handlePageChange,
+            onSizePerPageList: this.handleSizePerPageList
         };
 
         return (
@@ -139,7 +123,7 @@ class TasksComponent extends React.Component<TasksComponentProps, TasksComponent
                 <Container>
                     <Button positive={true} onClick={e => this.handleCreateStart()}>Add new task</Button>
                     <Header as="h2">
-                        <i className="fa fa-key"/> Tasks
+                        <i className="fa fa-key"/> Tasks [{total}]
                     </Header>
                     <Form>
                         <FormGroup>
@@ -218,6 +202,32 @@ class TasksComponent extends React.Component<TasksComponentProps, TasksComponent
                 <Button negative={true} onClick={e => this.handleDeleteStart(row.id)}>Delete</Button>
             </Button.Group>
         );
+    }
+
+    handleSortChange(sortName: any, sortOrder: SortOrder) {
+        const searchOptions = this.state.searchOptions;
+        searchOptions.sortName = sortName;
+        searchOptions.sortOrder = sortOrder;
+        this.setState({searchOptions});
+
+        this.onSearch$.next()
+    }
+
+    handlePageChange(page: number, sizePerPage: number) {
+        const searchOptions = this.state.searchOptions;
+        searchOptions.page = page;
+        searchOptions.sizePerPage = sizePerPage;
+        this.setState({searchOptions});
+
+        this.onSearch$.next()
+    }
+
+    handleSizePerPageList(sizePerPage: number) {
+        const searchOptions = this.state.searchOptions;
+        searchOptions.sizePerPage = sizePerPage;
+        this.setState({searchOptions});
+
+        this.onSearch$.next()
     }
 }
 

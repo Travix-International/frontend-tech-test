@@ -44,7 +44,6 @@ module.exports = function initTaskRoutes(app) {
                 tasks = tasks.splice((page-1)*sizePerPage, sizePerPage);
             }
         }
-        console.log('tasks.length / sizePerPage', tasksContainer.tasks.length, sizePerPage, tasksContainer.tasks.length / sizePerPage);
 
         return res.status(200).json({
             contextObjects: tasks,
