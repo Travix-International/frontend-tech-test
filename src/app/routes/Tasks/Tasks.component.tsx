@@ -1,11 +1,16 @@
 import * as React from 'react';
 import {TasksReduxState} from "./Tasks.reducer";
-import { BootstrapTable, Options, TableHeaderColumn } from 'react-bootstrap-table';
+import {BootstrapTable, Options, SortOrder, TableHeaderColumn} from 'react-bootstrap-table';
+import * as Rx from 'rxjs/Rx';
+import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
+import {Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Button, Container, Header} from "semantic-ui-react";
+
 import CommonUtilities from '../../../helpers/CommonUtilities';
 import TasksResponseViewModel from "./viewModels/TasksResponseViewModel";
 import TaskForm from './Tasks.form.container';
-import {Button, Container, Header} from "semantic-ui-react";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import TaskSearchOptions from "./viewModels/TaskSearchOptions";
 
 export interface TasksComponentStateProps extends TasksReduxState {}
 export interface TasksComponentDispatchProps {
@@ -28,15 +33,22 @@ function safe(key: keyof TasksResponseViewModel) {
     return CommonUtilities.typeSafeName<TasksResponseViewModel>(key);
 }
 
+interface TasksComponentState {searchOptions: TaskSearchOptions};
 type TasksComponentProps = TasksComponentStateProps & TasksComponentDispatchProps;
 
-class TasksComponent extends React.Component<TasksComponentProps> {
+class TasksComponent extends React.Component<TasksComponentProps, TasksComponentState> {
+    subscription: Subscription;
+    onSearch$: Subject<{}>;
+
+    readonly state: TasksComponentState = { searchOptions: TaskSearchOptions.getDefault() };
 
     constructor(props: any) {
         super(props);
+        this.onSearch$ = new Rx.Subject();
 
         this.getList = this.getList.bind(this);
         this.onChangeSuccess = this.onChangeSuccess.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
 
         this.handleCreateStart = this.handleCreateStart.bind(this);
         this.handleCreateCancel = this.handleCreateCancel.bind(this);
@@ -55,12 +67,37 @@ class TasksComponent extends React.Component<TasksComponentProps> {
     render() {
         const { pendingDeleteId, pendingAdd, pendingUpdateId, confirmLoading } = this.props;
         const { data, pagination } = this.props.tableData;
-        const { page, total, sizePerPage } = pagination;
+        const { total } = pagination;
+        const { page, sizePerPage } = this.state.searchOptions;
 
         const tableOptions: Options = {
             page: page,
             sizePerPage: sizePerPage,
-            sizePerPageList: [ 5, 10, 25 ]
+            sizePerPageList: [ 5, 10, 25 ],
+
+            onSortChange: (sortName: any, sortOrder: SortOrder) => {
+                const searchOptions = this.state.searchOptions;
+                searchOptions.sortName = sortName;
+                searchOptions.sortOrder = sortOrder;
+                this.setState({searchOptions});
+
+                this.onSearch$.next()
+            },
+            onPageChange: (page: number, sizePerPage: number) => {
+                const searchOptions = this.state.searchOptions;
+                searchOptions.page = page;
+                searchOptions.sizePerPage = sizePerPage;
+                this.setState({searchOptions});
+
+                this.onSearch$.next()
+            },
+            onSizePerPageList: (sizePerPage: number) => {
+                const searchOptions = this.state.searchOptions;
+                searchOptions.sizePerPage = sizePerPage;
+                this.setState({searchOptions});
+
+                this.onSearch$.next()
+            }
         };
 
         return (
@@ -104,9 +141,15 @@ class TasksComponent extends React.Component<TasksComponentProps> {
                     <Header as="h2">
                         <i className="fa fa-key"/> Tasks
                     </Header>
+                    <Form>
+                        <FormGroup>
+                            <Label for="exampleEmail">Search by title</Label>
+                            <Input type="text" name="title" id="search-title" placeholder="title" onChange={this.handleSearch} />
+                        </FormGroup>
+                    </Form>
                     <BootstrapTable
                         data={data}
-                        version="3"
+                        version="4"
                         tableContainerClass="table vm no-th-brd pro-of-month table-hover"
                         tableBodyClass="bg-white"
                         bordered={false}
@@ -131,10 +174,29 @@ class TasksComponent extends React.Component<TasksComponentProps> {
         )
     }
 
-    componentDidMount(): void { this.getList(); }
+    componentDidMount(): void {
+        this.getList();
 
-    getList(): void { this.props.fetch(); }
+        this.subscription = this.onSearch$
+            .debounceTime(300)
+            .subscribe(() => this.getList());
+    }
+
+    componentWillUnmount() {
+        if (this.subscription) {
+            this.subscription.unsubscribe(); // avoid leaking
+        }
+    }
+
+    getList(): void { this.props.fetch(this.state.searchOptions); }
     onChangeSuccess(): void { this.getList(); }
+    handleSearch(e: any) {
+        const searchOptions = this.state.searchOptions;
+        searchOptions.title = e.target.value;
+        this.setState({searchOptions});
+
+        this.onSearch$.next()
+    }
 
     handleCreateStart(): void  { this.props.createStart(); };
     handleCreateCancel(): void  { this.props.createCancel(); };

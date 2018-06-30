@@ -1,34 +1,23 @@
 import actionCreatorFactory from 'typescript-fsa';
 import { Dispatch } from 'redux';
-import {SortOrder} from "react-bootstrap-table";
 
 import CommonUtilities from '../../../../helpers/CommonUtilities';
 import {ErrorWrapper, TableData, PaginationOptions} from '../../../viewModels';
 import TasksResponseViewModel from "../viewModels/TasksResponseViewModel";
-import TodosApi from "../../../../api/Task.api";
-import {REDUCER_NAME__TASKS} from "../Tasks.reducer";
-import TableFormattingUtilities from "../../../../helpers/TableFormattingUtilities";
+import TasksApi from "../../../../api/Task.api";
 
 const actionCreator = actionCreatorFactory();
-export const asyncActions = actionCreator.async<
-    {},
-    {tableData: TableData<TasksResponseViewModel>},
-    ErrorWrapper
->('TASKS/FETCH');
+export const asyncActions = actionCreator.async<{}, {tableData: TableData<TasksResponseViewModel>}, ErrorWrapper>('TASKS/FETCH');
 
-export default function submit(paginationParams: PaginationOptions | null): any {
+export default function submit(searchOptions: PaginationOptions): any {
     return async (dispatch: Dispatch<any>) => {
 
         async function mainAction() {
             dispatch(asyncActions.started({}));
 
-            paginationParams = paginationParams || PaginationOptions.getDefault();
-            const paginatedList = await TodosApi.getList({...paginationParams});
-            const tableData = TableData.createTableDataFrom(
-                paginatedList,
-                paginationParams.page,
-                paginationParams.sizePerPage
-            );
+            CommonUtilities.logDevMessage('searchOptions', searchOptions);
+            const paginatedList = await TasksApi.getList({...searchOptions});
+            const tableData = TableData.createTableDataFrom(paginatedList, searchOptions.page, searchOptions.sizePerPage);
             dispatch(asyncActions.done({ params: {}, result: {tableData} }));
         }
 
@@ -41,23 +30,4 @@ export default function submit(paginationParams: PaginationOptions | null): any 
 
         await CommonUtilities.tryCatchWrapper(mainAction, catchAction);
     };
-}
-
-//
-// Sorting and pagination
-//
-
-export function onSortChange(sortName: string, sortOrder: SortOrder) {
-    return TableFormattingUtilities.getOnSortChangeAction((viewModel) =>
-        submit(viewModel), REDUCER_NAME__TASKS, sortName, sortOrder);
-}
-
-export function onPageChange(page: number, sizePerPage: number) {
-    return TableFormattingUtilities.getOnPageChangeAction((viewModel) =>
-        submit(viewModel), REDUCER_NAME__TASKS, page, sizePerPage);
-}
-
-export function onSizePerPageList(sizePerPage: number) {
-    return TableFormattingUtilities.getOnSizePerPageList((viewModel) =>
-        submit(viewModel), REDUCER_NAME__TASKS, sizePerPage);
 }

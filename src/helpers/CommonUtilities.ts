@@ -7,7 +7,7 @@ export default class CommonUtilities {
 
     public static logDevMessage(...params: any[]) {
         if (process.env.NODE_ENV !== 'production') {
-            console.log(...params);
+            console.info(...params);
         }
     }
 
