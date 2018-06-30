@@ -27,3 +27,5 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(5000, () => {
     process.stdout.write('the server is available on http://localhost:5000/\n');
 });
+
+module.exports = app;
