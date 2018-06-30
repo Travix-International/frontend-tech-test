@@ -1,6 +1,9 @@
 const tasksContainer = require('./tasks.json');
 const {validateTask, sortByString, reverseIfNeeded} = require('./helpers');
 
+const DEFAULT_PAGE = 1;
+const DEFAULT_SIZE_PER_PAGE = 5;
+
 module.exports = function initTaskRoutes(app) {
     /**
      * GET /api/tasks
@@ -12,16 +15,16 @@ module.exports = function initTaskRoutes(app) {
      * sortName: string,
      * sortOrder: 'asc' | 'desc'
      *
-     * Return the list of tasks with status code 200.
+     * Return the list of tasks with status code 200. If sizePerPage is not specified then returns 5.
      */
     app.get('/api/tasks', (req, res) => {
         let tasks = [...tasksContainer.tasks]; // don't accidentally modify "database" :D
 
-        let sizePerPage = 5;
+        let sizePerPage = DEFAULT_SIZE_PER_PAGE;
         if (req.query) {
 
             // Filtering
-            if (req.query.title) {
+            if (req.query.title && req.query.title.trim() !== '') {
                 tasks = tasks.filter(task => task.title.toLowerCase().indexOf(req.query.title.toLowerCase()) > -1)
             }
 
@@ -35,19 +38,18 @@ module.exports = function initTaskRoutes(app) {
             tasks = reverseIfNeeded(tasks, req.query.sortOrder);
 
             // Pagination
-            let page = parseInt(req.query.page, 10) || 1;
-            sizePerPage = parseInt(req.query.sizePerPage, 10) || 5;
+            let page = parseInt(req.query.page, 10) || DEFAULT_PAGE;
+            sizePerPage = parseInt(req.query.sizePerPage, 10) || DEFAULT_SIZE_PER_PAGE;
             if (!isNaN(page) && !isNaN(sizePerPage)) {
-                const from = (page-1)*sizePerPage;
-                const to = (page-1)*sizePerPage + sizePerPage;
-                tasks = tasks.splice(from, to);
+                tasks = tasks.splice((page-1)*sizePerPage, sizePerPage);
             }
         }
+        console.log('tasks.length / sizePerPage', tasksContainer.tasks.length, sizePerPage, tasksContainer.tasks.length / sizePerPage);
 
         return res.status(200).json({
             contextObjects: tasks,
             totalCount: tasksContainer.tasks.length, // total number in database so we know how many pages to display
-            pages: tasks.length === 0 ? 1 : (tasks.length / sizePerPage)
+            pages: tasks.length === 0 ? 1 : (Math.ceil(tasksContainer.tasks.length / sizePerPage))
         });
     });
 
@@ -69,7 +71,7 @@ module.exports = function initTaskRoutes(app) {
         }
 
         const task = tasksContainer.tasks.find((item) => item.id === id);
-        if (task === null) {
+        if (!task) {
             return res.status(404).json({ message: 'Not found.' });
         }
 
@@ -87,10 +89,6 @@ module.exports = function initTaskRoutes(app) {
      * Return status code 201.
      */
     app.post('/api/task', (req, res) => {
-        if (!req.body) {
-            return res.status(400).json({ message: 'Not created', description: 'No content' });
-        }
-
         const task = {
             id: tasksContainer.tasks.length+1,
             title: req.body.title,
@@ -122,10 +120,6 @@ module.exports = function initTaskRoutes(app) {
      * If the provided id is not a valid number return a status code 400.
      */
     app.put('/api/task/:id', (req, res) => {
-        if (!req.body) {
-            return res.status(400).json({ message: 'Content is empty' });
-        }
-
         const id = parseInt(req.params.id, 10);
         if (Number.isNaN(id)) {
             return res.status(400).json({ message: 'Bad request' });
