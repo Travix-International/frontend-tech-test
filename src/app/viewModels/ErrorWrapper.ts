@@ -1,29 +1,28 @@
 export class ErrorWrapper {
-    title: string;
+    message: string;
     description: string;
-    formValidations: ValidationResult;
-    type: ErrorType = ErrorType.GenericError;
+    validationResult: ValidationResult;
 
-    constructor(title: string, description?: string) {
-        this.title = title;
+    constructor(message: string, description?: string) {
+        this.message = message;
         this.description = description || '';
+    }
+
+    public static createFrom(obj: any): ErrorWrapper {
+        const errorWrapper = new ErrorWrapper(obj.message, obj.description);
+        errorWrapper.validationResult = obj.validationResult;
+        return errorWrapper;
     }
 }
 
-export enum ErrorType {
-    GenericError = 0,
-    ItemNotFound = 10,
-    FailedResponseError = 20
-}
-
 export class ValidationResult {
-    errors: Array<ValidationFailure>;
+    valid: boolean;
+    validationFields: Array<ValidationFailure>;
 }
 
 export class ValidationFailure {
-    propertyName: string;
-    errorMessage: string;
-    errorCode: string;
+    name: string;
+    message: string;
 }
 
 export default ErrorWrapper;

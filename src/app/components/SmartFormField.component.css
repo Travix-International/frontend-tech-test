@@ -1,0 +1,5 @@
+.SmartFormField-component__error > input,
+.SmartFormField-component__error > textarea
+{
+  border-color: red !important;
+  color: red; }

@@ -1,4 +1,5 @@
 import axios, {AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse} from 'axios';
+import ErrorWrapper from "../app/viewModels/ErrorWrapper";
 
 export default class ApiUtils {
     public static async handleGet<T>(URL: string, params: Object | null = null): Promise<T> {
@@ -43,15 +44,15 @@ export default class ApiUtils {
         return await ApiUtils.handleApi(axios.delete(URL, config));
     }
 
-    public static async handleApi<T>(promise: AxiosPromise<T>, throwT: boolean = false): Promise<T> {
+    public static async handleApi<T>(promise: AxiosPromise<T>): Promise<T> {
         return promise
             .then(function onFulfilled(value: AxiosResponse<T>): T {
                 return value.data;
             })
             .catch(function onRejected(error: AxiosError) {
                 if (error.response) {
-                    if (throwT && error.response.data) {
-                        throw error.response.data;
+                    if (error.response.data) {
+                        throw ErrorWrapper.createFrom(error.response.data);
                     } else {
                         throw 'Request failed. Code ' + (error.response.status || 'unknown');
                     }

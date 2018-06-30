@@ -3,7 +3,7 @@ import {TasksReduxState} from "./Tasks.reducer";
 import { BootstrapTable, Options, TableHeaderColumn } from 'react-bootstrap-table';
 import CommonUtilities from '../../../helpers/CommonUtilities';
 import TasksResponseViewModel from "./viewModels/TasksResponseViewModel";
-import TaskFormComponent from './Tasks.form.component';
+import TaskForm from './Tasks.form.container';
 import {Button, Container, Header} from "semantic-ui-react";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
@@ -36,6 +36,7 @@ class TasksComponent extends React.Component<TasksComponentProps> {
         super(props);
 
         this.getList = this.getList.bind(this);
+        this.onChangeSuccess = this.onChangeSuccess.bind(this);
 
         this.handleCreateStart = this.handleCreateStart.bind(this);
         this.handleCreateCancel = this.handleCreateCancel.bind(this);
@@ -68,7 +69,7 @@ class TasksComponent extends React.Component<TasksComponentProps> {
                 <Modal isOpen={pendingAdd} toggle={this.handleCreateCancel}>
                     <ModalHeader toggle={this.handleCreateCancel}>Creating</ModalHeader>
                     <ModalBody>
-                        <TaskFormComponent />
+                        <TaskForm />
                     </ModalBody>
                     <ModalFooter>
                         <Button negative={true} onClick={this.handleCreateCancel} content="Cancel" disabled={confirmLoading} />
@@ -80,7 +81,7 @@ class TasksComponent extends React.Component<TasksComponentProps> {
                 <Modal isOpen={!!pendingUpdateId && pendingUpdateId > 0} toggle={this.handleDeleteCancel}>
                     <ModalHeader>Updating</ModalHeader>
                     <ModalBody>
-                        <TaskFormComponent />
+                        <TaskForm />
                     </ModalBody>
                     <ModalFooter>
                         <Button negative={true} onClick={this.handleUpdateCancel} content="Cancel" disabled={confirmLoading} />
@@ -133,18 +134,19 @@ class TasksComponent extends React.Component<TasksComponentProps> {
     componentDidMount(): void { this.getList(); }
 
     getList(): void { this.props.fetch(); }
+    onChangeSuccess(): void { this.getList(); }
 
     handleCreateStart(): void  { this.props.createStart(); };
     handleCreateCancel(): void  { this.props.createCancel(); };
-    handleCreateSubmit(): void  { this.props.createSubmit(this.getList); };
+    handleCreateSubmit(): void  { this.props.createSubmit(this.onChangeSuccess); };
 
     handleUpdateStart(id: number): void  { this.props.updateStart(id); };
     handleUpdateCancel(): void  { this.props.updateCancel(); };
-    handleUpdateSubmit(): void  { this.props.updateSubmit(this.getList); };
+    handleUpdateSubmit(): void  { this.props.updateSubmit(this.onChangeSuccess); };
 
     handleDeleteStart(id: number): void  { this.props.deleteStart(id); };
     handleDeleteCancel(): void  { this.props.deleteCancel(); };
-    handleDeleteSubmit(): void  { this.props.deleteSubmit(this.getList); };
+    handleDeleteSubmit(): void  { this.props.deleteSubmit(this.onChangeSuccess); };
 
     actionFormat(cell: any, row: any): JSX.Element {
         return (

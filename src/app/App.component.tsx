@@ -24,7 +24,7 @@ class AppComponent extends React.Component<AppComponentStateProps & AppComponent
             return <div>Loading</div>;
         }
         if (error) {
-            return <div>[ERROR] {error.title}: {error.description}</div>
+            return <div>[ERROR] {error.message}: {error.description}</div>
         }
 
         return (
@@ -51,7 +51,7 @@ class AppComponent extends React.Component<AppComponentStateProps & AppComponent
                     timeOut={4000}
                     newestOnTop={false}
                     preventDuplicates={true}
-                    position="top-center"
+                    position="top-right"
                     transitionIn="bounceInDown"
                     transitionOut="bounceOutUp"
                     progressBar={true}

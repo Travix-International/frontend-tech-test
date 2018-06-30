@@ -57,7 +57,7 @@ export default (state: TasksReduxState = defaultState, action: Action): TasksRed
         return {...state, type: action.type, confirmLoading: false, pendingAdd: false };
     }
     if (isType(action, createStartActions.started)) {
-        return {...state, type: action.type, confirmLoading: true};
+        return {...state, type: action.type, confirmLoading: true, error: null };
     }
     if (isType(action, createStartActions.done)) {
         return { ...state, type: action.type, confirmLoading: false, pendingAdd: true };
@@ -66,7 +66,7 @@ export default (state: TasksReduxState = defaultState, action: Action): TasksRed
         return {...state, type: action.type, confirmLoading: false};
     }
     if (isType(action, createSubmitActions.started)) {
-        return {...state, type: action.type, confirmLoading: true};
+        return {...state, type: action.type, confirmLoading: true, error: null };
     }
     if (isType(action, createSubmitActions.done)) {
         return {...state, type: action.type, confirmLoading: false, pendingAdd: false };

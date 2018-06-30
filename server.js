@@ -5,11 +5,15 @@ const path = require('path');
 const cors = require('cors');
 const app = express();
 const tasksContainer = require('./tasks.json');
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors());
 
 /**
- * GET /tasks
+ * GET /api/tasks
  *
  * Return the list of tasks with status code 200.
  */
@@ -35,31 +39,56 @@ app.get('/api/tasks', (req, res) => {
  */
 app.get('/api/task/:id', (req, res) => {
     const id = parseInt(req.params.id, 10);
-
-    if (!Number.isNaN(id)) {
-        const task = tasksContainer.tasks.find((item) => item.id === id);
-
-        if (task !== null) {
-            return res.status(200).json({
-                task,
-            });
-        } else {
-            return res.status(404).json({
-                message: 'Not found.',
-            });
-        }
-    } else {
-        return res.status(400).json({
-            message: 'Bad request.',
-        });
+    if (Number.isNaN(id)) {
+        return res.status(400).json({ message: 'Bad request.' });
     }
+
+    const task = tasksContainer.tasks.find((item) => item.id === id);
+    if (task === null) {
+        return res.status(404).json({ message: 'Not found.' });
+    }
+
+    return res.status(200).json({ task });
 });
 
 /**
- * PUT /task/update/:id/:title/:description
+ * POST /task
  *
- * id: Number
+ * BODY:
  * title: string
+ * description: string
+ *
+ * Add a new task to the array tasksContainer.tasks with the given title and description.
+ * Return status code 201.
+ */
+app.post('/api/task', (req, res) => {
+    if (!req.body) {
+        return res.status(400).json({ message: 'Not created', description: 'No content' });
+    }
+
+    const task = {
+        id: tasksContainer.tasks.length+1,
+        title: req.body.title,
+        description: req.body.description,
+    };
+
+    const validationResult = validateTask(task);
+    if (!validationResult.valid) {
+        return res.status(400).json({ message: 'Not created', description: 'Validation failed', validationResult });
+    }
+
+    tasksContainer.tasks.push(task);
+    return res.status(201).json({ message: 'Resource created' });
+});
+
+/**
+ * PUT /api/task/:id
+ *
+ * URL PARAM:
+ * id: Number
+ *
+ * BODY:
+ *  title: string
  * description: string
  *
  * Update the task with the given id.
@@ -67,73 +96,36 @@ app.get('/api/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/api/task/update/:id/:title/:description', (req, res) => {
+app.put('/api/task/:id', (req, res) => {
+    if (!req.body) {
+        return res.status(400).json({ message: 'Content is empty' });
+    }
+
     const id = parseInt(req.params.id, 10);
-
-    if (!Number.isNaN(id)) {
-        const task = tasksContainer.tasks.find(item => item.id === id);
-
-        if (task !== null) {
-            task.title = req.params.title;
-            task.description = req.params.description;
-
-            const validationResult = validateTask(task);
-            if (!validationResult.valid) {
-                return res.status(400).json({
-                    message: 'Validation failed',
-                    validationResult
-                });
-            }
-
-            return res.status(204).json({
-                message: 'Updated'
-            });
-        } else {
-            return res.status(404).json({
-                message: 'Not found',
-            });
-        }
-    } else {
-        return res.status(400).json({
-            message: 'Bad request',
-        });
+    if (Number.isNaN(id)) {
+        return res.status(400).json({ message: 'Bad request' });
     }
-});
 
-/**
- * POST /task/create/:title/:description
- *
- * title: string
- * description: string
- *
- * Add a new task to the array tasksContainer.tasks with the given title and description.
- * Return status code 201.
- */
-app.post('/api/task/create/:title/:description', (req, res) => {
-    const task = {
-        id: tasksContainer.tasks.length+1,
-        title: req.params.title,
-        description: req.params.description,
-    };
+    const task = tasksContainer.tasks.find(item => item.id === id);
+    if (task === null) {
+        return res.status(404).json({ message: 'Not updated', description: `Not found with id ${id}` });
+    }
 
-    const validationResult = validateTask(task);
+    const validationResult = validateTask(req.body);
     if (!validationResult.valid) {
-        return res.status(400).json({
-            message: 'Validation failed',
-            validationResult
-        });
+        return res.status(400).json({ message: 'Not updated', description: 'Validation failed', validationResult });
     }
 
-    tasksContainer.tasks.push(task);
+    task.title = req.body.title;
+    task.description = req.body.description;
 
-    return res.status(201).json({
-        message: 'Resource created',
-    });
+    return res.status(204).json({ message: 'Updated' });
 });
 
 /**
- * DELETE /task/delete/:id
+ * DELETE /api/task/:id
  *
+ * URL PARAM:
  * id: Number
  *
  * Delete the task linked to the  given id.
@@ -141,28 +133,21 @@ app.post('/api/task/create/:title/:description', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/api/task/delete/:id', (req, res) => {
+app.delete('/api/task/:id', (req, res) => {
     const id = parseInt(req.params.id, 10);
 
-    if (!Number.isNaN(id)) {
-        const task = tasksContainer.tasks.find(item => item.id === id);
-
-        if (task !== null) {
-            const taskIndex = tasksContainer.tasks;
-            tasksContainer.tasks.splice(taskIndex, 1);
-            return res.status(200).json({
-                message: 'Updated successfully',
-            });
-        } else {
-            return es.status(404).json({
-                message: 'Not found',
-            });
-        }
-    } else {
-        return res.status(400).json({
-            message: 'Bad request',
-        });
+    if (Number.isNaN(id)) {
+        return res.status(400).json({ message: 'Bad request' });
     }
+
+    const task = tasksContainer.tasks.find(item => item.id === id);
+    if (!task) {
+        return es.status(404).json({ message: 'Not deleted', description: `Not found with id ${id}` });
+    }
+
+    const taskIndex = tasksContainer.tasks;
+    tasksContainer.tasks.splice(taskIndex, 1);
+    return res.status(200).json({ message: 'Deleted successfully' });
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -186,27 +171,20 @@ app.listen(5000, () => {
  */
 function validateTask(task) {
     if (!task) {
-        return {
-            valid: false
-        }
+        return { valid: false }
     }
 
     const validationFields = [];
     if (!task.title) {
-        error.push({name: 'title', message: 'Title is empty'})
+        validationFields.push({name: 'title', message: 'Title is empty'})
     }
     if (!task.description) {
-        error.push({name: 'description', message: 'Description is empty'})
+        validationFields.push({name: 'description', message: 'Description is empty'})
     }
 
     if (validationFields.length > 0) {
-        return {
-            valid: false,
-            validationFields
-        }
+        return { valid: false, validationFields }
     }
 
-    return {
-        valid: true
-    }
+    return { valid: true }
 }

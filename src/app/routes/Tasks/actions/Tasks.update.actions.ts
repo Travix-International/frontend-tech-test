@@ -57,10 +57,6 @@ export function submit(onSuccess: Function) {
             const state = getState();
 
             let formValues = state.form[taskFormName].values || {};
-            if (!formValues) {
-                throw new ErrorWrapper('Nothing was filled');
-            }
-
             const currentState: TasksReduxState = state[REDUCER_NAME__TASKS];
             if (!currentState.pendingUpdateId) {
                 throw new ErrorWrapper('Id is missing');

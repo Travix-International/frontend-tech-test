@@ -47,10 +47,7 @@ export function submit(onSuccess: Function) {
 
         async function mainAction() {
             dispatch(submitActions.started({}));
-            let formValues = getState().form[taskFormName].values;
-            if (!formValues) {
-                throw new ErrorWrapper('Nothing was filled');
-            }
+            let formValues = getState().form[taskFormName].values || {};
             await TaskApi.add(formValues);
             dispatch(submitActions.done({ params: {}, result: {} }));
             CommonUtilities.showSuccessToast('Success', 'Item was successfully created');

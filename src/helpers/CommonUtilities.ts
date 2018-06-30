@@ -1,4 +1,4 @@
-import { animateScroll } from 'react-scroll';
+import { animateScroll } from "react-scroll";
 import {ErrorWrapper} from "../app/viewModels/ErrorWrapper";
 import {toastr} from "react-redux-toastr";
 

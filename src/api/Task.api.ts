@@ -25,18 +25,14 @@ export default class TaskApi {
     }
 
     public static add(formValues: any) { // TODO: make strongly-typed
-        const title = formValues.title;
-        const description = formValues.description;
-        return ApiUtils.handlePost<MessageResponseDto>(`${BACKEND_HOST_MAIN}api/task/create/${title}/${description}`, {});
+        return ApiUtils.handlePost<MessageResponseDto>(`${BACKEND_HOST_MAIN}api/task`, formValues);
     }
 
     public static update(id: number, formValues: any) { // TODO: make strongly-typed
-        const title = formValues.title;
-        const description = formValues.description;
-        return ApiUtils.handlePut<MessageResponseDto>(`${BACKEND_HOST_MAIN}api/task/update/${id}/${title}/${description}`, {});
+        return ApiUtils.handlePut<MessageResponseDto>(`${BACKEND_HOST_MAIN}api/task/${id}`, formValues);
     }
 
     public static remove(id: number) {
-        return ApiUtils.handleDelete(`${BACKEND_HOST_MAIN}api/task/delete/${id}`);
+        return ApiUtils.handleDelete(`${BACKEND_HOST_MAIN}api/task/${id}`);
     }
 }

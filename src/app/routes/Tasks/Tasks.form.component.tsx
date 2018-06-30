@@ -1,24 +1,32 @@
 import * as React from 'react';
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {InjectedFormProps, reduxForm} from "redux-form";
 import {Col, Form, FormGroup, Label} from "reactstrap";
+import ErrorWrapper from "../../viewModels/ErrorWrapper";
+import ErrorMessageComponent from "../../components/ErrorMessage.component";
+import TaskCreateOrUpdateRequestViewModel from "./viewModels/TaskCreateOrUpdateRequestViewModel";
+import SmartFormField from "../../components/SmartFormField.component";
 
+export interface TaskFormComponentStateProps {
+    errorWrapper?: ErrorWrapper | null;
+}
 export const taskFormName = 'task';
-class TasksFormComponent extends React.Component<InjectedFormProps<any>> {
+class TaskField extends SmartFormField<keyof TaskCreateOrUpdateRequestViewModel> {}
+class TasksFormComponent extends React.Component<TaskFormComponentStateProps & InjectedFormProps<any>> {
     render() {
         return (
             <Form>
-                <FormGroup row>
-                    <Label for="taskTitle" sm={2}>Email</Label>
+                <ErrorMessageComponent error={this.props.errorWrapper} />
+
+                <FormGroup row={true}>
+                    <Label for="title" sm={2}>Title</Label>
                     <Col sm={10}>
-                        <Field id="taskTitle" className="form-control" name="title" component="input" placeholder="Title"/>
-                        {/*<Input type="email" name="email" id="exampleEmail" placeholder="with a placeholder" />*/}
+                        <TaskField id="title" className="form-control" name="title" type="text" placeholder="Title" errorWrapper={this.props.errorWrapper}/>
                     </Col>
                 </FormGroup>
-                <FormGroup row>
-                    <Label for="taskDescription" sm={2}>Password</Label>
+                <FormGroup row={true}>
+                    <Label for="description" sm={2}>Description</Label>
                     <Col sm={10}>
-                        <Field id="taskDescription" className="form-control" name="description" component="textarea" placeholder="Description"/>
-                        {/*<Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />*/}
+                        <TaskField id="description" className="form-control" name="description" type="textarea" placeholder="Description" errorWrapper={this.props.errorWrapper}/>
                     </Col>
                 </FormGroup>
             </Form>
