@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Index from './Index.component';
-import './index.scss';
+import './index.css';
 import {unregister} from './registerServiceWorker';
 
 ReactDOM.render(

@@ -125,7 +125,7 @@ class TasksComponent extends React.Component<TasksComponentProps, TasksComponent
                     <Header as="h2">
                         <i className="fa fa-key"/> Tasks [{total}]
                     </Header>
-                    <Form>
+                    <Form onSubmit={e => e.preventDefault()}>
                         <FormGroup>
                             <Label for="exampleEmail">Search by title</Label>
                             <Input type="text" name="title" id="search-title" placeholder="title" onChange={this.handleSearch} />
@@ -196,11 +196,22 @@ class TasksComponent extends React.Component<TasksComponentProps, TasksComponent
 
     actionFormat(cell: any, row: any): JSX.Element {
         return (
-            <Button.Group>
-                <Button primary={true} onClick={e => this.handleUpdateStart(row.id)}>Update</Button>
-                <Button.Or />
-                <Button negative={true} onClick={e => this.handleDeleteStart(row.id)}>Delete</Button>
-            </Button.Group>
+            <div>
+                <div className="d-none d-sm-block">
+                    <Button.Group>
+                        <Button primary={true} onClick={e => this.handleUpdateStart(row.id)}>Update</Button>
+                        <Button.Or />
+                        <Button negative={true} onClick={e => this.handleDeleteStart(row.id)}>Delete</Button>
+                    </Button.Group>
+                </div>
+                <div className="d-block d-sm-none">
+                    <Button.Group basic size="small" >
+                        <Button icon="edit" onClick={e => this.handleUpdateStart(row.id)} />
+                        <Button icon="delete" onClick={e => this.handleDeleteStart(row.id)} />
+                    </Button.Group>
+                </div>
+            </div>
+
         );
     }
 

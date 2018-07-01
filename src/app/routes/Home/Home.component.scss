@@ -1,0 +1,39 @@
+@import '../../../base.scss';
+
+.Home-component__ver-b-main {
+  text-align: center;
+  font: 1em/1.5 Georgia, serif;
+  color: #333;
+  padding: 5em 0 0;
+
+  h2 {
+    font-family: Bitter, Georgia, serif;
+    font-style: italic;
+    font-size: 2.25em;
+    padding: 0 1em;
+    margin-top: 0 !important;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .avatar {
+    box-shadow: 0 0 0 3px #fff, 0 0 0 4px #ccc, 0 4px 6px #333;
+    @include border-radius(10em);
+    width: 200px;
+    height: 200px;
+  }
+
+  section {
+    padding: 10px;
+  }
+}
+
+
+

@@ -6,7 +6,9 @@ import Variant from "react-ab-test/lib/Variant";
 import emitter from "react-ab-test/lib/emitter";
 import HomeVersionAComponent from './Home.inner-version-a.component';
 import HomeVersionBComponent from './Home.inner-version-b.component';
-emitter.defineVariants("My Experiment", ["A", "B"], [95, 5]);
+import './Home.component.css';
+emitter.defineVariants("My Experiment", ["B", "A"], [95, 5]);
+// emitter.setActiveVariant('My Experiment', 'B');
 
 export interface ComponentProps {}
 class HomeComponent extends React.Component<ComponentProps & RouteComponentProps<any>> {
@@ -15,18 +17,18 @@ class HomeComponent extends React.Component<ComponentProps & RouteComponentProps
             <Container>
                 <Header as="h2">Travix frontend assignment. &nbsp;
                     <Button.Group>
-                        <Button secondary={true} onClick={e => emitter.setActiveVariant('My Experiment', 'A')}>Variant A</Button>
-                        <Button.Or />
                         <Button secondary={true} onClick={e => emitter.setActiveVariant('My Experiment', 'B')}>Variant B</Button>
+                        <Button.Or />
+                        <Button secondary={true} onClick={e => emitter.setActiveVariant('My Experiment', 'A')}>Variant A</Button>
                     </Button.Group>
                 </Header>
 
                 <Experiment ref="experiment" name="My Experiment">
-                    <Variant name="A">
-                        <HomeVersionAComponent />
-                    </Variant>
                     <Variant name="B">
                         <HomeVersionBComponent />
+                    </Variant>
+                    <Variant name="A">
+                        <HomeVersionAComponent />
                     </Variant>
                 </Experiment>
 

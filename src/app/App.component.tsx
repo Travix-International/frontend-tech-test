@@ -8,7 +8,6 @@ import {routePaths} from "./constants/App.route-paths";
 import Header from "./App.Header.component";
 import {injectAsyncReducer} from "../store";
 import {store} from "../Index.component";
-import {Container} from "semantic-ui-react";
 
 export interface AppComponentStateProps {
     loading: boolean;
@@ -28,7 +27,7 @@ class AppComponent extends React.Component<AppComponentStateProps & AppComponent
         }
 
         return (
-            <Container>
+            <div>
                 <Header />
 
                 <Switch>
@@ -56,7 +55,7 @@ class AppComponent extends React.Component<AppComponentStateProps & AppComponent
                     transitionOut="bounceOutUp"
                     progressBar={true}
                 />
-            </Container>
+            </div>
         );
     }
 }
