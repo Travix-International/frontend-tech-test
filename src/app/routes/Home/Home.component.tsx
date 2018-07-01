@@ -1,60 +1,48 @@
 import * as React from 'react';
-import {Button, Container, Grid, Header, Image} from "semantic-ui-react";
-import image from './assets/me.jpg';
+import {Button, Container, Header} from "semantic-ui-react";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {routePaths} from "../../constants/App.route-paths";
-import Anime from 'react-anime';
-const Anime1: any = Anime;
+import Experiment from "react-ab-test/lib/Experiment";
+import Variant from "react-ab-test/lib/Variant";
+import emitter from "react-ab-test/lib/emitter";
+import HomeVersionAComponent from './Home.inner-version-a.component';
+import HomeVersionBComponent from './Home.inner-version-b.component';
+emitter.defineVariants("My Experiment", ["A", "B"], [95, 5]);
 
 export interface ComponentProps {}
 class HomeComponent extends React.Component<ComponentProps & RouteComponentProps<any>> {
     render() {
         return (
             <Container>
-                <Header as="h2">Travix frontend assignment.</Header>
+                <Header as="h2">Travix frontend assignment. &nbsp;
+                    <Button.Group>
+                        <Button secondary={true} onClick={e => emitter.setActiveVariant('My Experiment', 'A')}>Variant A</Button>
+                        <Button.Or />
+                        <Button secondary={true} onClick={e => emitter.setActiveVariant('My Experiment', 'B')}>Variant B</Button>
+                    </Button.Group>
+                </Header>
 
-                <Grid celled={false}>
-                    <Grid.Row>
-                        <Grid.Column width={3}>
-                            <Image src={image} />
-                        </Grid.Column>
-                        <Grid.Column width={13}>
-                            <Anime1 opacity={[0, 1]} translateY={'1em'} delay={(e, i) => i * 1000}>
-                                <h2>Hi, my name is Jevgeni.</h2>
-                                <section>
-                                    <p>This is the solution for assignment</p>
-                                </section>
-                                <section>
-                                    <p>I've been using technologies like...</p>
-                                </section>
-                                <section>
-                                    <p>...React & Redux...</p>
-                                </section>
-                                <section>
-                                    <p>...reactstrap & semantic-ui...</p>
-                                </section>
-                                <section>
-                                    ...rxjs...
-                                </section>
-                                <section>
-                                    ...and as for backend, it's written in express...
-                                </section>
-                                <section>
-                                    ...and fully tested using integration tests like chai, chai-http and mocha.
-                                </section>
-                                <section>
-                                    Have fun with task list management.
-                                </section>
-                                <section>
-                                    <Button positive={true} content={"Manage tasks"} onClick={e => this.props.history.push(routePaths.tasks)} />
-                                </section>
-                            </Anime1>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
+                <Experiment ref="experiment" name="My Experiment">
+                    <Variant name="A">
+                        <HomeVersionAComponent />
+                    </Variant>
+                    <Variant name="B">
+                        <HomeVersionBComponent />
+                    </Variant>
+                </Experiment>
+
             </Container>
         )
     }
 }
+
+// Called when the experiment is displayed to the user.
+emitter.addPlayListener(function(experimentName, variantName){
+    console.log("Displaying experiment ‘" + experimentName + "’ variant ‘" + variantName + "’");
+});
+
+// Called when a 'win' is emitted, in this case by this.refs.experiment.win()
+emitter.addWinListener(function(experimentName, variantName){
+    console.log("Variant ‘" + variantName + "’ of experiment ‘" + experimentName + "’  was clicked");
+});
 
 export default withRouter(HomeComponent);

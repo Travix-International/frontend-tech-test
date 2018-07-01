@@ -37,28 +37,61 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 * using the `made in Travix` technologies
 * ... Impress us!
 
+----
+
 # Developer's notes
+
+## Try out
+
+You can see application if you go to https://travixfrontendjevgenirum.azurewebsites.net.
 
 ## Getting started
 
-Install dependencies:
-`yarn`
+Install dependencies and run application with frontend and backend (default ports are 3000 and 5000):
+```
+yarn
+yarn dev
+```
 
-To run application in development mode, use:
-`yarn start` in one terminal to start frontend app and `yarn server` in another to start backend app.
+Alternatively, to run application separately in frontend, use:
+```
+yarn start
+```
 
-Alternatively, run `yarn dev` to run those processes simultaneously.
+... and to run application separately in backend, use:
+```
+yarn server
+```
 
-Client app uses port 3000, server app uses 5000.
+## What is used
+
+Features:
+- routing
+- CRUD tasks
+- searching (using rxjs)
+- server-side sorting, filtering, pagination; displaying results in paginated table
+- input validation: title and description are both required
 
 ## Deployment
 
 For continuous integration it is used CircleCI. Picture: https://gyazo.com/0f85a980b40c67a1a484a98ac8e8284a
 CircleCI uses Docker to build images.
 
-To build docker image, use `docker build -t <image-name> .`.
+To build docker image locally, use `docker build -t <image-name> .`.
 To run docker image locally, use `docker run -p 5000:5000 <image-name>`.
 
-## Try out
+## Integration testing
 
-Go to https://travixfrontendjevgenirum.azurewebsites.net to see deployed app
+To run express integration API tests, run
+```
+yarn server-tests
+```
+Libraries chai and chai-http were used for testing. During the test, application's port 5000 will be used
+
+## React/Redux unit testing
+
+There are few tests located in ``/src/app/routes/Tasks/__tests__`.
+To run all the react/redux tests, run:
+```
+yarn test
+```
