@@ -45,6 +45,7 @@
     "react-anime": "^2.1.0",
     "react-bootstrap-table": "^4.3.1",
     "react-dom": "^16.4.1",
+    "react-particles-js": "^2.2.0",
     "react-placeholder": "2.0.0",
     "react-redux": "^5.0.7",
     "react-redux-toastr": "^7.3.0",

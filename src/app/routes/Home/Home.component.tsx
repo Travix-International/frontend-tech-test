@@ -8,20 +8,21 @@ import HomeVersionAComponent from './Home.inner-version-a.component';
 import HomeVersionBComponent from './Home.inner-version-b.component';
 import './Home.component.css';
 emitter.defineVariants("My Experiment", ["B", "A"], [95, 5]);
-// emitter.setActiveVariant('My Experiment', 'B');
 
 export interface ComponentProps {}
 class HomeComponent extends React.Component<ComponentProps & RouteComponentProps<any>> {
     render() {
         return (
-            <Container>
-                <Header as="h2">Travix frontend assignment. &nbsp;
-                    <Button.Group>
-                        <Button secondary={true} onClick={e => emitter.setActiveVariant('My Experiment', 'B')}>Variant B</Button>
-                        <Button.Or />
-                        <Button secondary={true} onClick={e => emitter.setActiveVariant('My Experiment', 'A')}>Variant A</Button>
-                    </Button.Group>
-                </Header>
+            <div>
+                <Container>
+                    <Header as="h2">Travix frontend assignment. &nbsp;
+                        <Button.Group>
+                            <Button secondary={true} onClick={e => emitter.setActiveVariant('My Experiment', 'B')}>Variant B</Button>
+                            <Button.Or />
+                            <Button secondary={true} onClick={e => emitter.setActiveVariant('My Experiment', 'A')}>Variant A</Button>
+                        </Button.Group>
+                    </Header>
+                </Container>
 
                 <Experiment ref="experiment" name="My Experiment">
                     <Variant name="B">
@@ -31,8 +32,7 @@ class HomeComponent extends React.Component<ComponentProps & RouteComponentProps
                         <HomeVersionAComponent />
                     </Variant>
                 </Experiment>
-
-            </Container>
+            </div>
         )
     }
 }

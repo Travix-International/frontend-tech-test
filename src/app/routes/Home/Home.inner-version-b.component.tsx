@@ -7,7 +7,7 @@ import Anime from 'react-anime';
 const Anime1: any = Anime; // this library has a lot of required props which are not required actually
 
 export interface ComponentProps {}
-class HomeVersion1Component extends React.Component<ComponentProps & RouteComponentProps<any>> {
+class HomeVersionBComponent extends React.Component<ComponentProps & RouteComponentProps<any>> {
     render() {
         return (
             <div className="Home-component__ver-b-main">
@@ -48,4 +48,4 @@ class HomeVersion1Component extends React.Component<ComponentProps & RouteCompon
     }
 }
 
-export default withRouter(HomeVersion1Component);
+export default withRouter(HomeVersionBComponent);
