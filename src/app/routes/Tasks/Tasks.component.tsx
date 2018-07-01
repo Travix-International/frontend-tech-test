@@ -85,7 +85,7 @@ class TasksComponent extends React.Component<TasksComponentProps, TasksComponent
         };
 
         return (
-            <div>
+            <div className="test">
                 {/* Creating */}
                 <Modal isOpen={pendingAdd} toggle={this.handleCreateCancel}>
                     <ModalHeader toggle={this.handleCreateCancel}>Creating</ModalHeader>
@@ -121,7 +121,7 @@ class TasksComponent extends React.Component<TasksComponentProps, TasksComponent
                 </Modal>
 
                 <Container>
-                    <Button positive={true} onClick={e => this.handleCreateStart()}>Add new task</Button>
+                    <Button id="add-new-task" positive={true} onClick={e => this.handleCreateStart()}>Add new task</Button>
                     <Header as="h2">
                         <i className="fa fa-key"/> Tasks [{total}]
                     </Header>
