@@ -163,8 +163,7 @@ module.exports = function initTaskRoutes(app) {
             return res.status(400).json({ message: 'Bad request' });
         }
 
-        const task = tasksContainer.tasks.find(x => x.id === id);
-        const taskIndex = tasksContainer.tasks.indexOf(task);
+        const taskIndex = tasksContainer.tasks.findIndex(x => x.id === id);
         if (taskIndex === -1) {
             return res.status(404).json({ message: 'Not deleted', description: `Not found with id ${id}` });
         }
