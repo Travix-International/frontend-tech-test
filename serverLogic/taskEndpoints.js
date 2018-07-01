@@ -38,7 +38,7 @@ module.exports = function initTaskRoutes(app) {
             tasks = reverseIfNeeded(tasks, req.query.sortOrder);
 
             // Pagination
-            let page = parseInt(req.query.page, 10) || DEFAULT_PAGE;
+            const page = parseInt(req.query.page, 10) || DEFAULT_PAGE;
             sizePerPage = parseInt(req.query.sizePerPage, 10) || DEFAULT_SIZE_PER_PAGE;
             if (!isNaN(page) && !isNaN(sizePerPage)) {
                 tasks = tasks.splice((page-1)*sizePerPage, sizePerPage);

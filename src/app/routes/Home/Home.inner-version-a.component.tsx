@@ -24,7 +24,7 @@ export default withRouter(HomeVersionAComponent);
 const config = {
     'particles': {
         'number': {
-            'value': 100,
+            'value': 30,
             'density': {
                 'enable': true,
                 'value_area': 800

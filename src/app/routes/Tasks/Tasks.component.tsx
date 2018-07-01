@@ -4,8 +4,8 @@ import {BootstrapTable, Options, SortOrder, TableHeaderColumn} from 'react-boots
 import * as Rx from 'rxjs/Rx';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
-import {Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input} from 'reactstrap';
-import {Button, Container, Header} from "semantic-ui-react";
+import {Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input} from 'reactstrap';
+import {Button, Container, Header, Label} from "semantic-ui-react";
 
 import CommonUtilities from '../../../helpers/CommonUtilities';
 import TasksResponseViewModel from "./viewModels/TasksResponseViewModel";
@@ -123,11 +123,12 @@ class TasksComponent extends React.Component<TasksComponentProps, TasksComponent
                 <Container>
                     <Button id="add-new-task" positive={true} onClick={e => this.handleCreateStart()}>Add new task</Button>
                     <Header as="h2">
-                        <i className="fa fa-key"/> Tasks [{total}]
+                        <i className="fa fa-key"/> Tasks &nbsp;
+                        <Label as='a' color='teal' tag={true}>{total}</Label>
                     </Header>
                     <Form onSubmit={e => e.preventDefault()}>
                         <FormGroup>
-                            <Label for="exampleEmail">Search by title</Label>
+                            <Label htmlFor="search-title">Search by title</Label>
                             <Input type="text" name="title" id="search-title" placeholder="title" onChange={this.handleSearch} />
                         </FormGroup>
                     </Form>

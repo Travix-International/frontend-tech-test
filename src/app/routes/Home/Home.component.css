@@ -24,21 +24,24 @@
   .Home-component__ver-b-main section {
     padding: 10px; }
 
-
 .Home-component__ver-a-particles {
-    width: 100%;
-    margin-top: 10px;
-}
+  width: 100%;
+  margin-top: 10px; }
 
 .Home-component__ver-a-box {
-    position: absolute;
-    margin-top: 2em;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    background: white;
-    width: 600px;
-    height: 800px;
-    border-radius: 5em;
-}
+  position: absolute;
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  background: white;
+  width: 600px;
+  height: 800px;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  border-radius: 0.5em; }
+
+@media only screen and (max-width: 600px) {
+  .Home-component__ver-a-box {
+    width: 300px; } }

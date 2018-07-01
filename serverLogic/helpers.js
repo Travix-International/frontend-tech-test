@@ -24,8 +24,8 @@ function validateTask(task) {
 }
 
 function sortByString(a, b, commonPropertyName) {
-    const nameA = a[commonPropertyName].toUpperCase(); // ignore upper and lowercase
-    const nameB = b[commonPropertyName].toUpperCase(); // ignore upper and lowercase
+    const nameA = a[commonPropertyName].toUpperCase(); // case insensitive
+    const nameB = b[commonPropertyName].toUpperCase(); // case insensitive
     if (nameA > nameB)
         return 1;
     if (nameA < nameB)
