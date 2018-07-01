@@ -40,6 +40,5 @@
     background: white;
     width: 600px;
     height: 800px;
-    box-shadow: 0 0 0 3px #fff, 0 0 0 4px #ccc, 0 4px 6px #333;
-    box-radius: .5em;
+    border-radius: 5em;
 }

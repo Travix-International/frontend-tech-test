@@ -40,3 +40,16 @@
   margin-top: 10px;
 }
 
+.Home-component__ver-a-box {
+  position: absolute;
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  background: white;
+  width: 600px;
+  height: 800px;
+  //box-shadow: 0 0 0 3px #fff, 0 0 0 4px #ccc, 0 4px 6px #333;
+  @include border-radius(.5em);
+}
