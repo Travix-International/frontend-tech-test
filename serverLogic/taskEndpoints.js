@@ -88,8 +88,13 @@ module.exports = function initTaskRoutes(app) {
      * Return status code 201.
      */
     app.post('/api/task', (req, res) => {
+        let nextId = 1;
+        if (tasksContainer.tasks.length > 0) {
+            const ids = tasksContainer.tasks.map(task => task.id);
+            nextId = Math.max(...ids)+1;
+        }
         const task = {
-            id: tasksContainer.tasks.length+1,
+            id: nextId,
             title: req.body.title,
             description: req.body.description,
         };
@@ -158,13 +163,13 @@ module.exports = function initTaskRoutes(app) {
             return res.status(400).json({ message: 'Bad request' });
         }
 
-        const task = tasksContainer.tasks.find(item => item.id === id);
-        if (!task) {
-            return es.status(404).json({ message: 'Not deleted', description: `Not found with id ${id}` });
+        const task = tasksContainer.tasks.find(x => x.id === id);
+        const taskIndex = tasksContainer.tasks.indexOf(task);
+        if (taskIndex === -1) {
+            return res.status(404).json({ message: 'Not deleted', description: `Not found with id ${id}` });
         }
 
-        const taskIndex = tasksContainer.tasks;
         tasksContainer.tasks.splice(taskIndex, 1);
         return res.status(200).json({ message: 'Deleted successfully' });
     });
-}
+};
