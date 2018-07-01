@@ -2,11 +2,11 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import {expect} from 'chai';
-import getList, {asyncActions} from '../Tasks.fetch.action';​
+import getList, {asyncActions} from '../actions/Tasks.fetch.action';​
 import axios from 'axios';
-import TasksResponseViewModel from "../../viewModels/TasksResponseViewModel";
-import {TableData} from "../../../../viewModels/index";
-import TaskSearchOptions from "../../viewModels/TaskSearchOptions";
+import TasksResponseViewModel from "../viewModels/TasksResponseViewModel";
+import {TableData} from "../../../viewModels/index";
+import TaskSearchOptions from "../viewModels/TaskSearchOptions";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
