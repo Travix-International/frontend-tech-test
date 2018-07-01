@@ -62,7 +62,11 @@
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",
     "typescript": "^2.9.2",
-    "typescript-fsa": "^3.0.0-beta-2"
+    "typescript-fsa": "^3.0.0-beta-2",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "jest-express": "^1.6.0",
+    "mocha": "^5.2.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
@@ -78,9 +82,5 @@
   },
   "proxy": "http://localhost:5000/",
   "devDependencies": {
-    "chai": "^4.1.2",
-    "chai-http": "^4.0.0",
-    "jest-express": "^1.6.0",
-    "mocha": "^5.2.0"
   }
 }
