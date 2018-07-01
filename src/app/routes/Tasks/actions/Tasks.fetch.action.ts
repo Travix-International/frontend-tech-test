@@ -2,14 +2,15 @@ import actionCreatorFactory from 'typescript-fsa';
 import { Dispatch } from 'redux';
 
 import CommonUtilities from '../../../../helpers/CommonUtilities';
-import {ErrorWrapper, TableData, PaginationOptions} from '../../../viewModels';
+import {ErrorWrapper, TableData} from '../../../viewModels';
 import TasksResponseViewModel from "../viewModels/TasksResponseViewModel";
 import TasksApi from "../../../../api/Task.api";
+import TaskSearchOptions from "../viewModels/TaskSearchOptions";
 
 const actionCreator = actionCreatorFactory();
 export const asyncActions = actionCreator.async<{}, {tableData: TableData<TasksResponseViewModel>}, ErrorWrapper>('TASKS/FETCH');
 
-export default function submit(searchOptions: PaginationOptions): any {
+export default function submit(searchOptions: TaskSearchOptions): any {
     return async (dispatch: Dispatch<any>) => {
 
         async function mainAction() {
