@@ -90,9 +90,9 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
+    description: req.params.description,
     id: tasksContainer.tasks.length,
     title: req.params.title,
-    description: req.params.description,
   };
 
   tasksContainer.tasks.push(task);
