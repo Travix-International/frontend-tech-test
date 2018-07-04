@@ -1,0 +1,26 @@
+.todos {
+  display: grid;
+  grid-template-columns: repeat(4, 24%);
+  grid-column-gap: calc(4% / 3);
+}
+
+@media (max-width: 1220px) {
+  .todos {
+    grid-template-columns: repeat(3, 32%);
+    grid-column-gap: 1%
+  }
+}
+
+@media (max-width: 980px) {
+  .todos {
+    grid-template-columns: repeat(2, 49%);
+    grid-column-gap: 2%
+  }
+}
+
+@media (max-width: 788px) {
+  .todos {
+    display: flex;
+    flex-direction: column;
+  }
+}

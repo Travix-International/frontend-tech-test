@@ -1,7 +1,13 @@
 'use strict';
 
-const app = require('express')();
+const express = require('express');
+const app = express();
 const tasksContainer = require('./tasks.json');
+const path = require('path');
+const morgan = require('morgan');
+
+app.use(express.static(__dirname));
+app.use(morgan('dev'));
 
 /**
  * GET /tasks
@@ -31,7 +37,7 @@ app.get('/task/:id', (req, res) => {
 
     if (task !== null) {
       return res.status(200).json({
-        task,
+        task
       });
     } else {
       return res.status(404).json({
@@ -57,16 +63,20 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
+app.put('/task/update/:id/:title/:description/:isDone', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-
+    
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      task.isDone = req.params.isDone.includes('true');
+      
+      return res.status(200).json({
+        task
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -90,15 +100,17 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: Date.now(),
     title: req.params.title,
     description: req.params.description,
+    isDone: false 
   };
 
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
     message: 'Resource created',
+    task
   });
 });
 
@@ -116,16 +128,16 @@ app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
   
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
+    if (taskIndex + 1) {
+      const deletedTask = tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',
+        id: deletedTask[0].id
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
       });
     }
@@ -135,6 +147,10 @@ app.delete('/task/delete/:id', (req, res) => {
     });
   }
 });
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+})
 
 app.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');

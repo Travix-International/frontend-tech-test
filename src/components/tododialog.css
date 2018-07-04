@@ -1,0 +1,65 @@
+.content {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.sidebar {
+  display: flex;
+  padding: 0 8px;
+  border-right: 2px solid #000;
+}
+
+.text {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: #000;
+}
+
+.title {
+  composes: text;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.description {
+  composes: text;
+}
+
+.input {
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  padding: 8px;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000;
+  border-radius: 2px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  outline: none;
+}
+
+.input::placeholder {
+  text-transform: capitalize;
+}
+
+.textarea {
+  box-sizing: border-box;
+  padding: 8px;
+  width: 100%;
+  min-height: 150px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000;
+  border-radius: 2px;
+  border: 1px solid #ddd;
+  outline: none;
+  resize: none;
+}
+
+.textarea::placeholder {
+  text-transform: capitalize;
+}

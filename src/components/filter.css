@@ -1,0 +1,12 @@
+.list {
+  padding: 0;
+  margin: 16px 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  list-style: none;
+}
+
+.item:not(:last-child) {
+  margin-right: 8px;
+}
