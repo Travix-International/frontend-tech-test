@@ -13,8 +13,6 @@ export const getTodos = (req,res) => {
 }
 
 export const addTodo = (io,T) => {
-  console.log(T);
-  
   let result;
   const newTodo = new Todo(T);
   newTodo.save((err,todo) => {
