@@ -1,9 +1,7 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import CSSModules from 'react-css-modules';
-import Button from 'react-toolbox/lib/button';
 
 import {
   addTodo,
@@ -12,11 +10,13 @@ import {
   updateTodo
 } from '../actions/todos.js';
 import { setActiveTodo, unsetActiveTodo } from '../actions/activetodo.js';
-import { showDialog, hideDialog } from '../actions/dialog.js';
-import TodoDialog from './tododialog.jsx';
-import Filter from './filter.jsx';
-import TodoList from './todolist.jsx';
-import styles from './app.css';
+import {
+  showDialog,
+  hideDialog,
+  changeDialogField,
+  changeDialogView
+} from '../actions/dialog.js';
+import Main from './main.jsx';
 
 class App extends PureComponent {
   static propTypes = {
@@ -29,9 +29,11 @@ class App extends PureComponent {
     activeTodo: PropTypes.number,
     todos: PropTypes.array,
     match: PropTypes.object,
-    isDialogActive: PropTypes.bool,
+    dialog: PropTypes.object,
     showDialog: PropTypes.func,
     hideDialog: PropTypes.func,
+    changeDialogField: PropTypes.func,
+    changeDialogView: PropTypes.func,
     dialogTodo: PropTypes.object
   }
 
@@ -39,84 +41,16 @@ class App extends PureComponent {
     const { getTodos } = this.props;
     getTodos();
   }
-
-  filterTodos() {
-    const { match, todos } = this.props;
-    const { filter } = match.params;
-    return todos.filter(todo => (
-      (filter === 'done' && todo.isDone)
-      || (filter === 'notdone' && !todo.isDone)
-      || !filter
-    ));
-  }
-
-  addTodoClick = () => {
-    const { showDialog, unsetActiveTodo } = this.props;
-    unsetActiveTodo();
-    showDialog();
-  }
   
   render() {
-    const {
-      isDialogActive,
-      activeTodo,
-      addTodo,
-      deleteTodo,
-      updateTodo,
-      setActiveTodo,
-      unsetActiveTodo,
-      showDialog,
-      hideDialog,
-      dialogTodo
-    } = this.props;
-    const todos = this.filterTodos();
-
-    return (
-      <Fragment>
-        <header styleName='header'>
-          <div styleName='container'>
-            <div styleName='content'>
-              todos
-              <Button
-                icon='add'
-                label='Add todo'
-                raised
-                onClick={ this.addTodoClick }
-              />
-            </div>
-          </div>
-        </header>
-        <main styleName='main'>
-          <div styleName='container'>
-            <TodoDialog
-              addTodo={ addTodo }
-              updateTodo={ updateTodo }
-              deleteTodo={ deleteTodo }
-              isActive={ isDialogActive }
-              hideDialog={ hideDialog }
-              todo={ dialogTodo }
-            />
-            <Filter />
-            <TodoList
-              todos={ todos }
-              activeTodo={ activeTodo }
-              deleteTodo={ deleteTodo }
-              updateTodo={ updateTodo }
-              setActiveTodo={ setActiveTodo }
-              unsetActiveTodo={ unsetActiveTodo }
-              showDialog={ showDialog }
-            />
-          </div>
-        </main>
-      </Fragment>
-    );
+    return <Main { ...this.props } />;
   }
 }
 
 const mapStateToProps = (state) => ({
   todos: state.todos,
   activeTodo: state.activeTodo,
-  isDialogActive: state.dialog,
+  dialog: state.dialog,
   dialogTodo: state.todos.find(todo => todo.id === state.activeTodo)
 });
 
@@ -128,7 +62,9 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   setActiveTodo,
   unsetActiveTodo,
   showDialog,
-  hideDialog
+  hideDialog,
+  changeDialogField,
+  changeDialogView
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(CSSModules(App, styles));
+export default connect(mapStateToProps, mapDispatchToProps)(App);

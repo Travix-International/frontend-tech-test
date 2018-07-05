@@ -2,14 +2,15 @@
   box-sizing: border-box;
   display: flex;
   flex-wrap: nowrap;
-  padding: 8px;
+  padding: 4px 4px 16px;
   margin-bottom: 8px;
   width: 100%;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 13px;
   color: #000;
-  border-radius: 2px;
+  border-left: 2px solid #ccc;
+  border-radius: 0 2px 2px 0;
   background-color: #fff;
   box-shadow: 0 1px 2px 0 rgba(69, 69, 69, 0.41);
   cursor: pointer;
@@ -23,6 +24,7 @@
 
 .todo-done {
   composes: todo;
+  border-color: green;
   background-color: rgba(0, 255, 0, .1);
 }
 
@@ -30,6 +32,40 @@
   display: flex;
   flex-direction: column;
   width: calc(100% - 40px);
+}
+
+.title {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 2px 4px;
+  width: 100%;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #000;
+  border: none;
+  background-color: transparent;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.description {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 2px 4px;
+  width: 100%;
+  height: auto;
+  color: #000;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.tag {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+  font-size: 12px;
+  color: #000;
 }
 
 .buttons {
@@ -49,31 +85,4 @@
   margin-right: 8px;
   font-size: 16px;
   cursor: pointer;
-}
-
-.title {
-  margin: 0;
-  box-sizing: border-box;
-  padding: 4px;
-  width: 100%;
-  font-weight: 600;
-  line-height: 1.5;
-  color: #000;
-  border: none;
-  background-color: transparent;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.description {
-  margin: 0;
-  box-sizing: border-box;
-  padding: 4px;
-  width: 100%;
-  height: auto;
-  color: #000;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
 }

@@ -27,7 +27,7 @@ class TodoList extends PureComponent {
           todos && todos.reduceRight((res, todo) => {
             res.push(
               <Todo
-                { ...todo }
+                todo={ todo }
                 key={ todo.id }
                 setActiveTodo={ setActiveTodo }
                 showDialog={ showDialog }

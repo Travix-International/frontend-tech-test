@@ -4,17 +4,21 @@ const express = require('express');
 const app = express();
 const tasksContainer = require('./tasks.json');
 const path = require('path');
+const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
 app.use(express.static(__dirname));
 app.use(morgan('dev'));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 /**
  * GET /tasks
  * 
  * Return the list of tasks with status code 200.
  */
-app.get('/tasks', (req, res) => {
+app.get('/task', (req, res) => {
   return res.status(200).json(tasksContainer);
 });
 
@@ -63,16 +67,19 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description/:isDone', (req, res) => {
+app.put('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
     
     if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
-      task.isDone = req.params.isDone.includes('true');
+      task.title = req.body.title;
+      task.description = req.body.description;
+      task.isDone = req.body.isDone;
+      task.category = req.body.category;
+      task.tags = req.body.tags;
+      task.subtasks = req.body.subtasks;
       
       return res.status(200).json({
         task
@@ -98,12 +105,14 @@ app.put('/task/update/:id/:title/:description/:isDone', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task/', (req, res) => {
   const task = {
     id: Date.now(),
-    title: req.params.title,
-    description: req.params.description,
-    isDone: false 
+    title: req.body.title,
+    description: req.body.description,
+    isDone: false,
+    tags: req.body.tags || [],
+    subtasks: req.body.subtasks || []
   };
 
   tasksContainer.tasks.push(task);
@@ -124,7 +133,7 @@ app.post('/task/create/:title/:description', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/task/delete/:id', (req, res) => {
+app.delete('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {

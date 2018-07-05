@@ -2,20 +2,17 @@ import Http from './http.js';
 
 export default class TodosService {
   static getTodos() {
-    return Http.request({
-      method: 'get',
-      url: '/tasks'
-    }).then(res => {
+    return Http.get({ url: '/task' }).then(res => {
       return res.tasks;
     }).catch(err => {
       throw new Error(err);
     });
   }
 
-  static addTodo({ title, description }) {
-    return Http.request({
-      method: 'post',
-      url: `/task/create/${title}/${description}`
+  static addTodo(task) {
+    return Http.post({
+      url: '/task/',
+      data: task
     }).then(res => {
       return res.task;
     }).catch(err => {
@@ -23,10 +20,10 @@ export default class TodosService {
     });
   }
 
-  static updateTodo({ id, title, description, isDone }) {
-    return Http.request({
-      method: 'put',
-      url: `/task/update/${id}/${title}/${description}/${isDone}`
+  static updateTodo({ id, ...task }) {
+    return Http.put({
+      url: `/task/${id}/`,
+      data: task
     }).then(res => {
       return res.task;
     }).catch(err => {
@@ -35,10 +32,7 @@ export default class TodosService {
   }
 
   static deleteTodo(id) {
-    return Http.request({
-      method: 'delete',
-      url: `/task/delete/${id}`
-    }).then(res => {
+    return Http.delete({ url: `/task/${id}` }).then(res => {
       return res.id;
     }).catch(err => {
       throw new Error(err);

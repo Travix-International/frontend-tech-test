@@ -7,10 +7,7 @@ import styles from './todo.css';
 
 class Todo extends PureComponent {
   static propTypes = {
-    id: PropTypes.number,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    isDone: PropTypes.bool,
+    todo: PropTypes.object,
     setActiveTodo: PropTypes.func,
     showDialog: PropTypes.func,
     updateTodo: PropTypes.func
@@ -19,39 +16,34 @@ class Todo extends PureComponent {
   todo = React.createRef();
 
   openTodo = (e) => {
-    const todo = this.todo.current;
-    const checkbox = todo.querySelector('.js-isdone');
-    const { id, showDialog, setActiveTodo } = this.props;
+    const todoRef = this.todo.current;
+    const checkbox = todoRef.querySelector('.js-isdone');
+    const { todo, showDialog, setActiveTodo } = this.props;
 
     if (e.target.parentElement === checkbox) return;
     
-    setActiveTodo(id);
+    setActiveTodo(todo.id);
     showDialog();
   }
 
   switchProgress = () => {
     const {
-      id,
-      title,
-      description,
-      isDone,
+      todo,
       updateTodo
     } = this.props;
 
-    updateTodo({
-      id,
-      title,
-      description,
-      isDone: !isDone
-    });
+    updateTodo({ ...todo, isDone: !todo.isDone });
   }
 
   render() {
+    const { todo } = this.props;
     const {
       title,
       description,
+      tags,
+      subtasks,
       isDone
-    } = this.props;
+    } = todo;
     
     return (
       <section
@@ -62,6 +54,14 @@ class Todo extends PureComponent {
         <div styleName='body'>
           <p styleName='title'>{ title }</p>
           <p styleName='description'>{ description }</p>
+          <div>
+            {
+              tags.map(tag => (
+                <span styleName='tag' key={ tag } >{ tag }</span>
+              ))
+            }
+          </div>
+          <div>{ subtasks.length && `${subtasks.length} subtasks` }</div>
         </div>
         <div styleName='buttons'>
           <Checkbox

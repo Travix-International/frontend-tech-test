@@ -9,4 +9,20 @@ export default class Http {
       });
     });
   }
+  
+  static get(options) {
+    return Http.request({ ...options, method: 'get' });
+  }
+
+  static post(options) {
+    return Http.request({ ...options, method: 'post' });
+  }
+
+  static put(options) {
+    return Http.request({ ...options, method: 'put' });
+  }
+
+  static delete(options) {
+    return Http.request({ ...options, method: 'delete' });
+  }
 }

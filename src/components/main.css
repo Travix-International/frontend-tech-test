@@ -4,11 +4,6 @@ body {
   background-color: #eee;
 }
 
-.header {
-  display: flex;
-  padding: 8px 0 16px;
-}
-
 .main {
   display: flex;
   padding-bottom: 40px;
@@ -21,14 +16,6 @@ body {
   margin: 0 auto;
   padding: 0 8px;
   width: 1200px;
-}
-
-.content {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
-  font-size: 20px;
-  color: #000;
-  text-transform: uppercase;
 }
 
 @media (max-width: 1220px) {
