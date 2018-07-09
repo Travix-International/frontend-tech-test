@@ -1,0 +1,115 @@
+$breakpoint-tablet: 768px;
+
+.taskItemContainer{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #eaeaea;
+    padding: 12px;
+    align-items: center;
+    max-width: 850px;
+
+    .checkButton{
+        border: 1px solid #eaeaea;
+        background-color: #fff;
+        border-radius: 10px;
+        width: 20px;
+        height: 20px;
+        box-sizing: border-box;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        color: #eaeaea;
+        margin-right: 8px;
+        
+        .checkIcon{
+            display: none;
+        }
+
+        .undoIcon{
+            display: none;
+        }
+    }
+    .checkButton:hover{
+        background-color: #31c37b;
+        color: #fff;
+        border-color: #31c37b;
+        .checkIcon{
+            display: block;
+        }
+    }
+
+    .taskTextContainer{
+        color: #686868;
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 75%;
+
+        a{
+            text-decoration: none !important;
+            color: #686868;
+        }
+    }
+
+    .removeButton{
+        margin-left: 6px;
+        font-size: 17px;
+        color: #e1e1e1;
+        cursor: pointer;
+    }
+
+    .removeButton:hover{
+        color: #d72727;
+    }
+}
+
+.taskCompleted{
+    .taskTextContainer{
+        a{
+            color: #d1d1d1;
+            font-size: 16px;
+            text-decoration: line-through !important;
+        }
+    }
+
+    .checkButton{
+        border: 1px solid #fff;
+        background-color: #fff;
+        border-radius: 10px;
+        width: 20px;
+        height: 20px;
+        box-sizing: border-box;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        color: #31c37b;
+        margin-right: 8px;
+        
+        .checkIcon{
+            display: block;
+        }
+    }
+
+    .checkButton:hover{
+        .checkIcon{
+            display: none;
+        }
+
+        .undoIcon{
+            display: block;
+        }
+    }
+}
+
+
+@media only screen and (min-width: $breakpoint-tablet){
+    .taskItemContainer{
+        .taskTextContainer{
+            font-size: 14px;
+            max-width: 90%;
+        }
+    }
+}

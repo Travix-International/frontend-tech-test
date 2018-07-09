@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given proper props the list item renders properly. 1`] = `
+<div
+  className="taskItemContainer"
+>
+  <button
+    className="checkButton"
+    id="toggleButton"
+    onClick={[Function]}
+  >
+    <FaCheck
+      className="checkIcon"
+    />
+    <FaRotateLeft
+      className="undoIcon"
+    />
+  </button>
+  <div
+    className="taskTextContainer"
+  >
+    <Link
+      replace={false}
+      to="/task/0"
+    />
+  </div>
+  <FaMinusCircle
+    className="removeButton"
+    id="removeButton"
+    onClick={[Function]}
+  />
+</div>
+`;
