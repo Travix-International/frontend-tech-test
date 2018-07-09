@@ -1,0 +1,35 @@
+$breakpoint-tablet: 768px;
+
+*:focus{
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  outline: none;
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}
+
+.todoListItemContainer{
+    padding: 30px 0px;
+    margin-top: 110px;
+
+    .NoPendingTasks{
+        align-content: center;
+        text-align: center;
+        margin-top: 5%;
+        color: #7e7e7e;
+        font-size: 13px;
+        .checkSquareIcon{
+            margin-bottom: 30px;
+            font-size: 30px;
+            color: #e6e6e6;
+        }
+    }
+}
+
+@media only screen and (min-width: $breakpoint-tablet){
+    .todoListItemContainer{
+        padding: 30px 30px;
+        margin-top: 190px;
+    }
+}
