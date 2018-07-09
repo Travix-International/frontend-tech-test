@@ -1,0 +1,96 @@
+$breakpoint-tablet: 768px;
+
+.taskDetailsContainer {
+    position: fixed;
+    top: 0px;
+    background-color: #ffffffb3;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+    .contents{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        box-sizing: border-box;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        top: 0px;
+        right: 0px;
+
+        .taskInfo{
+            flex-grow: 1;
+        }
+
+        .closeButton{
+            float: right;
+            font-size: 40px;
+            color: #f82d2dcc;
+        }
+
+        .loader{
+            text-align: center;
+            margin-top: 200px;
+            font-weight: 800;
+            font-size: 26px;
+        }
+
+        .taskTitle{
+            font-size: 34px;
+            font-weight: 600;
+            padding-bottom: 15px;
+            border: none;
+            display: block;
+            width: 100%;
+        }
+
+        .taskDescription{
+            margin-top: 15px;
+            font-size: 14px;
+            padding-bottom: 15px;
+            max-height: 300px;
+            border: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding-left: 4px;
+            box-sizing: border-box;
+            font-family: helvetica;
+            line-height: 22px;
+            font-size: 14px;
+            color: #454545;
+        }
+
+        [contenteditable=true]:empty:before{
+            content: attr(placeholder);
+            display: block;
+        }
+
+        .saveButton{
+            height: 45px;
+            padding: 2px 25px;
+            border-radius: 28px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #6eb77e;
+            border-color: #6eb77e;
+            color: #fff;
+            font-weight: 600;
+            width: 200px;
+            align-self: center;
+            margin-bottom: 20px;
+        }
+    }
+
+@media only screen and (min-width: $breakpoint-tablet) {
+    .contents{
+        width: 45%;
+    }
+}

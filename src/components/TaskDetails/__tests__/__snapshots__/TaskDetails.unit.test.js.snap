@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fetches task details and renders properly 1`] = `
+<div>
+  <div
+    className="taskDetailsContainer"
+  />
+  <form
+    className="contents"
+    onSubmit={[Function]}
+  >
+    <div>
+      <Link
+        replace={false}
+        to="/"
+      >
+        <FaTimesCircle
+          className="closeButton"
+        />
+      </Link>
+    </div>
+    <div
+      className="loader"
+    >
+      Loading..
+    </div>
+    <button
+      className="saveButton"
+      id="saveButton"
+      type="submit"
+    >
+      SAVE
+    </button>
+  </form>
+</div>
+`;
