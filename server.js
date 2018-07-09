@@ -1,7 +1,10 @@
 'use strict';
 
 const app = require('express')();
+const cors = require('cors');
 const tasksContainer = require('./tasks.json');
+
+app.use(cors());
 
 /**
  * GET /tasks
@@ -27,7 +30,7 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find((item) => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
@@ -88,11 +91,11 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task/create/:title/', (req, res) => {
   const task = {
     id: tasksContainer.tasks.length,
     title: req.params.title,
-    description: req.params.description,
+    description: "",
   };
 
   tasksContainer.tasks.push(task);
