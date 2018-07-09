@@ -91,13 +91,13 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/', (req, res) => {
+app.post('/task/create/:title/:id', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: Number(req.params.id),
     title: req.params.title,
     description: "",
   };
-
+  console.log(task);
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({

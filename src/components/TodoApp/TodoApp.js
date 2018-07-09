@@ -58,7 +58,8 @@ class TodoApp extends Component {
 
 	addToList = (task) => {
 		let list = this.state.todoList;
-		let id = list.length;
+		var timestamp = new Date().getTime();
+		let id = timestamp;
 		list.push({
 			id: id,
 			title: task,
@@ -67,7 +68,7 @@ class TodoApp extends Component {
 		});
 		this.setState({todoList : list});
 
-		fetch(`http://localhost:9001/task/create/${task}`, {
+		fetch(`http://localhost:9001/task/create/${task}/${id}`, {
 			method: "POST"
 		})
 		  .then(
