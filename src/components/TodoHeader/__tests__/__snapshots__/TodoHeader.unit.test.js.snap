@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Todo Header component renders properly 1`] = `
+<div
+  className="todoHeaderContainer"
+>
+  <div
+    className="todoHeaderInfo"
+  >
+    24 December, Monday
+  </div>
+  <div>
+    <form
+      id="addForm"
+      onSubmit={[Function]}
+    >
+      <input
+        autoComplete="off"
+        id="addToListInput"
+        placeholder="Add something to do here..."
+        required={true}
+        type="text"
+      />
+      <button
+        id="submitButton"
+        type="submit"
+      >
+        <FaPlus />
+      </button>
+    </form>
+  </div>
+</div>
+`;
