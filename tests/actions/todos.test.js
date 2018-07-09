@@ -24,7 +24,7 @@ describe('Todos actions', () => {
     moxios.uninstall();
   });
 
-  it('Get todos', async (done) => {
+  it('Get todos', async () => {
     const todosMock = [
       {
         id: '1',
@@ -55,10 +55,9 @@ describe('Todos actions', () => {
     
     await store.dispatch(getTodos());
     expect(store.getActions()).toEqual(expected);
-    done();
   });
 
-  it('Add todo', async (done) => {
+  it('Add todo', async () => {
     const todoMock = {
       title: 'test',
       description: 'test'
@@ -89,10 +88,9 @@ describe('Todos actions', () => {
 
     await store.dispatch(addTodo(todoMock));
     expect(store.getActions()).toEqual(expected);
-    done();
   });
 
-  it('Update todo', async (done) => {
+  it('Update todo', async () => {
     const todoMock = {
       id: 4,
       title: 'test',
@@ -115,10 +113,9 @@ describe('Todos actions', () => {
 
     await store.dispatch(updateTodo(todoMock));
     expect(store.getActions()).toEqual(expected);
-    done();
   });
 
-  it('Delete todo', async (done) => {
+  it('Delete todo', async () => {
     const idMock = 1;
 
     setup({
@@ -133,7 +130,6 @@ describe('Todos actions', () => {
 
     await store.dispatch(deleteTodo(idMock));
     expect(store.getActions()).toEqual(expected);
-    done();
   });
 });
 

@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
@@ -8,7 +9,6 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import 'normalize.css';
-import '!!style-loader!css-loader!material-design-icons/iconfont/material-icons.css';
 
 import reducer from './reducer/index.js';
 import App from './components/app.jsx';

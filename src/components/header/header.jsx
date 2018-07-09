@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
 import Button from 'react-toolbox/lib/button';
 
-import Filter from './filter.jsx';
+import Filter from '../filter/filter.jsx';
 import styles from './header.css';
 
 class Header extends PureComponent {
@@ -22,6 +22,9 @@ class Header extends PureComponent {
     return (
       <header styleName='header'>
         <div styleName='container'>
+          <div styleName='top'>
+            todos
+          </div>
           <div styleName='content'>
             <div styleName='add'>
               <Button
@@ -31,7 +34,6 @@ class Header extends PureComponent {
                 onClick={ this.addTodoClick }
               />
             </div>
-            todos
             <div styleName='filter'>
               <Filter />
             </div>

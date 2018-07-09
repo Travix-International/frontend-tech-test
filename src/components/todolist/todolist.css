@@ -7,7 +7,7 @@
 @media (max-width: 1220px) {
   .todos {
     grid-template-columns: repeat(3, 32%);
-    grid-column-gap: 1%
+    grid-column-gap: 2%
   }
 }
 

@@ -1,0 +1,20 @@
+@value black: #000;
+@value white: #fff;
+
+@value font-family: 'Roboto', sans-serif;
+@value font: normal 400 17px/1.5 font-family;
+@value background: linear-gradient(to bottom, #ebedf5 0%, white 100%) no-repeat;
+@value task-background: white;
+@value text-color: black;
+@value border-color: #ddd;
+
+@value tag-background: rgba(71, 81, 128, .1);
+
+@value dialog-tag-color: #3f64bd;
+@value dialog-tag-background: #dbdde8;
+@value dialog-tag-hover-color: #01257b;
+
+@value todo-shadow-color: rgba(69, 69, 69, 0.21);
+@value todo-done-background: rgba(143, 169, 214, .4);
+@value todo-tag-color: #3f64bd;
+@value todo-tag-hover-color: #01257b;

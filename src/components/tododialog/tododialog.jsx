@@ -1,10 +1,10 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
 import Dialog from 'react-toolbox/lib/dialog';
-import { ListCheckbox } from 'react-toolbox/lib/list';
 
-import TodoForm from './todoform.jsx';
+import TodoForm from '../todoform/todoform.jsx';
+import DialogData from '../dialogdata/dialogdata.jsx';
 import styles from './tododialog.css';
 
 class TodoDialog extends PureComponent {
@@ -16,11 +16,13 @@ class TodoDialog extends PureComponent {
     dialog: PropTypes.object,
     hideDialog: PropTypes.func,
     changeDialogField: PropTypes.func,
+    changeDialogListField: PropTypes.func,
     changeDialogView: PropTypes.func
   }
 
   onCancelClick = () => {
     const { changeDialogView } = this.props;
+
     changeDialogView(false);
   }
 
@@ -93,33 +95,20 @@ class TodoDialog extends PureComponent {
     ];
   }
 
-  checkSubtask = (subtaskName) => {
-    const { todo, updateTodo } = this.props;
-    const subtaskIndex = todo.subtasks.findIndex(subtask => subtask.name === subtaskName);
-
-    if (!(subtaskIndex + 1)) return;
-
-    const subtask = todo.subtasks[subtaskIndex];
-    const updatedSubtasks = [ ...todo.subtasks ];
-    updatedSubtasks.splice(subtaskIndex, 1, { ...subtask, isDone: !subtask.isDone }) ;
-
-    updateTodo({
-      ...todo,
-      subtasks: updatedSubtasks
-    });
-  }
-
   render() {
     const {
       dialog,
       todo,
       hideDialog,
-      changeDialogField
+      changeDialogField,
+      changeDialogListField,
+      updateTodo
     } = this.props;
-    const { getActions, checkSubtask } = this;
+    const { getActions } = this;
 
     return (
       <Dialog
+        styleName='dialog'
         active={ dialog.isOpened }
         actions={ getActions() }
         onEscKeyDown={ hideDialog }
@@ -130,33 +119,15 @@ class TodoDialog extends PureComponent {
             ((dialog.isTodoChanges || !todo) && (
               <TodoForm
                 changeDialogField={ changeDialogField }
+                changeDialogListField={ changeDialogListField }
                 todo={ dialog.form }
                 isTodoChanges={ dialog.isTodoChanges }
               />
             )) || (
-              <Fragment>
-                <div styleName='title'>{ todo.title }</div>
-                <div styleName='description'>{ todo.description }</div>
-                <div>
-                  {
-                    todo.tags.map(tag => (
-                      <span key={ tag } >{ tag }</span>
-                    ))
-                  }
-                </div>
-                <div>
-                  {
-                    todo.subtasks.map(subtask => (
-                      <ListCheckbox
-                        checked={ subtask.isDone }
-                        caption={ subtask.name }
-                        key={ subtask.name }
-                        onChange={ checkSubtask.bind(this, subtask.name) }
-                      />
-                    ))
-                  }
-                </div>
-              </Fragment>
+              <DialogData
+                todo={ todo }
+                updateTodo={ updateTodo }
+              />
             )
           }
         </div>

@@ -4,6 +4,7 @@ import { Button } from 'react-toolbox/lib/button';
 import CSSModules from 'react-css-modules';
 
 import styles from './filter.css';
+
 const Filter = () => (
   <ul styleName='list'>
     <li styleName='item'>

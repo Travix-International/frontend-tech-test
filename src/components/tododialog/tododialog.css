@@ -1,0 +1,28 @@
+@value variables: '../variables.css';
+@value font, text-color from variables;
+
+.dialog {
+  border-radius: 5px;
+}
+
+.content {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 788px) {
+  .dialog {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 464px) {
+  .dialog {
+    width: 90vw;
+  }
+}

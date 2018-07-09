@@ -1,0 +1,5 @@
+.delayed-input {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+}

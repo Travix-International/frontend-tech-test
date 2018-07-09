@@ -32,7 +32,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader?modules,localIdentName="[name]-[local]-[hash:base64:6]"'
+          'css-loader?modules&importLoaders=1&localIdentName="[name]-[local]-[hash:base64:6]"!postcss-loader'
         ]
       },
       {

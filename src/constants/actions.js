@@ -9,3 +9,8 @@ export const SHOW_DIALOG = 'SHOW_DIALOG';
 export const HIDE_DIALOG = 'HIDE_DIALOG';
 export const CHANGE_DIALOG_VIEW = 'CHANGE_DIALOG_VIEW';
 export const CHANGE_DIALOG_FIELD = 'CHANGE_DIALOG_FIELD';
+export const CHANGE_DIALOG_LIST_FIELD = 'CHANGE_DIALOG_LIST_FIELD';
+
+export const SET_TAG = 'SET_TAG';
+export const UNSET_TAG = 'UNSET_TAG';
+export const CLEAR_TAGS = 'CLEAR_TAGS';

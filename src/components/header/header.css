@@ -1,0 +1,53 @@
+@value variables: '../variables.css';
+@value font, text-color from variables;
+
+.header {
+  display: flex;
+  padding: 24px 0 16px;
+}
+
+.top {
+  display: flex;
+  justify-content: center;
+  font: font;
+  font-weight: 400;
+  font-size: 30px;
+  color: text-color;
+  text-transform: uppercase;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  composes: container from '../main/main.css';
+}
+
+.filter,
+.add {
+  flex: 1 0 20%;
+}
+
+.filter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 464px) {
+  .top {
+    margin-bottom: 24px;
+  }
+
+  .content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .add {
+    margin-bottom: 16px;
+  }
+}

@@ -1,0 +1,108 @@
+@value variables: '../variables.css';
+@value font, task-background, text-color, border-color, todo-tag-color, todo-tag-hover-color, todo-shadow-color, todo-done-background from variables;
+
+.todo {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 12px;
+  margin-bottom: 16px;
+  width: 100%;
+  font: font;
+  font-size: 16px;
+  color: text-color;
+  border-radius: 5px;
+  background-color: task-background;
+  box-shadow: 2px 2px 10px -1px todo-shadow-color;
+  cursor: pointer;
+  opacity: .8;
+}
+
+.todo:hover {
+  opacity: 1;
+  transition: .3s;
+}
+
+.todo-done {
+  composes: todo;
+  background-color: todo-done-background;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 28px);
+}
+
+.title {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 2px 0;
+  width: 100%;
+  font-size: 21px;
+  font-weight: 500;
+  color: text-color;
+  border: none;
+  background-color: transparent;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.description {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 2px 0;
+  width: 100%;
+  height: auto;
+  color: text-color;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.tags {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 4px 4px 0;
+  font: font;
+  font-size: 12px;
+  color: todo-tag-color;
+  cursor: pointer;
+}
+
+.tag:hover {
+  color: todo-tag-hover-color;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 20px;
+  padding-top: 8px;
+}
+
+.icon {
+  padding: 4px;
+  font-size: 16px;
+}
+
+.delete {
+  composes: icon;
+  margin-right: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.subtasks {
+  flex-grow: 1;
+  font-size: 14px;
+}

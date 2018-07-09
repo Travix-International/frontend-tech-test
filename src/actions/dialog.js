@@ -2,6 +2,7 @@ import {
   SHOW_DIALOG,
   HIDE_DIALOG,
   CHANGE_DIALOG_VIEW,
+  CHANGE_DIALOG_LIST_FIELD,
   CHANGE_DIALOG_FIELD
 } from '../constants/actions.js';
 
@@ -19,4 +20,8 @@ export function changeDialogView(status) {
 
 export function changeDialogField(fieldObject) {
   return { type: CHANGE_DIALOG_FIELD, payload: fieldObject };
+}
+
+export function changeDialogListField(data) {
+  return { type: CHANGE_DIALOG_LIST_FIELD, payload: data };
 }

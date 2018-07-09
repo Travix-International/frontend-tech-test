@@ -1,0 +1,55 @@
+@value variables: '../variables.css';
+@value font, text-color, dialog-tag-color, dialog-tag-background, dialog-tag-hover-color from variables;
+
+.text {
+  font: font;
+  font-size: 24px;
+  color: text-color;
+}
+
+.title {
+  composes: text;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.description {
+  composes: text;
+}
+
+.tags {
+  margin-top: 12px;
+}
+
+.tag {
+  display: inline-block;
+  margin: 0 6px 6px 0;
+  padding: 2px 4px;
+  font: font;
+  font-size: 15px;
+  color: dialog-tag-color;
+  background: dialog-tag-background;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tag:hover {
+  color: dialog-tag-hover-color;
+}
+
+.subtasks {
+  composes: text;
+  margin-top: 16px;
+  font-size: 18px;
+}
+
+.subtask {
+  min-height: auto;
+  height: 28px;
+}
+
+@media (max-width: 464px) {
+  .subtask {
+    padding: 0;
+  }
+}
