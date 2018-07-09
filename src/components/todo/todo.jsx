@@ -14,19 +14,17 @@ class Todo extends PureComponent {
     setTag: PropTypes.func
   }
 
-  todo = React.createRef();
+  preventOpenTodo = (e) => {
+    e.stopPropagation();
+  }
 
-  openTodo = (e) => {
-    const todoRef = this.todo.current;
-    const checkbox = todoRef.querySelector('.js-isdone');
+  openTodo = () => {
     const { todo, showDialog, setActiveTodo } = this.props;
 
-    if (e.target.parentElement === checkbox
-      || e.target.classList.contains('js-tag')) return;
-    
     setActiveTodo(todo.id);
     showDialog();
   }
+
 
   switchProgress = () => {
     const {
@@ -37,8 +35,14 @@ class Todo extends PureComponent {
     updateTodo({ ...todo, isDone: !todo.isDone });
   }
 
+  setTag = (tag, e) => {
+    this.preventOpenTodo(e);
+
+    this.props.setTag(tag);
+  }
+
   render() {
-    const { todo, setTag } = this.props;
+    const { todo } = this.props;
     const {
       title,
       description,
@@ -51,7 +55,6 @@ class Todo extends PureComponent {
       <section
         styleName={ isDone ? 'todo-done' : 'todo' }
         onClick={ this.openTodo }
-        ref={ this.todo }
       >
         <div styleName='body'>
           <p styleName='title'>{ title }</p>
@@ -60,19 +63,17 @@ class Todo extends PureComponent {
             {
               tags.map(tag => (
                 <span
-                  className='js-tag'
                   styleName='tag'
                   key={ tag }
-                  onClick={ setTag.bind(null, tag) }
+                  onClick={ this.setTag.bind(null, tag) }
                 >{ tag }</span>
               ))
             }
           </div>
           <div styleName='subtasks'>{ (subtasks.length && `${subtasks.length} subtasks`) || '' }</div>
         </div>
-        <div styleName='buttons'>
+        <div onClick={ this.preventOpenTodo } styleName='buttons'>
           <Checkbox
-            className='js-isdone'
             checked={ isDone }
             onChange={ this.switchProgress }
           ></Checkbox>

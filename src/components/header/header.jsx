@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
 import Button from 'react-toolbox/lib/button';
@@ -6,7 +6,7 @@ import Button from 'react-toolbox/lib/button';
 import Filter from '../filter/filter.jsx';
 import styles from './header.css';
 
-class Header extends PureComponent {
+class Header extends Component {
   static propTypes = {
     showDialog: PropTypes.func,
     unsetActiveTodo: PropTypes.func

@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
 
@@ -8,7 +8,7 @@ import TodoList from '../todolist/todolist.jsx';
 import Tags from '../tags/tags.jsx';
 import styles from './main.css';
 
-class Main extends PureComponent {
+class Main extends Component {
   static propTypes = {
     getTodos: PropTypes.func,
     addTodo: PropTypes.func,

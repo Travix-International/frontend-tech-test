@@ -18,7 +18,7 @@ app.use(bodyParser.json());
  * 
  * Return the list of tasks with status code 200.
  */
-app.get('/task', (req, res) => {
+app.get('/tasks', (req, res) => {
   return res.status(200).json(tasksContainer);
 });
 
@@ -33,7 +33,7 @@ app.get('/task', (req, res) => {
  * If not found return status code 404.
  * If id is not valid number return status code 400.
  */
-app.get('/task/:id', (req, res) => {
+app.get('/tasks/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -67,7 +67,7 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/:id', (req, res) => {
+app.put('/tasks/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -105,7 +105,7 @@ app.put('/task/:id', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/', (req, res) => {
+app.post('/tasks/', (req, res) => {
   const task = {
     id: Date.now(),
     title: req.body.title,
@@ -133,7 +133,7 @@ app.post('/task/', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/task/:id', (req, res) => {
+app.delete('/tasks/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -164,3 +164,5 @@ app.get('*', (req, res) => {
 app.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });
+
+module.exports = app;

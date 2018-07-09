@@ -1,11 +1,11 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
 import { ListCheckbox } from 'react-toolbox/lib/list';
 
 import styles from './dialogdata.css';
 
-class DialogData extends PureComponent {
+class DialogData extends Component {
   static propTypes = {
     todo: PropTypes.object,
     updateTodo: PropTypes.func

@@ -4,6 +4,7 @@ import enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import TodoForm from '../../src/components/todoform/todoform.jsx';
+import Input from '../../src/components/shared/input/input.jsx';
 
 enzyme.configure({ adapter: new Adapter() });
 
@@ -23,32 +24,26 @@ describe('TodoForm Component', () => {
 
   it('Field changing', () => {
     const propsMock = {
-      todo: todoMock,
-      changeDialogField: jest.fn()
+      changeDialogField: jest.fn(),
+      todo: todoMock
     };
     const wrapper = shallow(<TodoForm { ...propsMock } />);
 
-    expect(wrapper.state('subtask')).toBe(null);
-    wrapper.find('input[name="title"]').simulate('change', {
-      target: {
-        name: 'title',
-        value: 'test'
-      }
-    });
+    wrapper.find(Input).prop('onChange')('test', 'title');
     expect(propsMock.changeDialogField).toHaveBeenCalledWith({ title: 'test' });
   });
+  
+  it('List field changing', () => {
+    const propsMock = {
+      changeDialogListField: jest.fn(),
+      todo: todoMock
+    };
+    const wrapper = shallow(<TodoForm { ...propsMock } />);
 
-  it('Add subtask into state', () => {
-    const wrapper = shallow(<TodoForm todo={ todoMock } />);
-    wrapper.setState({ subtaskAdding: true });
-
-    expect(wrapper.state('subtask')).toBe(null);
-    wrapper.find('input[name="subtask"]').simulate('change', {
-      target : {
-        name: 'subtask',
-        value: 'test'
-      }
+    wrapper.find('DelayedInput[name="subtasks"]').prop('onChange')('test', 'subtask');
+    expect(propsMock.changeDialogListField).toHaveBeenCalledWith({
+      value: 'test',
+      name: 'subtask'
     });
-    expect(wrapper.state('subtask')).toBe('test');
   });
 });

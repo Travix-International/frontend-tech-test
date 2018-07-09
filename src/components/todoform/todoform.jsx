@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
 import { List, ListItem } from 'react-toolbox/lib/list';
@@ -9,7 +9,7 @@ import Textarea from '../shared/textarea/textarea.jsx';
 
 import styles from './todoform.css';
 
-class TodoForm extends PureComponent {
+class TodoForm extends Component {
   static propTypes = {
     changeDialogField: PropTypes.func,
     changeDialogListField: PropTypes.func,
