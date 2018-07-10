@@ -12,9 +12,7 @@ class TodoApp extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			todoList: [
-				
-			],
+			todoList: [],
 			total: 0,
 			fetchCount: 10,
 			fetchStart: 0
@@ -50,7 +48,6 @@ class TodoApp extends Component {
 		  .then(res => res.json())
 		  .then(
 			(result) => {
-				console.log(result);
 			  this.setState({
 					todoList: result.tasks,
 					total: Number(result.total),
@@ -67,9 +64,6 @@ class TodoApp extends Component {
 	}
 
 	loadMore = () => {
-		console.log("loading");
-		console.log("start" + this.state.fetchStart);
-		console.log("total" + this.state.total);
 		if(this.state.fetchStart < this.state.total){
 			notify.show('Loading..', 'warning', 1000);
 			fetch(`http://localhost:9001/tasks/${this.state.fetchStart}/${this.state.fetchCount}`)
@@ -95,7 +89,6 @@ class TodoApp extends Component {
 		}
 	}
 		
-	
 
 	addToList = (task) => {
 		let list = this.state.todoList;
@@ -108,6 +101,7 @@ class TodoApp extends Component {
 			status: true
 		});
 
+		console.log(list);
 		let newStart = this.state.fetchStart + 1;
 		this.setState({
 			todoList : list,

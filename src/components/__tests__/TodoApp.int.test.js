@@ -6,7 +6,7 @@ test('A new todo added is displayed in the list', () => {
 
     fetch.mockResponses(
 		[
-			JSON.stringify({tasks: []}),
+			JSON.stringify({tasks: [], total: 0}),
 			{ status: 200 }
 		],
 		[
@@ -31,7 +31,7 @@ test('Todo is marked as checked on clicking check button', () => {
 
     fetch.mockResponses(
 		[
-			JSON.stringify({tasks: []}),
+			JSON.stringify({tasks: [], total: 0}),
 			{ status: 200 }
 		],
 		[
@@ -56,7 +56,7 @@ test('Click on delete button deletes the task entry.', () => {
 
 	fetch.mockResponses(
 		[
-			JSON.stringify({tasks: []}),
+			JSON.stringify({tasks: [], total: 0}),
 			{ status: 200 }
 		],
 		[
