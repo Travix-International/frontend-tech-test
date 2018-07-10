@@ -14,14 +14,17 @@ class TodoApp extends Component {
 		this.state = {
 			todoList: [
 				
-			]
+			],
+			total: 0,
+			fetchCount: 10,
+			fetchStart: 0
 		};
 	}
 
 	render(){
 		return (
 			<Router>
-			<div>
+			<div onScroll={() => this.loadMore}>
 				<Notifications />
 				<TodoHeader today={new Date()} add={this.addToList}/>
 				<div className="todoListItemContainer">
@@ -31,7 +34,11 @@ class TodoApp extends Component {
 						: <div className="NoPendingTasks"><FaSquareCheck className="checkSquareIcon" /><br/>No Pending Tasks !</div>
 					}
 				</div>
-
+				{
+					this.state.fetchStart < this.state.total
+					? <div className="loadButtonContainer" ><button className="loadMoreButton" onClick={this.loadMore}>Load More</button></div>
+					: ""
+				}
 				<Route path="/task/:id" render={() => <TaskDetails update={this.updateTaskDetails} />}/>
 			</div>
 			</Router>
@@ -39,13 +46,16 @@ class TodoApp extends Component {
 	}
 
 	componentDidMount() {
-		fetch("http://localhost:9001/tasks")
+		fetch(`http://localhost:9001/tasks/${this.state.fetchStart}/${this.state.fetchCount}`)
 		  .then(res => res.json())
 		  .then(
 			(result) => {
+				console.log(result);
 			  this.setState({
-				todoList: result.tasks
-			  });
+					todoList: result.tasks,
+					total: Number(result.total),
+					fetchStart: this.state.fetchStart + this.state.fetchCount
+				});
 			},
 			(error) => {
 			  this.setState({
@@ -53,20 +63,56 @@ class TodoApp extends Component {
 				error
 			  });
 			}
-		  )
-	  }
+		)
+	}
+
+	loadMore = () => {
+		console.log("loading");
+		console.log("start" + this.state.fetchStart);
+		console.log("total" + this.state.total);
+		if(this.state.fetchStart < this.state.total){
+			notify.show('Loading..', 'warning', 1000);
+			fetch(`http://localhost:9001/tasks/${this.state.fetchStart}/${this.state.fetchCount}`)
+				.then(res => res.json())
+				.then(
+				(result) => {
+					console.log(result);
+					let oldList = this.state.todoList;
+					let updatedList = oldList.concat(result.tasks);
+					this.setState({
+						todoList: updatedList,
+						total: Number(result.total),
+						fetchStart: this.state.fetchStart + this.state.fetchCount
+					});
+				},
+				(error) => {
+					this.setState({
+					todoList: [],
+					error
+					});
+				}
+			);
+		}
+	}
+		
+	
 
 	addToList = (task) => {
 		let list = this.state.todoList;
 		var timestamp = new Date().getTime();
 		let id = timestamp;
-		list.push({
+		list.unshift({
 			id: id,
 			title: task,
 			description: "",
 			status: true
 		});
-		this.setState({todoList : list});
+
+		let newStart = this.state.fetchStart + 1;
+		this.setState({
+			todoList : list,
+			fetchStart: newStart
+		});
 
 		fetch(`http://localhost:9001/task/create/${task}/${id}`, {
 			method: "POST"

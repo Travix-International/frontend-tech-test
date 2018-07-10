@@ -11,8 +11,15 @@ app.use(cors());
  * 
  * Return the list of tasks with status code 200.
  */
-app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
+app.get('/tasks/:start/:size', (req, res) => {
+  const length = tasksContainer.tasks.length;
+  const end = Number(req.params.start) + Number(req.params.size);
+  const tasks = tasksContainer.tasks.slice(Number(req.params.start), end);
+  let data = {
+      tasks: tasks,
+      total : length
+  }
+  return res.status(200).json(data);
 });
 
 /**
@@ -97,8 +104,7 @@ app.post('/task/create/:title/:id', (req, res) => {
     title: req.params.title,
     description: "",
   };
-  console.log(task);
-  tasksContainer.tasks.push(task);
+  tasksContainer.tasks.unshift(task);
 
   return res.status(201).json({
     message: 'Resource created',

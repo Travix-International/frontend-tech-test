@@ -27,6 +27,28 @@ button::-moz-focus-inner {
     }
 }
 
+.loadButtonContainer{
+
+    align-content: center;
+    text-align: center;
+    .loadMoreButton{
+        height: 35px;
+        padding: 2px 20px;
+        border-radius: 28px;
+        border: none;
+        cursor: pointer;
+        font-size: 12px;
+        background-color: #6eb77e;
+        border-color: #6eb77e;
+        color: #fff;
+        font-weight: 600;
+        align-self: center;
+        margin-bottom: 20px;
+}
+}
+
+
+
 @media only screen and (min-width: $breakpoint-tablet){
     .todoListItemContainer{
         padding: 30px 30px;
