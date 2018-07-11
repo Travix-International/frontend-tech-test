@@ -4,7 +4,7 @@
   "description": "test back - front",
   "main": "server.js",
   "scripts": {
-    "test": "jest --notify --coverage",
+    "test": "jest --coverage",
     "start-server": "node server.js",
     "build": "webpack-dev --mode production",
     "dev": "./node_modules/.bin/webpack-dev-server --host 192.168.1.2 --port 9000 --mode development --open",

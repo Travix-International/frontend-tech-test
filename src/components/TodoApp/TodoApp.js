@@ -70,7 +70,6 @@ class TodoApp extends Component {
 				.then(res => res.json())
 				.then(
 				(result) => {
-					console.log(result);
 					let oldList = this.state.todoList;
 					let updatedList = oldList.concat(result.tasks);
 					this.setState({
@@ -100,8 +99,7 @@ class TodoApp extends Component {
 			description: "",
 			status: true
 		});
-
-		console.log(list);
+		
 		let newStart = this.state.fetchStart + 1;
 		this.setState({
 			todoList : list,
