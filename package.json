@@ -6,9 +6,10 @@
   "scripts": {
     "test": "jest --coverage",
     "start-server": "node server.js",
-    "build": "webpack-dev --mode production",
+    "build": "./node_modules/.bin/webpack --mode production",
     "dev": "./node_modules/.bin/webpack-dev-server --host 192.168.1.2 --port 9000 --mode development --open",
-    "start": "concurrently --kill-others \"npm run dev &\" \"npm run start-server\""
+    "start": "concurrently --kill-others \"npm run dev &\" \"npm run start-server\"",
+    "demo": "concurrently --kill-others \"npm run dev &\" \"npm run start-server\""
   },
   "keywords": [
     "test",
@@ -19,6 +20,7 @@
   "dependencies": {
     "cors": "^2.8.4",
     "express": "^4.14.0",
+    "history": "^4.7.2",
     "query-string": "^6.1.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -52,7 +54,7 @@
     "sass-loader": "^7.0.3",
     "scss-loader": "0.0.1",
     "style-loader": "^0.21.0",
-    "webpack": "^4.12.0",
+    "webpack": "^4.16.0",
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.4"
   },

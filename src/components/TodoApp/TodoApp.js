@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import Notifications, {notify} from 'react-notify-toast';
+import history from '../utils/history';
 import TodoHeader from '../TodoHeader/TodoHeader';
 import TodoListItem from '../TodoListItem/TodoListItem';
 import TaskDetails from '../TaskDetails/TaskDetails';
@@ -21,7 +22,7 @@ class TodoApp extends Component {
 
 	render(){
 		return (
-			<Router>
+			<Router history={history}>
 			<div onScroll={() => this.loadMore}>
 				<Notifications />
 				<TodoHeader today={new Date()} add={this.addToList}/>

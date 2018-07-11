@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import history from '../utils/history';
 import FaClose from 'react-icons/lib/fa/times-circle';
 import './scss/TaskDetails.scss';
 
@@ -43,6 +44,7 @@ class TaskDetails extends Component{
         let taskTitle = event.target[0].value;
         let desctiption = event.target[1].value;
         this.props.update(this.state.info.id, taskTitle, desctiption);
+        history.push('/');
     }
 
     componentDidMount() {
