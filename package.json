@@ -7,7 +7,7 @@
     "test": "jest --coverage",
     "start-server": "node server.js",
     "build": "./node_modules/.bin/webpack --mode production",
-    "dev": "./node_modules/.bin/webpack-dev-server --host 192.168.1.2 --port 9000 --mode development --open",
+    "dev": "./node_modules/.bin/webpack-dev-server --host 127.0.0.1 --port 9002 --mode development --open",
     "start": "concurrently --kill-others \"npm run dev &\" \"npm run start-server\"",
     "demo": "concurrently --kill-others \"npm run dev &\" \"npm run start-server\""
   },
