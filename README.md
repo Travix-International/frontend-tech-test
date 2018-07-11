@@ -1,38 +1,59 @@
-# Travix test
+# Travix-Todo
 
-Travix Front-End Tech Interview Test 
+Travix Todo App is a simple To-do application built with ReactJS.
 
-# Introduction
+## Getting Started
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-Using your application we must be able to create, modify and delete a task.
+### Prerequisites
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
+##### Node
 
-However this server is not perfect. It could be improved and tested as well.
+[Node](http://nodejs.org/) is really easy to install & now include [NPM](https://npmjs.org/).
+You should be able to run the following command after the installation procedure
+below.
 
-So your mission is to develop the front-end from scratch using a front-end framework.
+    $ node --version
+    v0.10.24
 
-We are also expecting from you a usable, responsive UI.
+    $ npm --version
+    1.3.21
 
-# Process
+### Installing the App
 
-Fork the repository into your account. Once your code is ready, send a pull-request to this repository and we will review it.
+A step by step series of instructions that tell you how to get a development env running
 
-# Requirements
+	$ git clone https://github.com/sainiankit/travix.git
+    $ cd travix
+    $ npm install
 
-* React 15+
-* Redux or Flux or [FrintJS](https://frint.js.org) or other alternatives that implement a unidirectional data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
 
-# Bonus
+### Running the tests
 
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us!
+Run the automated Unit & Integration tests for Travix Todo Frontend Application. (Travix Todo App uses Enzyme as the testing framework.)
+
+	npm test
+
+### Running the Application with Webpack Dev Server
+
+	npm run demo
+The application should be runnning on localhost:9002/
+
+[![Travix Todo](https://sainiankit.github.io/images/traviximage1.png "Travix Todo")](https://sainiankit.github.io/images/traviximage1.png "Travix Todo")
+
+[![Task Desctiption](https://sainiankit.github.io/images/traviximage2.png "Task Desctiption")](https://sainiankit.github.io/images/traviximage2.png "Task Desctiption")
+### Deployment
+	npm run build
+will emit bundle.js and index.html in the dist folder which can be used in the production.
+
+## Built With
+
+* [ReactJS](https://reactjs.org/) - Fronted View framework used
+* [Node](https://maven.apache.org/https://nodejs.org/en/) - REST API and Dependency Management
+* [ExpressJS](https://expressjs.com/) - Web Server for REST API
+* [Enzyme](https://github.com/airbnb/enzyme) - Unit & Integration Testing framework
+
+## Authors
+
+* **Ankit Saini** 
