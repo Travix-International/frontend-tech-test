@@ -1,0 +1,15 @@
+export const GET_ITEMS = "GET_ITEMS";
+export const GET_ITEMS_SUCCESS = "GET_ITEMS_SUCCESS";
+export const GET_ITEM = "GET_ITEM";
+export const GET_ITEM_SUCCESS = "GET_ITEM_SUCCESS";
+export const GET_ITEMS_FAIL = "GET_ITEMS_FAIL";
+export const GET_ITEM_FAIL = "GET_ITEM_FAIL";
+export const DELETE_ITEM = "DELETE_ITEM";
+export const DELETE_ITEM_SUCCESS = "DELETE_ITEM_SUCCESS";
+export const DELETE_ITEM_FAIL = "DELETE_ITEM_FAIL";
+export const CREATE_ITEM = "CREATE_ITEM";
+export const CREATE_ITEM_SUCCESS = "CREATE_ITEM_SUCCESS";
+export const CREATE_ITEM_FAIL = "CREATE_ITEM_FAIL";
+export const EDIT_ITEM = "EDIT_ITEM";
+export const EDIT_ITEM_SUCCESS = "EDIT_ITEM_SUCCESS";
+export const EDIT_ITEM_FAIL = "EDIT_ITEM_FAIL";

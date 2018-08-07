@@ -58,7 +58,7 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id', (req, res) => {
+app.put('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -89,7 +89,7 @@ app.put('/task/update/:id', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create', (req, res) => {
+app.post('/task', (req, res) => {
   const task = {
     id: tasksContainer.tasks.length,
     title: req.body.title,
@@ -113,7 +113,7 @@ app.post('/task/create', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/task/delete/:id', (req, res) => {
+app.delete('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -126,7 +126,7 @@ app.delete('/task/delete/:id', (req, res) => {
         message: 'Updated successfully',
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
       });
     }

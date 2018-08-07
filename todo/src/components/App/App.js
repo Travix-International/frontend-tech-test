@@ -6,7 +6,8 @@ import './App.css';
 const App = () => (
   <div className="App">
     <Switch>
-      <Route path="/" component={Main} />
+      <Route path="/" exact component={Main} />
+      <Route path="/new" exact component={Main} />
     </Switch>
   </div>
 );
