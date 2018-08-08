@@ -3,7 +3,7 @@ import { GET_ITEMS, GET_ITEM, DELETE_ITEM, CREATE_ITEM, EDIT_ITEM } from '../act
 import Api from '../../api';
 import * as actions from '../actions/actions';
 
-const api = new Api();
+const api = new Api("http://localhost:9001");
 
 // saga for retreiving all items
 function* watchGetItems() {
@@ -13,8 +13,10 @@ function* watchGetItems() {
 function* fetchGetItems() {
   try {
     const data = yield call(api.getItems);
-    yield put(actions.getItemsSuccess(data));
+    yield put(actions.getItemsSuccess(data.body));
   } catch(error) {
+    
+    yield console.error(error);
     yield put(actions.getItemsFail(error));
   }
 }
@@ -27,7 +29,7 @@ function* watchGetItem() {
 function* fetchGetItem(action) {
   try {
     const data = yield call(api.getItem, action.id);
-    yield put(actions.getItemSuccess(data));
+    yield put(actions.getItemSuccess(data.body));
   } catch(error) {
     yield put(actions.getItemFail(error));
   }
@@ -41,7 +43,7 @@ function* watchCreateItem() {
 function* fetchCreateItem(action) {
   try {
     const data = yield call(api.createItem, action.data);
-    yield put(actions.createItemSuccess(data));
+    yield put(actions.createItemSuccess(data.body));
   } catch(error) {
     yield put(actions.createItemFail(error));
   }
@@ -55,7 +57,7 @@ function* watchEditItem() {
 function* fetchEditItem(action) {
   try {
     const data = yield call(api.editItem, action.id, action.data);
-    yield put(actions.editItemSuccess(data));
+    yield put(actions.editItemSuccess(data.body));
   } catch(error) {
     yield put(actions.editItemFail(error));
   }
@@ -69,7 +71,7 @@ function* watchDeleteItem() {
 function* fetchDeleteItem(action) {
   try {
     const data = yield call(api.deleteItem, action.id);
-    yield put(actions.deleteItemSuccess(data));
+    yield put(actions.deleteItemSuccess(data.body));
   } catch(error) {
     yield put(actions.deleteItemFail(error));
   }

@@ -1,28 +1,37 @@
 export default class Api {
-  baseUrl = "localhost:9001"; 
-  getItems() {
-    return fetch(`${this.baseUrl}/tasks`);
+  constructor(baseUrl) {
+    this.baseUrl = baseUrl;
+  }
+  
+  fetchData = (url, opts) => fetch(url, {
+    mode: "no-cors",
+    ...opts
+  })
+  
+  getItems = () => {
+    return this.fetchData(`${this.baseUrl}/tasks`);
   }
 
-  getItem(id) {
-    return fetch(`${this.baseUrl}/task/${id}`);
+  getItem = id => {
+    return this.fetchData(`${this.baseUrl}/task/${id}`);
   }
 
-  createItem(data) {
-    return fetch(`${this.baseUrl}/task`, {
+  createItem = data => {
+    return this.fetchData(`${this.baseUrl}/task`, {
       method: "GET",
       body: data
     });
   }
 
-  editItem(id, data) {
-    return fetch(`${this.baseUrl}/task/${id}`, {
+  editItem = (id, data) => {
+    return this.fetchData(`${this.baseUrl}/task/${id}`, {
       method: "PUT",
-      body: data
+      body: data,
+      mode: "no-cors"
     });
   }
 
-  deleteItem(id) {
-    return fetch(`${this.baseUrl}/task/${id}`);
+  deleteItem = id => {
+    return this.fetchData(`${this.baseUrl}/task/${id}`);
   }
 }

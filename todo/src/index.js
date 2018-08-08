@@ -5,10 +5,7 @@ import App from './components/App';
 import { BrowserRouter } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import storeConfig from './store';
-
-const store = createStore(storeConfig);
+import store from './store';
 
 const render = (
   <Provider store={store}>
