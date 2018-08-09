@@ -1,33 +1,6 @@
-.list--todos {
-  height: 40px;
-  background-color: rgb(235, 215, 162);
-}
-
-.item_block {
-  width: 100%;
-  height: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.item_left,
-.item_right {
-  height: inherit;
-  display: flex;
-  align-items: center;
-}
-.item_checkbox {
-  width: 20px;
-  height: 20px;
-}
-
-.item_name {
-  display: block;
-  font-size: 1rem;
-  font-weight: bold;
-  margin-left: 10px;;
-}
-
-.item_name--done {
+.crossed {
   text-decoration: line-through;
+}
+.link {
+  text-decoration: none;
 }

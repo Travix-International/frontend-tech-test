@@ -13,10 +13,8 @@ function* watchGetItems() {
 function* fetchGetItems() {
   try {
     const data = yield call(api.getItems);
-    yield put(actions.getItemsSuccess(data.body));
+    yield put(actions.getItemsSuccess(data));
   } catch(error) {
-    
-    yield console.error(error);
     yield put(actions.getItemsFail(error));
   }
 }
