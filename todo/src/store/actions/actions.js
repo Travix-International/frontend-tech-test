@@ -56,9 +56,8 @@ export const createItemFail = error => ({
 });
 
 // EDIT ITEM
-export const editItem = (id, data) => ({
+export const editItem = data => ({
   type: actions.EDIT_ITEM,
-  id,
   data
 });
 export const editItemSuccess = data => ({

@@ -1,10 +1,11 @@
+import 'whatwg-fetch';
 export default class Api {
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
   }
   
   fetchData = (url, opts) => fetch(url, {
-    mode: "no-cors",
+    mode: "cors",
     ...opts
   })
   
@@ -23,11 +24,13 @@ export default class Api {
     });
   }
 
-  editItem = (id, data) => {
-    return this.fetchData(`${this.baseUrl}/task/${id}`, {
+  editItem = data => {
+    return this.fetchData(`${this.baseUrl}/task/${data.id}`, {
       method: "PUT",
-      body: data,
-      mode: "no-cors"
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
     });
   }
 

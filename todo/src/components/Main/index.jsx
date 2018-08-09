@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getItems } from './../../store/actions/actions';
-import { List, ListItem, ListDivider } from 'react-toolbox/lib/list';
+import { getItems, editItem } from './../../store/actions/actions';
+import { List, ListItem, ListDivider, ListItemText } from 'react-toolbox/lib/list';
 import { Button } from 'react-toolbox/lib/button';
 import Checkbox from 'react-toolbox/lib/checkbox';
 import { Link } from 'react-router-dom';
@@ -36,26 +36,37 @@ class Main extends Component {
     this.props.getItems();
   }
 
-  onChangeTodoState(evt) {}
+  onChangeTodoState(done, data) {
+    const body = {
+      ...data,
+      done
+    }
+    console.log(body)
+    this.props.editItem(body);
+  }
 
   deleteItem(evt, id) {
-    evt.preventDefault();
-    console.log(id)
+    evt.stopPropagation();
+    console.log(evt)
   }
   renderList() {
-    return this.state.items.map((item, index) => {
-      const icon = <Checkbox checked={item.done}/>;
-      const btn = [<Button primary icon="delete" onClick={evt => this.deleteItem(evt, item.id)} floating mini />];
-      return (<Link to={`/item/${item.id}`} key={`${index}--${item.name}`}>
-        <ListItem
-          caption={item.name}
-          legend={item.description}
-          leftIcon={icon}
-          rightActions={btn}
-          className={styles.link}
-        />
-        <ListDivider />
-      </Link>);
+    return this.props.items.tasks && this.props.items.tasks.map((item, index) => {
+      const itemClass = item.done ? styles.crossed : styles.link;
+      const icon = [<Checkbox checked={item.done} onChange={evt => this.onChangeTodoState(evt, item)} key={item.id}/>];
+      const btn = [<Button primary icon="delete" onClick={evt => this.deleteItem(evt, item.id)} floating mini key={item.id}/>];
+      return (
+        <div key={item.title}>
+          <ListItem
+            caption={item.title}
+            legend={item.description}
+            leftActions={icon}
+            rightActions={btn}
+            className={itemClass}
+            to={`/item/${item.id}`}
+            key={item.title}
+          />
+          <ListDivider />
+        </div>);
     });
   }
   render() {
@@ -73,9 +84,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getItems: () => {
-    dispatch(getItems())
-  }
+  getItems: () => dispatch(getItems()),
+  editItem: data => dispatch(editItem(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

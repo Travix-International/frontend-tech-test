@@ -2,8 +2,11 @@
 
 const app = require('express')();
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const tasksContainer = require('./tasks.json');
-
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 /**
  * GET /tasks
  * 
@@ -28,7 +31,7 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.taska.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find((item) => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
@@ -60,14 +63,16 @@ app.get('/task/:id', (req, res) => {
  */
 app.put('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
-
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
       task.title = req.body.title;
       task.description = req.body.description;
-      return res.status(204);
+      task.done = req.body.done;
+      console.log(req.body)
+      tasksContainer.tasks[id] = task;
+      return res.status(204).json(task);
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -94,6 +99,7 @@ app.post('/task', (req, res) => {
     id: tasksContainer.tasks.length,
     title: req.body.title,
     description: req.body.description,
+    done: false
   };
 
   tasksContainer.tasks.push(task);
@@ -136,8 +142,8 @@ app.delete('/task/:id', (req, res) => {
     });
   }
 });
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
+
 app.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });

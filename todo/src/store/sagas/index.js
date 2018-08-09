@@ -13,7 +13,8 @@ function* watchGetItems() {
 function* fetchGetItems() {
   try {
     const data = yield call(api.getItems);
-    yield put(actions.getItemsSuccess(data));
+    const body = yield data.json();
+    yield put(actions.getItemsSuccess(body));
   } catch(error) {
     yield put(actions.getItemsFail(error));
   }
@@ -27,7 +28,8 @@ function* watchGetItem() {
 function* fetchGetItem(action) {
   try {
     const data = yield call(api.getItem, action.id);
-    yield put(actions.getItemSuccess(data.body));
+    const body = yield data.json();
+    yield put(actions.getItemSuccess(body));
   } catch(error) {
     yield put(actions.getItemFail(error));
   }
@@ -41,7 +43,8 @@ function* watchCreateItem() {
 function* fetchCreateItem(action) {
   try {
     const data = yield call(api.createItem, action.data);
-    yield put(actions.createItemSuccess(data.body));
+    const body = yield data.json();
+    yield put(actions.createItemSuccess(body));
   } catch(error) {
     yield put(actions.createItemFail(error));
   }
@@ -54,8 +57,10 @@ function* watchEditItem() {
 
 function* fetchEditItem(action) {
   try {
-    const data = yield call(api.editItem, action.id, action.data);
-    yield put(actions.editItemSuccess(data.body));
+    console.log('yield', action)
+    const data = yield call(api.editItem, action.data);
+    const body = yield data.json();
+    yield put(actions.editItemSuccess(body));
   } catch(error) {
     yield put(actions.editItemFail(error));
   }
@@ -69,7 +74,8 @@ function* watchDeleteItem() {
 function* fetchDeleteItem(action) {
   try {
     const data = yield call(api.deleteItem, action.id);
-    yield put(actions.deleteItemSuccess(data.body));
+    const body = yield data.json();
+    yield put(actions.deleteItemSuccess(body));
   } catch(error) {
     yield put(actions.deleteItemFail(error));
   }

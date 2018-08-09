@@ -4,6 +4,13 @@
   font-size: 1.5rem;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(206, 167, 96);
+  background-color: rgb(164, 214, 223);
   padding: 0 20px;
+}
+
+.visible {
+  visibility: visible;
+}
+.invisible {
+  visibility: hidden;
 }
