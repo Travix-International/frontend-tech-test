@@ -72,9 +72,8 @@ function* watchDeleteItem() {
 
 function* fetchDeleteItem(action) {
   try {
-    const data = yield call(api.deleteItem, action.id);
-    const body = yield data.json();
-    yield put(actions.deleteItemSuccess(body));
+    yield call(api.deleteItem, action.id);
+    yield put(actions.deleteItemSuccess(action.id));
   } catch(error) {
     yield put(actions.deleteItemFail(error));
   }

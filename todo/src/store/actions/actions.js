@@ -32,9 +32,9 @@ export const deleteItem = id => ({
   type: actions.DELETE_ITEM,
   id
 });
-export const deleteItemSuccess = data => ({
+export const deleteItemSuccess = id => ({
   type: actions.DELETE_ITEM_SUCCESS,
-  data
+  id
 });
 export const deleteItemFail = error => ({
   type: actions.DELETE_ITEM_FAIL,

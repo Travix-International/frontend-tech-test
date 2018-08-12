@@ -33,12 +33,10 @@ const reducer = (state = initialState, action) => {
     case types.EDIT_ITEM:
       return { ...state, isFetching: true };
     case types.EDIT_ITEM_SUCCESS:
-      console.log(state)
       const data = state.items.map(val => {
         if (val.id === action.data.id) val = action.data;
         return val;
-      }); 
-      console.log(items);
+      });
       return { ...state, isFetching: false, currentItem: action.data, items: data}
     case types.EDIT_ITEM_FAIL:
       return { ...state, isFetching: false, error: action.error}

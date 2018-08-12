@@ -12,7 +12,6 @@ import styles from './App.css';
 
 const DELETE_TEXT = "Item successfully deleted"
 const EDIT_TEXT = "Item successfully edited"
-const STATE_TEXT = "State changed"
 const CREATE_TEXT = "TODO created"
 
 class App extends Component {
@@ -53,13 +52,6 @@ class App extends Component {
       this.props.createItem(this.state);
     } else {
       this.props.editItem(this.state);
-      this.setState({
-        ...this.state,
-        snackbar: {
-          active: true,
-          text: EDIT_TEXT
-        }
-      })
     }
   }
   onDonePress() {
@@ -68,13 +60,6 @@ class App extends Component {
       ...item,
       done: !item.done
     });
-    this.setState({
-      ...this.state,
-      snackbar: {
-        active: true,
-        text: STATE_TEXT
-      }
-    })
   }
   onDeletePress() {
     this.props.deleteItem(this.state.id);
@@ -104,6 +89,20 @@ class App extends Component {
           }
         })
     }
+
+    if (prevProps.item
+      && this.props.item
+      && (prevProps.item.done !== this.props.item.done
+      || prevProps.item.title !== this.props.item.title
+      || prevProps.item.description !== this.props.item.description)) {
+        this.setState({
+          ...this.state,
+          snackbar: {
+            active: true,
+            text: EDIT_TEXT
+          }
+        })
+      }
   }
   render() {
     return (

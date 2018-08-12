@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getItems, editItem } from './../../store/actions/actions';
+import { getItems, editItem, deleteItem } from './../../store/actions/actions';
 import { List, ListItem, ListDivider } from 'react-toolbox/lib/list';
 import { Button } from 'react-toolbox/lib/button';
 import Checkbox from 'react-toolbox/lib/checkbox';
-import { Link } from 'react-router-dom';
 import styles from './Main.css';
 
 class Main extends Component {
@@ -26,28 +25,30 @@ class Main extends Component {
     this.props.editItem(body);
   }
 
-  deleteItem(evt, id) {
-    console.log(evt)
-    evt.stopPropagation();
+  deleteItem(evt,id) {
+    evt.preventDefault();
+    this.props.deleteItem(id);
   }
   renderList() {
+    console.log(this.props)
     return this.props.items && this.props.items.map((item, index) => {
       const itemClass = item.done ? styles.crossed : styles.link;
       const doneBox = [<Checkbox checked={item.done} onChange={evt => this.onChangeTodoState(evt, item)} key={item.id}/>];
       const btnDelete = [
-        <Button primary icon="delete" onClick={evt => this.deleteItem(evt, item.id)} floating mini key={item.id} />
+        <Button primary icon="delete" onClick={evt => this.deleteItem(evt, item.id)} floating mini key={item.id} type="button" />
       ];
       return (
-        <Link key={item.title} to={`/item/${item.id}`}>
+        <div key={`${item.title}--${item.id}`}>
           <ListItem
             caption={item.title}
             legend={item.description}
             leftActions={doneBox}
             rightActions={btnDelete}
             className={itemClass}
+            to={`/item/${item.id}`}
           />
           <ListDivider />
-        </Link>);
+        </div>);
     });
   }
   render() {
@@ -65,7 +66,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getItems: () => dispatch(getItems()),
-  editItem: data => dispatch(editItem(data))
+  editItem: data => dispatch(editItem(data)),
+  deleteItem: data => dispatch(deleteItem(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
