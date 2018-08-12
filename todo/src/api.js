@@ -19,8 +19,11 @@ export default class Api {
 
   createItem = data => {
     return this.fetchData(`${this.baseUrl}/task`, {
-      method: "GET",
-      body: data
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
     });
   }
 
@@ -35,6 +38,8 @@ export default class Api {
   }
 
   deleteItem = id => {
-    return this.fetchData(`${this.baseUrl}/task/${id}`);
+    return this.fetchData(`${this.baseUrl}/task/${id}`, {
+      method: "DELETE"
+    });
   }
 }

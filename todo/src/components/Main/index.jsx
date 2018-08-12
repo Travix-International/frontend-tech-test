@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getItems, editItem } from './../../store/actions/actions';
-import { List, ListItem, ListDivider, ListItemText } from 'react-toolbox/lib/list';
+import { List, ListItem, ListDivider } from 'react-toolbox/lib/list';
 import { Button } from 'react-toolbox/lib/button';
 import Checkbox from 'react-toolbox/lib/checkbox';
 import { Link } from 'react-router-dom';
@@ -14,24 +14,6 @@ class Main extends Component {
     this.deleteItem = this.deleteItem.bind(this);
   }
 
-  state = {
-    items: [
-      {
-        id: 1,
-        name: "TODO",
-        description: "TODO",
-        done: false
-      },
-
-      {
-        id: 2,
-        name: "TODO1",
-        description: "TODO1",
-        done: true
-      }
-    ]
-  }
-
   componentDidMount() {
     this.props.getItems();
   }
@@ -41,36 +23,34 @@ class Main extends Component {
       ...data,
       done
     }
-    console.log(body)
     this.props.editItem(body);
   }
 
   deleteItem(evt, id) {
-    evt.stopPropagation();
     console.log(evt)
+    evt.stopPropagation();
   }
   renderList() {
-    return this.props.items.tasks && this.props.items.tasks.map((item, index) => {
+    return this.props.items && this.props.items.map((item, index) => {
       const itemClass = item.done ? styles.crossed : styles.link;
-      const icon = [<Checkbox checked={item.done} onChange={evt => this.onChangeTodoState(evt, item)} key={item.id}/>];
-      const btn = [<Button primary icon="delete" onClick={evt => this.deleteItem(evt, item.id)} floating mini key={item.id}/>];
+      const doneBox = [<Checkbox checked={item.done} onChange={evt => this.onChangeTodoState(evt, item)} key={item.id}/>];
+      const btnDelete = [
+        <Button primary icon="delete" onClick={evt => this.deleteItem(evt, item.id)} floating mini key={item.id} />
+      ];
       return (
-        <div key={item.title}>
+        <Link key={item.title} to={`/item/${item.id}`}>
           <ListItem
             caption={item.title}
             legend={item.description}
-            leftActions={icon}
-            rightActions={btn}
+            leftActions={doneBox}
+            rightActions={btnDelete}
             className={itemClass}
-            to={`/item/${item.id}`}
-            key={item.title}
           />
           <ListDivider />
-        </div>);
+        </Link>);
     });
   }
   render() {
-    console.log(this.renderList())
     return (
       <List ripple selectable>
         {this.renderList()}

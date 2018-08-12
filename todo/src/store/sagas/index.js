@@ -14,7 +14,7 @@ function* fetchGetItems() {
   try {
     const data = yield call(api.getItems);
     const body = yield data.json();
-    yield put(actions.getItemsSuccess(body));
+    yield put(actions.getItemsSuccess(body.tasks));
   } catch(error) {
     yield put(actions.getItemsFail(error));
   }
@@ -29,7 +29,7 @@ function* fetchGetItem(action) {
   try {
     const data = yield call(api.getItem, action.id);
     const body = yield data.json();
-    yield put(actions.getItemSuccess(body));
+    yield put(actions.getItemSuccess(body.task));
   } catch(error) {
     yield put(actions.getItemFail(error));
   }
@@ -57,7 +57,6 @@ function* watchEditItem() {
 
 function* fetchEditItem(action) {
   try {
-    console.log('yield', action)
     const data = yield call(api.editItem, action.data);
     const body = yield data.json();
     yield put(actions.editItemSuccess(body));

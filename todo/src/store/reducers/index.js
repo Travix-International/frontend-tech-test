@@ -10,7 +10,7 @@ let items = [];
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_ITEMS:
-      return { ...state, isFetching: true };
+      return { ...state, isFetching: true, currentItem: null };
     case types.GET_ITEMS_SUCCESS:
       return { ...state, isFetching: false, items: action.data}
     case types.GET_ITEMS_FAIL:
@@ -33,11 +33,13 @@ const reducer = (state = initialState, action) => {
     case types.EDIT_ITEM:
       return { ...state, isFetching: true };
     case types.EDIT_ITEM_SUCCESS:
-      items = state.items.map(val => {
-        if (val.id === action.id) val = action.data;
+      console.log(state)
+      const data = state.items.map(val => {
+        if (val.id === action.data.id) val = action.data;
         return val;
       }); 
-      return { ...state, isFetching: false, currentItem: action.data, items}
+      console.log(items);
+      return { ...state, isFetching: false, currentItem: action.data, items: data}
     case types.EDIT_ITEM_FAIL:
       return { ...state, isFetching: false, error: action.error}
 
@@ -45,7 +47,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, isFetching: true };
     case types.DELETE_ITEM_SUCCESS:
       items = state.items.filter(val => val.id !== action.id);
-      return { ...state, isFetching: false, items}
+      return { ...state, isFetching: false, items, currentItem: null }
     case types.DELETE_ITEM_FAIL:
       return { ...state, isFetching: false, error: action.error}
     default:

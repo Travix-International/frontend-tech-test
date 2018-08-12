@@ -1,16 +1,16 @@
-.header {
+.footer {
   display: flex;
   height: 3rem;
-  width: 100%;
   font-size: 1.5rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   background-color: rgb(164, 214, 223);
   padding: 0 20px;
 }
 
 .visible {
   visibility: visible;
+  margin: 0 5px;
 }
 .invisible {
   visibility: hidden;
