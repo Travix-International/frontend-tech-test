@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
 import { Snackbar } from 'react-toolbox/lib/snackbar';
-import { editItem, createItem, deleteItem } from './../../store/actions/actions';
+import { editItem, createItem, deleteItem, getItem } from './../../store/actions/actions';
 import Main from './../Main';
 import Header from './../Header';
 import Footer from './../Footer';
@@ -45,8 +45,9 @@ class App extends Component {
         active: false,
         text: ''
       }
-    })
+    });
   }
+
   onSavePress() {
     if (this.props.location.pathname === '/new') {
       this.props.createItem(this.state);
@@ -54,6 +55,7 @@ class App extends Component {
       this.props.editItem(this.state);
     }
   }
+
   onDonePress() {
     const { item } = this.props;
     this.props.editItem({
@@ -61,9 +63,11 @@ class App extends Component {
       done: !item.done
     });
   }
+
   onDeletePress() {
     this.props.deleteItem(this.state.id);
   }
+  
   componentDidUpdate(prevProps) {
     if (!prevProps.item
       && this.props.item
@@ -112,7 +116,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={Main} />
             <Route path="/new" exact render={_ => <Detail handleChange={this.handleChange} />} />
-            <Route path="/item/:id" render={_ => <Detail handleChange={this.handleChange} />} />
+            <Route path="/item/:id" render={_ => <Detail handleChange={this.handleChange} getItem={this.props.getItem}/>} />
           </Switch>
         </section>
         <Footer 
@@ -139,5 +143,6 @@ const mapDispatchToProps = dispatch => ({
   editItem: data => dispatch(editItem(data)),
   createItem: data => dispatch(createItem(data)),
   deleteItem: id => dispatch(deleteItem(id)),
+  getItem: id => dispatch(getItem(id))
 })
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

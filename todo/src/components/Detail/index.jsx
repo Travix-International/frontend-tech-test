@@ -2,8 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import Input from './../ui/Input';
-import { getItem } from './../../store/actions/actions';
-import styles from './Deatil.css';
 
 class Detail extends Component {
   constructor(props) {
@@ -16,10 +14,8 @@ class Detail extends Component {
     done: false,
   }
   componentDidMount() {
-    const { location: { pathname }, match: { params: { id }}, getItem } = this.props;
-    if (pathname !== "/new") {
-      getItem(id);
-    }
+    const { match: { params: { id }}, getItem } = this.props;
+    if (getItem && id) getItem(id);
   }
 
   componentDidUpdate(prevProps) {
@@ -50,8 +46,6 @@ const mapStateToProps = state => ({
   data: state.currentItem
 });
 
-const mapDispatchToProps = dispatch => ({
-  getItem: id => dispatch(getItem(id))
-});
+const mapDispatchToProps = dispatch => ({});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Detail));
