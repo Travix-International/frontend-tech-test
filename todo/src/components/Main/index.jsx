@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getItems, editItem, deleteItem } from './../../store/actions/actions';
 import { List, ListItem, ListDivider } from 'react-toolbox/lib/list';
+import { Snackbar } from 'react-toolbox/lib/snackbar';
 import { Button } from 'react-toolbox/lib/button';
 import Checkbox from 'react-toolbox/lib/checkbox';
 import styles from './Main.css';
@@ -11,12 +12,41 @@ class Main extends Component {
     super(props);
     this.onChangeTodoState = this.onChangeTodoState.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.onSnackbarTimeout = this.onSnackbarTimeout.bind(this);
   }
 
+  state = {
+    snackbar: {
+      text: '',
+      active: false
+    }
+  }
   componentDidMount() {
     this.props.getItems();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.items
+      && this.props.items
+      && prevProps.items.length > this.props.items.length) {
+        this.setState({
+          ...this.state,
+          snackbar: {
+            active: true,
+            text: 'Todo have been deleted'
+          }
+        })
+      }
+  }
+  onSnackbarTimeout() {
+    this.setState({
+      ...this.state,
+      snackbar: {
+        active: false,
+        text: ''
+      }
+    })
+  }
   onChangeTodoState(done, data) {
     const body = {
       ...data,
@@ -53,9 +83,17 @@ class Main extends Component {
   }
   render() {
     return (
-      <List ripple selectable>
-        {this.renderList()}
-      </List>
+      <Fragment>
+        <List ripple selectable>
+          {this.renderList()}
+        </List>
+        <Snackbar
+          timeout={2000}
+          label={this.state.snackbar.text}
+          active={this.state.snackbar.active}
+          onTimeout={this.onSnackbarTimeout}
+        />
+      </Fragment>
     );
   }
 }
