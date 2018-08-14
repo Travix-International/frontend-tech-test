@@ -9,8 +9,9 @@ export default class Api {
     ...opts
   })
   
-  getItems = () => {
-    return this.fetchData(`${this.baseUrl}/tasks`);
+  getItems = tag => {
+    const tagName = tag ? `?tag=${tag}` : '';
+    return this.fetchData(`${this.baseUrl}/tasks${tagName}`);
   }
 
   getItem = id => {

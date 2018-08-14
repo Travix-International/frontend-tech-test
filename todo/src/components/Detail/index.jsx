@@ -37,6 +37,7 @@ class Detail extends Component {
       <Fragment>
         <Input type='text' name='title' value={this.state.title} change={this.handleChange} bgText="Title"/>
         <Input type='text' name='description' value={this.state.description} change={this.handleChange} area bgText="Description"/>
+        <Input type='text' name='tags' value={this.state.tags} change={this.handleChange} area bgText="Please, add tags separating with commas"/>
       </Fragment>
     )
   }

@@ -10,9 +10,9 @@ function* watchGetItems() {
   yield takeLatest(GET_ITEMS, fetchGetItems);
 }
 
-function* fetchGetItems() {
+function* fetchGetItems(action) {
   try {
-    const data = yield call(api.getItems);
+    const data = yield call(api.getItems, action.tag);
     const body = yield data.json();
     yield put(actions.getItemsSuccess(body.tasks));
   } catch(error) {

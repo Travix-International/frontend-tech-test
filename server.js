@@ -13,6 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
+  if (req.query.tag) {
+    const tasks = tasksContainer.tasks.filter(task => task.tags.includes(req.query.tag));
+    return res.status(200).json({ tasks });
+  }
   return res.status(200).json(tasksContainer);
 });
 
@@ -70,6 +74,7 @@ app.put('/task/:id', (req, res) => {
       task.title = req.body.title;
       task.description = req.body.description;
       task.done = req.body.done;
+      task.tags = req.body.tags;
       tasksContainer.tasks[id] = task;
       return res.status(200).json(task);
     } else {
@@ -98,6 +103,7 @@ app.post('/task', (req, res) => {
     id: tasksContainer.tasks.length,
     title: req.body.title,
     description: req.body.description,
+    tags: req.body.tags,
     done: false
   };
 

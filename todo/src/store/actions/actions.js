@@ -1,8 +1,9 @@
 import * as actions from './constants';
 
 // GET ALL ITEMS
-export const getItems = () => ({
-  type: actions.GET_ITEMS
+export const getItems = tag => ({
+  type: actions.GET_ITEMS,
+  tag
 });
 export const getItemsSuccess = data => ({
   type: actions.GET_ITEMS_SUCCESS,
