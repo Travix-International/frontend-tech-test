@@ -5,6 +5,7 @@ import { List, ListItem, ListDivider } from 'react-toolbox/lib/list';
 import { Snackbar } from 'react-toolbox/lib/snackbar';
 import { Button } from 'react-toolbox/lib/button';
 import Checkbox from 'react-toolbox/lib/checkbox';
+import Input from './../ui/Input';
 import styles from './Main.css';
 
 class Main extends Component {
@@ -13,6 +14,7 @@ class Main extends Component {
     this.onChangeTodoState = this.onChangeTodoState.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
     this.getItemsByTag = this.getItemsByTag.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.onSnackbarTimeout = this.onSnackbarTimeout.bind(this);
   }
 
@@ -20,7 +22,8 @@ class Main extends Component {
     snackbar: {
       text: '',
       active: false
-    }
+    },
+    tag: ''
   }
   componentDidMount() {
     this.props.getItems();
@@ -63,7 +66,14 @@ class Main extends Component {
 
   getItemsByTag(tag) {
     this.props.getItems(tag.trim());
+    this.setState({ ...this.state, tag: tag.trim() });
   }
+  handleChange(e) {
+    const { name, value } = e.target;
+    this.setState({ ...this.state, [name]: value });
+    this.props.getItems(value.trim(value.trim()));
+  }
+
   renderList() {
     return this.props.items && this.props.items.map((item, index) => {
       const itemClass = item.done ? styles.crossed : styles.link;
@@ -78,7 +88,7 @@ class Main extends Component {
         description = item.description.length > 40 ? `${item.description.substr(0, 40)}...` : item.description;
       }
       const tags = item.tags
-        ? item.tags.split(',').map(tag => <Button label={tag} flat primary key={tag} onClick={_ => this.getItemsByTag(tag)}/>)
+        ? item.tags.split(',').map(tag => <Button label={`#${tag}`} flat primary key={tag} onClick={_ => this.getItemsByTag(tag)}/>)
         : [];
       return (
         <div key={`${item.title}--${item.id}`}>
@@ -90,7 +100,9 @@ class Main extends Component {
             className={itemClass}
             to={`/item/${item.id}`}
           />
-          { tags }
+          <div className={styles.tags}>
+            { tags }
+          </div>
           <ListDivider />
         </div>);
     });
@@ -98,6 +110,7 @@ class Main extends Component {
   render() {
     return (
       <Fragment>
+        <Input type='text' name='tag' value={this.state.tag} change={this.handleChange} bgText="Tags"/>
         <List ripple selectable>
           {this.renderList()}
         </List>

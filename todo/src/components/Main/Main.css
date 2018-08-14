@@ -4,3 +4,7 @@
 .link {
   text-decoration: none;
 }
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+}

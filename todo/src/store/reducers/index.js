@@ -4,13 +4,14 @@ const initialState = {
   isFetching: false,
   items: [],
   currentItem: null,
-  error: null
+  error: null,
+  tag: null
 };
 let items = [];
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_ITEMS:
-      return { ...state, isFetching: true, currentItem: null };
+      return { ...state, isFetching: true, currentItem: null, tag: action.tag };
     case types.GET_ITEMS_SUCCESS:
       return { ...state, isFetching: false, items: action.data}
     case types.GET_ITEMS_FAIL:
