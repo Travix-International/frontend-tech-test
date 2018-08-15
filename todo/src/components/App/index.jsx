@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
 import { Snackbar } from 'react-toolbox/lib/snackbar';
+import ProgressBar from 'react-toolbox/lib/progress_bar';
 import { editItem, createItem, deleteItem, getItem } from './../../store/actions/actions';
 import Main from './../Main';
 import Header from './../Header';
@@ -110,6 +111,7 @@ class App extends Component {
       }
   }
   render() {
+    const spinnerClass = this.props.isFetching ? styles.spinnerVisible : styles.spinnerInvis;
     return (
       <div className={styles.App}>
         <Header />
@@ -132,13 +134,15 @@ class App extends Component {
           active={this.state.snackbar.active}
           onTimeout={this.onSnackbarTimeout}
         />
+        <ProgressBar type='circular' className={spinnerClass}/>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  item: state.currentItem
+  item: state.currentItem,
+  isFetching: state.isFetching
 });
 const mapDispatchToProps = dispatch => ({
   editItem: data => dispatch(editItem(data)),

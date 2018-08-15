@@ -10,6 +10,17 @@
   flex: 1;
   overflow: auto;
 }
+
+.spinnerVisible {
+  display: block;
+  position: absolute;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+}
+
+.spinnerInvis {
+  display: none;
+}
 @media screen and (max-width: 1170px) {
   .App {
     width: 100%;

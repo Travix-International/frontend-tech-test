@@ -102,6 +102,7 @@
   "devDependencies": {
     "enzyme": "^3.4.1",
     "enzyme-adapter-react-16": "^1.2.0",
-    "redux-mock-store": "^1.5.3"
+    "redux-mock-store": "^1.5.3",
+    "supertest": "^3.1.0"
   }
 }
