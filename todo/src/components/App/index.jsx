@@ -98,7 +98,8 @@ class App extends Component {
       && this.props.item
       && (prevProps.item.done !== this.props.item.done
       || prevProps.item.title !== this.props.item.title
-      || prevProps.item.description !== this.props.item.description)) {
+      || prevProps.item.description !== this.props.item.description
+      || prevProps.item.tags !== this.props.item.tags)) {
         this.setState({
           ...this.state,
           snackbar: {

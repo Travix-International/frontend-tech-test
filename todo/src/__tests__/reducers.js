@@ -6,7 +6,8 @@ const initialState = {
   isFetching: false,
   items: [],
   currentItem: null,
-  error: null
+  error: null,
+  tag: null
 };
 const id = 1;
 const items = [
@@ -26,7 +27,16 @@ describe("Reducers testing", () => {
     test(`${types.GET_ITEMS}`, () => {
       expect(reducer(initialState, actions.getItems())).toEqual({
         ...initialState,
-        isFetching: true
+        isFetching: true,
+        tag: undefined
+      });
+    });
+    test(`${types.GET_ITEMS} with tag`, () => {
+      const tag = 'todo';
+      expect(reducer(initialState, actions.getItems(tag))).toEqual({
+        ...initialState,
+        isFetching: true,
+        tag
       });
     });
     test(`${types.GET_ITEMS_SUCCESS}`, () => {
