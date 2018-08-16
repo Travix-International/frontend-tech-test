@@ -6,14 +6,14 @@ import * as actions from '../actions/actions';
 const api = new Api("http://localhost:9001");
 
 // saga for retreiving all items
-function* watchGetItems() {
+export function* watchGetItems() {
   yield takeLatest(GET_ITEMS, fetchGetItems);
 }
 
-function* fetchGetItems(action) {
+export function* fetchGetItems(action) {
   try {
     const data = yield call(api.getItems, action.tag);
-    const body = yield data.json();
+    const body = yield call([data, 'json']);
     yield put(actions.getItemsSuccess(body.tasks));
   } catch(error) {
     yield put(actions.getItemsFail(error));
@@ -21,14 +21,14 @@ function* fetchGetItems(action) {
 }
 
 // saga for single item
-function* watchGetItem() {
+export function* watchGetItem() {
   yield takeLatest(GET_ITEM, fetchGetItem);
 }
 
-function* fetchGetItem(action) {
+export function* fetchGetItem(action) {
   try {
     const data = yield call(api.getItem, action.id);
-    const body = yield data.json();
+    const body = yield call([data, 'json']);
     yield put(actions.getItemSuccess(body.task));
   } catch(error) {
     yield put(actions.getItemFail(error));
@@ -36,14 +36,14 @@ function* fetchGetItem(action) {
 }
 
 // saga for creating an item
-function* watchCreateItem() {
+export function* watchCreateItem() {
   yield takeLatest(CREATE_ITEM, fetchCreateItem);
 }
 
-function* fetchCreateItem(action) {
+export function* fetchCreateItem(action) {
   try {
     const data = yield call(api.createItem, action.data);
-    const body = yield data.json();
+    const body = yield call([data, 'json']);
     yield put(actions.createItemSuccess(body));
   } catch(error) {
     yield put(actions.createItemFail(error));
@@ -51,14 +51,14 @@ function* fetchCreateItem(action) {
 }
 
 // saga for editing an item
-function* watchEditItem() {
+export function* watchEditItem() {
   yield takeLatest(EDIT_ITEM, fetchEditItem);
 }
 
-function* fetchEditItem(action) {
+export function* fetchEditItem(action) {
   try {
     const data = yield call(api.editItem, action.data);
-    const body = yield data.json();
+    const body = yield call([data, 'json']);
     yield put(actions.editItemSuccess(body));
   } catch(error) {
     yield put(actions.editItemFail(error));
@@ -66,11 +66,11 @@ function* fetchEditItem(action) {
 }
 
 // saga for deleting an item
-function* watchDeleteItem() {
+export function* watchDeleteItem() {
   yield takeLatest(DELETE_ITEM, fetchDeleteItem);
 }
 
-function* fetchDeleteItem(action) {
+export function* fetchDeleteItem(action) {
   try {
     yield call(api.deleteItem, action.id);
     yield put(actions.deleteItemSuccess(action.id));
