@@ -34,10 +34,10 @@ describe('test sagas', () => {
     const watchGenerator = cloneableGenerator(watchDeleteItem)();
     const fetchGenerator = cloneableGenerator(fetchDeleteItem)(action);
     expect(str(watchGenerator.next().value)).toEqual(str(takeLatest(types.DELETE_ITEM, fetchDeleteItem)));
-    expect(str(fetchGenerator.next().value)).toEqual(str(call(api.deleteItem, action.id)));
-
-    test('Get items', () => {
+    
+    test('Delete success', () => {
       const clone = fetchGenerator.clone();
+      expect(str(clone.next().value)).toEqual(str(call(api.deleteItem, action.id)));
       expect(str(clone.next().value)).toEqual(str(put(actions.deleteItemSuccess(action.id))));
     });
   })

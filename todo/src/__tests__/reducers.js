@@ -7,7 +7,8 @@ const initialState = {
   items: [],
   currentItem: null,
   error: null,
-  tag: null
+  tag: null,
+  currentAction: null
 };
 const id = 1;
 const items = [
@@ -42,6 +43,7 @@ describe("Reducers testing", () => {
     test(`${types.GET_ITEMS_SUCCESS}`, () => {
       expect(reducer(initialState, actions.getItemsSuccess(items))).toEqual({
         ...initialState,
+        currentAction: 'ITEMS',
         items
       });
     });
@@ -63,7 +65,8 @@ describe("Reducers testing", () => {
     test(`${types.GET_ITEM_SUCCESS}`, () => {
       expect(reducer(initialState, actions.getItemSuccess(items[0]))).toEqual({
         ...initialState,
-        currentItem: items[0]
+        currentItem: items[0],
+        currentAction: 'ITEM'
       });
     });
     test(`${types.GET_ITEM_FAIL}`, () => {
@@ -84,7 +87,8 @@ describe("Reducers testing", () => {
     test(`${types.CREATE_ITEM_SUCCESS}`, () => {
       expect(reducer(initialState, actions.createItemSuccess(items[1]))).toEqual({
         ...initialState,
-        currentItem: items[1]
+        currentItem: items[1],
+        currentAction: 'CREATE'
       });
     });
     test(`${types.CREATE_ITEM_FAIL}`, () => {
@@ -106,7 +110,8 @@ describe("Reducers testing", () => {
       expect(reducer({...initialState, items}, actions.editItemSuccess(editedItem))).toEqual({
         ...initialState,
         items: [items[0], editedItem],
-        currentItem: editedItem
+        currentItem: editedItem,
+        currentAction: 'EDIT'
       });
     });
     test(`${types.EDIT_ITEM_FAIL}`, () => {
@@ -127,7 +132,8 @@ describe("Reducers testing", () => {
     test(`${types.DELETE_ITEM_SUCCESS}`, () => {
       expect(reducer({...initialState, items}, actions.deleteItemSuccess(id))).toEqual({
         ...initialState,
-        items: [items[1]]
+        items: [items[1]],
+        currentAction: 'DELETE'
       });
     });
     test(`${types.DELETE_ITEM_FAIL}`, () => {

@@ -5,7 +5,17 @@ import { List, ListItem, ListDivider } from 'react-toolbox/lib/list';
 import { Button } from 'react-toolbox/lib/button';
 import Checkbox from 'react-toolbox/lib/checkbox';
 import Input from './../ui/Input';
+import Tags from './../Tags';
 import styles from './Main.css';
+
+
+const truncateDesctiption = description => {
+  console.log(window.innerWidth)
+  if (window.innerWidth < 1170) {
+    return description.length > 25 ? `${description.substr(0, 25)}...` : description;
+  }
+  return description.length > 100 ? `${description.substr(0, 100)}...` : description;
+}
 
 class Main extends Component {
   constructor(props) {
@@ -52,32 +62,27 @@ class Main extends Component {
 
   renderList() {
     return this.props.items && this.props.items.map((item, index) => {
-      const itemClass = item.done ? styles.crossed : styles.link;
-      const doneBox = [<Checkbox checked={item.done} onChange={evt => this.onChangeTodoState(evt, item)} key={item.id}/>];
+      const itemClass = item.done
+        ? styles.crossed
+        : styles.link;
+      const doneBox = [
+        <Checkbox checked={item.done} onChange={evt => this.onChangeTodoState(evt, item)} key={item.id}/>
+      ];
       const btnDelete = [
         <Button primary icon="delete" onClick={evt => this.deleteItem(evt, item.id)} floating mini key={item.id} type="button" />
       ];
-      let description = '';
-      if (window.innerWidth > 1169) {
-        description = item.description.length > 150 ? `${item.description.substr(0, 150)}...` : item.description;
-      } else {
-        description = item.description.length > 40 ? `${item.description.substr(0, 40)}...` : item.description;
-      }
-      const tags = item.tags
-        ? item.tags.split(',').map(tag => <Button label={`#${tag}`} flat primary key={tag} onClick={_ => this.getItemsByTag(tag)}/>)
-        : [];
       return (
         <div key={`${item.title}--${item.id}`}>
           <ListItem
             caption={item.title}
-            legend={description}
+            legend={truncateDesctiption(item.description)}
             leftActions={doneBox}
             rightActions={btnDelete}
             className={itemClass}
             to={`/item/${item.id}`}
           />
           <div className={styles.tags}>
-            { tags }
+            <Tags items={item.tags} onClick={this.getItemsByTag} />
           </div>
           <ListDivider />
         </div>);

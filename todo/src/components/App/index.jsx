@@ -11,9 +11,13 @@ import Footer from './../Footer';
 import Detail from './../Detail';
 import styles from './App.css';
 
-const DELETE_TEXT = "Item successfully deleted"
-const EDIT_TEXT = "Item successfully edited"
-const CREATE_TEXT = "TODO created"
+const actionTriggered = {
+  'ITEMS': 'Items downloaded',
+  'ITEM': 'Item downloaded',
+  'CREATE': 'Item successfully created',
+  'EDIT': 'Item successfully edited',
+  'DELETE': 'Item successfully deleted'
+}
 
 class App extends Component {
   constructor(props) {
@@ -39,6 +43,7 @@ class App extends Component {
   handleChange(state) {
     this.setState({ ...state });
   }
+
   onSnackbarTimeout() {
     this.setState({
       ...this.state,
@@ -70,45 +75,27 @@ class App extends Component {
   }
   
   componentDidUpdate(prevProps) {
-    if (!prevProps.item
-      && this.props.item
-      && prevProps.location.pathname === '/new') {
-        this.props.history.push(`/item/${this.props.item.id}`);
+    // Show snackbar
+    if (!prevProps.action
+      && prevProps.action !== this.props.action) {
         this.setState({
           ...this.state,
           snackbar: {
             active: true,
-            text: CREATE_TEXT
+            text: actionTriggered[this.props.action]
           }
         });
     }
+    // Redirect from /new
+    if (!prevProps.action && this.props.action === 'CREATE') {
+        this.props.history.push(`/item/${this.props.item.id}`);
+    }
+    // Redirect from detail page to Main if deleted
     if (prevProps.item
       && !this.props.item
-      && prevProps.location.pathname.startsWith("/item/")) {
+      && this.props.action === 'DELETE') {
         this.props.history.push('/');
-        this.setState({
-          ...this.state,
-          snackbar: {
-            active: true,
-            text: DELETE_TEXT
-          }
-        })
     }
-
-    if (prevProps.item
-      && this.props.item
-      && (prevProps.item.done !== this.props.item.done
-      || prevProps.item.title !== this.props.item.title
-      || prevProps.item.description !== this.props.item.description
-      || prevProps.item.tags !== this.props.item.tags)) {
-        this.setState({
-          ...this.state,
-          snackbar: {
-            active: true,
-            text: EDIT_TEXT
-          }
-        })
-      }
   }
   render() {
     const spinnerClass = this.props.isFetching ? styles.spinnerVisible : styles.spinnerInvis;
@@ -142,7 +129,8 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   item: state.currentItem,
-  isFetching: state.isFetching
+  isFetching: state.isFetching,
+  action: state.currentAction
 });
 const mapDispatchToProps = dispatch => ({
   editItem: data => dispatch(editItem(data)),

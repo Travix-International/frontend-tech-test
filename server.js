@@ -99,7 +99,7 @@ app.put('/task/:id', (req, res) => {
  */
 app.post('/task', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: Date.now(),
     title: req.body.title,
     description: req.body.description,
     tags: req.body.tags,
