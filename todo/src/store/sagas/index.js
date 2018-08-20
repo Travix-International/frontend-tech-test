@@ -1,5 +1,16 @@
-import { call, put, takeLatest, all } from 'redux-saga/effects';
-import { GET_ITEMS, GET_ITEM, DELETE_ITEM, CREATE_ITEM, EDIT_ITEM } from '../actions/constants';
+import {
+  call,
+  put,
+  takeLatest,
+  all
+} from 'redux-saga/effects';
+import {
+  GET_ITEMS,
+  GET_ITEM,
+  DELETE_ITEM,
+  CREATE_ITEM,
+  EDIT_ITEM
+} from '../actions/constants';
 import Api from '../../api';
 import * as actions from '../actions/actions';
 
@@ -15,7 +26,7 @@ export function* fetchGetItems(action) {
     const data = yield call(api.getItems, action.tag);
     const body = yield call([data, 'json']);
     yield put(actions.getItemsSuccess(body.tasks));
-  } catch(error) {
+  } catch (error) {
     yield put(actions.getItemsFail(error));
   }
 }
@@ -30,7 +41,7 @@ export function* fetchGetItem(action) {
     const data = yield call(api.getItem, action.id);
     const body = yield call([data, 'json']);
     yield put(actions.getItemSuccess(body.task));
-  } catch(error) {
+  } catch (error) {
     yield put(actions.getItemFail(error));
   }
 }
@@ -45,7 +56,7 @@ export function* fetchCreateItem(action) {
     const data = yield call(api.createItem, action.data);
     const body = yield call([data, 'json']);
     yield put(actions.createItemSuccess(body));
-  } catch(error) {
+  } catch (error) {
     yield put(actions.createItemFail(error));
   }
 }
@@ -60,7 +71,7 @@ export function* fetchEditItem(action) {
     const data = yield call(api.editItem, action.data);
     const body = yield call([data, 'json']);
     yield put(actions.editItemSuccess(body));
-  } catch(error) {
+  } catch (error) {
     yield put(actions.editItemFail(error));
   }
 }
@@ -74,7 +85,7 @@ export function* fetchDeleteItem(action) {
   try {
     yield call(api.deleteItem, action.id);
     yield put(actions.deleteItemSuccess(action.id));
-  } catch(error) {
+  } catch (error) {
     yield put(actions.deleteItemFail(error));
   }
 }

@@ -1,21 +1,20 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { getItems, editItem, deleteItem } from './../../store/actions/actions';
 import { List, ListItem, ListDivider } from 'react-toolbox/lib/list';
 import { Button } from 'react-toolbox/lib/button';
 import Checkbox from 'react-toolbox/lib/checkbox';
+import { getItems, editItem, deleteItem } from './../../store/actions/actions';
 import Input from './../ui/Input';
 import Tags from './../Tags';
 import styles from './Main.css';
 
 
 const truncateDesctiption = description => {
-  console.log(window.innerWidth)
   if (window.innerWidth < 1170) {
     return description.length > 25 ? `${description.substr(0, 25)}...` : description;
   }
   return description.length > 100 ? `${description.substr(0, 100)}...` : description;
-}
+};
 
 class Main extends Component {
   constructor(props) {
@@ -33,6 +32,7 @@ class Main extends Component {
     },
     tag: ''
   }
+
   componentDidMount() {
     this.props.getItems();
   }
@@ -41,7 +41,7 @@ class Main extends Component {
     const body = {
       ...data,
       done
-    }
+    };
     this.props.editItem(body);
   }
 
@@ -54,6 +54,7 @@ class Main extends Component {
     this.props.getItems(tag.trim());
     this.setState({ ...this.state, tag: tag.trim() });
   }
+
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ ...this.state, [name]: value });
@@ -88,6 +89,7 @@ class Main extends Component {
         </div>);
     });
   }
+  
   render() {
     return (
       <Fragment>

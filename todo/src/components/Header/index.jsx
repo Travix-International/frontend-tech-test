@@ -16,7 +16,7 @@ const Header = props => {
         <Button label="New" icon="add" primary raised/>
       </Link>
     </header>
-  )
+  );
 }
 
 export default withRouter(Header);

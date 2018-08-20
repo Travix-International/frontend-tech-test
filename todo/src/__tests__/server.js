@@ -13,6 +13,7 @@ describe('API testing', () => {
     id: 2,
     done: false
   };
+
   afterAll(() => {
     app.close();
   });
@@ -28,6 +29,7 @@ describe('API testing', () => {
         done();
       });
   });
+
   test('GET /tasks?tag=todo', done => {
     request(app)
       .get('/tasks?tag=todo')
@@ -39,6 +41,7 @@ describe('API testing', () => {
         done();
       });
   });
+
   test('GET /task/0 success', done => {
     request(app)
       .get('/task/0')
@@ -50,6 +53,7 @@ describe('API testing', () => {
         done();
       });
   });
+
   test('GET /task/2 Not Found', done => {
     request(app)
       .get('/task/2')
@@ -61,6 +65,7 @@ describe('API testing', () => {
         done();
       });
   });
+  
   test('GET /task/abc Bad request', done => {
     request(app)
       .get('/task/abc')

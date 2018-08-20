@@ -8,11 +8,13 @@ class Detail extends Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
   }
+
   state = {
     title: '',
     description: '',
     done: false,
   }
+
   componentDidMount() {
     const { match: { params: { id }}, getItem } = this.props;
     if (getItem && id) getItem(id);
@@ -28,10 +30,12 @@ class Detail extends Component {
         this.setState({ ...this.props.data }, () => this.props.handleChange(this.state));
       }
   }
+
   handleChange(evt) {
     const { name, value } = evt.target;
     this.setState({...this.state, [name]: value}, () => this.props.handleChange(this.state));
   }
+
   render() {
     return (
       <Fragment>
@@ -39,7 +43,7 @@ class Detail extends Component {
         <Input type='text' name='description' value={this.state.description} change={this.handleChange} area bgText="Description"/>
         <Input type='text' name='tags' value={this.state.tags} change={this.handleChange} area bgText="Please, add tags separating with commas"/>
       </Fragment>
-    )
+    );
   }
 }
 
@@ -47,6 +51,4 @@ const mapStateToProps = state => ({
   data: state.currentItem
 });
 
-const mapDispatchToProps = dispatch => ({});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Detail));
+export default withRouter(connect(mapStateToProps)(Detail));

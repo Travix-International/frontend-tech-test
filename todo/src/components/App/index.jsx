@@ -17,7 +17,7 @@ const actionTriggered = {
   'CREATE': 'Item successfully created',
   'EDIT': 'Item successfully edited',
   'DELETE': 'Item successfully deleted'
-}
+};
 
 class App extends Component {
   constructor(props) {
@@ -132,10 +132,12 @@ const mapStateToProps = state => ({
   isFetching: state.isFetching,
   action: state.currentAction
 });
+
 const mapDispatchToProps = dispatch => ({
   editItem: data => dispatch(editItem(data)),
   createItem: data => dispatch(createItem(data)),
   deleteItem: id => dispatch(deleteItem(id)),
   getItem: id => dispatch(getItem(id))
-})
+});
+
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

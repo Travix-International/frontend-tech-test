@@ -6,7 +6,11 @@ const Tags = ({ onClick, items }) => {
     && items
         .split(',')
         .map(tag => <Button label={`#${tag}`} flat primary key={tag} onClick={_ => onClick(tag)} />);
-  return (<Fragment>{ tagButtons }</Fragment>); 
+  return (
+    <Fragment>
+      { tagButtons }
+    </Fragment>
+  ); 
 };
 
 export default Tags;
