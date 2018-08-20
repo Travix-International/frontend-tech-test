@@ -8,47 +8,45 @@ const Input = props => {
     area
   } = props;
   const inputField = area ?
-    < textarea
-  value = {
-    props.value
-  }
-  onChange = {
-    props.change
-  }
-  className = {
-    styles.area
-  }
-  name = {
-    props.name
-  }
-  placeholder = {
-    props.bgText
-  }
-  />: < input
-  value = {
-    props.value
-  }
-  onChange = {
-    props.change
-  }
-  className = {
-    styles.input
-  }
-  name = {
-    props.name
-  }
-  placeholder = {
-    props.bgText
-  }
-  type = {
-    props.type
-  }
+    <textarea
+      value = {
+        props.value
+      }
+      onChange = {
+        props.onChange
+      }
+      className = {
+        styles.area
+      }
+      name = {
+        props.name
+      }
+      placeholder = {
+        props.bgText
+      }
+  />: <input
+      value = {
+        props.value
+      }
+      onChange = {
+        props.change
+      }
+      className = {
+        styles.input
+      }
+      name = {
+        props.name
+      }
+      placeholder = {
+        props.bgText
+      }
+      type = {
+        props.type
+      }
   />;
-  return ( <
-    Fragment > {
+  return ( <Fragment>{
       inputField
-    } <
-    /Fragment>
+    }</Fragment>
   );
 };
 export default Input;

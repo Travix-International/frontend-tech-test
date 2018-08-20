@@ -45,21 +45,20 @@ class App extends Component {
   }
 
   onSnackbarTimeout() {
-    this.setState({
-      ...this.state,
+    this.setState(state => ({
+      ...state,
       snackbar: {
         active: false,
         text: ''
       }
-    });
+    }));
   }
 
   onSavePress() {
-    if (this.props.location.pathname === '/new') {
-      this.props.createItem(this.state);
-    } else {
-      this.props.editItem(this.state);
-    }
+    const callback = this.props.location.pathname === '/new'
+      ? 'createItem'
+      : 'editItem';
+    this.props[callback](this.state);
   }
 
   onDonePress() {
@@ -78,13 +77,13 @@ class App extends Component {
     // Show snackbar
     if (!prevProps.action
       && prevProps.action !== this.props.action) {
-        this.setState({
-          ...this.state,
+        this.setState(state => ({
+          state,
           snackbar: {
             active: true,
             text: actionTriggered[this.props.action]
           }
-        });
+        }));
     }
     // Redirect from /new
     if (!prevProps.action && this.props.action === 'CREATE') {
@@ -98,7 +97,9 @@ class App extends Component {
     }
   }
   render() {
-    const spinnerClass = this.props.isFetching ? styles.spinnerVisible : styles.spinnerInvis;
+    const spinnerClass = this.props.isFetching
+      ? styles.spinnerVisible
+      : styles.spinnerInvis;
     return (
       <div className={styles.App}>
         <Header />

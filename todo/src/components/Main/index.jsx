@@ -58,7 +58,7 @@ class Main extends Component {
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ ...this.state, [name]: value });
-    this.props.getItems(value.trim(value.trim()));
+    this.props.getItems(value.trim());
   }
 
   renderList() {

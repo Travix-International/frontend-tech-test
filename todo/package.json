@@ -89,7 +89,7 @@
       "node",
       "mjs"
     ],
-    "setupTestFrameworkScriptFile": "<rootDir>src/configureEnzyme.js"
+    "setupTestFrameworkScriptFile": "<rootDir>src/__tests__/configureEnzyme.js"
   },
   "babel": {
     "presets": [

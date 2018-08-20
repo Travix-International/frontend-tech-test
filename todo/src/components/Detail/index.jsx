@@ -3,6 +3,15 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import Input from './../ui/Input';
 
+
+const handleStateChange = (prevProps, props) => {
+  return props.location.pathname !== "/new"
+      && props.data
+      && (!prevProps.data
+      || prevProps.data.title !== props.data.title
+      || prevProps.data.description !== props.data.description
+      || prevProps.data.done !==props.data.done);
+}
 class Detail extends Component {
   constructor(props) {
     super(props);
@@ -21,27 +30,22 @@ class Detail extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.location.pathname !== "/new"
-      && this.props.data
-      && (!prevProps.data
-      || prevProps.data.title !== this.props.data.title
-      || prevProps.data.description !== this.props.data.description
-      || prevProps.data.done !== this.props.data.done)) {
-        this.setState({ ...this.props.data }, () => this.props.handleChange(this.state));
-      }
+    if (handleStateChange(prevProps, this.props)) {
+      this.setState({ ...this.props.data }, () => this.props.handleChange(this.state));
+    }
   }
 
   handleChange(evt) {
     const { name, value } = evt.target;
-    this.setState({...this.state, [name]: value}, () => this.props.handleChange(this.state));
+    this.setState(state => ({...state, [name]: value}), () => this.props.handleChange(this.state));
   }
 
   render() {
     return (
       <Fragment>
-        <Input type='text' name='title' value={this.state.title} change={this.handleChange} bgText="Title"/>
-        <Input type='text' name='description' value={this.state.description} change={this.handleChange} area bgText="Description"/>
-        <Input type='text' name='tags' value={this.state.tags} change={this.handleChange} area bgText="Please, add tags separating with commas"/>
+        <Input type='text' name='title' value={this.state.title} onChange={this.handleChange} bgText="Title"/>
+        <Input type='text' name='description' value={this.state.description} onChange={this.handleChange} area bgText="Description"/>
+        <Input type='text' name='tags' value={this.state.tags} onChange={this.handleChange} area bgText="Please, add tags separating with commas"/>
       </Fragment>
     );
   }

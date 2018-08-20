@@ -5,7 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 import { List, ListItem } from 'react-toolbox/lib/list';
 import { Button } from 'react-toolbox/lib/button';
 import Main from './../../components/Main';
-import testStore from './../../testState';
+import testStore from './../testState';
 
 describe('Test Detail component', () => {
   const mockStore = configureMockStore([createSagaMiddleware()]);
