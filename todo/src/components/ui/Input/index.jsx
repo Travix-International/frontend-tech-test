@@ -29,7 +29,7 @@ const Input = props => {
         props.value
       }
       onChange = {
-        props.change
+        props.onChange
       }
       className = {
         styles.input

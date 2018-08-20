@@ -93,7 +93,7 @@ class Main extends Component {
   render() {
     return (
       <Fragment>
-        <Input type='text' name='tag' value={this.state.tag} change={this.handleChange} bgText="Tags"/>
+        <Input type='text' name='tag' value={this.state.tag} onChange={this.handleChange} bgText="Tags"/>
         <List ripple selectable>
           {this.renderList()}
         </List>
