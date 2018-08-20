@@ -97,7 +97,7 @@
     ]
   },
   "eslintConfig": {
-    "extends": "airbnb-base"
+    "extends": "react-app"
   },
   "devDependencies": {
     "enzyme": "^3.4.1",
