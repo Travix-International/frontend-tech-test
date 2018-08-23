@@ -1,0 +1,46 @@
+{
+    "extends": [
+        "prettier"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "env": {
+        "es6": true
+    },
+    "plugins": [
+        "json",
+        "react"
+    ],
+    "rules": {
+        "prefer-const": "error",
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js"
+                ]
+            }
+        ],
+        "import/prefer-default-export": "off",
+        "semi": [
+            "error",
+            "never"
+        ],
+        "comma-dangle": "warn",
+        "import/extensions": {
+            "js": "never"
+        },
+        "function-paren-newline": [
+            "off"
+        ],
+        "arrow-parens": "off",
+        "react/prop-types": "warn",
+        "quotes": "off",
+        "object-curly-newline": "off",
+        "no-confusing-arrow": "warn",
+        "camelcase": "off"
+    }
+}
