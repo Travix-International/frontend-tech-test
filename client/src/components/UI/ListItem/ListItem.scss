@@ -1,7 +1,7 @@
 @import '../../../scss/vars.scss';
 .Item {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   width: 90%;
   padding: 1rem;
   margin: 1rem auto;
@@ -29,4 +29,11 @@
   width: 100%;
   overflow: hidden;
   padding: 0 10px 0 0;
+  margin: 0
+}
+
+.Desc {
+  font-size: 0.7rem;
+  padding: 0 10px 0 0;
+  text-transform: lowercase;
 }

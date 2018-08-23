@@ -15,6 +15,7 @@ class List extends Component {
       tasksList = tasks.map(task => (
         <ListItem
           title={task.title}
+          desc={task.description}
           key={task.id}
           selected={this.props.selectedTask === task.id}
           onClick={() => this.onTaskSelect(task.id)}
