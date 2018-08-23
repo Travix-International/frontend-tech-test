@@ -1,18 +1,82 @@
-import React from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 import {Button, Input} from '../UI'
 import styles from './Footer.scss'
 
-const Footer = () => {
-  return (
-    <div className={styles.Footer}>
-      <Input />
-      <div className={styles.Buttons}>
-        <Button text="delete" delete />
-        <Button text="add" add />
+class Footer extends Component {
+  state = {
+    taskTitle: '',
+    taskDesc: ''
+  }
+
+  onChangeValueHandler = event => {
+    this.setState({taskTitle: event.target.value})
+  }
+
+  onChangeDescHandler = event => {
+    this.setState({taskDesc: event.target.value})
+  }
+
+  onAddButtonClickHandler = () => {
+    const task = {
+      title: this.state.taskTitle,
+      desc: this.state.taskDesc
+    }
+    this.props.addTask(task)
+    this.setState({
+      taskTitle: '',
+      taskDesc: ''
+    })
+  }
+
+  onDeleteButtonClickHandler = () => {
+    this.props.deleteTask(this.props.selectedTask)
+  }
+
+  render() {
+    const {taskTitle, taskDesc} = this.state
+    return (
+      <div className={styles.Footer}>
+        <div className={styles.Inputs}>
+          <Input
+            onChangeValueHandler={this.onChangeValueHandler}
+            value={taskTitle}
+            title
+          />
+          <Input
+            onChangeDescHandler={this.onChangeDescHandler}
+            value={taskDesc}
+          />
+        </div>
+        <div className={styles.Buttons}>
+          <Button
+            text="delete"
+            delete
+            onButtonClick={this.onDeleteButtonClickHandler}
+            disabled={this.props.selectedTask === null}
+          />
+          <Button
+            text="edit"
+            edit
+            disabled={this.props.selectedTask === null}
+          />
+          <Button
+            text="add"
+            add
+            onButtonClick={this.onAddButtonClickHandler}
+            disabled={taskTitle === '' || taskDesc === ''}
+          />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+}
+
+Footer.propTypes = {
+  addTask: PropTypes.func,
+  deleteTask: PropTypes.func,
+  selectedTask: PropTypes.number
 }
 
 export default Footer

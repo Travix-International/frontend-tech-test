@@ -10,8 +10,13 @@
 .Buttons {
   display: flex;
   flex-flow: row nowrap;
-  width: 80;
+  width: 80%;
   margin: 1rem auto;
   align-items: center;
   justify-content: center;
+}
+
+.Inputs {
+  display: flex;
+  flex-flow: column nowrap;
 }

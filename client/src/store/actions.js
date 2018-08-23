@@ -20,7 +20,7 @@ const fetchTasksStart = () => {
 const fetchTasksSuccess = data => {
   return {
     type: constants.TASKS_FETCH_SUCCESS,
-    payload: data
+    payload: data.tasks
   }
 }
 
@@ -31,22 +31,75 @@ const fetchTasksFail = err => {
   }
 }
 
-export const addTask = () => {
-  return {
-    type: constants.TASK_ADD
+export const addTask = task => {
+  return dispatch => {
+    dispatch(addTasksStart())
+    axios
+      .post(`http://localhost:9001/task/create/${task.title}/${task.desc}`)
+      .then(res => dispatch(addTasksSuccess()))
+      .catch(err => dispatch(addTasksFail(err)))
   }
 }
 
-export const editTask = data => {
+const addTasksStart = () => {
+  return {
+    type: constants.TASK_ADD_START
+  }
+}
+
+const addTasksSuccess = () => {
+  return dispatch => {
+    dispatch(fetchTasks())
+    dispatch({
+      type: constants.TASK_ADD_SUCCESS
+    })
+  }
+}
+
+const addTasksFail = err => {
+  return {
+    type: constants.TASK_ADD_FAIL,
+    payload: err
+  }
+}
+
+export const selectTask = id => {
+  return {
+    type: constants.TASK_SELECTED,
+    payload: id
+  }
+}
+
+export const editTask = id => {
   return {
     type: constants.TASK_EDIT,
-    payload: data
+    payload: id
   }
 }
 
-export const deleteTask = data => {
+export const deleteTask = id => {
+  return dispatch => {
+    dispatch(deleteTaskStart())
+    axios
+      .delete(`http://localhost:9001/task/delete/${id}`)
+      .then(res => dispatch(deleteTaskSuccess(id)))
+      .catch(err => dispatch(deleteTaskFail(err)))
+  }
+}
+
+const deleteTaskStart = () => {
   return {
-    type: constants.TASK_DELETE,
-    payload: data
+    type: constants.TASK_DELETE_START
+  }
+}
+const deleteTaskSuccess = id => {
+  return dispatch => {
+    dispatch({type: constants.TASK_DELETE_SUCCESS, payload: id})
+  }
+}
+const deleteTaskFail = err => {
+  return {
+    type: constants.TASK_DELETE_FAIL,
+    payload: err
   }
 }

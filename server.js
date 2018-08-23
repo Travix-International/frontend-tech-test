@@ -92,8 +92,9 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
+  // It is not a production solution, but i think it could be used here just fo example purpose
   const task = {
-    id: tasksContainer.tasks.length,
+    id: parseInt(Math.random() * 1000, 10),
     title: req.params.title,
     description: req.params.description
   }

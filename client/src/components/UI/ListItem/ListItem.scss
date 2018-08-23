@@ -17,4 +17,16 @@
     background-color: lighten( $yellow, 15%);
     cursor: pointer
   }
+  &_Selected {
+    @extend .Item;
+    background-color: $red;
+    color: $yellow
+  }
+}
+
+.Text {
+  text-overflow: ellipsis;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 10px 0 0;
 }

@@ -8,6 +8,7 @@
   text-shadow: 1px 1px 1px $yellow;
   width: 80%;
   margin: auto;
+  text-transform: uppercase;
 }
 
 .Counter {
@@ -21,4 +22,5 @@
   flex-flow: row nowrap;
   justify-content: space-around;
   text-shadow: none;
+  text-transform: none;
 }
