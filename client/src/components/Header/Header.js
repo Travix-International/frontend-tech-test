@@ -1,7 +1,22 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-const Header = () => {
-  return <div>some information here</div>
+import styles from './Header.scss'
+
+const Header = props => {
+  return (
+    <div className={styles.Header}>
+      <h1>Travix ToDo list</h1>
+      <div className={styles.Counter}>
+        <p>Tasks To Do:</p>
+        <p>{props.counter}</p>
+      </div>
+    </div>
+  )
+}
+
+Header.propTypes = {
+  counter: PropTypes.number.isRequired
 }
 
 export default Header

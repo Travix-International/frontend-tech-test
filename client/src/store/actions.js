@@ -5,7 +5,7 @@ export const fetchTasks = () => {
   return dispatch => {
     dispatch(fetchTasksStart())
     axios
-      .get('../../../tasks.json')
+      .get('http://localhost:9001/tasks')
       .then(res => dispatch(fetchTasksSuccess(res.data)))
       .catch(err => dispatch(fetchTasksFail(err)))
   }
@@ -13,20 +13,20 @@ export const fetchTasks = () => {
 
 const fetchTasksStart = () => {
   return {
-    type: constants.FETCH_TASKS_START
+    type: constants.TASKS_FETCH_START
   }
 }
 
 const fetchTasksSuccess = data => {
   return {
-    type: constants.FETCH_TASKS_SUCCESS,
+    type: constants.TASKS_FETCH_SUCCESS,
     payload: data
   }
 }
 
 const fetchTasksFail = err => {
   return {
-    type: constants.FETCH_TASKS_FAIL,
+    type: constants.TASKS_FETCH_FAIL,
     payload: err
   }
 }

@@ -1,0 +1,20 @@
+@import '../../../scss/vars.scss';
+.Item {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 90%;
+  padding: 1rem;
+  margin: 1rem auto;
+  background-color: $yellow;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem 3rem 1rem 3rem;
+  color: $darkgreen;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  &:hover {
+    background-color: lighten( $yellow, 15%);
+    cursor: pointer
+  }
+}

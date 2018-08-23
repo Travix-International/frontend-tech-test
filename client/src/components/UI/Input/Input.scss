@@ -1,0 +1,14 @@
+@import '../../../scss/vars.scss';
+.Input {
+  background-color: $orange;
+  width: 50%;
+  height: 30px;
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  padding: 0 10px;
+  margin: auto;
+  border-radius: 2rem 2rem 1rem 2rem;
+  border: none;
+  color: black;
+  outline: none;
+}

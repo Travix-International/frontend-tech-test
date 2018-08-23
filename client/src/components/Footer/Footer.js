@@ -1,12 +1,16 @@
 import React from 'react'
 
-import {Button} from '../UI'
+import {Button, Input} from '../UI'
+import styles from './Footer.scss'
 
 const Footer = () => {
   return (
-    <div>
-      <Button />
-      <Button />
+    <div className={styles.Footer}>
+      <Input />
+      <div className={styles.Buttons}>
+        <Button text="delete" delete />
+        <Button text="add" add />
+      </div>
     </div>
   )
 }

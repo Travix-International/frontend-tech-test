@@ -1,0 +1,11 @@
+@import '../../scss/vars.scss';
+.Layout {
+  width: 50vw;
+  margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  background-color: $green;
+  border-radius: 15px 45px 15px 45px;
+  padding: 1rem;
+}

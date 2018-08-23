@@ -1,0 +1,17 @@
+@import '../../scss/vars.scss';
+.Footer {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  margin: 1rem;
+  justify-content: center;
+}
+
+.Buttons {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 80;
+  margin: 1rem auto;
+  align-items: center;
+  justify-content: center;
+}

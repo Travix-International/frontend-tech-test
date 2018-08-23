@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 
 import {ListItem} from '../UI'
+import styles from './List.scss'
 
 class List extends Component {
   render() {
     return (
-      <div>
+      <div className={styles.List}>
         <ListItem />
         <ListItem />
         <ListItem />
