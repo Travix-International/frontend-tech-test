@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
+import {Layout} from '../'
 
-import styles from './App.scss'
+import './App.scss'
 
 class App extends Component {
   render() {
-    return <h1 className={styles.h1}>My React App</h1>
+    return <Layout />
   }
 }
 

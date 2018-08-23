@@ -7,14 +7,22 @@
     "start": "node_modules/.bin/webpack-dev-server --mode development --open --hot",
     "build": "node_modules/.bin/webpack --config webpack.prod.js --mode production",
     "serve": "node_modules/.bin/http-server ./dist",
-    "test": "jest --env=jsdom",
+    "test": "jest",
     "test:ci": "CI=true jest --env=jsdom --runInBand",
     "precommit": "lint-staged",
     "prepush": "yarn test:ci"
   },
   "author": "PabloSpaniard",
   "license": "ISC",
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js"
+  },
   "dependencies": {
+    "identity-obj-proxy": "^3.0.0",
     "node-sass": "^4.9.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
