@@ -14,27 +14,21 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
-    "props": Object {
-      "children": "My React App",
-      "className": "h1",
-    },
+    "nodeType": "function",
+    "props": Object {},
     "ref": null,
-    "rendered": "My React App",
-    "type": "h1",
+    "rendered": null,
+    "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": "My React App",
-        "className": "h1",
-      },
+      "nodeType": "function",
+      "props": Object {},
       "ref": null,
-      "rendered": "My React App",
-      "type": "h1",
+      "rendered": null,
+      "type": [Function],
     },
   ],
   Symbol(enzyme.__options__): Object {
