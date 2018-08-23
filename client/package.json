@@ -22,10 +22,14 @@
     "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "identity-obj-proxy": "^3.0.0",
     "node-sass": "^4.9.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
     "sass-loader": "^7.1.0"
   },
   "devDependencies": {
@@ -33,6 +37,7 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
     "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.4.1",
