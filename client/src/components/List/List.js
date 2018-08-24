@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
-import {ListItem} from '../UI'
+import {ListItem, Spinner} from '../UI'
 import styles from './List.scss'
 
 class List extends Component {
@@ -11,7 +11,7 @@ class List extends Component {
 
   render() {
     const {tasks, loading, deleteTask, selectedTask, saveTask} = this.props
-    let tasksList = <div>Spinner</div>
+    let tasksList = <Spinner />
     if (tasks.length !== 0 && !loading) {
       tasksList = tasks.map(task => (
         <ListItem
