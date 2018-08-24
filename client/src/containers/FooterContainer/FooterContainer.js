@@ -10,8 +10,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addTask: task => dispatch(actions.addTask(task)),
-    deleteTask: id => dispatch(actions.deleteTask(id))
+    addTask: task => dispatch(actions.addTask(task))
   }
 }
 

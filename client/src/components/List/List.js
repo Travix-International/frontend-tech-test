@@ -8,8 +8,9 @@ class List extends Component {
   onTaskSelect = id => {
     this.props.selectTask(id)
   }
+
   render() {
-    const {tasks, loading} = this.props
+    const {tasks, loading, deleteTask, selectedTask, saveTask} = this.props
     let tasksList = <div>Spinner</div>
     if (tasks.length !== 0 && !loading) {
       tasksList = tasks.map(task => (
@@ -17,7 +18,10 @@ class List extends Component {
           title={task.title}
           desc={task.description}
           key={task.id}
-          selected={this.props.selectedTask === task.id}
+          deleteTask={deleteTask}
+          saveTask={saveTask}
+          selectedTask={selectedTask}
+          selected={selectedTask === task.id}
           onClick={() => this.onTaskSelect(task.id)}
         />
       ))
@@ -38,6 +42,8 @@ List.propTypes = {
   tasks: PropTypes.array,
   loading: PropTypes.bool,
   selectTask: PropTypes.func,
+  deleteTask: PropTypes.func,
+  saveTask: PropTypes.func,
   selectedTask: PropTypes.number
 }
 

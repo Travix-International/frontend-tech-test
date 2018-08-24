@@ -36,7 +36,7 @@ export const addTask = task => {
     dispatch(addTasksStart())
     axios
       .post(`http://localhost:9001/task/create/${task.title}/${task.desc}`)
-      .then(res => dispatch(addTasksSuccess()))
+      .then(() => dispatch(addTasksSuccess()))
       .catch(err => dispatch(addTasksFail(err)))
   }
 }
@@ -49,10 +49,10 @@ const addTasksStart = () => {
 
 const addTasksSuccess = () => {
   return dispatch => {
-    dispatch(fetchTasks())
     dispatch({
       type: constants.TASK_ADD_SUCCESS
     })
+    dispatch(fetchTasks())
   }
 }
 
@@ -70,10 +70,32 @@ export const selectTask = id => {
   }
 }
 
-export const editTask = id => {
+export const editTask = (id, title, desc) => {
+  return dispatch => {
+    dispatch(editTaskStart())
+    axios
+      .put(`http://localhost:9001/task/update/${id}/${title}/${desc}`)
+      .then(res => dispatch(editTaskSuccess()))
+      .catch(err => dispatch(editTaskFail(err)))
+  }
+}
+
+const editTaskStart = () => {
   return {
-    type: constants.TASK_EDIT,
-    payload: id
+    type: constants.TASK_EDIT_START
+  }
+}
+const editTaskSuccess = () => {
+  return dispatch => {
+    dispatch({type: constants.TASK_EDIT_SUCCESS})
+    dispatch(fetchTasks())
+  }
+}
+
+const editTaskFail = err => {
+  return {
+    type: constants.TASK_EDIT_FAIL,
+    payload: err
   }
 }
 

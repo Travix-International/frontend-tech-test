@@ -69,7 +69,10 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title
       task.description = req.params.description
-      return res.status(204)
+      //change it to 200 because with 204 action never dispatched
+      return res.status(200).json({
+        message: 'Updated successfully'
+      })
     } else {
       return res.status(404).json({
         message: 'Not found'
@@ -94,7 +97,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
 app.post('/task/create/:title/:description', (req, res) => {
   // It is not a production solution, but i think it could be used here just fo example purpose
   const task = {
-    id: parseInt(Math.random() * 1000, 10),
+    id: parseInt(Math.random() * 100000, 10),
     title: req.params.title,
     description: req.params.description
   }

@@ -22,6 +22,8 @@ const tasksReducer = (state = initialStore, action) => {
     case constants.TASK_DELETE_SUCCESS:
       const newTasks = state.tasks.filter(task => task.id !== action.payload)
       return {...state, tasks: newTasks, selectedTask: null}
+    case constants.TASK_EDIT_SUCCESS:
+      return {...state, selectedTask: null}
     default:
       return state
   }

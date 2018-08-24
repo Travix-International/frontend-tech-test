@@ -30,10 +30,6 @@ class Footer extends Component {
     })
   }
 
-  onDeleteButtonClickHandler = () => {
-    this.props.deleteTask(this.props.selectedTask)
-  }
-
   render() {
     const {taskTitle, taskDesc} = this.state
     return (
@@ -51,17 +47,6 @@ class Footer extends Component {
         </div>
         <div className={styles.Buttons}>
           <Button
-            text="delete"
-            delete
-            onButtonClick={this.onDeleteButtonClickHandler}
-            disabled={this.props.selectedTask === null}
-          />
-          <Button
-            text="edit"
-            edit
-            disabled={this.props.selectedTask === null}
-          />
-          <Button
             text="add"
             add
             onButtonClick={this.onAddButtonClickHandler}
@@ -75,7 +60,6 @@ class Footer extends Component {
 
 Footer.propTypes = {
   addTask: PropTypes.func,
-  deleteTask: PropTypes.func,
   selectedTask: PropTypes.number
 }
 
