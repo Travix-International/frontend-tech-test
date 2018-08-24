@@ -8,6 +8,7 @@
     "build": "node_modules/.bin/webpack --config webpack.prod.js --mode production",
     "serve": "node_modules/.bin/http-server ./dist",
     "test": "jest --watch",
+    "coverage": "jest --coverage",
     "test:ci": "CI=true jest --env=jsdom --runInBand",
     "precommit": "lint-staged",
     "prepush": "yarn test:ci"
@@ -20,7 +21,15 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less|scss|sass)$": "identity-obj-proxy"
     },
-    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js"
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
+    "collectCoverageFrom": [
+      "src/components/**/**/*.js",
+      "src/containers/**/**/*.js",
+      "!src/components/**/**/index.js",
+      "!src/coverage",
+      "!src/public",
+      "!src/node_modules"
+    ]
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -58,6 +67,7 @@
     "lint-staged": "^7.2.0",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.13.7",
+    "react-testing-library": "^5.0.0",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5"

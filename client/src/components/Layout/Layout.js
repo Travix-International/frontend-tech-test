@@ -17,7 +17,9 @@ class Layout extends Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    return {counter: nextProps.tasks.length, tasks: nextProps.tasks}
+    if (nextProps.tasks) {
+      return {counter: nextProps.tasks.length, tasks: nextProps.tasks}
+    } else return null
   }
 
   render() {

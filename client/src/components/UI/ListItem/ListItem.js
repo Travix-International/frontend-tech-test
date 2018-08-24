@@ -76,6 +76,7 @@ class ListItem extends Component {
         <div
           className={selected ? styles.Item_Selected : styles.Item}
           onClick={onClick}
+          data-testid="listItem"
         >
           {taskArea}
         </div>

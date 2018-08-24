@@ -1,25 +1,17 @@
 import React from 'react'
-import {shallow} from 'enzyme'
+import {render, cleanup} from 'react-testing-library'
 import Header from '../Header'
 
 describe('App should render properly', () => {
-  let wrapper
-  beforeEach(() => {
-    wrapper = shallow(<Header />)
-  })
+  afterEach(cleanup)
+
   it('Should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot('Header_snapshot_1')
+    const {container} = render(<Header counter={0} />)
+    expect(container.firstChild).toMatchSnapshot('Header_snapshot_1')
   })
 
   it('Should show "Tasks To Do: 3" if passed counter = 3', () => {
-    console.log(wrapper.debug())
-    wrapper.setProps({counter: 3})
-    console.log(wrapper.debug())
-    expect(
-      wrapper
-        .find('div.Header')
-        .render()
-        .text()
-    ).to.equal('Tasks To Do: 3')
+    const {getByText} = render(<Header counter={3} />)
+    getByText('Tasks To Do: 3')
   })
 })

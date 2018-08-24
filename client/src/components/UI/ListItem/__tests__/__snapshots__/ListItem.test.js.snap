@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should render properly Should match snapshot: ListItem_snapshot_1 1`] = `
+<div
+  class="Item"
+  data-testid="listItem"
+>
+  <p
+    class="Text"
+  />
+  <p
+    class="Desc"
+  />
+</div>
+`;

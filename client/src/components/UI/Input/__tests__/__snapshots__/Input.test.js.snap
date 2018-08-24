@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should render properly Should match snapshot: Input_snapshot_1 1`] = `
+<textarea
+  class="Input"
+  name="desc"
+  placeholder="Please write some description..."
+  rows="5"
+  type="text"
+/>
+`;

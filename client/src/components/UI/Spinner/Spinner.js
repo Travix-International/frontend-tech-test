@@ -4,7 +4,7 @@ import styles from './Spinner.scss'
 
 const Spinner = () => {
   return (
-    <div className={styles.Spinner}>
+    <div className={styles.Spinner} data-testid="spinner">
       <div />
       <div />
       <div />
