@@ -8,8 +8,7 @@ const Header = props => {
     <div className={styles.Header}>
       <h1>Travix ToDo list</h1>
       <div className={styles.Counter}>
-        <p>Tasks To Do:</p>
-        <p>{props.counter}</p>
+        <p>Tasks To Do: {props.counter}</p>
       </div>
     </div>
   )

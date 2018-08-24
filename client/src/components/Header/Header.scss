@@ -23,4 +23,8 @@
   justify-content: space-around;
   text-shadow: none;
   text-transform: none;
+  @media only screen and (max-width: 600px) {
+    height: auto;
+    padding: 0.5rem;
+  }
 }

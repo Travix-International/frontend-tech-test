@@ -21,6 +21,7 @@ class List extends Component {
           deleteTask={deleteTask}
           saveTask={saveTask}
           selectedTask={selectedTask}
+          length={tasks.length}
           selected={selectedTask === task.id}
           onClick={() => this.onTaskSelect(task.id)}
         />

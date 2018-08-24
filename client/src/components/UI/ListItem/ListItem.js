@@ -45,7 +45,7 @@ class ListItem extends Component {
   }
 
   render() {
-    const {selected, onClick, title, desc} = this.props
+    const {selected, onClick, title, desc, length} = this.props
     const {editable, editTitle, editDesc} = this.state
     let taskArea = (
       <Fragment>
@@ -53,6 +53,8 @@ class ListItem extends Component {
         <p className={styles.Desc}>{desc}</p>
       </Fragment>
     )
+
+    const hr = length > 1 ? <hr className={styles.HR} /> : null
 
     if (editable && selected) {
       taskArea = (
@@ -95,6 +97,7 @@ class ListItem extends Component {
             disabled={!selected}
           />
         </div>
+        {hr}
       </Fragment>
     )
   }
@@ -107,7 +110,8 @@ ListItem.propTypes = {
   deleteTask: PropTypes.func,
   saveTask: PropTypes.func,
   selected: PropTypes.bool,
-  selectedTask: PropTypes.number
+  selectedTask: PropTypes.number,
+  length: PropTypes.number
 }
 
 export default ListItem

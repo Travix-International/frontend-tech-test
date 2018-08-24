@@ -20,7 +20,13 @@
   &_Selected {
     @extend .Item;
     background-color: $red;
-    color: $yellow
+    color: $yellow;
+    &:hover {
+      background-color: $red;
+    }
+  }
+  @media only screen and (max-width: 450px) {
+    padding: 1rem 0.3rem;
   }
 }
 
@@ -36,4 +42,15 @@
   font-size: 0.7rem;
   padding: 0 10px 0 0;
   text-transform: lowercase;
+  @media only screen and (max-width: 450px) {
+    font-size: 0.6rem;
+  }
+}
+
+.HR {
+  display: none;
+  @media only screen and (max-width: 1024px) {
+    border-color: $yellow;
+    display: block;
+  }
 }

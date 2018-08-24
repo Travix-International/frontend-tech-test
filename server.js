@@ -69,7 +69,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title
       task.description = req.params.description
-      //change it to 200 because with 204 action never dispatched
+      //changed it to 200 because with 204 action never dispatched
       return res.status(200).json({
         message: 'Updated successfully'
       })
