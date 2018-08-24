@@ -42,6 +42,7 @@
   font-size: 0.7rem;
   padding: 0 10px 0 0;
   text-transform: lowercase;
+  word-break: break-all;
   @media only screen and (max-width: 450px) {
     font-size: 0.6rem;
   }
