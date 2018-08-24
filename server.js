@@ -1,6 +1,7 @@
 'use strict'
 
-const app = require('express')()
+const express = require('express')
+const app = express()
 var cors = require('cors')
 const tasksContainer = require('./tasks.json')
 
