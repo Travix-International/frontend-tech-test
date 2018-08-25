@@ -1,38 +1,53 @@
-# Travix test
+You can try an app here: https://shrouded-earth-17665.herokuapp.com/
 
-Travix Front-End Tech Interview Test 
+## To start the project
 
-# Introduction
+- clone this repo
+- npm install
+- npm run dev
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+## To run tests
 
-Using your application we must be able to create, modify and delete a task.
+- npm run test
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
+## Tech Stack
 
-However this server is not perfect. It could be improved and tested as well.
+- React 16
+- Redux
+- CSS modules (scss)
+- Jest & React-Testing-Library for tests
+- Husky
+- Prettier
+- Eslint
+- Webpack
+- Axios
+- Redux Thunk
 
-So your mission is to develop the front-end from scratch using a front-end framework.
+## Bonus
 
-We are also expecting from you a usable, responsive UI.
+- [x] - React-Transition-Group
+- [x] - Travix logger
+- [x] - travix eslint config
+- [x] - unit & integration tests
 
-# Process
+## Screenshots
 
-Fork the repository into your account. Once your code is ready, send a pull-request to this repository and we will review it.
+### Main
 
-# Requirements
+![screencapture-localhost-8080-2018-08-25-13_41_53](https://user-images.githubusercontent.com/10797797/44620668-d5302e00-a898-11e8-83a2-a02e99acc7c6.png)
 
-* React 15+
-* Redux or Flux or [FrintJS](https://frint.js.org) or other alternatives that implement a unidirectional data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
+### With tasks
 
-# Bonus
+![screencapture-localhost-8080-2018-08-25-13_40_33](https://user-images.githubusercontent.com/10797797/44620676-f6911a00-a898-11e8-9a70-a7acc6850f49.png)
 
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us!
+### Task selected
+
+![screencapture-localhost-8080-2018-08-25-13_41_02](https://user-images.githubusercontent.com/10797797/44620682-090b5380-a899-11e8-9d00-f9a6405d1488.png)
+
+### Task Edit
+
+![screencapture-localhost-8080-2018-08-25-13_41_14](https://user-images.githubusercontent.com/10797797/44620685-14f71580-a899-11e8-86ad-4eb03192fe45.png)
+
+### Mobile
+
+![screencapture-localhost-8080-2018-08-25-13_37_57](https://user-images.githubusercontent.com/10797797/44620689-1de7e700-a899-11e8-999c-e4d79e96b849.png)
