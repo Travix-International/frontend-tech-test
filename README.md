@@ -1,12 +1,12 @@
 ## To start the project
 
-- clone this repo
-- npm install
-- npm run dev
+- `clone this repo`
+- `npm install && npm install --prefix client`
+- `npm run dev`
 
 ## To run tests
 
-- npm run test
+- `npm run test`
 
 ## Tech Stack
 
