@@ -4,36 +4,38 @@ exports[`List should works properly Should match snapshot: List_snapshot_1 1`] =
 <div
   class="List"
 >
-  <div
-    class="Item"
-    data-testid="listItem"
-  >
-    <p
-      class="Text"
+  <div>
+    <div
+      class="Item"
+      data-testid="listItem"
     >
-      Hello
-    </p>
-    <p
-      class="Desc"
+      <p
+        class="Text"
+      >
+        Hello
+      </p>
+      <p
+        class="Desc"
+      >
+        Test
+      </p>
+    </div>
+    <div
+      class="Buttons"
     >
-      Test
-    </p>
-  </div>
-  <div
-    class="Buttons"
-  >
-    <button
-      class="null Button_Delete null"
-      disabled=""
-    >
-      delete
-    </button>
-    <button
-      class="null null Button_Edit"
-      disabled=""
-    >
-      edit
-    </button>
+      <button
+        class="null Button_Delete null"
+        disabled=""
+      >
+        delete
+      </button>
+      <button
+        class="null null Button_Edit"
+        disabled=""
+      >
+        edit
+      </button>
+    </div>
   </div>
 </div>
 `;
