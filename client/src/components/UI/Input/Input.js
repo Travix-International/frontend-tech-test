@@ -1,11 +1,16 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import styles from './Input.scss'
 
 class Input extends Component {
   render() {
-    const {onChangeValueHandler, value, onChangeDescHandler, title} = this.props
+    const {
+      onChangeValueHandler,
+      value,
+      onChangeDescHandler,
+      title,
+    } = this.props
 
     const input = title ? (
       <input
@@ -32,11 +37,18 @@ class Input extends Component {
   }
 }
 
+Input.defaultProps = {
+  title: null,
+  onChangeDescHandler: null,
+  onChangeValueHandler: null,
+  value: '',
+}
+
 Input.propTypes = {
   onChangeDescHandler: PropTypes.func,
   onChangeValueHandler: PropTypes.func,
   value: PropTypes.string,
-  title: PropTypes.bool
+  title: PropTypes.bool,
 }
 
 export default Input

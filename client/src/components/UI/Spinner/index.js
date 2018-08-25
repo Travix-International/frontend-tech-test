@@ -1,3 +1,3 @@
 import Spinner from './Spinner.js'
 
-export {Spinner}
+export { Spinner }

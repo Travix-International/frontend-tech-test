@@ -14,8 +14,7 @@ exports[`Layout should works properly Should match snapshot: Layout_snapshot_1 1
       class="Counter"
     >
       <p>
-        Tasks To Do: 
-        0
+        Tasks To Do: 0
       </p>
     </div>
   </div>
@@ -23,7 +22,13 @@ exports[`Layout should works properly Should match snapshot: Layout_snapshot_1 1
     class="List"
   >
     <div>
-      Your ToDo list is empty. Please add a new Task or just seat and enjoy the live 🌴
+      Your ToDo list is empty. Please add a new Task or just seat and enjoy the live
+      <span
+        aria-label="palm"
+        role="img"
+      >
+        🌴
+      </span>
     </div>
   </div>
   <div
@@ -53,6 +58,7 @@ exports[`Layout should works properly Should match snapshot: Layout_snapshot_1 1
       <button
         class="Button_Add null null"
         disabled=""
+        type="button"
       >
         add
       </button>

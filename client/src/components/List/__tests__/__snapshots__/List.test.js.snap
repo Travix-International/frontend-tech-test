@@ -8,6 +8,7 @@ exports[`List should works properly Should match snapshot: List_snapshot_1 1`] =
     <div
       class="Item"
       data-testid="listItem"
+      role="group"
     >
       <p
         class="Text"
@@ -26,12 +27,14 @@ exports[`List should works properly Should match snapshot: List_snapshot_1 1`] =
       <button
         class="null Button_Delete null"
         disabled=""
+        type="button"
       >
         delete
       </button>
       <button
         class="null null Button_Edit"
         disabled=""
+        type="button"
       >
         edit
       </button>

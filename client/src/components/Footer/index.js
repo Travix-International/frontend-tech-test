@@ -1,3 +1,3 @@
 import Footer from './Footer.js'
 
-export {Footer}
+export { Footer }

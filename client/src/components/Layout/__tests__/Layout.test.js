@@ -1,19 +1,19 @@
 import React from 'react'
-import {createStore} from 'redux'
-import {Provider} from 'react-redux'
-import {render, cleanup} from 'react-testing-library'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { render, cleanup } from 'react-testing-library'
 
 import reducer from '../../../store/reducers/tasksReducer'
-import {Layout} from '../'
+import { Layout } from '..'
 
 describe('Layout should works properly', () => {
   function renderWithRedux(
     ui,
-    {initialState, store = createStore(reducer, initialState)} = {}
+    { initialState, store = createStore(reducer, initialState) } = {},
   ) {
     return {
       ...render(<Provider store={store}>{ui}</Provider>),
-      store
+      store,
     }
   }
 
@@ -22,19 +22,21 @@ describe('Layout should works properly', () => {
   afterEach(cleanup)
 
   it('Should match snapshot', () => {
-    const {container} = renderWithRedux(<Layout fetchTasks={fetchTasks} />)
+    const { container } = renderWithRedux(<Layout fetchTasks={fetchTasks} />)
     expect(container.firstChild).toMatchSnapshot('Layout_snapshot_1')
   })
 
   it('Should show a message when List is empty', () => {
-    const {getByText} = renderWithRedux(<Layout fetchTasks={fetchTasks} />)
+    const { getByText } = renderWithRedux(
+      <Layout fetchTasks={fetchTasks} loading={false} />,
+    )
     getByText(
-      'Your ToDo list is empty. Please add a new Task or just seat and enjoy the live 🌴'
+      'Your ToDo list is empty. Please add a new Task or just seat and enjoy the live',
     )
   })
 
   it('Should fetch tasks while mounting', () => {
-    const {} = renderWithRedux(<Layout fetchTasks={fetchTasks} />)
+    renderWithRedux(<Layout fetchTasks={fetchTasks} />)
     expect(fetchTasks).toHaveBeenCalled()
   })
 })

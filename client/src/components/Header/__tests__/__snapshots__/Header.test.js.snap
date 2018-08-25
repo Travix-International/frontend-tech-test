@@ -11,8 +11,7 @@ exports[`App should render properly Should match snapshot: Header_snapshot_1 1`]
     class="Counter"
   >
     <p>
-      Tasks To Do: 
-      0
+      Tasks To Do: 0
     </p>
   </div>
 </div>

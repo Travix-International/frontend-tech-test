@@ -1,37 +1,39 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {Button, Input} from '../UI'
+import { Button, Input } from '../UI'
 import styles from './Footer.scss'
 
 class Footer extends Component {
   state = {
     taskTitle: '',
-    taskDesc: ''
+    taskDesc: '',
   }
 
   onChangeValueHandler = event => {
-    this.setState({taskTitle: event.target.value})
+    this.setState({ taskTitle: event.target.value })
   }
 
   onChangeDescHandler = event => {
-    this.setState({taskDesc: event.target.value})
+    this.setState({ taskDesc: event.target.value })
   }
 
   onAddButtonClickHandler = () => {
+    const { taskTitle, taskDesc } = this.state
+    const { addTask } = this.props
     const task = {
-      title: this.state.taskTitle,
-      desc: this.state.taskDesc
+      title: taskTitle,
+      desc: taskDesc,
     }
-    this.props.addTask(task)
+    addTask(task)
     this.setState({
       taskTitle: '',
-      taskDesc: ''
+      taskDesc: '',
     })
   }
 
   render() {
-    const {taskTitle, taskDesc} = this.state
+    const { taskTitle, taskDesc } = this.state
     return (
       <div className={styles.Footer}>
         <div className={styles.Inputs}>
@@ -58,9 +60,12 @@ class Footer extends Component {
   }
 }
 
+Footer.defaultProps = {
+  addTask: null,
+}
+
 Footer.propTypes = {
   addTask: PropTypes.func,
-  selectedTask: PropTypes.number
 }
 
 export default Footer

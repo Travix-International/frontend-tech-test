@@ -1,12 +1,8 @@
-import React, {Component} from 'react'
+import React from 'react'
 import LayoutContainer from '../../containers/LayoutContainer/LayoutContainer'
 
 import './App.scss'
 
-class App extends Component {
-  render() {
-    return <LayoutContainer />
-  }
-}
+const App = () => <LayoutContainer />
 
 export default App

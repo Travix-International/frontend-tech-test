@@ -28,6 +28,7 @@ exports[`Footer should works properly Should match snapshot: Footer_snapshot_1 1
     <button
       class="Button_Add null null"
       disabled=""
+      type="button"
     >
       add
     </button>

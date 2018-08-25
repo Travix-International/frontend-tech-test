@@ -42,6 +42,7 @@
         "quotes": "off",
         "object-curly-newline": "off",
         "no-confusing-arrow": "warn",
-        "camelcase": "off"
+        "camelcase": "off",
+        "operator-linebreak": "off"
     }
 }

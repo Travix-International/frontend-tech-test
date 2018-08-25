@@ -3,6 +3,7 @@
 exports[`App should render properly Should match snapshot: Button_snapshot_1 1`] = `
 <button
   class="null null null"
+  type="button"
 >
   add
 </button>

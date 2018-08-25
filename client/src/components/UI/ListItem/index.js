@@ -1,3 +1,3 @@
 import ListItem from './ListItem.js'
 
-export {ListItem}
+export { ListItem }
