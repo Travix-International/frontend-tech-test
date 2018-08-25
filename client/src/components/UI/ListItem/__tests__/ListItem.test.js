@@ -18,20 +18,24 @@ describe('App should render properly', () => {
   })
 
   it('Should show SAVE button when EDIT button is clicked and ListItem selected', async () => {
-    const { getByText } = render(<ListItem selected />)
+    const { getByText } = render(
+      <ListItem selected title="Hello" desc="test" />,
+    )
     fireEvent.click(getByText('edit'))
     await waitForElement(() => getByText('save'))
   })
 
   it('Should show Inputs when EDIT button is clicked and ListItem selected', async () => {
-    const { getByText, getByPlaceholderText } = render(<ListItem selected />)
+    const { getByText, getByPlaceholderText } = render(
+      <ListItem selected title="Hello" desc="test" />,
+    )
     fireEvent.click(getByText('edit'))
     await waitForElement(() => getByPlaceholderText('Your next task...'))
   })
 
   it('Should save Item when SAVE button pushed', async () => {
     const { getByText, getByPlaceholderText } = render(
-      <ListItem selected saveTask={saveTask} />,
+      <ListItem selected saveTask={saveTask} title="Hello" desc="test" />,
     )
     fireEvent.click(getByText('edit'))
     await waitForElement(() => getByPlaceholderText('Your next task...'))

@@ -89,7 +89,7 @@ class ListItem extends Component {
             text="delete"
             delete
             onButtonClick={this.onDeleteButtonClickHandler}
-            disabled={!selected}
+            disabled={!selected || editable}
           />
           <Button
             text={`${!editable ? 'edit' : 'save'}`}
@@ -99,7 +99,7 @@ class ListItem extends Component {
                 ? this.onEditButtonClickHandler
                 : this.onSaveButtonClickHandler
             }
-            disabled={!selected}
+            disabled={!selected || editTitle === '' || editDesc === ''}
           />
         </div>
         {hr}
