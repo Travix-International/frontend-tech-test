@@ -1,6 +1,7 @@
 {
     "extends": [
-        "prettier"
+        "prettier",
+        "travix"
     ],
     "parser": "babel-eslint",
     "parserOptions": {
