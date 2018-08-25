@@ -10,3 +10,11 @@
   text-align: center;
   color: white;
 }
+
+.Exit {
+  opacity: 1;
+  &_Active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
+}
