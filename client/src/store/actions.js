@@ -1,5 +1,11 @@
 import axios from 'axios'
+import { Logger, configureConsoleTransport } from 'travix-logger'
+
 import * as constants from './constants'
+
+const logger = new Logger({
+  transports: [configureConsoleTransport()],
+})
 
 const fetchTasksStart = () => ({
   type: constants.TASKS_FETCH_START,
@@ -10,10 +16,13 @@ const fetchTasksSuccess = data => ({
   payload: data.tasks,
 })
 
-const fetchTasksFail = err => ({
-  type: constants.TASKS_FETCH_FAIL,
-  payload: err,
-})
+const fetchTasksFail = err => {
+  logger.error('Fetch Tasks', err, { meta: err })
+  return {
+    type: constants.TASKS_FETCH_FAIL,
+    payload: err,
+  }
+}
 
 export const fetchTasks = () => dispatch => {
   dispatch(fetchTasksStart())
@@ -27,23 +36,27 @@ const addTasksStart = () => ({
   type: constants.TASK_ADD_START,
 })
 
-const addTasksSuccess = () => dispatch => {
+const addTasksSuccess = res => dispatch => {
   dispatch({
     type: constants.TASK_ADD_SUCCESS,
   })
+  logger.info('Create Task', res, { meta: res.statusText })
   dispatch(fetchTasks())
 }
 
-const addTasksFail = err => ({
-  type: constants.TASK_ADD_FAIL,
-  payload: err,
-})
+const addTasksFail = err => {
+  logger.error('Create Task', err, { meta: err.response.statusText })
+  return {
+    type: constants.TASK_ADD_FAIL,
+    payload: err,
+  }
+}
 
 export const addTask = task => dispatch => {
   dispatch(addTasksStart())
   axios
     .post(`http://localhost:9001/task/create/${task.title}/${task.desc}`)
-    .then(() => dispatch(addTasksSuccess()))
+    .then(res => dispatch(addTasksSuccess(res)))
     .catch(err => dispatch(addTasksFail(err)))
 }
 
@@ -60,10 +73,13 @@ const editTaskSuccess = () => dispatch => {
   dispatch(fetchTasks())
 }
 
-const editTaskFail = err => ({
-  type: constants.TASK_EDIT_FAIL,
-  payload: err,
-})
+const editTaskFail = err => {
+  logger.error('Edit Task', err, { meta: err.response.statusText })
+  return {
+    type: constants.TASK_EDIT_FAIL,
+    payload: err,
+  }
+}
 
 export const editTask = (id, title, desc) => dispatch => {
   dispatch(editTaskStart())
@@ -77,19 +93,23 @@ const deleteTaskStart = () => ({
   type: constants.TASK_DELETE_START,
 })
 
-const deleteTaskSuccess = id => dispatch => {
+const deleteTaskSuccess = (res, id) => dispatch => {
   dispatch({ type: constants.TASK_DELETE_SUCCESS, payload: id })
+  logger.info('Delete Task', res, { meta: res.statusText })
 }
 
-const deleteTaskFail = err => ({
-  type: constants.TASK_DELETE_FAIL,
-  payload: err,
-})
+const deleteTaskFail = err => {
+  logger.error('Delete Task', err, { meta: err.response.statusText })
+  return {
+    type: constants.TASK_DELETE_FAIL,
+    payload: err,
+  }
+}
 
 export const deleteTask = id => dispatch => {
   dispatch(deleteTaskStart())
   axios
     .delete(`http://localhost:9001/task/delete/${id}`)
-    .then(() => dispatch(deleteTaskSuccess(id)))
+    .then(res => dispatch(deleteTaskSuccess(res, id)))
     .catch(err => dispatch(deleteTaskFail(err)))
 }

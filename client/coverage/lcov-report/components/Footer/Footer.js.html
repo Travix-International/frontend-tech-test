@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">37.5% </span>
+        <span class="strong">36.36% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>3/8</span>
+        <span class='fraction'>4/11</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>1/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">37.5% </span>
+        <span class="strong">36.36% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>3/8</span>
+        <span class='fraction'>4/11</span>
       </div>
     </div>
     <p class="quiet">
@@ -112,7 +112,12 @@
 <a name='L64'></a><a href='#L64'>64</a>
 <a name='L65'></a><a href='#L65'>65</a>
 <a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,6 +138,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -176,42 +183,47 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, {Component} from 'react'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 &nbsp;
-import {Button, Input} from '../UI'
+import { Button, Input } from '../UI'
 import styles from './Footer.scss'
 &nbsp;
 class Footer extends Component {
   state = {
     taskTitle: '',
-    taskDesc: ''
+    taskDesc: '',
   }
 &nbsp;
   onChangeValueHandler = <span class="fstat-no" title="function not covered" >ev</span>ent =&gt; {
-<span class="cstat-no" title="statement not covered" >    this.setState({taskTitle: event.target.value})</span>
+<span class="cstat-no" title="statement not covered" >    this.setState({ taskTitle: event.target.value })</span>
   }
 &nbsp;
   onChangeDescHandler = <span class="fstat-no" title="function not covered" >ev</span>ent =&gt; {
-<span class="cstat-no" title="statement not covered" >    this.setState({taskDesc: event.target.value})</span>
+<span class="cstat-no" title="statement not covered" >    this.setState({ taskDesc: event.target.value })</span>
   }
 &nbsp;
   onAddButtonClickHandler = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+    const { taskTitle, taskDesc } = <span class="cstat-no" title="statement not covered" >this.state</span>
+    const { addTask } = <span class="cstat-no" title="statement not covered" >this.props</span>
     const task = <span class="cstat-no" title="statement not covered" >{</span>
-      title: this.state.taskTitle,
-      desc: this.state.taskDesc
+      title: taskTitle,
+      desc: taskDesc,
     }
-<span class="cstat-no" title="statement not covered" >    this.props.addTask(task)</span>
+<span class="cstat-no" title="statement not covered" >    addTask(task)</span>
 <span class="cstat-no" title="statement not covered" >    this.setState({</span>
       taskTitle: '',
-      taskDesc: ''
+      taskDesc: '',
     })
   }
 &nbsp;
   render() {
-    const {taskTitle, taskDesc} = this.state
+    const { taskTitle, taskDesc } = this.state
     return (
       &lt;div className={styles.Footer}&gt;
         &lt;div className={styles.Inputs}&gt;
@@ -238,9 +250,12 @@ class Footer extends Component {
   }
 }
 &nbsp;
+Footer.defaultProps = {
+  addTask: null,
+}
+&nbsp;
 Footer.propTypes = {
   addTask: PropTypes.func,
-  selectedTask: PropTypes.number
 }
 &nbsp;
 export default Footer
@@ -250,7 +265,7 @@ export default Footer
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Aug 25 2018 11:22:14 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Aug 25 2018 12:15:30 GMT+0200 (CEST)
 </div>
 </div>
 <script src="../../prettify.js"></script>

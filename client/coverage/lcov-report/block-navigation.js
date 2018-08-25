@@ -1,17 +1,17 @@
-const jumpToCode = (function init() {
+var jumpToCode = (function init() {
   // Classes of code we would like to highlight
-  const missingCoverageClasses = ['.cbranch-no', '.cstat-no', '.fstat-no']
+  var missingCoverageClasses = ['.cbranch-no', '.cstat-no', '.fstat-no']
 
   // We don't want to select elements that are direct descendants of another match
-  const notSelector = `:not(${missingCoverageClasses.join('):not(')}) > ` // becomes `:not(a):not(b) > `
+  var notSelector = ':not(' + missingCoverageClasses.join('):not(') + ') > ' // becomes `:not(a):not(b) > `
 
   // Selecter that finds elements on the page to which we can jump
-  const selector = notSelector + missingCoverageClasses.join(`, ${notSelector}`) // becomes `:not(a):not(b) > a, :not(a):not(b) > b`
+  var selector = notSelector + missingCoverageClasses.join(', ' + notSelector) // becomes `:not(a):not(b) > a, :not(a):not(b) > b`
 
   // The NodeList of matching elements
-  const missingCoverageElements = document.querySelectorAll(selector)
+  var missingCoverageElements = document.querySelectorAll(selector)
 
-  let currentIndex
+  var currentIndex
 
   function toggleClass(index) {
     missingCoverageElements.item(currentIndex).classList.remove('highlighted')
@@ -27,7 +27,7 @@ const jumpToCode = (function init() {
   }
 
   function goToPrevious() {
-    let nextIndex = 0
+    var nextIndex = 0
     if (typeof currentIndex !== 'number' || currentIndex === 0) {
       nextIndex = missingCoverageElements.length - 1
     } else if (missingCoverageElements.length > 1) {
@@ -38,7 +38,7 @@ const jumpToCode = (function init() {
   }
 
   function goToNext() {
-    let nextIndex = 0
+    var nextIndex = 0
 
     if (
       typeof currentIndex === 'number' &&
