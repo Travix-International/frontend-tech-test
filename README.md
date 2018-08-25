@@ -1,5 +1,3 @@
-You can try an app here: https://shrouded-earth-17665.herokuapp.com/
-
 ## To start the project
 
 - clone this repo
