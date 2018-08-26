@@ -1,0 +1,30 @@
+@import '../../scss/vars.scss';
+.Header {
+  color: $darkgreen;
+  background-color: $orange;
+  border-radius: 3rem 1rem 3rem 1rem;
+  padding: 1rem;
+  text-align: center;
+  text-shadow: 1px 1px 1px $yellow;
+  width: 80%;
+  margin: auto;
+  text-transform: uppercase;
+}
+
+.Counter {
+  background-color: $red;
+  color: $yellow;
+  border-radius: 1rem;
+  width: 30%;
+  height: 50px;
+  margin: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  text-shadow: none;
+  text-transform: none;
+  @media only screen and (max-width: 600px) {
+    height: auto;
+    padding: 0.5rem;
+  }
+}

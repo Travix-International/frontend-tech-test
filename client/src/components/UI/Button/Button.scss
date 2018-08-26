@@ -1,0 +1,82 @@
+@import '../../../scss/vars.scss';
+.Button {
+  position: relative;
+  overflow: hidden;
+  margin: 1rem;
+  padding: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  border-radius: 1rem;
+  border: none;
+  color: white;
+  transition: all 0.5s ease-in-out;
+  outline: none;
+  &:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+  }
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    padding-top: 240%;
+    padding-left: 240%;
+    margin-left: -120%;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+  }
+  &_Add {
+    @extend .Button;
+    background-color: $darkgreen;
+    &:hover {
+      background-color: lighten($darkgreen, 15%);
+      font-size: 2rem;
+      transition: all 0.5s ease-in-out;
+      cursor: pointer;
+    }
+    &:after {
+      background-color: darken($darkgreen, 15%)
+    }
+  }
+  &_Delete {
+    @extend .Button;
+    background-color: $red;
+    &:hover {
+      background-color: lighten($red, 15%);
+      font-size: 2rem;
+      transition: all 0.5s ease-in-out;
+      cursor: pointer;
+    }
+    &:after {
+      background-color: darken($red, 15%)
+    }
+  }
+  &_Edit {
+    @extend .Button;
+    background-color: $yellow;
+    color: black;
+    &:hover {
+      background-color: lighten($yellow, 15%);
+      font-size: 2rem;
+      transition: all 0.5s ease-in-out;
+      cursor: pointer;
+    }
+    &:after {
+      background-color: darken($yellow, 15%)
+    }
+  }
+  &:disabled {
+    background-color: #ccc;
+    transition: none;
+    color: white;
+    &:hover {
+      transition: none;
+      cursor: not-allowed;
+      font-size: 1rem;
+    }
+  }
+}

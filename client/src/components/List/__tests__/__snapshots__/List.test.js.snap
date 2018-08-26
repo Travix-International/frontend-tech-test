@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List should works properly Should match snapshot: List_snapshot_1 1`] = `
+<div
+  class="List"
+>
+  <div>
+    <div
+      class="Item"
+      data-testid="listItem"
+      role="group"
+    >
+      <p
+        class="Text"
+      >
+        Hello
+      </p>
+      <p
+        class="Desc"
+      >
+        Test
+      </p>
+    </div>
+    <div
+      class="Buttons"
+    >
+      <button
+        class="null Button_Delete null"
+        disabled=""
+        type="button"
+      >
+        delete
+      </button>
+      <button
+        class="null null Button_Edit"
+        disabled=""
+        type="button"
+      >
+        edit
+      </button>
+    </div>
+  </div>
+</div>
+`;

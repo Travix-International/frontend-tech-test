@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should render properly Should match snapshot: Header_snapshot_1 1`] = `
+<div
+  class="Header"
+>
+  <h1>
+    Travix ToDo list
+  </h1>
+  <div
+    class="Counter"
+  >
+    <p>
+      Tasks To Do: 0
+    </p>
+  </div>
+</div>
+`;

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer should works properly Should match snapshot: Footer_snapshot_1 1`] = `
+<div
+  class="Footer"
+>
+  <div
+    class="Inputs"
+  >
+    <input
+      class="Input"
+      name="title"
+      placeholder="Your next task..."
+      type="text"
+      value=""
+    />
+    <textarea
+      class="Input"
+      name="desc"
+      placeholder="Please write some description..."
+      rows="5"
+      type="text"
+    />
+  </div>
+  <div
+    class="Buttons"
+  >
+    <button
+      class="Button_Add null null"
+      disabled=""
+      type="button"
+    >
+      add
+    </button>
+  </div>
+</div>
+`;

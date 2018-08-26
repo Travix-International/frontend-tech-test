@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should render properly Should match snapshot: Spinner_snapshot_1 1`] = `
+<div
+  class="Spinner"
+  data-testid="spinner"
+>
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+`;
