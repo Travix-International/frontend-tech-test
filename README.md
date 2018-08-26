@@ -1,3 +1,6 @@
+## demo app : https://travix-todo-app-client.herokuapp.com/
+(notice: it may take up to 30 seconds to start) 
+
 ## To start the project
 
 - `clone this repo`
