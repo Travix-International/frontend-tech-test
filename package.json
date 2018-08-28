@@ -4,8 +4,10 @@
   "description": "test back - front",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "npm run test --prefix frontend",
+    "start": "node server.js",
+    "frontend": "npm start --prefix frontend",
+    "dev": "concurrently \"npm start\" \"npm run frontend\""
   },
   "keywords": [
     "test",
@@ -14,6 +16,7 @@
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^4.0.1",
     "express": "^4.14.0"
   }
 }
