@@ -6,6 +6,10 @@ class HomeComponent extends React.Component {
     super(props);
   }
 
+  componentDidMount(){
+    this.props.getAllTasks()
+  }
+
   render(){
     return(
       <section>

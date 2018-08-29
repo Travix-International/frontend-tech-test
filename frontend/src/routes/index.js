@@ -1,5 +1,6 @@
 import React from 'react'
-import { Header, Home } from 'components'
+import { Header } from 'components'
+import HomeContainer from '../containers/home_container'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -10,7 +11,7 @@ function Routes() {
     <Router>
       <Container>
         <Header />
-        <Route path="/" component={Home} />
+        <Route path="/" component={HomeContainer} />
       </Container>
     </Router>
   )
