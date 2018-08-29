@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "author": "shaurya",
   "dependencies": {
+    "@material-ui/core": "^3.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -16,7 +17,8 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
-    "styled-components": "^3.2.6"
+    "styled-components": "^3.2.6",
+    "travix-logger": "^0.6.5"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.2",
