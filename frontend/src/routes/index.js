@@ -1,6 +1,5 @@
 import React from 'react'
-import { CounterContainer } from 'containers'
-import { Header } from 'components'
+import { Header, Home } from 'components'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -11,7 +10,7 @@ function Routes() {
     <Router>
       <Container>
         <Header />
-        <Route path="/" component={CounterContainer} />
+        <Route path="/" component={Home} />
       </Container>
     </Router>
   )

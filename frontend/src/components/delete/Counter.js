@@ -2,12 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import pure from 'recompose/pure'
 import styled from 'styled-components'
+import Home from './home'
 
 const Intro = styled.p`font-size: large;`
 
 function Counter({ increment, incrementIfOdd, decrement, counter }) {
   return (
     <section>
+    <Home></Home>
       <Intro>
         To get started, edit <code>src/routes/index.js </code>
         and save to reload.
