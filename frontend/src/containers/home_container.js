@@ -3,7 +3,8 @@ import {getAllTasks} from '../actions/task_actions'
 import HomeComponent from '../components/Home'
 
 const mapStateToProps = ({loader}) => ({
-  fetching: loader.fetching
+  fetching: loader.fetching,
+  error: loader.error
 })
 
 const mapDispatchToProps = (dispatch) => ({

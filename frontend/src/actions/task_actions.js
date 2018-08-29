@@ -10,6 +10,22 @@ export const getAllTasks = (dispatch) => {
     dispatch({
       type: constants.FETCH_TASK_REQUEST
     })
+
+    return fetch('http://localhost:9001/tasks')
+    .then(response => response.json().then(body => ({ response, body })))
+    .then(({ response, body }) => {
+      if(response.ok){
+        dispatch({
+          type: constants.RECEIVE_TASK_SUCCESS,
+          tasks: body.tasks
+        })
+      } else {
+        dispatch({
+          type: constants.RECEIVE_TASK_ERROR,
+          error: body.error
+        })
+      }
+    })
   }
 }
 
