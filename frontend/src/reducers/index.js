@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import counter from './counter'
+import IncompleteTasksReducer from './incomplete_tasks_reducer'
 
 const rootReducer = combineReducers({
-  counter,
+  incompleteTasks: IncompleteTasksReducer
 })
 
 export default rootReducer
