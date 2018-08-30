@@ -5,36 +5,27 @@ const _defaultState = {
   error: ""
 }
 
-const IncompleteTasksReducer = (oldState = _defaultState, action) => {
+const CompleteTasksReducer = (oldState = _defaultState, action) => {
   let newState = merge({}, oldState);
 
   switch (action.type) {
-    case constants.CREATE_TASK:
-      newState.tasks.push(action.task)
-
-      return newState
     case constants.RECEIVE_TASK_SUCCESS:
       action.tasks.forEach(task => {
-        if(!task.completed) {
+        if(task.completed) {
           newState.tasks.push(task);
         }
       })
 
       return newState
-    case constants.CREATE_TASK_SUCCESS:
-      newState.tasks.push(action.task);
-
-      return newState
-    case constants.CREATE_TASK_ERROR:
-      newState.error = action.error
-
-      return newState
     case constants.UPDATE_TASK_SUCCESS:
-      // TODO: finish this;
+      if(action.task.completed){
+          newState.tasks.push(action.task);
+      }
+
       return newState
     default:
       return oldState;
   }
 }
 
-export default IncompleteTasksReducer
+export default CompleteTasksReducer

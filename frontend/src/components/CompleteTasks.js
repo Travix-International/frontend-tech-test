@@ -1,6 +1,6 @@
 import React from 'react';
 
-class IncompleteTasksComponent extends React.Component {
+class CompleteTasks extends React.Component {
   constructor(props){
     super(props)
     // this.clickMe = this.clickMe.bind(this);
@@ -10,9 +10,9 @@ class IncompleteTasksComponent extends React.Component {
   //   this.props.createTask({id: 1, title: 'hello', description: 'why hello there'})
   // }
 
-  parseIncompleteTasks(){
+  parseCompleteTasks(){
 
-    return this.props.incompleteTasks.map((task, index) => {
+    return this.props.completeTasks.map((task, index) => {
       return(
         <li key = {index}>
           <h1>{task.title}</h1>
@@ -22,15 +22,16 @@ class IncompleteTasksComponent extends React.Component {
   }
 
   render(){
+    debugger
     return(
       <section>
-        Incomplete Tasks
+        Complete Tasks
         <ul>
-          {this.parseIncompleteTasks()}
+          {this.parseCompleteTasks()}
         </ul>
       </section>
     )
   }
 }
 
-export default IncompleteTasksComponent
+export default CompleteTasks
