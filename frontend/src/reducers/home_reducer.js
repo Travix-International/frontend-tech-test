@@ -8,7 +8,8 @@ const _defaultState = {
   selectedTask: {
     id: null,
     title: "",
-    description: ""
+    description: "",
+    completed: false
   }
 }
 

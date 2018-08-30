@@ -10,19 +10,22 @@ class AddEditTask extends React.Component{
     this.state = {
       id: null,
       title: '',
-      description: ''
+      description: '',
+      completed: false
     }
 
     this.handleClose = this.handleClose.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.markCompleteIncomplete = this.markCompleteIncomplete.bind(this);
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
       id: nextProps.selectedTask.id,
       title: nextProps.selectedTask.title,
-      description: nextProps.selectedTask.description
+      description: nextProps.selectedTask.description,
+      completed: nextProps.selectedTask.completed
     })
   }
 
@@ -38,11 +41,19 @@ class AddEditTask extends React.Component{
 
   handleSubmit(){
 // First part of if checks if an update needs to be made and second handles a create task
-    if(this.props.selectedTask.title){
+    if(this.props.selectedTask.title !== ''){
       this.props.updateTask(this.state);
     } else {
       this.props.createTask(this.state);
     }
+  }
+
+  markCompleteIncomplete(){
+    this.setState({
+      completed: this.state.completed ? false : true
+    }, () => {
+      this.props.updateTask(this.state);
+    })
   }
 
   render(){
@@ -71,9 +82,17 @@ class AddEditTask extends React.Component{
           <Button
           variant='contained'
           color='primary'
+          onClick={this.markCompleteIncomplete}
+          >
+          {this.state.completed ? 'Mark Incomplete' : 'Mark Complete'}</Button>
+
+          <Button
+          variant='contained'
+          color='primary'
           onClick={this.handleSubmit}
           >
           Save</Button>
+
         </Drawer>
       </div>
     )

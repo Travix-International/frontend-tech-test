@@ -45,6 +45,7 @@ const apiRequest = (task, url, method, constantStart = null, constantSuccess = n
     })
     .then(response => response.json().then(body => ({ response, body })))
     .then(({ response, body }) => {
+      
       if(response.ok){
         logger.info(`Successfully performed ${method} task: ${url}`, response)
         dispatch({
@@ -83,7 +84,7 @@ export const updateTask = task => dispatch => {
 
   return apiRequest(
     task,
-    `http://localhost:9001/task/update/${task.id}/${task.title}/${task.description}`,
+    `http://localhost:9001/task/update/${task.id}/${task.title}/${task.description}/${task.completed}`,
     'put',
     constants.UPDATE_TASK,
     constants.UPDATE_TASK_SUCCESS,

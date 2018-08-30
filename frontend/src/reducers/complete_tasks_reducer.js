@@ -18,16 +18,27 @@ const CompleteTasksReducer = (oldState = _defaultState, action) => {
 
       return newState
     case constants.UPDATE_TASK_SUCCESS:
-      if(!action.task.completed){
-        newState.tasks = newState.tasks.filter(task => task.id !== action.task.id)
+      // if(!action.task.completed){
+      //   newState.tasks = newState.tasks.map(task => {
+      //     if(task.id === action.task.id){
+      //       return action.task
+      //     } else {
+      //       return task
+      //     }
+      //   })
+      // } else {
+      //   newState.tasks = newState.tasks.filter(task => task.id !== action.task.id)
+      // }
+
+
+      let index = newState.tasks.findIndex((task) => {
+        return task.id === action.task.id
+      })
+
+      if(!action.task.completed && index > -1){
+        newState.tasks.splice(index, 1)
       } else {
-        newState.tasks = newState.tasks.map(task => {
-          if(task.id === action.task.id){
-            return action.task
-          } else {
-            return task
-          }
-        })
+        newState.tasks.push(action.task)
       }
 
       return newState

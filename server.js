@@ -60,7 +60,7 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
+app.put('/task/update/:id/:title/:description/:completed', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -71,10 +71,11 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
       task.description = req.params.description;
 
       // this helps in sorting out tasks later
-      task.completed = req.params.completed ? true : false;
+      task.completed = req.params.completed === 'true' ? true : false
       return res.status(200).json({
+        taskId: task.id,
         task,
-        message: 'Resource updated'
+        message: 'Resource updated',
       });
     } else {
       return res.status(404).json({
@@ -107,8 +108,8 @@ app.post('/task/create/:title/:description', (req, res) => {
 
   tasksContainer.tasks.push(task);
   return res.status(201).json({
-    taskId: task.ids
-    message: 'Resource created',
+    taskId: task.id,
+    message: 'Resource created'
   });
 });
 
