@@ -64,6 +64,8 @@ const apiRequest = (task, url, method, dispatch, constantStart = null, constantS
 
 // Create a new task
 export const createTask = task => dispatch => {
+  dispatch(unselectTask());
+
   return apiRequest(
     task,
     `http://localhost:9001/task/create/${task.title}/${task.description}`,
@@ -77,6 +79,8 @@ export const createTask = task => dispatch => {
 
 // Update a task
 export const updateTask = task => dispatch => {
+  dispatch(unselectTask());
+
   return apiRequest(
     task,
     `http://localhost:9001/task/update/${task.title}/${task.description}`,
@@ -101,7 +105,13 @@ export const deleteTask = task => dispatch => {
     )
 }
 
-export const selectOrCreateTask = (task) => ({
-  type: constants.SELECT_OR_CREATE_TASK,
-  task
+export const selectOrCreateTask = (task = {id: null, title: "", description: ""}) => {
+  return {
+    type: constants.SELECT_OR_CREATE_TASK,
+    task
+  }
+}
+
+export const unselectTask = () => ({
+  type: constants.UNSELECT_TASK
 })

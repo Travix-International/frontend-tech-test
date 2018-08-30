@@ -1,0 +1,6 @@
+.add-button {
+  position: fixed !important;
+  bottom: 20px;
+  margin: 0 auto;
+  z-index: 10000
+}

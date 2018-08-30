@@ -6,7 +6,11 @@ const _defaultState = {
   nextId: 0,
   crudLoader: false,
   selectOrCreate: false,
-  selectedTask: {}
+  selectedTask: {
+    id: null,
+    title: "",
+    description: ""
+  }
 }
 
 const HomeReducer = (oldState = _defaultState, action) => {
@@ -47,7 +51,11 @@ const HomeReducer = (oldState = _defaultState, action) => {
       return newState
     case constants.UNSELECT_TASK:
       newState.selectOrCreate = false
-      newState.selectedTask = {}
+      newState.selectedTask = {
+        id: null,
+        title: "",
+        description: ""
+      }
 
       return newState
     default:
