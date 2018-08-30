@@ -3,7 +3,8 @@ import * as constants from 'constants/ActionTypes'
 
 const _defaultState = {
   fetching: false,
-  error: ""
+  error: "",
+  lastId: 0
 }
 
 const HomeReducer = (oldState = _defaultState, action) => {
@@ -14,6 +15,9 @@ const HomeReducer = (oldState = _defaultState, action) => {
       newState.fetching = true
       return newState
     case constants.RECEIVE_TASK_SUCCESS:
+      if(action.tasks.length != 0){
+        newState.lastId = action.tasks[action.tasks.length].id
+      }
       newState.fetching = false
       return newState
     case constants.RECEIVE_TASK_ERROR:

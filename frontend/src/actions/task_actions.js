@@ -15,11 +15,13 @@ export const getAllTasks = (dispatch) => {
     .then(response => response.json().then(body => ({ response, body })))
     .then(({ response, body }) => {
       if(response.ok){
+        logger.info('Received all tasks!', response)
         dispatch({
           type: constants.RECEIVE_TASK_SUCCESS,
           tasks: body.tasks
         })
       } else {
+        logger.info('There was an error fetching tasks', response)
         dispatch({
           type: constants.RECEIVE_TASK_ERROR,
           error: body.error

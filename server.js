@@ -69,6 +69,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
+      task.completed = req.params.completed;
       return res.status(204);
     } else {
       return res.status(404).json({
@@ -96,6 +97,7 @@ app.post('/task/create/:title/:description', (req, res) => {
     id: tasksContainer.tasks.length,
     title: req.params.title,
     description: req.params.description,
+    completed: req.params.completed
   };
 
   tasksContainer.tasks.push(task);
