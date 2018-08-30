@@ -45,7 +45,7 @@ const apiRequest = (task, url, method, constantStart = null, constantSuccess = n
     })
     .then(response => response.json().then(body => ({ response, body })))
     .then(({ response, body }) => {
-      
+
       if(response.ok){
         logger.info(`Successfully performed ${method} task: ${url}`, response)
         dispatch({
@@ -94,6 +94,8 @@ export const updateTask = task => dispatch => {
 
 // Delete a task
 export const deleteTask = task => dispatch => {
+  dispatch(unselectTask());
+  
   return apiRequest(
     task,
     `http://localhost:9001/task/delete/${task.id}`,

@@ -4,21 +4,23 @@ import Task from './PresentationalComponents/TaskComponent'
 class IncompleteTasksComponent extends React.Component {
   constructor(props){
     super(props)
-    // this.clickMe = this.clickMe.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
-  //
-  // clickMe(){
-  //   this.props.createTask({id: 1, title: 'hello', description: 'why hello there'})
-  // }
+
 
   handleClick = (task) => () => {
     this.props.selectOrCreateTask(task);
   }
 
+  handleDelete = (task) => () =>{
+    this.props.deleteTask(task)
+  }
+
   parseIncompleteTasks(){
     return this.props.incompleteTasks.map((task, index) => {
       return(
-        <Task todo={task} clickHandler={this.handleClick(task)} key = {index}/>
+        <Task todo={task} clickHandler={this.handleClick(task)} key = {index} handleDeleteClick={this.handleDelete(task)}/>
       )
     })
   }

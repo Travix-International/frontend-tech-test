@@ -49,6 +49,16 @@ const IncompleteTasksReducer = (oldState = _defaultState, action) => {
 
 
       return newState
+    case constants.DELETE_TASK_SUCCESS:
+      if(!action.task.completed){
+        let index = newState.tasks.findIndex((task) => {
+          return task.id === action.task.id
+        })
+
+        newState.tasks.splice(index, 1)
+      }
+
+      return newState
     default:
       return oldState;
   }

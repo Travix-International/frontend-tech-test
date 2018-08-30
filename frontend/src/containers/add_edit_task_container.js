@@ -8,8 +8,8 @@ const mapStateToProps = ({loader}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createTask: (task) => dispatch(createTask(task, dispatch)),
-  updateTask: (task) => dispatch(updateTask(task, dispatch)),
+  createTask: (task) => dispatch(createTask(task)),
+  updateTask: (task) => dispatch(updateTask(task)),
   unselectTask: () => dispatch(unselectTask())
 })
 
