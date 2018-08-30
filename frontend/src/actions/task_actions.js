@@ -33,7 +33,7 @@ export const getAllTasks = (dispatch) => {
 
 // Create Update and Delete are more or less the same actions. The following method will DRY the code straight up.
 
-const apiRequest = (task, url, method, dispatch, constantStart = null, constantSuccess = null, constantError = null) => {
+const apiRequest = (task, url, method, constantStart = null, constantSuccess = null, constantError = null) => {
   return (dispatch) => {
     dispatch({
       type: constantStart
@@ -49,7 +49,7 @@ const apiRequest = (task, url, method, dispatch, constantStart = null, constantS
         logger.info(`Successfully performed ${method} task: ${url}`, response)
         dispatch({
           type: constantSuccess,
-          task: task
+          task
         })
       } else {
         logger.info(`Error in performing ${method} task: ${url}`, response)
@@ -70,11 +70,10 @@ export const createTask = task => dispatch => {
     task,
     `http://localhost:9001/task/create/${task.title}/${task.description}`,
     'post',
-    dispatch,
     constants.CREATE_TASK,
     constants.CREATE_TASK_SUCCESS,
     constants.CREATE_TASK_ERROR
-    )
+  )(dispatch)
 }
 
 // Update a task
@@ -85,11 +84,10 @@ export const updateTask = task => dispatch => {
     task,
     `http://localhost:9001/task/update/${task.title}/${task.description}`,
     'put',
-    dispatch,
     constants.UPDATE_TASK,
     constants.UPDATE_TASK_SUCCESS,
     constants.UPDATE_TASK_ERROR
-    )
+  )(dispatch)
 }
 
 // Delete a task
@@ -98,11 +96,10 @@ export const deleteTask = task => dispatch => {
     task,
     `http://localhost:9001/task/delete/${task.id}`,
     'delete',
-    dispatch,
     constants.DELETE_TASK,
     constants.DELETE_TASK_SUCCESS,
     constants.DELETE_TASK_ERROR
-    )
+  )(dispatch)
 }
 
 export const selectOrCreateTask = (task = {id: null, title: "", description: ""}) => {

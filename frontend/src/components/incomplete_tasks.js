@@ -12,7 +12,6 @@ class IncompleteTasksComponent extends React.Component {
   // }
 
   parseIncompleteTasks(){
-
     return this.props.incompleteTasks.map((task, index) => {
       return(
         <Task todo={task} key = {index}/>

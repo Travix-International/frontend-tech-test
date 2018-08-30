@@ -8,10 +8,6 @@ const IncompleteTasksReducer = (oldState = _defaultState, action) => {
   let newState = merge({}, oldState);
 
   switch (action.type) {
-    case constants.CREATE_TASK:
-      newState.tasks.push(action.task)
-
-      return newState
     case constants.RECEIVE_TASK_SUCCESS:
       action.tasks.forEach(task => {
         if(!task.completed) {

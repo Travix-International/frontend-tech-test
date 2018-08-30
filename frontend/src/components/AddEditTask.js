@@ -7,12 +7,34 @@ class AddEditTask extends React.Component{
 
   constructor(props){
     super(props)
+    this.state = {
+      id: this.props.nextId,
+      title: '',
+      description: ''
+    }
 
     this.handleClose = this.handleClose.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleClose(){
     this.props.unselectTask();
+  }
+
+  handleInputChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    })
+  }
+
+  handleSubmit(){
+// First part of if checks if an update needs to be made and second handles a create task
+    if(this.props.selectedTask.id){
+      this.props.updateTask(this.state);
+    } else {
+      this.props.createTask(this.state);
+    }
   }
 
   render(){
@@ -26,19 +48,22 @@ class AddEditTask extends React.Component{
           <TextField
           id="name"
           label="Title"
-          value={this.props.selectedTask.title}
+          defaultValue={this.props.selectedTask.title}
           margin="normal"
+          onChange = {this.handleInputChange('title')}
           />
           <TextField
           id="name"
           label="Description"
-          value={this.props.selectedTask.description}
+          defaultValue={this.props.selectedTask.description}
           margin="normal"
+          onChange = {this.handleInputChange('description')}
           />
 
           <Button
           variant='contained'
-          color='green'
+          color='primary'
+          onClick={this.handleSubmit}
           >
           Save</Button>
         </Drawer>

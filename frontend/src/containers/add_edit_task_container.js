@@ -4,7 +4,8 @@ import AddEditTaskComponent from '../components/AddEditTask'
 
 const mapStateToProps = ({loader}) => ({
   selectOrCreate: loader.selectOrCreate,
-  selectedTask: loader.selectedTask
+  selectedTask: loader.selectedTask,
+  nextId: loader.nextId
 })
 
 const mapDispatchToProps = (dispatch) => ({

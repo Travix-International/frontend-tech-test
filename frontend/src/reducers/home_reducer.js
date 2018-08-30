@@ -35,7 +35,12 @@ const HomeReducer = (oldState = _defaultState, action) => {
       newState.crudLoader = true
 
       return newState
-    case (constants.CREATE_TASK_SUCCESS || constants.UPDATE_TASK_SUCCESS || constants.DELETE_TASK_SUCCESS) :
+    case constants.CREATE_TASK_SUCCESS:
+      newState.crudLoader = false
+      newState.nextId += 1
+
+      return newState;
+    case (constants.UPDATE_TASK_SUCCESS || constants.DELETE_TASK_SUCCESS) :
       newState.crudLoader = false
 
       return newState
