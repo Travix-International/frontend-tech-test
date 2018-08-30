@@ -4,7 +4,9 @@ import * as constants from 'constants/ActionTypes'
 const _defaultState = {
   error: "",
   nextId: 0,
-  crud: false
+  crudLoader: false,
+  selectOrCreate: false,
+  selectedTask: {}
 }
 
 const HomeReducer = (oldState = _defaultState, action) => {
@@ -13,29 +15,41 @@ const HomeReducer = (oldState = _defaultState, action) => {
   switch (action.type) {
     case constants.FETCH_TASK_REQUEST:
       newState.fetching = true
+
       return newState
     case constants.RECEIVE_TASK_SUCCESS:
       newState.nextId = action.tasks.length
-      newState.crud = false
+      newState.crudLoader = false
+
       return newState
     case constants.RECEIVE_TASK_ERROR:
-      newState.crud = false
+      newState.crudLoader = false
       newState.error = action.error
-      return newState
 
+      return newState
     case constants.CREATE_TASK:
-      newState.crud = true
-      return newState
+      newState.crudLoader = true
 
+      return newState
     case (constants.CREATE_TASK_SUCCESS || constants.UPDATE_TASK_SUCCESS || constants.DELETE_TASK_SUCCESS) :
-      newState.crud = false
-      return newState
+      newState.crudLoader = false
 
+      return newState
     case (constants.DELETE_TASK_SUCCESS || constants.UPDATE_TASK_ERROR || constants.CREATE_TASK_ERROR) :
       newState.error = action.error
-      newState.crud = false
-      return newState
+      newState.crudLoader = false
 
+      return newState
+    case constants.SELECT_OR_CREATE_TASK:
+      newState.selectOrCreate = true
+      newState.selectedTask = action.task
+
+      return newState
+    case constants.UNSELECT_TASK:
+      newState.selectOrCreate = false
+      newState.selectedTask = {}
+
+      return newState
     default:
       return oldState;
   }

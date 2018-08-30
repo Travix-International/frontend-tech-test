@@ -1,4 +1,5 @@
 import React from 'react';
+import Task from './PresentationalComponents/TaskComponent'
 
 class IncompleteTasksComponent extends React.Component {
   constructor(props){
@@ -14,9 +15,7 @@ class IncompleteTasksComponent extends React.Component {
 
     return this.props.incompleteTasks.map((task, index) => {
       return(
-        <li key = {index}>
-          <h1>{task.title}</h1>
-        </li>
+        <Task todo={task} key = {index}/>
       )
     })
   }

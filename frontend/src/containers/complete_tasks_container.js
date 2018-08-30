@@ -3,8 +3,7 @@ import {createTask} from '../actions/task_actions'
 import CompleteTasks from '../components/CompleteTasks'
 
 const mapStateToProps = ({completeTasks}) => ({
-  completeTasks: completeTasks.tasks,
-  error: completeTasks.error
+  completeTasks: completeTasks.tasks
 })
 
 const mapDispatchToProps = (dispatch) => ({

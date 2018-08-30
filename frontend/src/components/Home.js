@@ -1,6 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types';
+
 import IncompleteTasksContainer from '../containers/incomplete_tasks_container'
 import CompleteTasksContainer from '../containers/complete_tasks_container'
+
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+import Icon from '@material-ui/core/Icon';;
 
 class HomeComponent extends React.Component {
   constructor(props){
@@ -12,14 +19,28 @@ class HomeComponent extends React.Component {
   }
 
   render(){
+    const classes = PropTypes.object.isRequired;
+
     return(
       <section>
-        Home component working!
         <IncompleteTasksContainer />
         <CompleteTasksContainer />
+
+        <Button variant='fab' color='primary' aria-label='Add'>
+          <AddIcon />
+        </Button>
       </section>
     )
   }
 }
 
-export default HomeComponent
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit,
+  },
+});
+
+export default withStyles(styles) (HomeComponent)

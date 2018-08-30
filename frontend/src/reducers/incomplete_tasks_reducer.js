@@ -1,8 +1,7 @@
 import merge from 'lodash/merge'
 import * as constants from 'constants/ActionTypes'
 const _defaultState = {
-  tasks: [],
-  error: ""
+  tasks: []
 }
 
 const IncompleteTasksReducer = (oldState = _defaultState, action) => {
@@ -25,12 +24,19 @@ const IncompleteTasksReducer = (oldState = _defaultState, action) => {
       newState.tasks.push(action.task);
 
       return newState
-    case constants.CREATE_TASK_ERROR:
-      newState.error = action.error
-
-      return newState
     case constants.UPDATE_TASK_SUCCESS:
-      // TODO: finish this;
+      if(action.task.completed){
+        newState.tasks = newState.tasks.filter(task => task.id !== action.task.id)
+      } else {
+        newState.tasks = newState.tasks.map(task => {
+          if(task.id === action.task.id){
+            return action.task
+          } else {
+            return task
+          }
+        })
+      }
+
       return newState
     default:
       return oldState;

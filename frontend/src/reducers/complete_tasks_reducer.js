@@ -18,8 +18,16 @@ const CompleteTasksReducer = (oldState = _defaultState, action) => {
 
       return newState
     case constants.UPDATE_TASK_SUCCESS:
-      if(action.task.completed){
-          newState.tasks.push(action.task);
+      if(!action.task.completed){
+        newState.tasks = newState.tasks.filter(task => task.id !== action.task.id)
+      } else {
+        newState.tasks = newState.tasks.map(task => {
+          if(task.id === action.task.id){
+            return action.task
+          } else {
+            return task
+          }
+        })
       }
 
       return newState

@@ -100,3 +100,8 @@ export const deleteTask = task => dispatch => {
     constants.DELETE_TASK_ERROR
     )
 }
+
+export const selectOrCreateTask = (task) => ({
+  type: constants.SELECT_OR_CREATE_TASK,
+  task
+})

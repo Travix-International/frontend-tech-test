@@ -1,4 +1,5 @@
 import React from 'react';
+import Task from './PresentationalComponents/TaskComponent'
 
 class CompleteTasks extends React.Component {
   constructor(props){
@@ -14,15 +15,12 @@ class CompleteTasks extends React.Component {
 
     return this.props.completeTasks.map((task, index) => {
       return(
-        <li key = {index}>
-          <h1>{task.title}</h1>
-        </li>
+        <Task todo={task} key = {index}/>
       )
     })
   }
 
   render(){
-    debugger
     return(
       <section>
         Complete Tasks
