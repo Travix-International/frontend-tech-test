@@ -3,7 +3,6 @@ import * as constants from 'constants/ActionTypes'
 
 const _defaultState = {
   error: "",
-  nextId: 0,
   crudLoader: false,
   selectOrCreate: false,
   selectedTask: {
@@ -22,7 +21,6 @@ const HomeReducer = (oldState = _defaultState, action) => {
 
       return newState
     case constants.RECEIVE_TASK_SUCCESS:
-      newState.nextId = action.tasks.length
       newState.crudLoader = false
 
       return newState
@@ -37,7 +35,6 @@ const HomeReducer = (oldState = _defaultState, action) => {
       return newState
     case constants.CREATE_TASK_SUCCESS:
       newState.crudLoader = false
-      newState.nextId += 1
 
       return newState;
     case (constants.UPDATE_TASK_SUCCESS || constants.DELETE_TASK_SUCCESS) :

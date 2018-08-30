@@ -11,10 +11,14 @@ class IncompleteTasksComponent extends React.Component {
   //   this.props.createTask({id: 1, title: 'hello', description: 'why hello there'})
   // }
 
+  handleClick = (task) => () => {
+    this.props.selectOrCreateTask(task);
+  }
+
   parseIncompleteTasks(){
     return this.props.incompleteTasks.map((task, index) => {
       return(
-        <Task todo={task} key = {index}/>
+        <Task todo={task} clickHandler={this.handleClick(task)} key = {index}/>
       )
     })
   }

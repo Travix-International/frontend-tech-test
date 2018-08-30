@@ -17,7 +17,9 @@ const IncompleteTasksReducer = (oldState = _defaultState, action) => {
 
       return newState
     case constants.CREATE_TASK_SUCCESS:
-      newState.tasks.push(action.task);
+      let task = action.task
+      task.id = action.id
+      newState.tasks.push(task);
 
       return newState
     case constants.UPDATE_TASK_SUCCESS:

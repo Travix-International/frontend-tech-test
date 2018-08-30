@@ -8,7 +8,7 @@ class AddEditTask extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      id: this.props.nextId,
+      id: null,
       title: '',
       description: ''
     }
@@ -16,6 +16,14 @@ class AddEditTask extends React.Component{
     this.handleClose = this.handleClose.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      id: nextProps.selectedTask.id,
+      title: nextProps.selectedTask.title,
+      description: nextProps.selectedTask.description
+    })
   }
 
   handleClose(){
@@ -30,7 +38,7 @@ class AddEditTask extends React.Component{
 
   handleSubmit(){
 // First part of if checks if an update needs to be made and second handles a create task
-    if(this.props.selectedTask.id){
+    if(this.props.selectedTask.title){
       this.props.updateTask(this.state);
     } else {
       this.props.createTask(this.state);

@@ -69,8 +69,13 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      task.completed = req.params.completed;
-      return res.status(204);
+
+      // this helps in sorting out tasks later
+      task.completed = req.params.completed ? true : false;
+      return res.status(200).json({
+        task,
+        message: 'Resource updated'
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -102,6 +107,7 @@ app.post('/task/create/:title/:description', (req, res) => {
 
   tasksContainer.tasks.push(task);
   return res.status(201).json({
+    taskId: task.ids
     message: 'Resource created',
   });
 });

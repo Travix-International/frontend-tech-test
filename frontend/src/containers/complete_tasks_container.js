@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {createTask} from '../actions/task_actions'
+import {selectOrCreateTask} from '../actions/task_actions'
 import CompleteTasks from '../components/CompleteTasks'
 
 const mapStateToProps = ({completeTasks}) => ({
@@ -7,7 +7,8 @@ const mapStateToProps = ({completeTasks}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createTask: (task) => dispatch(createTask(task)(dispatch))
+  selectOrCreateTask: (task) => dispatch(selectOrCreateTask(task)),
+  
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CompleteTasks)

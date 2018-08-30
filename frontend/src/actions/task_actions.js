@@ -49,7 +49,8 @@ const apiRequest = (task, url, method, constantStart = null, constantSuccess = n
         logger.info(`Successfully performed ${method} task: ${url}`, response)
         dispatch({
           type: constantSuccess,
-          task
+          task,
+          id: body.taskId
         })
       } else {
         logger.info(`Error in performing ${method} task: ${url}`, response)
@@ -82,7 +83,7 @@ export const updateTask = task => dispatch => {
 
   return apiRequest(
     task,
-    `http://localhost:9001/task/update/${task.title}/${task.description}`,
+    `http://localhost:9001/task/update/${task.id}/${task.title}/${task.description}`,
     'put',
     constants.UPDATE_TASK,
     constants.UPDATE_TASK_SUCCESS,
