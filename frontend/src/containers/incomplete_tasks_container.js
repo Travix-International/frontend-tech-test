@@ -7,7 +7,7 @@ const mapStateToProps = ({incompleteTasks}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createTask: (task) => dispatch(createTask(task))
+  createTask: (task) => dispatch(createTask(task)(dispatch))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(IncompleteTasksComponent)

@@ -7,7 +7,8 @@ class IncompleteTasksComponent extends React.Component {
   }
 
   clickMe(){
-    this.props.createTask({id: 1})
+    console.log('hello')
+    this.props.createTask({id: 1, title: 'hello', description: 'why hello there'})
   }
 
   render(){

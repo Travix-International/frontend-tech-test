@@ -2,9 +2,9 @@ import merge from 'lodash/merge'
 import * as constants from 'constants/ActionTypes'
 
 const _defaultState = {
-  fetching: false,
   error: "",
-  lastId: 0
+  nextId: 0,
+  crud: false
 }
 
 const HomeReducer = (oldState = _defaultState, action) => {
@@ -15,15 +15,27 @@ const HomeReducer = (oldState = _defaultState, action) => {
       newState.fetching = true
       return newState
     case constants.RECEIVE_TASK_SUCCESS:
-      if(action.tasks.length != 0){
-        newState.lastId = action.tasks[action.tasks.length].id
-      }
-      newState.fetching = false
+      newState.nextId = action.tasks.length
+      newState.crud = false
       return newState
     case constants.RECEIVE_TASK_ERROR:
-      newState.fetching = false
+      newState.crud = false
       newState.error = action.error
       return newState
+
+    case constants.CREATE_TASK:
+      newState.crud = true
+      return newState
+
+    case (constants.CREATE_TASK_SUCCESS || constants.UPDATE_TASK_SUCCESS || constants.DELETE_TASK_SUCCESS) :
+      newState.crud = false
+      return newState
+
+    case (constants.DELETE_TASK_SUCCESS || constants.UPDATE_TASK_ERROR || constants.CREATE_TASK_ERROR) :
+      newState.error = action.error
+      newState.crud = false
+      return newState
+
     default:
       return oldState;
   }
