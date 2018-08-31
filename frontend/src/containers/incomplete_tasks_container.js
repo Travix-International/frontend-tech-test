@@ -1,9 +1,10 @@
 import {connect} from 'react-redux'
 import {selectOrCreateTask, deleteTask} from '../actions/task_actions'
-import IncompleteTasksComponent from '../components/incomplete_tasks'
+import CompleteAndIncompleteTasksComponent from '../components/CompleteAndIncompleteTasks'
 
 const mapStateToProps = ({incompleteTasks}) => ({
-  incompleteTasks: incompleteTasks.tasks
+  tasks: incompleteTasks.tasks,
+  type: incompleteTasks.type
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -11,4 +12,4 @@ const mapDispatchToProps = (dispatch) => ({
   deleteTask: (task) => dispatch(deleteTask(task))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(IncompleteTasksComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(CompleteAndIncompleteTasksComponent)

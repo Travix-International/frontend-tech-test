@@ -2,7 +2,7 @@ import merge from 'lodash/merge'
 import * as constants from 'constants/ActionTypes'
 const _defaultState = {
   tasks: [],
-  error: ""
+  type: 'Completed Tasks'
 }
 
 const CompleteTasksReducer = (oldState = _defaultState, action) => {

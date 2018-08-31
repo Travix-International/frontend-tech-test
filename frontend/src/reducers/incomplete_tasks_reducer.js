@@ -1,7 +1,8 @@
 import merge from 'lodash/merge'
 import * as constants from 'constants/ActionTypes'
 const _defaultState = {
-  tasks: []
+  tasks: [],
+  type: 'Incomplete Tasks'
 }
 
 const IncompleteTasksReducer = (oldState = _defaultState, action) => {

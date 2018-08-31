@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List'
 
-class IncompleteTasksComponent extends React.Component {
+class CompleteAndIncompleteTasksComponent extends React.Component {
   constructor(props){
     super(props)
     this.handleClick = this.handleClick.bind(this);
@@ -19,12 +19,13 @@ class IncompleteTasksComponent extends React.Component {
     this.props.selectOrCreateTask(task);
   }
 
-  handleDelete = (task) => () =>{
+  handleDelete = (task) => (event) =>{
+    event.stopPropagation();
     this.props.deleteTask(task)
   }
 
   parseIncompleteTasks(){
-    return this.props.incompleteTasks.map((task, index) => {
+    return this.props.tasks.map((task, index) => {
       return(
         <Task todo={task} clickHandler={this.handleClick(task)} key = {index} handleDeleteClick={this.handleDelete(task)}/>
       )
@@ -37,7 +38,7 @@ class IncompleteTasksComponent extends React.Component {
       <div>
         <Paper elevation = {1}>
           <Typography>
-            Incomplete Tasks
+            {this.props.type}
           </Typography>
           <div>
             <List component='nav'>
@@ -58,8 +59,8 @@ const styles = theme => ({
   },
 });
 
-IncompleteTasksComponent.propTypes = {
+CompleteAndIncompleteTasksComponent.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(IncompleteTasksComponent)
+export default withStyles(styles)(CompleteAndIncompleteTasksComponent)

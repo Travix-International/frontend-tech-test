@@ -19,7 +19,7 @@ class CompleteTasks extends React.Component {
 
   parseCompleteTasks(){
 
-    return this.props.completeTasks.map((task, index) => {
+    return this.props.tasks.map((task, index) => {
       return(
         <Task todo={task} clickHandler={this.handleClick(task)} key = {index} handleDeleteClick={this.handleDelete(task)}/>
       )

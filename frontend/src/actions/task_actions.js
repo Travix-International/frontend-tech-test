@@ -94,8 +94,7 @@ export const updateTask = task => dispatch => {
 
 // Delete a task
 export const deleteTask = task => dispatch => {
-  dispatch(unselectTask());
-  
+
   return apiRequest(
     task,
     `http://localhost:9001/task/delete/${task.id}`,
