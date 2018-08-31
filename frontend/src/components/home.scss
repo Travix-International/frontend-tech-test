@@ -1,0 +1,96 @@
+$break-mobile: "only screen and (min-width: 320px)";
+$break-tablet: "only screen and (min-width: 768px)";
+$mid-screen: 50%;
+$button-width: 28px;
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media #{$break-mobile} {
+  .add-button{
+    position: fixed !important;
+    bottom: 20px;
+    left: -webkit-calc(#{$mid-screen} - #{$button-width});
+    left:    -moz-calc(#{$mid-screen} - #{$button-width});
+    left:         calc(#{$mid-screen} - #{$button-width});
+    z-index: 10000;
+  }
+
+  section{
+    flex-direction: column;
+  }
+
+  .alltasks{
+    margin-bottom: 50px;
+  }
+
+  div.MuiPaper-root-4{
+    padding-top: 10px;
+  }
+
+  body{
+    background-color: grey;
+  }
+
+  .Incomplete, .Completed {
+    width: 80vw;
+  }
+
+  .Incomplete{
+    margin-top:20px;
+  }
+
+  .Completed{
+    margin-bottom: 20px;
+    margin-top:20px;
+  }
+
+  h2{
+    margin: 0;
+  }
+
+  .sc-bdVaJa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  div.MuiDrawer-paperAnchorBottom-65{
+    min-height: 60vh;
+    padding: 20px;
+    background: -moz-linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(153,218,255,1)), color-stop(100%, rgba(0,128,128,1))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%); /* ie10+ */
+    background: linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%); /* w3c */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008080', endColorstr='#99DAFF',GradientType=1 ); /* ie6-9 */
+  }
+
+  button.mark-button{
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  button.save-button{
+    margin-bottom: 70px;
+  }
+}
+
+@media #{$break-tablet} {
+  section{
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .Incomplete, .Completed {
+    width: 40vw;
+  }
+
+  .Incomplete{
+    margin-right: 20px;
+  }
+}

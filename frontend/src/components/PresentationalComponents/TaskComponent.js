@@ -6,13 +6,30 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
 
 const Task = (props) => {
+  let divStyle, base1, base2, base3;
+
+  if(props.type === 'Completed Tasks'){
+    base1 = 56 + (10 * props.index);
+    base2 = 56 + (10 * props.index);
+    base3 = 56 + (10 * props.index);
+  } else {
+    base1 = 0
+    base2 = 86 + (12 * props.index);
+    base3 = 1
+  }
+
+  divStyle = {
+    backgroundColor: `rgb(${base1}, ${base2}, ${base3})`
+  }
+
   return (
-    <div>
+    <div style={divStyle}>
       <ListItem button onClick = {props.clickHandler}>
         <ListItemText primary={props.todo.title} />
-        <IconButton className={props.button} aria-label="Delete" onClick={props.handleDeleteClick}>
+        <IconButton className={props.button} aria-label="Delete" onClick={props.openDialog}>
         <DeleteIcon />
         </IconButton>
       </ListItem>

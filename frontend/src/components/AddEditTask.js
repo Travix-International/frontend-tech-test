@@ -71,8 +71,11 @@ class AddEditTask extends React.Component{
           margin="normal"
           onChange = {this.handleInputChange('title')}
           />
+
           <TextField
-          id="name"
+          id="multiline-static"
+          multiline
+          rows='10'
           label="Description"
           defaultValue={this.props.selectedTask.description}
           margin="normal"
@@ -81,8 +84,9 @@ class AddEditTask extends React.Component{
 
           <Button
           variant='contained'
-          color='primary'
+          color='secondary'
           onClick={this.markCompleteIncomplete}
+          className = {'mark-button'}
           >
           {this.state.completed ? 'Mark Incomplete' : 'Mark Complete'}</Button>
 
@@ -90,8 +94,8 @@ class AddEditTask extends React.Component{
           variant='contained'
           color='primary'
           onClick={this.handleSubmit}
-          >
-          Save</Button>
+          className={'save-button'}
+          >Save</Button>
 
         </Drawer>
       </div>

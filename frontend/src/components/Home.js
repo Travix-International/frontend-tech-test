@@ -35,7 +35,7 @@ class HomeComponent extends React.Component {
         <CompleteTasksContainer />
         <AddEditTaskContainer />
 
-        <Button variant='fab' color='primary' aria-label='Add' onClick={this.handleClick} className='add-button'>
+        <Button variant='fab' color='secondary' aria-label='Add' onClick={this.handleClick} className='add-button'>
           <AddIcon />
         </Button>
       </section>

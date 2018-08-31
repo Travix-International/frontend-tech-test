@@ -6,14 +6,28 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List'
 
+import DeleteConfirmation from './PresentationalComponents/DeleteConfirmation'
+
 class CompleteAndIncompleteTasksComponent extends React.Component {
   constructor(props){
     super(props)
     this.handleClick = this.handleClick.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.root = props.classes.root;
+    this.openDialog = this.openDialog.bind(this);
+
+    this.state = {
+      dialog: true
+    }
+
   }
 
+  openDialog(){
+    console.log('dialog opening');
+    this.setState({
+      dialog: true
+    })
+  }
 
   handleClick = (task) => () => {
     this.props.selectOrCreateTask(task);
@@ -27,7 +41,7 @@ class CompleteAndIncompleteTasksComponent extends React.Component {
   parseIncompleteTasks(){
     return this.props.tasks.map((task, index) => {
       return(
-        <Task todo={task} clickHandler={this.handleClick(task)} key = {index} handleDeleteClick={this.handleDelete(task)}/>
+        <Task openDialog={this.openDialog} type={this.props.type} index = {index} todo={task} clickHandler={this.handleClick(task)} key = {index} handleDeleteClick={this.handleDelete(task)}/>
       )
     })
   }
@@ -35,9 +49,9 @@ class CompleteAndIncompleteTasksComponent extends React.Component {
   render(){
     // console.log(this.root);
     return(
-      <div>
-        <Paper elevation = {1}>
-          <Typography>
+      <div className={'alltasks', `${this.props.type}`}>
+        <Paper elevation = {3}>
+          <Typography variant="headline">
             {this.props.type}
           </Typography>
           <div>
@@ -46,6 +60,8 @@ class CompleteAndIncompleteTasksComponent extends React.Component {
             </List>
           </div>
         </Paper>
+
+        <DeleteConfirmation open = {this.state.dialog}/>
       </div>
     )
   }

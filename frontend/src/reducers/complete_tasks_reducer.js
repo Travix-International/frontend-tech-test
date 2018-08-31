@@ -38,8 +38,10 @@ const CompleteTasksReducer = (oldState = _defaultState, action) => {
 
       if(!action.task.completed && index > -1){
         newState.tasks.splice(index, 1)
-      } else {
+      } else if (index === -1){
         newState.tasks.push(action.task)
+      } else {
+        newState[index] = action.task
       }
 
       return newState
