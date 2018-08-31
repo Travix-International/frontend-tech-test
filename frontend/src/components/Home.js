@@ -9,8 +9,8 @@ import AddEditTaskContainer from '../containers/add_edit_task_container'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';;
-
+import Icon from '@material-ui/core/Icon';
+import SvgIcon from '@material-ui/core/SvgIcon';
 
 class HomeComponent extends React.Component {
   constructor(props){
@@ -35,9 +35,19 @@ class HomeComponent extends React.Component {
         <CompleteTasksContainer />
         <AddEditTaskContainer />
 
-        <Button variant='fab' color='secondary' aria-label='Add' onClick={this.handleClick} className='add-button'>
-          <AddIcon />
-        </Button>
+        <div className = {this.props.selectOrCreate ? 'hide' : ''}>
+          <Button variant='fab' color='secondary' aria-label='Add' onClick={this.handleClick} className='add-button'>
+            <AddIcon />
+          </Button>
+        </div>
+
+        <div className = {!this.props.selectOrCreate ? 'hide' : ''}>
+          <Button variant='fab' color='primary' aria-label='Add' onClick={this.props.unselectTask} className='add-button'>
+          <SvgIcon>
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </SvgIcon>
+          </Button>
+        </div>
       </section>
     )
   }

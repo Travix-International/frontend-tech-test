@@ -9,6 +9,10 @@ section {
   align-items: center;
 }
 
+.hide {
+  display: none !important;
+}
+
 @media #{$break-mobile} {
   .add-button{
     position: fixed !important;
@@ -58,8 +62,8 @@ section {
     align-items: center;
   }
 
-  div.MuiDrawer-paperAnchorBottom-65{
-    min-height: 60vh;
+  .MuiPaper-root-4.MuiPaper-elevation16-22.MuiDrawer-paper-80.MuiDrawer-paperAnchorBottom-84{
+    min-height: 55vh;
     padding: 20px;
     background: -moz-linear-gradient(45deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%); /* ff3.6+ */
     background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(153,218,255,1)), color-stop(100%, rgba(0,128,128,1))); /* safari4+,chrome */
@@ -78,6 +82,23 @@ section {
   button.save-button{
     margin-bottom: 70px;
   }
+
+  div.MuiDialog-paperScrollPaper-64 {
+    padding: 20px;
+  }
+
+  div.MuiDrawer-paper-75{
+    padding: 20px;
+  }
+
+  .button-container{
+    display: flex;
+    justify-content: center;
+  }
+
+  .button-container button {
+    width: 250px;
+  }
 }
 
 @media #{$break-tablet} {
@@ -92,5 +113,13 @@ section {
 
   .Incomplete{
     margin-right: 20px;
+  }
+
+  div.MuiDrawer-paper-75{
+    padding: 50px;
+  }
+
+  button.save-button {
+    margin-bottom: 60px;
   }
 }

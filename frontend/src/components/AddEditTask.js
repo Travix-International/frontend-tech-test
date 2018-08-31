@@ -21,6 +21,7 @@ class AddEditTask extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
+    console.log('hi');
     this.setState({
       id: nextProps.selectedTask.id,
       title: nextProps.selectedTask.title,
@@ -65,6 +66,7 @@ class AddEditTask extends React.Component{
         >
           <h1>Task Details</h1>
           <TextField
+          required
           id="name"
           label="Title"
           defaultValue={this.props.selectedTask.title}
@@ -73,29 +75,35 @@ class AddEditTask extends React.Component{
           />
 
           <TextField
+          required
           id="multiline-static"
           multiline
-          rows='10'
+          rows='8'
           label="Description"
           defaultValue={this.props.selectedTask.description}
           margin="normal"
           onChange = {this.handleInputChange('description')}
           />
 
-          <Button
-          variant='contained'
-          color='secondary'
-          onClick={this.markCompleteIncomplete}
-          className = {'mark-button'}
-          >
-          {this.state.completed ? 'Mark Incomplete' : 'Mark Complete'}</Button>
+          <div className = {'button-container ' + (this.state.id === null ? 'hide' : '')}>
+            <Button
+            variant='contained'
+            color='secondary'
+            onClick={this.markCompleteIncomplete}
+            className = {'mark-button'}
+            >
+            {this.state.completed ? 'Mark Incomplete' : 'Mark Complete'}</Button>
+          </div>
 
-          <Button
-          variant='contained'
-          color='primary'
-          onClick={this.handleSubmit}
-          className={'save-button'}
-          >Save</Button>
+          <div className={'button-container'}>
+            <Button
+            disabled={this.state.title === '' || this.state.description === ''}
+            variant='contained'
+            color='primary'
+            onClick={this.handleSubmit}
+            className={'save-button'}
+            >Save</Button>
+          </div>
 
         </Drawer>
       </div>

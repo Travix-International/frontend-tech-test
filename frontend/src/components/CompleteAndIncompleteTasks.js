@@ -5,6 +5,7 @@ import {withStyles} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List'
+import Badge from '@material-ui/core/Badge'
 
 import DeleteConfirmation from './PresentationalComponents/DeleteConfirmation'
 
@@ -73,9 +74,11 @@ class CompleteAndIncompleteTasksComponent extends React.Component {
     return(
       <div className={'alltasks', `${this.props.type}`}>
         <Paper elevation = {3}>
-          <Typography variant="headline">
-            {this.props.type}
-          </Typography>
+          <Badge badgeContent = {this.props.tasks.length} color='primary'>
+            <Typography variant="headline">
+              {this.props.type}
+            </Typography>
+          </Badge>
           <div>
             <List component='nav'>
               {this.parseIncompleteTasks()}

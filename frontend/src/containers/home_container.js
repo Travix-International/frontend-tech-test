@@ -1,5 +1,8 @@
 import {connect} from 'react-redux'
-import {getAllTasks, selectOrCreateTask, deleteTask} from '../actions/task_actions'
+import {getAllTasks,
+  selectOrCreateTask,
+  deleteTask,
+  unselectTask} from '../actions/task_actions'
 import HomeComponent from '../components/Home'
 
 const mapStateToProps = ({loader}) => ({
@@ -12,6 +15,7 @@ const mapStateToProps = ({loader}) => ({
 const mapDispatchToProps = (dispatch) => ({
   getAllTasks: () => dispatch(getAllTasks()),
   selectOrCreateTask: (task) => dispatch(selectOrCreateTask(task)),
+  unselectTask: () => dispatch(unselectTask())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeComponent)

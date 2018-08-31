@@ -3,6 +3,9 @@ section {
   justify-content: center;
   align-items: center; }
 
+.hide {
+  display: none !important; }
+
 @media only screen and (min-width: 320px) {
   .add-button {
     position: fixed !important;
@@ -32,8 +35,8 @@ section {
     display: flex;
     justify-content: center;
     align-items: center; }
-  div.MuiDrawer-paperAnchorBottom-65 {
-    min-height: 60vh;
+  .MuiPaper-root-4.MuiPaper-elevation16-22.MuiDrawer-paper-80.MuiDrawer-paperAnchorBottom-84 {
+    min-height: 55vh;
     padding: 20px;
     background: -moz-linear-gradient(45deg, #99daff 0%, teal 100%);
     /* ff3.6+ */
@@ -53,7 +56,16 @@ section {
     margin-bottom: 20px;
     margin-top: 20px; }
   button.save-button {
-    margin-bottom: 70px; } }
+    margin-bottom: 70px; }
+  div.MuiDialog-paperScrollPaper-64 {
+    padding: 20px; }
+  div.MuiDrawer-paper-75 {
+    padding: 20px; }
+  .button-container {
+    display: flex;
+    justify-content: center; }
+  .button-container button {
+    width: 250px; } }
 
 @media only screen and (min-width: 768px) {
   section {
@@ -62,4 +74,8 @@ section {
   .Incomplete, .Completed {
     width: 40vw; }
   .Incomplete {
-    margin-right: 20px; } }
+    margin-right: 20px; }
+  div.MuiDrawer-paper-75 {
+    padding: 50px; }
+  button.save-button {
+    margin-bottom: 60px; } }
