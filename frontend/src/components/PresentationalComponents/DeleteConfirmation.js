@@ -5,15 +5,17 @@ import Button from '@material-ui/core/Button';
 
 
 const DeleteConfirmation = (props) => {
+
   return (
     <div>
-      <Dialog open = {props.openDialog}>
+      <Dialog open = {props.open} onClose={props.closeDialog}>
         <DialogTitle id='dialog-title'>Are you sure you want to delete this task?</DialogTitle>
 
         <Button
         variant='contained'
         color='secondary'
         className = {'mark-button'}
+        onClick = {props.closeDialog(props.task)}
         >
         Yes</Button>
 
@@ -21,8 +23,9 @@ const DeleteConfirmation = (props) => {
         variant='contained'
         color='primary'
         className = {'mark-button'}
+        onClick = {props.closeDialog(false)}
         >
-        Yes</Button>
+        No</Button>
 
       </Dialog>
     </div>

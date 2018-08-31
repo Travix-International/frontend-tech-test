@@ -24,13 +24,13 @@ const Task = (props) => {
   divStyle = {
     backgroundColor: `rgb(${base1}, ${base2}, ${base3})`
   }
-
+  
   return (
     <div style={divStyle}>
       <ListItem button onClick = {props.clickHandler}>
         <ListItemText primary={props.todo.title} />
         <IconButton className={props.button} aria-label="Delete" onClick={props.openDialog}>
-        <DeleteIcon />
+          <DeleteIcon />
         </IconButton>
       </ListItem>
       <Divider />

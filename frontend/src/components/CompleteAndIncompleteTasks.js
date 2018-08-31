@@ -15,18 +15,29 @@ class CompleteAndIncompleteTasksComponent extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.root = props.classes.root;
     this.openDialog = this.openDialog.bind(this);
-
+    this.closeDialog = this.closeDialog.bind(this);
     this.state = {
-      dialog: true
+      dialog: false
     }
 
   }
 
-  openDialog(){
-    console.log('dialog opening');
+  openDialog = task => () => {
     this.setState({
       dialog: true
     })
+  }
+
+  closeDialog = task => event => {
+    event.stopPropagation();
+
+    if(task){
+      console.log('hi');
+    } else {
+      this.setState({
+        dialog: false
+      })
+    }
   }
 
   handleClick = (task) => () => {
@@ -41,7 +52,14 @@ class CompleteAndIncompleteTasksComponent extends React.Component {
   parseIncompleteTasks(){
     return this.props.tasks.map((task, index) => {
       return(
-        <Task openDialog={this.openDialog} type={this.props.type} index = {index} todo={task} clickHandler={this.handleClick(task)} key = {index} handleDeleteClick={this.handleDelete(task)}/>
+        <Task
+         openDialog = {this.openDialog(task)}
+         type={this.props.type}
+         index = {index}
+         todo={task}
+         clickHandler={this.handleClick(task)}
+         key = {index} handleDeleteClick={this.handleDelete(task)}
+         />
       )
     })
   }
@@ -61,7 +79,7 @@ class CompleteAndIncompleteTasksComponent extends React.Component {
           </div>
         </Paper>
 
-        <DeleteConfirmation open = {this.state.dialog}/>
+        <DeleteConfirmation closeDialog = {this.closeDialog} open = {this.state.dialog}/>
       </div>
     )
   }
