@@ -11,6 +11,7 @@ const IncompleteTasksReducer = (oldState = _defaultState, action) => {
     case constants.RECEIVE_TASK_SUCCESS:
       action.tasks.forEach(task => {
         if(!task.completed) {
+          task.completed = false;
           newState.tasks.push(task);
         }
       })

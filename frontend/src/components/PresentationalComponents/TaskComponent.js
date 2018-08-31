@@ -3,15 +3,21 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 
 const Task = (props) => {
   return (
-    <li onClick = {props.clickHandler}>
-      <p>{props.todo.title}</p>
-      <IconButton className={props.button} aria-label="Delete" onClick={props.handleDeleteClick}>
+    <div>
+      <ListItem button onClick = {props.clickHandler}>
+        <ListItemText primary={props.todo.title} />
+        <IconButton className={props.button} aria-label="Delete" onClick={props.handleDeleteClick}>
         <DeleteIcon />
-      </IconButton>
-    </li>
+        </IconButton>
+      </ListItem>
+      <Divider />
+    </div>
   )
 }
 

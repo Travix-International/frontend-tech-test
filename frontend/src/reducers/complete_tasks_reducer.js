@@ -12,6 +12,7 @@ const CompleteTasksReducer = (oldState = _defaultState, action) => {
     case constants.RECEIVE_TASK_SUCCESS:
       action.tasks.forEach(task => {
         if(task.completed) {
+          task.completed = true;
           newState.tasks.push(task);
         }
       })

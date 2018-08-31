@@ -127,10 +127,10 @@ app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    // Previously method was erroneous. It got the task and then did '.splice(taskIndex)', this way we don't need to get the task
+    const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
 
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+    if (taskIndex > -1) {
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',
