@@ -17,35 +17,39 @@ class CompleteAndIncompleteTasksComponent extends React.Component {
     this.openDialog = this.openDialog.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
     this.state = {
-      dialog: false
+      dialog: false,
+      task: {}
     }
 
   }
 
-  openDialog = task => () => {
+  openDialog = task => (event) => {
+    event.stopPropagation();
+
     this.setState({
-      dialog: true
+      dialog: true,
+      task: task
     })
   }
 
   closeDialog = task => event => {
     event.stopPropagation();
 
-    if(task){
-      console.log('hi');
-    } else {
-      this.setState({
-        dialog: false
-      })
-    }
+    this.setState({
+      dialog: false,
+      task: {}
+    }, () => {
+      if(task){
+        this.handleDelete(task);
+      }
+    })
   }
 
   handleClick = (task) => () => {
     this.props.selectOrCreateTask(task);
   }
 
-  handleDelete = (task) => (event) =>{
-    event.stopPropagation();
+  handleDelete(task){
     this.props.deleteTask(task)
   }
 
@@ -58,7 +62,7 @@ class CompleteAndIncompleteTasksComponent extends React.Component {
          index = {index}
          todo={task}
          clickHandler={this.handleClick(task)}
-         key = {index} handleDeleteClick={this.handleDelete(task)}
+         key = {index}
          />
       )
     })
@@ -79,7 +83,7 @@ class CompleteAndIncompleteTasksComponent extends React.Component {
           </div>
         </Paper>
 
-        <DeleteConfirmation closeDialog = {this.closeDialog} open = {this.state.dialog}/>
+        <DeleteConfirmation task = {this.state.task} closeDialog = {this.closeDialog} open = {this.state.dialog}/>
       </div>
     )
   }
