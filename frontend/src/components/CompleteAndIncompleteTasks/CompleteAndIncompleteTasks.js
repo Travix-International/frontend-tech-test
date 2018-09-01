@@ -1,5 +1,4 @@
 import React from 'react';
-import Task from './PresentationalComponents/TaskComponent'
 import Paper from '@material-ui/core/Paper'
 import {withStyles} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography';
@@ -7,7 +6,8 @@ import PropTypes from 'prop-types';
 import List from '@material-ui/core/List'
 import Badge from '@material-ui/core/Badge'
 
-import DeleteConfirmation from './PresentationalComponents/DeleteConfirmation'
+import Task from '../PresentationalComponents/TaskComponent'
+import DeleteConfirmation from '../PresentationalComponents/DeleteConfirmation'
 
 class CompleteAndIncompleteTasksComponent extends React.Component {
   constructor(props){

@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import {createTask, updateTask, unselectTask} from '../actions/task_actions'
-import AddEditTaskComponent from '../components/AddEditTask'
+import {AddEditTaskComponent} from 'components'
 
 const mapStateToProps = ({loader}) => ({
   selectOrCreate: loader.selectOrCreate,

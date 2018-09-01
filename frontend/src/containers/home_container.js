@@ -3,7 +3,7 @@ import {getAllTasks,
   selectOrCreateTask,
   deleteTask,
   unselectTask} from '../actions/task_actions'
-import HomeComponent from '../components/Home'
+import {HomeComponent} from 'components'
 
 const mapStateToProps = ({loader}) => ({
   fetching: loader.fetching,
