@@ -19,7 +19,7 @@ section {
   .alltasks {
     margin-bottom: 50px; }
   div.MuiPaper-root-4 {
-    padding-top: 10px; }
+    padding-top: 15px; }
   body {
     background-color: grey; }
   .Incomplete, .Completed {
@@ -65,7 +65,10 @@ section {
     display: flex;
     justify-content: center; }
   .button-container button {
-    width: 250px; } }
+    width: 250px; }
+  button.delete-yes, button.delete-no {
+    width: 170px;
+    margin-bottom: 20px; } }
 
 @media only screen and (min-width: 768px) {
   section {

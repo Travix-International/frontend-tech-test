@@ -11,21 +11,25 @@ const DeleteConfirmation = (props) => {
       <Dialog open = {props.open} onClose={props.closeDialog}>
         <DialogTitle id='dialog-title'>Are you sure you want to delete this task?</DialogTitle>
 
-        <Button
-        variant='contained'
-        color='secondary'
-        className = {'mark-button'}
-        onClick = {props.closeDialog(props.task)}
-        >
-        Yes</Button>
+        <div className={'button-container'}>
+          <Button
+          variant='contained'
+          color='secondary'
+          className = {'delete-yes'}
+          onClick = {props.closeDialog(props.task)}
+          >
+          Yes</Button>
+        </div>
 
-        <Button
-        variant='contained'
-        color='primary'
-        className = {'mark-button'}
-        onClick = {props.closeDialog(false)}
-        >
-        No</Button>
+        <div className={'button-container'}>
+            <Button
+            variant='contained'
+            color='primary'
+            className = {'delete-no'}
+            onClick = {props.closeDialog(false)}
+            >
+            No</Button>
+        </div>
 
       </Dialog>
     </div>

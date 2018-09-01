@@ -32,7 +32,7 @@ section {
   }
 
   div.MuiPaper-root-4{
-    padding-top: 10px;
+    padding-top: 15px;
   }
 
   body{
@@ -98,6 +98,11 @@ section {
 
   .button-container button {
     width: 250px;
+  }
+
+  button.delete-yes, button.delete-no {
+    width: 170px;
+    margin-bottom: 20px;
   }
 }
 

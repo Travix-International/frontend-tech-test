@@ -73,7 +73,7 @@ class CompleteAndIncompleteTasksComponent extends React.Component {
     // console.log(this.root);
     return(
       <div className={'alltasks', `${this.props.type}`}>
-        <Paper elevation = {3}>
+        <Paper elevation = {7}>
           <Badge badgeContent = {this.props.tasks.length} color='primary'>
             <Typography variant="headline">
               {this.props.type}

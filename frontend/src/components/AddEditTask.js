@@ -21,7 +21,6 @@ class AddEditTask extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    console.log('hi');
     this.setState({
       id: nextProps.selectedTask.id,
       title: nextProps.selectedTask.title,
@@ -58,6 +57,21 @@ class AddEditTask extends React.Component{
   }
 
   render(){
+    let numRows;
+    if( navigator.userAgent.match(/Android/i)
+      || navigator.userAgent.match(/webOS/i)
+      || navigator.userAgent.match(/iPhone/i)
+      || navigator.userAgent.match(/iPad/i)
+      || navigator.userAgent.match(/iPod/i)
+      || navigator.userAgent.match(/BlackBerry/i)
+      || navigator.userAgent.match(/Windows Phone/i)
+      ){
+         numRows = 5;
+       }
+      else {
+         numRows = 10;
+     }
+
     return(
       <div>
         <Drawer anchor='bottom'
@@ -78,7 +92,7 @@ class AddEditTask extends React.Component{
           required
           id="multiline-static"
           multiline
-          rows='8'
+          rows={`${numRows}`}
           label="Description"
           defaultValue={this.props.selectedTask.description}
           margin="normal"
