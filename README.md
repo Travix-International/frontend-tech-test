@@ -31,7 +31,7 @@ This was extremely important as
 
 # Screenshots
 
-![Home](/screenshots/1.png)
-![Add Edit task](/screenshots/2.png)
-![Delete Confirmation](/screenshots/3.png)
-![Mobile](/screenshots/4.png)
+![Home](./screenshots/1.png)
+![Add Edit task](./screenshots/2.png)
+![Delete Confirmation](./screenshots/3.png)
+![Mobile](./screenshots/4.png)
