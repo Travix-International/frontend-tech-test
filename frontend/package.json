@@ -64,5 +64,6 @@
   "engines": {
     "npm": ">=4",
     "node": ">=6"
-  }
+  },
+  "proxy": "http://localhost:9001"
 }

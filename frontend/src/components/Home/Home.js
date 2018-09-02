@@ -1,15 +1,12 @@
 import React from 'react'
 import './home.css'
-import PropTypes from 'prop-types';
 
 import IncompleteTasksContainer from '../../containers/incomplete_tasks_container'
 import CompleteTasksContainer from '../../containers/complete_tasks_container'
 import AddEditTaskContainer from '../../containers/add_edit_task_container'
 
-import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
 class HomeComponent extends React.Component {
@@ -38,7 +35,6 @@ class HomeComponent extends React.Component {
   }
 
   render(){
-    const classes = PropTypes.object.isRequired;
     let mobile;
     if( navigator.userAgent.match(/Android/i)
       || navigator.userAgent.match(/webOS/i)
@@ -82,16 +78,4 @@ class HomeComponent extends React.Component {
   }
 }
 
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-    positon: 'fixed',
-    bottom: '20px',
-    'z-index': 1000
-  },
-  extendedIcon: {
-    marginRight: theme.spacing.unit,
-  },
-});
-
-export default withStyles(styles) (HomeComponent)
+export default HomeComponent

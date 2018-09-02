@@ -11,7 +11,7 @@ export const getAllTasks = (dispatch) => {
       type: constants.FETCH_TASK_REQUEST
     })
 
-    return fetch('http://localhost:9001/tasks')
+    return fetch('/tasks')
     .then(response => response.json().then(body => ({ response, body })))
     .then(({ response, body }) => {
       if(response.ok){
@@ -70,7 +70,7 @@ export const createTask = task => dispatch => {
 
   return apiRequest(
     task,
-    `http://localhost:9001/task/create/${task.title}/${task.description}`,
+    `/task/create/${task.title}/${task.description}`,
     'post',
     constants.CREATE_TASK,
     constants.CREATE_TASK_SUCCESS,
@@ -84,7 +84,7 @@ export const updateTask = task => dispatch => {
 
   return apiRequest(
     task,
-    `http://localhost:9001/task/update/${task.id}/${task.title}/${task.description}/${task.completed}`,
+    `/task/update/${task.id}/${task.title}/${task.description}/${task.completed}`,
     'put',
     constants.UPDATE_TASK,
     constants.UPDATE_TASK_SUCCESS,
@@ -97,7 +97,7 @@ export const deleteTask = task => dispatch => {
 
   return apiRequest(
     task,
-    `http://localhost:9001/task/delete/${task.id}`,
+    `/task/delete/${task.id}`,
     'delete',
     constants.DELETE_TASK,
     constants.DELETE_TASK_SUCCESS,
