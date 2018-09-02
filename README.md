@@ -17,7 +17,7 @@ This was extremely important as
 
 [Trello Board](https://trello.com/b/rwty4M0w/travix-todo-project-roadmap)
 
-Initially, I had also intended on writing tests for the project. However since I haven't coded in React for over a year and am not at all familiar with React + Redux testing, I had to sacrifice that bonus feature. Instead, I opted to showcase my working skills via a project plan, implement Material UI for animations and deploy onto heroku
+Initially, I had also intended on writing tests for the project. However since I haven't coded in React for over a year and am not at all familiar with React + Redux testing, I had to sacrifice that bonus feature. Instead, I opted to showcase my working skills via a project plan and implementing Material UI for animations and styling.
 
 # Installation and running
 
