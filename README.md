@@ -30,6 +30,8 @@ Initially, I had also intended on writing tests for the project. However since I
 * Redux
 * SASS
 * Material UI
+* Travix logger
+* Travis eslint
 
 # Screenshots
 
