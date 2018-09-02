@@ -12,19 +12,19 @@ const Task = (props) => {
   let divStyle, base1, base2, base3;
 
   if(props.type === 'Completed Tasks'){
-    base1 = 56 + (10 * props.index);
-    base2 = 56 + (10 * props.index);
-    base3 = 56 + (10 * props.index);
+    base1 = 56 + (5 * props.index);
+    base2 = 56 + (5 * props.index);
+    base3 = 56 + (5 * props.index);
   } else {
-    base1 = 0
-    base2 = 86 + (12 * props.index);
-    base3 = 1
+    base1 = 0 + (2 * props.index);
+    base2 = 86 + (10 * props.index);
+    base3 = 1 + (5* props.index);
   }
 
   divStyle = {
     backgroundColor: `rgb(${base1}, ${base2}, ${base3})`
   }
-  
+
   return (
     <div style={divStyle}>
       <ListItem button onClick = {props.clickHandler}>

@@ -16,6 +16,11 @@ class HomeComponent extends React.Component {
   constructor(props){
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.reverseOrder = this.reverseOrder.bind(this);
+
+    this.state = {
+      reverse: false
+    }
   }
 
   componentDidMount(){
@@ -26,11 +31,35 @@ class HomeComponent extends React.Component {
     this.props.selectOrCreateTask();
   }
 
+  reverseOrder(){
+    this.setState({
+      reverse: this.state.reverse ? false : true
+    })
+  }
+
   render(){
     const classes = PropTypes.object.isRequired;
+    let mobile;
+    if( navigator.userAgent.match(/Android/i)
+      || navigator.userAgent.match(/webOS/i)
+      || navigator.userAgent.match(/iPhone/i)
+      || navigator.userAgent.match(/iPad/i)
+      || navigator.userAgent.match(/iPod/i)
+      || navigator.userAgent.match(/BlackBerry/i)
+      || navigator.userAgent.match(/Windows Phone/i)
+      ){
+        mobile = true;
+      }
 
     return(
-      <section>
+      <section className = {this.state.reverse ? 'flex-reverse' : ''}>
+        <Button variant = 'contained'
+        color='secondary'
+        onClick = {this.reverseOrder}
+        className = {'reverse-button ' + (mobile ? '' : 'hide')}
+        >
+        {this.state.reverse ? 'Show Incomplete First' : 'Show Complete First'}</Button>
+
         <IncompleteTasksContainer />
         <CompleteTasksContainer />
         <AddEditTaskContainer />

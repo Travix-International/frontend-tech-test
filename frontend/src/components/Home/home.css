@@ -16,6 +16,8 @@ section {
     z-index: 10000; }
   section {
     flex-direction: column; }
+  .flex-reverse {
+    flex-direction: column-reverse; }
   .alltasks {
     margin-bottom: 50px; }
   div.MuiPaper-root-4 {
@@ -25,17 +27,17 @@ section {
   .Incomplete, .Completed {
     width: 80vw; }
   .Incomplete {
-    margin-top: 20px; }
+    margin-top: 70px; }
   .Completed {
     margin-bottom: 20px;
-    margin-top: 20px; }
+    margin-top: 70px; }
   h2 {
     margin: 0; }
   .sc-bdVaJa {
     display: flex;
     justify-content: center;
     align-items: center; }
-  .MuiPaper-root-4.MuiPaper-elevation16-22.MuiDrawer-paper-80.MuiDrawer-paperAnchorBottom-84 {
+  .MuiPaper-root-40.MuiPaper-elevation16-58.MuiDrawer-paper-116.MuiDrawer-paperAnchorBottom-120 {
     min-height: 55vh;
     padding: 20px;
     background: -moz-linear-gradient(45deg, #99daff 0%, teal 100%);
@@ -68,12 +70,21 @@ section {
     width: 250px; }
   button.delete-yes, button.delete-no {
     width: 170px;
-    margin-bottom: 20px; } }
+    margin-bottom: 20px; }
+  section {
+    margin-bottom: 150px;
+    position: relative; }
+  button.reverse-button {
+    position: absolute;
+    top: 20px; } }
 
 @media only screen and (min-width: 768px) {
   section {
     flex-direction: row;
     align-items: flex-start; }
+  .flex-reverse {
+    flex-direction: row-reverse;
+    justify-content: space-evenly; }
   .Incomplete, .Completed {
     width: 40vw; }
   .Incomplete {
