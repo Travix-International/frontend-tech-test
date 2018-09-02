@@ -17,6 +17,8 @@ This was extremely important as
 
 [Trello Board](https://trello.com/b/rwty4M0w/travix-todo-project-roadmap)
 
+Initially, I had also intended on writing tests for the project. However since I haven't coded in React for over a year and am not at all familiar with React + Redux testing, I had to sacrifice that bonus feature. Instead, I opted to showcase my working skills via a project plan, implement Material UI for animations and deploy onto heroku
+
 # Installation and running
 
 * Clone the repo by running ```git clone https://github.com/shaurya157/frontend-tech-test.git ```
@@ -31,7 +33,7 @@ This was extremely important as
 
 # Screenshots
 
-![Home](./screenshots/1.png)
-![Add Edit task](./screenshots/2.png)
-![Delete Confirmation](./screenshots/3.png)
-![Mobile](./screenshots/4.png)
+![Home](https://raw.githubusercontent.com/shaurya157/frontend-tech-test/master/screenshots/1.PNG)
+![Add Edit task](https://raw.githubusercontent.com/shaurya157/frontend-tech-test/master/screenshots/2.PNG)
+![Delete Confirmation](https://raw.githubusercontent.com/shaurya157/frontend-tech-test/master/screenshots/3.PNG)
+![Mobile](https://raw.githubusercontent.com/shaurya157/frontend-tech-test/master/screenshots/4.PNG)
