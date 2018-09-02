@@ -13,25 +13,25 @@ Before I began to create the project, I made a project roadmap. This roadmap was
 This was extremely important as
 * I had limited time (1 week) to complete the Project
 * I am also currently working full time as a dev
-* I have not coded in React in over a year
+* I have not coded in React in over a year, so I had to budget time to learn
 
 [Trello Board](https://trello.com/b/rwty4M0w/travix-todo-project-roadmap)
 
-# Installation
+# Installation and running
 
-* ```npm install && npm install --prefix frontend ```
+* Clone the repo by running ```git clone https://github.com/shaurya157/frontend-tech-test.git ```
+* Install the repo ```npm install && npm install --prefix frontend ```
+* Navigate to the root directory and run ``` npm run dev ```
 
-* React 15+
-* Redux or Flux or [FrintJS](https://frint.js.org) or other alternatives that implement a unidirectional data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
+# Technologies used
+* React 16+
+* Redux
+* SASS
+* Material UI
 
-# Bonus
+# Screenshots
 
-* unit-tests for the UI
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us!
+![Home](/screenshots/1.png)
+![Add Edit task](/screenshots/2.png)
+![Delete Confirmation](/screenshots/3.png)
+![Mobile](/screenshots/4.png)
