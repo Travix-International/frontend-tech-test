@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import {selectOrCreateTask, deleteTask} from '../actions/task_actions'
-import {CompleteAndIncompleteTasksComponent} from 'components'
+import CompleteAndIncompleteTasksComponent from '../components/CompleteAndIncompleteTasks/CompleteAndIncompleteTasks'
 
 const mapStateToProps = ({incompleteTasks}) => ({
   tasks: incompleteTasks.tasks,

@@ -2,7 +2,7 @@ import {connect} from 'react-redux'
 import {getAllTasks,
   selectOrCreateTask,
   unselectTask} from '../actions/task_actions'
-import {HomeComponent} from 'components'
+import HomeComponent from '../components/Home/Home'
 
 const mapStateToProps = ({loader}) => ({
   fetching: loader.fetching,

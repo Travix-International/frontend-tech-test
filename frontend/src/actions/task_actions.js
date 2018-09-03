@@ -1,4 +1,4 @@
-import * as constants from 'constants/ActionTypes'
+import * as constants from '../constants/ActionTypes'
 import {Logger, configureConsoleTransport} from 'travix-logger';
 
 const logger = new Logger({

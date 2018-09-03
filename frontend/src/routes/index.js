@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header } from 'components'
+import Header from '../components/PresentationalComponents/Header'
 import HomeContainer from '../containers/home_container'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import styled from 'styled-components'

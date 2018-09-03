@@ -1,5 +1,5 @@
 import merge from 'lodash/merge'
-import * as constants from 'constants/ActionTypes'
+import * as constants from '../constants/ActionTypes'
 const _defaultState = {
   tasks: [],
   type: 'Incomplete Tasks'
