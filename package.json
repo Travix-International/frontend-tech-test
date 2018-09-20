@@ -1,19 +1,26 @@
 {
-  "name": "test-candidates",
-  "version": "0.0.1",
-  "description": "test back - front",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "keywords": [
-    "test",
-    "travix"
-  ],
-  "author": "spartans",
-  "license": "ISC",
+  "name": "trevix-app",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "express": "^4.14.0"
+    "concurrently": "^4.0.1",
+    "keymirror": "^0.1.1",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.5",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^0.16.0",
+    "request": "^2.88.0",
+    "reselect": "^3.0.1"
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "start": "concurrently \"react-scripts start\" \"cd ./server && node server.js\"",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
