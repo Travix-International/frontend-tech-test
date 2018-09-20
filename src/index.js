@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import './index.css';
-import App from './App';
+import App from './components/App';
 import configureStore from './store/configureStore';
 import { rootSaga } from './sagas';
 import registerServiceWorker from './registerServiceWorker';
@@ -18,7 +18,7 @@ store.runSaga(rootSaga);
             document.getElementById('root'),
         );
         if (process.env.NODE_ENV === 'development') {
-            module.hot.accept('./App', () => {
+            module.hot.accept('./components/App', () => {
                 ReactDOM.render(
                         <Provider store={store}>
                             <App />
