@@ -5,6 +5,7 @@ import Input from '../Input/Input';
 class TodoList extends Component {
     static propTypes = {
         saveTask: PropTypes.func,
+        editTask: PropTypes.func,
     };
     constructor(props) {
         super(props);
@@ -18,7 +19,7 @@ class TodoList extends Component {
             [key]: value,
         });
     }
-    makePayload = () =>{
+    makeNewTaskPayload = () =>{
         let { title, description } = this.state;
         return {
             title,
@@ -26,11 +27,26 @@ class TodoList extends Component {
         }
     }
     handleSubmit = (e) => {
-        this.props.saveTask(this.makePayload());
+        this.props.saveTask(this.makeNewTaskPayload());
+        this.clearInputs();
         e.preventDefault();
     }
     handleKeyPress = () => {
-        this.props.saveTask(this.makePayload());
+        this.props.saveTask(this.makeNewTaskPayload());
+        this.clearInputs();
+    }
+
+    areInputsEmpty = () => {
+        if (this.state.title && this.state.description) {
+            return true;
+        }
+        return false;
+    }
+    clearInputs = () => {
+        this.setState({
+            title: '',
+            description: '',
+        });
     }
     render() {
         let { description, title } = this.state;
@@ -56,7 +72,7 @@ class TodoList extends Component {
                         value={description}
                     />
                 </div>
-                <button type="submit">Add</button>
+                <button className={this.areInputsEmpty() ? 'but' : 'but disabled'} type="submit">Add</button>
             </form>
             </div>
         </div>

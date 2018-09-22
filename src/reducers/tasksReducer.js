@@ -3,6 +3,7 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     taskLoaded: false,
     deleteID: '',
+    editedTask: null,
     tasks: [],
 };
 
@@ -38,20 +39,36 @@ const tasksReducer = (tasksState = initialState, action) => {
                 deleteID: action.payload
             };
         case actionTypes.DELETE_TASK_SUCCESS:
-            let removedArray = tasksState.tasks.filter( (item, id) => id !== tasksState.deleteID);
             return {
                 ...tasksState,
+                tasks: tasksState.tasks.filter( (item) => item.id !== tasksState.deleteID ),
                 deleteID: '',
-                tasks: removedArray
             };
         case actionTypes.DELETE_TASK_ERROR:
             return {
                 ...tasksState,
                 deleteID: ''
             };
-        case actionTypes.UPDATE_TASK_SUCCESS:
+        case actionTypes.UPDATE_TASK_REQUEST:
             return {
                 ...tasksState,
+                editedTask: action.payload,
+        };
+        case actionTypes.UPDATE_TASK_SUCCESS:
+                return {
+                    ...tasksState,
+                    tasks: tasksState.tasks.map(
+                        (task, id) => {
+                            if(id !== tasksState.editedTask.id) {
+                            // This isn't the item we care about - keep it as-is
+                            return task;
+                        }
+                        // Otherwise, this is the one we want - return an updated value
+                        return {
+                            ...task,
+                            ...tasksState.editedTask
+                        };
+                    })
             };
         default:
             return tasksState;

@@ -97,7 +97,28 @@ export const deleteTaskError = (payload = {}) => {
 
 
 //UPDATE TASKS
+export const updateTask = (payload) =>  {
+    return function action(dispatch) {
+      dispatch({ type: actionTypes.UPDATE_TASK_REQUEST, payload })
+      const request = axios({
+        method: 'PUT',
+        url: `${apiEndpoints.TASK_CALL}/task/update/${payload.id}/${payload.title}/${payload.description}`,
+        headers: []
+      });
+      request.then(
+        (response) => {
+            dispatch(updateTaskSuccess(response))
+            dispatch(getTask());
+        },
+        err => dispatch(updateTaskError(err))
+      )
+    }
+}
 
-export const updateTask = (payload = {}) => {
-    return {type: actionTypes.UPDATE_TASK_REQUEST, payload};
+export const updateTaskSuccess = (payload = {}) => {
+    return {type: actionTypes.UPDATE_TASK_SUCCESS, payload};
+};
+
+export const updateTaskError = (payload = {}) => {
+    return {type: actionTypes.UPDATE_TASK_ERROR, payload};
 };
