@@ -9,9 +9,9 @@ import apiEndpoints from './apiEndpoints';
  */
 export const getTask = (payload = {}) => {
     return Request.getPromise({
-        url: `${apiEndpoints.TASK_CALL}/tasks`,
+        // url: `${apiEndpoints.TASK_CALL}/tasks`,
+        url: `${apiEndpoints.TEST_CALL}`,
         method: 'GET',
-        data: payload,
     }).then((error, response, body) => {
         return body;
     });
@@ -27,7 +27,6 @@ export const getTaskId = (payload = {}) => {
     return Request.getPromise({
         url: `${apiEndpoints.TASK_CALL}/task/${payload.taskId}`,
         method: 'GET',
-        data: payload,
     }).then((error, response, body) => {
         return body;
     });
@@ -39,9 +38,11 @@ export const getTaskId = (payload = {}) => {
  * @param {Object} payload
  * @return {*}
  */
-export const saveTask = (payload = {}) => {
+export const saveTask = (payload ={}) => {
+    // console.error('payload', payload);
+    let { title , description } = payload.payload;
     return Request.getPromise({
-        url: `${apiEndpoints.TASK_CALL}/task/create/${payload.title}/${payload.desc}`,
+        url: `${apiEndpoints.TASK_CALL}/task/create/${title}/${description}`,
         method: 'POST',
         data: payload,
     }).then((error, response, body) => {
