@@ -72,13 +72,16 @@ app.get('/task/:id', (req, res) => {
 app.put('/task/update/:id/:title/:description', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
+
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(204).json({
+        message: 'Item updated',
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',

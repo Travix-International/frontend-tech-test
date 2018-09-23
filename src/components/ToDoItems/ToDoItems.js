@@ -35,7 +35,7 @@ class ToDoItems extends Component {
         let editItemId = document.getElementById(itemId);
         this.setState({
             isEdit: true,
-            itemToEdit: Number(editItemId.id),
+            itemToEdit: editItemId.id,
         });
     }
     closeModal = () => {
@@ -52,7 +52,7 @@ class ToDoItems extends Component {
             <div>
             <Modal
                 isOpen={isEdit}
-                onRequestClose={this.closeModal}
+                shouldCloseOnOverlayClick={false}
                 style={customStyles}
                 contentLabel="Edit Modal"
                 ariaHideApp={false}

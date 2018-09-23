@@ -6,7 +6,7 @@ class TodoList extends Component {
     static propTypes = {
         saveTask: PropTypes.func,
         updateTask: PropTypes.func,
-        itemToEdit: PropTypes.number,
+        itemToEdit: PropTypes.string,
         closeModal: PropTypes.func,
     };
     constructor(props) {
@@ -32,9 +32,9 @@ class TodoList extends Component {
         let { title, description } = this.state;
         let { itemToEdit } = this.props;
         return {
+            id: itemToEdit,
             title,
             description,
-            id: itemToEdit,
         }
     }
     handleSubmit = (e) => {
@@ -49,7 +49,13 @@ class TodoList extends Component {
         this.clearInputs();
     }
     handleKeyPress = () => {
-        this.props.saveTask(this.makeNewTaskPayload());
+        let { itemToEdit, updateTask, saveTask, closeModal,  } = this.props;
+        if(typeof(itemToEdit) !== 'undefined' || itemToEdit != null) {
+            updateTask(this.makeEditTaskPayload());
+            closeModal();
+        } else {
+            saveTask(this.makeNewTaskPayload());
+        }
         this.clearInputs();
     }
 

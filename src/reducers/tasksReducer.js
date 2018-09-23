@@ -9,6 +9,8 @@ const initialState = {
 
 const tasksReducer = (tasksState = initialState, action) => {
     switch (action.type) {
+
+        //GET
         case actionTypes.GET_TASK_REQUEST:
             return {
                 ...tasksState,
@@ -25,6 +27,12 @@ const tasksReducer = (tasksState = initialState, action) => {
                 ...tasksState,
                 taskLoaded: false,
             };
+
+        //SAVE
+        case actionTypes.SAVE_TASK_REQUEST:
+            return {
+                ...tasksState,
+            };
         case actionTypes.SAVE_TASK_SUCCESS:
             return {
                 ...tasksState,
@@ -33,6 +41,8 @@ const tasksReducer = (tasksState = initialState, action) => {
             return {
                 ...tasksState,
             };
+
+         //DELETE
         case actionTypes.DELETE_TASK_REQUEST:
             return {
                 ...tasksState,
@@ -49,26 +59,31 @@ const tasksReducer = (tasksState = initialState, action) => {
                 ...tasksState,
                 deleteID: ''
             };
+
+        //UPDATE
         case actionTypes.UPDATE_TASK_REQUEST:
             return {
                 ...tasksState,
                 editedTask: action.payload,
-        };
+            };
         case actionTypes.UPDATE_TASK_SUCCESS:
                 return {
                     ...tasksState,
                     tasks: tasksState.tasks.map(
                         (task, id) => {
                             if(id !== tasksState.editedTask.id) {
-                            // This isn't the item we care about - keep it as-is
                             return task;
                         }
-                        // Otherwise, this is the one we want - return an updated value
                         return {
                             ...task,
                             ...tasksState.editedTask
                         };
                     })
+            };
+        case actionTypes.UPDATE_TASK_ERROR:
+            return {
+                ...tasksState,
+                editedTask: null,
             };
         default:
             return tasksState;
