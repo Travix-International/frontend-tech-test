@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {  getTask, saveTask, deleteTask } from '../../actions/taskActions';
+import {  getTask, saveTask, deleteTask, updateTask } from '../../actions/taskActions';
 import logo from '../../logo.svg';
 import './App.css';
 
@@ -14,6 +14,7 @@ class App extends Component {
   static propTypes = {
     getTask: PropTypes.func,
     saveTask: PropTypes.func,
+    updateTask: PropTypes.func,
     tasks: PropTypes.any,
   };
   constructor(props) {
@@ -47,7 +48,7 @@ class App extends Component {
           <h1 className="App-title">Travix ToDo App</h1>
         </header>
         <ToDoList saveTask={saveTask} />
-        <ToDoItems tasks={tasks} deleteTask={deleteTask} />
+        <ToDoItems tasks={tasks} deleteTask={deleteTask} updateTask={updateTask} />
       </div>
     );
   }
@@ -63,6 +64,7 @@ const mapDispatchToProps = {
   getTask,
   saveTask,
   deleteTask,
+  updateTask,
 };
 
 export default (connect(mapStateToProps, mapDispatchToProps)(App));

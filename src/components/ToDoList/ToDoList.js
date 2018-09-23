@@ -5,7 +5,8 @@ import Input from '../Input/Input';
 class TodoList extends Component {
     static propTypes = {
         saveTask: PropTypes.func,
-        editTask: PropTypes.func,
+        updateTask: PropTypes.func,
+        itemToEdit: PropTypes.number,
     };
     constructor(props) {
         super(props);
@@ -26,10 +27,24 @@ class TodoList extends Component {
             description
         }
     }
+    makeEditTaskPayload = () =>{
+        let { title, description } = this.state;
+        let { itemToEdit } = this.props;
+        return {
+            title,
+            description,
+            id: itemToEdit,
+        }
+    }
     handleSubmit = (e) => {
-        this.props.saveTask(this.makeNewTaskPayload());
-        this.clearInputs();
         e.preventDefault();
+        let { itemToEdit, updateTask, saveTask  } = this.props;
+        if(typeof(itemToEdit) !== 'undefined' || itemToEdit != null) {
+            updateTask(this.makeEditTaskPayload());
+        } else {
+            saveTask(this.makeNewTaskPayload());
+        }
+        this.clearInputs();
     }
     handleKeyPress = () => {
         this.props.saveTask(this.makeNewTaskPayload());
@@ -37,7 +52,8 @@ class TodoList extends Component {
     }
 
     areInputsEmpty = () => {
-        if (this.state.title && this.state.description) {
+        let { description, title } = this.state;
+        if (title && description) {
             return true;
         }
         return false;
