@@ -38,6 +38,7 @@ class App extends Component {
     let {
       saveTask,
       deleteTask,
+      updateTask,
     } = this.props;
 
 

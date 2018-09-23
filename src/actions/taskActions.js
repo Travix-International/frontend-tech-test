@@ -100,9 +100,10 @@ export const deleteTaskError = (payload = {}) => {
 export const updateTask = (payload) =>  {
     return function action(dispatch) {
       dispatch({ type: actionTypes.UPDATE_TASK_REQUEST, payload })
+      let { title , description, id } = payload;
       const request = axios({
         method: 'PUT',
-        url: `${apiEndpoints.TASK_CALL}/task/update/${payload.id}/${payload.title}/${payload.description}`,
+        url: `${apiEndpoints.TASK_CALL}/task/update/${id}/${title}/${description}`,
         headers: []
       });
       request.then(

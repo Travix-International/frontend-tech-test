@@ -38,6 +38,11 @@ class ToDoItems extends Component {
             itemToEdit: Number(editItemId.id),
         });
     }
+    closeModal = () => {
+        this.setState({
+            isEdit: false,
+        });
+    }
 
     render() {
         let { tasks, updateTask } =  this.props;
@@ -52,9 +57,8 @@ class ToDoItems extends Component {
                 contentLabel="Edit Modal"
                 ariaHideApp={false}
             >
-            <TodoList itemToEdit={itemToEdit} updateTask={updateTask} />
+            <TodoList itemToEdit={itemToEdit} updateTask={updateTask} closeModal={this.closeModal} />
             </Modal>
-            <TodoList itemToEdit={itemToEdit} updateTask={updateTask} />
             <ul className="theList">
                 {
                     tasks.length > 0 ?

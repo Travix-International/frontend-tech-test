@@ -7,6 +7,7 @@ class TodoList extends Component {
         saveTask: PropTypes.func,
         updateTask: PropTypes.func,
         itemToEdit: PropTypes.number,
+        closeModal: PropTypes.func,
     };
     constructor(props) {
         super(props);
@@ -38,9 +39,10 @@ class TodoList extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        let { itemToEdit, updateTask, saveTask  } = this.props;
+        let { itemToEdit, updateTask, saveTask, closeModal,  } = this.props;
         if(typeof(itemToEdit) !== 'undefined' || itemToEdit != null) {
             updateTask(this.makeEditTaskPayload());
+            closeModal();
         } else {
             saveTask(this.makeNewTaskPayload());
         }
