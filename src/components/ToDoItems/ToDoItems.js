@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
-import TodoList from '../ToDoList/ToDoList';
+
+import TodoList from '../TodoList/TodoList';
+
+import './TodoItems.css';
 
 const customStyles = {
   content : {
@@ -14,7 +17,7 @@ const customStyles = {
   }
 };
 
-class ToDoItems extends Component {
+class TodoItems extends Component {
     static propTypes = {
         deleteTask: PropTypes.func,
         updateTask: PropTypes.func,
@@ -62,11 +65,11 @@ class ToDoItems extends Component {
             <ul className="theList">
                 {
                     tasks.length > 0 ?
-                        tasks.map(task => (
-                        <li key={task.id} id={task.id}>
+                        tasks.map((task, index) => (
+                        <li key={index} id={task.id}>
                             <h1>{task.title}</h1>
                             <p>{task.description}</p>
-                            <button onClick={ this.deleteTasks.bind(this, (task.id)) }>Delete</button>
+                            <button onClick={ this.deleteTasks.bind(this, (index)) }>Delete</button>
                             <button onClick={ this.editTasks.bind(this, (task.id)) }>Edit</button>
                         </li>
                     ))
@@ -78,4 +81,4 @@ class ToDoItems extends Component {
     }
 };
 
-export default ToDoItems;
+export default TodoItems;

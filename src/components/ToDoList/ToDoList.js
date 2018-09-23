@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import Input from '../Input/Input';
+import Button from '../Button/Button';
+
+import './TodoList.css';
 
 class TodoList extends Component {
     static propTypes = {
@@ -75,12 +79,13 @@ class TodoList extends Component {
     render() {
         let { description, title } = this.state;
         return (
-        <div className="todoListMain">
+        <div className="todoList">
             <div className="header">
             <form onSubmit={this.handleSubmit}>
                 <div>
                     <Input
                         name="title"
+                        placeholder="Add title"
                         type="text"
                         onInputChange={this.onInputChange}
                         onSubmit={this.handleKeyPress}
@@ -90,13 +95,19 @@ class TodoList extends Component {
                 <div>
                     <Input
                         name="description"
+                        placeholder="Add description"
                         type="text"
                         onInputChange={this.onInputChange}
                         onSubmit={this.handleKeyPress}
                         value={description}
                     />
                 </div>
-                <button className={this.areInputsEmpty() ? 'but' : 'but disabled'} type="submit">Add</button>
+                <Button
+                   className="but"
+                   disabled={this.areInputsEmpty() ? false : true}
+                   text="Add"
+                   type="submit"
+                 />
             </form>
             </div>
         </div>

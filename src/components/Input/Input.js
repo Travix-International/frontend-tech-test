@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+
 import './Input.css';
 
 class Input extends Component {
@@ -20,8 +21,6 @@ class Input extends Component {
     };
 
     handleChange = (e) => {
-        // second argument convenient when we want to
-        // map value to the key later in the component state
         this.props.onInputChange(e.target.value, this.props.name);
     }
     handleKeyPress = (e) => {

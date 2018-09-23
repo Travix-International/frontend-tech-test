@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {  getTask, saveTask, deleteTask, updateTask } from '../../actions/taskActions';
-import logo from '../../logo.svg';
-import './App.css';
 
+import {  getTask, saveTask, deleteTask, updateTask } from '../../actions/taskActions';
 import { selectTasks } from '../../reducers/tasksReducer';
 
-import ToDoList from '../ToDoList/ToDoList';
-import ToDoItems from '../ToDoItems/ToDoItems';
+import TodoList from '../TodoList/TodoList';
+import TodoItems from '../TodoItems/TodoItems';
+
+import logo from '../../logo.svg';
+import './App.css';
 
 class App extends Component {
   static propTypes = {
@@ -43,13 +44,13 @@ class App extends Component {
 
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Travix ToDo App</h1>
+      <div className="app">
+        <header className="app__header">
+          <img src={logo} className="app__logo" alt="logo" />
+          <h1 className="app__title">Travix ToDo App</h1>
         </header>
-        <ToDoList saveTask={saveTask} />
-        <ToDoItems tasks={tasks} deleteTask={deleteTask} updateTask={updateTask} />
+        <TodoList saveTask={saveTask} />
+        <TodoItems tasks={tasks} deleteTask={deleteTask} updateTask={updateTask} />
       </div>
     );
   }

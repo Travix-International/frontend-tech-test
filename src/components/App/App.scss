@@ -1,25 +1,28 @@
-.App {
+@import '../../scss/base/variables.scss';
+
+.app {
   text-align: center;
-}
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
+  &__logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+  }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
+  &__header {
+    background: url('../../assets/img/journal.jpeg') no-repeat;
+    background-size: cover;
+    height: 150px;
+    width:100%;
+    padding: 20px;
+    color: $white__color;
+  }
+  &__title {
+    font-size: 1.85em;
+  }
 
-.App-title {
-  font-size: 1.85em;
-}
-
-.App-intro {
-  font-size: large;
+  &__intro {
+    font-size: large;
+  }
 }
 
 @keyframes App-logo-spin {
