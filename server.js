@@ -1,6 +1,13 @@
 'use strict';
 
 const app = require('express')();
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
+
 const tasksContainer = require('./tasks.json');
 
 /**
@@ -57,15 +64,15 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
+app.put('/task/update/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
+      task.title = req.body.title;
+      task.description = req.body.description;
       return res.status(204);
     } else {
       return res.status(404).json({
@@ -88,11 +95,11 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task/create', (req, res) => {
   const task = {
     id: tasksContainer.tasks.length,
-    title: req.params.title,
-    description: req.params.description,
+    title: req.body.title,
+    description: req.body.description,
   };
 
   tasksContainer.tasks.push(task);
