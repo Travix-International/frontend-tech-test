@@ -24,7 +24,7 @@ class Input extends Component {
     }
     handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-            this.props.onSubmit();
+            this.props.onSubmit(e);
         }
     }
     render() {

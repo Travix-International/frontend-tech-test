@@ -52,15 +52,8 @@ class TodoList extends Component {
         }
         this.clearInputs();
     }
-    handleKeyPress = () => {
-        let { itemToEdit, updateTask, saveTask, closeModal,  } = this.props;
-        if(typeof(itemToEdit) !== 'undefined' || itemToEdit != null) {
-            updateTask(this.makeEditTaskPayload());
-            closeModal();
-        } else {
-            saveTask(this.makeNewTaskPayload());
-        }
-        this.clearInputs();
+    handleKeyPress = (e) => {
+        this.handleSubmit(e);
     }
 
     areInputsEmpty = () => {
