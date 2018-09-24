@@ -101,3 +101,7 @@ export default tasksReducer;
 export const selectTasks = (state) => {
     return state.tasks;
 };
+
+export const areTasksLoaded = (state) => {
+    return state.taskLoaded;
+};

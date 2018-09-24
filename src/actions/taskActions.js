@@ -20,7 +20,7 @@ export const getTask = () =>  {
         headers: []
       });
       return request.then(
-        response => dispatch(getTaskSuccess(response.data.tasks) ),
+        response => dispatch(getTaskSuccess(response.data.tasks)),
         err => dispatch(getTaskError(err))
       );
     }
@@ -50,9 +50,11 @@ export const saveTask = (payload) =>  {
       request.then(
         (response) => {
             dispatch(saveTaskSuccess(response))
-            dispatch(getTask());
         },
         err => dispatch(saveTaskError(err))
+      ).then(() => {
+            dispatch(getTask())
+        }
       )
     }
 }
@@ -80,9 +82,11 @@ export const deleteTask = (payload) =>  {
       request.then(
         (response) => {
             dispatch(deleteTaskSuccess(response))
-            dispatch(getTask());
         },
         err => dispatch(deleteTaskError(err))
+      ).then(() => {
+            dispatch(getTask())
+        }
       )
     }
 }
@@ -109,9 +113,11 @@ export const updateTask = (payload) =>  {
       request.then(
         (response) => {
             dispatch(updateTaskSuccess(response))
-            dispatch(getTask());
         },
         err => dispatch(updateTaskError(err))
+      ).then(() => {
+            dispatch(getTask())
+        }
       )
     }
 }

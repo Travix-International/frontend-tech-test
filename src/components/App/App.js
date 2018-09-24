@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {  getTask, saveTask, deleteTask, updateTask } from '../../actions/taskActions';
-import { selectTasks } from '../../reducers/tasksReducer';
+import { selectTasks, areTasksLoaded } from '../../reducers/tasksReducer';
 
 import TodoItem from '../TodoItem/ToDoItem';
 import TodoList from '../TodoList/TodoList';
@@ -17,6 +17,7 @@ class App extends Component {
     saveTask: PropTypes.func,
     updateTask: PropTypes.func,
     tasks: PropTypes.any,
+    areTasksLoaded: PropTypes.bool,
   };
   constructor(props) {
     super(props);
@@ -40,8 +41,8 @@ class App extends Component {
       saveTask,
       deleteTask,
       updateTask,
+      areTasksLoaded,
     } = this.props;
-
 
     return (
       <div className="app">
@@ -50,7 +51,7 @@ class App extends Component {
           <h1 className="app__title">Travix Todo App</h1>
         </header>
         <TodoList saveTask={saveTask} />
-        <TodoItem tasks={tasks} deleteTask={deleteTask} updateTask={updateTask} />
+        <TodoItem tasks={tasks} deleteTask={deleteTask} areTasksLoaded={areTasksLoaded} updateTask={updateTask} />
       </div>
     );
   }
@@ -59,6 +60,7 @@ class App extends Component {
 const mapStateToProps = ({tasksReducer}) => {
   return {
     tasks: selectTasks(tasksReducer),
+    areTasksLoaded: areTasksLoaded(tasksReducer),
   };
 };
 

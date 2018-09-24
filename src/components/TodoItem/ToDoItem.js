@@ -24,6 +24,7 @@ class TodoItem extends Component {
         deleteTask: PropTypes.func,
         updateTask: PropTypes.func,
         tasks: PropTypes.array,
+        areTasksLoaded: PropTypes.bool,
     };
     constructor(props) {
         super(props);
@@ -50,7 +51,7 @@ class TodoItem extends Component {
     }
 
     render() {
-        let { tasks, updateTask } =  this.props;
+        let { tasks, updateTask, areTasksLoaded } =  this.props;
         let { isEdit, itemToEdit } =  this.state;
 
         return (
@@ -70,8 +71,7 @@ class TodoItem extends Component {
             </Modal>
             <ul className="list">
                 {
-                    tasks.length > 0 ?
-                        tasks.map((task, index) => (
+                    areTasksLoaded ? tasks.map((task, index) => (
                         <li key={index} id={task.id}>
                             <div className="left">
                                 <h1>{task.title}</h1>
