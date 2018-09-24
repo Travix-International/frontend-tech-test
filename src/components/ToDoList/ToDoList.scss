@@ -2,7 +2,11 @@
 @import '../../scss/mixins/mixins.scss';
 
 .todoList {
-    padding: 14px;
+    padding: 20px;
     border-bottom: 1px solid $border__color;
     background-color: $back__list;
+
+    form {
+        padding: 20px 0px;
+    }
 }

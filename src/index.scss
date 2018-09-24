@@ -1,9 +1,10 @@
+@import './scss/reset/reset.scss';
 @import './scss/base/variables.scss';
 
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: $base__font;
     box-sizing: border-box;
     font-size: $text__size--base;
 }

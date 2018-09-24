@@ -1,7 +1,35 @@
+@import '../../scss/base/variables.scss';
+@import '../../scss/mixins/mixins.scss';
+
 .btn {
-    transition: all 3s ease;
+    transition: all .3s ease;
+    font-size: $text__size--base;
+    padding: 8px;
+    border-radius: $border__radius;
+    display: block;
+    width: 140px;
+    color: $black__color;
+
+    &:focus {
+        outline: none;
+    }
+
     &.disabled {
         pointer-events: none;
         opacity: 0.5;
+        color: $white__color;
+    }
+    &__add {
+        background-color: $input__green;
+        margin: 0 auto;
+    }
+    &__del {
+        background-color: $del__button;
+        color: $white__color;
+        margin-right: 10px;
+        @include responsive(medium) {
+            margin-right: 0px;
+            margin-bottom: 10px;
+        }
     }
 }

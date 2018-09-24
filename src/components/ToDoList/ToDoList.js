@@ -90,6 +90,7 @@ class TodoList extends Component {
                         onInputChange={this.onInputChange}
                         onSubmit={this.handleKeyPress}
                         value={title}
+                        autocomplete="off"
                     />
                  </div>
                 <div>
@@ -100,10 +101,11 @@ class TodoList extends Component {
                         onInputChange={this.onInputChange}
                         onSubmit={this.handleKeyPress}
                         value={description}
+                        autocomplete="off"
                     />
                 </div>
                 <Button
-                   className="btn"
+                   className="btn btn__add"
                    disabled={this.areInputsEmpty() ? false : true}
                    text="Add"
                    type="submit"

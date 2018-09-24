@@ -39,6 +39,7 @@ class Input extends Component {
             value,
             disabled,
             children,
+            autocomplete,
         } = this.props;
         return (
             <div className={`form__input ${classNameWrap || ''}`}>
@@ -60,6 +61,7 @@ class Input extends Component {
                     placeholder={placeholder || ''}
                     value = {value}
                     disabled={disabled}
+                    autoComplete={autocomplete}
                 />
                 {children ? children : null}
             </div>

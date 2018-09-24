@@ -57,10 +57,14 @@ class TodoItems extends Component {
             <Modal
                 isOpen={isEdit}
                 shouldCloseOnOverlayClick={false}
+                onRequestClose={this.closeModal}
                 style={customStyles}
                 contentLabel="Edit Modal"
                 ariaHideApp={false}
             >
+            <div className="close" onClick={this.closeModal}>
+            x
+            </div>
             <TodoList itemToEdit={itemToEdit} updateTask={updateTask} closeModal={this.closeModal} />
             </Modal>
             <ul className="list">
@@ -68,20 +72,24 @@ class TodoItems extends Component {
                     tasks.length > 0 ?
                         tasks.map((task, index) => (
                         <li key={index} id={task.id}>
-                            <h1>{task.title}</h1>
-                            <p>{task.description}</p>
-                            <Button
-                                className="btn"
-                                text="Delete"
-                                type="button"
-                                onAction={ this.deleteTasks.bind(this, (index)) }
-                            />
-                            <Button
-                                className="btn"
-                                text="Edit"
-                                type="button"
-                                onAction={ this.editTasks.bind(this, (task.id)) }
-                            />
+                            <div className="left">
+                                <h1>{task.title}</h1>
+                                <p>{task.description}</p>
+                            </div>
+                            <div className="right">
+                                <Button
+                                    className="btn btn__del"
+                                    text="Delete"
+                                    type="button"
+                                    onAction={ this.deleteTasks.bind(this, (index)) }
+                                />
+                                <Button
+                                    className="btn btn__edit"
+                                    text="Edit"
+                                    type="button"
+                                    onAction={ this.editTasks.bind(this, (task.id)) }
+                                />
+                            </div>
                         </li>
                     ))
                     : null
