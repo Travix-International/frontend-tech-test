@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TodoList from '../TodoList/TodoList';
 import Button from '../Button/Button';
 
-import './TodoItems.css';
+import './TodoItem.css';
 
 const customStyles = {
   content : {
@@ -19,7 +19,7 @@ const customStyles = {
   }
 };
 
-class TodoItems extends Component {
+class TodoItem extends Component {
     static propTypes = {
         deleteTask: PropTypes.func,
         updateTask: PropTypes.func,
@@ -101,4 +101,4 @@ class TodoItems extends Component {
     }
 };
 
-export default TodoItems;
+export default TodoItem;

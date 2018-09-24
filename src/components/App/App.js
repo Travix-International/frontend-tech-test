@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import {  getTask, saveTask, deleteTask, updateTask } from '../../actions/taskActions';
 import { selectTasks } from '../../reducers/tasksReducer';
 
+import TodoItem from '../TodoItem/ToDoItem';
 import TodoList from '../TodoList/TodoList';
-import TodoItems from '../TodoItems/TodoItems';
 
 import logo from '../../logo.svg';
 import './App.css';
@@ -50,7 +50,7 @@ class App extends Component {
           <h1 className="app__title">Travix Todo App</h1>
         </header>
         <TodoList saveTask={saveTask} />
-        <TodoItems tasks={tasks} deleteTask={deleteTask} updateTask={updateTask} />
+        <TodoItem tasks={tasks} deleteTask={deleteTask} updateTask={updateTask} />
       </div>
     );
   }
