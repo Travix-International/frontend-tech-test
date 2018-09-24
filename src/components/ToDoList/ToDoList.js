@@ -103,7 +103,7 @@ class TodoList extends Component {
                     />
                 </div>
                 <Button
-                   className="but"
+                   className="btn"
                    disabled={this.areInputsEmpty() ? false : true}
                    text="Add"
                    type="submit"

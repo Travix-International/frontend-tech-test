@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 
 import TodoList from '../TodoList/TodoList';
+import Button from '../Button/Button';
 
 import './TodoItems.css';
 
@@ -62,15 +63,25 @@ class TodoItems extends Component {
             >
             <TodoList itemToEdit={itemToEdit} updateTask={updateTask} closeModal={this.closeModal} />
             </Modal>
-            <ul className="theList">
+            <ul className="list">
                 {
                     tasks.length > 0 ?
                         tasks.map((task, index) => (
                         <li key={index} id={task.id}>
                             <h1>{task.title}</h1>
                             <p>{task.description}</p>
-                            <button onClick={ this.deleteTasks.bind(this, (index)) }>Delete</button>
-                            <button onClick={ this.editTasks.bind(this, (task.id)) }>Edit</button>
+                            <Button
+                                className="btn"
+                                text="Delete"
+                                type="button"
+                                onAction={ this.deleteTasks.bind(this, (index)) }
+                            />
+                            <Button
+                                className="btn"
+                                text="Edit"
+                                type="button"
+                                onAction={ this.editTasks.bind(this, (task.id)) }
+                            />
                         </li>
                     ))
                     : null

@@ -1,24 +1,27 @@
+@import '../../scss/base/variables.scss';
+@import '../../scss/mixins/mixins.scss';
+
 .form__input {
     &-field {
         width: 200px;
-        border: 1px solid #e7e7e7;
-        background-color: #fff;
+        border: 1px solid $border__color;
+        background-color: $white__color;
         color: inherit;
         font-family: inherit;
         font-size: 14px;
         padding: 12px 15px;
         margin-right: 10px;
         margin-bottom: 20px;
-        border-radius: 5px;
+        border-radius: $border__radius;
         transition: border 0.3s;
 
-        @media screen and (min-width: 1024px) {
+        @include responsive(large) {
             width: 400px;
         }
 
         &:focus {
             outline: none;
-            border: 1px solid #28B9B5;
+            border: 1px solid $input__green;
         }
     }
 }

@@ -1,2 +1,25 @@
+
+//Fonts
+$text__size--base:              16px;
+$text__line-height--base:       1.3;
+$text__weight--base:            normal;
+
+//Colors
 $white__color: #fff;
 $black__color: #000;
+$border__color: #e7e7e7;
+$back__list: #f7f7f7;
+$input__green: #28B9B5;
+
+//Radius
+$border__radius: 5px;
+
+//Responsive
+$breakpoint: (
+  default:                    320px,
+  xsmall:                     480px,
+  small:                      568px,
+  medium:                     768px,
+  large:                      1024px,
+  xlarge:                     1180px
+);
