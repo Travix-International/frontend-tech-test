@@ -19,7 +19,6 @@ class Input extends Component {
         refered: PropTypes.any,
         autocomplete: PropTypes.string,
     };
-
     handleChange = (e) => {
         this.props.onInputChange(e.target.value, this.props.name);
     }
@@ -29,29 +28,40 @@ class Input extends Component {
         }
     }
     render() {
+        let {
+            classNameWrap,
+            label,
+            name,
+            className,
+            refered,
+            type,
+            placeholder,
+            value,
+            disabled,
+            children,
+        } = this.props;
         return (
-            <div className={`form__input ${this.props.classNameWrap || ''}`}>
-                {this.props.label
+            <div className={`form__input ${classNameWrap || ''}`}>
+                {label
                     ? <label
                         className="form__input-label"
-                        htmlFor={this.props.name}
+                        htmlFor={name}
                     >
-                        {this.props.label}
+                        {label}
                     </label>
                     : null
                 }
-                <input name={this.props.name}
-                    className={`form__input-field ${this.props.className || ''}`}
-                    ref={this.props.refered}
-                    type={this.props.type}
+                <input name={name}
+                    className={`form__input-field ${className || ''}`}
+                    ref={refered}
+                    type={type}
                     onChange={this.handleChange}
                     onKeyPress={this.handleKeyPress}
-                    placeholder={this.props.placeholder || ''}
-                    value = {this.props.value}
-                    disabled={this.props.disabled}
-                    autoComplete={this.props.autocomplete}
+                    placeholder={placeholder || ''}
+                    value = {value}
+                    disabled={disabled}
                 />
-                {this.props.children ? this.props.children : null}
+                {children ? children : null}
             </div>
         );
     }
