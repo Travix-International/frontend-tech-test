@@ -71,6 +71,8 @@ class TodoList extends Component {
     }
     render() {
         let { description, title } = this.state;
+        let { itemToEdit } = this.props;
+
         return (
         <div className="todoList">
             <div className="header">
@@ -100,7 +102,7 @@ class TodoList extends Component {
                 <Button
                    className="btn btn__add"
                    disabled={this.areInputsEmpty() ? false : true}
-                   text="Add"
+                   text={typeof(itemToEdit) !== 'undefined' || itemToEdit != null ? "Edit" : "Add"}
                    type="submit"
                  />
             </form>
