@@ -47,7 +47,7 @@ class App extends Component {
       <div className="app">
         <header className="app__header">
           <img src={logo} className="app__logo" alt="logo" />
-          <h1 className="app__title">Travix ToDo App</h1>
+          <h1 className="app__title">Travix Todo App</h1>
         </header>
         <TodoList saveTask={saveTask} />
         <TodoItems tasks={tasks} deleteTask={deleteTask} updateTask={updateTask} />

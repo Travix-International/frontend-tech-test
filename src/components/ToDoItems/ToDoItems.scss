@@ -9,13 +9,27 @@
         box-shadow: 0 0 3px 0px rgba($black__color, 0.15);
         border: 1px solid $border__color;
         border-radius: $border__radius;
-        padding: 10px;
-        margin-bottom: 20px;
+        padding: 15px;
+        margin: 0px 10px 20px 10px;
         display: flex;
         flex-direction: column;
         height: 100%;
         @include responsive(medium) {
             flex-direction: row;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        p {
+            margin-bottom: 10px;
+            @include responsive(medium) {
+                padding-right: 10px;
+                margin-bottom: 0px;
+            }
         }
 
         .left {
@@ -31,9 +45,30 @@
             justify-content: center;
             align-items: center;
             @include responsive(medium) {
-                // display: block;
                 flex-direction: column;
             }
         }
     }
+}
+
+.close__modal {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.ReactModal__Content.ReactModal__Content--after-open {
+    width: 260px;
+    @include responsive(medium) {
+        width: auto;
+    }
+}
+
+.ReactModal__Body--open,
+.ReactModal__Html--open {
+  overflow: hidden;
 }

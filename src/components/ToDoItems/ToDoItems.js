@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import TodoList from '../TodoList/TodoList';
 import Button from '../Button/Button';
@@ -62,8 +63,8 @@ class TodoItems extends Component {
                 contentLabel="Edit Modal"
                 ariaHideApp={false}
             >
-            <div className="close" onClick={this.closeModal}>
-            x
+            <div className="close__modal" onClick={this.closeModal}>
+                <FontAwesomeIcon icon="times"/>
             </div>
             <TodoList itemToEdit={itemToEdit} updateTask={updateTask} closeModal={this.closeModal} />
             </Modal>
