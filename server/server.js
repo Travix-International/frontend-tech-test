@@ -6,7 +6,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const tasksContainer = require('./tasks.json');
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(bodyParser.json());
 
@@ -134,7 +134,8 @@ app.delete('/task/delete/:id', (req, res) => {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+      // const taskIndex = tasksContainer.tasks;
+      const taskIndex = tasksContainer.tasks.findIndex(x => x.id == id);
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
         message: 'Updated successfully',

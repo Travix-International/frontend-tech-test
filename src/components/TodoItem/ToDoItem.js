@@ -84,7 +84,7 @@ class TodoItem extends Component {
                                     className="btn btn__del"
                                     text="Delete"
                                     type="button"
-                                    onAction={ this.deleteTasks(index) }
+                                    onAction={ this.deleteTasks(task.id) }
                                 />
                                 <Button
                                     className="btn btn__edit"
