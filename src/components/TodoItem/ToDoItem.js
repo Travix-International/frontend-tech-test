@@ -33,11 +33,13 @@ class TodoItem extends Component {
             itemToEdit: null,
         };
     }
-    deleteTasks(id) {
+    deleteTasks = (id) => (e) => {
+        e.preventDefault();
         this.props.deleteTask(id);
     }
 
-    editTasks(itemId) {
+    editTasks = (itemId) => (e) => {
+        e.preventDefault();
         let editItemId = document.getElementById(itemId);
         this.setState({
             isEdit: true,
@@ -82,13 +84,13 @@ class TodoItem extends Component {
                                     className="btn btn__del"
                                     text="Delete"
                                     type="button"
-                                    onAction={ this.deleteTasks.bind(this, (index)) }
+                                    onAction={ this.deleteTasks(index) }
                                 />
                                 <Button
                                     className="btn btn__edit"
                                     text="Edit"
                                     type="button"
-                                    onAction={ this.editTasks.bind(this, (task.id)) }
+                                    onAction={ this.editTasks(task.id) }
                                 />
                             </div>
                         </li>
