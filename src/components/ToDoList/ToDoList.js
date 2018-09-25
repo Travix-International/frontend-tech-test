@@ -53,9 +53,11 @@ class TodoList extends Component {
         this.clearInputs();
     }
     handleKeyPress = (e) => {
-        this.handleSubmit(e);
+        e.preventDefault();
+        if(this.areInputsEmpty()) {
+            this.handleSubmit(e);
+        }
     }
-
     areInputsEmpty = () => {
         let { description, title } = this.state;
         if (title && description) {
