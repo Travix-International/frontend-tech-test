@@ -1,0 +1,36 @@
+$todo-item-bg-color: #ffffff;
+
+.todo-feed-item {
+    background-color: $todo-item-bg-color;
+    border: 1px solid #d8d8d8;
+    padding: 5px 10px 5px 10px;
+    margin-bottom: 20px;
+
+    h3 {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+
+    p {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .todo-action {
+        button {
+            height: 34px;
+            width: 35px;
+            color: #838383;
+            border-radius: 20px;
+            border-color: #bbb;
+            margin-right: 10px;
+            margin-bottom: 10px;
+
+            i {
+                margin-left: -8px;
+            }
+        }
+    }
+}

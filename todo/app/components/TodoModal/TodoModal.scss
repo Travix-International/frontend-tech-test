@@ -1,0 +1,13 @@
+.todo-modal {
+    background-color: white;
+    padding: 15px 15px 1px 15px;
+    border: 1px solid #d8d8d8;
+    position: absolute;
+    width: 96.1%;
+    top: -26px;
+    z-index: 2;
+
+    .btn-cancel {
+        margin-left: 10px;
+    }
+}
