@@ -16,7 +16,11 @@ const tasksContainer = require('./tasks.json');
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
+  const tasks = tasksContainer.tasks;
+  return res.status(200).json({
+    tasks: tasks.slice(Number(req.query.from), Number(req.query.from)+10),
+    total: tasksContainer.tasks.length
+  });
 });
 
 /**
@@ -73,7 +77,10 @@ app.put('/task/update/:id', (req, res) => {
     if (task !== null) {
       task.title = req.body.title;
       task.description = req.body.description;
-      return res.status(204);
+      return res.status(200).json({
+        message: 'Resource updated',
+        task: task
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -102,10 +109,11 @@ app.post('/task/create', (req, res) => {
     description: req.body.description,
   };
 
-  tasksContainer.tasks.push(task);
+  tasksContainer.tasks.unshift(task);
 
   return res.status(201).json({
     message: 'Resource created',
+    task: task
   });
 });
 
@@ -121,13 +129,11 @@ app.post('/task/create', (req, res) => {
  */
 app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
-
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    const task = tasksContainer.tasks.findIndex(item => item.id === id);
   
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
+      tasksContainer.tasks.splice(task, 1);
       return res.status(200).json({
         message: 'Updated successfully',
       });
