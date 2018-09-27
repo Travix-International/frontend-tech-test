@@ -3,6 +3,19 @@
 const app = require('express')();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const io = require('socket.io')();
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
+const port = 9002;
+io.listen(port);
+console.log('listening on port ', port);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -16,7 +29,13 @@ const tasksContainer = require('./tasks.json');
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  const tasks = tasksContainer.tasks;
+  let tasks = tasksContainer.tasks;
+  const search = req.query.search;
+  if (search.toString().trim() !== '') {
+    tasks = tasks.filter((task) => {
+      return task.title.match(new RegExp(search, 'ig')) || task.description.match(new RegExp(search, 'ig'))
+    });
+  }
   return res.status(200).json({
     tasks: tasks.slice(Number(req.query.from), Number(req.query.from)+10),
     total: tasksContainer.tasks.length
@@ -77,6 +96,9 @@ app.put('/task/update/:id', (req, res) => {
     if (task !== null) {
       task.title = req.body.title;
       task.description = req.body.description;
+      io.emit('todo-update', {
+        task: task
+      });
       return res.status(200).json({
         message: 'Resource updated',
         task: task
@@ -111,6 +133,10 @@ app.post('/task/create', (req, res) => {
 
   tasksContainer.tasks.unshift(task);
 
+  io.emit('todo-add', {
+    task: task
+  });
+
   return res.status(201).json({
     message: 'Resource created',
     task: task
@@ -134,6 +160,7 @@ app.delete('/task/delete/:id', (req, res) => {
   
     if (task !== null) {
       tasksContainer.tasks.splice(task, 1);
+      io.emit('todo-delete', id);
       return res.status(200).json({
         message: 'Updated successfully',
       });
