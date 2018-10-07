@@ -1,0 +1,36 @@
+.task-list-table{
+	// border:1px solid #000;	
+	thead{
+		tr{
+			th{
+				// border: 1px solid #000;
+			}
+		}
+	}
+	tbody{
+		height: 10em;
+		overflow: scroll;
+		tr{
+			&:nth-child(odd){
+				background-color: #f7f4f4,
+			}
+			&:nth-child(even){
+				background-color: #fff;
+			}
+			td{
+				&:last-child{
+					width: 30%;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					}
+			}
+		}
+	}
+}
+
+.text-area{
+	height:100px;
+	width:500px;
+	word-break: break-word;
+}

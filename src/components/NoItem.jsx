@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 export default class NoItem extends React.Component {
-    render() {
-        return (
-            <h1>No List Found</h1>
-        )
-    }
+	render() {
+		return (
+			<h3>No Task Found...Please add task</h3>
+		)
+	}
 }

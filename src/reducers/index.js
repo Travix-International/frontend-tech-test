@@ -1,11 +1,11 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 import todoReducer from './todo.reducer';
 import { fetchTodo } from '../actions/todo.action';
 
 export const allReducer = combineReducers({
-    todo: todoReducer,
+	todo: todoReducer,
 });
 
-export const getInitialData = () => {
-    return fetchTodo()
+export const getInitialData = (dispatch) => {
+	return fetchTodo().then(action => dispatch(action))
 }

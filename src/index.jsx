@@ -4,9 +4,9 @@ import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 // import { combineForms } from 'react-redux-form';
 import { Provider } from 'react-redux';
-import { allReducer ,getInitialData } from './reducers';
-import TodoComponent from './components/TodoComponent';
-
+import { allReducer, getInitialData } from './reducers';
+import ErrorPage from './components/ErrorPage';
+import App from './components/App';
 
 const middleWare = applyMiddleware(thunk);
 const store = createStore(allReducer, middleWare);
@@ -15,11 +15,16 @@ const store = createStore(allReducer, middleWare);
 } */
 
 global.store = store; //for debugging purpose
-getInitialData();
+const initialData = getInitialData(store.dispatch);
+initialData.then(success => ReactDOM.render(
+	<Provider store={store}>
+		<App />
+	</Provider>,
+	document.getElementById('todo-root'),
+)).catch(error => ReactDOM.render(
+	<Provider store={store}>
+		<ErrorPage />
+	</Provider>,
+	document.getElementById('todo-root'),
+));
 
-ReactDOM.render(
-    <Provider store={store}>
-        <TodoComponent />
-    </Provider>,
-    document.getElementById('todo-root'),
-);

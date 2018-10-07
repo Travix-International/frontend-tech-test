@@ -16,6 +16,8 @@
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
     "es6-promise": "^4.2.4",
     "express": "^4.14.0",
     "isomorphic-fetch": "^2.2.1",
