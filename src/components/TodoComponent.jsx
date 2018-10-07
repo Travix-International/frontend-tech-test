@@ -107,7 +107,7 @@ const mapStateToDispatch = (dispatch) => {
 		modifyTask: (taskId, title, description) => {
 			modifyTask(taskId, title, description).then(success => dispatch(success))
 		},
-		deleteTask: (taskId) => { deleteTask(taskId).then(success => { debugger; dispatch(success) }) },
+		deleteTask: (taskId) => { deleteTask(taskId).then(success => { dispatch(success) }) },
 	};
 };
 

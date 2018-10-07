@@ -29,7 +29,7 @@ export default class TodoList extends React.Component {
 
 	generateSearch() {
 		return (
-			<tr colSpan={3} className="column-12 no-padding">
+			<tr colSpan={3} className="column-12 no-padding searchBar">
 				<input
 					className="column-4"
 					tppe="text"
@@ -47,7 +47,6 @@ export default class TodoList extends React.Component {
 		return ((tasks || []).reverse() || [])
 			.filter(v => searchReg.test(v.title) || searchReg.test(v.description))
 			.map((task, index) => {
-				debugger;
 				return (
 					<tr key={index} className="column-12 no-padding">
 						<td className="column-2">

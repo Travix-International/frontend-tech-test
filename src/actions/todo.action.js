@@ -8,7 +8,7 @@ export const fetchTodo = (operation = '', status = false) => {
 }
 
 export const createTask = (title, description) => {
-	return fetchWrapper("http://localhost:9001/task/create/" + title + "/" + description, 'POST')
+	return fetchWrapper("http://localhost:9001/task/create/", 'POST', { title: title, description: description })
 		.then(parseData => {
 			if (parseData.message === 'Resource created') {
 				return fetchTodo("create", true);
@@ -27,7 +27,7 @@ export const selectTaskFromStore = (taskId) => {
 };
 
 export const modifyTask = (taskId, title, description) => {
-	return fetchWrapper("http://localhost:9001/task/update/" + taskId + "/" + title + "/" + description, 'PUT')
+	return fetchWrapper(`http://localhost:9001/task/update/${taskId}`, 'PUT', { title: title, description: description })
 		.then(parseData => {
 			// if (parseData.message === 'Resource created') {
 			return fetchTodo("update", true);
@@ -39,7 +39,7 @@ export const modifyTask = (taskId, title, description) => {
 }
 
 export const deleteTask = (taskId) => {
-	return fetchWrapper("http://localhost:9001/task/delete/" + taskId, 'DELETE')
+	return fetchWrapper(`http://localhost:9001/task/delete/${taskId}`, 'DELETE')
 		.then(parseData => {
 			// if (parseData.message === 'Resource created') {
 			return fetchTodo("delete", true);

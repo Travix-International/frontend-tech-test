@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { allReducer, getInitialData } from './reducers';
 import ErrorPage from './components/ErrorPage';
 import App from './components/App';
+import polyfillForApp from './common/polyfill';
 
 const middleWare = applyMiddleware(thunk);
 const store = createStore(allReducer, middleWare);
@@ -14,17 +15,17 @@ const store = createStore(allReducer, middleWare);
     user: initialUser,
 } */
 
-global.store = store; //for debugging purpose
-const initialData = getInitialData(store.dispatch);
+polyfillForApp();
+
+const initialData = getInitialData(store.dispatch); // to get all the task on app load
+
 initialData.then(success => ReactDOM.render(
 	<Provider store={store}>
 		<App />
 	</Provider>,
 	document.getElementById('todo-root'),
-)).catch(error => ReactDOM.render(
-	<Provider store={store}>
-		<ErrorPage />
-	</Provider>,
+)).catch(error => ReactDOM.render(<ErrorPage />,
 	document.getElementById('todo-root'),
 ));
 
+// global.store = store.getState(); //for debugging purpose

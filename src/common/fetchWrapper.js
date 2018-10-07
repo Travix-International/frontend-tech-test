@@ -4,9 +4,9 @@ import 'isomorphic-fetch';
 export const fetchWrapper = (url, method = 'GET', data) => {
 	const fetchConfig = {
 		method: method,
-		// body: JSON.stringify(data),
+		body: JSON.stringify(data),
 		headers: {
-			// 'Content-Type': 'application/json',
+			'Content-Type': 'application/json',
 			// 'Accept': 'application/json',
 			// 'Access-Control-Allow-Methods': 'GET,PUT,POST',
 		},
