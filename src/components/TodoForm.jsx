@@ -15,12 +15,10 @@ export default class TodoForm extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		const { selectedTask } = nextProps;
-		if (selectedTask) {
-			this.setState({
-				title: selectedTask.title,
-				description: selectedTask.description,
-			});
-		}
+		this.setState({
+			title: selectedTask ? selectedTask.title : '',
+			description: selectedTask ? selectedTask.description : '',
+		});
 	}
 
 	updateFieldTitle(e) {
@@ -30,9 +28,9 @@ export default class TodoForm extends React.Component {
 
 	updateFieldDescription(e) {
 		e.preventDefault();
-		if(e.target.value.length <= 120){
+		if (e.target.value.length <= 120) {
 			this.setState({ description: e.target.value });
-		}		
+		}
 	}
 
 	generateButtons() {
@@ -74,8 +72,8 @@ export default class TodoForm extends React.Component {
 				<div className="row">
 					<div className="column-3" />
 					<div className="column-6">
-						<label className="column-12">Task</label>
-						<input className="column-12" type="text" value={this.state.title} onChange={(e) => this.updateFieldTitle(e)} />
+						<label className="column-12">Title</label>
+						<input className="column-12 title" type="text" value={this.state.title} onChange={(e) => this.updateFieldTitle(e)} />
 					</div>
 					<div className="column-3" />
 				</div>
@@ -83,7 +81,7 @@ export default class TodoForm extends React.Component {
 					<div className="column-3" />
 					<div className="column-6">
 						<label className="column-12">Description</label>
-						<textarea className="column-12" value={this.state.description} onChange={(e) => this.updateFieldDescription(e)} />
+						<textarea className="column-12 description" value={this.state.description} onChange={(e) => this.updateFieldDescription(e)} />
 						<span>{120 - this.state.description.length} character remaining out of 80</span>
 					</div>
 					<div className="column-3" />
