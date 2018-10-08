@@ -2,6 +2,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require("webpack");
 //not required in production build as its by default in webpack 4 for production mode
 // const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
@@ -33,7 +34,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       chunksSortMode: packageSort(['vendor', 'main']),
       template: __dirname + "/index.html",
-    }),
+		}),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('production')
+		}),
+		// new webpack.optimize.UglifyJsPlugin()
+		
     //Automatically load modules instead of having to import or require them everywhere
     // new webpack.ProvidePlugin({
     //     react: 'react',
@@ -86,16 +92,16 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
-      {
-        test: /\.(png|jp(e*)g|svg)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 16000, // Convert images < 16kb to base64 strings
-            name: 'images/[hash]-[name].[ext]'
-          }
-        }]
-      }
+      // {
+      //   test: /\.(png|jp(e*)g|svg)$/,
+      //   use: [{
+      //     loader: 'url-loader',
+      //     options: {
+      //       limit: 16000, // Convert images < 16kb to base64 strings
+      //       name: 'images/[hash]-[name].[ext]'
+      //     }
+      //   }]
+      // }
     ]
   },
 };
