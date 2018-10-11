@@ -25,8 +25,7 @@ class TodoComponent extends React.Component {
 
 	selectTask(e, taskId) {
 		e.preventDefault();
-		const click = e.target.checked;
-		click ? this.props.selectTaskFromStore(taskId) : this.props.selectTaskFromStore(null);
+		this.props.selectTaskFromStore(taskId);
 	}
 
 	editTask(taskId, title, description) {
@@ -57,13 +56,13 @@ class TodoComponent extends React.Component {
 			add: this.addTask,
 			editTask: this.editTask,
 			selectedTask: selectedTask,
-			deleteTask: this.deleteTask,
 			selectedTaskId: selectedTaskId
 		}
 
 		const todoListConfiguration = {
 			searchBar: true, // configure search bar on todo list table
 			selectTask: this.selectTask,
+			deleteTask: this.deleteTask,
 		}
 
 		return (

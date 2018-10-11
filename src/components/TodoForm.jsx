@@ -33,34 +33,33 @@ export default class TodoForm extends React.Component {
 		}
 	}
 
-	generateButtons() {
+	generateFormButtons() {
 		const { selectedTask, selectedTaskId, todoFormConfiguration } = this.props;
 		const { title, description } = this.state;
 		if (selectedTask == null) {
 			return (
-				<React.Fragment>
-					<div className="column-3" />
-					<div className="column-6">
-						<div className="column-3" />
-						<button className="column-6 btn" type="submit" onClick={() => todoFormConfiguration.add(title, description)}> Add </button>
-						<div className="column-3" />
-					</div>
-					<div className="column-3" />
-				</React.Fragment>
-
+				<button className="column-6 btn" type="submit" onClick={() => todoFormConfiguration.add(title, description)}> Add </button>
 			)
 		} else {
 			return (
-				<React.Fragment>
-					<div className="column-3" />
-					<div className="column-6">
-						<button className="column-6 btn" type="submit" onClick={() => todoFormConfiguration.editTask(selectedTaskId, title, description)}> Edit </button>
-						<button className="column-6 btn" type="submit" onClick={() => todoFormConfiguration.deleteTask(selectedTaskId)}> Delete </button>
-					</div>
-					<div className="column-3" />
-				</React.Fragment>
-			);
+				<button className="column-6 btn" type="submit" onClick={() => todoFormConfiguration.editTask(selectedTaskId, title, description)}> Edit </button>
+			)
 		}
+	}
+
+	generateButtons() {
+
+		return (
+			<React.Fragment>
+				<div className="column-3" />
+				<div className="column-6">
+					<div className="column-3" />
+					{this.generateFormButtons()}
+					<div className="column-3" />
+				</div>
+				<div className="column-3" />
+			</React.Fragment>
+		)
 	}
 
 	render() {
@@ -82,7 +81,7 @@ export default class TodoForm extends React.Component {
 					<div className="column-6">
 						<label className="column-12">Description</label>
 						<textarea className="column-12 description" value={this.state.description} onChange={(e) => this.updateFieldDescription(e)} />
-						<span>{120 - this.state.description.length} character remaining out of 80</span>
+						<span>{120 - this.state.description.length} character remaining out of 120</span>
 					</div>
 					<div className="column-3" />
 				</div>

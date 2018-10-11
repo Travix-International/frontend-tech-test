@@ -17,7 +17,7 @@ export default function (state = initialState, action) {
 			return Object.assign({}, state, {
 				loading: false,
 				error: false,
-				tasks: action.payload.tasks,
+				tasks: (action.payload.tasks || []).reverse(),
 			});
 		case "operation_req_start":
 			return Object.assign({}, state, { loading: true, error: false, operation: action.payload });

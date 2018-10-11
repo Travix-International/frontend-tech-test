@@ -20,9 +20,9 @@ export default class TodoList extends React.Component {
 	generateListHeader() {
 		return (
 			<tr className="column-12 no-padding">
-				<th className="column-2 text-left">Action</th>
-				<th className="column-4 text-left">Title </th>
-				<th className="column-6 text-left">Description </th>
+				<th className="column-2 no-padding text-left">Title </th>
+				<th className="column-8 no-padding text-left">Description </th>
+				<th className="column-2 no-padding text-left">Action</th>
 			</tr>
 		)
 	}
@@ -40,25 +40,21 @@ export default class TodoList extends React.Component {
 		)
 	}
 	generateListBody() {
-		const { tasks, selectedTaskId, todoListConfiguration } = this.props;
+		const { tasks, todoListConfiguration } = this.props;
 		const { searchStr } = this.state;
 		const searchReg = new RegExp(searchStr, 'gi');
 
-		return ((tasks || []).reverse() || [])
+		return (tasks || [])
 			.filter(v => searchReg.test(v.title) || searchReg.test(v.description))
 			.map((task, index) => {
 				return (
-					<tr key={index} className="column-12 no-padding">
+					<tr key={index} className="column-12 no-padding">						
+						<td className="column-2 text-left">{task.title}</td>
+						<td className="column-8 text-left">{task.description}</td>
 						<td className="column-2">
-							<input
-								key={"taskId_" + task.id}
-								type="checkbox"
-								checked={task.id == selectedTaskId}
-								onChange={(e) => todoListConfiguration.selectTask(e, task.id)}
-							/>
+							<button className="column-5" onClick={(e) => todoListConfiguration.selectTask(e, task.id)}> Edit </button>
+							<button className="column-5" onClick={(e) => todoListConfiguration.deleteTask(task.id)}> Delete </button>
 						</td>
-						<td className="column-4 text-left">{task.title}</td>
-						<td className="column-6 text-left">{task.description}</td>
 					</tr>
 				);
 			})

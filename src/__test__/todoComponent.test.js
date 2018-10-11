@@ -45,7 +45,8 @@ describe("Integration testing", () => {
 	});
 
 	it("todoComponent Testing Pending", () => {
-		// console.log(componentWrapper.find('TodoForm').props())
+		console.log(componentWrapper.find('UserList'));
+		// console.log(componentWrapper.find('TodoForm').props())		
 	});
 
 });
