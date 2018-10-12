@@ -8,115 +8,118 @@ import { createTask, modifyTask, deleteTask, selectTaskFromStore, fetchTodo } fr
 
 class TodoComponent extends React.Component {
 
-	constructor(props) {
-		super(props);
-		this.addTask = this.addTask.bind(this);
-		this.editTask = this.editTask.bind(this);
-		this.selectTask = this.selectTask.bind(this);
-		this.deleteTask = this.deleteTask.bind(this);
-	}
+  constructor(props) {
+    super(props);
+    this.addTask = this.addTask.bind(this);
+    this.editTask = this.editTask.bind(this);
+    this.selectTask = this.selectTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
+  }
 
-	addTask(title, description) {
-		// if (title.trim() == '' || description.trim() == '')
-		// this.props.setValidateMessage("please fill title & description");
-		// else
-		this.props.createTask(title, description);
-	}
+  addTask(title, description) {
+    // if (title.trim() == '' || description.trim() == '')
+    // this.props.setValidateMessage("please fill title & description");
+    // else
+    this.props.createTask(title, description);
+  }
 
-	selectTask(e, taskId) {
-		e.preventDefault();
-		this.props.selectTaskFromStore(taskId);
-	}
+  selectTask(e, taskId) {
+    e.preventDefault();
+    this.props.selectTaskFromStore(taskId);
+  }
 
-	editTask(taskId, title, description) {
-		this.props.modifyTask(taskId, title, description);
-	}
+  editTask(taskId, title, description) {
+    this.props.modifyTask(taskId, title, description);
+  }
 
-	deleteTask(taskId) {
-		this.props.deleteTask(taskId);
-	}
+  deleteTask(taskId) {
+    this.props.deleteTask(taskId);
+  }
 
-	render() {
+  render() {
 
-		const { loading, error, operation, operationStatus, selectedTask, selectedTaskId } = this.props;
+    const { loading, error, operation, operationStatus, selectedTask, selectedTaskId } = this.props;
 
-		if (loading) {
-			return (
-				<p>loading Tasks....</p>
-			)
-		}
+    if (loading) {
+      return (
+        <p>loading Tasks....</p>
+      )
+    }
 
-		if (error) {
-			return (
-				<p>Error occured while fetching tasks</p>
-			)
-		}
+    if (error) {
+      return (
+        <p>Error occured while fetching tasks</p>
+      )
+    }
 
-		const todoFormConfiguration = {
-			add: this.addTask,
-			editTask: this.editTask,
-			selectedTask: selectedTask,
-			selectedTaskId: selectedTaskId
-		}
+    const todoFormConfiguration = {
+      formTitle: "Task Form",
+      add: this.addTask,
+      editTask: this.editTask,
+      selectedTask: selectedTask,
+      selectedTaskId: selectedTaskId
+    }
 
-		const todoListConfiguration = {
-			searchBar: true, // configure search bar on todo list table
-			selectTask: this.selectTask,
-			deleteTask: this.deleteTask,
-		}
+    const todoListConfiguration = {
+      searchBar: true, // configure search bar on todo list table
+      selectTask: this.selectTask,
+      deleteTask: this.deleteTask,
+    }
 
-		return (
-			<div className="wrapper">
-				<div className="line-break-50" />
-				<span>{operation ? operation : false}</span>
-				<ErrorBoundary>
-					{operation && operationStatus ? <h3>{operation ? operation : false} {operationStatus == true ? "Success" : "Fail"}</h3> : false}
-					<TodoFrom
-						{...this.props}
-						todoFormConfiguration={todoFormConfiguration}
-					/>
-				</ErrorBoundary>
-				<div className="line-break-50" />
-				<ErrorBoundary>
-					<TodoList {...this.props} todoListConfiguration={todoListConfiguration} />
-				</ErrorBoundary>
-			</div>
-		)
-	}
+    return (
+      <div className="wrapper">
+        <div className="line-break-50" />
+        <ErrorBoundary>
+          {operation && operationStatus ? <h3>{operation ? operation : false} {operationStatus == true ? "Success" : "Fail"}</h3> : false}
+          <TodoFrom
+            {...this.props}
+            todoFormConfiguration={todoFormConfiguration}
+          />
+        </ErrorBoundary>
+        <div className="line-break-50" />
+        <ErrorBoundary>
+          <TodoList {...this.props} todoListConfiguration={todoListConfiguration} />
+        </ErrorBoundary>
+      </div>
+    )
+  }
 }
 
 
 const mapStateToProps = (state, props) => {
-	return {
-		tasks: state.todo.tasks,
-		error: state.todo.error,
-		loading: state.todo.loading,
-		operation: state.todo.operation,
-		operationStatus: state.todo.operationStatus,
-		selectedTask: getSelectedTask(state),
-		selectedTaskId: state.todo.selectedTaskId,
-	};
+  return {
+    tasks: state.todo.tasks,
+    error: state.todo.error,
+    loading: state.todo.loading,
+    operation: state.todo.operation,
+    operationStatus: state.todo.operationStatus,
+    selectedTask: getSelectedTask(state),
+    selectedTaskId: state.todo.selectedTaskId,
+  };
 };
 const mapStateToDispatch = (dispatch) => {
-	return {
-		createTask: (title, description) => {
-			createTask(title, description).then(action => dispatch(action))
-		},
-		selectTaskFromStore: (taskId) => dispatch(selectTaskFromStore(taskId)),
-		modifyTask: (taskId, title, description) => {
-			modifyTask(taskId, title, description).then(action => {
-				dispatch(action);
-				fetchTodo().then(action => dispatch(action));
-			});
-		},
-		deleteTask: (taskId) => {
-			deleteTask(taskId).then(action => {
-				dispatch(action);
-				fetchTodo().then(action => { dispatch(action) })
-			});;
-			;
-		},
-	};
+  return {
+    createTask: (title, description) => {
+      createTask(title, description).then(action => {
+        dispatch(action);
+        fetchTodo().then(action => dispatch(action));
+      });
+    },
+    selectTaskFromStore: (taskId) => dispatch(selectTaskFromStore(taskId)),
+    modifyTask: (taskId, title, description) => {
+      modifyTask(taskId, title, description).then(action => {
+        dispatch(action);
+        fetchTodo().then(action => dispatch(action));
+      });
+    },
+    deleteTask: (taskId) => {
+      deleteTask(taskId).then(action => {
+        dispatch(action);
+        fetchTodo().then(action => { dispatch(action) })
+      });;
+      ;
+    },
+  };
 };
 
 export default connect(mapStateToProps, mapStateToDispatch)(TodoComponent);
