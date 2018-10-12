@@ -20,16 +20,16 @@ export default class TodoList extends React.Component {
 	generateListHeader() {
 		return (
 			<tr className="column-12 no-padding">
-				<th className="column-2 no-padding text-left">Title </th>
-				<th className="column-8 no-padding text-left">Description </th>
-				<th className="column-2 no-padding text-left">Action</th>
+				<th className="column-2 text-left">Title </th>
+				<th className="column-7 text-left">Description </th>
+				<th className="column-3 text-left">Action</th>
 			</tr>
 		)
 	}
 
 	generateSearch() {
 		return (
-			<tr colSpan={3} className="column-12 no-padding searchBar">
+			<tr colSpan={3} className="column-12 no-left-padding searchBar">
 				<input
 					className="column-4"
 					tppe="text"
@@ -50,10 +50,10 @@ export default class TodoList extends React.Component {
 				return (
 					<tr key={index} className="column-12 no-padding">						
 						<td className="column-2 text-left">{task.title}</td>
-						<td className="column-8 text-left">{task.description}</td>
-						<td className="column-2">
-							<button className="column-5" onClick={(e) => todoListConfiguration.selectTask(e, task.id)}> Edit </button>
-							<button className="column-5" onClick={(e) => todoListConfiguration.deleteTask(task.id)}> Delete </button>
+						<td className="column-7 text-left">{task.description}</td>
+						<td className="column-3">
+							<button className="column-5 edit" onClick={(e) => todoListConfiguration.selectTask(e, task.id)}> Edit </button>
+							<button className="column-5 delete" onClick={(e) => todoListConfiguration.deleteTask(task.id)}> Delete </button>
 						</td>
 					</tr>
 				);

@@ -1,9 +1,10 @@
 .task-list-table{
-	// border:1px solid #000;	
 	thead{
 		tr{
 			th{
-				// border: 1px solid #000;
+				font-size: 1em;
+				background-color: $theme-color;
+				color:#fff;
 			}
 		}
 	}
@@ -22,7 +23,14 @@
 					white-space: nowrap;
 					overflow: hidden;
 					text-overflow: ellipsis;
-					}
+				}
+				button{
+					font-size: 0.7em;
+					overflow: hidden;
+					background-color:$theme-color;
+					border-radius: 5px;
+					color: #fff;					
+				}
 			}
 		}
 	}
@@ -32,4 +40,10 @@
 	height:100px;
 	width:500px;
 	word-break: break-word;
+}
+
+.no-item{
+	h3{
+		color: $theme-color;
+	}
 }

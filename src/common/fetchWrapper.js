@@ -1,5 +1,5 @@
 import 'es6-promise';
-import 'isomorphic-fetch';
+import fetch from 'isomorphic-fetch';
 
 export const fetchWrapper = (url, method = 'GET', data) => {
 	const fetchConfig = {
@@ -15,6 +15,13 @@ export const fetchWrapper = (url, method = 'GET', data) => {
 		// mode: 'cors',
 	};
 	return fetch(url, fetchConfig)
-		.then(result => result.json())
+		.then(result => {
+			if(result.status != 500){
+				return	result.json()
+			}else{
+				//retry code
+			}
+		
+		})
 		.catch(error => console.warn(error.message))
 }

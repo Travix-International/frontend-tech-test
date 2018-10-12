@@ -64,16 +64,23 @@
 
 input[type=text]{
 	border:1px solid gray;
+	font-size: 1em;
 }
+
 textarea{
 	border:1px solid gray;
+	font-size: 1em;
 }
 .btn{
 	background-color:$theme-color;
 	color:#fff;
 	border-radius: 10px;
 	border:1px solid #1c4879;
+	font-size: 0.7em;
 }
 .no-padding{
 	padding: 0px !important;
+}
+.no-left-padding{
+	padding-left: 0px !important;
 }

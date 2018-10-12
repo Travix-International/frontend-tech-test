@@ -29,11 +29,11 @@ export const selectTaskFromStore = (taskId) => {
 export const modifyTask = (taskId, title, description) => {
 	return fetchWrapper(`http://localhost:9001/task/update/${taskId}`, 'PUT', { title: title, description: description })
 		.then(parseData => {
-			// if (parseData.message === 'Resource created') {
-			return fetchTodo("update", true);
-			// } else {
-			// return operationFail("update", parseData);
-			// }
+			if (parseData.message === 'update success') {
+				return operationuccess("update", true);
+			} else {
+				return operationFail("update", parseData);
+			}
 		})
 		.catch(error => operationFail("update", error))
 }
@@ -41,14 +41,16 @@ export const modifyTask = (taskId, title, description) => {
 export const deleteTask = (taskId) => {
 	return fetchWrapper(`http://localhost:9001/task/delete/${taskId}`, 'DELETE')
 		.then(parseData => {
-			// if (parseData.message === 'Resource created') {
-			return fetchTodo("delete", true);
-			// } else {
-			// return operationFail("update", parseData);
-			// }
+			debugger;
+			if (parseData.message === 'delete success') {
+				return operationuccess("delete", true);
+			} else {
+				return operationFail("delete", parseData.message);
+			}
 		})
 		.catch(error => operationFail("delete", error))
 }
+
 export const fetchStart = () => { return { type: "todo_fetch_start" } }
 const fetchSuccess = (result) => { return { type: "todo_fetch_success", payload: result } };
 const fetchFail = (error) => { return { type: "todo_fetch_fail", payload: error } };

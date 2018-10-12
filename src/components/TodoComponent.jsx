@@ -4,7 +4,7 @@ import ErrorBoundary from './ErrorBoundary';
 import TodoFrom from './TodoForm';
 import TodoList from './TodoList';
 import { getSelectedTask } from '../selectors/task.selector';
-import { createTask, modifyTask, deleteTask, operationStart, selectTaskFromStore } from '../actions/todo.action';
+import { createTask, modifyTask, deleteTask, selectTaskFromStore, fetchTodo } from '../actions/todo.action';
 
 class TodoComponent extends React.Component {
 
@@ -68,6 +68,7 @@ class TodoComponent extends React.Component {
 		return (
 			<div className="wrapper">
 				<div className="line-break-50" />
+				<span>{operation ? operation : false}</span>
 				<ErrorBoundary>
 					{operation && operationStatus ? <h3>{operation ? operation : false} {operationStatus == true ? "Success" : "Fail"}</h3> : false}
 					<TodoFrom
@@ -99,14 +100,22 @@ const mapStateToProps = (state, props) => {
 const mapStateToDispatch = (dispatch) => {
 	return {
 		createTask: (title, description) => {
-			dispatch(operationStart("create"));
-			createTask(title, description).then(success => dispatch(success))
+			createTask(title, description).then(action => dispatch(action))
 		},
 		selectTaskFromStore: (taskId) => dispatch(selectTaskFromStore(taskId)),
 		modifyTask: (taskId, title, description) => {
-			modifyTask(taskId, title, description).then(success => dispatch(success))
+			modifyTask(taskId, title, description).then(action => {
+				dispatch(action);
+				fetchTodo().then(action => dispatch(action));
+			});
 		},
-		deleteTask: (taskId) => { deleteTask(taskId).then(success => { dispatch(success) }) },
+		deleteTask: (taskId) => {
+			deleteTask(taskId).then(action => {
+				dispatch(action);
+				fetchTodo().then(action => { dispatch(action) })
+			});;
+			;
+		},
 	};
 };
 

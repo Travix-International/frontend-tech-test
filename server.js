@@ -41,7 +41,7 @@ app.get('/task/:id', (req, res) => {
 	if (!Number.isNaN(id)) {
 		const task = tasks.Container.find((item) => item.id === id);
 
-		if (task !== null) {
+		if (task !== undefined) {
 			return res.status(200).json({
 				task,
 			});
@@ -74,10 +74,12 @@ app.put('/task/update/:id/', (req, res) => {
 
 	if (!Number.isNaN(id)) {
 		const task = tasksContainer.tasks.find(item => item.id === id);
-		if (task !== null) {
+		if (task !== undefined) {
 			task.title = req.body.title;
 			task.description = req.body.description;
-			return res.status(204).send();
+			return res.status(200).json({
+				message:'update success'
+			});
 		} else {
 			return res.status(404).json({
 				message: 'Not found',
@@ -105,11 +107,8 @@ app.post('/task/create/', (req, res) => {
 		title: req.body.title,
 		description: req.body.description,
 	};
-	console.log(req.title);
-	console.log(task);
 	tasksContainer.tasks.push(task);
-
-	return res.status(201).json({
+	return res.status(200).json({
 		message: 'Resource created',
 	});
 });
@@ -130,12 +129,14 @@ app.delete('/task/delete/:id', (req, res) => {
 	if (!Number.isNaN(id)) {
 		const task = tasksContainer.tasks.find(item => item.id === id);
 
-		if (task !== null) {
-			const taskIndex = tasksContainer.tasks;
+		if (task !== undefined) {
+			const taskIndex = tasksContainer.tasks.map(task => task.id).indexOf(id);
 			tasksContainer.tasks.splice(taskIndex, 1);
-			return res.status(200).send();
+			return res.status(200).json({
+				message:'delete success'
+			});
 		} else {
-			return es.status(404).json({
+			return res.status(404).json({
 				message: 'Not found',
 			});
 		}
