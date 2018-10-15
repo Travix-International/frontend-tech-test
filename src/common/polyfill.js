@@ -1,4 +1,4 @@
-import { getPolyfill as objectAssignPolyfill } from 'object.assign';
+import { shim as objectAssignPolyfill } from 'object.assign/shim';
 import { polyfill } from 'es6-promise';
 
 export default function polyfillForApp() {

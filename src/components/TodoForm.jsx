@@ -36,6 +36,7 @@ export default class TodoForm extends React.Component {
 
   validateForm() {
     const { title, description } = this.state;
+    console.log('inside validate '+title);
     if (title.trim().length == 0 && description.trim().length == 0) {
       return false;
     }
@@ -43,6 +44,7 @@ export default class TodoForm extends React.Component {
   }
 
   submitForm(e) {
+    console.log('inside simulate clcik');
     const { title, description } = this.state;
     const { todoFormConfiguration, selectedTaskId } = this.props;
     if (this.validateForm()) {
@@ -67,11 +69,11 @@ export default class TodoForm extends React.Component {
 
     if (selectedTask == null) {
       return (
-        <button className="column-6 btn" type="submit" value="Add" onClick={(e) => this.submitForm(e)}>Add</button>
+        <button className="column-6 btn add-btn" type="submit" value="Add" onClick={(e) => this.submitForm(e)}>Add</button>
       )
     } else {
       return (
-        <button className="column-6 btn" type="submit" value="Edit" onClick={(e) => this.submitForm(e)}>Edit</button>
+        <button className="column-6 btn edit-btn" type="submit" value="Edit" onClick={(e) => this.submitForm(e)}>Edit</button>
       )
     }
   }
@@ -96,7 +98,7 @@ export default class TodoForm extends React.Component {
     /** State approach prefer over ref approach due to textarea defaulValue issue */
 
     return (
-      <div className="column-12">
+      <div className="column-12 todo-form">
         {message !== '' ? <span className="text-center">{message}</span> : false}
         <div className="row">
           <div className="column-3" />

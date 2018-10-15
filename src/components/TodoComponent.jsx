@@ -17,9 +17,7 @@ class TodoComponent extends React.Component {
   }
 
   addTask(title, description) {
-    // if (title.trim() == '' || description.trim() == '')
-    // this.props.setValidateMessage("please fill title & description");
-    // else
+    console.log(" inside add task ");
     this.props.createTask(title, description);
   }
 
