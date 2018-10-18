@@ -4,7 +4,7 @@ Dynamic TODO App by Suhas Patil
 
 # Introduction
 
-This is a completely dynamic TODO application. To run the application,
+This is a completely dynamic TODO application. The dynamic behaviour is achieved using `Websockets`. To run the application,
 
 * Checkout the repo from https://github.com/iamsuhas/todo-app-test.git
 * Open terminal go into the checked out folder(using `cd`)
