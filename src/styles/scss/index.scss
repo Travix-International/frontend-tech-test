@@ -1,0 +1,27 @@
+div.columns {
+  padding: 5% 0;
+}
+
+div.container {
+  max-width: 500px;
+}
+a.btn-link {
+  width: 100%;
+}
+
+.list-todo {
+  padding: 5% 0;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  li {
+    border: 2px solid #e3e3e3;
+    cursor: pointer;
+    border-radius: 6px;
+    margin: 2px;
+  }
+}
+
+.input-task {
+  margin-bottom: 18px;
+}

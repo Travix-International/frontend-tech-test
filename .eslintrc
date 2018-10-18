@@ -1,0 +1,4 @@
+{
+    "extends": "travix",
+    "parser": "babel-eslint"
+}
