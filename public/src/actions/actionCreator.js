@@ -42,10 +42,19 @@ const ActionCreator = {
     },
 
     receiveEvent: function(data) {
-        if(data.type === 'connectionSuccess') {
-            this.sendReadyMessage(data.connectionId);
+        switch (data.type) {
+            case 'connectionSuccess':
+                this.sendReadyMessage(data.connectionId);
+                break;
+            case 'addfail':
+            case 'updatefail':
+            case 'deletefail':
+                console.log("Operation Failed ::: ", data.value.error);
+                break;
+            default:
+                store.dispatch(data);
+                break;
         }
-        store.dispatch(data);
     }
 }
 
