@@ -8,7 +8,7 @@ class FilterSection extends React.Component {
 
     render() {
         return (
-            <div className="btn-group btn-group-sm full-width-btn-group" role="group">
+            <div className="btn-group btn-group-sm todo-filter-group" role="group">
                 <button type="button"
                 className={this.getClassName(FILTERS.SHOW_ALL)}
                 value={FILTERS.SHOW_ALL}
@@ -26,7 +26,7 @@ class FilterSection extends React.Component {
     }
 
     getClassName(filterName) {
-        let classString = "btn btn-link btn-block";
+        let classString = "btn btn-light btn-block todo-filters";
         if(this.props.filter === filterName) {
             classString += " active";
         }

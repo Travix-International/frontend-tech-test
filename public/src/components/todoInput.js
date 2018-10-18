@@ -12,7 +12,7 @@ class TodoInput extends React.Component {
     render() {
         return (
             <input
-                className={this.props.editMode ? "edit-mode" : "form-control"}
+                className={"todo-input form-control " + (this.props.editMode ? "edit-mode" : "")}
                 type="text"
                 autoFocus={true}
                 value={this.state.text}

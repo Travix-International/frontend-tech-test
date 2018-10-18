@@ -7,9 +7,9 @@ import store from '../store';
 class AddSection extends React.Component {
     render() {
         return (
-            <div>
+            <div className="todo-input-holder">
                 <TodoInput
-                    placeholder="Enter your tasks here"
+                    placeholder="What's on your mind?"
                     addTodo={this.addTodo.bind(this)}
                 />
             </div>

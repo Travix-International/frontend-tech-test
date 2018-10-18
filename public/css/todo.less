@@ -1,0 +1,192 @@
+.font_base() {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    ;
+    font-size: 16px;
+    line-height: 18px;
+
+    @media only screen and (max-width: 1030px) {
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    @media only screen and (max-width: 480px) {
+        font-size: 14px;
+        line-height: 16px;
+    }
+}
+
+html {
+    width: 100%;
+}
+
+body {
+    .font_base();
+    width: 80%;
+    max-width: 720px;
+    min-width: 320px;
+    margin: 0 auto;
+    font-weight: 100;
+    background: #f5f5f5;
+    color: #4d4d4d;
+    @media only screen and (max-width: 480px) {
+        width: 90%;
+        max-width: none;
+    }
+
+    @media only screen and (max-width: 350px) {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+.todo {
+    &-heading {
+        font-weight: 100;
+        font-size: 4em;
+        text-align: center;
+        color: #17a2b8;
+    }
+
+    &-author {
+        font-weight: 100;
+        font-size: 1em;
+        text-align: center;
+        color:#4d4d4d;
+    }
+
+    &-input {
+        padding: 10px 10px 10px 20px;
+        border: none;
+        height: initial;
+        background: rgba(0, 0, 0, 0.003);
+        color: #4d4d4d;
+        font-weight: 300;
+        font-size: 1.5em;
+        &.edit-mode {
+            font-size: 1em;
+            line-height: 1em;
+            border-radius: 0;
+            &:focus {
+                border: 1px solid black;
+            }
+        }
+        &:focus {
+            outline: 0;
+            box-shadow: none;
+            border: none;
+        }
+        &::-webkit-input-placeholder {
+            font-style: italic;
+            font-weight: 200;
+            color: #e6e6e6;
+        }
+        &::-moz-placeholder {
+            font-style: italic;
+            font-weight: 300;
+            color: #e6e6e6;
+        }
+        &::input-placeholder {
+            font-style: italic;
+            font-weight: 300;
+            color: #e6e6e6;
+        }
+    }
+
+    &-app {
+        background: #fff;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    &-filter-group {
+        width: 100%;
+        button.todo-filters {
+            margin: 0;
+            border-radius: 0!important;
+            font-weight: 100;
+            &.active:focus {
+                box-shadow: none!important;
+            }
+        }
+    }
+
+    &-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    &-item {
+        font-size: 24px;
+        border-bottom: 1px solid #ededed;
+    }
+
+    &-text {
+        position: relative;
+        font-size: 1em;
+        padding: 13px 10px 13px 20px;
+        line-height: 1em;
+        margin: 0;
+        word-break: break-all;
+        max-width: 520px;
+        @media only screen and (max-width: 1030px) {
+            width: 80%;
+        }
+
+        @media only screen and (max-width: 768px) {
+            width: 75%;
+        }
+
+        @media only screen and (max-width: 520px) {
+            width: 65%;
+        }
+    }
+
+    &-view {
+        position: relative;
+        &.complete {
+            .todo-edit {
+                display: none;
+            }
+            .todo-complete {
+                color: #28a745;
+                &:hover {
+                    color: #dc3545;
+                }
+            }
+            .todo-text {
+                text-decoration: line-through;
+                color: #d9d9d9;
+            }
+        }
+    }
+
+    &-control {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        span {
+            padding: 10px;
+        }
+    }
+
+    &-edit:hover {
+        cursor: pointer;
+        color: #17a2b8;
+    }
+
+    &-complete:hover {
+        cursor: pointer;
+        color: #28a745
+    }
+
+    &-delete:hover {
+        cursor: pointer;
+        color: #dc3545;
+    }
+}

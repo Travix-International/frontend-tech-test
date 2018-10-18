@@ -17,8 +17,8 @@ export default class Socket {
         this.websocket.onopen = function () {
             options.onOpen();
         };
-        this.websocket.onclose = function (args) {
-            options.onClose();
+        this.websocket.onclose = options.onClose || function () {
+            console.log('socket closed');
         };
         this.websocket.onerror = options.onError || function (e) {
             console.log('socket error', e);

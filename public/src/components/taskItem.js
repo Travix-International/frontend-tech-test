@@ -2,10 +2,10 @@ import React from 'react';
 import ActionCreator from '../actions/actionCreator';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faPenSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import TodoInput from './todoInput';
 
-library.add(faCheck, faPen, faTrash);
+library.add(faCheck, faPenSquare, faTrash);
 
 class TaskItem extends React.Component {
     constructor(props) {
@@ -17,35 +17,38 @@ class TaskItem extends React.Component {
 
     render() {
         var element;
+        var task = this.props.task;
         if (this.state.editMode) {
             element = (
                 <TodoInput
                     editMode={true}
-                    text={this.props.task.text}
+                    text={task.text}
                     updateTodo={this.updateTodo.bind(this)}
                 />
             )
           } else {
             element = (
-              <div className="view">
-                <label>
-                  {this.props.task.text}
+              <div className={"todo-view" + (task.completed ? " complete" : "")}>
+                <label className="todo-text">
+                  {task.text}
                 </label>
-                <span onClick={() => { this.setState({editMode: true})}}>
-                    <FontAwesomeIcon icon="pen" />
-                </span>
-                <span onClick={this.markCompleted.bind(this)}>
-                    <FontAwesomeIcon icon="check" />
-                </span>
-                <span onClick={this.deleteTodo.bind(this)}>
-                    <FontAwesomeIcon icon="trash" />
-                </span>
+                <div className="todo-control">
+                    <span className="todo-edit" title="edit" onClick={() => { this.setState({editMode: true})}}>
+                        <FontAwesomeIcon icon="pen-square" />
+                    </span>
+                    <span className="todo-complete" title={task.completed ? "Undo Complete" : "Mark Complete"} onClick={this.markCompleted.bind(this)}>
+                        <FontAwesomeIcon icon="check" />
+                    </span>
+                    <span className="todo-delete" title="Delete" onClick={this.deleteTodo.bind(this)}>
+                        <FontAwesomeIcon icon="trash" />
+                    </span>
+                </div>
               </div>
             )
           }
 
           return (
-            <li>
+            <li className={"todo-item " + (this.state.editMode ? "edit" : "view")}>
               {element}
             </li>
           )
@@ -70,7 +73,7 @@ class TaskItem extends React.Component {
     markCompleted() {
         ActionCreator.sendCompleteMessage({
             ...this.props.task,
-            completed: true
+            completed: !this.props.task.completed
         })
     }
 
