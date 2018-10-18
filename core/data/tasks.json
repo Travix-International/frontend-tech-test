@@ -2,8 +2,28 @@
   "tasks": [
     {
       "id": "0",
-      "text": "To do text here",
+      "text": "This is a Dynamic To do App",
+      "completed": false
+    },
+    {
+      "id": "1",
+      "text": "The implementation is complete",
       "completed": true
+    },
+    {
+      "id": "2",
+      "text": "Open in multiple window to see the magic",
+      "completed": false
+    },
+    {
+      "id": "3",
+      "text": "Websockets, React, Redux, LESS are used in this",
+      "completed": true
+    },
+    {
+      "id": "4",
+      "text": "Thank you checking this application!!",
+      "completed": false
     }
   ]
 }
