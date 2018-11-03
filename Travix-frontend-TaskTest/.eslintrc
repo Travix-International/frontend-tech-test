@@ -1,0 +1,15 @@
+{
+  "extends": ["travix", "prettier"],
+  "plugins": ["react"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "rules": {
+    "react/jsx-no-bind": 0,
+    "import/prefer-default-export": 0
+  }
+}

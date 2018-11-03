@@ -1,0 +1,29 @@
+@import '../../scss/globalvariables.scss';
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  a {
+    margin-right: 0.2rem;
+    margin-left:2rem;
+    font-size:larger;
+      font-weight:bold;
+  }
+
+  margin-top: 2rem;
+}
+
+
+@media screen and (max-width: $responsive-small-device) {
+  .wrap {
+    display: flex;
+    justify-content: space-evenly;
+    a {
+      margin-right: 0.1rem;
+      font-size:larger;
+      font-weight:bold;
+    }
+  
+    margin-top: 1.5rem;
+  }
+}

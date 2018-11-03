@@ -1,0 +1,79 @@
+@import '../../scss/globalvariables.scss';
+
+.wrapper {
+  display: flex;
+  justify-content: flex-start;
+  padding: 2rem 0 1rem 0;
+}
+
+.searchContainer {
+  display: flex;
+  margin-right: 2rem;
+}
+
+.searchInput {
+  width: 21.5rem;
+  margin-right: 0.2rem;
+}
+
+.addNewBtnWrapper {
+  display: flex;
+  margin-right: 3.5rem;
+}
+.mg-lft{
+  margin-left: 1rem;
+}
+
+.fnt-size{
+  font-size:2.75rem !important;
+}
+
+.btn-search {
+  background: #424242;
+  border-radius: 1.8rem;
+  color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #1c1c1c;
+  width: 40%;
+  height:50%;
+
+}
+.btn-search:link, .btn-search:visited {
+  color: #fff;
+}
+.btn-search:active, .btn-search:hover {
+  background: #1c1c1c;
+  color: #fff;
+}
+
+@media screen and (max-width: $responsive-small-device) {
+  .addNewBtnWrapper {
+    margin-top: 10px;
+  }
+  .wrapper {
+    flex-wrap: wrap;
+  }
+  .searchContainer {
+    flex-wrap: wrap;
+   /* margin-left: 2rem; */
+  }
+
+  .searchInput {
+    width: 21.5rem;
+    margin-right: 0.2rem;
+  }
+  .searchButton {
+    margin-top: 20px;
+  }
+  .roudedBorder{
+    border-radius: 1.8rem !important;
+  }
+  .mg-lft{
+    margin-left: 1rem;
+  }
+
+  .fnt-size{
+    font-size:2.75rem !important;
+  }
+}

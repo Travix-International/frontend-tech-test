@@ -1,0 +1,18 @@
+@import '../../scss/globalvariables.scss';
+
+.TaskListwrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+@media screen and (max-width: $responsive-small-device) {
+  .TaskListwrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .Taskwrap{
+    width: 49%;
+  }
+}

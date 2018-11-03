@@ -1,0 +1,17 @@
+.Main {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.txt-align{
+  text-align: center;
+}
+
+.myname{
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  text-align: left;
+  margin-top:4rem;
+}
