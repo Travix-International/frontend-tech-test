@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import TravixtaskItem from '../../components/TravixtaskItem';
 import './TravixtaskList.scss';
 import { TASKS_PER_PAGE } from '../../Globalconstants';
-import { fetchTasks } from './actions';
+import { fetchTravixTasksList } from './TLactions';
 import Recordspaging from '../../components/Recordspaging';
 
 class TravixtaskList extends React.Component {
   constructor(props) {
     super(props);
-    props.fetchTasks(1, TASKS_PER_PAGE, props.filterBy);
+    props.fetchTravixTasksList(1, TASKS_PER_PAGE, props.filterBy);
     this.onPageChange = this.onPageChange.bind(this);
   }
 
@@ -19,7 +19,7 @@ class TravixtaskList extends React.Component {
       nextProps.updatedDate !== this.props.updatedDate ||
       nextProps.filterBy !== this.props.filterBy
     )
-      this.props.fetchTasks(
+      this.props.fetchTravixTasksList(
         this.props.pageNumber,
         TASKS_PER_PAGE,
         nextProps.filterBy
@@ -27,7 +27,7 @@ class TravixtaskList extends React.Component {
   }
 
   onPageChange(page) {
-    this.props.fetchTasks(page, TASKS_PER_PAGE, this.props.filterBy);
+    this.props.fetchTravixTasksList(page, TASKS_PER_PAGE, this.props.filterBy);
   }
 
   render() {
@@ -63,7 +63,7 @@ TravixtaskList.defaultProps = {
 
 TravixtaskList.propTypes = {
   fetching: PropTypes.bool.isRequired,
-  fetchTasks: PropTypes.func.isRequired,
+  fetchTravixTasksList: PropTypes.func.isRequired,
   filterBy: PropTypes.string,
   handleTaskSelection: PropTypes.func.isRequired,
   pageNumber: PropTypes.number,
@@ -79,4 +79,4 @@ const mapStateToProps = state => ({
   fetching: state.TaskListReducer.fetching,
 });
 
-export default connect(mapStateToProps, { fetchTasks })(TravixtaskList);
+export default connect(mapStateToProps, { fetchTravixTasksList })(TravixtaskList);

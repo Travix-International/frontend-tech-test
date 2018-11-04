@@ -6,7 +6,7 @@ import {
 } from './TLconstants';
 import { SERVER_URL } from '../../Globalconstants';
 
-export const fetchTasks = (currentPage, tasksPerPage, filterBy) => {
+export const fetchTravixTasksList = (currentPage, tasksPerPage, filterBy) => {
   const request = axios.get(
     `${SERVER_URL}?pn=${currentPage}&tpp=${tasksPerPage}&search=${filterBy}`
   );

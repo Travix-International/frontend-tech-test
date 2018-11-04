@@ -12,7 +12,7 @@ import {
 } from './TEconstants';
 import { SERVER_URL } from '../../Globalconstants';
 
-export const getTask = id => {
+export const getTravixTask = id => {
   const request = axios.get(`${SERVER_URL}${id}`);
   return dispatch => {
     dispatch({ type: GETPENDING });
@@ -30,7 +30,7 @@ export const getTask = id => {
   };
 };
 
-export const deleteTask = (id, fn) => {
+export const deleteTravixTask = (id, fn) => {
   const request = axios.delete(`${SERVER_URL}${id}`);
   return dispatch => {
     dispatch({ type: DELETEPENDING });
@@ -49,7 +49,7 @@ export const deleteTask = (id, fn) => {
   };
 };
 
-export const createTask = task => {
+export const createTravixTask = task => {
   const request = axios.post(`${SERVER_URL}`, task);
   return dispatch => {
     dispatch({ type: SAVEPENDING });
@@ -67,7 +67,7 @@ export const createTask = task => {
   };
 };
 
-export const updateTask = (task, fn) => {
+export const updateTravixTask = (task, fn) => {
   const request = axios.put(`${SERVER_URL}${task.id}`, task);
   return dispatch => {
     dispatch({ type: SAVEPENDING });

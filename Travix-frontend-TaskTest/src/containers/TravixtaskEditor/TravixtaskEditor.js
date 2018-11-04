@@ -1,16 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  SlidingPanel,
-  SlidingPanelContent,
-  SlidingPanelFooter,
-  Input,
+import {Input,
   Button,
   Modal,
   ModalContent
 } from 'travix-ui-kit';
-import { createTask, updateTask, getTask, deleteTask } from './actions';
+import { createTravixTask, updateTravixTask, getTravixTask, deleteTravixTask } from './TEactions';
 
 import './TravixtaskEditor.scss';
 
@@ -28,13 +24,7 @@ class TravixtaskEditor extends React.Component {
 
   componentWillReceiveProps(props) {
     this.setState({ modelopenstate: props.editmodalstate,task:props.task });
-    
-    /*if (!props.inProgress)
-    return {
-      task: props.task,
-    }; */
-   
-    
+  
   }
 
   titleChange(event) {
@@ -57,18 +47,18 @@ class TravixtaskEditor extends React.Component {
   
   saveChanges() {
     if (!this.state.task.id) this.props.createTask(this.state.task);
-    else this.props.updateTask(this.state.task, () => this.props.onChange());
+    else this.props.updateTravixTask(this.state.task, () => this.props.onChange());
   }
 
   deleteTask() {
-    this.props.deleteTask(this.state.task.id, () => this.props.onChange());
+    this.props.deleteTravixTask(this.state.task.id, () => this.props.onChange());
   }
 
   render() {
     if (this.props.inProgress) return null;
    
     return (
-      <Modal active={this.state.modelopenstate} title={<header>Save Task</header>} overlay closeOnEsc={false}  closeOnOverlayClick={false} fullscreen={false} closable={true} footer={(
+      <Modal active={this.state.modelopenstate} title={<header><span className="modal-header">Save Task</span></header>} overlay closeOnEsc={false}  closeOnOverlayClick={false} fullscreen={false} closable={true} footer={(
         <div>
           <Button className="TaskEditor__saveButton" key="2" onClick={this.saveChanges} size="s">
             Save
@@ -112,13 +102,13 @@ class TravixtaskEditor extends React.Component {
 }
 
 TravixtaskEditor.propTypes = {
-  createTask: PropTypes.func.isRequired,
-  deleteTask: PropTypes.func.isRequired,
+  createTravixTask: PropTypes.func.isRequired,
+  deleteTravixTask: PropTypes.func.isRequired,
   inProgress: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onPanelClose: PropTypes.func.isRequired,
   task: PropTypes.shape().isRequired,
-  updateTask: PropTypes.func.isRequired,
+  updateTravixTask: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -134,8 +124,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export default connect(mapStateToProps, {
-  createTask,
-  updateTask,
-  getTask,
-  deleteTask,
+  createTravixTask,
+  updateTravixTask,
+  getTravixTask,
+  deleteTravixTask,
 })(TravixtaskEditor);
