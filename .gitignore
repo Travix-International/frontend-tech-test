@@ -1,4 +1,3 @@
 node_modules/
-*~
-#*
-.vs_code/
+.vscode/
+mockups.epgz
