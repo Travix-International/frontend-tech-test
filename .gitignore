@@ -1,5 +1,3 @@
 node_modules/
 .vscode/
 mockups.epgz
-
-client/node_modules
