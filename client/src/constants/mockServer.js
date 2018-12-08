@@ -20,7 +20,7 @@ const mockServer = {
         }
       ],
       'allCount': 2,
-      'completedCount': 1,
+      'doneCount': 1,
       'pendingCount': 1
     }
   },

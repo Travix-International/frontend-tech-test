@@ -88,7 +88,7 @@ const TASKS = {
     return {
       tasks: this.convertToArray (0, count),
       allCount: all.length,
-      completedCount: completed.length,
+      doneCount: completed.length,
       pendingCount: pending.length
     }
   },
