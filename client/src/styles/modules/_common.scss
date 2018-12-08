@@ -1,3 +1,6 @@
+#root * {
+  box-sizing: border-box;
+}
  /* to make the application of full height. */
  #root {
   display: flex;
@@ -13,4 +16,6 @@
 // give main full available height.
 main {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }

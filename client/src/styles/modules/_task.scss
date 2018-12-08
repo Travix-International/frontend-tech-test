@@ -1,0 +1,15 @@
+.task-list-container {
+  margin: 15px;
+  .tab-content-container {
+    background: #e4f2ff;
+    padding: 30px;
+    min-height: 250px;
+    .ui-loading-overlay {
+      min-height: 250px;
+    }
+  }
+}
+
+.task-input-container {
+  margin: 10px;
+}
