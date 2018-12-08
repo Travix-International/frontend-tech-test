@@ -31,8 +31,11 @@ describe ('All actions for of the app', () => {
     });
 
     const expectedActions = [
-      { type: actionTypes.APP_DATA.FETCH_APP_DATA_START },
-      { type: actionTypes.APP_DATA.FETCH_APP_DATA_SUCCESS, data: mockServer.fetchAppDataSuccess }
+      { type: actionTypes.APP_DATA.FETCH_APP_DATA_START, tab: 0 },
+      { type: actionTypes.APP_DATA.FETCH_APP_DATA_SUCCESS,
+        data: mockServer.fetchAppDataSuccess.data,
+        tab: mockServer.fetchAppDataSuccess.tab
+      }
     ]
 
     return store.dispatch (actions.fetchAppData ()).then (() => {
@@ -40,7 +43,7 @@ describe ('All actions for of the app', () => {
     });
   });
 
-  it ('should create FETCH_APP_DATA_FAILED action after successful API call', () => {
+  it ('should create FETCH_APP_DATA_FAILED action after failed API call', () => {
     moxios.wait (() => {
       const request = moxios.requests.mostRecent ();
       request.respondWith ({
@@ -50,7 +53,7 @@ describe ('All actions for of the app', () => {
     });
 
     const expectedActions = [
-      { type: actionTypes.APP_DATA.FETCH_APP_DATA_START },
+      { type: actionTypes.APP_DATA.FETCH_APP_DATA_START, tab: 0 },
       { type: actionTypes.APP_DATA.FETCH_APP_DATA_FAILED, error: mockServer.fetchAppDataError }
     ]
 

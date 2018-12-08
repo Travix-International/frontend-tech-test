@@ -22,7 +22,8 @@ const mockServer = {
       'allCount': 2,
       'doneCount': 1,
       'pendingCount': 1
-    }
+    },
+    'tab': 0
   },
   fetchAppDataError: {
     'message': 'Something went wrong!'

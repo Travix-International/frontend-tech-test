@@ -1,8 +1,17 @@
 import actionTypes from "../constants/actionTypes";
+import appConstants from '../constants/appConstants';
+import HELPER from './helper';
 
 // initial state of the application
 export const initialState = {
-  fetchingAllData: false
+  currentTab: appConstants.DEFAULTS.TAB,
+  fetchingAllData: false,
+  allCount: 0,
+  doneCount: 0,
+  pendingCount: 0,
+  allTasks: [],
+  doneTasks: [],
+  pendingTasks: []
 };
 
 
@@ -14,11 +23,13 @@ export const initialState = {
  */
 export const appData = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.APP_DATA.FETCH_APP_DATA_START:
+    case actionTypes.UPDATE_CURRENT_TAB:
       return {
         ...state,
-        fetchingAllData: true
-      };
+        currentTab: action.tab
+      }
+    case actionTypes.APP_DATA.FETCH_APP_DATA_START:
+      return HELPER.startFetchingFlag (state, action.tab);
     case actionTypes.APP_DATA.FETCH_APP_DATA_SUCCESS:
       return {
         ...state,
@@ -28,6 +39,8 @@ export const appData = (state = initialState, action) => {
         doneCount: action.data.doneCount,
         pendingCount: action.data.pendingCount
       };
+    case actionTypes.APP_DATA.FETCH_TAB_DATA_SUCCESS:
+      return HELPER.fetchTabDataSuccess (state, action.tab, action.data.tasks, action.isPagination);
     default:
       return state;
   }

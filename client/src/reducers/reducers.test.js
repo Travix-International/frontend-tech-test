@@ -9,7 +9,8 @@ describe ('Reducer of the application', () => {
 
   it ('should handle the fetch_app_data_start action', () => {
     const startAction = {
-      type: actionTypes.APP_DATA.FETCH_APP_DATA_START
+      type: actionTypes.APP_DATA.FETCH_APP_DATA_START,
+      tab: 0
     }
 
     const expectedState = {

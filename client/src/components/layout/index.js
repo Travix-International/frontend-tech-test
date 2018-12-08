@@ -1,7 +1,7 @@
 import React from 'react';
 import LABELS from '../../constants/labels';
-import List from '../list';
 import TaskInput from '../task-input';
+import ConnectedList from '../list/ConnectedList';
 
 const Layout = () => {
   return (
@@ -11,7 +11,7 @@ const Layout = () => {
       </header>
       <main>
         <TaskInput />
-        <List />
+        <ConnectedList />
       </main>
       <footer>
         Created by <a href="http://jayendra.co.in">Jayendra Sharan</a>
