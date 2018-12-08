@@ -13,13 +13,26 @@ taskRouter.get ('/task/test-api', (req, res) => {
   }).status (200);
 });
 
+
+taskRouter.get ('/task/get-app-data', (req, res) => {
+  const data = TASKS.getAppData (parseInt (req.query.limit));
+  if (data) {
+    res.send ({
+      'data': data
+    }).status (200);
+  }
+  res.status (400).send ({
+    'message': labels.CATCH_ERROR
+  });
+})
+
 /**
  * GET /task/get-all-tasks
  * 
  * Returns all tasks available in the current environment.
  */
 taskRouter.get ('/task/get-all-tasks', (req, res) => {
-  const { page, limit } = req.query;
+  const { page, limit, type } = req.query;
 
   if (!page || !limit) {
     // bad request
@@ -27,7 +40,7 @@ taskRouter.get ('/task/get-all-tasks', (req, res) => {
       'message': labels.BAD_REQUEST
     });
   }
-  const allTasks = TASKS.getAllTasks (page, limit);
+  const allTasks = TASKS.getAllTasks (parseInt(page), parseInt(limit), type);
   res.send ({
     'data': allTasks
   });

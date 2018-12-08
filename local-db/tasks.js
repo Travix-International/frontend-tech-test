@@ -1,6 +1,9 @@
-const TASK_TYPE = require ('../constants/task-type').TASK;
+const TASK_CONST = require ('../constants/task-type');
 const labels = require ('../constants/labels');
 const crypto = require ('crypto');
+
+const TASK_TYPE = TASK_CONST.TASK;
+const LIMIT = TASK_CONST.LIMIT;
 
 /**
  * An object to hold all tasks, where the key is the id and
@@ -9,9 +12,21 @@ const crypto = require ('crypto');
 let allTasks = {};
 
 /**
- * An array that contains the list of task ids.
+ * An array that contains the list of task ids all.
  */
-let index = [];
+let all = [];
+
+
+/**
+ * An array that contains the list of task ids of completed tasks.
+ */
+let completed = [];
+
+
+/**
+ * An array that contains the list of task ids of pending tasks.
+ */
+let pending = [];
 
 /**
    * @description A utility function that determines whether the
@@ -64,18 +79,54 @@ const typeOfInputIsTask = (task) => {
 const TASKS = {
 
   /**
-   * @description function to get all tasks.
+   * @description function to get all data for the initialisation
+   * of application.
+   * @param {Number} count no of items to be fetched in first request.
    */
-  getAllTasks (page, limit) {
+  getAppData (count) {
+    count = count || LIMIT;
+    return {
+      tasks: this.convertToArray (0, count),
+      allCount: all.length,
+      completedCount: completed.length,
+      pendingCount: pending.length
+    }
+  },
+  /**
+   * @description function to get all tasks.
+   * @param {Number} page current page number
+   * @param {Number} limit no of items to be retrieved
+   * @param {String} type of task to be retrieved.
+   * @return {Array}
+   */
+  getAllTasks (page, limit, type) {
     let start = (page - 1) * limit,
         end = page * limit;
-    return this.convertToArray (start, end);
+    return {
+      tasks: this.convertToArray (start, end, type)
+    };
   },
 
-  convertToArray (start, end) {
-    let tempArr = [];
+  /**
+   * @description function to extract the objects for the given ids of the array.
+   * @param {Number} start index for the array.
+   * @param {Number} end index for the array.
+   * @param {String} type of task to be fetched.
+   */
+  convertToArray (start, end, type) {
+    let tempArr = [],
+        thisList = [];
+    if (!type) {
+      thisList = all;
+    } else {
+      if (type === 'C') {
+        thisList = completed
+      } else {
+        thisList = pending;
+      }
+    }
     for (let count = start; count < end; count++) {
-      let task = allTasks[index[count]];
+      let task = allTasks[thisList[count]];
       if (task) {
         tempArr.push (task);
       }
@@ -101,7 +152,7 @@ const TASKS = {
         }
         
         allTasks [id] = createdTask;
-        index.push (id);
+        this.createIndex (createdTask);
 
         return {
           'status': 1,
@@ -124,6 +175,20 @@ const TASKS = {
   },
 
   /**
+   * @description function to maintain the indices of
+   * all, completed, and pending tasks.
+   * @param {Object} task object
+   */
+  createIndex (task) {
+    all.push (task.id);
+    if (task.isCompleted) {
+      completed.push (task.id)
+    } else {
+      pending.push (task.id)
+    }
+  },
+
+  /**
    * @description function to return task content for the
    * given id.
    * @param {String} id of the task
@@ -142,7 +207,10 @@ const TASKS = {
       
       // asynchronously remove the id from the index array.
       setTimeout (() => {
-        index = index.filter (taskId => taskId !== id);
+        this.
+        all = all.filter (taskId => taskId !== id);
+        completed = completed.filter (taskId => taskId !== id);
+        pending = pending.filter (taskId => taskId !== id);
       }, 0);
 
       return true;
@@ -167,6 +235,7 @@ const TASKS = {
           thisTask[key] = task[key];
         }
         thisTask ["lastUpdatedAt"] = Date.now ();
+        this.updateIndex (thisTask);
         return {
           status: 1,
           message: labels.TASK_UPDATED,
@@ -181,6 +250,39 @@ const TASKS = {
         message: e.message
       }
     }
+  },
+
+  /**
+   * @description function to update the indices when task is updated.
+   * @param {Object} updatedTask task object.
+   */
+  updateIndex (updatedTask) {
+    // if new status is completed, remove it from pending and push to
+    // completed.
+    if (updatedTask.isCompleted) {
+      pending = pending.filter (id => id !== updatedTask.id);
+      completed = this.pushIfNotExist (completed, updatedTask.id);
+    } else {
+      // if new status is pending, remove it from completed and push to
+      // pending.
+      completed = completed.filter (id => id !== updatedTask.id);
+      pending = this.pushIfNotExist (pending, updatedTask.id);
+    }
+  },
+
+  /**
+   * @description function to push an item into the array
+   * if it does not already exist.
+   * @param {Arra} list 
+   * @param {String} id 
+   */
+  pushIfNotExist (list, id) {
+    let newList = [];
+    if (!list.filter (item => item.id).length) {
+      newList = list.slice ();
+      newList.push (id);
+    }
+    return newList;
   },
 
   /**
