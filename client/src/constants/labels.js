@@ -9,7 +9,8 @@ const LABELS = {
     'PLACEHOLDER': 'What do you want to do today?'
   },
   'TASKS': {
-    'LOADING': 'Loading your tasks'
+    'LOADING': 'Loading your tasks...',
+    'NO_TASKS': 'You have no tasks in this bucket!'
   }
 };
 

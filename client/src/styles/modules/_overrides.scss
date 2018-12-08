@@ -1,0 +1,20 @@
+.task-list-container {
+  .ui-tab {
+    height: 40px;
+    &:after {
+      border-bottom-width: 40px;
+      border-left-width: 2px; 
+    }
+  }
+  li.ui-toggle-button__item {
+    height: 30px;
+    min-width: 100px;
+    padding: 0;
+  }
+  .ui-button_size_s {
+    height: 30px;
+    font-size: 14px;
+    margin-right: 10px;
+    border-radius: 5px;
+  }
+}

@@ -2,12 +2,75 @@
   margin: 15px;
   .tab-content-container {
     background: #e4f2ff;
-    padding: 30px;
+    padding: 20px;
     min-height: 250px;
-    max-height: 400px;
-    height: 400px;
+    max-height: 440px;
+    height: 440px;
+    overflow: hidden;
     .ui-loading-overlay {
       min-height: 250px;
+    }
+    .no-task-in-bucket {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .task-item {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      background: #5ec7f6;
+      padding: 10px;
+      margin-right: 10px;
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      
+      .task-title {
+        height: 30px;
+        line-height: 30px;
+        font-weight: bold;
+        color: #ffffff;
+      }
+      .task-description {
+        width: 100%;
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 1.2;
+        margin-top: -100px;
+        transition: all 1s;
+        z-index: -1;
+      }
+      .show-task-description {
+        margin-top: 10px;
+        z-index: 0;
+        transition: all 0.5s;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .task-item {
+    flex-direction: column;
+    .task-actions {
+      margin-top: 10px;;
+      display: flex;
+    }
+  }
+}
+@media only screen and (min-width: 768px) {
+  .task-item {
+    flex-direction: row;
+    .task-title {
+      margin-bottom: 0px;
+    }
+    .task-actions {
+      margin-top: 0px;;
+      display: flex;
     }
   }
 }

@@ -1,13 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import TaskList from '.';
+import mockServer from '../../constants/mockServer';
 
 describe ('Task List component', () => {
   let component;
 
   beforeEach (() => {
     component = shallow (<TaskList
-                            currentTab={0} />
+                            tasks={ mockServer.fetchAppDataSuccess.data.tasks }
+                            currentTab={0}
+                            isFetching={false}/>
                 );
   });
   afterEach (() => {

@@ -293,10 +293,13 @@ const TASKS = {
     count = parseInt (count) || 3;
     for (let index = 0; index <  count; index++) {
       const random = Math.floor ((Math.random () * 9) + 1)
+      const isCompleted = (index % random) === 0;
+      const title = `${isCompleted ? 'DONE': 'PENDING'}: Test title ${index}`;
+      const description = `${isCompleted ? 'DONE': 'PENDING'}: Test description ${index}`;
       const req = {
-        'title': `Test title ${index}`,
-        'description': `Test description ${index}`,
-        'isCompleted': (index % random) === 0
+        title,
+        description,
+        isCompleted 
       }
       this.createTask (req);
     }

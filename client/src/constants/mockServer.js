@@ -1,4 +1,12 @@
 const mockServer = {
+  'sampleTask': {
+    'id': 'T-2714fa55d3a714d1f75511',
+    'title': 'Test title 0',
+    'description': 'Test description 0',
+    'isCompleted': true,
+    'createdAt': 1544260778133,
+    'lastUpdatedAt': 1544260778133
+  },
   'fetchAppDataSuccess': {
     'data': {
       'tasks': [
