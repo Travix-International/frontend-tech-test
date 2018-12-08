@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs, Tab, LoadingOverlay } from 'travix-ui-kit';
-import LABELS from '../../constatns/labels';
+import LABELS from '../../constants/labels';
 
 class List extends React.Component {
   constructor (props) {

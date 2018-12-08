@@ -1,5 +1,5 @@
 import React from 'react';
-import LABELS from '../../constatns/labels';
+import LABELS from '../../constants/labels';
 import List from '../list';
 import TaskInput from '../task-input';
 

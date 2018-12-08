@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input } from 'travix-ui-kit';
-import LABELS from '../../constatns/labels';
+import LABELS from '../../constants/labels';
 
 class TaskInput extends React.Component {
   constructor (props) {
