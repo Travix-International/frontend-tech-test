@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import "../node_modules/travix-ui-kit/dist/ui-bundle.css";
+import "../node_modules/travix-ui-kit/dist/theme.css";
 import App from './app/App';
 import * as serviceWorker from './serviceWorker';
 
