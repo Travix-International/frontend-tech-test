@@ -20,10 +20,11 @@ taskRouter.get ('/task/get-app-data', (req, res) => {
     res.send ({
       'data': data
     }).status (200);
+  } else {
+    res.status (400).send ({
+      'message': labels.CATCH_ERROR
+    });
   }
-  res.status (400).send ({
-    'message': labels.CATCH_ERROR
-  });
 })
 
 /**
@@ -39,11 +40,12 @@ taskRouter.get ('/task/get-all-tasks', (req, res) => {
     res.status (404).send ({
       'message': labels.BAD_REQUEST
     });
+  } else {
+    const allTasks = TASKS.getAllTasks (parseInt(page), parseInt(limit), type);
+    res.send ({
+      'data': allTasks
+    });
   }
-  const allTasks = TASKS.getAllTasks (parseInt(page), parseInt(limit), type);
-  res.send ({
-    'data': allTasks
-  });
 })
 
 /**
@@ -80,10 +82,11 @@ taskRouter.get ('/task/:id', (req, res) => {
     res.send ({
       'data': task
     }).status (200);
+  } else {
+    res.status (404).send ({
+      'message': labels.NO_EXIST
+    });
   }
-  res.status (404).send ({
-    'message': labels.NO_EXIST
-  });
 });
 
 /**
@@ -97,10 +100,11 @@ taskRouter.delete ('/task/:id', (req, res) => {
     res.send ({
       'message': labels.TASK_DELETED
     }).status (200);
+  } else {
+    res.status (404).send ({
+      'message': labels.NO_EXIST
+    });
   }
-  res.status (404).send ({
-    'message': labels.NO_EXIST
-  });
 });
 
 
@@ -114,12 +118,13 @@ taskRouter.put ('/task/:id', (req, res) => {
     res.status (404).send ({
       'message': labels.NO_ID
     });
-  }
-  const task = TASKS.updateTask (req.params.id, req.body);
-  if (task) {
-    res.send ({
-      'data': task
-    }).status (200);
+  } else {
+    const task = TASKS.updateTask (req.params.id, req.body);
+    if (task) {
+      res.send ({
+        'data': task
+      }).status (200);
+    }
   }
 });
 
