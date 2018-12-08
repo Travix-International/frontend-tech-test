@@ -5,11 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-<<<<<<< HEAD
     "start:watch": "nodemon server.js",
-=======
-    "start:w": "nodemon server.js",
->>>>>>> client
     "test": "mocha -w"
   },
   "keywords": [
