@@ -189,10 +189,10 @@ const TASKS = {
    */
   generateTasks (count) {
     count = parseInt (count) || 3;
-    console.log (count);
     for (let index = 0; index <  count; index++) {
       const random = Math.floor ((Math.random () * 9) + 1)
       const req = {
+        'title': `Test title ${index}`,
         'description': `Test description ${index}`,
         'isCompleted': (index % random) === 0
       }

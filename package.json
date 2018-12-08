@@ -4,7 +4,8 @@
   "description": "test back - front",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "start:w": "nodemon server.js",
     "test": "mocha -w"
   },
   "keywords": [
