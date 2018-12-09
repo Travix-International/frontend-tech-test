@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Test Suite: For task list - main component.
+ * @author Jayendra Sharan (http://jayendra.co.in)
+ */
 import React from 'react';
 import { shallow } from 'enzyme';
 import List from '.';
@@ -14,6 +18,8 @@ describe ('List Section of Task app', () => {
                     pendingCount={ mockServer.fetchAppDataSuccess.data.pendingCount }
                     currentTab={ 0 }
                     fetchingAllData={false}
+                    createNewTask={mockFn}
+                    createError={'test'}
                     />);
   });
   afterEach (() => {
@@ -26,5 +32,9 @@ describe ('List Section of Task app', () => {
 
   it ('should contain three tabs for all, pending, and completed items', () => {
     expect (component.find ('Tab').length).toEqual (3);
+  });
+
+  it ('should contain the add task form', () => {
+    expect (component.find ('TaskInput').length).toEqual (1);
   });
 })

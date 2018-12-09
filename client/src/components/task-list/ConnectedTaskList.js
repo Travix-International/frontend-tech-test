@@ -59,7 +59,8 @@ const mapStateToProps = state => {
     appErrorStatus: state.appData.appErrorStatus,
     isUpdating: state.update.isUpdating,
     id: state.update.id,
-    updateErrorMessage: getUpdateErrorMessage (state.update.error)
+    updateErrorMessage: getUpdateErrorMessage (state.update.error),
+    isCreating: state.create.isCreating
   }
 }
 

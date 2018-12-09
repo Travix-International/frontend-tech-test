@@ -1,6 +1,5 @@
 import React from 'react';
 import LABELS from '../../constants/labels';
-import TaskInput from '../task-input';
 import ConnectedList from '../list/ConnectedList';
 
 const Layout = () => {
@@ -10,7 +9,6 @@ const Layout = () => {
         { LABELS.APP_TITLE }
       </header>
       <main>
-        <TaskInput />
         <ConnectedList />
       </main>
       <footer>

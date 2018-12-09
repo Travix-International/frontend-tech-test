@@ -65,6 +65,20 @@ export const appData = (state = initialState, action) => {
       }
     case actionTypes.APP_DATA.UPDATE_BUCKETS:
       return HELPER.updateBuckets (state, action.task);
+    case actionTypes.APP_DATA.ADD_IN_BUCKETS:
+      return {
+        ...state,
+        allCount: state.allCount + 1,
+        pendingCount: state.pendingCount + 1,
+        allTasks: [
+          action.task,
+          ...state.allTasks
+        ],
+        pendingTasks: [
+          action.task,
+          ...state.pendingTasks
+        ]
+      }
     default:
       return state;
   }

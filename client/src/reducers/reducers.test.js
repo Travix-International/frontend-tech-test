@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Test Suite: For app reducer.
+ * @author Jayendra Sharan (http://jayendra.co.in)
+ */
 import { initialState, appData } from '.';
 import actionTypes from '../constants/actionTypes';
 import mockServer from '../constants/mockServer';

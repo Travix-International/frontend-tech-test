@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Test Suite: For App's main page.
+ * @author Jayendra Sharan (http://jayendra.co.in)
+ */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '.';

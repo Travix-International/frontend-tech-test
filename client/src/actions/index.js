@@ -166,11 +166,22 @@ const actions = {
 
   /**
    * @description function to update buckets.
-   * @param {Object} task 
+   * @param {Object} data from the server 
    */
   updateBuckets (data) {
     return ({
       type: actionTypes.APP_DATA.UPDATE_BUCKETS,
+      task: data.task
+    });
+  },
+
+  /**
+   * @description add in pending and all tasks.
+   * @param {Object} data from the server
+   */
+  addInBuckets (data) {
+    return ({
+      type: actionTypes.APP_DATA.ADD_IN_BUCKETS,
       task: data.task
     });
   }

@@ -1,14 +1,16 @@
 import React from 'react';
-import { Tabs, Tab } from 'travix-ui-kit';
+import { Tabs, Tab, Modal } from 'travix-ui-kit';
 import LABELS from '../../constants/labels';
 import types from '../../constants/types';
 import ConnectedTaskList from '../task-list/ConnectedTaskList';
+import TaskInput from '../task-input';
 
 class List extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      activeTabIndex: 0
+      activeTabIndex: 0,
+      isOpenBaseModal: false
     }
   }
 
@@ -26,6 +28,11 @@ class List extends React.Component {
    * @param {Object} data nextProps || this.props
    */
   _updateState (data) {
+    if (data.createError) {
+      this.setState ({
+        isOpenBaseModal: true
+      });
+    }
     this.setState ({
       activeTabIndex: data.currentTab
     });
@@ -47,19 +54,31 @@ class List extends React.Component {
     const { currentTab,
             allCount,
             doneCount,
-            pendingCount } = this.props;
+            pendingCount,
+            createNewTask,
+            createError } = this.props;
     return (
-      <div className={`task-list-container ${!currentTab ? 'all-tasks' : ''}`}>
-        <Tabs
-          onChange={ this._onTabChange.bind (this) }>
-          <Tab title={ `${LABELS.TABS.A} [${allCount}]` } />
-          <Tab title={ `${LABELS.TABS.P} [${pendingCount}]` } />
-          <Tab title={ `${LABELS.TABS.D} [${doneCount}]` } />
-        </Tabs>
-        <div className='tab-content-container'>
-          <ConnectedTaskList />
+      <React.Fragment>
+        <Modal
+          active={ this.state.isOpenBaseModal }
+          onClose={ () => this.setState({ isOpenBaseModal: false }) }>
+            { `${LABELS.ERROR_MESSAGE.CREATE_FAILED}\n${createError}` }
+        </Modal>
+        <TaskInput
+          createTask={ (task) => { createNewTask (task)} }
+          />
+        <div className={`task-list-container ${!currentTab ? 'all-tasks' : ''}`}>
+          <Tabs
+            onChange={ this._onTabChange.bind (this) }>
+            <Tab title={ `${LABELS.TABS.A} [${allCount}]` } />
+            <Tab title={ `${LABELS.TABS.P} [${pendingCount}]` } />
+            <Tab title={ `${LABELS.TABS.D} [${doneCount}]` } />
+          </Tabs>
+          <div className='tab-content-container'>
+            <ConnectedTaskList />
+          </div>
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 }
@@ -69,7 +88,9 @@ List.propTypes = {
   currentTab: types._number,
   allCount: types._number,
   doneCount: types._number,
-  pendingCount: types._number
+  pendingCount: types._number,
+  createNewTask: types._function,
+  createError: types._string
 }
 
 export default List;

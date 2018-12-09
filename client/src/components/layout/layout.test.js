@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Test Suite: For app layout.
+ * @author Jayendra Sharan (http://jayendra.co.in)
+ */
 import React from 'react';
 import { shallow } from 'enzyme';
 import Layout from '.';

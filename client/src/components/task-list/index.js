@@ -64,16 +64,17 @@ class TaskList extends React.Component {
             updateTask,
             isUpdating,
             id,
-            updateErrorMessage
+            updateErrorMessage,
+            isCreating
           } = this.props;
     
     return (
       <LoadingOverlay
-        loading={isFetching || this.state.pageFetching }
-        message={ LABELS.TASKS.LOADING }
+        loading={isFetching || this.state.pageFetching || isCreating }
+        message={ isCreating ? LABELS.TASKS.CREATE_LOADING : LABELS.TASKS.LOADING }
         messageDirectiion='bottom'
         spinner={ true }
-        transparency={ (this.state.pageFetching || isFetching) && !!tasks.length }>
+        transparency={ isCreating || ((this.state.pageFetching || isFetching) && !!tasks.length) }>
           <Scrollbars
             ref="scrollbar"
             onScroll={ this._onScroll }
@@ -81,7 +82,7 @@ class TaskList extends React.Component {
             {
               (appErrorStatus > 0) ?
                 <div className='no-task-in-bucket'>
-                  { LABELS.ERROR_MESSAGE[appErrorStatus] }
+                  { LABELS.ERROR_MESSAGE[`${appErrorStatus}`] }
                 </div>
     
                 : // if no error, check for tasks length.
@@ -114,7 +115,8 @@ TaskList.propTypes = {
   currentTab: types._number,
   isFetching: types._boolean,
   tasks: types._taskArray,
-  appErrorStatus: types._number 
+  appErrorStatus: types._number,
+  isCreating: types._boolean
 }
 
 export default TaskList;

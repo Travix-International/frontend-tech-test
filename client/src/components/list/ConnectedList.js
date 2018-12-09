@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import List from '.';
 import { bindActionCreators } from 'redux';
 import actions from './../../actions';
+import createActions from './../../actions/create';
 
 const mapStateToProps = (state) => {
   const { currentTab,
@@ -12,14 +13,16 @@ const mapStateToProps = (state) => {
     currentTab,
     allCount,
     doneCount,
-    pendingCount
+    pendingCount,
+    createError: state.create.createError
   }
 }
 
 const mapDispatchToProps = (dispatch) => (
   bindActionCreators ({
     fetchAllData: actions.fetchAppData,
-    changeTab: actions.fetchTabDataIfNeeded
+    changeTab: actions.fetchTabDataIfNeeded,
+    createNewTask: createActions.createTask
   }, dispatch)
 )
 

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Test Suite: For task item.
+ * @author Jayendra Sharan (http://jayendra.co.in)
+ */
 import React from 'react';
 import { shallow } from 'enzyme';
 import TaskItem from '.';
@@ -21,13 +25,5 @@ describe ('Task Item Component', () => {
 
   it ('should render Task Item component without crashing', () => {
     expect (component.exists ()).toBe (true);
-  });
-
-  it ('should render Task Item component without crashing', () => {
-
-  });
-
-  it ('should render Task Item component without crashing', () => {
-
   });
 })

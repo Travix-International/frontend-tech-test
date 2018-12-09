@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Test Suite: For updating the task.
+ * @author Jayendra Sharan (http://jayendra.co.in)
+ */
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';

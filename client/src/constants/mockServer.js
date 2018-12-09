@@ -51,6 +51,31 @@ const mockServer = {
   },
   'updateFailed': {
     'message': 'Update failed.'
+  },
+  'createRequest': {
+    'title': 'This is mock create title.',
+    'description': 'This is mock create description.',
+    'isCompleted': false
+  },
+  'createResponse': {
+    "data": {
+        "status": 1,
+        "message": "Task created successfully.",
+        "task": {
+            "id": "T-b37a47ed2d793b0833440e",
+            "title": "test",
+            "description": "Test description of todo 1",
+            "isCompleted": false,
+            "createdAt": 1544350770706,
+            "lastUpdatedAt": 1544350770706
+        }
+    }
+  },
+  'createError': {
+    "data": {
+        "status": -1,
+        "message": "The object passed is not a valid task."
+    }
   }
 };
 

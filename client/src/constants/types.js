@@ -14,6 +14,7 @@ const types = {
   _function: PropTypes.func.isRequired,
   _boolean: PropTypes.bool.isRequired,
   _number: PropTypes.number.isRequired,
+  _string: PropTypes.string.isRequired,
   _task: taskType.isRequired,
   _taskArray: PropTypes.arrayOf (taskType)
 }

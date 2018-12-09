@@ -3,10 +3,12 @@ import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import { appData } from './reducers';
 import { update } from './reducers/update';
+import { create } from './reducers/create';
 
 const rootReducer = combineReducers ({
   appData,
-  update
+  update,
+  create
 });
 
 // returns true in development environment.
