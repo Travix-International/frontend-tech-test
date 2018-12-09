@@ -3,6 +3,7 @@ import List from '.';
 import { bindActionCreators } from 'redux';
 import actions from './../../actions';
 import createActions from './../../actions/create';
+import updateActions from '../../actions/update';
 
 const mapStateToProps = (state) => {
   const { currentTab,
@@ -14,6 +15,7 @@ const mapStateToProps = (state) => {
     allCount,
     doneCount,
     pendingCount,
+    updating: state.update.updating,
     createError: state.create.createError
   }
 }
@@ -22,7 +24,9 @@ const mapDispatchToProps = (dispatch) => (
   bindActionCreators ({
     fetchAllData: actions.fetchAppData,
     changeTab: actions.fetchTabDataIfNeeded,
-    createNewTask: createActions.createTask
+    createNewTask: createActions.createTask,
+    cancelEdit: updateActions.cancelEdit,
+    updateTask: updateActions.updateTask
   }, dispatch)
 )
 

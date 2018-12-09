@@ -33,6 +33,11 @@ const updateFailed = (id, error, status) => ({
 });
 
 const updateActions = {
+  /**
+   * @description function to make the api call and dispatch relevant actions.
+   * @param {String} id of thet ask to be updated
+   * @param {Object} task 
+   */
   updateTask (id, task) {
     return dispatch => {
       dispatch (updateStart (id));
@@ -57,6 +62,23 @@ const updateActions = {
       }).catch (error => {
         dispatch (updateFailed (id, error.response.data, error.response.status));
       });
+    }
+  },
+
+  /**
+   * @description action creator: sets the task to be updated.
+   * @param {Object} task
+   */
+  editThisTask (task) {
+    return {
+      type: actionTypes.TASK.UPDATE_TASK.EDIT_THIS_TASK,
+      task
+    }
+  },
+
+  cancelEdit () {
+    return {
+      type: actionTypes.TASK.UPDATE_TASK.CANCEL_EDIT
     }
   }
 };

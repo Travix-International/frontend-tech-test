@@ -16,6 +16,7 @@ describe ('Task Item Component', () => {
                   isUpdating={ false }
                   task={ mockServer.sampleTask.data.task }
                   toggleStatus={ mockFn }
+                  editTask={ mockFn }
                   />
                 );
   });

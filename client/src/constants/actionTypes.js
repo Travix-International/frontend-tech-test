@@ -12,6 +12,8 @@ const actionTypes = {
   },
   'TASK': {
     'UPDATE_TASK': {
+      'EDIT_THIS_TASK': 'EDIT_THIS_TASK',
+      'CANCEL_EDIT': 'CANCEL_EDIT',
       'UPDATE_START': 'UPDATE_START',
       'UPDATE_SUCCESS': 'UPDATE_SUCCESS',
       'UPDATE_FAILED': 'UPDATE_FAILED'

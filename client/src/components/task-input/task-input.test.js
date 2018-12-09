@@ -5,13 +5,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import TaskInput from '.';
+import mockServer from './../../constants/mockServer';
 
 describe ('Task input component', () => {
   let component;
   const mockFn = jest.fn ();
   beforeEach (() => {
     component = shallow (<TaskInput
+                            updating={ mockServer.sampleTask.data.task }
                             createTask={ mockFn }
+                            cancelEdit={ mockFn }
+                            updateTask={ mockFn }
                             />)
   })
   it ('should render without crashing', () => {

@@ -12,6 +12,7 @@ const taskType = PropTypes.shape ({
 
 const types = {
   _function: PropTypes.func.isRequired,
+  _object: PropTypes.object.isRequired,
   _boolean: PropTypes.bool.isRequired,
   _number: PropTypes.number.isRequired,
   _string: PropTypes.string.isRequired,

@@ -16,7 +16,10 @@ const LABELS = {
     'CREATE_LOADING': 'Creating the task for you!',
     'NO_TASKS': 'You have no tasks in this bucket!',
     'EXPAND_HELP': 'Click to expand',
-    'COLLAPSE_HELP': 'Click to collapse'
+    'COLLAPSE_HELP': 'Click to collapse',
+    'ADD_TASK': 'Add Task',
+    'EDIT_TASK': 'Edit Task',
+    'CANCEL_BUTTON': 'Cancel'
   },
   'ERROR_MESSAGE': {
     '500': 'Could not connect to the server.',

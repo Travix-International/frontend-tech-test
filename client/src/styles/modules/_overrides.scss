@@ -18,3 +18,17 @@
     border-radius: 5px;
   }
 }
+@media only screen and (min-width: 360px) {
+  .task-list-container {
+    .ui-tab {
+      font-size: 14px;
+    }
+  }
+}
+@media only screen and (min-width: 768px) {
+  .task-list-container {
+    .ui-tab {
+      font-size: initial;
+    }
+  }
+}

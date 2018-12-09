@@ -20,6 +20,7 @@ describe ('List Section of Task app', () => {
                     fetchingAllData={false}
                     createNewTask={mockFn}
                     createError={'test'}
+                    updating={ mockServer.sampleTask.data.task }
                     />);
   });
   afterEach (() => {

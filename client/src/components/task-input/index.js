@@ -10,7 +10,23 @@ class TaskInput extends React.Component {
       title: '',
       description: '',
       showForm: false,
-      isOpenBaseModal: false
+      isOpenBaseModal: false,
+      isEdit: false
+    }
+  }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.updating && nextProps.updating.id) {
+      this.setState ({
+        title: nextProps.updating.title,
+        description: nextProps.updating.description,
+        showForm: true,
+        isEdit: true
+      });
+    } else {
+      this.setState ({
+        showForm: false,
+        isEdit: false
+      });
     }
   }
   _onFocus (e) {
@@ -38,6 +54,19 @@ class TaskInput extends React.Component {
     });
   }
 
+  _clearForm () {
+    this.setState ({
+      title: '',
+      description: ''
+    });
+  }
+
+  _onCancelClick (e) {
+    this._hideForm ();
+    this.props.cancelEdit ();
+    this._clearForm ();
+  }
+
   _onFormSubmit (e) {
     e.preventDefault ();
     if (!this.state.title) {
@@ -46,15 +75,20 @@ class TaskInput extends React.Component {
       });
     } else {
       const { title, description } = this.state;
-      this.setState ({
-        title: '',
-        description: ''
-      });
-      this.props.createTask ({
-        title,
-        description,
-        'isCompleted': 'false'
-      });
+      if (this.state.isEdit) {
+        this.props.updateTask (this.props.updating.id, {
+          title,
+          description,
+          isCompleted: this.props.updating.isCompleted
+        });
+      } else {
+        this.props.createTask ({
+          title,
+          description,
+          'isCompleted': 'false'
+        });
+      }
+      this._clearForm ();
       this.setState ({
         showForm: false
       });
@@ -85,17 +119,17 @@ class TaskInput extends React.Component {
               placeholder={ LABELS.INPUT.PLACEHOLDER.DESCRIPTION } />
             <div className='form-action'>
               <Button
-                onClick={ this._hideForm.bind(this) }
+                onClick={ this._onCancelClick.bind (this) }
                 variation="ghost"
                 size="s">
-                Cancel
+                { LABELS.TASKS.CANCEL_BUTTON }
               </Button>
 
               <Button
                 onClick={ this._onFormSubmit.bind (this) }
                 variation="ghost"
                 size="s">
-                Add Task
+                { this.state.isEdit ? LABELS.TASKS.EDIT_TASK : LABELS.TASKS.ADD_TASK }
               </Button>
             </div>
 
@@ -107,7 +141,10 @@ class TaskInput extends React.Component {
 }
 
 TaskInput.propTypes = {
-  createTask: types._function
+  createTask: types._function,
+  updating: types._object,
+  cancelEdit: types._function,
+  updateTask: types._function
 }
 
 export default TaskInput;

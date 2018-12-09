@@ -9,15 +9,20 @@ import mockServer from '../../constants/mockServer';
 
 describe ('Task List component', () => {
   let component;
+  const mockFn = jest.fn ();
 
   beforeEach (() => {
     component = shallow (<TaskList
-                            isUpdating={false}
-                            tasks={ mockServer.fetchAppDataSuccess.data.tasks }
                             currentTab={0}
-                            appErrorStatus={0}
                             isFetching={false}
-                            isCreating={false}/>
+                            tasks={ mockServer.fetchAppDataSuccess.data.tasks }
+                            appErrorStatus={0}
+                            isUpdating={false}
+                            id={ mockServer.updateRequestId }
+                            isCreating={false}
+                            updateTask={ mockFn }
+                            fetchTabData={ mockFn }
+                            editThisTask={ mockFn }/>
                 );
   });
   afterEach (() => {

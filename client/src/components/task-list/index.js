@@ -64,8 +64,8 @@ class TaskList extends React.Component {
             updateTask,
             isUpdating,
             id,
-            updateErrorMessage,
-            isCreating
+            isCreating,
+            editThisTask
           } = this.props;
     
     return (
@@ -91,13 +91,14 @@ class TaskList extends React.Component {
                   tasks.map (task => {
                     return (
                       <TaskItem
-                        updateErrorMessage={ updateErrorMessage }
-                        errorId={ id }
                         isUpdating={ isUpdating && task.id === id }
                         toggleStatus={ (id, task) => {
                           updateTask (id, task);
                         }}
                         task={ task }
+                        editTask={ (task) => {
+                          editThisTask (task);
+                        }}
                         key={task.id} />
                       )
                   }) :
@@ -116,7 +117,12 @@ TaskList.propTypes = {
   isFetching: types._boolean,
   tasks: types._taskArray,
   appErrorStatus: types._number,
-  isCreating: types._boolean
+  isUpdating: types._boolean,
+  id: types._string,
+  isCreating: types._boolean,
+  updateTask: types._function,
+  fetchTabData: types._function,
+  editThisTask: types._function
 }
 
 export default TaskList;

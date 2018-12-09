@@ -41,15 +41,6 @@ const getTaskData = (state) => {
   }
 }
 
-const getUpdateErrorMessage = (error) => {
-  if (!error) return "";
-  if (typeof error === "string") {
-    return error;
-  } else {
-    return error.message
-  }
-}
-
 const mapStateToProps = state => {
   const { isFetching, tasks } = getTaskData (state)
   return {
@@ -59,14 +50,14 @@ const mapStateToProps = state => {
     appErrorStatus: state.appData.appErrorStatus,
     isUpdating: state.update.isUpdating,
     id: state.update.id,
-    updateErrorMessage: getUpdateErrorMessage (state.update.error),
     isCreating: state.create.isCreating
   }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators ({
   updateTask: updateActions.updateTask,
-  fetchTabData: actions.fetchTabDataIfNeeded
+  fetchTabData: actions.fetchTabDataIfNeeded,
+  editThisTask: updateActions.editThisTask
 }, dispatch);
 
 const ConnectedTaskList = connect (

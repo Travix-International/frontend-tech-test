@@ -56,7 +56,10 @@ class List extends React.Component {
             doneCount,
             pendingCount,
             createNewTask,
-            createError } = this.props;
+            createError,
+            updating,
+            cancelEdit,
+            updateTask } = this.props;
     return (
       <React.Fragment>
         <Modal
@@ -65,6 +68,9 @@ class List extends React.Component {
             { `${LABELS.ERROR_MESSAGE.CREATE_FAILED}\n${createError}` }
         </Modal>
         <TaskInput
+          updateTask={ (id, task) => { updateTask (id, task)} }
+          cancelEdit={ () => cancelEdit ()}
+          updating={ updating }
           createTask={ (task) => { createNewTask (task)} }
           />
         <div className={`task-list-container ${!currentTab ? 'all-tasks' : ''}`}>
@@ -90,7 +96,8 @@ List.propTypes = {
   doneCount: types._number,
   pendingCount: types._number,
   createNewTask: types._function,
-  createError: types._string
+  createError: types._string,
+  updating: types._object
 }
 
 export default List;
