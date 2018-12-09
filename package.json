@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "start:watch": "nodemon server.js",
-    "test": "mocha -w"
+    "test": "mocha -w",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "keywords": [
     "test",
