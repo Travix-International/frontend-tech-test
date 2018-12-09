@@ -42,9 +42,11 @@ class TaskList extends React.Component {
     const LIMIT = appConstants.DEFAULTS.DATA_LIMIT;
     const { clientHeight, scrollHeight, scrollTop } = scrollbar.getValues ();
     const shouldPaginate = (scrollHeight - (clientHeight + scrollTop)) < 150;
+    const lastTaskId = this.props.tasks[this.props.tasks.length - 1].id;
     if (this.props.tasks.length > (LIMIT - 1)
         && shouldPaginate 
-        && !this.state.pageFetching) {
+        && !this.state.pageFetching
+        && lastTaskId !== '-1') {
       this.setState ({
         pageFetching: true
       });

@@ -10,7 +10,10 @@ import { shallow } from 'enzyme';
 describe ('App Component', () => {
   let component;
   beforeEach (() => {
-    component = shallow (<App />)
+    component = shallow (<App
+                          registerError={ 'test' }
+                          userid={ 'test' }
+                        />)
   })
   it('renders without crashing', () => {
     expect (component.exists ()).toEqual (true);

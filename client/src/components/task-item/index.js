@@ -72,52 +72,54 @@ class TaskItem extends React.Component {
         <div className={`task-update-error ${this.state.showUpdateError ? 'show-error' : ''}`}>
           { updateErrorMessage }
         </div>
-        <div className={`task-item ${isUpdating ? 'disable-events' : ''}`}>
-          <div
-            onClick={ this._showDescription.bind (this) }
-            className={`task-title ${task.isCompleted ? 'done-task': 'pending-task'}`}
-            title='Click to expand'>
-            { task.title }
-            <span className='help-text'>
-              { this.state.showDescription ? 
-                  LABELS.TASKS.COLLAPSE_HELP : 
-                  LABELS.TASKS.EXPAND_HELP
-              }
-            </span>
-          </div>
-          <div className='task-actions'>
-          <Button
-              onClick={ e => {
-                deleteTask (task.id, task.isCompleted)
-              }}
-              variation="ghost"
-              size="s">X
-            </Button>
-
+        { task.id === '-1' ? <div className='no-more-task'>{ task.title }</div> :
+          <div className={`task-item ${isUpdating ? 'disable-events' : ''}`}>
+            <div
+              onClick={ this._showDescription.bind (this) }
+              className={`task-title ${task.isCompleted ? 'done-task': 'pending-task'}`}
+              title='Click to expand'>
+              { task.title }
+              <span className='help-text'>
+                { this.state.showDescription ? 
+                    LABELS.TASKS.COLLAPSE_HELP : 
+                    LABELS.TASKS.EXPAND_HELP
+                }
+              </span>
+            </div>
+            <div className='task-actions'>
             <Button
-              onClick={ e => {
-                editTask (task)
-              }}
-              variation="ghost"
-              size="s">Edit
-            </Button>
-            <ToggleButton
-              handleSelect={ this._handleSelect.bind (this) }
-              selectedIndex={ this.state.selectedIndex }
-            >
-              <ToggleItem>
-                Done
-              </ToggleItem>
-              <ToggleItem>
-                Pending
-              </ToggleItem>
-            </ToggleButton>
+                onClick={ e => {
+                  deleteTask (task.id, task.isCompleted)
+                }}
+                variation="ghost"
+                size="s">X
+              </Button>
+
+              <Button
+                onClick={ e => {
+                  editTask (task)
+                }}
+                variation="ghost"
+                size="s">Edit
+              </Button>
+              <ToggleButton
+                handleSelect={ this._handleSelect.bind (this) }
+                selectedIndex={ this.state.selectedIndex }
+              >
+                <ToggleItem>
+                  Done
+                </ToggleItem>
+                <ToggleItem>
+                  Pending
+                </ToggleItem>
+              </ToggleButton>
+            </div>
+            <div 
+                className={`task-description ${this.state.showDescription ? 'show-task-description' : ''}`}>
+                { task.description }
+            </div>
           </div>
-          <div 
-              className={`task-description ${this.state.showDescription ? 'show-task-description' : ''}`}>
-              { task.description }
-          </div>
-        </div>
+        }
       </div>
     );
   };

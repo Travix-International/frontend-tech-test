@@ -1,3 +1,12 @@
+.app-connect-error {
+  top: 200px;
+  color: #ff0000;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 40px;
+}
 .app-login {
   display: flex;
   flex-direction: column;

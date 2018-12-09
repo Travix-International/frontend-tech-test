@@ -5,7 +5,8 @@ import App from '.';
 
 const mapStateToProps = (state) => {
   return {
-    userid: state.appData.userid
+    userid: state.appData.userid,
+    registerError: state.appData.registerError
   }
 };
 

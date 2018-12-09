@@ -1,3 +1,5 @@
+import LABELS from './../constants/labels';
+
 const HELPER = {
   /**
    * @description updates fetching flag for given tab.
@@ -109,8 +111,18 @@ const HELPER = {
     if (!topList.length) {
       return bottomList;
     }
-    // create new bottom list, reject the one which appears
-    // in the top list.
+    if (!bottomList.length) {
+      return [
+        ...topList,
+        { id: '-1',
+          title: LABELS.TASKS.NO_MORE_TASKS,
+          description: LABELS.TASKS.NO_MORE_TASKS,
+          isCompleted: true
+        }
+      ]
+    }
+    // create new bottom list,
+    // reject the one which appears in the top list.
     bottomList = bottomList.reduce ((acc, bottomItem) => {
       if (!topList.filter (topItem => topItem.id === bottomItem.id).length) {
         acc.push (bottomItem);

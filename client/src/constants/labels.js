@@ -20,7 +20,8 @@ const LABELS = {
     'COLLAPSE_HELP': 'Click to collapse',
     'ADD_TASK': 'Add Task',
     'EDIT_TASK': 'Edit Task',
-    'CANCEL_BUTTON': 'Cancel'
+    'CANCEL_BUTTON': 'Cancel',
+    'NO_MORE_TASKS': 'No more tasks in this bucket.'
   },
   'ERROR_MESSAGE': {
     '500': 'Could not connect to the server.',

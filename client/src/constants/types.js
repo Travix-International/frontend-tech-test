@@ -6,8 +6,8 @@ const taskType = PropTypes.shape ({
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   isCompleted: PropTypes.bool.isRequired,
-  createdAt: PropTypes.number.isRequired,
-  lastUpdatedAt: PropTypes.number.isRequired
+  createdAt: PropTypes.number,
+  lastUpdatedAt: PropTypes.number
 });
 
 const types = {

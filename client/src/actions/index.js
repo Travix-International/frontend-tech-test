@@ -1,6 +1,7 @@
 import actionTypes from "../constants/actionTypes";
 import axios from "axios";
 import appConstants from "../constants/appConstants";
+import LABELS from "../constants/labels";
 
 export const register = (id) => ({
   type: actionTypes.APP_DATA.REGISTER_USER,
@@ -114,6 +115,11 @@ const actions = {
             id: response.data.id
           });
         }
+      }).catch (error => {
+        dispatch ({
+          type: actionTypes.APP_DATA.REGISTER_USER_FAILED,
+          error: LABELS.ERROR_MESSAGE['500']
+        })
       })
     }
   },

@@ -5,6 +5,7 @@ import HELPER from './helper';
 // initial state of the application
 export const initialState = {
   userid: '',
+  registerError: '',
   currentTab: appConstants.DEFAULTS.TAB,
   fetchingAllData: false,
   fetchingDoneData: false,
@@ -33,6 +34,11 @@ export const appData = (state = initialState, action) => {
         ...state,
         userid: action.id
       };
+    case actionTypes.APP_DATA.REGISTER_USER_FAILED:
+      return {
+        ...state,
+        registerError: action.error 
+      }
     case actionTypes.UPDATE_CURRENT_TAB:
       return {
         ...state,

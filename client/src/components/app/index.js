@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Layout from '../layout';
 import { Input, Button } from 'travix-ui-kit';
 import LABELS from '../../constants/labels';
+import types from '../../constants/types';
 
 class App extends Component {
   constructor (props) {
@@ -24,9 +25,14 @@ class App extends Component {
   }
 
   render() {
-    const { userid } = this.props;
+    const { userid, registerError } = this.props;
     if (userid) {
       return <Layout />
+    }
+    if (registerError) {
+      return <div className='app-connect-error'>
+        { registerError }
+      </div>
     }
     return (
       <form className='app-login' onSubmit={ this._onFormSubmit.bind (this) }>
@@ -41,6 +47,11 @@ class App extends Component {
       </form>
     );
   }
+}
+
+App.propTypes = {
+  registerError: types._string,
+  userid: types._string
 }
 
 export default App;

@@ -18,10 +18,13 @@
     border-radius: 5px;
   }
 }
-@media only screen and (min-width: 360px) {
+@media only screen and (min-width: 340px) {
   .task-list-container {
     .ui-tab {
       font-size: 14px;
+    }
+    .ui-loading-overlay__loading-message {
+      font-size: 16px;
     }
   }
 }
