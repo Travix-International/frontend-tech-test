@@ -146,7 +146,7 @@ const HELPER = {
         allTasks,
         allCount,
         pendingTasks: state.pendingTasks.filter (item => item.id !== id),
-        pendingCount: state.pendingCount -1
+        pendingCount: state.pendingCount - 1
       }
     }
   }

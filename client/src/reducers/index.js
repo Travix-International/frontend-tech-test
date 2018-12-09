@@ -86,7 +86,7 @@ export const appData = (state = initialState, action) => {
         ]
       }
     case actionTypes.APP_DATA.REMOVE_FROM_BUCKET:
-      return HELPER.removeFromBucket (state, action.id);
+      return HELPER.removeFromBucket (state, action.id, action.isComplete);
     default:
       return state;
   }
