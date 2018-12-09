@@ -65,12 +65,13 @@ class TaskList extends React.Component {
             isUpdating,
             id,
             isCreating,
-            editThisTask
-          } = this.props;
+            editThisTask,
+            deleteTask,
+            isDeleting } = this.props;
     
     return (
       <LoadingOverlay
-        loading={isFetching || this.state.pageFetching || isCreating }
+        loading={(appErrorStatus === -1) && (isFetching || this.state.pageFetching || isCreating) }
         message={ isCreating ? LABELS.TASKS.CREATE_LOADING : LABELS.TASKS.LOADING }
         messageDirectiion='bottom'
         spinner={ true }
@@ -91,13 +92,16 @@ class TaskList extends React.Component {
                   tasks.map (task => {
                     return (
                       <TaskItem
-                        isUpdating={ isUpdating && task.id === id }
+                        isUpdating={ (isDeleting || isUpdating) && task.id === id }
                         toggleStatus={ (id, task) => {
                           updateTask (id, task);
                         }}
                         task={ task }
                         editTask={ (task) => {
                           editThisTask (task);
+                        }}
+                        deleteTask={ (id, isComplete) => {
+                          deleteTask (id, isComplete);
                         }}
                         key={task.id} />
                       )
@@ -122,7 +126,9 @@ TaskList.propTypes = {
   isCreating: types._boolean,
   updateTask: types._function,
   fetchTabData: types._function,
-  editThisTask: types._function
+  editThisTask: types._function,
+  deleteTask: types._function,
+  isDeleting: types._boolean
 }
 
 export default TaskList;

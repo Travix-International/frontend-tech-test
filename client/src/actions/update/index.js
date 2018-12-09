@@ -39,13 +39,19 @@ const updateActions = {
    * @param {Object} task 
    */
   updateTask (id, task) {
-    return dispatch => {
+    return (dispatch, getState) => {
+      const currentState = getState ();
+      const userid = currentState.appData.userid;
+
       dispatch (updateStart (id));
       return axios ({
         url: appConstants.API.UPDATE_TASK.replace (':id', id),
         method: 'put',
         data: task,
-        config: { headers: {'Content-Type': 'application/json' }}
+        headers: {
+          'Content-Type': 'application/json',
+          'user': userid
+        }
       }).then (resp => {
         if (resp.status === 200) {
           const data = resp.data.data;
@@ -76,6 +82,9 @@ const updateActions = {
     }
   },
 
+  /**
+   * @description dispatches action to cancel the current edit.
+   */
   cancelEdit () {
     return {
       type: actionTypes.TASK.UPDATE_TASK.CANCEL_EDIT

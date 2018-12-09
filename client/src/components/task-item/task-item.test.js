@@ -17,6 +17,7 @@ describe ('Task Item Component', () => {
                   task={ mockServer.sampleTask.data.task }
                   toggleStatus={ mockFn }
                   editTask={ mockFn }
+                  deleteTask={ mockFn }
                   />
                 );
   });

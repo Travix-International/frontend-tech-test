@@ -121,6 +121,34 @@ const HELPER = {
       ...topList,
       ...bottomList
     ]
+  },
+
+  /**
+   * @description function to remove from the bucket and update the count.
+   * @param {Object} state current state of the application
+   * @param {String} id 
+   * @param {Boolean} isComplete to choose the correct bucket
+   */
+  removeFromBucket (state, id, isComplete) {
+    let allTasks = state.allTasks.filter (item => item.id !== id);
+    let allCount = state.allCount - 1;
+    if (isComplete) {
+      return {
+        ...state,
+        allTasks,
+        allCount,
+        doneTasks: state.doneTasks.filter (item => item.id !== id),
+        doneCount: state.doneCount -1
+      }
+    } else {
+      return {
+        ...state,
+        allTasks,
+        allCount,
+        pendingTasks: state.pendingTasks.filter (item => item.id !== id),
+        pendingCount: state.pendingCount -1
+      }
+    }
   }
 };
 

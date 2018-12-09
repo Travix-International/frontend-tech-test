@@ -85,7 +85,7 @@ class TaskInput extends React.Component {
         this.props.createTask ({
           title,
           description,
-          'isCompleted': 'false'
+          'isCompleted': false
         });
       }
       this._clearForm ();

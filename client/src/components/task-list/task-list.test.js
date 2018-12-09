@@ -22,7 +22,9 @@ describe ('Task List component', () => {
                             isCreating={false}
                             updateTask={ mockFn }
                             fetchTabData={ mockFn }
-                            editThisTask={ mockFn }/>
+                            editThisTask={ mockFn }
+                            deleteTask={ mockFn }
+                            isDeleting={ false }/>
                 );
   });
   afterEach (() => {

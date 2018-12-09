@@ -1,5 +1,6 @@
 const LABELS = {
   'APP_TITLE': 'Plan your day',
+  'LOGIN_BUTTON': 'Login',
   'TABS': {
     'A': 'ALL',
     'P': 'Pending',

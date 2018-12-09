@@ -1,0 +1,28 @@
+.app-login {
+  display: flex;
+  flex-direction: column;
+  background: #357ef4;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  border: 1px solid #ffffff;
+  .ui-input {
+    margin-bottom: 10px;
+  }
+}
+
+
+@media only screen and (min-width: 360px) {
+  .app-login {
+    width: 350px;
+    padding: 60px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .app-login {
+    width: 550px;
+    padding: 100px;
+  }
+}

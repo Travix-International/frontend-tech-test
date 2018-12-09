@@ -62,7 +62,11 @@ class TaskItem extends React.Component {
     
 
   render () {
-    const { task, isUpdating, updateErrorMessage, editTask } = this.props;
+    const { task,
+            isUpdating,
+            updateErrorMessage,
+            editTask,
+            deleteTask } = this.props;
     return (
       <div className='relative'>
         <div className={`task-update-error ${this.state.showUpdateError ? 'show-error' : ''}`}>
@@ -82,6 +86,14 @@ class TaskItem extends React.Component {
             </span>
           </div>
           <div className='task-actions'>
+          <Button
+              onClick={ e => {
+                deleteTask (task.id, task.isCompleted)
+              }}
+              variation="ghost"
+              size="s">X
+            </Button>
+
             <Button
               onClick={ e => {
                 editTask (task)
@@ -115,7 +127,8 @@ TaskItem.propTypes = {
   task: types._task,
   toggleStatus: types._function,
   isUpdating: types._boolean,
-  editTask: types._function
+  editTask: types._function,
+  deleteTask: types._function
 }
 
 export default TaskItem;

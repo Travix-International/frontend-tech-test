@@ -5,28 +5,7 @@ const crypto = require ('crypto');
 const TASK_TYPE = TASK_CONST.TASK;
 const LIMIT = TASK_CONST.LIMIT;
 
-/**
- * An object to hold all tasks, where the key is the id and
- * the value is the task object.
- */
-let allTasks = {};
-
-/**
- * An array that contains the list of task ids all.
- */
-let all = [];
-
-
-/**
- * An array that contains the list of task ids of completed tasks.
- */
-let completed = [];
-
-
-/**
- * An array that contains the list of task ids of pending tasks.
- */
-let pending = [];
+let userData = {};
 
 /**
    * @description A utility function that determines whether the
@@ -77,19 +56,30 @@ const typeOfInputIsTask = (task) => {
  * for CRUD oprations.
  */
 const TASKS = {
-
+  registerUser (id) {
+    if (userData[id]) {
+      return;
+    } else {
+      userData [id] = {
+        all: [],
+        completed: [],
+        pending: [],
+        allTasks: {}
+      }
+    }
+  },
   /**
    * @description function to get all data for the initialisation
    * of application.
    * @param {Number} count no of items to be fetched in first request.
    */
-  getAppData (count) {
+  getAppData (count, user) {
     count = count || LIMIT;
     return {
-      tasks: this.convertToArray (0, count),
-      allCount: all.length,
-      doneCount: completed.length,
-      pendingCount: pending.length
+      tasks: this.convertToArray (user, 0, count),
+      allCount: userData[user].all.length,
+      doneCount: userData[user].completed.length,
+      pendingCount: userData[user].pending.length
     }
   },
   /**
@@ -97,14 +87,25 @@ const TASKS = {
    * @param {Number} page current page number
    * @param {Number} limit no of items to be retrieved
    * @param {String} type of task to be retrieved.
+   * @param {String} user
    * @return {Array}
    */
-  getAllTasks (page, limit, type) {
+  getAllTasks (page, limit, type, user) {
     let start = (page - 1) * limit,
         end = page * limit;
-    return {
-      tasks: this.convertToArray (start, end, type)
-    };
+    try {
+      const tasks = this.convertToArray (user, start, end, type);
+      return {
+        status: 1,
+        tasks: tasks
+      };
+    } catch (e) {
+      return {
+        'status': -1,
+        'message': labels.CATCH_ERROR
+      }
+    }
+
   },
 
   /**
@@ -113,20 +114,20 @@ const TASKS = {
    * @param {Number} end index for the array.
    * @param {String} type of task to be fetched.
    */
-  convertToArray (start, end, type) {
+  convertToArray (user, start, end, type) {
     let tempArr = [],
         thisList = [];
     if (!type) {
-      thisList = all;
+      thisList = userData[user].all;
     } else {
       if (type === 'C') {
-        thisList = completed
+        thisList = userData[user].completed
       } else {
-        thisList = pending;
+        thisList = userData[user].pending;
       }
     }
     for (let count = start; count < end; count++) {
-      let task = allTasks[thisList[count]];
+      let task = userData[user].allTasks[thisList[count]];
       if (task) {
         tempArr.push (task);
       }
@@ -136,10 +137,11 @@ const TASKS = {
 
   /**
    * @description function to create a task.
+   * @param {String} user
    * @param {Object} task to be created.
    * @return {Object} created task.
    */
-  createTask (task) {
+  createTask (user, task) {
     try {
       if (typeOfInputIsTask (task)) {
         const id = 'T-' + crypto.randomBytes(11).toString('hex');
@@ -150,9 +152,8 @@ const TASKS = {
           createdAt: Date.now (),
           lastUpdatedAt: Date.now ()
         }
-        
-        allTasks [id] = createdTask;
-        this.createIndex (createdTask);
+        userData[user].allTasks [id] = createdTask;
+        this.createIndex (user, createdTask);
 
         return {
           'status': 1,
@@ -177,40 +178,42 @@ const TASKS = {
   /**
    * @description function to maintain the indices of
    * all, completed, and pending tasks.
+   * @param {String} user
    * @param {Object} task object
    */
-  createIndex (task) {
-    all.push (task.id);
+  createIndex (user, task) {
+    userData[user].all.push (task.id);
     if (task.isCompleted) {
-      completed.push (task.id)
+      userData[user].completed.push (task.id)
     } else {
-      pending.push (task.id)
+      userData[user].pending.push (task.id)
     }
   },
 
   /**
    * @description function to return task content for the
    * given id.
+   * @param {String} user
    * @param {String} id of the task
    */
-  findById (id) {
-    return allTasks[id];
+  findById (user, id) {
+    return userData[user].allTasks[id];
   },
   
   /**
    * @description function to delete a task.
+   * @param {String} user
    * @param {String} id of the task
    */
-  deleteById (id) {
+  deleteById (user, id) {
     try {
-      delete allTasks[id];
+      delete userData[user].allTasks[id];
       
       // asynchronously remove the id from the index array.
       setTimeout (() => {
-        this.
-        all = all.filter (taskId => taskId !== id);
-        completed = completed.filter (taskId => taskId !== id);
-        pending = pending.filter (taskId => taskId !== id);
+        userData[user].all = userData[user].all.filter (taskId => taskId !== id);
+        userData[user].completed = userData[user].completed.filter (taskId => taskId !== id);
+        userData[user].pending = userData[user].pending.filter (taskId => taskId !== id);
       }, 0);
 
       return true;
@@ -221,13 +224,14 @@ const TASKS = {
 
   /**
    * @description function to update task.
+   * @param {String} user
    * @param {String} id of the task to be updated. 
    * @param {Object} task object
    */
-  updateTask (id, task) {
+  updateTask (user, id, task) {
     try {
       if (typeOfInputIsTask (task)) {
-        const thisTask = allTasks[id];
+        const thisTask = userData[user].allTasks[id];
         if (!thisTask) {
           throw new Error (`${labels.TASK_NOT_FOUND} ${id}`)
         }
@@ -235,14 +239,14 @@ const TASKS = {
           thisTask[key] = task[key];
         }
         thisTask ["lastUpdatedAt"] = Date.now ();
-        this.updateIndex (thisTask);
+        this.updateIndex (user, thisTask);
         return {
           status: 1,
           message: labels.TASK_UPDATED,
           task: thisTask,
-          allCount: all.length,
-          pendingCount: pending.length,
-          doneCount: completed.length
+          allCount: userData[user].all.length,
+          pendingCount: userData[user].pending.length,
+          doneCount: userData[user].completed.length
         }
       } else {
         throw new Error (labels.CATCH_ERROR);
@@ -257,19 +261,20 @@ const TASKS = {
 
   /**
    * @description function to update the indices when task is updated.
+   * @param {String} user
    * @param {Object} updatedTask task object.
    */
-  updateIndex (updatedTask) {
+  updateIndex (user, updatedTask) {
     // if new status is completed, remove it from pending and push to
     // completed.
     if (updatedTask.isCompleted) {
-      pending = pending.filter (id => id !== updatedTask.id);
-      completed = this.pushIfNotExist (completed, updatedTask.id);
+      userData[user].pending = userData[user].pending.filter (id => id !== updatedTask.id);
+      userData[user].completed = this.pushIfNotExist (userData[user].completed, updatedTask.id);
     } else {
       // if new status is pending, remove it from completed and push to
       // pending.
-      completed = completed.filter (id => id !== updatedTask.id);
-      pending = this.pushIfNotExist (pending, updatedTask.id);
+      userData[user].completed = userData[user].completed.filter (id => id !== updatedTask.id);
+      userData[user].pending = this.pushIfNotExist (userData[user].pending, updatedTask.id);
     }
   },
 
@@ -281,9 +286,11 @@ const TASKS = {
    */
   pushIfNotExist (list, id) {
     let newList = [];
-    if (!list.filter (item => item.id).length) {
+    if (!list.filter (item => item === id).length) {
       newList = list.slice ();
       newList.push (id);
+    } else {
+      newList = list.slice ();
     }
     return newList;
   },
@@ -292,7 +299,7 @@ const TASKS = {
    * @description function generates specified number of task.
    * @param {Number} count no of tasks to be generated
    */
-  generateTasks (count) {
+  generateTasks (count, user) {
     count = parseInt (count) || 3;
     for (let index = 0; index <  count; index++) {
       const random = Math.floor ((Math.random () * 9) + 1)
@@ -304,7 +311,7 @@ const TASKS = {
         description,
         isCompleted 
       }
-      this.createTask (req);
+      this.createTask (user, req);
     }
     return count;
   },

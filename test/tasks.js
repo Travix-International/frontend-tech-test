@@ -25,9 +25,7 @@ describe ('Task module', () => {
     chai.request (server)
       .get ('/task/bad-request')
       .end ((err, res) => {
-        expect (res.status).to.equal (404);
-        expect (res.body).to.not.be.undefined;
-        expect (res.body).to.have.property ('message');
+        expect (res.status).to.equal (500);
         done ();
       });
   });

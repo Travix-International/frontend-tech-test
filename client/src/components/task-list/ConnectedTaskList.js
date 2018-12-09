@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import updateActions from '../../actions/update';
 import TaskList from '.';
 import actions from '../../actions';
+import deleteActions from '../../actions/delete';
 
 /**
  * @description function determines whether for the current
@@ -49,15 +50,17 @@ const mapStateToProps = state => {
     tasks,
     appErrorStatus: state.appData.appErrorStatus,
     isUpdating: state.update.isUpdating,
-    id: state.update.id,
-    isCreating: state.create.isCreating
+    id: state.update.id || state.destroy.id,
+    isCreating: state.create.isCreating,
+    isDeleting: state.destroy.isDeleting
   }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators ({
   updateTask: updateActions.updateTask,
   fetchTabData: actions.fetchTabDataIfNeeded,
-  editThisTask: updateActions.editThisTask
+  editThisTask: updateActions.editThisTask,
+  deleteTask: deleteActions.deleteTask
 }, dispatch);
 
 const ConnectedTaskList = connect (

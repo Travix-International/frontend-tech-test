@@ -27,14 +27,20 @@ const createFailed = (error) => ({
 
 const createActions = {
   createTask (task) {
-    return dispatch => {
+    return (dispatch, getState) => {
       dispatch (createStart ());
+      
+      const currentState = getState ();
+      const userid = currentState.appData.userid;
 
       return axios ({
         url: appConstants.API.CREATE_TASK,
         method: 'post',
         data: task,
-        config: { headers: {'Content-Type': 'application/json' }}
+        headers: {
+          'Content-Type': 'application/json',
+          'user': userid          
+        }
       }).then (response => {
         if (response.status === 200 && response.data.data.status === 1) {
           dispatch (createSuccess (response.data))

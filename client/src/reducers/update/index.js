@@ -30,7 +30,7 @@ export const update = (state = initialState, action) => {
       return {
         ...state,
         isUpdating: false,
-        id: action.id,
+        id: action.task.id,
         error: '',
         updating: {}
       }

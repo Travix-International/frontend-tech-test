@@ -18,7 +18,7 @@ describe ('List Section of Task app', () => {
                     pendingCount={ mockServer.fetchAppDataSuccess.data.pendingCount }
                     currentTab={ 0 }
                     fetchingAllData={false}
-                    createNewTask={mockFn}
+                    createNewTask={ mockFn }
                     createError={'test'}
                     updating={ mockServer.sampleTask.data.task }
                     />);

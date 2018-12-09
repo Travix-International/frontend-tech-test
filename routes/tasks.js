@@ -2,6 +2,17 @@ const express = require ('express');
 const taskRouter = express.Router ();
 const labels = require ('../constants/labels');
 const TASKS = require ('../local-db/tasks');
+const md5 = require ('md5');
+
+taskRouter.get ('/task/register-user', (req, res) => {
+  const user = req.query.user;
+  const id = md5 (user);
+  TASKS.registerUser (id);
+  res.send ({
+    'id': id
+  }).status (200);
+});
+
 /**
  * GET /task/test-api
  * 
@@ -15,7 +26,8 @@ taskRouter.get ('/task/test-api', (req, res) => {
 
 
 taskRouter.get ('/task/get-app-data', (req, res) => {
-  const data = TASKS.getAppData (parseInt (req.query.limit));
+  const user = req.get ('user');
+  const data = TASKS.getAppData (parseInt (req.query.limit), user);
   if (data) {
     res.send ({
       'data': data
@@ -41,10 +53,17 @@ taskRouter.get ('/task/get-all-tasks', (req, res) => {
       'message': labels.BAD_REQUEST
     });
   } else {
-    const allTasks = TASKS.getAllTasks (parseInt(page), parseInt(limit), type);
-    res.send ({
-      'data': allTasks
-    });
+    const user = req.get ('user');
+    const allTasks = TASKS.getAllTasks (parseInt(page), parseInt(limit), type, user);
+    if (allTasks.status === 1) {
+      res.send ({
+        'data': allTasks
+      });
+    } else {
+      res.status (500).send ({
+        'message': labels.CATCH_ERROR
+      });
+    }
   }
 })
 
@@ -52,10 +71,17 @@ taskRouter.get ('/task/get-all-tasks', (req, res) => {
  * POST /task/create-task
  */
 taskRouter.post ('/task/create-task', (req, res) => {
-  const createdTask = TASKS.createTask (req.body);
-  res.send ({
-    'data': createdTask
-  }).status (200);
+  const user = req.get ('user');
+  const createdTask = TASKS.createTask (user, req.body);
+  if (createdTask.status === 1) {
+    res.send ({
+      'data': createdTask
+    }).status (200);
+  } else {
+    res.status (500).send ({
+      'message': labels.CATCH_ERROR
+    });
+  }
 });
 
 /**
@@ -64,7 +90,8 @@ taskRouter.post ('/task/create-task', (req, res) => {
  * Test api to generate 1000 tasks.
  */
 taskRouter.get ('/task/generate', (req, res) => {
-  const count = TASKS.generateTasks (req.query.count);
+  const user = req.get ('user');
+  const count = TASKS.generateTasks (req.query.count, user);
   res.send ({
     'message': `${count} tasks created.`
   });
@@ -77,7 +104,8 @@ taskRouter.get ('/task/generate', (req, res) => {
  * Get task by id.
  */
 taskRouter.get ('/task/:id', (req, res) => {
-  const task = TASKS.findById (req.params.id);
+  const user = req.get ('user');
+  const task = TASKS.findById (user, req.params.id);
   if (task) {
     res.send ({
       'data': task
@@ -95,7 +123,8 @@ taskRouter.get ('/task/:id', (req, res) => {
  * Delete task by id.
  */
 taskRouter.delete ('/task/:id', (req, res) => {
-  const task = TASKS.deleteById (req.params.id);
+  const user = req.get ('user');
+  const task = TASKS.deleteById (user, req.params.id);
   if (task) {
     res.send ({
       'message': labels.TASK_DELETED
@@ -119,7 +148,8 @@ taskRouter.put ('/task/:id', (req, res) => {
       'message': labels.NO_ID
     });
   } else {
-    const task = TASKS.updateTask (req.params.id, req.body);
+    const user = req.get ('user');
+    const task = TASKS.updateTask (user, req.params.id, req.body);
     if (task.status !== -1) {
       if (task) {
         res.send ({

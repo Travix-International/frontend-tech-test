@@ -2,6 +2,11 @@ import actionTypes from "../constants/actionTypes";
 import axios from "axios";
 import appConstants from "../constants/appConstants";
 
+export const register = (id) => ({
+  type: actionTypes.APP_DATA.REGISTER_USER,
+  id
+});
+
 /**
  * @description updates the current tab.
  * @param {Number} tab current tab
@@ -93,6 +98,26 @@ const hasDataForCurrentTab = (state, currentTab) => {
 }
 
 const actions = {
+  registerUser (username) {
+    return dispatch => {
+      dispatch ({
+        type: actionTypes.APP_DATA.REGISTER_USER
+      });
+
+      return axios ({
+        url: appConstants.API.REGISTER_USER.replace ('__user__', username),
+        method: 'get'
+      }).then (response => {
+        if (response.status === 200) {
+          dispatch ({
+            type: actionTypes.APP_DATA.REGISTER_USER_SUCCESS,
+            id: response.data.id
+          });
+        }
+      })
+    }
+  },
+
   /**
    * @description function executes as on app mount.
    * It fetches the inital data.
@@ -100,13 +125,19 @@ const actions = {
    * - all tasks for the current tab => all tasks [first tab]
    */
   fetchAppData () {
-    return dispatch => {
+    return (dispatch, getState) => {
+      const currentState = getState ();
+      const userid = currentState.appData.userid;
+      
       dispatch (fetchAppDataStart (0));
       
       const url = appConstants.API.FETCH_APP_DATA
                     .replace ('__limit__', appConstants.DEFAULTS.DATA_LIMIT)
-      return axios.get (url)
-        .then (response => {
+      return axios ({
+        method: 'get',
+        url: url,
+        headers: { 'user': userid }
+      }).then (response => {
           if (response.status === 200) {
             dispatch (fetchAppDataSuccess (response.data.data, 0));
           } else {
@@ -132,6 +163,7 @@ const actions = {
   fetchTabDataIfNeeded (tab, page, limit, pagination) {
     return (dispatch, getState) => {
       const currentState = getState ();
+      const userid = currentState.appData.userid;
       const shouldFetch = hasDataForCurrentTab (currentState, tab);
       if (shouldFetch || pagination) {
         dispatch (fetchAppDataStart (tab));
@@ -140,8 +172,11 @@ const actions = {
                       .replace ('__limit__', appConstants.DEFAULTS.DATA_LIMIT)
                       .replace ('__page__', (page || 1))
                       .replace ('__type__', type)
-        return axios.get (url)
-        .then (response => {
+        return axios ({
+          url: url,
+          method: 'get',
+          headers: { 'user': userid }
+        }).then (response => {
           if (response.status === 200) {
             dispatch (fetchTabDataSuccess (response.data.data, tab));
           } else {

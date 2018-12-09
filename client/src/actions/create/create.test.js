@@ -17,7 +17,7 @@ describe ('Create Action', () => {
   let store;
   beforeEach (() => {
     moxios.install ();
-    store = mockStore ({ create: {} });
+    store = mockStore ({ appData: { userid: '123' } });
   });
 
   afterEach (() => {

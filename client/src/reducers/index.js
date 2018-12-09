@@ -4,6 +4,7 @@ import HELPER from './helper';
 
 // initial state of the application
 export const initialState = {
+  userid: '',
   currentTab: appConstants.DEFAULTS.TAB,
   fetchingAllData: false,
   fetchingDoneData: false,
@@ -27,6 +28,11 @@ export const initialState = {
  */
 export const appData = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.APP_DATA.REGISTER_USER_SUCCESS:
+      return {
+        ...state,
+        userid: action.id
+      };
     case actionTypes.UPDATE_CURRENT_TAB:
       return {
         ...state,
@@ -79,6 +85,8 @@ export const appData = (state = initialState, action) => {
           ...state.pendingTasks
         ]
       }
+    case actionTypes.APP_DATA.REMOVE_FROM_BUCKET:
+      return HELPER.removeFromBucket (state, action.id);
     default:
       return state;
   }

@@ -4,11 +4,13 @@ import thunk from 'redux-thunk';
 import { appData } from './reducers';
 import { update } from './reducers/update';
 import { create } from './reducers/create';
+import { destroy } from './reducers/delete';
 
 const rootReducer = combineReducers ({
   appData,
   update,
-  create
+  create,
+  destroy
 });
 
 // returns true in development environment.
