@@ -8,8 +8,10 @@ describe ('Task List component', () => {
 
   beforeEach (() => {
     component = shallow (<TaskList
+                            isUpdating={false}
                             tasks={ mockServer.fetchAppDataSuccess.data.tasks }
                             currentTab={0}
+                            appErrorStatus={0}
                             isFetching={false}/>
                 );
   });

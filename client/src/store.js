@@ -2,9 +2,11 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import { appData } from './reducers';
+import { update } from './reducers/update';
 
 const rootReducer = combineReducers ({
-  appData
+  appData,
+  update
 });
 
 // returns true in development environment.

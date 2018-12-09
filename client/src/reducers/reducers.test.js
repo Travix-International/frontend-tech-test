@@ -41,8 +41,26 @@ describe ('Reducer of the application', () => {
 
   });
 
-  it ('should handle the fetch_app_data_failed action', () => {
+  it ('should handle the update_count action', () => {
+    const updateAction = {
+      type: actionTypes.APP_DATA.UPDATE_COUNT,
+      allCount: mockServer.sampleTask.allCount,
+      doneCount: mockServer.sampleTask.doneCount,
+      pendingCount: mockServer.sampleTask.pendingCount
+    }
 
+    const expectedState = {
+      ...initialState,
+      allCount: mockServer.sampleTask.allCount,
+      doneCount: mockServer.sampleTask.doneCount,
+      pendingCount: mockServer.sampleTask.pendingCount
+    }
+
+    expect (appData (undefined, updateAction)).toEqual (expectedState);
+  });
+
+  it ('should handle the fetch_app_data_failed action', () => {
+    // same as app error.
   });
 });
 

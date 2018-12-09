@@ -1,11 +1,24 @@
 const mockServer = {
   'sampleTask': {
-    'id': 'T-2714fa55d3a714d1f75511',
-    'title': 'Test title 0',
-    'description': 'Test description 0',
-    'isCompleted': true,
-    'createdAt': 1544260778133,
-    'lastUpdatedAt': 1544260778133
+    'data': {
+      'task': {
+        'id': 'T-2714fa55d3a714d1f75511',
+        'title': 'Test title 0',
+        'description': 'Test description 0',
+        'isCompleted': true,
+        'createdAt': 1544260778133,
+        'lastUpdatedAt': 1544260778133
+      },
+      allCount: 100,
+      doneCount: 65,
+      pendingCount: 35
+    }
+  },
+  'updateRequestId': 'T-2714fa55d3a714d1f75511',
+  'updateRequest': {
+    'title': 'Updated title 0',
+    'description': 'Updated Test description 0',
+    'isCompleted': false
   },
   'fetchAppDataSuccess': {
     'data': {
@@ -33,8 +46,11 @@ const mockServer = {
     },
     'tab': 0
   },
-  fetchAppDataError: {
+  'fetchAppDataError': {
     'message': 'Something went wrong!'
+  },
+  'updateFailed': {
+    'message': 'Update failed.'
   }
 };
 

@@ -19,3 +19,18 @@ main {
   display: flex;
   flex-direction: column;
 }
+
+span.help-text {
+  font-size: 11px;
+  margin-left: 10px;
+  font-weight: normal;
+  color: #2b3a35;
+}
+
+.disable-events {
+  pointer-events: none;
+  opacity: 0.5
+}
+.relative {
+  position: relative;
+}

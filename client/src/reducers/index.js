@@ -6,12 +6,16 @@ import HELPER from './helper';
 export const initialState = {
   currentTab: appConstants.DEFAULTS.TAB,
   fetchingAllData: false,
+  fetchingDoneData: false,
+  fetchingPendingData: false,
   allCount: 0,
   doneCount: 0,
   pendingCount: 0,
   allTasks: [],
   doneTasks: [],
-  pendingTasks: []
+  pendingTasks: [],
+  error: '',
+  appErrorStatus: -1
 };
 
 
@@ -39,8 +43,28 @@ export const appData = (state = initialState, action) => {
         doneCount: action.data.doneCount,
         pendingCount: action.data.pendingCount
       };
+    case actionTypes.APP_DATA.FETCH_APP_DATA_FAILED:
+    case actionTypes.APP_DATA.FETCH_TAB_DATA_FAILED:
+      return {
+        ...state,
+        fetchingAllData: false,
+        fetchingDoneData: false,
+        fetchingPendingData: false,
+        error: action.error,
+        appErrorStatus: action.status
+      }
     case actionTypes.APP_DATA.FETCH_TAB_DATA_SUCCESS:
       return HELPER.fetchTabDataSuccess (state, action.tab, action.data.tasks, action.isPagination);
+    
+    case actionTypes.APP_DATA.UPDATE_COUNT:
+      return {
+        ...state,
+        allCount: action.allCount,
+        doneCount: action.doneCount,
+        pendingCount: action.pendingCount
+      }
+    case actionTypes.APP_DATA.UPDATE_BUCKETS:
+      return HELPER.updateBuckets (state, action.task);
     default:
       return state;
   }

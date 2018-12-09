@@ -34,21 +34,46 @@
         line-height: 30px;
         font-weight: bold;
         color: #ffffff;
+        cursor: pointer;
       }
       .task-description {
         width: 100%;
-        margin-top: 10px;
         font-size: 14px;
         line-height: 1.2;
-        margin-top: -100px;
-        transition: all 1s;
+        top: -100px;
         z-index: -1;
+        display: none;
+        transition: all 1s;
       }
       .show-task-description {
         margin-top: 10px;
         z-index: 0;
+        display: block;
         transition: all 0.5s;
       }
+    }
+    .task-update-error {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.75);
+      width: 50%;
+      height: 30px;
+      left: 50%;
+      transform: translate(-50%);
+      top: -32px;
+      color: #ff0000;
+      text-align: center;
+      line-height: 30px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 1s;
+    }
+    .show-error {
+      top: 0px;
+      visibility: visible;
+      opacity: 1;
+      transition: all 0.5s;
     }
   }
 }

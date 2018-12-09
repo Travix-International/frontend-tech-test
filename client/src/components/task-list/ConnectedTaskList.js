@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import TaskList from '.';
-
+import updateActions from '../../actions/update';
 
 /**
  * @description function determines whether for the current
@@ -40,17 +40,30 @@ const getTaskData = (state) => {
   }
 }
 
+const getUpdateErrorMessage = (error) => {
+  if (!error) return "";
+  if (typeof error === "string") {
+    return error;
+  } else {
+    return error.message
+  }
+}
+
 const mapStateToProps = state => {
   const { isFetching, tasks } = getTaskData (state)
   return {
     currentTab: state.appData.currentTab,
     isFetching,
-    tasks
+    tasks,
+    appErrorStatus: state.appData.appErrorStatus,
+    isUpdating: state.update.isUpdating,
+    id: state.update.id,
+    updateErrorMessage: getUpdateErrorMessage (state.update.error)
   }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators ({
-
+  updateTask: updateActions.updateTask
 }, dispatch);
 
 const ConnectedTaskList = connect (

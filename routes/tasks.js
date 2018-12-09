@@ -120,10 +120,16 @@ taskRouter.put ('/task/:id', (req, res) => {
     });
   } else {
     const task = TASKS.updateTask (req.params.id, req.body);
-    if (task) {
-      res.send ({
-        'data': task
-      }).status (200);
+    if (task.status !== -1) {
+      if (task) {
+        res.send ({
+          'data': task
+        }).status (200);
+      }
+    } else {
+      res.status (500).send ({
+        'message': task.message 
+      });
     }
   }
 });

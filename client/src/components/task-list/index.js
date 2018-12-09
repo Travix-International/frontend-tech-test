@@ -7,7 +7,12 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 const TaskList = ({
   tasks,
-  isFetching
+  isFetching,
+  appErrorStatus,
+  updateTask,
+  isUpdating,
+  id,
+  updateErrorMessage
 }) => {
   return (
     <LoadingOverlay
@@ -15,21 +20,33 @@ const TaskList = ({
       message={ LABELS.TASKS.LOADING }
       messageDirectiion='bottom'
       spinner={ true }
-      transparency={ false }>
+      transparency={ isFetching && !!tasks.length }>
         <Scrollbars style={{ height: 400 }}>
           {
-            tasks.length ?
-            tasks.map (task => {
-              return (
-                <TaskItem
-                  updateTask={ (e) => {e.preventDefault ()} }
-                  task={ task }
-                  key={task.id} />
-                )
-            }) :
-            <div className='no-task-in-bucket'>
-              { LABELS.TASKS.NO_TASKS }
-            </div>
+            (appErrorStatus > 0) ?
+              <div className='no-task-in-bucket'>
+                { LABELS.ERROR_MESSAGE[appErrorStatus] }
+              </div>
+
+              : // if no error, check for tasks length.
+
+              tasks.length ?
+                tasks.map (task => {
+                  return (
+                    <TaskItem
+                      updateErrorMessage={ updateErrorMessage }
+                      errorId={ id }
+                      isUpdating={ isUpdating && task.id === id }
+                      toggleStatus={ (id, task) => {
+                        updateTask (id, task);
+                      }}
+                      task={ task }
+                      key={task.id} />
+                    )
+                }) :
+                <div className='no-task-in-bucket'>
+                  { LABELS.TASKS.NO_TASKS }
+                </div>
           }
         </Scrollbars>
       </LoadingOverlay>
@@ -39,7 +56,8 @@ const TaskList = ({
 TaskList.prototype = {
   currentTab: types._number,
   isFetching: types._boolean,
-  tasks: types._taskArray
+  tasks: types._taskArray,
+  appErrorStatus: types._number 
 }
 
 export default TaskList;

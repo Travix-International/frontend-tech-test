@@ -47,19 +47,19 @@ describe ('All actions for of the app', () => {
     moxios.wait (() => {
       const request = moxios.requests.mostRecent ();
       request.respondWith ({
-        status: 400,
+        status: 500,
         response: mockServer.fetchAppDataError
       });
     });
 
     const expectedActions = [
       { type: actionTypes.APP_DATA.FETCH_APP_DATA_START, tab: 0 },
-      { type: actionTypes.APP_DATA.FETCH_APP_DATA_FAILED, error: mockServer.fetchAppDataError }
+      { type: actionTypes.APP_DATA.FETCH_APP_DATA_FAILED, error: mockServer.fetchAppDataError, status: 500 }
     ]
 
     return store.dispatch (actions.fetchAppData ()).then (() => {
       expect (store.getActions ()).toEqual (expectedActions);
     });
-  })
+  });
 
 });

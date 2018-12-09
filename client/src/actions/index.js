@@ -12,6 +12,17 @@ const updateCurrentTab = tab => ({
 });
 
 /**
+ * @description updates the count of tasks in all categories.
+ * @param {Object} data contains count data
+ */
+const updateTaskCounts = data => ({
+  type: actionTypes.APP_DATA.UPDATE_COUNT,
+  doneCount: data.doneCount,
+  pendingCount: data.pendingCount,
+  allCount: data.allCount
+});
+
+/**
  * @desc action creator: indicates fetch has started.
  * @param {Number} tab current tab index.
  */
@@ -43,10 +54,15 @@ const fetchTabDataSuccess = (data, tab) => ({
   tab
 })
 
-// action creator: indicates fetch has failed to load.
-const fetchAppDataFailed = (error) => ({
+/**
+ * @description action creator: indicates fetch has failed to load.
+ * @param {Object} error 
+ * @param {Number} status 
+ */
+const fetchAppDataFailed = (error, status) => ({
   type: actionTypes.APP_DATA.FETCH_APP_DATA_FAILED,
-  error
+  error,
+  status
 });
 
 
@@ -62,13 +78,13 @@ const hasDataForCurrentTab = (state, currentTab) => {
   const { allTasks, doneTasks, pendingTasks } = state.appData;
   switch (currentTab) {
     case 0:
-      shouldFetch = !allTasks.length;
+      shouldFetch = (allTasks.length < appConstants.DEFAULTS.DATA_LIMIT);
       break;
     case 1:
-      shouldFetch = !pendingTasks.length;
+      shouldFetch = (pendingTasks.length < appConstants.DEFAULTS.DATA_LIMIT);
       break;
     case 2:
-      shouldFetch = !doneTasks.length;
+      shouldFetch = (doneTasks.length < appConstants.DEFAULTS.DATA_LIMIT);
       break;
     default:
       break;
@@ -97,11 +113,22 @@ const actions = {
             throw new Error ("Test");
           }
         }).catch (error => {
-          dispatch (fetchAppDataFailed (error.response.data));
+          dispatch (fetchAppDataFailed (error.response.data, error.response.status));
         });
     }
   },
 
+  /**
+   * @description function determines whether to send an api call to fetch data
+   * for the given tab.
+   * 1. in case of pagination always fetch data,
+   * 2. otherwise, if it's just a tab switch, check if for the given tab
+   *    data exists, if not send an api call.
+   * @param {Number} tab current tab
+   * @param {Number} page current page
+   * @param {Number} limit no of records per call
+   * @param {Boolean} pagination indicates whether pagination is active
+   */
   fetchTabDataIfNeeded (tab, page, limit, pagination) {
     return (dispatch, getState) => {
       const currentState = getState ();
@@ -121,13 +148,31 @@ const actions = {
             throw new Error ("Test");
           }
         }).catch (error => {
-          dispatch (fetchAppDataFailed (error.response.data));
+          dispatch (fetchAppDataFailed (error.response.data, error.response.status));
         });
       } else {
         dispatch (updateCurrentTab (tab));
       }
     }
+  },
 
+  /**
+   * @description function to dispatch action to update counts.
+   * @param {Object} data count data
+   */
+  updateCount (data) {
+    return updateTaskCounts (data);
+  },
+
+  /**
+   * @description function to update buckets.
+   * @param {Object} task 
+   */
+  updateBuckets (data) {
+    return ({
+      type: actionTypes.APP_DATA.UPDATE_BUCKETS,
+      task: data.task
+    });
   }
 }
 

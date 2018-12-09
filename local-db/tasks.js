@@ -239,7 +239,10 @@ const TASKS = {
         return {
           status: 1,
           message: labels.TASK_UPDATED,
-          task: thisTask
+          task: thisTask,
+          allCount: all.length,
+          pendingCount: pending.length,
+          doneCount: completed.length
         }
       } else {
         throw new Error (labels.CATCH_ERROR);

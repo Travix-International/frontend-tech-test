@@ -9,8 +9,9 @@ describe ('Task Item Component', () => {
   beforeEach (() => {
     component = shallow (
                 <TaskItem
-                  task={ mockServer.sampleTask }
-                  updateTask={ mockFn }
+                  isUpdating={ false }
+                  task={ mockServer.sampleTask.data.task }
+                  toggleStatus={ mockFn }
                   />
                 );
   });
