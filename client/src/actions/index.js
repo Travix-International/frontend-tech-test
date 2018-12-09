@@ -133,7 +133,7 @@ const actions = {
     return (dispatch, getState) => {
       const currentState = getState ();
       const shouldFetch = hasDataForCurrentTab (currentState, tab);
-      if (shouldFetch) {
+      if (shouldFetch || pagination) {
         dispatch (fetchAppDataStart (tab));
         const type = (tab === 0) ? '' : ((tab === 1) ? 'P' : 'C')
         const url = appConstants.API.FECTH_TAB_DATA

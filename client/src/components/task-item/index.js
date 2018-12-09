@@ -71,7 +71,7 @@ class TaskItem extends React.Component {
         <div className={`task-item ${isUpdating ? 'disable-events' : ''}`}>
           <div
             onClick={ this._showDescription.bind (this) }
-            className='task-title'
+            className={`task-title ${task.isCompleted ? 'done-task': 'pending-task'}`}
             title='Click to expand'>
             { task.title }
             <span className='help-text'>
@@ -80,7 +80,7 @@ class TaskItem extends React.Component {
                   LABELS.TASKS.EXPAND_HELP
               }
             </span>
-            </div>
+          </div>
           <div className='task-actions'>
             <Button
               onClick={() => {} }

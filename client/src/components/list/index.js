@@ -10,9 +10,6 @@ class List extends React.Component {
     this.state = {
       activeTabIndex: 0
     }
-    
-    // maintains the current page for 3 tabs.
-    this.currentPage = [1, 1, 1];
   }
 
   componentDidMount () {
@@ -47,11 +44,12 @@ class List extends React.Component {
   }
 
   render () {
-    const { allCount,
+    const { currentTab,
+            allCount,
             doneCount,
             pendingCount } = this.props;
     return (
-      <div className='task-list-container'>
+      <div className={`task-list-container ${!currentTab ? 'all-tasks' : ''}`}>
         <Tabs
           onChange={ this._onTabChange.bind (this) }>
           <Tab title={ `${LABELS.TABS.A} [${allCount}]` } />

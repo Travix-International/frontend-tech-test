@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import TaskList from '.';
 import updateActions from '../../actions/update';
+import TaskList from '.';
+import actions from '../../actions';
 
 /**
  * @description function determines whether for the current
@@ -63,7 +64,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators ({
-  updateTask: updateActions.updateTask
+  updateTask: updateActions.updateTask,
+  fetchTabData: actions.fetchTabDataIfNeeded
 }, dispatch);
 
 const ConnectedTaskList = connect (
