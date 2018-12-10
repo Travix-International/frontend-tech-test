@@ -26,23 +26,4 @@ describe ('Update reducer', () => {
 
     expect (update (undefined, startAction)).toEqual (expectedState);
   });
-
-  it ('should handle UPDATE_SUCCESS action', () => {
-    const startAction = {
-      type: actionTypes.TASK.UPDATE_TASK.UPDATE_SUCCESS,
-      task: mockServer.sampleTask.task
-    }
-
-    const expectedState = {
-      ...initialState,
-      isUpdating: true,
-      id: mockServer.updateRequestId
-    };
-
-    // expect (update (undefined, startAction)).toEqual (expectedState);
-  });
-
-  it ('should handle UPDATE_FAILED action', () => {
-
-  });
 })

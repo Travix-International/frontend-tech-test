@@ -62,9 +62,5 @@ describe ('Reducer of the application', () => {
 
     expect (appData (undefined, updateAction)).toEqual (expectedState);
   });
-
-  it ('should handle the fetch_app_data_failed action', () => {
-    // same as app error.
-  });
 });
 
