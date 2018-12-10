@@ -24,12 +24,13 @@ if(!module.parent){
 
 app.use (taskRouter);
 
-app.use(express.static(path.join(__dirname, 'client/build')))
-// Anything that doesn't match the above, send back index.html
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + 'client/build/index.html'))
-});
+// uncomment following block for build and deploying.
+/**
+ * app.use(express.static(path.join(__dirname, 'client/build')))
+ * app.get('*', (req, res) => {
+ *    res.sendFile(path.join(__dirname + 'client/build/index.html'))
+ * });
+ */
 
 app.get ('/', (req, res) => {
   res.status (200).send ({

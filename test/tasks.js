@@ -9,6 +9,16 @@ const mockData = require ('../local-db/mock-data');
 chai.use (chaiHttp);
 
 describe ('Task module', () => {
+  let userid;
+  beforeEach ((done) => {
+    chai.request (server)
+      .get ('/task/register-user?user=test')
+      .end ((err, res) => {
+        userid = res.body.id;
+        done ();
+      });
+  });
+
   it ('should render a successful connection test message', (done) => {
     chai.request (server)
       .get ('/task/test-api')
@@ -64,6 +74,7 @@ describe ('Task module', () => {
     // neither page nor limit given
     chai.request (server)
       .get ('/task/get-all-tasks?limit=10&page=1')
+      .set ('user', userid)
       .end ((err, res) => {
         expect (res.status).to.equal (200);
         expect (res.body.data).to.be.not.undefined;
@@ -75,6 +86,7 @@ describe ('Task module', () => {
     chai.request (server)
       .post ('/task/create-task')
       .set ('content-type', 'application/json')
+      .set ('user', userid)
       .send (mockData.createRequest)
       .end ((err, res) => {
         expect (res.status).to.equal (200);
