@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Connector: Connects the App component with store.
+ */
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../../actions';

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview component renders task items, i.e. title, a hidden description,
+ * and, the task actions.
+ */
 import React from 'react';
 import types from './../../constants/types';
 import { Button, ToggleButton, ToggleItem } from 'travix-ui-kit';

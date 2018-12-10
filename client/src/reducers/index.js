@@ -1,3 +1,6 @@
+/**
+ * @fileoverview reducer to manage app data and actions.
+ */
 import actionTypes from "../constants/actionTypes";
 import appConstants from '../constants/appConstants';
 import HELPER from './helper';

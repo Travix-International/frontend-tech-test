@@ -1,5 +1,8 @@
+/**
+ * @fileoverview extends PropTypes to create easily accessible
+ * data types to be used.
+ */
 import PropTypes from 'prop-types';
-
 
 const taskType = PropTypes.shape ({
   id: PropTypes.string.isRequired,

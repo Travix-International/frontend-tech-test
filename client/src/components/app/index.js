@@ -1,3 +1,8 @@
+/**
+ * @fileoverview main component, contains the login form as
+ * well as the app layout. After logging in and receiving a valid
+ * token, app layout will be displayed.
+ */
 import React, { Component } from 'react';
 import Layout from '../layout';
 import { Input, Button } from 'travix-ui-kit';

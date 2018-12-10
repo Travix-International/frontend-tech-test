@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Component to render task form.
+ */
 import React from 'react';
 import { Input, Button, Modal } from 'travix-ui-kit';
 import LABELS from '../../constants/labels';

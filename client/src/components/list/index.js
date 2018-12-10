@@ -1,3 +1,7 @@
+/**
+ * @fileoverview component renders list, tabs, and, an input form
+ * to add todos.
+ */
 import React from 'react';
 import { Tabs, Tab, Modal } from 'travix-ui-kit';
 import LABELS from '../../constants/labels';

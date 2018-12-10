@@ -1,3 +1,7 @@
+/**
+ * @fileoverview component contains the main layout of the application,
+ * like header, footer, and, main app.
+ */
 import React from 'react';
 import LABELS from '../../constants/labels';
 import ConnectedList from '../list/ConnectedList';

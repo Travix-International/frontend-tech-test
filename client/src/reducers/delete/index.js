@@ -1,3 +1,6 @@
+/**
+ * @fileoverview reducer to manage delete actions.
+ */
 import actionTypes from './../../constants/actionTypes';
 
 export const initialState = {

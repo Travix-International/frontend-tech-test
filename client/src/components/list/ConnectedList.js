@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Connector: connects list component with the store.
+ */
 import { connect } from 'react-redux';
 import List from '.';
 import { bindActionCreators } from 'redux';

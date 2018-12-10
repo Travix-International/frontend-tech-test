@@ -1,3 +1,6 @@
+/**
+ * @fileoverview constants for actions.
+ */
 const actionTypes = {
   'UPDATE_CURRENT_TAB': 'UPDATE_CURRENT_TAB',
   'APP_DATA': {

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview component to iterate over the tasks and render each task using
+ * Task Item component. It is also responsible for managing infinte scrolling to
+ * load more tasks.
+ */
 import React from 'react';
 import { LoadingOverlay } from 'travix-ui-kit';
 import types from './../../constants/types';

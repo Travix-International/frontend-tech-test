@@ -1,3 +1,6 @@
+/**
+ * @fileoverview helper/utility functions to manage reducer actions.
+ */
 import LABELS from './../constants/labels';
 
 const HELPER = {

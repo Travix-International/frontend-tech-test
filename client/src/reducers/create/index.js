@@ -1,3 +1,6 @@
+/**
+ * @fileoverview reducer to manage create actions.
+ */
 import actionTypes from "../../constants/actionTypes";
 
 export const initialState = {

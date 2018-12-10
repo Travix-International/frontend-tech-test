@@ -1,3 +1,6 @@
+/**
+ * @fileoverview reducer to manage update actions.
+ */
 import actionTypes from "../../constants/actionTypes";
 
 // initial state of the application

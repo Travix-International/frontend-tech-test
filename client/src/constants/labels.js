@@ -1,3 +1,6 @@
+/**
+ * @fileoverview labels used in the application.
+ */
 const LABELS = {
   'APP_TITLE': 'Plan your day',
   'LOGIN_BUTTON': 'Login',

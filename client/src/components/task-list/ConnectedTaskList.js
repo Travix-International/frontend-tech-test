@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Connector: connects Task List component with the store.
+ */
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import updateActions from '../../actions/update';

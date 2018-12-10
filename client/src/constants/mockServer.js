@@ -1,3 +1,6 @@
+/**
+ * @fileoverview sample data.
+ */
 const mockServer = {
   'sampleTask': {
     'data': {

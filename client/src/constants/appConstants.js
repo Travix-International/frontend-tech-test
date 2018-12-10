@@ -1,3 +1,6 @@
+/**
+ * @fileoverview app configuration constants.
+ */
 const appConstants = {
   'DEFAULTS': {
     'DATA_LIMIT': 20,
