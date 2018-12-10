@@ -1,38 +1,36 @@
-# Travix test
+# Task App
+A simple task application to manage your tasks.
 
-Travix Front-End Tech Interview Test 
+# Server
+Build with nodejs and express.
 
-# Introduction
+### Run the server
+`npm start`
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+### Run server in watch mode
+`npm run start:watch`
 
-Using your application we must be able to create, modify and delete a task.
+### Run tests
+`npm test`
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
+# Database
+No database has been used for this application. Data will live until the server
+is restarted.
 
-However this server is not perfect. It could be improved and tested as well.
+# Client
+Created with create-react-app.
+Using React JS, Redux to manage the application state, and [Travix UI Kit](https://travix-ui-kit.netlify.com/) to create components.
 
-So your mission is to develop the front-end from scratch using a front-end framework.
+### Run the client
+Switch to the client directory and run following command
+`npm start`
 
-We are also expecting from you a usable, responsive UI.
+### Run tests
+`npm test`
 
-# Process
+### Build client
+`npm run build`
 
-Fork the repository into your account. Once your code is ready, send a pull-request to this repository and we will review it.
-
-# Requirements
-
-* React 15+
-* Redux or Flux or [FrintJS](https://frint.js.org) or other alternatives that implement a unidirectional data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
-
-# Bonus
-
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us!
+# Note
+To use the build of the client as static resources, go to `server.js` in the root directory
+and uncomment the code for serving the static content. See the comments in the file.
