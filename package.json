@@ -1,5 +1,5 @@
 {
-  "name": "test-candidates",
+  "name": "mohammad-maleh",
   "version": "0.0.1",
   "description": "test back - front",
   "main": "server.js",
@@ -15,5 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0"
-  }
+  },
+  "repository": "https://github.com/mohammadmaleh/frontend-tech-test.git",
+  "private": false
 }
