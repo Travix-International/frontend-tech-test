@@ -1,18 +1,6 @@
-import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faSort } from '@fortawesome/free-solid-svg-icons';
+import React  from 'react';
 
-class Header extends Component {
-  render() {
-    return (
-      <div id="header">
-
-
-
-      </div>
-    );
-  }
-}
-
-
+const Header = () => (
+  <div id="header" />
+);
 export default Header;

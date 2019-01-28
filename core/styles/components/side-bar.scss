@@ -4,11 +4,13 @@
   background-color: $color-white;
   position: absolute;
   max-width: 0px;
-  right: 0px;
+  left: 0px;
   top: 0px;
+  transition: all 0.3s ease;
+  z-index: 1;
   &.active{
     position: relative;
-    right: 0;
+    left: 0;
     top: unset;
     max-width: 360px;
     width: 360px;
@@ -23,7 +25,12 @@
   }
   .title{
     padding: 0 20px ;
-    border-bottom: 1px solid $color-grey;
+    border: 1px solid  transparent;
+    border-bottom-color: $color-grey;
+
+    &.has-error {
+      border: 1px solid $color-red;
+    }
     input{
       background-color: transparent;
       width: 100%;
@@ -32,7 +39,10 @@
       color: $color-green-very-dark;
       outline: none;
       height: 60px;
-      @include place-holder-color($color-green-very-dark)
+      border: 1px solid transparent;
+
+      @include place-holder-color($color-green-very-dark);
+
     }
   }
   .description {
@@ -60,7 +70,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    .close-view-todo-icon, .delete-todo-icon{
+    .close-view-todo-icon, .delete-todo-icon,.save-todo-icon{
       font-size: 2.5rem;
       cursor: pointer;
       transition: all .3s ease-in-out;
@@ -74,6 +84,9 @@
     .delete-todo-icon{
       color: $color-red;
     }
+    .save-todo-icon{
+      color: $color-blue;
+    }
   }
 
 
@@ -81,12 +94,11 @@
 
 @media  (max-width : $breakpoint){
   #side-bar.active {
-
     width: 360px;
     height: 100vh;
     position: absolute!important;
     max-width: 360px;
-    right: 0px;
+    left: 0px;
     top: 0px;
 
   }

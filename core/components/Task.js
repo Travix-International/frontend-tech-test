@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Task = (props) => {
-  const { task ,selectTask } = props;
+  const { task, selectTask } = props;
+
   return (
-    <li key={task.id}  className="todo-item" onClick={() => { selectTask(task); }} role="presentation">
+    <li key={task.id} className="todo-item" onClick={() => { selectTask(task); }} role="presentation">
       <p>{task.title}</p>
     </li>
   );

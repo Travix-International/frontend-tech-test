@@ -2,6 +2,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = require('frint-config');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -16,8 +18,8 @@ module.exports = {
     contentBase: './build',
   },
   output: {
-    path: path.resolve(__dirname, 'build/js'),
-    filename: '[name].js',
+    path: path.resolve(__dirname, 'build/'),
+    filename: 'js/[name].js',
     libraryTarget: 'umd',
   },
   module: {
@@ -79,9 +81,19 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'layouts/index.ejs'),
+      excludeChunks: ['base'],
       filename: path.resolve(__dirname, 'build/index.html'),
-      chunksSortMode({ names }) {
-        return names[0] === 'core' ? -1 : 1;
+      minify: {
+        collapseWhitespace: true,
+        collapseInlineTagWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+      },
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: false,
+      output: {
+        comments: false,
       },
     }),
     new ExtractTextPlugin('styles.css'),

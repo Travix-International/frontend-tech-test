@@ -3,4 +3,4 @@ node_modules/
 #*
 .vs_code/
 .idea/
-./build
+build/

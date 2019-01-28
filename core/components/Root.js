@@ -2,13 +2,10 @@ import React from 'react';
 import { observe, streamProps, Region } from 'frint-react';
 import io from 'socket.io-client';
 import PropTypes from 'prop-types';
-import { Spinner } from 'travix-ui-kit';
-import { AutoSizer, List } from 'react-virtualized';
 
 import Header from './Header';
 import AddTask from './AddTask';
 import EditTask from './EditTask';
-import Task from './Task';
 import {
   initSocket,
   addTaskSocket,
@@ -18,6 +15,7 @@ import {
   taskDeletedListener,
   taskEditedListener,
 } from '../actions/socketActions';
+import TasksList from './TasksList';
 
 
 let socket;
@@ -32,8 +30,7 @@ class Root extends React.Component {
     this.handleDeleteTask = this.handleDeleteTask.bind(this);
     this.selectTask = this.selectTask.bind(this);
     this.handleCloseSideBar = this.handleCloseSideBar.bind(this);
-    this.handleEditTaskFormChange = this.handleEditTaskFormChange.bind(this);
-    this.renderTask = this.renderTask.bind(this);
+    this.handleEditTask = this.handleEditTask.bind(this);
   }
 
   componentDidMount() {
@@ -41,28 +38,22 @@ class Root extends React.Component {
     const {
       initSocket, taskAddedListener, taskDeletedListener, taskEditedListener,
     } = this.props;
-    console.log(socket);
     initSocket(socket);
     taskAddedListener(socket);
     taskDeletedListener(socket);
     taskEditedListener(socket);
   }
 
-  componentWillReceiveProps(nextProps, nextContext) {
+  componentWillReceiveProps(nextProps) {
     const { selectedTask } = nextProps;
     this.setState({
       selectedTask,
     });
   }
 
-  handleEditTaskFormChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-    const { selectedTask } = this.state;
+  handleEditTask(task) {
     const { editTaskSocket } = this.props;
-    selectedTask[name] = value;
-    editTaskSocket(socket, selectedTask);
+    editTaskSocket(socket, task);
   }
 
   handleAddTask(task) {
@@ -75,72 +66,34 @@ class Root extends React.Component {
     deleteTaskSocket(socket, task);
   }
 
-
   selectTask(task) {
     this.setState({
       selectedTask: task,
     });
   }
 
-
   handleCloseSideBar() {
     this.setState({ selectedTask: {} });
   }
-
-  renderTask({ index, key, style }) {
-    const { tasks } = this.props;
-    return (
-      <div key={key} style={style}>
-        <Task selectTask={this.selectTask} task={tasks[index]} />
-      </div>
-    );
-  }
-
 
   render() {
     const { selectedTask } = this.state;
     const { tasks } = this.props;
     return (
       <div id="app">
-        <section className={selectedTask.id ? 'task-selected' : ''} id="main-section">
-          <Header />
-          <AddTask handleAddTask={this.handleAddTask} />
-          <ul id="todo-list-container">
-            { tasks
-              ? (
-                <AutoSizer>
-                  {
-                    ({ width, height }) => (
-                      <List
-                        className="list"
-                        height={height}
-                        overscanRowCount={3}
-                        rowCount={tasks.length}
-                        rowHeight={55}
-                        rowRenderer={this.renderTask}
-                        {...tasks}
-                        width={width}
-                      />
-                    )
-                  }
-                </AutoSizer>
-              )
-              : (
-                <div className="spinner-container">
-
-                  <Spinner size="m" />
-                </div>
-              )
-            }
-          </ul>
-        </section>
         <section className={selectedTask.id ? 'active' : ''} id="side-bar">
           <EditTask
             handleCloseSideBar={this.handleCloseSideBar}
             handleDeleteTask={this.handleDeleteTask}
-            handleEditTaskFormChange={this.handleEditTaskFormChange}
+            handleEditTask={this.handleEditTask}
             selectedTask={selectedTask}
           />
+        </section>
+        <section className={selectedTask.id ? 'task-selected' : ''} id="main-section">
+          <Header />
+          <AddTask handleAddTask={this.handleAddTask} />
+          <TasksList selectTask={this.selectTask} tasks={tasks} />
+
         </section>
       </div>
     );
@@ -154,6 +107,7 @@ Root.propTypes = {
   taskAddedListener: PropTypes.func.isRequired,
   taskDeletedListener: PropTypes.func.isRequired,
   taskEditedListener: PropTypes.func.isRequired,
+  selectedTask: PropTypes.object.isRequired,
 };
 export default observe(app => streamProps({})
   .set(

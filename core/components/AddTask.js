@@ -13,7 +13,6 @@ class AddTask extends Component {
       description: '',
       formHasError: false,
     };
-
     this.handleAddTaskFormChange = this.handleAddTaskFormChange.bind(this);
     this.handleFocusAddTodo = this.handleFocusAddTodo.bind(this);
     this.submitAddTaskForm = this.submitAddTaskForm.bind(this);
@@ -28,17 +27,15 @@ class AddTask extends Component {
   }
 
   handleAddTaskFormChange(event) {
-    const target = event.target;
+    const { target } = event;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    const { name } = target;
     this.setState({
       [name]: value,
       activeAddTodo: true,
       formHasError: false,
-
     });
   }
-
 
   submitAddTaskForm(event) {
     event.preventDefault();
@@ -51,7 +48,6 @@ class AddTask extends Component {
         description: '',
         formHasError: false,
         activeAddTodo: false,
-
       });
     } else {
       this.setState({ formHasError: true });

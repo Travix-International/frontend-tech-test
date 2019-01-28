@@ -1,3 +1,56 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+p{
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+}
+html {
+  font-size: 10px;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  text-rendering: optimizeLegibility;
+  //font-size: 10px;
+  font-family: 'Lato', sans-serif;
+
+}
+#root{
+  height: 100%;
+}
+#app{
+  //width: 100%;
+  height: 100%;
+  background: url("../assets/images/amsterdam.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-y: scroll;
+  display: flex;
+  max-height: 100vh;
+  flex-direction: row;
+}
+@media  (max-width : 900px){
+  html{
+    font-size: 12px ;
+  }
+}
+.spinner-container{
+  width: 100%;
+  text-align: center;
+}
+
+.list {
+  height: calc(100vh - 210px)
+}
+
+
 @import "common/variables";
 @import "common/mixins";
 @import "components/header";
