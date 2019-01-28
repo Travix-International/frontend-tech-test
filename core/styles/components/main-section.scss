@@ -1,0 +1,15 @@
+#main-section{
+  width: 100%;
+  &.task-selected{
+    width: calc(100% - 360px);
+  }
+
+}
+@media  (max-width : $breakpoint){
+  #main-section.task-selected {
+
+    width: 100% !important;
+
+
+  }
+}

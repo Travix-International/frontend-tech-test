@@ -1,0 +1,93 @@
+#side-bar{
+  width: 360px;
+  height: 100vh;
+  background-color: $color-white;
+  position: absolute;
+  max-width: 0px;
+  right: 0px;
+  top: 0px;
+  &.active{
+    position: relative;
+    right: 0;
+    top: unset;
+    max-width: 360px;
+    width: 360px;
+
+  }
+  #view-todo{
+    height: 100%;
+    #view-todo-container{
+      margin: 0;
+      height: calc(100% - 25px);
+    }
+  }
+  .title{
+    padding: 0 20px ;
+    border-bottom: 1px solid $color-grey;
+    input{
+      background-color: transparent;
+      width: 100%;
+      border: none;
+      font-size: 2.2rem;
+      color: $color-green-very-dark;
+      outline: none;
+      height: 60px;
+      @include place-holder-color($color-green-very-dark)
+    }
+  }
+  .description {
+    padding: 0 20px ;
+    height: calc(100% - 120px);
+    width: 100%;
+    textarea{
+      padding: 20px 0 ;
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+      border: none;
+      font-size: 2rem;
+      resize: none;
+      color: $color-green-very-dark;
+      outline: none;
+      @include place-holder-color($color-green-very-dark)
+    }
+  }
+  .controller{
+    width: 100%;
+    padding: 20px ;
+    border-top: 1px solid $color-grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .close-view-todo-icon, .delete-todo-icon{
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: all .3s ease-in-out;
+      &:hover{
+        transform: scale(1.1);
+      }
+    }
+    .close-view-todo-icon{
+      color: $color-primary-light;
+    }
+    .delete-todo-icon{
+      color: $color-red;
+    }
+  }
+
+
+}
+
+@media  (max-width : $breakpoint){
+  #side-bar.active {
+
+    width: 360px;
+    height: 100vh;
+    position: absolute!important;
+    max-width: 360px;
+    right: 0px;
+    top: 0px;
+
+  }
+}

@@ -1,0 +1,39 @@
+.todo-item{
+  background-color: $color-white;
+  border: 1px solid $color-blue-dark;
+  border-radius: 3px;
+  padding: 10px 20px;
+  cursor: pointer;
+  list-style: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  height: 55px;
+  margin: 0;
+  border-top: none;
+  p{
+    font-size: 2rem;
+    max-width: 95%;
+    overflow: hidden;
+    padding-left: 20px;
+    text-overflow: ellipsis;
+    display:inline-block;
+    position: relative;
+    &:before{
+      content:"\A";
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background: $color-primary-light;
+      display:inline-block;
+      margin:0 10px;
+      position: absolute;
+      top: 10px;
+      left: -8px;
+    }
+
+  }
+
+}

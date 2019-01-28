@@ -1,0 +1,7 @@
+#todo-list-container{
+    max-height: calc(100% - 190px) ;
+    overflow-y: scroll;
+    padding: 0 65px;
+    position: relative;
+    height: 100%;
+}
