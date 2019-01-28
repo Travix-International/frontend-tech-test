@@ -1,9 +1,4 @@
-# Counter
-
-Example demonstrating:
-
-* A Root app
-* With a counter having increment/decrement buttons
+# Travix - Realtime Todo App
 
 ## Usage
 
