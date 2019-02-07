@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "npm run start-app && npm run start-server",
+    "start-app": "webpack-dev-server --open --config webpack/webpack.dev.js",
+    "start-server": "node server.js",
+    "build_prod": "webpack --config ./webpack/webpack.prod.js"
   },
   "keywords": [
     "test",
@@ -14,6 +17,47 @@
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.16.4",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^5.10.0",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "@types/node": "^10.12.21",
+    "@types/react": "^16.8.2",
+    "@types/react-redux": "^7.0.1",
+    "@types/redux": "^3.6.0",
+    "@types/redux-logger": "^3.0.6",
+    "@types/redux-thunk": "^2.1.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-module-resolver": "^3.1.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-react": "^6.24.1",
+    "bootstrap-sass": "3.3.7",
+    "clean-webpack-plugin": "^1.0.1",
+    "css-loader": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.10.0",
+    "react-hot-loader": "^4.3.12",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "typescript": "^3.3.1",
+    "webpack": "^4.29.1",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14",
+    "webpack-merge": "^4.2.1"
   }
 }
