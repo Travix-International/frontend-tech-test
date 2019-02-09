@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as serviceWorker from './serviceWorker';
-import './style.scss'
+import './style.scss';
+import 'toastr/build/toastr.css';
 import FormContainer from "./components/container/FormContainer.jsx";
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<FormContainer />, document.getElementById('create-article-form'));
 

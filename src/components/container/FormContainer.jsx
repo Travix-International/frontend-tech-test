@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import Input from "../presentational/Input.jsx";
 import TextArea from "../presentational/TextArea.jsx";
 
+import Toaster from 'toastr';
+
 class FormContainer extends Component {
     constructor() {
         super();
@@ -10,9 +12,13 @@ class FormContainer extends Component {
             seo_title: ""
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleAddEvent = this.handleAddEvent.bind(this);
     }
     handleChange(event) {
         this.setState({ [event.target.id]: event.target.value });
+    }
+    handleAddEvent(event) {
+        Toaster.success("Task added - Success."); 
     }
     render() {
         const { seo_title } = this.state;
@@ -45,7 +51,7 @@ class FormContainer extends Component {
                                 <button type="button" className="btn btn-primary btn-min-width">
                                     CLear
                                 </button>
-                                <button type="button" className="btn btn-success l-ml-10 btn-min-width">
+                                <button type="button" onClick={this.handleAddEvent} className="btn btn-success l-ml-10 btn-min-width">
                                     Add Task
                                 </button>
                             </div>
