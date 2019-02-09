@@ -88,18 +88,19 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task/create/:title/:description', (req, res) => { 
   const task = {
-    id: tasksContainer.tasks.length,
+    id: tasksContainer.tasks.length + 1,
     title: req.params.title,
     description: req.params.description,
   };
 
   tasksContainer.tasks.push(task);
-
+  return res.status(200).json(tasksContainer);
+  /*
   return res.status(201).json({
     message: 'Resource created',
-  });
+  }); */
 });
 
 /**
@@ -116,7 +117,7 @@ app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    let taskIndex = 0;
+    let taskIndex = -1;
     const tasksCount = tasksContainer.tasks.length;
     for (let count = 0; count < tasksCount; count++) {
       if (tasksContainer.tasks[count].id === id) {
@@ -124,11 +125,12 @@ app.delete('/task/delete/:id', (req, res) => {
       }
     }
   
-    if (taskIndex !== 0) {      
+    if (taskIndex >= 0) {      
       tasksContainer.tasks.splice(taskIndex, 1);
-      return res.status(200).json({
+      return res.status(200).json(tasksContainer);
+      /* return res.status(200).json({
         message: 'Deleted successfully',
-      });
+      }); */      
     } else {
       return es.status(404).json({
         message: 'Not found',

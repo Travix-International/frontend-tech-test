@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 import HeaderContainer from '../HeaderContainer/HeaderContainer.jsx';
 import TaskListContainer from '../TaskListContainer/TaskListContainer.jsx';
 
-const SERVER_URL = 'http://localhost:9001/tasks/';
+const SERVER_URL = 'http://localhost:9001';
 import Toaster from 'toastr';
 
 class LayoutContainer extends Component {
@@ -21,6 +21,7 @@ class LayoutContainer extends Component {
         this.handleDeleteTaskEvent = this.handleDeleteTaskEvent.bind(this);
         this.handleUpdaetTaskEvent = this.handleUpdaetTaskEvent.bind(this);
         this.handleHideModalEvent = this.handleHideModalEvent.bind(this);
+        this.handleCreateTaskEvent = this.handleCreateTaskEvent.bind(this);
     }
 
     componentDidMount(){
@@ -28,23 +29,49 @@ class LayoutContainer extends Component {
     }
        
     loadToDoTasksList(){
-        const request = axios.get(`${SERVER_URL}`);
+        const request = axios.get(`${SERVER_URL}/tasks/`);
         request.then(({ data }) => {
             console.log(data);
-            this.setState({ tasks: data.tasks });
+            this.setState({ tasks: data.tasks.reverse() });
         }).catch(error => {
             return [];
         }); 
     }
-
-    handleAddTaskEvent(){
-        this.setState({
-            isModalOpen: true
-        });
-        Toaster.success("Task added - Success."); 
+    handleAddTaskEvent(){        
+        this.setState({ isModalOpen: true });        
     }
-    handleDeleteTaskEvent(){
-        Toaster.success("Task Deleted - Success."); 
+    handleCreateTaskEvent(event){
+        let createTask = JSON.parse(event.target.value);
+        const request = axios({
+            url: `${SERVER_URL}/task/create/${createTask.title}/${createTask.description}`,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        request.then(({ data }) => {
+            Toaster.success("Task Deleted - Success.");
+            this.setState({ tasks: data.tasks.reverse() });
+            this.setState({ isModalOpen: false });
+        }).catch(error => {
+            return [];
+        }); 
+    }
+    handleDeleteTaskEvent(event){
+        let deleteTaskId = event.target.value;
+        const request = axios({
+            url: `${SERVER_URL}/task/delete/${deleteTaskId}`,
+            method: 'delete',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        request.then(({ data }) => {
+            Toaster.success("Task Deleted - Success."); 
+            this.setState({ tasks: data.tasks.reverse() });
+        }).catch(error => {
+            return [];
+        });         
     }
     handleUpdaetTaskEvent() {
         Toaster.success("Task Updated - Success.");
@@ -64,6 +91,7 @@ class LayoutContainer extends Component {
                     onupdate={this.handleUpdaetTaskEvent} 
                     tasklist={this.state.tasks}
                     showmodal={this.state.isModalOpen}
+                    oncreate={this.handleCreateTaskEvent}
                     hidemodal={this.handleHideModalEvent}></TaskListContainer>                
             </div>
         );

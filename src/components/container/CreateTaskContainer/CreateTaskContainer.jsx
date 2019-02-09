@@ -11,12 +11,25 @@ class TaskContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            seo_title: ""
+            task: {
+                title: "",
+                description:""
+            }
         };
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChangeTitle = this.handleChangeTitle.bind(this);
+        this.handleChangeDescription = this.handleChangeDescription.bind(this);
     }
-    handleChange(event) {
-        this.setState({ [event.target.id]: event.target.value });
+    handleChangeTitle(event) {
+        let task = {};
+        task.title = event.target.value
+        task.description = this.state.task.description;
+        this.setState({ task: task });
+    } 
+    handleChangeDescription(event) {
+        let task = {};
+        task.title = this.state.task.title;
+        task.description = event.target.value;
+        this.setState({ task: task });
     }
     render() {
         // Render nothing if the "show" prop is false
@@ -42,21 +55,21 @@ class TaskContainer extends Component {
                             <div className="col-xs-12 col-sm-12 col-md-12 l-p-20">
                                 <Input
                                     text="Task Title"
-                                    label="seo_title"
+                                    label="Title"
                                     type="text"
-                                    id="seo_title"
-                                    value={this.state.seo_title}
-                                    handleChange={this.handleChange}
+                                    id="txtTitle"
+                                    value={this.state.task.title}
+                                    handleChange={this.handleChangeTitle}
                                 />
                             </div>
                             <div className="col-xs-12 col-sm-12 col-md-12">
                                 <TextArea
                                     text="Task Description"
-                                    label="seo_title"
+                                    label="Description"
                                     type="text"
-                                    id="seo_title"
-                                    value={this.state.seo_title}
-                                    handleChange={this.handleChange}
+                                    id="txtDescription"
+                                    value={this.state.task.description}
+                                    handleChange={this.handleChangeDescription}
                                 />
                             </div>
                             <div className="col-xs-12 col-sm-12 col-md-12 l-p-20">
@@ -65,7 +78,7 @@ class TaskContainer extends Component {
                                         <button type="button" className="btn btn-primary btn-min-width">
                                             Clear
                                         </button>
-                                        <button type="button" onClick={this.handleAddEvent} className="btn btn-success l-ml-10 btn-min-width">
+                                        <button type="button" value={JSON.stringify(this.state.task)} onClick={this.props.oncreate} className="btn btn-success l-ml-10 btn-min-width">
                                             Add Task
                                         </button>
                                     </div>

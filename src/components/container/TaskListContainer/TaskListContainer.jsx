@@ -32,7 +32,10 @@ class TaskListContainer extends Component {
     render() {
         return (
             <div>      
-                <CreateTaskContainer showmodal={this.props.showmodal} hidemodal={this.props.hidemodal} taskdetails={this.state.taskDetails}></CreateTaskContainer>      
+                <CreateTaskContainer showmodal={this.props.showmodal} 
+                    hidemodal={this.props.hidemodal} 
+                    oncreate={this.props.oncreate}
+                    taskdetails={this.state.taskDetails}></CreateTaskContainer>      
                 {
                     this.props.tasklist.map((task, index) => {                    
                     return <TaskContainer ondelete={this.props.ondelete}
