@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Input from "../presentational/Input.jsx";
+import TextArea from "../presentational/TextArea.jsx";
+
 class FormContainer extends Component {
     constructor() {
         super();
@@ -16,14 +18,43 @@ class FormContainer extends Component {
         const { seo_title } = this.state;
         return (
             <form id="article-form">
-                <Input
-                    text="SEO title"
-                    label="seo_title"
-                    type="text"
-                    id="seo_title"
-                    value={seo_title}
-                    handleChange={this.handleChange}
-                />
+                <div className="row bg-info">
+                    <div className="col-xs-12 col-sm-12 col-md-12 l-p-20">
+                        <Input
+                            text="Task Title"
+                            label="seo_title"
+                            type="text"
+                            id="seo_title"                        
+                            value={seo_title}
+                            handleChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="col-xs-12 col-sm-12 col-md-12">
+                        <TextArea
+                            text="Task Description"
+                            label="seo_title"
+                            type="text"
+                            id="seo_title"
+                            value={seo_title}
+                            handleChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="col-xs-12 col-sm-12 col-md-12 l-p-20">
+                        <div className="row"> 
+                            <div className="offset-md-8 col-xs-2 col-sm-2 col-md-2">
+                                <button type="button" className="btn btn-primary btn-min-width">
+                                    CLear
+                                </button>
+                            </div>
+                            <div className="col-xs-2 col-sm-2 col-md-2">
+                                <button type="button" className="btn btn-success btn-min-width">
+                                    Add Task
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </form>
         );
     }

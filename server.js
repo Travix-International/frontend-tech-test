@@ -27,7 +27,7 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find((item) => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
@@ -116,13 +116,18 @@ app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    let taskIndex = 0;
+    const tasksCount = tasksContainer.tasks.length;
+    for (let count = 0; count < tasksCount; count++) {
+      if (tasksContainer.tasks[count].id === id) {
+        taskIndex = count;
+      }
+    }
   
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
+    if (taskIndex !== 0) {      
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
-        message: 'Updated successfully',
+        message: 'Deleted successfully',
       });
     } else {
       return es.status(404).json({

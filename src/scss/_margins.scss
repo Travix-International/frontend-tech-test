@@ -1,0 +1,107 @@
+
+$l0px: 0px;
+$l1px: 1px;
+$l2px: 2px;
+$l5px: 5px;
+$l10px: 10px;
+$l20px: 20px;
+
+@mixin custom-margin($custom-margin-left, $custom-margin-top, $custom-margin-right, $custom-margin-bottom) {
+  margin-left: $custom-margin-left;
+  margin-top: $custom-margin-top;
+  margin-right: $custom-margin-right;
+  margin-bottom: $custom-margin-bottom;
+}
+@mixin custom-left-margin($custom-margin-left) {
+  margin-left: $custom-margin-left;
+}
+@mixin custom-top-margin($custom-margin-top) {
+  margin-top: $custom-margin-top;
+}
+@mixin custom-right-margin($custom-margin-right) {
+  margin-right: $custom-margin-right;
+}
+@mixin custom-bottom-margin($custom-margin-bottom) {
+  margin-bottom: $custom-margin-bottom;
+}
+
+.l-m-1 {
+    @include custom-margin($l1px,$l1px,$l1px,$l1px);
+}
+.l-ml-1 {
+    @include custom-left-margin($l1px);
+}
+.l-mt-1 {
+    @include custom-top-margin($l1px);
+}
+.l-mr-1 {
+   @include custom-right-margin($l1px);
+}
+.l-mb-1 {
+   @include custom-bottom-margin($l1px);
+}
+
+
+.l-m-2 {
+    @include custom-margin($l2px,$l2px,$l2px,$l2px);
+}
+.l-ml-2 {
+    @include custom-left-margin($l2px);
+}
+.l-mt-2 {
+    @include custom-top-margin($l2px);
+}
+.l-mr-2 {
+   @include custom-right-margin($l2px);
+}
+.l-mb-2 {
+   @include custom-bottom-margin($l2px);
+}
+
+.l-m-5 {
+    @include custom-margin($l5px,$l5px,$l5px,$l5px);
+}
+.l-ml-5 {
+    @include custom-left-margin($l5px);
+}
+.l-mt-5 {
+    @include custom-top-margin($l5px);
+}
+.l-mr-5 {
+   @include custom-right-margin($l5px);
+}
+.l-mb-5 {
+   @include custom-bottom-margin($l5px);
+}
+
+.l-m-10 {
+    @include custom-margin($l10px,$l10px,$l10px,$l10px);
+}
+.l-ml-10 {
+    @include custom-left-margin($l10px);
+}
+.l-mt-10 {
+    @include custom-top-margin($l10px);
+}
+.l-mr-10 {
+   @include custom-right-margin($l10px);
+}
+.l-mb-10 {
+   @include custom-bottom-margin($l10px);
+}
+
+.l-m-20 {
+    @include custom-margin($l20px,$l20px,$l20px,$l20px);
+}
+.l-ml-20 {
+    @include custom-left-margin($l20px);
+}
+.l-mt-20 {
+    @include custom-top-margin($l20px);
+}
+.l-mr-20 {
+   @include custom-right-margin($l20px);
+}
+.l-mb-20 {
+   @include custom-bottom-margin($l20px);
+}

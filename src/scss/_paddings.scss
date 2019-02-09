@@ -1,0 +1,107 @@
+
+$l0px: 0px;
+$l1px: 1px;
+$l2px: 2px;
+$l5px: 5px;
+$l10px: 10px;
+$l20px: 20px;
+
+@mixin custom-padding($custom-padding-left, $custom-padding-top, $custom-padding-right, $custom-padding-bottom) {
+  padding-left: $custom-padding-left;
+  padding-top: $custom-padding-top;
+  padding-right: $custom-padding-right;
+  padding-bottom: $custom-padding-bottom;
+}
+@mixin custom-left-padding($custom-padding-left) {
+  padding-left: $custom-padding-left;
+}
+@mixin custom-top-padding($custom-padding-top) {
+  padding-top: $custom-padding-top;
+}
+@mixin custom-right-padding($custom-padding-right) {
+  padding-right: $custom-padding-right;
+}
+@mixin custom-bottom-padding($custom-padding-bottom) {
+  padding-bottom: $custom-padding-bottom;
+}
+
+.l-p-1 {
+    @include custom-padding($l1px,$l1px,$l1px,$l1px);
+}
+.l-pl-1 {
+    @include custom-left-padding($l1px);
+}
+.l-pt-1 {
+    @include custom-top-padding($l1px);
+}
+.l-pr-1 {
+   @include custom-right-padding($l1px);
+}
+.l-pb-1 {
+   @include custom-bottom-padding($l1px);
+}
+
+
+.l-p-2 {
+    @include custom-padding($l2px,$l2px,$l2px,$l2px);
+}
+.l-pl-2 {
+    @include custom-left-padding($l2px);
+}
+.l-pt-2 {
+    @include custom-top-padding($l2px);
+}
+.l-pr-2 {
+   @include custom-right-padding($l2px);
+}
+.l-pb-2 {
+   @include custom-bottom-padding($l2px);
+}
+
+.l-p-5 {
+    @include custom-padding($l5px,$l5px,$l5px,$l5px);
+}
+.l-pl-5 {
+    @include custom-left-padding($l5px);
+}
+.l-pt-5 {
+    @include custom-top-padding($l5px);
+}
+.l-pr-5 {
+   @include custom-right-padding($l5px);
+}
+.l-pb-5 {
+   @include custom-bottom-padding($l5px);
+}
+
+.l-p-10 {
+    @include custom-padding($l10px,$l10px,$l10px,$l10px);
+}
+.l-pl-10 {
+    @include custom-left-padding($l10px);
+}
+.l-pt-10 {
+    @include custom-top-padding($l10px);
+}
+.l-pr-10 {
+   @include custom-right-padding($l10px);
+}
+.l-pb-10 {
+   @include custom-bottom-padding($l10px);
+}
+
+.l-p-20 {
+    @include custom-padding($l20px,$l20px,$l20px,$l20px);
+}
+.l-pl-20 {
+    @include custom-left-padding($l20px);
+}
+.l-pt-20 {
+    @include custom-top-padding($l20px);
+}
+.l-pr-20 {
+   @include custom-right-padding($l20px);
+}
+.l-pb-20 {
+   @include custom-bottom-padding($l20px);
+}
