@@ -13,12 +13,14 @@ class LayoutContainer extends Component {
     constructor() {
         super();
         this.state = {
+            isModalOpen: false,
             tasks: []
         };
 
         this.handleAddTaskEvent = this.handleAddTaskEvent.bind(this);
         this.handleDeleteTaskEvent = this.handleDeleteTaskEvent.bind(this);
         this.handleUpdaetTaskEvent = this.handleUpdaetTaskEvent.bind(this);
+        this.handleHideModalEvent = this.handleHideModalEvent.bind(this);
     }
 
     componentDidMount(){
@@ -36,6 +38,9 @@ class LayoutContainer extends Component {
     }
 
     handleAddTaskEvent(){
+        this.setState({
+            isModalOpen: true
+        });
         Toaster.success("Task added - Success."); 
     }
     handleDeleteTaskEvent(){
@@ -44,6 +49,12 @@ class LayoutContainer extends Component {
     handleUpdaetTaskEvent() {
         Toaster.success("Task Updated - Success.");
     }
+    handleHideModalEvent(){
+        this.setState({
+            isModalOpen: false
+        });
+        Toaster.success("Modal Closed - Success."); 
+    }
     render() {
         const { seo_title } = this.state;
         return (
@@ -51,7 +62,9 @@ class LayoutContainer extends Component {
                 <HeaderContainer onadd={this.handleAddTaskEvent}></HeaderContainer>
                 <TaskListContainer ondelete={this.handleDeleteTaskEvent}
                     onupdate={this.handleUpdaetTaskEvent} 
-                    tasklist={this.state.tasks}></TaskListContainer>                
+                    tasklist={this.state.tasks}
+                    showmodal={this.state.isModalOpen}
+                    hidemodal={this.handleHideModalEvent}></TaskListContainer>                
             </div>
         );
     }

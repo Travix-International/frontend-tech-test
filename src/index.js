@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './style.scss';
 import 'toastr/build/toastr.css';
+
 import LayoutContainer from "./components/container/LayoutContainer/LayoutContainer.jsx";
 import * as serviceWorker from './serviceWorker';
 
