@@ -1,18 +1,32 @@
 import React, { Component } from "react";
+import axios from 'axios';
 import ReactDOM from "react-dom";
 import Input from "../presentational/Input.jsx";
 import TextArea from "../presentational/TextArea.jsx";
 
+const SERVER_URL = 'http://localhost:9001/tasks/';
+
 import Toaster from 'toastr';
 
 class FormContainer extends Component {
-    constructor() {
+    constructor(props) {
+        super(props);
         super();
         this.state = {
             seo_title: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleAddEvent = this.handleAddEvent.bind(this);
+    }
+
+    componentDidMount(){
+        const request = axios.get(`${SERVER_URL}`);       
+        request.then(({ data }) => {
+                console.log(data);
+            })
+            .catch(error => {
+                return [];
+            }); 
     }
     handleChange(event) {
         this.setState({ [event.target.id]: event.target.value });
