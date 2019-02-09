@@ -41,13 +41,11 @@ class FormContainer extends Component {
                     </div>
                     <div className="col-xs-12 col-sm-12 col-md-12 l-p-20">
                         <div className="row"> 
-                            <div className="offset-md-8 col-xs-2 col-sm-2 col-md-2">
+                            <div className="offset-md-7 col-xs-12 col-sm-12 col-md-5 text-right">
                                 <button type="button" className="btn btn-primary btn-min-width">
                                     CLear
                                 </button>
-                            </div>
-                            <div className="col-xs-2 col-sm-2 col-md-2">
-                                <button type="button" className="btn btn-success btn-min-width">
+                                <button type="button" className="btn btn-success l-ml-10 btn-min-width">
                                     Add Task
                                 </button>
                             </div>

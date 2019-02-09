@@ -10,18 +10,25 @@ $grid-gutter-widths: ( xs: $grid-gutter-width-base,
     xl: $grid-gutter-width-base + 30
 );
 
-.container-fluid.custom-container {
-    padding: 0px 150px;
-}
 
+
+@media screen and (min-width: 1080px) {
+  .container-fluid.custom-container {
+    padding: 0px 150px;
+  }
+}
 
 body{
     background-color: $body-background-color;
-    padding-top: 70px;
+    padding-top: 20px;
 }
 
 .bg-info {
     background-color: #98ced7!important;
+    padding: 5px;
+    margin:5px;
+    border: 2px solid #4c4c4c;
+    border-radius: 10px;
 }
 
 .btn-min-width {
