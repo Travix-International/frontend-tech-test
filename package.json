@@ -5,11 +5,11 @@
   "main": "server.js",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production",
+    "server": "node server.js",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start-server": "node server.js"
+    "eject": "react-scripts eject"
   },
   "keywords": [
     "test",
@@ -31,5 +31,17 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "prop-types": "^15.6.2",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
+  }
 }
