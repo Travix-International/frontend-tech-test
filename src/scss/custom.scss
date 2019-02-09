@@ -1,0 +1,8 @@
+$grid-gutter-width-base: 30px;
+
+$grid-gutter-widths: ( xs: $grid-gutter-width-base, 
+sm: $grid-gutter-width-base, 
+md: $grid-gutter-width-base + 10, 
+lg: $grid-gutter-width-base + 20, 
+xl: $grid-gutter-width-base + 30
+);
