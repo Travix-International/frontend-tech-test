@@ -35,6 +35,7 @@ class TaskListContainer extends Component {
                 <CreateTaskContainer showmodal={this.props.showmodal} 
                     hidemodal={this.props.hidemodal} 
                     oncreate={this.props.oncreate}
+                    onselect={this.props.onselect}
                     taskdetails={this.state.taskDetails}></CreateTaskContainer>      
                 {
                     this.props.tasklist.map((task, index) => {                    

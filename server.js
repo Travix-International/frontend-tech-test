@@ -66,7 +66,8 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      // return res.status(204);
+      return res.status(200).json(tasksContainer);
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -89,8 +90,16 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => { 
+  let uniqueTaskId = tasksContainer.tasks.length + 1; // Default unique id.
+  const tasksCount = tasksContainer.tasks.length;
+  for (let count = 0; count < tasksCount; count++) {
+    if (tasksContainer.tasks[count].id === uniqueTaskId) {
+      uniqueTaskId = uniqueTaskId + 1; // Reset unique id if this is already available in the list.
+      count = 0; // Recheck from start of list.
+    }
+  }
   const task = {
-    id: tasksContainer.tasks.length + 1,
+    id: uniqueTaskId,
     title: req.params.title,
     description: req.params.description,
   };

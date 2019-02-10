@@ -14,7 +14,8 @@ class LayoutContainer extends Component {
         super();
         this.state = {
             isModalOpen: false,
-            tasks: []
+            tasks: [],
+            task: [],
         };
 
         this.handleAddTaskEvent = this.handleAddTaskEvent.bind(this);
@@ -38,20 +39,38 @@ class LayoutContainer extends Component {
         }); 
     }
     handleAddTaskEvent(){        
+        this.setState({ task: {} });
         this.setState({ isModalOpen: true });        
     }
     handleCreateTaskEvent(event){
         let createTask = JSON.parse(event.target.value);
+        var SERVER_ACTION_URL = '';
+        var SERVER_ACTION_METHOD = '';
+        console.log("Add or Update.");
+        if (!Number.isNaN(createTask.id) && createTask.id > 0){
+            SERVER_ACTION_URL= `${SERVER_URL}/task/update/${createTask.id}/${createTask.title}/${createTask.description}`;
+            SERVER_ACTION_METHOD = 'PUT';
+        }else{
+            SERVER_ACTION_URL = `${SERVER_URL}/task/create/${createTask.title}/${createTask.description}`;
+            SERVER_ACTION_METHOD = 'POST';
+        }
+
         const request = axios({
-            url: `${SERVER_URL}/task/create/${createTask.title}/${createTask.description}`,
-            method: 'POST',
+            url: SERVER_ACTION_URL,
+            method: SERVER_ACTION_METHOD,
             headers: {
                 'Content-Type': 'application/json'
             }
         });
+        
         request.then(({ data }) => {
-            Toaster.success("Task Deleted - Success.");
+            if (!Number.isNaN(createTask.id)) {
+                Toaster.success("Task Updated - Success.");
+            }else{
+                Toaster.success("Task Deleted - Success.");
+            }
             this.setState({ tasks: data.tasks.reverse() });
+            this.setState({ task: {} });
             this.setState({ isModalOpen: false });
         }).catch(error => {
             return [];
@@ -74,9 +93,24 @@ class LayoutContainer extends Component {
         });         
     }
     handleUpdaetTaskEvent() {
-        Toaster.success("Task Updated - Success.");
+        let selectedTaskId = event.target.value;
+        const request = axios({
+            url: `${SERVER_URL}/task/${selectedTaskId}`,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        request.then(({ data }) => {
+            Toaster.success("Task Update - Success.");
+            this.setState({ task: data.task });
+            this.setState({ isModalOpen: true });
+        }).catch(error => {
+            return [];
+        });      
     }
     handleHideModalEvent(){
+        this.setState({ task: {} });
         this.setState({
             isModalOpen: false
         });
@@ -89,6 +123,7 @@ class LayoutContainer extends Component {
                 <HeaderContainer onadd={this.handleAddTaskEvent}></HeaderContainer>
                 <TaskListContainer ondelete={this.handleDeleteTaskEvent}
                     onupdate={this.handleUpdaetTaskEvent} 
+                    onselect={this.state.task}
                     tasklist={this.state.tasks}
                     showmodal={this.state.isModalOpen}
                     oncreate={this.handleCreateTaskEvent}
