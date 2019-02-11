@@ -4,16 +4,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
   mode: 'development',
-  entry: {
-    app:['babel-polyfill','./src/index.js'],
-    vendor: ['react']
-  },
+  entry: [
+    './src/index.js'
+  ],
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'build')
+    path: path.resolve(__dirname, './../dist'),
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx','ts','tsx']
+    extensions: ['*', '.js', '.jsx','.ts','.tsx','.es6'],
   },
   module: {
     rules: [
@@ -28,7 +27,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: ['babel-loader'],  
       },
       {
         test: /\.(ts|tsx)$/,
@@ -49,17 +48,14 @@ module.exports = {
       }
     ]
   },
-  devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './build'
-  },    
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: 'SILA',
-      file:'./src/index.html',
+      title: 'Travix',
+      // file:'./../src/index.html',
+      template:path.resolve(__dirname, './../src/index.html'),
       chunksSortMode:'none'
     }),
-    new CleanWebpackPlugin(['build']),
+    new CleanWebpackPlugin(['./../dist']),
   ],
 };

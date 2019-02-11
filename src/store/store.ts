@@ -1,13 +1,16 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux'
-import {Todo} from './../reducers/todo.reducer';
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
+import Todo from './../reducers/todo.reducer';
 import { createLogger, ReduxLoggerOptions } from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
+import { IStore } from '../interfaces/interface';
 const loggerOptions:ReduxLoggerOptions = {
     
 }
 const logger = createLogger({
   ...loggerOptions
 });
-const middleware = applyMiddleware(logger,ReduxThunk, (window as any).devToolsExtension ? (window as any).devToolsExtension() : f => f)
+const middlewares = [logger,ReduxThunk];
+const enhancers = [applyMiddleware(...middlewares)];
 const reducers = combineReducers({Todo});
-export const store = createStore(reducers,middleware);
+export const store = createStore(reducers, {}, ...enhancers);
+

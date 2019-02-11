@@ -1,20 +1,13 @@
 import { TodoActions } from './../actions/todo.actions'
+import { ITodoList, ITodoReducer } from '../interfaces/interface';
 
-export interface ITodoItem {
-    name: string;
-    endTime: number;
-    assignee: string;
-    isDone: boolean;
-    isExpired: boolean;
-    id: number
+const initialState: ITodoReducer = {
+    TodoList: [],
+    ShowTodoItem: false,
+    TodoItem: {},
+    TodoSelection: []
 }
-
-export type ITodoList = Array<ITodoItem>
-
-const initialState: { TodoList: ITodoList } = {
-    TodoList: []
-}
-export var Todo = (state = initialState, action) => {
+var Todo = (state: ITodoReducer = initialState, action) => {
     switch (action.type) {
         case TodoActions.ADD_TODO_ITEM:
             {
@@ -44,7 +37,32 @@ export var Todo = (state = initialState, action) => {
                     }
                 }
             }
+        case TodoActions.SAVE_TODO_ITEMS: {
+            return {...{},...state,...{
+                TodoList: action.payload || state.TodoList || []}
+            }
+        }
+        case TodoActions.OPEN_TODO_ITEM: {
+            let { description = '', title = '', id = 0 } = action.payload;
+            return { ...{}, ...state, ...{ ShowTodoItem: true, TodoItem: { description, title, id } } }
+        }
+        case TodoActions.CLOSE_TODO_ITEM: {
+            return { ...{}, ...state, ...{ ShowTodoItem: false, TodoItem: {} } }
+        }
+        case TodoActions.UPDATE_TODO_SELECTION: {
+            let { TodoSelection } = state;
+            TodoSelection = TodoSelection.includes(action.payload) ? TodoSelection.filter((itemId: number) => Number(itemId) !== Number(action.payload)) : [...TodoSelection, ...[action.payload]]
+            return {
+                ...{}, ...state, ...{ TodoSelection }
+            }
+        }
+        case TodoActions.CLEAR_TODO_SELECTION:{
+            return {
+                ...{},...state,...{TodoSelection:[]}
+            }
+        }
         default:
             return state;
     }
 }
+export default Todo

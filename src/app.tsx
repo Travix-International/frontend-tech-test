@@ -1,11 +1,16 @@
 import * as React from 'react';
 import TodoList from './components/todolist.component'
-class App extends React.Component<any,any>{
-    constructor(props){
+import TodoPage from './pages/todo.page';
+class App extends React.Component<any, any>{
+    constructor(props) {
         super(props);
     }
-    render(){
-        return <TodoList/>
+    render() {
+        return (
+                <div>
+                    <TodoPage />
+                </div>
+        )
     }
 }
 export default App
