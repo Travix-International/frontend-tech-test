@@ -42,9 +42,7 @@ var Task = /** @class */ (function () {
         });
         this._io = SocketIO(this._server);
         this._io.on('connection', function (socket) {
-            console.log('Socket connetced...');
             socket.on('itemsAltered', function () {
-                console.log('Items Altered...');
                 _this._io.sockets.emit('itemsAltered', _this.tasksContainer.tasks);
             });
         });
@@ -57,7 +55,6 @@ var Task = /** @class */ (function () {
          * Return the list of tasks with status code 200.
          */
         this._app.get(ROUTES.TASKLIST, function (req, res) {
-            console.log('tasklist:', _this.tasksContainer.tasks);
             return res.status(200).json(__assign({ status: 200 }, _this.tasksContainer));
         });
         /**
@@ -73,7 +70,6 @@ var Task = /** @class */ (function () {
          */
         this._app.get(ROUTES.TASK, function (req, res) {
             var id = parseInt(req.params.id, 10);
-            console.log('task:', req.params);
             if (!isNaN(id)) {
                 var task_1 = _this.tasksContainer.tasks.find(function (item) { return item.id === id; });
                 if (task_1 !== null) {
@@ -108,7 +104,6 @@ var Task = /** @class */ (function () {
          * If the provided id is not a valid number return a status code 400.
          */
         this._app.put(ROUTES.UPDATETASK, function (req, res) {
-            console.log('task:', req.params);
             var id = parseInt(req.params.id, 10);
             if (!isNaN(id)) {
                 var task_2 = _this.tasksContainer.tasks.find(function (item) { return item.id === id; });
@@ -144,7 +139,6 @@ var Task = /** @class */ (function () {
          * Return status code 201.
          */
         this._app.post(ROUTES.CREATETASK, function (req, res) {
-            console.log('task:', req.params);
             var task = {
                 id: _this.tasksContainer.tasks.length + 1,
                 title: req.params.title,

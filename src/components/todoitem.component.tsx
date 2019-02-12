@@ -34,7 +34,6 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState>{
         return this.props.TodoSelection.includes(this.props.id)
     }
     render() {
-        console.log('props', this.props)
         return (
             <div className='todo-item'>
                 <div>

@@ -48,15 +48,13 @@ class Task {
     this._io = SocketIO(this._server);
 
     this._io.on('connection', socket => {
-      console.log('Socket connetced...')
       socket.on('itemsAltered', () => {
-        console.log('Items Altered...')
         this._io.sockets.emit('itemsAltered', this.tasksContainer.tasks)
       })
     })
 
-    // this.tasksContainer = { tasks: new Array() };
-    this.tasksContainer = { tasks: new Array(100).fill({}).map((e,index)=>{return {title:'ahahaah'+Number(index+1),description:'dsdfsdfsdfsdfsdasdafsdf',id:index+1}}) };
+    this.tasksContainer = { tasks: new Array() };
+    // this.tasksContainer = { tasks: new Array(100).fill({}).map((e,index)=>{return {title:'ahahaah'+Number(index+1),description:'dsdfsdfsdfsdfsdasdafsdf',id:index+1}}) };
     // const tasksContainer = require('./tasks.json');
 
 
@@ -66,7 +64,6 @@ class Task {
      * Return the list of tasks with status code 200.
      */
     this._app.get(ROUTES.TASKLIST, (req, res) => {
-      console.log('tasklist:', this.tasksContainer.tasks)
       return res.status(200).json({...{status:200},...this.tasksContainer});
     });
 
@@ -84,7 +81,6 @@ class Task {
      */
     this._app.get(ROUTES.TASK, (req, res) => {
       const id = parseInt(req.params.id, 10);
-      console.log('task:', req.params)
       if (!isNaN(id)) {
         const task = this.tasksContainer.tasks.find((item) => item.id === id);
 
@@ -119,7 +115,6 @@ class Task {
      * If the provided id is not a valid number return a status code 400.
      */
     this._app.put(ROUTES.UPDATETASK, (req, res) => {
-      console.log('task:', req.params)
       const id = parseInt(req.params.id, 10);
 
       if (!isNaN(id)) {
@@ -156,7 +151,6 @@ class Task {
      * Return status code 201.
      */
     this._app.post(ROUTES.CREATETASK, (req, res) => {
-      console.log('task:', req.params)
       const task = {
         id: this.tasksContainer.tasks.length + 1,
         title: req.params.title,
