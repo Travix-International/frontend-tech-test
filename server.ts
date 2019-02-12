@@ -55,7 +55,8 @@ class Task {
       })
     })
 
-    this.tasksContainer = { tasks: new Array() };
+    // this.tasksContainer = { tasks: new Array() };
+    this.tasksContainer = { tasks: new Array(100).fill({}).map((e,index)=>{return {title:'ahahaah'+Number(index+1),description:'dsdfsdfsdfsdfsdasdafsdf',id:index+1}}) };
     // const tasksContainer = require('./tasks.json');
 
 

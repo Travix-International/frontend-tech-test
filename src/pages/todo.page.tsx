@@ -28,7 +28,9 @@ class TodoPage extends React.Component<ITodoPageProps, ITodoPageState>{
         return (
             <div className='todo-page'>
                 <div>
-                    <button className='green-btn' onClick={this.create}>CREATE</button>
+                    {
+                    this.props.TodoSelection.length == 0 &&<button className='green-btn' onClick={this.create}>CREATE</button>
+                    }
                     {
                     this.props.TodoSelection.length > 0 &&<button className='red-btn' onClick={this.delete}>DELETE</button>
                     }

@@ -8,7 +8,9 @@ export interface ITodoItem {
 export type ITodoList = Array<ITodoItem>;
 
 export interface ITodoListState {
-
+    activePage:number;
+    perPage:number;
+    totalRecords:number;
 }
 
 export interface ITodoListProps{
@@ -76,4 +78,17 @@ export interface ITodoItemModalState{
 export interface ITodoItemModalProps{
     dispatch?:any;
     TodoItem:ITodoItem
+}
+
+export interface IPaginationProps{
+    totalRecords:number;
+    activePage:number;
+    perPage:number;
+    onPageChange:Function
+}
+
+export interface IPaginationState{
+    currentQueue:Array<number>;
+    activePage:number;
+    totalRecords:number;
 }

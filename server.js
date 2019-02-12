@@ -48,7 +48,8 @@ var Task = /** @class */ (function () {
                 _this._io.sockets.emit('itemsAltered', _this.tasksContainer.tasks);
             });
         });
-        this.tasksContainer = { tasks: new Array() };
+        // this.tasksContainer = { tasks: new Array() };
+        this.tasksContainer = { tasks: new Array(100).fill({}).map(function (e, index) { return { title: 'ahahaah' + Number(index + 1), description: 'dsdfsdfsdfsdfsdasdafsdf', id: index + 1 }; }) };
         // const tasksContainer = require('./tasks.json');
         /**
          * GET /tasks
