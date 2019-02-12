@@ -1,8 +1,11 @@
+import { Dispatch } from "react";
+import { Action } from "redux";
+
 export interface ITodoItem {
     title?: string;
     description?:string;
     id?: number;
-    dispatch?:any
+    dispatch?:Dispatch<Action>
 }
 
 export type ITodoList = Array<ITodoItem>;
@@ -14,7 +17,7 @@ export interface ITodoListState {
 }
 
 export interface ITodoListProps{
-    dispatch:any;
+    dispatch:Dispatch<Action>;
     TodoList:ITodoList
 }
 
@@ -25,7 +28,7 @@ export interface ITodoItemState{
 export interface ITodoPageProps{
     ShowTodoItem?:boolean;
     TodoSelection:Array<number>
-    dispatch:any;
+    dispatch:Dispatch<Action>;
 }
 
 export interface ITodoPageState{
@@ -36,7 +39,7 @@ export interface ITodoItemProps{
     title?: string;
     description?:string;
     id?: number;
-    dispatch?:any
+    dispatch?:Dispatch<Action>
     TodoSelection?:Array<number>
 }
 
@@ -45,9 +48,9 @@ export interface IAppState{
 }
 
 export interface IStore {
-        dispatch: any,
+        dispatch: Dispatch<Action>,
         getState: () => IAppState
-        subscribe: any;
+        subscribe: Dispatch<Action>;
 }
 
 export interface ITodoReducer{
@@ -55,6 +58,8 @@ export interface ITodoReducer{
      ShowTodoItem:boolean;
      TodoItem:ITodoItem;
      TodoSelection:Array<number>;
+     ShowToast:boolean;
+     ToastConfig:IToast
 }
 
 export enum ServiceCallType{
@@ -76,7 +81,7 @@ export interface ITodoItemModalState{
 }
 
 export interface ITodoItemModalProps{
-    dispatch?:any;
+    dispatch?:Dispatch<Action>;
     TodoItem:ITodoItem
 }
 
@@ -91,4 +96,23 @@ export interface IPaginationState{
     currentQueue:Array<number>;
     activePage:number;
     totalRecords:number;
+}
+export enum ToastType {
+    SUCCESS,
+    FAILURE
+}
+export interface IToast{
+    message?:string;
+    type?:ToastType 
+}
+
+export interface IToastProps{
+    dispatch?:Dispatch<Action>;
+    message?:string;
+    type?:ToastType;
+    ShowToast:boolean;
+    ToastConfig:IToast 
+}
+export interface IToastState{
+
 }

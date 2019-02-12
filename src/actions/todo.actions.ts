@@ -1,4 +1,4 @@
-import { ITodoItem } from "../interfaces/interface";
+import { ITodoItem, IToast } from "../interfaces/interface";
 
 export class TodoActions {
     static ADD_TODO_ITEM = 'ADD_TODO_ITEM';
@@ -51,6 +51,20 @@ export class TodoActions {
     }
     static CLEAR_TODO_SELECTION = 'CLEAR_TODO_SELECTION'
     clearTodoSelection =()=>({type:TodoActions.CLEAR_TODO_SELECTION})
+
+    static SHOW_TOAST = 'SHOW_TOAST';
+    showToast=(toastConfig:IToast)=>{
+        return {
+            type:TodoActions.SHOW_TOAST,
+            payload:toastConfig
+        }
+    }
+    static HIDE_TOAST = 'HIDE_TOAST';
+    hideToast=()=>{
+        return {
+            type:TodoActions.HIDE_TOAST
+        }
+    }
 }
 
 export default new TodoActions();

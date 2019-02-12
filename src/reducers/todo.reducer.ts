@@ -5,7 +5,9 @@ const initialState: ITodoReducer = {
     TodoList: [],
     ShowTodoItem: false,
     TodoItem: {},
-    TodoSelection: []
+    TodoSelection: [],
+    ShowToast:false,
+    ToastConfig:{}
 }
 var Todo = (state: ITodoReducer = initialState, action) => {
     switch (action.type) {
@@ -59,6 +61,16 @@ var Todo = (state: ITodoReducer = initialState, action) => {
         case TodoActions.CLEAR_TODO_SELECTION:{
             return {
                 ...{},...state,...{TodoSelection:[]}
+            }
+        }
+        case TodoActions.SHOW_TOAST:{
+            return {
+                ...{},...state,...{ShowToast:true,ToastConfig:action.payload}
+            }
+        }
+        case TodoActions.HIDE_TOAST:{
+            return {
+                ...{},...state,...{ShowToast:false,ToastConfig:{}}
             }
         }
         default:

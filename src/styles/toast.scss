@@ -1,0 +1,33 @@
+.toast{
+    width: 58vw;
+    left: 20vw;
+    position: absolute;
+    bottom:50vh;
+    height:10vh;
+}
+.toast-success{
+    background-color: #78d8bd;
+    animation:toast-show 3s
+}
+
+.toast-failure{
+    background-color: #da7c7c;
+    animation:toast-show 3s 
+}
+@keyframes toast-show {
+    0% {
+        opacity:0.1
+    }
+
+    30% {
+        opacity:0.3
+    }
+
+    70% {
+        opacity:0.5
+    }
+
+    100% {
+        opacity:1
+    }
+}

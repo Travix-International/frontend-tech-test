@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { ITodoItemState, ITodoItemProps, ITodoItem, IAppState, ITodoItemModalProps, ITodoItemModalState, ITodoList } from '../interfaces/interface';
+import { ITodoItemState, ITodoItemProps, ITodoItem, IAppState, ITodoItemModalProps, ITodoItemModalState, ITodoList, ToastType } from '../interfaces/interface';
 import todo_actions from '../actions/todo.actions';
 import service_call, { SUCCESS_CODES } from '../api/api';
 import { API_URLS, API_TYPE } from '../api/api_urls';
@@ -32,6 +32,7 @@ class TodoItemModal extends React.Component<ITodoItemModalProps, ITodoItemModalS
         service_call.makeServiceCall(URL, METHOD)
             .then((response: any) => {
                 if (SUCCESS_CODES.includes(response.status)) {
+                    this.props.dispatch(todo_actions.showToast({message:'Todo Item Created Successfully',type:ToastType.SUCCESS}))
                     socket_connection.socket.emit('itemsAltered'); 
                     this.props.dispatch(todo_actions.closeTodoModal());
                 } else {
