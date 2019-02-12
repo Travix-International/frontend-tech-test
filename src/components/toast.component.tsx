@@ -3,16 +3,33 @@ import { IToast, IToastProps, IToastState, IAppState, ToastType } from '../inter
 import todo_actions from '../actions/todo.actions';
 import { connect } from 'react-redux';
 import './../styles/toast.scss'
- class Toast extends React.Component<IToastProps, IToastState>{
-    componentDidMount(){
-        // window.setTimeout(()=>{
-        //     this.props.dispatch(todo_actions.hideToast())
-        // },3000);
-        
+class Toast extends React.Component<IToastProps, IToastState>{
+    constructor(props) {
+        super(props);
+        this.state = {
+            className: 'toast'
+        }
+    }
+    componentDidMount() {
+        let { className } = this.state;
+        if (this.props.ToastConfig.type === ToastType.SUCCESS) {
+            className += ' toast-success'
+        } else {
+            className += ' toast-failure'
+        }
+        this.setState({ className }, () => {
+            className += ' close-toast';
+            this.setState({ className }, () => {
+                window.setTimeout(() => {
+                    this.props.dispatch(todo_actions.hideToast())
+                }, 3000);
+            })
+        })
+
     }
     render() {
         return (
-            <div className={this.props.ShowToast && this.props.type ===ToastType.SUCCESS?'toast toast-success':'toast toast-failure'}>
+            <div className={this.state.className}>
                 <div className='toast-msg'>{this.props.ToastConfig.message}</div>
             </div>
         )
@@ -20,8 +37,8 @@ import './../styles/toast.scss'
 }
 const mapStateToProps = (state: IAppState) => {
     return {
-        ShowToast:state.Todo.ShowToast,
-        ToastConfig:state.Todo.ToastConfig
+        ShowToast: state.Todo.ShowToast,
+        ToastConfig: state.Todo.ToastConfig
     };
 };
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { ITodoItemState, ITodoItemProps, ITodoItem, ITodoPageProps, IAppState } from '../interfaces/interface';
-import service_call from '../api/api';
+import { ITodoItemState, ITodoItemProps, ITodoItem, ITodoPageProps, IAppState, ToastType } from '../interfaces/interface';
+import service_call, { SUCCESS_CODES } from '../api/api';
 import { API_TYPE, API_URLS } from '../api/api_urls';
 import todo_actions from './../actions/todo.actions'
 import socket_connection from '../api/socket.connection';
@@ -18,7 +18,13 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState>{
     deleteItem = () => {
         service_call.makeServiceCall(API_URLS.DELETETASK(this.props.id), API_TYPE.DELETE)
             .then((response: any) => {
-                socket_connection.socket.emit('itemsAltered'); 
+                if(SUCCESS_CODES.includes(response.status)){
+                    this.props.dispatch(todo_actions.showToast({message:response.message||'Todo Item Deleted Successfully',type:ToastType.SUCCESS}))
+                    socket_connection.socket.emit('itemsAltered'); 
+                }else{
+                    this.props.dispatch(todo_actions.showToast({message:response.message||'Unable To Delete Todo Item',type:ToastType.FAILURE}))
+                }
+                
             })
     }
     onItemClicked = () => {

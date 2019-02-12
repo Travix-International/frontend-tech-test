@@ -97,22 +97,22 @@ export interface IPaginationState{
     activePage:number;
     totalRecords:number;
 }
-export enum ToastType {
-    SUCCESS,
-    FAILURE
+export const ToastType= {
+    SUCCESS:'SUCCESS',
+    FAILURE:'FAILURE'
 }
 export interface IToast{
     message?:string;
-    type?:ToastType 
+    type?:string 
 }
 
 export interface IToastProps{
     dispatch?:Dispatch<Action>;
     message?:string;
-    type?:ToastType;
+    type?:string;
     ShowToast:boolean;
     ToastConfig:IToast 
 }
 export interface IToastState{
-
+className:string
 }

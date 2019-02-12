@@ -17,9 +17,9 @@ const ERROR_MESSAGES = Object.freeze({
 });
 
 const SUCCESS_MESSAGES = Object.freeze({
-  TASK_UPDATED: 'Task Updated',
-  TASK_CREATED: 'Task Created',
-  TASK_DELETED: 'Task Deleted',
+  TASK_UPDATED: 'Todo Item Updated Successfully',
+  TASK_CREATED: 'Todo Item Created Successfully',
+  TASK_DELETED: 'Todo Item Deleted Successfully',
 })
 
 const ROUTES = Object.freeze({
@@ -204,7 +204,7 @@ class Task {
       } else {
         return res.status(200).json({
           status:200,
-          message: SUCCESS_MESSAGES.TASK_UPDATED,
+          message: SUCCESS_MESSAGES.TASK_DELETED,
         });
       }
     });

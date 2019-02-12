@@ -2,32 +2,35 @@
     width: 58vw;
     left: 20vw;
     position: absolute;
-    bottom:50vh;
-    height:10vh;
+    bottom: 50vh;
+    height: 10vh;
+    border: solid 0.5px;
+    box-shadow: 2px 13px 13px 7px black;
+    .toast-msg{
+        text-align: center;
+        position: relative;
+        top: 20%;
+        color: white;
+    }
 }
 .toast-success{
-    background-color: #78d8bd;
+    background-color: #2a8c51;
     animation:toast-show 3s
 }
 
 .toast-failure{
-    background-color: #da7c7c;
+    background-color: #d81f1f;
     animation:toast-show 3s 
 }
 @keyframes toast-show {
-    0% {
-        opacity:0.1
-    }
-
-    30% {
-        opacity:0.3
-    }
-
-    70% {
-        opacity:0.5
-    }
-
-    100% {
-        opacity:1
-    }
+   from{opacity:0}
+   to{opacity: 1;}
+}
+.close-toast{
+    animation-delay: 2s;
+    animation:close-toast 3s
+}
+@keyframes close-toast{
+    from {bottom: 50vh;}
+    to{bottom: 100vh;}
 }

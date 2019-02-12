@@ -19,7 +19,7 @@ class ServiceCall {
                 })
             }
             return fetch(url, reqConfig as any)
-                .then((response) => response.status === 204 ? { message: 'done', status: 204 } : response.json())
+                .then((response) => response.status === 204 ? { message: '', status: 204 } : response.json())
 
                 .then((resObj) => resolve(resObj))
                 .catch((err) => console.log(err))

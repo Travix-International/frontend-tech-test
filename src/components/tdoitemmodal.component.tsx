@@ -32,7 +32,8 @@ class TodoItemModal extends React.Component<ITodoItemModalProps, ITodoItemModalS
         service_call.makeServiceCall(URL, METHOD)
             .then((response: any) => {
                 if (SUCCESS_CODES.includes(response.status)) {
-                    this.props.dispatch(todo_actions.showToast({message:'Todo Item Created Successfully',type:ToastType.SUCCESS}))
+                    const message = Number(payload.id) ?'Todo Item Updated Successfully':'Todo Item Created Successfully'
+                    this.props.dispatch(todo_actions.showToast({message:response.message||message,type:ToastType.SUCCESS}))
                     socket_connection.socket.emit('itemsAltered'); 
                     this.props.dispatch(todo_actions.closeTodoModal());
                 } else {
