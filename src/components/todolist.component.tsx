@@ -24,7 +24,6 @@ class TodoList extends React.Component<ITodoListProps, ITodoListState>{
     componentDidMount() {
         service_call.makeServiceCall(API_URLS.TASKLIST, API_TYPE.GET)
             .then((response: { tasks: ITodoList }) => {
-                console.log({ response })
                 this.props.dispatch(todo_actions.saveTodoItemsList(response.tasks))
                 this.setState({totalRecords:response.tasks.length})
             })
