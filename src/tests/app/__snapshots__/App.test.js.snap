@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component should render TaskList Component 1`] = `<Connect(TasksList) />`;
+
+exports[`App Component should render correctly in "debug" mode 1`] = `
+<div>
+  <nav
+    className="nav"
+  >
+    <div
+      className="header"
+    >
+      o Do Lis
+    </div>
+  </nav>
+  <Connect(TasksList) />
+</div>
+`;

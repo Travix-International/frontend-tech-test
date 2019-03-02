@@ -1,7 +1,19 @@
 'use strict';
-
+const bodyParser = require('body-parser')
+const fs = require('fs');
+const uuidv4 = require('uuid/v4')
+const _keys = require('lodash/keys');
+const cors = require('cors')
 const app = require('express')();
-const tasksContainer = require('./tasks.json');
+app.use(bodyParser.json())
+app.use(cors());
+
+let rawdata = fs.readFileSync('./tasks.json'); 
+const taskContainer = JSON.parse(rawdata);
+const tasks = taskContainer.tasks.reduce((acc,task)=>{
+    acc[task.id] = task;
+    return acc;
+},{})
 
 /**
  * GET /tasks
@@ -9,7 +21,7 @@ const tasksContainer = require('./tasks.json');
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
+  return res.status(200).json({data: tasks, totalCount: _keys(tasks).length});
 });
 
 /**
@@ -27,11 +39,12 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasks[id]
 
     if (task !== null) {
       return res.status(200).json({
-        task,
+        data: task,
+        totalCount: _keys(tasks).length,
       });
     } else {
       return res.status(404).json({
@@ -57,16 +70,20 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+app.put('/task/update/:id', (req, res) => {
+  const {id} = req.params;
 
-  if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-
-    if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
-      return res.status(204);
+  if (id !== undefined) {
+    let task = tasks[id]
+    if (task) {
+      const {title = '', description = '', } = req.body;
+      const updatedTask = { ...task, title, description};
+      tasks[id] = updatedTask;
+      return res.status(202).json({
+        message: 'Resource updated',
+        data: updatedTask,
+        totalCount: _keys(tasks).length
+      });;
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -88,17 +105,20 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task/create', (req, res) => {
+  const { title='', description='', } = req.body;
   const task = {
-    id: tasksContainer.tasks.length,
-    title: req.params.title,
-    description: req.params.description,
+    id: uuidv4(),
+    title,
+    description,
   };
 
-  tasksContainer.tasks.push(task);
+  tasks[task.id] = task;
 
   return res.status(201).json({
     message: 'Resource created',
+    data: task,
+    totalCount: _keys(tasks).length
   });
 });
 
@@ -113,19 +133,18 @@ app.post('/task/create/:title/:description', (req, res) => {
  * If the provided id is not a valid number return a status code 400.
  */
 app.delete('/task/delete/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+  const {id} = req.params;
 
-  if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-  
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
+  if (!!id) {
+    const task = tasks[id];  
+    if (task !== undefined) {
+      delete tasks[id];
       return res.status(200).json({
-        message: 'Updated successfully',
+        message: 'Deleted successfully',
+        totalCount: _keys(tasks).length
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
       });
     }

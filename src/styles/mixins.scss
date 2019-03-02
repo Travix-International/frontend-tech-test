@@ -1,0 +1,14 @@
+@mixin flex($flex-flow: row nowrap, $justify-content: flex-start, $align-items: stretch) {
+    display: flex;
+    flex-flow: $flex-flow;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+@mixin calcHeight($height) {
+  height:calc(100vh-$height);
+  height:-moz-calc(100vh - $height);
+  height:-webkit-calc(100vh - $height);
+}

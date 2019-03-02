@@ -36,3 +36,9 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 * dynamic-ui (web-sockets...?)
 * using the `made in Travix` technologies
 * ... Impress us!
+
+#  Setup 
+
+* Do  `yarn install`
+* to start web  `yarn start-web`
+* to start server `yarn start-server`

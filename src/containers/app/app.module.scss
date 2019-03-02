@@ -1,0 +1,150 @@
+@import '../../styles/base.scss';
+.app {
+  width: 100%;
+}
+.nav {
+  @include flex($justify-content: center, $align-items: stretch);
+  position: fixed;
+  top:0;
+  left: 0;
+  right: 0;
+  background-color: $white;
+  z-index: 1;
+  height: 5rem;
+  &::after{
+    content:"";
+    clear: both;
+    display: block;
+  }
+}
+.header {
+    line-height: 5rem;
+    font-size : $font-size-large;
+    font-family: $font-family-Roboto;
+    color: $denim;
+    letter-spacing: $letter-spacing-header;
+    &::before, &::after{
+      content: "T";
+      background-color: $mordantRed;
+      padding: 1rem;
+      border-radius: 50%;
+      padding: 0.6rem 0.95rem;
+      border-radius: 50%;
+      color:$white;
+    }
+}
+.page{
+  @include flex($flex-flow: column wrap,$justify-content: center, $align-items:center);
+  margin-top: 8rem;
+  position: relative;
+}
+.task{
+  @include flex($align-items: center, $justify-content:space-between);
+  border-bottom: 0.01rem solid $atomic;
+  padding : 1rem 0.2rem;
+  margin: 0.2rem 0;
+  width: 100%;
+}
+.taskButtonHolder{
+  @include flex($justify-content: space-between);
+  width: 4.5rem;
+  margin-right: 1rem;
+
+}
+.ListContainer{
+  @include flex($justify-content: center);
+}
+.List{
+  @include flex($justify-content: center, $align-items: center);
+  flex-direction: column;
+  margin: 0.2rem 5rem;
+  width: 50rem;
+  overflow: auto;
+  @include calcHeight(13.7rem);
+}
+
+.formContainer{
+  @include flex($flex-flow: column wrap, $justify-content: center, $align-items:flex-start);
+  font-family: $font-family-Roboto;
+}
+.AddNew{
+  @include flex($justify-content: flex-start);
+  border: 0.01rem solid $atomic;
+  position: fixed;
+  z-index: 1;
+  top: 5rem;
+  background-color: $platinum;
+  padding : 0.4rem;
+  width: 50rem;
+}
+.formItem{
+  margin: 0.5rem 1rem;
+  label{
+    display: block;
+    &::after{
+      content: " *";
+      color:$mordantRed;
+    }
+  }
+  input{
+    width: 20rem;
+    padding: 0.3rem;
+    outline: none;
+    box-shadow: none;
+    border:none;
+    border:  0.05rem solid $denim;
+    border-radius: 0.2rem;
+  }
+}
+.title{
+  padding: 0.3rem;
+  margin: 0 0.3rem;
+  border: 0.01rem solid $white;
+  border-radius: 0.1rem;
+  color: $white;
+  line-height: 3rem;
+  background-color: $mordantRed;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.description{
+  padding: 1rem;
+  color: $gunMetal;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.error{
+  color: $mordantRed;
+  display: block;
+}
+.noTask{
+  @include flex($flex-flow: column wrap, $align-items: center, $justify-content: center);
+  margin: 1rem;
+  color: $ashGray;
+  font-size: $font-size-medium;
+  letter-spacing: 0.2rem;
+  font-weight: 600;
+}
+.row{
+  width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .AddNew{
+      width: 100%;
+  }
+  .ListContainer{
+    width: 100%;
+  }
+  .List{
+    margin: 0;
+    width: 100%;
+  }
+  .formItem{
+    margin: 0;
+    width: 100%;
+    input{
+      width: 100%;
+    }
+  }
+}

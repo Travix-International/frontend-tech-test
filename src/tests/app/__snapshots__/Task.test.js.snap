@@ -1,0 +1,262 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component should render TaskList Component 1`] = `<Connect(TasksList) />`;
+
+exports[`App Component should render correctly in "debug" mode 1`] = `
+<div>
+  <nav
+    className="nav"
+  >
+    <div
+      className="header"
+    >
+      o Do Lis
+    </div>
+  </nav>
+  <Connect(TasksList) />
+</div>
+`;
+
+exports[`Task Component should render 1`] = `
+<div
+  className="task"
+>
+  <div>
+    <Icon
+      type="bars"
+    />
+    <span
+      className="title"
+    >
+       
+       
+    </span>
+    <span
+      className="description"
+    />
+  </div>
+  <div
+    className="taskButtonHolder"
+  >
+    <Button
+      block={false}
+      ghost={false}
+      icon="edit"
+      loading={false}
+      onClick={[Function]}
+      type="default"
+    />
+    <Button
+      block={false}
+      ghost={false}
+      icon="delete"
+      loading={false}
+      onClick={[Function]}
+      type="primary"
+    />
+  </div>
+</div>
+`;
+
+exports[`Task Component should render 2`] = `
+<div
+  className="task"
+>
+  <div>
+    <Icon
+      type="bars"
+    />
+    <span
+      className="title"
+    >
+       
+       
+    </span>
+    <span
+      className="description"
+    />
+  </div>
+  <div
+    className="taskButtonHolder"
+  >
+    <Button
+      block={false}
+      ghost={false}
+      icon="edit"
+      loading={false}
+      onClick={[Function]}
+      type="default"
+    />
+    <Button
+      block={false}
+      ghost={false}
+      icon="delete"
+      loading={false}
+      onClick={[Function]}
+      type="primary"
+    />
+  </div>
+</div>
+`;
+
+exports[`Task Component should render Task when task is taskWithIsDeletedFalse 1`] = `
+<div
+  className="task"
+>
+  <div>
+    <Icon
+      type="bars"
+    />
+    <span
+      className="title"
+    >
+       
+      Vaughan
+       
+    </span>
+    <span
+      className="description"
+    >
+      minim
+    </span>
+  </div>
+  <div
+    className="taskButtonHolder"
+  >
+    <Button
+      block={false}
+      ghost={false}
+      icon="edit"
+      loading={false}
+      onClick={[Function]}
+      type="default"
+    />
+    <Button
+      block={false}
+      ghost={false}
+      icon="delete"
+      loading={false}
+      onClick={[Function]}
+      type="primary"
+    />
+  </div>
+</div>
+`;
+
+exports[`Task Component should render Task when task is taskWithIsDeletedTrue 1`] = `
+<div
+  className="task"
+>
+  <div>
+    <Icon
+      type="bars"
+    />
+    <span
+      className="title"
+    >
+      <strike>
+         
+        Vaughan
+          
+      </strike>
+    </span>
+  </div>
+  <div
+    className="taskButtonHolder"
+  >
+    <Button
+      block={false}
+      disabled={true}
+      ghost={false}
+      icon="check"
+      loading={false}
+      type="default"
+    />
+  </div>
+</div>
+`;
+
+exports[`Task Component should render correctly in "debug" mode 1`] = `
+<div
+  className="task"
+>
+  <div>
+    <Icon
+      type="bars"
+    />
+    <span
+      className="title"
+    >
+       
+       
+    </span>
+    <span
+      className="description"
+    />
+  </div>
+  <div
+    className="taskButtonHolder"
+  >
+    <Button
+      block={false}
+      ghost={false}
+      icon="edit"
+      loading={false}
+      onClick={[Function]}
+      type="default"
+    />
+    <Button
+      block={false}
+      ghost={false}
+      icon="delete"
+      loading={false}
+      onClick={[Function]}
+      type="primary"
+    />
+  </div>
+</div>
+`;
+
+exports[`Task Component should render not deleted Task 1`] = `
+<div
+  className="task"
+>
+  <div>
+    <Icon
+      type="bars"
+    />
+    <span
+      className="title"
+    >
+       
+      Vaughan
+       
+    </span>
+    <span
+      className="description"
+    >
+      minim
+    </span>
+  </div>
+  <div
+    className="taskButtonHolder"
+  >
+    <Button
+      block={false}
+      ghost={false}
+      icon="edit"
+      loading={false}
+      onClick={[Function]}
+      type="default"
+    />
+    <Button
+      block={false}
+      ghost={false}
+      icon="delete"
+      loading={false}
+      onClick={[Function]}
+      type="primary"
+    />
+  </div>
+</div>
+`;

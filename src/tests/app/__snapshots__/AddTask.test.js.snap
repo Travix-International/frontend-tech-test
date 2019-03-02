@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddEditTask Component should render correctly 1`] = `
+<form
+  className="formContainer"
+  name="taskAddEdit"
+>
+  <div
+    className="formItem"
+  >
+    <label
+      htmlFor="title"
+    >
+      Title
+    </label>
+    <input
+      autoFocus={true}
+      id="title"
+      maxLength={20}
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="formItem"
+  >
+    <label
+      htmlFor="description"
+    >
+       Description
+    </label>
+    <input
+      id="description"
+      maxLength={60}
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>
+</form>
+`;
