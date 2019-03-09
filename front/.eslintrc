@@ -1,0 +1,81 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "16.6.3",
+    }
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+    "sort-class-members",
+    "react",
+    "jsx-a11y",
+    "import",
+    "jest"
+  ],
+  "globals": {
+    "trafficMeister": true,
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jest/globals": true
+  },
+  "rules": {
+    "no-unused-vars": 1,
+    "indent": [1, 2, {"SwitchCase": 1}],
+    "semi": [2, "never"],
+    "no-var": 2,
+    "prefer-const": 1,
+    "no-console": 1,
+    "no-debugger": 1,
+    "no-unreachable": 1,
+    "react/self-closing-comp": 2,
+    "react/jsx-indent": [1, 2],
+    "react/jsx-indent-props": [1, 2],
+    "react/jsx-pascal-case": 2,
+    "react/jsx-curly-spacing": [1, "never"],
+    "react/no-did-mount-set-state": 0,
+    "react/jsx-no-bind": ["off"],
+    "sort-class-members/sort-class-members": [2, {
+      "order": [
+        "[static-properties]",
+        "[static-methods]",
+        "[lifecycle]",
+        "/^on.*$/",
+        "[everything-else]",
+        "render",
+        "/^render.+$/"
+      ],
+      "groups": {
+        "lifecycle": [
+          "displayName",
+          "propTypes",
+          "contextTypes",
+          "childContextTypes",
+          "mixins",
+          "statics",
+          "defaultProps",
+          "constructor",
+          "getDefaultProps",
+          "getInitialState",
+          "state",
+          "getChildContext",
+          "componentWillMount",
+          "componentDidMount",
+          "componentWillReceiveProps",
+          "shouldComponentUpdate",
+          "componentWillUpdate",
+          "componentDidUpdate",
+          "componentWillUnmount"
+        ]
+      }
+    }]
+  }
+}
