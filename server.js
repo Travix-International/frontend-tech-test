@@ -1,7 +1,16 @@
 'use strict';
+var express = require('express'); // ExperssJS Framework
+var path = require('path'); // Import path module
 
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
+
+app.use(express.static(__dirname + '/public')); // Allow front end to access public folder
+
+// Set Application Static Layout
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/app/views/index.html')); // Set index.html as layout
+});
 
 /**
  * GET /tasks
@@ -9,7 +18,9 @@ const tasksContainer = require('./tasks.json');
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
+  // return res.status(200).json(tasksContainer);
+
+  return res.status(200).json({success:true, tasks:tasksContainer.tasks});
 });
 
 /**
@@ -27,11 +38,11 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find((item) => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
-        task,
+        success: true, task:task
       });
     } else {
       return res.status(404).json({
@@ -66,7 +77,11 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(200).json({
+        success: true,
+        message: 'Updated!',
+        task: task
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -89,8 +104,17 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
+  var new_id;
+  var numberOfTasks = tasksContainer.tasks.length;
+  if(numberOfTasks > 0){
+    var last_id = tasksContainer.tasks[numberOfTasks -1].id;
+    new_id = last_id +1;
+  }else{
+    new_id = 0;
+  }
+
   const task = {
-    id: tasksContainer.tasks.length,
+    id: new_id,
     title: req.params.title,
     description: req.params.description,
   };
@@ -98,7 +122,7 @@ app.post('/task/create/:title/:description', (req, res) => {
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
-    message: 'Resource created',
+    success: true, message: 'Resource created', task: task
   });
 });
 
@@ -122,7 +146,7 @@ app.delete('/task/delete/:id', (req, res) => {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
-        message: 'Updated successfully',
+        success: true, message: 'Updated successfully',
       });
     } else {
       return es.status(404).json({
