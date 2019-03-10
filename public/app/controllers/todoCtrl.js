@@ -1,6 +1,5 @@
 angular.module('todoController', ['todoServices'])
 .controller('todoCtrl', function($http, $location, $route, $timeout,$scope, $log, $routeParams, ToDo) {
-	// $uibModal,
 	var app = this;
 	$scope.tasks = []
 	$scope.newFormOpen = false;
@@ -40,6 +39,7 @@ angular.module('todoController', ['todoServices'])
 	}
 
 	this.editTask = function(task_id){
+		console.log(task_id);
 		ToDo.getTask(task_id).then((data)=>{
 			console.log(data);
 			if(data.data.success){
