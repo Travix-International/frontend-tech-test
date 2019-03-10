@@ -19,6 +19,7 @@ const Circle = styled.div`
     box-shadow: 0px 0px 10px 0px rgba(235,70,70,1);
   }
 `
+Circle.displayName = 'Circle' 
 const LogoStyle = styled(Logo)`
   fill: #fff;
   & path {

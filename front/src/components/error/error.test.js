@@ -1,8 +1,6 @@
-jest.mock('react-dom')
-
 import React from 'react'
-import render from 'react-test-renderer'
 import ShallowRenderer from 'react-test-renderer/shallow'
+import { mount } from 'enzyme'
 
 import Error from '.'
 
@@ -13,5 +11,11 @@ describe('ErrorComponent', () => {
     const result = renderer.getRenderOutput()
 
     expect(result).toMatchSnapshot()
+  })
+  it('onClose', async () => {
+    const tree = mount(<Error isOpen={true} message={'test'} />)
+    const container = tree.find('ModalContainer')
+    container.simulate('click')
+    expect(container).toBeDefined()
   })
 })

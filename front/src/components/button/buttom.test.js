@@ -2,19 +2,19 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import { shallow } from 'enzyme'
 
-import CircleButton from '.'
+import Button from '.'
 
-describe('CircleButtonComponent', () => {
+describe('ButtonComponent', () => {
   it('Snapshot', async () => {
     const tree = renderer
-      .create(<CircleButton />)
+      .create(<Button>Test</Button>)
       .toJSON()
     expect(tree).toMatchSnapshot()
   })
   it('onCLick simulate', async () => {
     const onClick = jest.fn()
-    const tree = shallow(<CircleButton onClick={onClick}/>)
-    tree.find('Circle').simulate('click')
+    const tree = shallow(<Button onClick={onClick}>Test</Button>)
+    tree.find('Button').simulate('click')
     expect(onClick).toHaveBeenCalled()
   })
 })

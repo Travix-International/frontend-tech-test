@@ -12,6 +12,9 @@ const { window } = jsdomVar
 
 global.window = window
 global.document = window.document
+global.location = {
+  reload: () => {}
+}
 global.navigator = {
   userAgent: 'node.js',
 }

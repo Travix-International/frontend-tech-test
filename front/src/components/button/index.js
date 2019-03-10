@@ -30,6 +30,8 @@ const Button = styled.button`
     box-shadow: 0 .5rem .5rem -0.3rem rgba(0,0,0,0.2), 0 .8rem 1rem .1rem rgba(0,0,0,0.14), 0 .3rem 1.4rem .2rem rgba(0,0,0,0.12);
   }
 `
+Button.displayName = 'Button'
+
 const ButtonComponent = ({className, onClick, children}) => {
   return (
     <Button className={className} onClick={onClick}>{children}</Button>

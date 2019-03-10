@@ -36,22 +36,22 @@ const ModalContainer = styled.div`
   z-index: 50;
   animation: ${Animation} 500ms ease;
 `
+ModalContainer.displayName = 'ModalContainer'
 
 const ModalComponent = ({open, children, onClose}) => {
 
-  document.onkeydown = function(evt) {
-    evt = evt || window.event
+  const keyDown = (evt) => {
     if (evt.keyCode == 27) {
       onClose()
     }
   }
-
+  
   return open ? ReactDOM.createPortal((
     <Fragment>
-      <ModalContent>
+      <ModalContent onKeyDown={keyDown}>
         {children}
       </ModalContent>
-      <ModalContainer onClick={onClose} />
+      <ModalContainer onClick={onClose} onKeyDown={keyDown} />
     </Fragment>
   ), document.body) : null
 }

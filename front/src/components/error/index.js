@@ -28,7 +28,7 @@ const ModalContainer = styled.div`
 
 const ErrorComponent = ({isOpen, message}) => {
   return (
-    <Modal open={isOpen} onClose={() => {location.reload()}}>
+    <Modal open={isOpen} onClose={() => location.reload()}>
       <ModalContainer>
         <Title>Error!</Title>
         <Descriptions>{message}</Descriptions>

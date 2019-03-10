@@ -1,16 +1,17 @@
-jest.mock('react-dom')
-
 import React from 'react'
-import ShallowRenderer from 'react-test-renderer/shallow'
+import { shallow } from 'enzyme'
 
 import Loading from '.'
 
 describe('LoadingComponent', () => {
   it('Snapshot', async () => {
-    const renderer = new ShallowRenderer()
-    renderer.render(<Loading open={true} />)
-    const result = renderer.getRenderOutput()
+    const tree = shallow(<Loading isOpen={true} />)
 
-    expect(result).toMatchSnapshot()
+    expect(tree).toMatchSnapshot()
+  })
+  it('Snapshot without nothing', async () => {
+    const tree = shallow(<Loading isOpen={false} />)
+
+    expect(tree).toMatchSnapshot()
   })
 })
