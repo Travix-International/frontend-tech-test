@@ -58,7 +58,10 @@ const ModalComponent = ({open, children, onClose}) => {
 
 ModalComponent.propTypes = {
   open: PropTypes.bool.isRequired,
-  childre: PropTypes.array,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
   onClose: PropTypes.func
 }
 

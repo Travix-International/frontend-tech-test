@@ -26,7 +26,7 @@ const LogoStyle = styled(Logo)`
   }
 `
 
-const CircleButton = ({className, onClick}) => {
+const CircleButtonComponent = ({className, onClick}) => {
   return (
     <Circle className={className} onClick={onClick}>
       <LogoStyle />
@@ -34,9 +34,9 @@ const CircleButton = ({className, onClick}) => {
   )
 }
 
-CircleButton.propTypes = {
+CircleButtonComponent.propTypes = {
   className: PropTypes.string,
   onClick: PropTypes.func,
 }
 
-export default CircleButton
+export default CircleButtonComponent

@@ -1,16 +1,12 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import Input from '.'
+import CircleButton from '.'
 
-describe('InputComponent', () => {
+describe('CircleButtonComponent', () => {
   it('Snapshot', async () => {
     const tree = renderer
-      .create(<Input
-        label={'label'}
-        value={'text'}
-        onChange={() => {}}
-      />)
+      .create(<CircleButton />)
       .toJSON()
     expect(tree).toMatchSnapshot()
   })

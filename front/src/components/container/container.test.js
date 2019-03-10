@@ -1,16 +1,12 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import Input from '.'
+import Container from '.'
 
-describe('InputComponent', () => {
+describe('ContainerComponent', () => {
   it('Snapshot', async () => {
     const tree = renderer
-      .create(<Input
-        label={'label'}
-        value={'text'}
-        onChange={() => {}}
-      />)
+      .create(<Container><p>test</p></Container>)
       .toJSON()
     expect(tree).toMatchSnapshot()
   })

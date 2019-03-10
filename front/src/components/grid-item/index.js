@@ -20,8 +20,7 @@ const RemoveIcon = styled(Remove)`
 `
 
 const Title = styled.h1`
-  color: ${props => props.done ? '#CFCFCF': '#707070'};
-  text-decoration: ${props => props.done ? 'line-through' : 'none'};
+  color: #707070;
   font-size: 1.6rem;
   font-weight: 400;
   display: inline-block;
@@ -31,8 +30,7 @@ const Title = styled.h1`
 `
 
 const Description = styled.p`
-  color: ${props => props.done ? '#CFCFCF': '#707070'};
-  text-decoration: ${props => props.done ? 'line-through' : 'none'};
+  color: #707070;
   font-size: 1.2rem;
   margin: 0 0 1rem;
 `
@@ -57,7 +55,6 @@ const TitlesContainer = styled.div`
 `
 
 const GridItem = ({
-  done,
   title,
   description,
   handleRemove,
@@ -67,8 +64,8 @@ const GridItem = ({
     <Item>
       <InfosContainer>
         <TitlesContainer>
-          <Title done={done}>{title}</Title>
-          <Description done={done}>{description}</Description>
+          <Title>{title}</Title>
+          <Description>{description}</Description>
         </TitlesContainer>
       </InfosContainer>
       <div>
@@ -84,7 +81,6 @@ GridItem.propTypes = {
   handleRemove: PropTypes.func,
   handleEdit: PropTypes.func,
   description: PropTypes.string,
-  done: PropTypes.bool,
 }
 
 export default GridItem

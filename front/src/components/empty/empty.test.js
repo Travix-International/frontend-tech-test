@@ -1,16 +1,12 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import Input from '.'
+import Empty from '.'
 
-describe('InputComponent', () => {
+describe('EmptyComponent', () => {
   it('Snapshot', async () => {
     const tree = renderer
-      .create(<Input
-        label={'label'}
-        value={'text'}
-        onChange={() => {}}
-      />)
+      .create(<Empty />)
       .toJSON()
     expect(tree).toMatchSnapshot()
   })

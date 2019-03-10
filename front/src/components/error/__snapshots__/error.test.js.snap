@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorComponent Snapshot 1`] = `
+<ModalComponent
+  onClose={[Function]}
+  open={true}
+>
+  <ForwardRef>
+    <ForwardRef>
+      Error!
+    </ForwardRef>
+    <ForwardRef>
+      test
+    </ForwardRef>
+  </ForwardRef>
+</ModalComponent>
+`;

@@ -1,16 +1,12 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import Input from '.'
+import Grid from '.'
 
-describe('InputComponent', () => {
+describe('GridComponent', () => {
   it('Snapshot', async () => {
     const tree = renderer
-      .create(<Input
-        label={'label'}
-        value={'text'}
-        onChange={() => {}}
-      />)
+      .create(<Grid><li>torto</li></Grid>)
       .toJSON()
     expect(tree).toMatchSnapshot()
   })

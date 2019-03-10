@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CircleButtonComponent Snapshot 1`] = `
+.c0 {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background: #FFB874;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.c0:hover {
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,.2);
+}
+
+.c0:active {
+  box-shadow: 0px 0px 10px 0px rgba(235,70,70,1);
+}
+
+.c1 {
+  fill: #fff;
+}
+
+.c1 path {
+  fill: #fff;
+}
+
+<div
+  className="c0"
+>
+  <test-file-stub
+    className="c1"
+  />
+</div>
+`;

@@ -20,7 +20,10 @@ const GridComponent = ({ children }) => {
 }
 
 GridComponent.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
 }
 
 export default GridComponent

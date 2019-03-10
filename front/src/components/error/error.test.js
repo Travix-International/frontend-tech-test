@@ -1,14 +1,15 @@
 jest.mock('react-dom')
 
 import React from 'react'
+import render from 'react-test-renderer'
 import ShallowRenderer from 'react-test-renderer/shallow'
 
-import Loading from '.'
+import Error from '.'
 
-describe('LoadingComponent', () => {
+describe('ErrorComponent', () => {
   it('Snapshot', async () => {
     const renderer = new ShallowRenderer()
-    renderer.render(<Loading open={true} />)
+    renderer.render(<Error isOpen={true} message={'test'} />)
     const result = renderer.getRenderOutput()
 
     expect(result).toMatchSnapshot()

@@ -1,16 +1,12 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import Input from '.'
+import Card from '.'
 
-describe('InputComponent', () => {
+describe('CardComponent', () => {
   it('Snapshot', async () => {
     const tree = renderer
-      .create(<Input
-        label={'label'}
-        value={'text'}
-        onChange={() => {}}
-      />)
+      .create(<Card><p>test</p></Card>)
       .toJSON()
     expect(tree).toMatchSnapshot()
   })
