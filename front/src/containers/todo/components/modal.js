@@ -6,6 +6,10 @@ import ButtonComponent from '../../../components/button'
 
 const ModalContainer = styled.div`
   width: 35vw;
+
+  @media only screen and (max-width: 768px) {
+    width: 90vw;
+  }
 `
 const Title = styled.h1`
   font-size: 2rem;

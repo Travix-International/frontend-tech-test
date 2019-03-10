@@ -1,10 +1,11 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { boolean } from '@storybook/addon-knobs'
+import { boolean, text } from '@storybook/addon-knobs'
 
-import Loading from '.'
+import Error from '.'
 
-storiesOf('Loading', module).add('simple', () => {
-  const isOpenLoading = boolean('Open/Close Loading', true)
-  return (<Loading isOpen={isOpenLoading}/>)
+storiesOf('Panel Message', module).add('Error', () => {
+  const isOpenError = boolean('Open/Close Error', true)
+  const messageError = text('Message Error', 'Message Error ')
+  return (<Error isOpen={isOpenError} message={messageError}/>)
 })

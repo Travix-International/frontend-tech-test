@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
 import Modal from '../modal'
 import styled from 'styled-components'
 
@@ -22,6 +21,9 @@ const ModalContainer = styled.div`
   align-items: center;
   flex-direction: column;
   width: 30vw;
+  @media only screen and (max-width: 768px) {
+    width: 80vw;
+  }
 `
 
 const ErrorComponent = ({isOpen, message}) => {

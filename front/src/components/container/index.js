@@ -8,5 +8,4 @@ export default styled.section`
   box-sizing: border-box;
   position: relative;
   overflow: none;
-  transform: translateY(-1rem);
 `

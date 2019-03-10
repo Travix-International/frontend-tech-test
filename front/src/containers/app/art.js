@@ -1,19 +1,22 @@
 /* eslint-disable */
-const insertAsciiArt = `        CCCCCCCCCCCCC                    iiii                            tttt         hhhhhhh
-     CCC::::::::::::C                   i::::i                        ttt:::t         h:::::h
-   CC:::::::::::::::C                    iiii                         t:::::t         h:::::h
-  C:::::CCCCCCCC::::C                                                 t:::::t         h:::::h
- C:::::C       CCCCCC  aaaaaaaaaaaaa   iiiiiiinnnn  nnnnnnnn    ttttttt:::::ttttttt    h::::h hhhhh       uuuuuu    uuuuuu      ssssssssss
-C:::::C                a::::::::::::a  i:::::in:::nn::::::::nn  t:::::::::::::::::t    h::::hh:::::hhh    u::::u    u::::u    ss::::::::::s
-C:::::C                aaaaaaaaa:::::a  i::::in::::::::::::::nn t:::::::::::::::::t    h::::::::::::::hh  u::::u    u::::u  ss:::::::::::::s
-C:::::C                         a::::a  i::::inn:::::::::::::::ntttttt:::::::tttttt    h:::::::hhh::::::h u::::u    u::::u  s::::::ssss:::::s
-C:::::C                  aaaaaaa:::::a  i::::i  n:::::nnnn:::::n      t:::::t          h::::::h   h::::::hu::::u    u::::u   s:::::s  ssssss
-C:::::C                aa::::::::::::a  i::::i  n::::n    n::::n      t:::::t          h:::::h     h:::::hu::::u    u::::u     s::::::s
-C:::::C               a::::aaaa::::::a  i::::i  n::::n    n::::n      t:::::t          h:::::h     h:::::hu::::u    u::::u        s::::::s
- C:::::C       CCCCCCa::::a    a:::::a  i::::i  n::::n    n::::n      t:::::t    tttttth:::::h     h:::::hu:::::uuuu:::::u  ssssss   s:::::s
-  C:::::CCCCCCCC::::Ca::::a    a:::::a i::::::i n::::n    n::::n      t::::::tttt:::::th:::::h     h:::::hu:::::::::::::::uus:::::ssss::::::s
-   CC:::::::::::::::Ca:::::aaaa::::::a i::::::i n::::n    n::::n      tt::::::::::::::th:::::h     h:::::h u:::::::::::::::us::::::::::::::s
-     CCC::::::::::::C a::::::::::aa:::ai::::::i n::::n    n::::n        tt:::::::::::tth:::::h     h:::::h  uu::::::::uu:::u s:::::::::::ss
-        CCCCCCCCCCCCC  aaaaaaaaaa  aaaaiiiiiiii nnnnnn    nnnnnn          ttttttttttt  hhhhhhh     hhhhhhh    uuuuuuuu  uuuu  sssssssssss`
+const insertAsciiArt = `
+                                                                                                             
+TTTTTTTTTTTTTTTTTTTTTTT                                                            iiii
+T:::::::::::::::::::::T                                                           i::::i
+T:::::::::::::::::::::T                                                            iiii
+T:::::TT:::::::TT:::::T
+TTTTTT  T:::::T  TTTTTTrrrrr   rrrrrrrrr   aaaaaaaaaaaaavvvvvvv           vvvvvvviiiiiii xxxxxxx      xxxxxxx
+        T:::::T        r::::rrr:::::::::r  a::::::::::::av:::::v         v:::::v i:::::i  x:::::x    x:::::x
+        T:::::T        r:::::::::::::::::r aaaaaaaaa:::::av:::::v       v:::::v   i::::i   x:::::x  x:::::x
+        T:::::T        rr::::::rrrrr::::::r         a::::a v:::::v     v:::::v    i::::i    x:::::xx:::::x
+        T:::::T         r:::::r     r:::::r  aaaaaaa:::::a  v:::::v   v:::::v     i::::i     x::::::::::x
+        T:::::T         r:::::r     rrrrrrraa::::::::::::a   v:::::v v:::::v      i::::i      x::::::::x
+        T:::::T         r:::::r           a::::aaaa::::::a    v:::::v:::::v       i::::i      x::::::::x
+        T:::::T         r:::::r          a::::a    a:::::a     v:::::::::v        i::::i     x::::::::::x
+      TT:::::::TT       r:::::r          a::::a    a:::::a      v:::::::v        i::::::i   x:::::xx:::::x
+      T:::::::::T       r:::::r          a:::::aaaa::::::a       v:::::v         i::::::i  x:::::x  x:::::x
+      T:::::::::T       r:::::r           a::::::::::aa:::a       v:::v          i::::::i x:::::x    x:::::x
+      TTTTTTTTTTT       rrrrrrr            aaaaaaaaaa  aaaa        vvv           iiiiiiiixxxxxxx      xxxxxxx
+`
 
 export default () => console.log(insertAsciiArt)

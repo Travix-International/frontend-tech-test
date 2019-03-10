@@ -24,6 +24,7 @@ const Title = styled.h1`
 const Descriptions = styled.p`
   font-size: 1.5rem;
   color: #707070;
+  text-align: center;
 `
 
 const EmptyComponent = () => {

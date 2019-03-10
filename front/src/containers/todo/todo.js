@@ -94,9 +94,7 @@ class ToDoComponent extends Component {
 
   handleRemoveItem(id) {
     const { deleteItem } = this.props
-    console.log(id)
     return () => {
-      console.log(id)
       deleteItem(id)
     }
   }
@@ -104,8 +102,7 @@ class ToDoComponent extends Component {
 
   render() {
     const { item, isOpenModal } = this.state
-    const { items: { loading, data, error } } = this.props
-    console.log(item, loading, data)
+    const { items: { loading, error } } = this.props
     return (
       <Container>
         <Loading isOpen={loading} />
@@ -127,6 +124,7 @@ class ToDoComponent extends Component {
       </Container>
     )
   }
+
   renderGrid() {
     const { items: { data } } = this.props
     if(!data.length) return null
@@ -142,6 +140,7 @@ class ToDoComponent extends Component {
       }
     </Grid>)
   }
+  
   renderEmpty(){
     const { items: { data } } = this.props
     if(!data.length) return <Empty />
