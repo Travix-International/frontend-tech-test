@@ -134,13 +134,12 @@ class ToDoComponent extends Component {
           key={item.id}
           title={item.title}
           description={item.description}
-          done={false}
           handleRemove={this.handleRemoveItem(item.id)}
           handleEdit={this.handleClickEdit(item.id)} />)
       }
     </Grid>)
   }
-  
+
   renderEmpty(){
     const { items: { data } } = this.props
     if(!data.length) return <Empty />
