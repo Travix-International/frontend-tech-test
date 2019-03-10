@@ -1,16 +1,20 @@
 import React from 'react'
-import ShallowRenderer from 'react-test-renderer/shallow'
-import { mount } from 'enzyme'
+import { mount, shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
+
 
 import Error from '.'
 
 describe('ErrorComponent', () => {
   it('Snapshot', async () => {
-    const renderer = new ShallowRenderer()
-    renderer.render(<Error isOpen={true} message={'test'} />)
-    const result = renderer.getRenderOutput()
+    const tree = shallow(<Error isOpen={true} message={'test'} />)
 
-    expect(result).toMatchSnapshot()
+    expect(toJson(tree)).toMatchSnapshot()
+  })
+  it('Snapshot without open', async () => {
+    const tree = shallow(<Error isOpen={false} message={'test'} />)
+
+    expect(toJson(tree)).toMatchSnapshot()
   })
   it('onClose', async () => {
     const tree = mount(<Error isOpen={true} message={'test'} />)

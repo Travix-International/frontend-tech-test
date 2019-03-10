@@ -100,7 +100,7 @@ app.post('/task/create/:title/:description', (req, res) => {
     description: req.params.description,
   };
 
-  tasksContainer.tasks.push(task);
+  tasksContainer.tasks.unshift(task);
 
   return res.status(201).json({
     message: 'Resource created',

@@ -5,13 +5,29 @@ exports[`ErrorComponent Snapshot 1`] = `
   onClose={[Function]}
   open={true}
 >
-  <ForwardRef>
-    <ForwardRef>
+  <styled.div>
+    <styled.h1>
       Error!
-    </ForwardRef>
-    <ForwardRef>
+    </styled.h1>
+    <styled.p>
       test
-    </ForwardRef>
-  </ForwardRef>
+    </styled.p>
+  </styled.div>
+</ModalComponent>
+`;
+
+exports[`ErrorComponent Snapshot without open 1`] = `
+<ModalComponent
+  onClose={[Function]}
+  open={false}
+>
+  <styled.div>
+    <styled.h1>
+      Error!
+    </styled.h1>
+    <styled.p>
+      test
+    </styled.p>
+  </styled.div>
 </ModalComponent>
 `;

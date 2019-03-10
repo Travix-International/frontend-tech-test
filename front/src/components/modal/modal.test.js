@@ -1,16 +1,17 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
 
 import Modal from '.'
 
 describe('ModalComponent', () => {
   it('Snapshot', async () => {
     const tree = shallow(<Modal open={true} />)
-    expect(tree).toMatchSnapshot()
+    expect(toJson(tree)).toMatchSnapshot()
   })
   it('Snapshot without nothing', async () => {
     const tree = shallow(<Modal open={false} />)
-    expect(tree).toMatchSnapshot()
+    expect(toJson(tree)).toMatchSnapshot()
   })
   it('onClose with click event', async () => {
     const onClose = jest.fn()
