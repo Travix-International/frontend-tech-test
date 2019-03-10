@@ -5,12 +5,8 @@ import {
   REQ_ITEMS_LOADING
 } from '../reducers/items'
 
-const dependencies = {
-  axios
-}
 
-export const getItems = (injection) => async dispatch => {
-  const { axios } = Object.assign({}, dependencies, injection)
+export const getItems = () => async dispatch => {
   const URL = 'http://localhost:9001/tasks'
   dispatch({
     type: REQ_ITEMS_LOADING,

@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 
 // const recipes = require('./recipes')
 

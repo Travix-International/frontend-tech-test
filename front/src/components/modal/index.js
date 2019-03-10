@@ -38,14 +38,16 @@ const ModalContainer = styled.div`
 `
 ModalContainer.displayName = 'ModalContainer'
 
+const KEY_ESC = 27
+
 const ModalComponent = ({open, children, onClose}) => {
 
   const keyDown = (evt) => {
-    if (evt.keyCode == 27) {
+    if (evt.keyCode == KEY_ESC) {
       onClose()
     }
   }
-  
+
   return open ? ReactDOM.createPortal((
     <Fragment>
       <ModalContent onKeyDown={keyDown}>
