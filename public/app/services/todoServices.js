@@ -2,7 +2,7 @@ angular.module('todoServices', [])
 
 .factory('ToDo', function($http) {
 	var todoFactory = {}; // Create the customerFactory object
-
+	var task
     // Register a new todo
     todoFactory.createTask = function(data) {
         return $http.post('/task/create/' + data.title + '/' + data.description);
@@ -21,6 +21,21 @@ angular.module('todoServices', [])
     //update the task
     todoFactory.updateTask = function(data){
     	return $http.put('/task/update/' + data.id +'/' + data.title + '/' + data.description);
+    };
+
+    //set a task to pass to another route
+    todoFactory.setTask = function(data){
+    	task = data;
+    };
+
+    //get the task to from setter
+    todoFactory.getTask = function(){
+    	return task;
+    };
+
+    //reset the task in the setter
+    todoFactory.resetTask = function(){
+    	task = false;
     };
 
     // Delete a task

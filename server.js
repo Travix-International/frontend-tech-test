@@ -18,9 +18,17 @@ app.get('/', function(req, res) {
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  // return res.status(200).json(tasksContainer);
-
-  return res.status(200).json({success:true, tasks:tasksContainer.tasks});
+  if(tasksContainer.tasks){
+    return res.status(200).json({
+      success:true,
+      tasks:tasksContainer.tasks
+    });
+  }else{
+    return res.status(404).json({
+        success:false,
+        message: 'Tasks are not found.',
+      });
+  }
 });
 
 /**

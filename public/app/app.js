@@ -1,10 +1,11 @@
 angular.module('userApp', [	
 	'ngAnimate',
 	'ngMaterial',
-	// 'modalInstanceController',
 	'ngRoute',
+	'ui.bootstrap',
 	'todoController',
 	'todoServices',
+	'modalInstanceController',
 	])
 
 // .animation()

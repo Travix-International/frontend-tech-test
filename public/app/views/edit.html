@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Edit<h3>
+    <button type="button" class="close" ng-click="cancel()">
+          <span aria-hidden="true">&times;</span>
+  	</button>
+ </div>
+
+<div class="modal-body" id="modal-body">
+	<div class="modal-page-wrap">
+		<form class="form" name="form" novalidate>
+          <div class="form-group">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Title</label>
+              <input name="title" ng-model="modal_data.title">
+            </md-input-container>
+          </div>
+          <div class="form-group">
+            <md-input-container class="md-block">
+              <label>Description</label>
+              <textarea rows="5" name="description" md-select-on-focus ng-model="modal_data.description" ng-disabled=""></textarea>
+            </md-input-container>
+          </div>
+          <div class="float-right">
+            <button class="btn bgc-third-color" ng-click="cancel()">Cancel</button>
+            <button class="btn bgc-first-color" ng-click="modal.updateTask(modal_data)" ng-disabled="">Edit</button>
+
+          </div>
+          <div class="clear"></div>
+        </form>
+	</div>
+
+</div>

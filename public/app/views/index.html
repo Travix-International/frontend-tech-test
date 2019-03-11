@@ -2,58 +2,55 @@
 <html lang="en">
 
 <head>
-    <base href="/">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <base href="/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
 
-         <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.js"></script>
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
 
-    <!-- Main Angular Files -->
-    <script src="assets/js/angular.js"></script>
-    <script src="assets/js/angular-route.js"></script>
-    <script src="assets/js/angular-animate.js"></script>
-    <script src="assets/js/angular-messages.min.js"></script>
-    <script src="assets/js/angular-aria.min.js"></script>
-    <script src="assets/js/angular-material.js"></script>
+  <!-- Main Angular Files -->
+  <script src="assets/js/angular.js"></script>
+  <script src="assets/js/angular-route.js"></script>
+  <script src="assets/js/angular-animate.js"></script>
+  <script src="assets/js/angular-messages.min.js"></script>
+  <script src="assets/js/angular-aria.min.js"></script>
+  <script src="assets/js/angular-material.js"></script>
 
+  <!-- module -->
+  <script src="assets/js/ui-bootstrap-tpls.js"></script>
 
-    <!-- module -->
-    <script src="assets/js/ui-bootstrap-tpls.js"></script>
+  <!-- Angular Config/Routes -->
+  <script src="app/app.js"></script>
+  <!-- <script src="app/routes.js"></script> -->
 
-    <!-- Angular Config/Routes -->
-    <script src="app/app.js"></script>
-    <!-- <script src="app/routes.js"></script> -->
+  <!-- Angular Controllers -->
+  <script src="app/controllers/todoCtrl.js"></script>
+  <script src="app/controllers/modalInstanceCtrl.js"></script>
 
-    <!-- Angular Controllers -->
-    <script src="app/controllers/todoCtrl.js"></script>
+  <!-- Angular Services -->
+  <script src="app/services/todoServices.js"></script>
 
-    <!-- Angular Services -->
-    <script src="app/services/todoServices.js"></script>
+  <!-- font-awesome -->
+  <link rel="stylesheet" type="text/css" href="assets/css/all.css">
 
-    <!-- font-awesome -->
-    <link rel="stylesheet" type="text/css" href="assets/css/all.css">
+  <!-- google-font -->
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i|Titillium+Web:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 
-    <!-- google-font -->
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i|Titillium+Web:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-
-    <!-- Cascade Style Sheets -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/angular-material.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <!-- Cascade Style Sheets -->
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/angular-material.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 
 
-    <title>TODO App</title>
+  <title>TODO App</title>
 
 </head>
 
@@ -66,82 +63,80 @@
               <h3 class="text-center">
                   TODO List
               </h3>
-              
-              <h5 class="text-center">You have 
-                <span ng-if="tasks.length == 0">nothing</span>
-                <span ng-if="tasks.length !== 0">
-                  {{tasks.length}} thing<span ng-if="tasks.length > 1">s</span>
-                </span>
-                 to do.
-              </h5>
-
-              <div class="text-center">
-                 <button class="round-icon bgc-first-color" type="button" data-toggle="collapse" data-target="#newTaskForm" aria-expanded="false" aria-controls="newTaskForm" ng-click="newFormOpen = !newFormOpen">
-                  <i class="fas fa-plus" ng-class="{'rotate-icon': newFormOpen}"></i>
-                </button>
+              <!-- Loading icon -->
+              <div id="load" class="text-center" ng-if="todo.load">
+                <i class="fas fa-spinner fa-2x fa-spin"></i>
+                <div>Loading....</div>
               </div>
-              <div id="newTaskForm" class="collapse">
-                <form class="form" name="newTaskForm" novalidate>
-                  <div class="form-group">
-                    <md-input-container class="md-block" flex-gt-sm>
-                      <label>Title</label>
-                      <input name="title" ng-model="data.title">
-                    </md-input-container>
-                  </div>
-                  <div>
-                    <md-input-container class="md-block">
-                      <label>Description</label>
-                      <textarea name="description" md-select-on-focus ng-model="data.description" ng-disabled=""></textarea>
-                    </md-input-container>
-                  </div>
-                  <button class="btn bgc-first-color float-right" ng-click="todo.createTask(data)" ng-disabled="">Create</button>
-                  <div class="clear"></div>
-                </form>
-              </div>
+              <!-- Loading icon -->
 
-              <div class="card task-item" ng-repeat="task in tasks | orderBy:'-id' track by task.id">
-                <div class="card-body">
-                  <div ng-show="!task.editForm">
-                    <p class="card-title">{{task.title}}</p>
-                    <div>{{task.description}}</div>
-                    <div class="float-right">
-                      <button class="round-icon bgc-second-color" ng-click="todo.editTask(task.id)"><i class="fas fa-edit"></i></button>
-                      <button class="round-icon bgc-fourth-color" ng-click="todo.deleteTask(task.id)"><i class="fas fa-trash"></i></button>
-                    </div>
-                    <div class="clear"></div>
-                  </div>
+              <div ng-if="!todo.load">
+                <div ng-if="!errorMsg">
+                  <h5 class="text-center">You have 
+                    <span ng-if="tasks.length == 0">nothing</span>
+                    <span ng-if="tasks.length !== 0">
+                      {{tasks.length}} thing<span ng-if="tasks.length > 1">s</span>
+                    </span>
+                     to do.
+                  </h5>
 
-                  <div ng-show="task.editForm">
-                    <form class="form" name="form" novalidate>
+                  <div class="text-center">
+                     <button class="round-icon bgc-first-color" type="button" data-toggle="collapse" data-target="#newTaskForm" aria-expanded="false" aria-controls="newTaskForm" ng-click="todo.openNewTaskForm()">
+                      <i class="fas fa-plus" ng-class="{'rotate-icon': todo.newFormOpen}"></i>
+                    </button>
+                  </div>
+                  <div id="newTaskForm" class="collapse">
+                    <form class="form" name="todo.newTaskForm" novalidate>
                       <div class="form-group">
                         <md-input-container class="md-block" flex-gt-sm>
                           <label>Title</label>
-                          <input name="title" ng-model="edit.title">
+                          <input name="title" ng-model="todo.data.title" ng-disabled="todo.disabled" required>
                         </md-input-container>
                       </div>
-                      <div class="form-group">
+                      <div>
                         <md-input-container class="md-block">
                           <label>Description</label>
-                          <textarea rows="5" name="description" md-select-on-focus ng-model="edit.description" ng-disabled=""></textarea>
+                          <textarea name="description" md-select-on-focus ng-model="todo.data.description" ng-disabled="todo.disabled" required></textarea>
                         </md-input-container>
                       </div>
-                      <div class="float-right">
-                        <button class="btn bgc-third-color" ng-click="todo.cancelUpdateTask(edit)">Cancel</button>
-                        <button class="btn bgc-first-color" ng-click="todo.updateTask(edit)" ng-disabled="">Edit</button>
+                      <div ng-show="todo.newTaskForm.$touched || todo.newTaskForm.$submitted">
+                        <p ng-show="todo.newTaskForm.title.$invalid && todo.newTaskForm.description.$invalid">
+                        Please complete the fields.
+                        </p>
+                        <p ng-show="todo.newTaskForm.title.$error.required && !todo.newTaskForm.description.$error.required">
+                          Please fill in the title.
+                        </p>
+                        <p ng-show="!todo.newTaskForm.title.$error.required && todo.newTaskForm.description.$error.required">
+                        Please fill in the description.
+                        </p>
                       </div>
+                      <div ng-show="error">
+                        {{error}}
+                      </div>
+                      <button class="btn bgc-first-color float-right" ng-click="todo.createTask(todo.data)" ng-disabled="todo.disabled">Create</button>
                       <div class="clear"></div>
                     </form>
-                  
+                  </div>
+
+                  <div class="card task-item" ng-repeat="task in tasks | orderBy:'-id' track by task.id">
+                    <div class="card-body">
+                      <p class="card-title"><strong>{{task.title}}</strong></p>
+                      <div class="description">{{task.description}}</div>
+                      <div class="float-right">
+                        <button class="round-icon bgc-second-color" ng-click="todo.openUpdateTask(task)" ng-disabled=""><i class="fas fa-edit"></i></button>
+                        <button class="round-icon bgc-fourth-color" ng-click="todo.deleteTask(task.id)"><i class="fas fa-trash"></i></button>
+                      </div>
+                      <div class="clear"></div>
+                    </div>
                   </div>
                 </div>
-                
-              </div>
 
-              <!-- Custom Messages -->
-              <div class="show-hide-message" ng-show="main.successMsg || main.errorMsg">
-                  <div ng-class="alert">{{ main.successMsg || main.errorMsg }}</div>&nbsp
+                <!-- Loading Error Messages -->
+                <div id="error-message" class="text-center font-red" ng-if="errorMsg">
+                    <p>Error - {{ errorMsg }}</p>
+                </div>
+                <!-- Loading Error Messages -->
               </div>
-              <!-- Custom Messages -->
           </div>
         </div>
       </div>
@@ -152,6 +147,10 @@
           TODO app - tomomi-s
       </div>
   </div>
+
+  <script src="assets/js/jquery-3.2.1.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.js"></script>
+
 </body>
 
 </html>
