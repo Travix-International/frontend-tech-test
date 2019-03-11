@@ -122,7 +122,6 @@ app.delete('/task/delete/:id', (req, res) => {
 
   if (id) {
     const tasks = tasksContainer.tasks.filter(item => item.id !== id);
-    console.log(tasks)
 
     if (tasks !== null) {
       tasksContainer.tasks = tasks;
