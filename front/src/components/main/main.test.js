@@ -1,12 +1,12 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import Container from '.'
+import Main from '.'
 
-describe('ContainerComponent', () => {
+describe('MainComponent', () => {
   it('Snapshot', async () => {
     const tree = renderer
-      .create(<Container><p>test</p></Container>)
+      .create(<Main><p>test</p></Main>)
       .toJSON()
     expect(tree).toMatchSnapshot()
   })

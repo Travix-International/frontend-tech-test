@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToDoContainerComponent Snapshot with error 1`] = `
+<styled.section>
+  <Loading
+    isOpen={false}
+  />
+  <ErrorComponent
+    isOpen={true}
+    message="Error Network"
+  />
+  <ToDoComponent
+    handleRemoveItem={[Function]}
+    handleSaveItem={[Function]}
+    items={Array []}
+  />
+</styled.section>
+`;
+
+exports[`ToDoContainerComponent Snapshot with loading 1`] = `
+<styled.section>
+  <Loading
+    isOpen={true}
+  />
+  <ErrorComponent
+    isOpen={false}
+    message=""
+  />
+  <ToDoComponent
+    handleRemoveItem={[Function]}
+    handleSaveItem={[Function]}
+    items={Array []}
+  />
+</styled.section>
+`;

@@ -1,4 +1,4 @@
-# Project Cainthus
+# Project Travix
 
 ## Technologies to front
 
@@ -52,3 +52,11 @@ Test with watch (dev-mode)
 `$ npm run test:watch`
 
 ### Storybook
+
+Run Storybook
+
+`$ npm run storybook`
+
+Build storybook
+
+`$ npm run build-storybook`

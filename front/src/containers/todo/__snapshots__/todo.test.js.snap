@@ -1,14 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ToDoComponent Snapshot with empty list 1`] = `
-<styled.section>
-  <Loading
-    isOpen={false}
-  />
-  <ErrorComponent
-    isOpen={false}
-    message=""
-  />
+<Fragment>
   <CardComponent>
     <styled.h1>
       ToDo
@@ -36,57 +29,11 @@ exports[`ToDoComponent Snapshot with empty list 1`] = `
       }
     />
   </ModalComponent>
-</styled.section>
-`;
-
-exports[`ToDoComponent Snapshot with error 1`] = `
-<styled.section>
-  <Loading
-    isOpen={false}
-  />
-  <ErrorComponent
-    isOpen={true}
-    message="Error Network"
-  />
-  <CardComponent>
-    <styled.h1>
-      ToDo
-    </styled.h1>
-    <EmptyComponent />
-  </CardComponent>
-  <styled.div>
-    <CircleButtonComponent
-      onClick={[Function]}
-    />
-  </styled.div>
-  <ModalComponent
-    onClose={[Function]}
-    open={false}
-  >
-    <ModalTodo
-      onChangeInput={[Function]}
-      onSave={[Function]}
-      values={
-        Object {
-          "description": "",
-          "id": 0,
-          "title": "",
-        }
-      }
-    />
-  </ModalComponent>
-</styled.section>
+</Fragment>
 `;
 
 exports[`ToDoComponent Snapshot with list 1`] = `
-<styled.section>
-  <Loading
-    isOpen={false}
-  />
-  <ErrorComponent
-    isOpen={false}
-    message=""
-  />
+<Fragment>
   <CardComponent>
     <styled.h1>
       ToDo
@@ -122,44 +69,5 @@ exports[`ToDoComponent Snapshot with list 1`] = `
       }
     />
   </ModalComponent>
-</styled.section>
-`;
-
-exports[`ToDoComponent Snapshot with loading 1`] = `
-<styled.section>
-  <Loading
-    isOpen={true}
-  />
-  <ErrorComponent
-    isOpen={false}
-    message=""
-  />
-  <CardComponent>
-    <styled.h1>
-      ToDo
-    </styled.h1>
-    <EmptyComponent />
-  </CardComponent>
-  <styled.div>
-    <CircleButtonComponent
-      onClick={[Function]}
-    />
-  </styled.div>
-  <ModalComponent
-    onClose={[Function]}
-    open={false}
-  >
-    <ModalTodo
-      onChangeInput={[Function]}
-      onSave={[Function]}
-      values={
-        Object {
-          "description": "",
-          "id": 0,
-          "title": "",
-        }
-      }
-    />
-  </ModalComponent>
-</styled.section>
+</Fragment>
 `;

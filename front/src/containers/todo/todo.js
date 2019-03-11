@@ -1,12 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import Loading from '../../components/loading'
-import Container from '../../components/container'
 import Card from '../../components/card'
 import Grid from '../../components/grid'
 import GridItem from '../../components/grid-item'
 import Empty from '../../components/empty'
-import Error from '../../components/error'
 import CircleButton from '../../components/circle-button'
 import Modal from '../../components/modal'
 import ToDoForm from './components/todo-form'
@@ -19,49 +16,35 @@ class ToDoComponent extends Component {
     super(props)
     this.state = {
       isOpenModal: false,
-      edit: false,
       item: {
         title: '',
         description: '',
         id: 0
       }
     }
-
-    this.handleCloseModal = this.handleCloseModal.bind(this)
-    this.handleOpenModal = this.handleOpenModal.bind(this)
-    this.handleClickEdit = this.handleClickEdit.bind(this)
-    this.cleanValuesItem = this.cleanValuesItem.bind(this)
-    this.handleChangeInput = this.handleChangeInput.bind(this)
-    this.handleSaveItem = this.handleSaveItem.bind(this)
-    this.handleRemoveItem = this.handleRemoveItem.bind(this)
   }
 
-  componentDidMount() {
-    this.props.getItems()
-  }
-
-  cleanValuesItem() {
+  cleanValuesItem = () => {
     this.setState({ item: { title: '', description: '', id: 0 } })
   }
 
-  handleCloseModal() {
+  handleCloseModal = () => {
     this.setState({ isOpenModal: false})
     this.cleanValuesItem()
   }
 
-  handleOpenModal() {
+  handleOpenModal = () => {
     this.setState({ isOpenModal: true})
   }
 
-  handleClickEdit(id) {
-    const {items: { data } } = this.props
+  handleClickEdit = (item) => {
     return () => {
-      this.setState({ item: data.filter(item => item.id === id)[0]})
+      this.setState({ item })
       this.handleOpenModal()
     }
   }
 
-  handleChangeInput(prop) {
+  handleChangeInput = (prop) => {
     return (e) => {
       this.setState({
         item: {
@@ -72,74 +55,61 @@ class ToDoComponent extends Component {
     }
   }
 
-  handleSaveItem() {
+  handleSaveItem = () => {
     const { item } = this.state
-    const { insertOrUpdateItem } = this.props
-    insertOrUpdateItem(item)
-
+    const { handleSaveItem } = this.props
+    handleSaveItem(item)
     this.handleCloseModal()
   }
 
-  handleRemoveItem(id) {
-    const { deleteItem } = this.props
+  handleRemoveItem = (id) => {
+    const { handleRemoveItem } = this.props
     return () => {
-      deleteItem(id)
+      handleRemoveItem(id)
     }
   }
 
-
   render() {
-    const { item, isOpenModal } = this.state
-    const { items: { loading, error } } = this.props
+    const { isOpenModal, item } = this.state
+    const { items } = this.props
     return (
-      <Container>
-        <Loading isOpen={loading} />
-        <Error isOpen={!!error} message={error} />
+      <Fragment>
         <Card>
           <Title>ToDo</Title>
-          {this.renderGrid()}
-          {this.renderEmpty()}
+          {items.length > 0 ? this.renderGrid() : <Empty />}
         </Card>
         <Button>
           <CircleButton onClick={this.handleOpenModal}/>
         </Button>
-        <Modal onClose={() => this.handleCloseModal()} open={isOpenModal}>
+        <Modal onClose={this.handleCloseModal} open={isOpenModal}>
           <ToDoForm
             values={item}
             onChangeInput={this.handleChangeInput}
             onSave={this.handleSaveItem}/>
         </Modal>
-      </Container>
+      </Fragment>
     )
   }
 
   renderGrid() {
-    const { items: { data } } = this.props
-    if(!data.length) return null
+    const { items } = this.props
     return (<Grid>
       {
-        data.map(item => <GridItem
+        items.map(item => <GridItem
           key={item.id}
           title={item.title}
           description={item.description}
           handleRemove={this.handleRemoveItem(item.id)}
-          handleEdit={this.handleClickEdit(item.id)} />)
+          handleEdit={this.handleClickEdit(item)} />)
       }
     </Grid>)
-  }
-
-  renderEmpty(){
-    const { items: { data } } = this.props
-    if(!data.length) return <Empty />
-    return null
   }
 }
 
 ToDoComponent.propTypes = {
-  getItems: PropTypes.func.isRequired,
-  insertOrUpdateItem: PropTypes.func.isRequired,
-  deleteItem: PropTypes.func.isRequired,
-  items: PropTypes.object.isRequired
+  handleRemoveItem: PropTypes.func.isRequired,
+  handleSaveItem: PropTypes.func.isRequired,
+  items: PropTypes.array.isRequired
 }
 
 export default ToDoComponent

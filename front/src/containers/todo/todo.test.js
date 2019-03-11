@@ -8,14 +8,9 @@ let options  = {}
 describe('ToDoComponent', () => {
   beforeEach(() => {
     options = {
-      getItems: jest.fn(),
-      insertOrUpdateItem: jest.fn(),
-      deleteItem: jest.fn(),
-      items:  {
-        data: [],
-        loading: false,
-        error: ''
-      }
+      handleSaveItem: jest.fn(),
+      handleRemoveItem: jest.fn(),
+      items: []
     }
   })
   it('Snapshot with empty list', async () => {
@@ -23,7 +18,7 @@ describe('ToDoComponent', () => {
     expect(toJson(tree)).toMatchSnapshot()
   })
   it('Snapshot with list', async () => {
-    options.items.data = [{
+    options.items = [{
       id: 'asd',
       title: 'title',
       description: 'description'
@@ -31,18 +26,8 @@ describe('ToDoComponent', () => {
     const tree = shallow(<Todo {...options} />)
     expect(toJson(tree)).toMatchSnapshot()
   })
-  it('Snapshot with error', async () => {
-    options.items.error = 'Error Network'
-    const tree = shallow(<Todo {...options} />)
-    expect(toJson(tree)).toMatchSnapshot()
-  })
-  it('Snapshot with loading', async () => {
-    options.items.loading = true
-    const tree = shallow(<Todo {...options} />)
-    expect(toJson(tree)).toMatchSnapshot()
-  })
   it('open and close modal function', async () => {
-    options.items.data = [{
+    options.items = [{
       id: 'asd',
       title: 'title',
       description: 'description'
@@ -56,7 +41,7 @@ describe('ToDoComponent', () => {
     expect(instance.state.isOpenModal).toBeFalsy()
   })
   it('edit item', async () => {
-    options.items.data = [{
+    options.items = [{
       id: 'asd',
       title: 'title',
       description: 'description'
@@ -65,39 +50,39 @@ describe('ToDoComponent', () => {
     const tree = shallow(<Todo {...options} />)
     const instance = tree.instance()
     expect(instance.state.item).toEqual(emptyValues)
-    instance.handleClickEdit('asd')()
-    expect(instance.state.item).toEqual(options.items.data[0])
+    instance.handleClickEdit(options.items[0])()
+    expect(instance.state.item).toEqual(options.items[0])
     instance.cleanValuesItem()
     expect(instance.state.item).toEqual(emptyValues)
   })
   it('change item value', async () => {
     const newTitle = 'test'
-    options.items.data = [{
+    options.items = [{
       id: 'asd',
       title: 'title',
       description: 'description'
     }]
     const tree = shallow(<Todo {...options} />)
     const instance = tree.instance()
-    instance.handleClickEdit('asd')()
+    instance.handleClickEdit(options.items[0])()
     instance.handleChangeInput('title')({target:{ value: newTitle}})
     expect(instance.state.item.title).toEqual(newTitle)
   })
   it('save item', async () => {
-    options.items.data = [{
+    options.items = [{
       id: 'asd',
       title: 'title',
       description: 'description'
     }]
     const tree = shallow(<Todo {...options} />)
     const instance = tree.instance()
-    instance.handleClickEdit('asd')()
+    instance.handleClickEdit(options.items[0])()
     instance.handleSaveItem()
-    expect(options.insertOrUpdateItem).toHaveBeenCalledWith(options.items.data[0])
+    expect(options.handleSaveItem).toHaveBeenCalledWith(options.items[0])
   })
   it('delete item', async () => {
     const id = 'asd'
-    options.items.data = [{
+    options.items = [{
       id,
       title: 'title',
       description: 'description'
@@ -105,11 +90,11 @@ describe('ToDoComponent', () => {
     const tree = shallow(<Todo {...options} />)
     const instance = tree.instance()
     instance.handleRemoveItem(id)()
-    expect(options.deleteItem).toHaveBeenCalledWith(id)
+    expect(options.handleRemoveItem).toHaveBeenCalledWith(id)
   })
   it('execute onCloseModal', async () => {
     const id = 'asd'
-    options.items.data = [{
+    options.items = [{
       id,
       title: 'title',
       description: 'description'
