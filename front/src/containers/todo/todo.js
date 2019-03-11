@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import Loading from '../../components/loading'
 import Container from '../../components/container'
 import Card from '../../components/card'
@@ -10,21 +9,9 @@ import Empty from '../../components/empty'
 import Error from '../../components/error'
 import CircleButton from '../../components/circle-button'
 import Modal from '../../components/modal'
-import ModalTodo from './components/modal'
-
-const Button = styled.div`
-  position: absolute;
-  bottom: -2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-`
-const Title = styled.h1`
-  padding-top: 1.5rem;
-  font-size: 2rem;
-  color: #707070;
-  text-align: center;
-  font-weight: 600;
-`
+import ToDoForm from './components/todo-form'
+import Button from './components/button'
+import Title from './components/title'
 
 class ToDoComponent extends Component {
 
@@ -32,6 +19,7 @@ class ToDoComponent extends Component {
     super(props)
     this.state = {
       isOpenModal: false,
+      edit: false,
       item: {
         title: '',
         description: '',
@@ -84,10 +72,10 @@ class ToDoComponent extends Component {
     }
   }
 
-  async handleSaveItem() {
+  handleSaveItem() {
     const { item } = this.state
     const { insertOrUpdateItem } = this.props
-    await insertOrUpdateItem(item)
+    insertOrUpdateItem(item)
 
     this.handleCloseModal()
   }
@@ -116,7 +104,7 @@ class ToDoComponent extends Component {
           <CircleButton onClick={this.handleOpenModal}/>
         </Button>
         <Modal onClose={() => this.handleCloseModal()} open={isOpenModal}>
-          <ModalTodo
+          <ToDoForm
             values={item}
             onChangeInput={this.handleChangeInput}
             onSave={this.handleSaveItem}/>

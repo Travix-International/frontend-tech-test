@@ -6,6 +6,7 @@ import {
 } from '../reducers/items'
 
 export const insertOrUpdateItem = (item) => async dispatch => {
+  if(!item.title && !item.description) return null
   const URL_INSERT = `http://localhost:9001/task/create/${item.title}/${item.description}`
   const URL_UPDATE = `http://localhost:9001/task/update/${item.id}/${item.title}/${item.description}`
   dispatch({

@@ -41,3 +41,6 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 
 ## Front-end
   [Readme Front-end with all instructions](front/README.md)
+
+## Server
+  [Readme Server with all instructions](server/README.md)

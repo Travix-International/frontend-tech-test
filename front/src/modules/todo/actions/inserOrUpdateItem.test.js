@@ -72,4 +72,15 @@ describe('insertOrUpdateItem Action', () => {
     expect(dispatch).toHaveBeenNthCalledWith(1, firstCallArgs)
     expect(dispatch).toHaveBeenNthCalledWith(2, secondCallArgs)
   })
+  it('execute without values', async () => {
+    const item = {
+      id: 0,
+      title: '',
+      description: ''
+    }
+    const dispatch = jest.fn()
+    await insertOrUpdateItem(item)(dispatch)
+
+    expect(dispatch).not.toHaveBeenCalled()
+  })
 })

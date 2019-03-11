@@ -8,6 +8,12 @@ exports[`InputComponent Snapshot 1`] = `
   box-sizing: border-box;
 }
 
+.c1 {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 1.2rem;
+  color: rgba(0,0,0,0.54);
+}
+
 .c2 {
   width: 100%;
   display: block;
@@ -39,12 +45,6 @@ exports[`InputComponent Snapshot 1`] = `
 
 .c3:focus {
   outline: 0;
-}
-
-.c1 {
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
-  font-size: 1.2rem;
-  color: rgba(0,0,0,0.54);
 }
 
 <div

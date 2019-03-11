@@ -10,7 +10,6 @@
     "lint:fix": "eslint --fix src",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
-    "now-build": "npm run test && npm run lint && npm run build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

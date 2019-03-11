@@ -1,15 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-
-const Grid = styled.ul`
-  list-style: none;
-  width: 100%;
-  height: calc(100% - 2rem);
-  box-sizing: border-box;
-  padding: 1.5rem;
-  overflow: auto;
-`
+import Grid from './components/grid'
 
 const GridComponent = ({ children }) => {
   return (
