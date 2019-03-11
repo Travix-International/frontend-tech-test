@@ -39,6 +39,9 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 
 # Introductions
 
+This project was separated into two parts, front-end and server(back-end), they work separated each other.
+Below have the instruction to execute both parts.
+
 ## Front-end
   [Readme Front-end with all instructions](front/README.md)
 
