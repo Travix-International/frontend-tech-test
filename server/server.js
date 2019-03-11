@@ -121,11 +121,11 @@ app.delete('/task/delete/:id', (req, res) => {
   const id = req.params.id;
 
   if (id) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    const tasks = tasksContainer.tasks.filter(item => item.id !== id);
+    console.log(tasks)
 
-    if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
+    if (tasks !== null) {
+      tasksContainer.tasks = tasks;
       return res.status(200).json({
         message: 'Updated successfully',
       });
