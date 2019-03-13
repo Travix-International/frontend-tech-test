@@ -1,9 +1,10 @@
 'use strict';
-var express = require('express'); // ExperssJS Framework
-var path = require('path'); // Import path module
+const express = require('express'); // ExperssJS Framework
+const path = require('path'); // Import path module
 
 const app = require('express')();
-const tasksContainer = require('./tasks.json');
+// const tasksContainer = require('./tasks.json');
+const tasksContainer = require('./tasks50.json');
 
 app.use(express.static(__dirname + '/public')); // Allow front end to access public folder
 
@@ -20,14 +21,12 @@ app.get('/', function(req, res) {
 app.get('/tasks', (req, res) => {
   if(tasksContainer.tasks){
     return res.status(200).json({
-      success:true,
       tasks:tasksContainer.tasks
     });
   }else{
     return res.status(404).json({
-        success:false,
-        message: 'Tasks are not found.',
-      });
+      message: 'Tasks are not found.',
+    });
   }
 });
 
@@ -50,16 +49,16 @@ app.get('/task/:id', (req, res) => {
 
     if (task !== null) {
       return res.status(200).json({
-        success: true, task:task
+        task:task
       });
     } else {
       return res.status(404).json({
-        message: 'Not found.',
+        message: 'Task is not found.',
       });
     }
   } else {
     return res.status(400).json({
-      message: 'Bad request.',
+       message: 'Something went wrong.',
     });
   }
 });
@@ -86,18 +85,17 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
       task.title = req.params.title;
       task.description = req.params.description;
       return res.status(200).json({
-        success: true,
         message: 'Updated!',
         task: task
       });
     } else {
       return res.status(404).json({
-        message: 'Not found',
+        message: 'Task is not found.',
       });
     }
   } else {
     return res.status(400).json({
-      message: 'Bad request',
+      message: 'Something went wrong.',
     });
   }
 });
@@ -112,26 +110,32 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
-  var new_id;
-  var numberOfTasks = tasksContainer.tasks.length;
-  if(numberOfTasks > 0){
-    var last_id = tasksContainer.tasks[numberOfTasks -1].id;
-    new_id = last_id +1;
+  if(req.params.title && req.params.description){
+    let new_id;
+    const numberOfTasks = tasksContainer.tasks.length;
+    // if there are tasks more than 0 assign 
+    if(numberOfTasks > 0){
+      const last_id = tasksContainer.tasks[numberOfTasks -1].id;
+      new_id = last_id +1;
+    }else{
+      new_id = 0;
+    }
+    const task = {
+      id: new_id,
+      title: req.params.title,
+      description: req.params.description,
+    };
+
+    tasksContainer.tasks.push(task);
+
+    return res.status(201).json({
+      message: 'Resource created', task: task
+    });
   }else{
-    new_id = 0;
+    return res.status(400).json({
+      message: 'Something went wrong.',
+    });
   }
-
-  const task = {
-    id: new_id,
-    title: req.params.title,
-    description: req.params.description,
-  };
-
-  tasksContainer.tasks.push(task);
-
-  return res.status(201).json({
-    success: true, message: 'Resource created', task: task
-  });
 });
 
 /**
@@ -154,16 +158,16 @@ app.delete('/task/delete/:id', (req, res) => {
       const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
-        success: true, message: 'Updated successfully',
+        message: 'Updated successfully',
       });
     } else {
-      return es.status(404).json({
-        message: 'Not found',
+      return res.status(404).json({
+        message: 'Task is not found.',
       });
     }
   } else {
     return res.status(400).json({
-      message: 'Bad request',
+      message: 'Something went wrong',
     });
   }
 });
@@ -171,3 +175,4 @@ app.delete('/task/delete/:id', (req, res) => {
 app.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });
+

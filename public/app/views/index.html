@@ -100,18 +100,18 @@
                         </md-input-container>
                       </div>
                       <div ng-show="todo.newTaskForm.$touched || todo.newTaskForm.$submitted">
-                        <p ng-show="todo.newTaskForm.title.$invalid && todo.newTaskForm.description.$invalid">
+                        <p class="font-red" ng-show="todo.newTaskForm.title.$invalid && todo.newTaskForm.description.$invalid">
                         Please complete the fields.
                         </p>
-                        <p ng-show="todo.newTaskForm.title.$error.required && !todo.newTaskForm.description.$error.required">
+                        <p class="font-red" ng-show="todo.newTaskForm.title.$error.required && !todo.newTaskForm.description.$error.required">
                           Please fill in the title.
                         </p>
-                        <p ng-show="!todo.newTaskForm.title.$error.required && todo.newTaskForm.description.$error.required">
+                        <p class="font-red" ng-show="!todo.newTaskForm.title.$error.required && todo.newTaskForm.description.$error.required">
                         Please fill in the description.
                         </p>
                       </div>
-                      <div ng-show="error">
-                        {{error}}
+                      <div ng-show="errorNew">
+                        <p class="font-red">{{errorNew}}</p>
                       </div>
                       <button class="btn bgc-first-color float-right" ng-click="todo.createTask(todo.data)" ng-disabled="todo.disabled">Create</button>
                       <div class="clear"></div>
@@ -127,6 +127,9 @@
                         <button class="round-icon bgc-fourth-color" ng-click="todo.deleteTask(task.id)"><i class="fas fa-trash"></i></button>
                       </div>
                       <div class="clear"></div>
+                      <div ng-if="errorDelete">
+                        <p class="font-red" >{{errorDelete}}</p>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -1,9 +1,9 @@
 angular.module('modalInstanceController', ['todoServices'])
 .controller('ModalInstanceCtrl', function($timeout, $scope, $uibModal, $Modaldata, $uibModalInstance, ToDo) {
-	var app = this;
+	const app = this;
 	//clone data to prevent changes in parent scope
 	function initPopUp() { 
-	    var initdata = []; 
+	    let initdata = []; 
 	    if ($Modaldata)
 	        initdata = angular.copy($Modaldata);
 	    return initdata;
@@ -21,15 +21,21 @@ angular.module('modalInstanceController', ['todoServices'])
 
 
 	this.updateTask = function(task){
-		ToDo.updateTask(task).then((data)=>{
-			console.log(data);
-			if(data.data.success){
+		app.disabled = true;
+		if((!task) || (!task.title || !task.description)){
+			app.disabled = false;
+		}else{
+			ToDo.updateTask(task)
+			.then((data)=>{
+				console.log(data);
 				ToDo.setTask(data.data.task);
 				$uibModalInstance.dismiss('cancel');
-			}else{
-
-			}
-		})
+			})
+			.catch(function(data) {
+				$scope.errorEdit = data.data.message;
+				app.disabled = false;
+			})
+		}
 
 	}
 

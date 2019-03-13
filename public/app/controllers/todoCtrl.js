@@ -1,25 +1,25 @@
 angular.module('todoController', ['todoServices'])
 .controller('todoCtrl', function($scope, ToDo, $uibModal) {
-	var app = this;
+	const app = this;
 	app.load = true;
 	$scope.tasks = []
 	app.newFormOpen = false;
-
+	//get all tasks from json file
 	function getAllTasks(){
-		ToDo.getAllTasks().then((data)=>{
+		ToDo.getAllTasks()
+		.then((data)=>{
 			console.log(data);
-			if(data.data.success){
-				$scope.tasks = data.data.tasks;
-				app.load = false;
-			}else{
-				$scope.errorMsg = data.data.message;
-				app.load = false;
-			}
+			$scope.tasks = data.data.tasks;
+			app.load = false;
+		})
+		.catch(function(data) {
+			$scope.errorMsg = data.data.message;
+		 	app.load = false;
 		})
 	}
 
 	getAllTasks();
-
+	//open and close the form to create a new task
 	this.openNewTaskForm = ()=>{
 		if(!app.newFormOpen){
 			app.newFormOpen = true;
@@ -30,34 +30,33 @@ angular.module('todoController', ['todoServices'])
 			app.newTaskForm.$setUntouched();
 		}
 	}
-
-	this.createTask = (todo)=>{
-		console.log(todo)
+	//create a new task
+	this.createTask = (task)=>{
+		console.log(task)
 		app.disabled = true;
-		if((!todo) || (!todo.title || !todo.description)){
+		if((!task) || (!task.title || !task.description)){
 			app.disabled = false;
 		}else{
-			ToDo.createTask(todo).then((data)=>{
+			ToDo.createTask(task)
+			.then((data)=>{
 				console.log(data);
-				if(data.data.success){
-					$scope.tasks.push(data.data.task);
-					app.data = {};
-					$('#newTaskForm').collapse('hide');
-					app.newFormOpen = false;
-					app.disabled = false;
-					app.newTaskForm.$setPristine();
-					app.newTaskForm.$setUntouched();
-				}else{
-					$scope.error = data.data.message;
-					app.disabled = false;
-				}
+				$scope.tasks.push(data.data.task);
+				app.data = {};
+				$('#newTaskForm').collapse('hide');
+				app.newFormOpen = false;
+				app.disabled = false;
+				app.newTaskForm.$setPristine();
+				app.newTaskForm.$setUntouched();
 			})
-			
+			.catch(function(data) {
+				$scope.errorNew = data.data.message;
+				app.disabled = false;
+			})
 		}
 	}
-
+	// open modal to edit the task
 	this.openUpdateTask = (task)=>{
-		var modalInstance = $uibModal.open({
+		const modalInstance = $uibModal.open({
             animation: true,
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
@@ -74,10 +73,10 @@ angular.module('todoController', ['todoServices'])
             function () {
 
         }, function () {
-        	var updated_task = ToDo.getTask();
+        	const updated_task = ToDo.getTask();
         	console.log(updated_task)
         	if(updated_task){
-        		var index = $scope.tasks.findIndex(x=> x.id == updated_task.id);
+        		const index = $scope.tasks.findIndex(x=> x.id == updated_task.id);
 				console.log(index);
 				$scope.tasks[index] = updated_task;
 				ToDo.resetTask();
@@ -85,15 +84,17 @@ angular.module('todoController', ['todoServices'])
         });
 	}
 
+	// delete the task
 	this.deleteTask = (id)=>{
-		ToDo.deleteTask(id).then((data)=>{
+		ToDo.deleteTask(id)
+		.then((data)=>{
 			console.log(data);
-			if(data.data.success){
-				var index = $scope.tasks.findIndex(x=> x.id == id);
-				$scope.tasks.splice(index, 1);
-			}else{
+			const index = $scope.tasks.findIndex(x=> x.id == id);
+			$scope.tasks.splice(index, 1);
 
-			}
+		})
+		.catch(function(data) {
+			$scope.errorDelete = data.data.message;
 		})
 	}
 

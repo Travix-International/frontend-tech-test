@@ -1,8 +1,8 @@
 angular.module('todoServices', [])
 
 .factory('ToDo', function($http) {
-	var todoFactory = {}; // Create the customerFactory object
-	var task
+	const todoFactory = {}; // Create the customerFactory object
+	let task
     // Register a new todo
     todoFactory.createTask = function(data) {
         return $http.post('/task/create/' + data.title + '/' + data.description);
