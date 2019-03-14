@@ -4,62 +4,51 @@ angular.module('todoController', ['todoServices'])
 
 	app.load = true;
 	app.newFormOpen = false;
+    app.more = false;
 
-	//initialize for load more
-    $scope.more = false;
-    $scope.loadCounter = 1;
-
-
-	//get all tasks from json file
-	function getAllTasks(){
-		ToDo.getAllTasks()
+	//get first 10 tasks
+	function getFirstTasks(){
+		ToDo.getFirstTasks()
 		.then((data)=>{
-			console.log(data);
 			$scope.tasks = data.data.tasks;
 			$scope.totalItems = data.data.totalItems;
-
+			// show and hide load more
             if($scope.tasks.length < $scope.totalItems){
-                $scope.more = true;
+                app.more = true;
             }else{
-            	$scope.more = false;
+            	app.more = false;
             }
 			app.load = false;
 		})
-		.catch(function(data) {
-			console.log(data);
+		.catch((data)=>{
 			$scope.errorMsg = data.data.message;
 		 	app.load = false;
 		})
 	}
 
-	getAllTasks();
+	getFirstTasks();
 
-	this.loadMore = (loadCounter)=>{
-		const load_number = loadCounter + 1;
-		const last_id = Math.min.apply(Math, $scope.tasks.map(function(task) { return task.id; }));
-		const setter = {
-			page: load_number,
-			last_id : last_id
-		}
-		console.log(setter)
-		ToDo.getMoreTasks(setter)
+	//get additional tasks
+	this.loadMore = ()=>{
+		app.moreSpinner = true;
+		//find the last id from the all tasks which is already loaded
+		const last_id = Math.min.apply(Math, $scope.tasks.map((task)=>{ return task.id; }));
+		ToDo.getMoreTasks(last_id)
 		.then((data)=>{
-			console.log(data);
 			$scope.tasks = $scope.tasks.concat(data.data.tasks);
 			$scope.totalItems = data.data.totalItems;
-            $scope.loadCounter = load_number;
-
+			
+			// show and hide load more
             if($scope.tasks.length < $scope.totalItems){
-                $scope.more = true;
+                app.more = true;
             }else{
-            	$scope.more = false;
+            	app.more = false;
             }
-			app.load = false;
+            app.moreSpinner = false;
 		})
-		.catch(function(data) {
-			console.log(data);
-			$scope.errorMsg = data.data.message;
-		 	app.load = false;
+		.catch((data)=>{
+			$scope.errorMore = data.data.message;
+		 	app.moreSpinner = false;
 		})
 	}
 
@@ -70,6 +59,7 @@ angular.module('todoController', ['todoServices'])
 			app.newFormOpen = true;
 		}else{
 			app.newFormOpen = false;
+			//reset the form
 			app.data = {};
 			app.newTaskForm.$setPristine();
 			app.newTaskForm.$setUntouched();
@@ -77,14 +67,13 @@ angular.module('todoController', ['todoServices'])
 	}
 	//create a new task
 	this.createTask = (task)=>{
-		console.log(task)
 		app.disabled = true;
 		if((!task) || (!task.title || !task.description)){
 			app.disabled = false;
 		}else{
 			ToDo.createTask(task)
 			.then((data)=>{
-				console.log(data);
+				//push the new task in frontend(avoid reloading the whole tasks)
 				$scope.tasks.push(data.data.task);
 				$scope.totalItems = data.data.totalItems;
 
@@ -92,10 +81,11 @@ angular.module('todoController', ['todoServices'])
 				$('#newTaskForm').collapse('hide');
 				app.newFormOpen = false;
 				app.disabled = false;
+				//reset the form
 				app.newTaskForm.$setPristine();
 				app.newTaskForm.$setUntouched();
 			})
-			.catch(function(data) {
+			.catch((data)=>{
 				$scope.errorNew = data.data.message;
 				app.disabled = false;
 			})
@@ -120,11 +110,10 @@ angular.module('todoController', ['todoServices'])
             function () {
 
         }, function () {
-        	const updated_task = ToDo.getTask();
-        	console.log(updated_task)
+        	const updated_task = ToDo.getTask();//get the task which was stored in modalInstanceCtrl
         	if(updated_task){
+        		//override the updated task in frontend(avoid reloading the whole tasks)
         		const index = $scope.tasks.findIndex(x=> x.id == updated_task.id);
-				console.log(index);
 				$scope.tasks[index] = updated_task;
 				ToDo.resetTask();
 			}
@@ -136,17 +125,19 @@ angular.module('todoController', ['todoServices'])
 		ToDo.deleteTask(id)
 		.then((data)=>{
 			console.log(data);
+			//remove the task in frontend(avoid reloading the whole tasks)
 			const index = $scope.tasks.findIndex(x=> x.id == id);
 			$scope.tasks.splice(index, 1);
 			$scope.totalItems = data.data.totalItems;
+			// show and hide load more
 			if($scope.tasks.length < $scope.totalItems){
-                $scope.more = true;
+                app.more = true;
             }else{
-            	$scope.more = false;
+            	app.more = false;
             }
 
 		})
-		.catch(function(data) {
+		.catch((data)=>{
 			console.log(data);
 			$scope.errorDelete = data.data.message;
 		})

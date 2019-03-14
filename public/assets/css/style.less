@@ -1,7 +1,3 @@
-/*typography*/
-@first-font: 'Titillium Web', sans-serif;
-@second-font: 'Lora', serif;
-
 /*color*/
 @first-color: #363237;
 @second-color: #2D4262;
@@ -29,7 +25,6 @@ html {
 body{
     margin: 0;
     font-size: 16px;
-    // font-family: @second-font;
     color: @first-font-color;
     min-height: 100vh;
     height: auto;
@@ -129,6 +124,10 @@ body{
 
 }
 
+//////////////////////////////////////////////
+//--------------- MAIN PAGE ----------------//
+//////////////////////////////////////////////
+
 .page-wrap{
     max-width: 600px;
     width: 60%;
@@ -163,18 +162,23 @@ body{
       }
     }
 
-    .pagination{
-      margin-top: 20px;
+    #load-more{
+      margin-top: 30px;
+      a{
+        color: @fourth-color;
+        font-size: 1.2rem;
+
+        &:hover{
+          opacity:.5;
+        }
+      }
+      
     }
 
     #error-message{
       margin-top: 50px;
     }
 }
-
-
-
-
 
 
 //////////////////////////////////////////////
@@ -196,7 +200,6 @@ body{
 md-input-container{
   margin: 0;
 }
-
 
 
 /////////////////////////////////////////////

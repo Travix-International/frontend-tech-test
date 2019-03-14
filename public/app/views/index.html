@@ -38,10 +38,6 @@
   <!-- font-awesome -->
   <link rel="stylesheet" type="text/css" href="assets/css/all.css">
 
-  <!-- google-font -->
-  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i|Titillium+Web:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-
   <!-- Cascade Style Sheets -->
   <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
@@ -72,6 +68,7 @@
 
               <div ng-if="!todo.load">
                 <div ng-if="!errorMsg">
+                  <!-- Number of tasks -->
                   <h5 class="text-center">You have 
                     <span ng-if="totalItems == 0">nothing</span>
                     <span ng-if="totalItems !== 0">
@@ -79,7 +76,9 @@
                     </span>
                      to do.
                   </h5>
+                  <!-- Number of tasks -->
 
+                  <!-- New Task Form -->
                   <div class="text-center">
                      <button class="round-icon bgc-first-color" type="button" data-toggle="collapse" data-target="#newTaskForm" aria-expanded="false" aria-controls="newTaskForm" ng-click="todo.openNewTaskForm()">
                       <i class="fas fa-plus" ng-class="{'rotate-icon': todo.newFormOpen}"></i>
@@ -101,13 +100,13 @@
                       </div>
                       <div ng-show="todo.newTaskForm.$touched || todo.newTaskForm.$submitted">
                         <p class="font-red" ng-show="todo.newTaskForm.title.$invalid && todo.newTaskForm.description.$invalid">
-                        Please complete the fields.
+                          Please complete the fields.
                         </p>
                         <p class="font-red" ng-show="todo.newTaskForm.title.$error.required && !todo.newTaskForm.description.$error.required">
                           Please fill in the title.
                         </p>
                         <p class="font-red" ng-show="!todo.newTaskForm.title.$error.required && todo.newTaskForm.description.$error.required">
-                        Please fill in the description.
+                          Please fill in the description.
                         </p>
                       </div>
                       <div ng-show="errorNew">
@@ -117,10 +116,12 @@
                       <div class="clear"></div>
                     </form>
                   </div>
+                  <!-- New Task Form -->
 
+                  <!-- Tasks -->
                   <div class="card task-item" ng-repeat="task in tasks | orderBy:'-id' track by task.id">
                     <div class="card-body">
-                      <p class="card-title"><strong>{{task.id}}.{{task.title}}</strong></p>
+                      <p class="card-title"><strong>{{task.title}}</strong></p>
                       <div class="description">{{task.description}}</div>
                       <div class="float-right button-wrapper">
                         <button class="round-icon bgc-second-color" ng-click="todo.openUpdateTask(task)" ng-disabled=""><i class="fas fa-edit"></i></button>
@@ -128,26 +129,33 @@
                       </div>
                       <div class="clear"></div>
                       <div ng-if="errorDelete">
-                        <p class="font-red" >{{errorDelete}}</p>
+                        <p class="font-red">{{errorDelete}}</p>
                       </div>
                     </div>
                   </div>
+                  <!-- Tasks -->
 
-                  <div class="text-center" ng-if="more">
-                    <a href="" ng-model="last_id" ng-click="todo.loadMore(loadCounter)">--Load more--</a>
+                  <!-- Load more -->
+                  <div id="load-more" ng-if="todo.more">
+                    <div ng-if="!errorMore">
+                      <div class="text-center" ng-if="!todo.moreSpinner">
+                        <a href="" ng-model="last_id" ng-click="todo.loadMore()">Load more</a>
+                      </div>
+                      <div class="text-center" ng-if="todo.moreSpinner">
+                        <i class="fas fa-spinner fa-2x fa-spin"></i>
+                      </div>
+                    </div>
+                    <div ng-if="errorMore">
+                      <p class="font-red text-center">{{ errorMore }}</p>
+                    </div>
                   </div>
-
-<!--                   <div ng-if="pagination">
-                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm justify-content-center" boundary-links="true" num-pages="numPages" ng-change="todo.pageChange(currentPage)" items-per-page="itemsPerPage"></ul>
-                  </div>
-                </div> -->
-
-                <!-- Loading Error Messages -->
-                <div id="error-message" class="text-center font-red" ng-if="errorMsg">
-                    <p>Error - {{ errorMsg }}</p>
-                </div>
-                <!-- Loading Error Messages -->
+                  <!-- Load more -->
               </div>
+              <!-- Loading Error Messages -->
+              <div id="error-message" class="text-center font-red" ng-if="errorMsg">
+                  <p>Error - {{ errorMsg }}</p>
+              </div>
+              <!-- Loading Error Messages -->
           </div>
         </div>
       </div>

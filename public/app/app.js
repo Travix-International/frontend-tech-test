@@ -8,6 +8,5 @@ angular.module('userApp', [
 	'modalInstanceController',
 	])
 
-// .animation()
 
 

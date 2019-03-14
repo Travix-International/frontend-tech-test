@@ -9,25 +9,23 @@ const tasksContainer = require('./tasks50.json');
 app.use(express.static(__dirname + '/public')); // Allow front end to access public folder
 
 // Set Application Static Layout
-app.get('/', function(req, res) {
+app.get('/', (req, res)=>{
     res.sendFile(path.join(__dirname + '/public/app/views/index.html')); // Set index.html as layout
 });
 
 /**
  * GET /tasks
  * 
- * Return the list of tasks with status code 200.
+ * Return the first list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
   if(tasksContainer.tasks){
-    const pageCount = Math.ceil(tasksContainer.tasks.length / 10);
     const totalItems = tasksContainer.tasks.length;
-    //sort tasks with id
+    //sort tasks by id(descending)
     const arr = tasksContainer.tasks.sort((a,b)=>{return b.id - a.id});
     return res.status(200).json({
-      pageCount: pageCount,
       totalItems: totalItems,
-      tasks: arr.slice(0, 10)
+      tasks: arr.slice(0, 10)//get 10 tasks
     });
   }else{
     return res.status(404).json({
@@ -36,24 +34,21 @@ app.get('/tasks', (req, res) => {
   }
 });
 
-app.get('/tasks/:page/:id', (req, res) => {
+/**
+ * GET /tasks/:lastId
+ * 
+ * Return the additional list of tasks with status code 200.
+ */
+app.get('/tasks/:lastId', (req, res) => {
   if(tasksContainer.tasks){
-    const pageCount = Math.ceil(tasksContainer.tasks.length / 10);
     const totalItems = tasksContainer.tasks.length;
-    let page = parseInt(req.params.page);
-    if (!page) { page = 1;}
-    if (page > pageCount) {
-      page = pageCount
-    }
-
+    //sort tasks by id(descending)
     const arr = tasksContainer.tasks.sort((a,b)=>{return b.id - a.id});
-    const lastIdIndex = arr.findIndex(x=> x.id == req.params.id)
-    console.log(lastIdIndex)
+    //find index of the last id from the previous group
+    const lastIdIndex = arr.findIndex(x=> x.id == req.params.lastId)
     return res.status(200).json({
-      page: page,
-      pageCount: pageCount,
       totalItems: totalItems,
-      tasks: arr.slice(lastIdIndex +1, lastIdIndex + 11)
+      tasks: arr.slice(lastIdIndex +1, lastIdIndex + 11)//start from the next object of the last one
     });
   }else{
     return res.status(404).json({
@@ -149,7 +144,7 @@ app.post('/task/create/:title/:description', (req, res) => {
     console.log(tasksContainer.tasks);
     //if there are tasks more than 0 assign the greatest number of id +1
     if(numberOfTasks > 0){
-      const last_id = Math.max.apply(Math, tasksContainer.tasks.map(function(task) { return task.id; }));
+      const last_id = Math.max.apply(Math, tasksContainer.tasks.map((task)=>{ return task.id; }));
       console.log(last_id)
       new_id = last_id +1;
     }else{

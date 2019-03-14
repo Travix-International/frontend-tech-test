@@ -3,42 +3,42 @@ angular.module('todoServices', [])
 .factory('ToDo', function($http) {
 	const todoFactory = {}; // Create the customerFactory object
 	let task
-    // Register a new todo
+    // Register a new task
     todoFactory.createTask = function(data) {
         return $http.post('/task/create/' + data.title + '/' + data.description);
     };
 
-    // Get all todo tasks
-    todoFactory.getAllTasks = function() {
+    // Get first 10 tasks
+    todoFactory.getFirstTasks = function() {
         return $http.get('/tasks');
     };
 
-    // Get all todo tasks
-    todoFactory.getMoreTasks = function(data) {
-        return $http.get('/tasks/' + data.page + '/' + data.last_id);
+    // Get additional tasks
+    todoFactory.getMoreTasks = function(lastId) {
+        return $http.get('/tasks/' + lastId);
     };
 
-    // Get atodo task
+    // Get a task
     todoFactory.getTask = function(id) {
         return $http.get('/task/' + id);
     };
 
-    //update the task
+    //Update the task
     todoFactory.updateTask = function(data){
     	return $http.put('/task/update/' + data.id +'/' + data.title + '/' + data.description);
     };
 
-    //set a task to pass to another route
+    //Set a task to pass to another route
     todoFactory.setTask = function(data){
     	task = data;
     };
 
-    //get the task to from setter
+    //Get the task to from setter
     todoFactory.getTask = function(){
     	return task;
     };
 
-    //reset the task in the setter
+    //Reset the task in the setter
     todoFactory.resetTask = function(){
     	task = false;
     };
