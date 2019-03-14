@@ -73,9 +73,9 @@
               <div ng-if="!todo.load">
                 <div ng-if="!errorMsg">
                   <h5 class="text-center">You have 
-                    <span ng-if="tasks.length == 0">nothing</span>
-                    <span ng-if="tasks.length !== 0">
-                      {{tasks.length}} thing<span ng-if="tasks.length > 1">s</span>
+                    <span ng-if="totalItems == 0">nothing</span>
+                    <span ng-if="totalItems !== 0">
+                      {{totalItems}} thing<span ng-if="totalItems > 1">s</span>
                     </span>
                      to do.
                   </h5>
@@ -120,9 +120,9 @@
 
                   <div class="card task-item" ng-repeat="task in tasks | orderBy:'-id' track by task.id">
                     <div class="card-body">
-                      <p class="card-title"><strong>{{task.title}}</strong></p>
+                      <p class="card-title"><strong>{{task.id}}.{{task.title}}</strong></p>
                       <div class="description">{{task.description}}</div>
-                      <div class="float-right">
+                      <div class="float-right button-wrapper">
                         <button class="round-icon bgc-second-color" ng-click="todo.openUpdateTask(task)" ng-disabled=""><i class="fas fa-edit"></i></button>
                         <button class="round-icon bgc-fourth-color" ng-click="todo.deleteTask(task.id)"><i class="fas fa-trash"></i></button>
                       </div>
@@ -132,7 +132,15 @@
                       </div>
                     </div>
                   </div>
-                </div>
+
+                  <div class="text-center" ng-if="more">
+                    <a href="" ng-model="last_id" ng-click="todo.loadMore(loadCounter)">--Load more--</a>
+                  </div>
+
+<!--                   <div ng-if="pagination">
+                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm justify-content-center" boundary-links="true" num-pages="numPages" ng-change="todo.pageChange(currentPage)" items-per-page="itemsPerPage"></ul>
+                  </div>
+                </div> -->
 
                 <!-- Loading Error Messages -->
                 <div id="error-message" class="text-center font-red" ng-if="errorMsg">

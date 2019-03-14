@@ -113,6 +113,12 @@ body button:disabled {
 .page-wrap .task-item .description {
   font-size: .9rem;
 }
+.page-wrap .task-item .button-wrapper {
+  margin-top: 10px;
+}
+.page-wrap .pagination {
+  margin-top: 20px;
+}
 .page-wrap #error-message {
   margin-top: 50px;
 }
@@ -140,7 +146,7 @@ md-input-container {
     font-size: 0.8rem;
   }
   .page-wrap {
-    width: 90%;
+    width: 100%;
   }
   .page-wrap h5 {
     margin-top: 30px;

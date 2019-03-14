@@ -13,6 +13,11 @@ angular.module('todoServices', [])
         return $http.get('/tasks');
     };
 
+    // Get all todo tasks
+    todoFactory.getMoreTasks = function(data) {
+        return $http.get('/tasks/' + data.page + '/' + data.last_id);
+    };
+
     // Get atodo task
     todoFactory.getTask = function(id) {
         return $http.get('/task/' + id);

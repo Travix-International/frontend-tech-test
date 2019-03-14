@@ -20,8 +20,14 @@ app.get('/', function(req, res) {
  */
 app.get('/tasks', (req, res) => {
   if(tasksContainer.tasks){
+    const pageCount = Math.ceil(tasksContainer.tasks.length / 10);
+    const totalItems = tasksContainer.tasks.length;
+    //sort tasks with id
+    const arr = tasksContainer.tasks.sort((a,b)=>{return b.id - a.id});
     return res.status(200).json({
-      tasks:tasksContainer.tasks
+      pageCount: pageCount,
+      totalItems: totalItems,
+      tasks: arr.slice(0, 10)
     });
   }else{
     return res.status(404).json({
@@ -29,6 +35,33 @@ app.get('/tasks', (req, res) => {
     });
   }
 });
+
+app.get('/tasks/:page/:id', (req, res) => {
+  if(tasksContainer.tasks){
+    const pageCount = Math.ceil(tasksContainer.tasks.length / 10);
+    const totalItems = tasksContainer.tasks.length;
+    let page = parseInt(req.params.page);
+    if (!page) { page = 1;}
+    if (page > pageCount) {
+      page = pageCount
+    }
+
+    const arr = tasksContainer.tasks.sort((a,b)=>{return b.id - a.id});
+    const lastIdIndex = arr.findIndex(x=> x.id == req.params.id)
+    console.log(lastIdIndex)
+    return res.status(200).json({
+      page: page,
+      pageCount: pageCount,
+      totalItems: totalItems,
+      tasks: arr.slice(lastIdIndex +1, lastIdIndex + 11)
+    });
+  }else{
+    return res.status(404).json({
+      message: 'Tasks are not found.',
+    });
+  }
+});
+
 
 /**
  * Get /task/:id
@@ -113,9 +146,11 @@ app.post('/task/create/:title/:description', (req, res) => {
   if(req.params.title && req.params.description){
     let new_id;
     const numberOfTasks = tasksContainer.tasks.length;
-    // if there are tasks more than 0 assign 
+    console.log(tasksContainer.tasks);
+    //if there are tasks more than 0 assign the greatest number of id +1
     if(numberOfTasks > 0){
-      const last_id = tasksContainer.tasks[numberOfTasks -1].id;
+      const last_id = Math.max.apply(Math, tasksContainer.tasks.map(function(task) { return task.id; }));
+      console.log(last_id)
       new_id = last_id +1;
     }else{
       new_id = 0;
@@ -127,9 +162,10 @@ app.post('/task/create/:title/:description', (req, res) => {
     };
 
     tasksContainer.tasks.push(task);
+    const totalItems = tasksContainer.tasks.length;
 
     return res.status(201).json({
-      message: 'Resource created', task: task
+      message: 'Resource created', task: task, totalItems: totalItems
     });
   }else{
     return res.status(400).json({
@@ -157,8 +193,9 @@ app.delete('/task/delete/:id', (req, res) => {
     if (task !== null) {
       const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
       tasksContainer.tasks.splice(taskIndex, 1);
+      const totalItems = tasksContainer.tasks.length;
       return res.status(200).json({
-        message: 'Updated successfully',
+        message: 'Updated successfully', totalItems: totalItems
       });
     } else {
       return res.status(404).json({
