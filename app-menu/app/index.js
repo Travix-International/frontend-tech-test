@@ -5,7 +5,7 @@ import { createStore } from 'frint-store';
 import RootComponent from '../components/Root';
 
 export default createApp({
-  name: 'HeaderApp',
+  name: 'MenuApp',
   providers: [
     {
       name: 'component',

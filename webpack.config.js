@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = {
   entry: {
     core: path.resolve(__dirname, 'core/index.js'),
-    'app-header': path.resolve(__dirname, 'app-header/index.js'),
+    'app-menu': path.resolve(__dirname, 'app-menu/index.js'),
     'app-modal': path.resolve(__dirname, 'app-modal/index.js'),
     'app-todos': path.resolve(__dirname, 'app-todos/index.js')
   },
