@@ -1,19 +1,15 @@
 import React from 'react';
 import { observe } from 'frint-react';
-import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operator/map';
-import { merge } from 'rxjs/operator/merge';
-import { scan } from 'rxjs/operator/scan';
+import { of } from 'rxjs/observable/of';
+import { map } from 'rxjs/operators/map';
+import { merge } from 'rxjs/operators/merge';
+import { scan } from 'rxjs/operators/scan';
 
 import { getTodosAsync } from '../actions/todos';
 
 import Item from './Item';
 
 class Root extends React.Component {
-  componentDidMount() {
-    this.props.getTodosAsync();
-  }
-
   render() {
     return (
       <div className="row-columns">
@@ -28,31 +24,28 @@ class Root extends React.Component {
   }
 }
 
-export default observe(function (app) { // eslint-disable-line func-names
+export default observe((app) => {
   const store = app.get('store');
+  const state$ = store.getState$();
 
-  const state$ = store.getState$()
-      :: map((state) => {
-    return {
-      todos: state.todos.records,
-    };
+  const stateProps$ = state$
+    .pipe(
+      map(state => {
+        return {
+          todos: state.todos.records,
+        };
+      })
+    );
+
+  const actions$ = of({
+    getTodosAsync: () => store.dispatch(getTodosAsync())
   });
 
-  const actions$ = Observable.of({
-    getTodosAsync: () => {
-      return store.dispatch(getTodosAsync());
-    },
-  });
-
-  return state$
-    :: merge(actions$)
-    ::scan((props, emitted) => {
-      return {
-        ...props,
-        ...emitted,
-      };
-    }, {
-      records: [],
-    });
-
+  return stateProps$.pipe(
+    merge(actions$),
+    scan((props, emitted) => ({
+      ...props,
+      ...emitted,
+    }))
+  );
 })(Root);

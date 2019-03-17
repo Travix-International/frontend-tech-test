@@ -37,33 +37,5 @@ class Root extends React.Component {
 }
 
 export default observe(function (app) {
-  const sidebarToggle$ = (new BehaviorSubject(true))
-    .map((toggleValue) => {
-      return {
-        showSidebar: toggleValue,
-      };
-    });
 
-  const actions$ = Observable.of({
-    toggle: (value) => {
-      sidebarToggle$.next(value);
-    }
-  });
-
-  const services$ = Observable.of({
-    logger: app.get('logger'),
-  });
-
-  return sidebarToggle$
-    .merge(actions$)
-    .merge(services$)
-    .scan((props, emitted) => {
-      return {
-        ...props,
-        ...emitted,
-      };
-    }, {
-        // start with these props
-        appName: app.getName(),
-      });
 })(Root);

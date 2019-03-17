@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { createApp } from 'frint';
 import { createStore } from 'frint-store';
 import { RegionService } from 'frint-react';
@@ -21,16 +20,6 @@ export default createApp({
           initialState: {
             todos: {
               records: [
-                // {
-                //   id: _.uniqueId(),
-                //   title: 'First todo',
-                //   description: 'First description'
-                // },
-                // {
-                //   id: _.uniqueId(),
-                //   title: 'Second todo',
-                //   description: 'Second description'
-                // }
               ]
             },
           },
