@@ -9,7 +9,7 @@
     "build": "npm run bundle:vendors && npm run bundle:apps",
     "start:server-debug": "live-server build",
     "start:server": "npm run build && node server/index.js",
-    "start": "npm run build && npm run start:server-debug"
+    "start": "npm run build && npm run start:server"
   },
   "keywords": [
     "test",

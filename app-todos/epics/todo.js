@@ -1,19 +1,31 @@
-import { filter } from 'rxjs/operator/filter';
-import { map } from 'rxjs/operator/map';
+import { Observable } from 'rxjs/Observable';
+import { mergeMap } from 'rxjs/operators/mergeMap';
+import { filter } from 'rxjs/operators/filter';
+
 
 import {
-    TODOS_FETCH_ASYNC
+    TODOS_FETCH,
+    TODOS_FETCH_ASYNC,
+    TODOS_FAILED
 } from '../constants';
-import { fetchTodos } from '../actions/todos';
 
-export default function fetchTodos$(action$) {
+export default function fetchTodosAsync$(action$) {
     return action$
-        :: filter(action => action.type === TODOS_FETCH_ASYNC)
-        :: map(action => fetchTodos([
-        {
-            id: 123,
-            title: 'vara todo',
-            description: 'descritption trodo'
-        }
-    ]));
+        .pipe(
+            filter(action => action.type === TODOS_FETCH_ASYNC),
+            mergeMap(() => {
+                return Observable.ajax.getJSON('http://localhost:9001/tasks')
+                    .map(data => ({
+                        type: TODOS_FETCH,
+                        response: data.tasks,
+                    }))
+                    .catch(error => [
+                        {
+                            type: TODOS_FAILED,
+                            response: { message: error.message, status: error.status },
+                            error: true,
+                        },
+                    ])
+            })
+        )
 }

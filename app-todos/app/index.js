@@ -5,6 +5,7 @@ import { RegionService } from 'frint-react';
 import RootComponent from '../components/Root';
 import rootReducer from '../reducers';
 import todoEpic$ from '../epics';
+import { fetchTodosAsync } from '../actions/todos';
 
 export default createApp({
   name: 'TodosApp',
@@ -28,7 +29,9 @@ export default createApp({
           deps: { app },
         });
 
-        return new Store();
+        const store = new Store();
+        store.dispatch(fetchTodosAsync());
+        return store;
       },
       deps: ['app'],
     },

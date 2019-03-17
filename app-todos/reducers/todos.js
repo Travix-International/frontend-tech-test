@@ -47,7 +47,7 @@ export default function todos(state = INITIAL_STATE, action) {
 
     case TODOS_FETCH:
       return Object.assign({}, {
-        records: action.records
+        records: action.response
       });
 
     default:
