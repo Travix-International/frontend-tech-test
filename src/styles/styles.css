@@ -1,0 +1,61 @@
+.todo-item {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.editable-input {
+  width: 30rem;
+}
+.division-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sik-style {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 29rem;
+}
+
+.label-group {
+  display: flex;
+  width: 30rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.todo-list {
+  list-style-type: none;
+  margin: 1rem;
+  padding: 0;
+}
+
+.header-style {
+  margin-bottom: 3rem;
+  text-align: center;
+  overflow: hidden;
+
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #007bff;
+}
+
+.form-csontrol {
+  visibility: hidden;
+}
+
+.empty-list {
+  text-align: center;
+}
