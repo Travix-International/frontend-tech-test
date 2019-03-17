@@ -1,0 +1,44 @@
+.modal {
+    right: auto;
+    left: auto;
+    margin: 0 auto;
+    display: none;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 300;
+    background: rgba(102, 102, 102, 0.5);
+    overflow-y: auto;
+    transition: opacity .2s ease-in;
+}
+
+.modal-window {
+    z-index: 301;
+    border-radius: 5px;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 20px;
+    margin-top: 55px;
+    padding: 20px;
+    background-color: #fff;
+    h4 {
+        margin-bottom: 20px;
+    }
+}
+
+.is-opened {
+    display: block;
+}
+
+@media screen and (min-width: 40em) {
+    .modal-window {
+        width: 600px;
+        max-width: 75rem;
+    }
+}
