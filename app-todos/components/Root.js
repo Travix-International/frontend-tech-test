@@ -5,15 +5,13 @@ import { map } from 'rxjs/operator/map';
 import { merge } from 'rxjs/operator/merge';
 import { scan } from 'rxjs/operator/scan';
 
-import {
-  TODOS_GET_ASYNC
-} from '../constants';
+import { getTodosAsync } from '../actions/todos';
 
 import Item from './Item';
 
 class Root extends React.Component {
-  componentWillMount() {
-    // this.props.getTodosAsync();
+  componentDidMount() {
+    this.props.getTodosAsync();
   }
 
   render() {
@@ -42,9 +40,7 @@ export default observe(function (app) { // eslint-disable-line func-names
 
   const actions$ = Observable.of({
     getTodosAsync: () => {
-      return store.dispatch({
-        type: TODOS_GET_ASYNC
-      });
+      return store.dispatch(getTodosAsync());
     },
   });
 
