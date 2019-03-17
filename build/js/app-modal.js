@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("frint-react"), require("react"), require("frint"), require("frint-store"), require("rxjs/BehaviorSubject"));
+		module.exports = factory(require("frint-react"), require("react"), require("frint-store"), require("frint"), require("rxjs/BehaviorSubject"));
 	else if(typeof define === 'function' && define.amd)
-		define(["frint-react", "react", "frint", "frint-store", "rxjs/BehaviorSubject"], factory);
+		define(["frint-react", "react", "frint-store", "frint", "rxjs/BehaviorSubject"], factory);
 	else {
-		var a = typeof exports === 'object' ? factory(require("frint-react"), require("react"), require("frint"), require("frint-store"), require("rxjs/BehaviorSubject")) : factory(root["FrintReact"], root["React"], root["Frint"], root["FrintStore"], root["Rx"]);
+		var a = typeof exports === 'object' ? factory(require("frint-react"), require("react"), require("frint-store"), require("frint"), require("rxjs/BehaviorSubject")) : factory(root["FrintReact"], root["React"], root["FrintStore"], root["Frint"], root["Rx"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_7__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -89,7 +89,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
 
 /***/ }),
 
-/***/ 10:
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -114,13 +114,6 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
 /***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
-
-/***/ }),
-
-/***/ 4:
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
 
 /***/ }),
 
@@ -153,9 +146,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _frint = __webpack_require__(2);
+var _frint = __webpack_require__(3);
 
-var _frintStore = __webpack_require__(3);
+var _frintStore = __webpack_require__(2);
 
 var _frintReact = __webpack_require__(0);
 
@@ -219,7 +212,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _frintReact = __webpack_require__(0);
 
-var _BehaviorSubject = __webpack_require__(4);
+var _BehaviorSubject = __webpack_require__(7);
 
 var _modal = __webpack_require__(43);
 
@@ -422,7 +415,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.openModal = openModal;
 exports.closeModal = closeModal;
 
-var _constants = __webpack_require__(10);
+var _constants = __webpack_require__(14);
 
 function openModal(showEditMode) {
   return {
@@ -450,7 +443,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _frintStore = __webpack_require__(3);
+var _frintStore = __webpack_require__(2);
 
 var _modal = __webpack_require__(45);
 
@@ -476,7 +469,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = modal;
 
-var _constants = __webpack_require__(10);
+var _constants = __webpack_require__(14);
 
 var INITIAL_STATE = {
   value: false
@@ -504,6 +497,13 @@ function modal() {
   }
 }
 module.exports = exports['default'];
+
+/***/ }),
+
+/***/ 7:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
 
 /***/ })
 

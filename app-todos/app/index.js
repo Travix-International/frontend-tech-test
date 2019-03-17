@@ -5,6 +5,7 @@ import { RegionService } from 'frint-react';
 
 import RootComponent from '../components/Root';
 import rootReducer from '../reducers';
+import todoEpic$ from '../epics';
 
 export default createApp({
   name: 'TodosApp',
@@ -20,20 +21,21 @@ export default createApp({
           initialState: {
             todos: {
               records: [
-                {
-                  id: _.uniqueId(),
-                  title: 'First todo',
-                  description: 'First description'
-                },
-                {
-                  id: _.uniqueId(),
-                  title: 'Second todo',
-                  description: 'Second description'
-                },
+                // {
+                //   id: _.uniqueId(),
+                //   title: 'First todo',
+                //   description: 'First description'
+                // },
+                // {
+                //   id: _.uniqueId(),
+                //   title: 'Second todo',
+                //   description: 'Second description'
+                // }
               ]
             },
           },
           reducer: rootReducer,
+          epic: todoEpic$,
           deps: { app },
         });
 

@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("frint-react"), require("react"), require("frint"), require("frint-store"), require("rxjs/operator/map"), require("rxjs/operator/concatMap"), require("rxjs/operator/merge"), require("rxjs/operator/scan"), require("prop-types"));
+		module.exports = factory(require("frint-react"), require("react"), require("frint-store"), require("frint"), require("rxjs/operator/map"), require("rxjs/operator/merge"), require("rxjs/operator/scan"), require("rxjs/operator/concatMap"), require("prop-types"));
 	else if(typeof define === 'function' && define.amd)
-		define(["frint-react", "react", "frint", "frint-store", "rxjs/operator/map", "rxjs/operator/concatMap", "rxjs/operator/merge", "rxjs/operator/scan", "prop-types"], factory);
+		define(["frint-react", "react", "frint-store", "frint", "rxjs/operator/map", "rxjs/operator/merge", "rxjs/operator/scan", "rxjs/operator/concatMap", "prop-types"], factory);
 	else {
-		var a = typeof exports === 'object' ? factory(require("frint-react"), require("react"), require("frint"), require("frint-store"), require("rxjs/operator/map"), require("rxjs/operator/concatMap"), require("rxjs/operator/merge"), require("rxjs/operator/scan"), require("prop-types")) : factory(root["FrintReact"], root["React"], root["Frint"], root["FrintStore"], root["Rx"]["Observable"]["prototype"], root["Rx"]["Observable"]["prototype"], root["Rx"]["Observable"]["prototype"], root["Rx"]["Observable"]["prototype"], root["PropTypes"]);
+		var a = typeof exports === 'object' ? factory(require("frint-react"), require("react"), require("frint-store"), require("frint"), require("rxjs/operator/map"), require("rxjs/operator/merge"), require("rxjs/operator/scan"), require("rxjs/operator/concatMap"), require("prop-types")) : factory(root["FrintReact"], root["React"], root["FrintStore"], root["Frint"], root["Rx"]["Observable"]["prototype"], root["Rx"]["Observable"]["prototype"], root["Rx"]["Observable"]["prototype"], root["Rx"]["Observable"]["prototype"], root["PropTypes"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_35__, __WEBPACK_EXTERNAL_MODULE_36__, __WEBPACK_EXTERNAL_MODULE_37__, __WEBPACK_EXTERNAL_MODULE_38__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_37__, __WEBPACK_EXTERNAL_MODULE_38__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 32);
+/******/ 	return __webpack_require__(__webpack_require__.s = 34);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -99,18 +99,28 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
 
 /***/ }),
 /* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */
+/* 5 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
 
 /***/ }),
+/* 6 */,
+/* 7 */,
 /* 8 */,
 /* 9 */,
-/* 10 */,
-/* 11 */,
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_10__;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_11__;
+
+/***/ }),
 /* 12 */,
 /* 13 */,
 /* 14 */,
@@ -131,13 +141,15 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
 /* 29 */,
 /* 30 */,
 /* 31 */,
-/* 32 */
+/* 32 */,
+/* 33 */,
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _app = __webpack_require__(33);
+var _app = __webpack_require__(35);
 
 var _app2 = _interopRequireDefault(_app);
 
@@ -148,7 +160,7 @@ window.app.registerApp(_app2.default, {
 });
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -158,13 +170,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _frint = __webpack_require__(2);
+var _frint = __webpack_require__(3);
 
 var _frintReact = __webpack_require__(0);
 
-var _frintStore = __webpack_require__(3);
+var _frintStore = __webpack_require__(2);
 
-var _Root = __webpack_require__(34);
+var _Root = __webpack_require__(36);
 
 var _Root2 = _interopRequireDefault(_Root);
 
@@ -195,7 +207,7 @@ exports.default = (0, _frint.createApp)({
 module.exports = exports['default'];
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -215,13 +227,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _frintReact = __webpack_require__(0);
 
-var _concatMap = __webpack_require__(35);
+var _concatMap = __webpack_require__(37);
 
-var _map = __webpack_require__(7);
+var _map = __webpack_require__(5);
 
-var _merge = __webpack_require__(36);
+var _merge = __webpack_require__(10);
 
-var _scan = __webpack_require__(37);
+var _scan = __webpack_require__(11);
 
 var _propTypes = __webpack_require__(38);
 
@@ -346,18 +358,6 @@ exports.default = (0, _frintReact.observe)(function (app) {
   });
 })(Root);
 module.exports = exports['default'];
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_35__;
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_36__;
 
 /***/ }),
 /* 37 */

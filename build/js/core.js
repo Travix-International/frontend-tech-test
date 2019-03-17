@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("frint-react"), require("react"), require("frint"), require("rxjs/BehaviorSubject"), require("rxjs/Observable"));
+		module.exports = factory(require("frint-react"), require("react"), require("frint"), require("rxjs/Observable"), require("rxjs/BehaviorSubject"));
 	else if(typeof define === 'function' && define.amd)
-		define(["frint-react", "react", "frint", "rxjs/BehaviorSubject", "rxjs/Observable"], factory);
+		define(["frint-react", "react", "frint", "rxjs/Observable", "rxjs/BehaviorSubject"], factory);
 	else {
-		var a = typeof exports === 'object' ? factory(require("frint-react"), require("react"), require("frint"), require("rxjs/BehaviorSubject"), require("rxjs/Observable")) : factory(root["FrintReact"], root["React"], root["Frint"], root["Rx"], root["Rx"]);
+		var a = typeof exports === 'object' ? factory(require("frint-react"), require("react"), require("frint"), require("rxjs/Observable"), require("rxjs/BehaviorSubject")) : factory(root["FrintReact"], root["React"], root["Frint"], root["Rx"], root["Rx"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_16__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -86,20 +86,28 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
 module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
 
 /***/ }),
-/* 2 */
+/* 2 */,
+/* 3 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
 
 /***/ }),
-/* 3 */,
 /* 4 */
 /***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
 
 /***/ }),
-/* 5 */
+/* 5 */,
+/* 6 */,
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -109,11 +117,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defaultLevels = __webpack_require__(25);
+var _defaultLevels = __webpack_require__(27);
 
 var _defaultLevels2 = _interopRequireDefault(_defaultLevels);
 
-var _defaultKeys = __webpack_require__(26);
+var _defaultKeys = __webpack_require__(28);
 
 var _defaultKeys2 = _interopRequireDefault(_defaultKeys);
 
@@ -126,7 +134,7 @@ exports.default = {
 module.exports = exports['default'];
 
 /***/ }),
-/* 6 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -137,7 +145,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = createTransport;
 
-var _Transport2 = __webpack_require__(8);
+var _Transport2 = __webpack_require__(12);
 
 var _Transport3 = _interopRequireDefault(_Transport2);
 
@@ -184,8 +192,9 @@ function createTransport() {
 module.exports = exports['default'];
 
 /***/ }),
-/* 7 */,
-/* 8 */
+/* 10 */,
+/* 11 */,
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -224,7 +233,7 @@ exports.default = Transport;
 module.exports = exports["default"];
 
 /***/ }),
-/* 9 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -262,10 +271,9 @@ function each(arr, iterator, cb) {
 module.exports = exports["default"];
 
 /***/ }),
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */
+/* 14 */,
+/* 15 */,
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -273,7 +281,7 @@ module.exports = exports["default"];
 
 var _frintReact = __webpack_require__(0);
 
-var _app = __webpack_require__(14);
+var _app = __webpack_require__(17);
 
 var _app2 = _interopRequireDefault(_app);
 
@@ -284,7 +292,7 @@ window.app = new _app2.default();
 (0, _frintReact.render)(window.app, document.getElementById('root'));
 
 /***/ }),
-/* 14 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -294,13 +302,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _frint = __webpack_require__(2);
+var _frint = __webpack_require__(3);
 
-var _Root = __webpack_require__(15);
+var _Root = __webpack_require__(18);
 
 var _Root2 = _interopRequireDefault(_Root);
 
-var _logger = __webpack_require__(22);
+var _logger = __webpack_require__(24);
 
 var _logger2 = _interopRequireDefault(_logger);
 
@@ -323,7 +331,7 @@ exports.default = (0, _frint.createApp)({
 module.exports = exports['default'];
 
 /***/ }),
-/* 15 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -343,11 +351,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _frintReact = __webpack_require__(0);
 
-var _BehaviorSubject = __webpack_require__(4);
+var _BehaviorSubject = __webpack_require__(7);
 
-var _Observable = __webpack_require__(16);
+var _Observable = __webpack_require__(4);
 
-__webpack_require__(17);
+__webpack_require__(19);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -428,17 +436,11 @@ exports.default = (0, _frintReact.observe)(function (app) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_16__;
-
-/***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(18);
+var content = __webpack_require__(20);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -452,7 +454,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(20)(content, options);
+var update = __webpack_require__(22)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -484,10 +486,10 @@ if(false) {
 }
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(19)(false);
+exports = module.exports = __webpack_require__(21)(false);
 // Imports
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);", ""]);
 
@@ -497,7 +499,7 @@ exports.push([module.i, "* {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizi
 
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -588,7 +590,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -657,7 +659,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(21);
+var	fixUrls = __webpack_require__(23);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -994,7 +996,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports) {
 
 
@@ -1089,7 +1091,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1099,7 +1101,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _travixLogger = __webpack_require__(23);
+var _travixLogger = __webpack_require__(25);
 
 var logger = new _travixLogger.Logger({
   transports: [(0, _travixLogger.configureConsoleTransport)()]
@@ -1109,44 +1111,44 @@ exports.default = logger;
 module.exports = exports['default'];
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(24);
+module.exports = __webpack_require__(26);
 
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _constants = __webpack_require__(5);
+var _constants = __webpack_require__(8);
 
 var _constants2 = _interopRequireDefault(_constants);
 
-var _createTransport = __webpack_require__(6);
+var _createTransport = __webpack_require__(9);
 
 var _createTransport2 = _interopRequireDefault(_createTransport);
 
-var _Transport = __webpack_require__(8);
+var _Transport = __webpack_require__(12);
 
 var _Transport2 = _interopRequireDefault(_Transport);
 
-var _Logger = __webpack_require__(27);
+var _Logger = __webpack_require__(29);
 
 var _Logger2 = _interopRequireDefault(_Logger);
 
-var _console = __webpack_require__(28);
+var _console = __webpack_require__(30);
 
 var _console2 = _interopRequireDefault(_console);
 
-var _http = __webpack_require__(29);
+var _http = __webpack_require__(31);
 
 var _http2 = _interopRequireDefault(_http);
 
-var _each = __webpack_require__(9);
+var _each = __webpack_require__(13);
 
 var _each2 = _interopRequireDefault(_each);
 
@@ -1167,7 +1169,7 @@ module.exports = {
 }; /* global module */
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1203,7 +1205,7 @@ exports.default = {
 module.exports = exports['default'];
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1221,7 +1223,7 @@ exports.default = {
 module.exports = exports['default'];
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1235,9 +1237,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _constants = __webpack_require__(5);
+var _constants = __webpack_require__(8);
 
-var _each = __webpack_require__(9);
+var _each = __webpack_require__(13);
 
 var _each2 = _interopRequireDefault(_each);
 
@@ -1348,7 +1350,7 @@ exports.default = Logger;
 module.exports = exports['default'];
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1359,7 +1361,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = configureConsoleTransport;
 
-var _createTransport = __webpack_require__(6);
+var _createTransport = __webpack_require__(9);
 
 var _createTransport2 = _interopRequireDefault(_createTransport);
 
@@ -1413,7 +1415,7 @@ function configureConsoleTransport() {
 module.exports = exports['default'];
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1428,11 +1430,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.default = configureHttpTransport;
 
-__webpack_require__(30);
+__webpack_require__(32);
 
-var _constants = __webpack_require__(5);
+var _constants = __webpack_require__(8);
 
-var _createTransport = __webpack_require__(6);
+var _createTransport = __webpack_require__(9);
 
 var _createTransport2 = _interopRequireDefault(_createTransport);
 
@@ -1538,19 +1540,19 @@ function configureHttpTransport() {
 module.exports = exports['default'];
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // the whatwg-fetch polyfill installs the fetch() function
 // on the global object (window or self)
 //
 // Return that as the export for use in Webpack, Browserify etc.
-__webpack_require__(31);
+__webpack_require__(33);
 module.exports = self.fetch.bind(self);
 
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

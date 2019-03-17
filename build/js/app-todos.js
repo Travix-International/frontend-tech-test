@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("frint-react"), require("react"), require("frint"), require("frint-store"), require("rxjs/operator/map"), require("lodash"));
+		module.exports = factory(require("frint-react"), require("react"), require("frint-store"), require("frint"), require("rxjs/Observable"), require("rxjs/operator/map"), require("rxjs/operator/merge"), require("rxjs/operator/scan"), require("lodash"), require("rxjs/operator/filter"));
 	else if(typeof define === 'function' && define.amd)
-		define(["frint-react", "react", "frint", "frint-store", "rxjs/operator/map", "lodash"], factory);
+		define(["frint-react", "react", "frint-store", "frint", "rxjs/Observable", "rxjs/operator/map", "rxjs/operator/merge", "rxjs/operator/scan", "lodash", "rxjs/operator/filter"], factory);
 	else {
-		var a = typeof exports === 'object' ? factory(require("frint-react"), require("react"), require("frint"), require("frint-store"), require("rxjs/operator/map"), require("lodash")) : factory(root["FrintReact"], root["React"], root["Frint"], root["FrintStore"], root["Rx"]["Observable"]["prototype"], root["_"]);
+		var a = typeof exports === 'object' ? factory(require("frint-react"), require("react"), require("frint-store"), require("frint"), require("rxjs/Observable"), require("rxjs/operator/map"), require("rxjs/operator/merge"), require("rxjs/operator/scan"), require("lodash"), require("rxjs/operator/filter")) : factory(root["FrintReact"], root["React"], root["FrintStore"], root["Frint"], root["Rx"], root["Rx"]["Observable"]["prototype"], root["Rx"]["Observable"]["prototype"], root["Rx"]["Observable"]["prototype"], root["_"], root["Rx"]["Observable"]["prototype"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_11__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_15__, __WEBPACK_EXTERNAL_MODULE_56__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -98,25 +98,19 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
 module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
 
 /***/ }),
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */
+/* 4 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
 
 /***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */
+/* 5 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_11__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
 
 /***/ }),
-/* 12 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -128,11 +122,33 @@ Object.defineProperty(exports, "__esModule", {
 var TODOS_ADD = exports.TODOS_ADD = 'TODOS_ADD';
 var TODOS_DELETE = exports.TODOS_DELETE = 'TODOS_DELETE';
 var TODOS_UPDATE = exports.TODOS_UPDATE = 'TODOS_UPDATE';
+var TODOS_GET_ASYNC = exports.TODOS_GET_ASYNC = 'TODOS_GET_ASYNC';
 
 /***/ }),
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_10__;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_11__;
+
+/***/ }),
+/* 12 */,
 /* 13 */,
 /* 14 */,
-/* 15 */,
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_15__;
+
+/***/ }),
 /* 16 */,
 /* 17 */,
 /* 18 */,
@@ -191,13 +207,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _lodash = __webpack_require__(11);
+var _lodash = __webpack_require__(15);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _frint = __webpack_require__(2);
+var _frint = __webpack_require__(3);
 
-var _frintStore = __webpack_require__(3);
+var _frintStore = __webpack_require__(2);
 
 var _frintReact = __webpack_require__(0);
 
@@ -208,6 +224,10 @@ var _Root2 = _interopRequireDefault(_Root);
 var _reducers = __webpack_require__(52);
 
 var _reducers2 = _interopRequireDefault(_reducers);
+
+var _epics = __webpack_require__(54);
+
+var _epics2 = _interopRequireDefault(_epics);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -224,18 +244,22 @@ exports.default = (0, _frint.createApp)({
       var Store = (0, _frintStore.createStore)({
         initialState: {
           todos: {
-            records: [{
-              id: _lodash2.default.uniqueId(),
-              title: 'First todo',
-              description: 'First description'
-            }, {
-              id: _lodash2.default.uniqueId(),
-              title: 'Second todo',
-              description: 'Second description'
-            }]
+            records: [
+              // {
+              //   id: _.uniqueId(),
+              //   title: 'First todo',
+              //   description: 'First description'
+              // },
+              // {
+              //   id: _.uniqueId(),
+              //   title: 'Second todo',
+              //   description: 'Second description'
+              // }
+            ]
           }
         },
         reducer: _reducers2.default,
+        epic: _epics2.default,
         deps: { app: app }
       });
 
@@ -261,6 +285,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -269,7 +295,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _frintReact = __webpack_require__(0);
 
-var _map = __webpack_require__(7);
+var _Observable = __webpack_require__(4);
+
+var _map = __webpack_require__(5);
+
+var _merge = __webpack_require__(10);
+
+var _scan = __webpack_require__(11);
+
+var _constants = __webpack_require__(6);
 
 var _Item = __webpack_require__(49);
 
@@ -293,6 +327,11 @@ var Root = function (_React$Component) {
   }
 
   _createClass(Root, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      // this.props.getTodosAsync();
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -323,7 +362,19 @@ exports.default = (0, _frintReact.observe)(function (app) {
     };
   });
 
-  return state$;
+  var actions$ = _Observable.Observable.of({
+    getTodosAsync: function getTodosAsync() {
+      return store.dispatch({
+        type: _constants.TODOS_GET_ASYNC
+      });
+    }
+  });
+
+  return (_context = _merge.merge.call(state$, actions$), _scan.scan).call(_context, function (props, emitted) {
+    return _extends({}, props, emitted);
+  }, {
+    records: []
+  });
 })(Root);
 module.exports = exports['default'];
 
@@ -463,7 +514,7 @@ exports.addTodo = addTodo;
 exports.removeTodo = removeTodo;
 exports.updateTodo = updateTodo;
 
-var _constants = __webpack_require__(12);
+var _constants = __webpack_require__(6);
 
 function addTodo(title, description) {
   return {
@@ -538,7 +589,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _frintStore = __webpack_require__(3);
+var _frintStore = __webpack_require__(2);
 
 var _todos = __webpack_require__(53);
 
@@ -563,11 +614,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = todos;
 
-var _lodash = __webpack_require__(11);
+var _lodash = __webpack_require__(15);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _constants = __webpack_require__(12);
+var _constants = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -617,6 +668,76 @@ function todos() {
   }
 }
 module.exports = exports['default'];
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _frintStore = __webpack_require__(2);
+
+var _todo = __webpack_require__(55);
+
+var _todo2 = _interopRequireDefault(_todo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _frintStore.combineEpics)(_todo2.default);
+module.exports = exports['default'];
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = fetchTodos$;
+
+var _Observable = __webpack_require__(4);
+
+var _filter = __webpack_require__(56);
+
+var _map = __webpack_require__(5);
+
+var _constants = __webpack_require__(6);
+
+function fetchTodos$(action$) {
+    var _context;
+
+    return (_context = _filter.filter.call(action$, function (action) {
+        return action.type === _constants.TODOS_GET_ASYNC;
+    }), _map.map).call(_context, function (action) {
+        // Observable.ajax.getJSON('http://localhost/tasks')
+        //     .map(data => ({
+        //         type: 'nao sei',
+        //         payload: { records: data.items },
+        //     }))
+        //     .catch(error => [
+        //         {
+        //             type: 'nao sei tres',
+        //             payload: { message: error.message, status: error.status },
+        //             error: true,
+        //         },
+        //     ])
+    });
+}
+module.exports = exports['default'];
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_56__;
 
 /***/ })
 /******/ ]);
