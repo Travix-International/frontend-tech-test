@@ -91,7 +91,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: tasksContainer.tasks.length + 1,
     title: req.params.title,
     description: req.params.description,
   };
@@ -100,6 +100,7 @@ app.post('/task/create/:title/:description', (req, res) => {
 
   return res.status(201).json({
     message: 'Resource created',
+    id: task.id
   });
 });
 
@@ -137,7 +138,7 @@ app.delete('/task/delete/:id', (req, res) => {
   }
 });
 
-
+//Client and API in the same route so I don't need to deal with CORS
 const http = require('http').Server(app);
 app.use(express.static('build'));
 http.listen(9001, () => {

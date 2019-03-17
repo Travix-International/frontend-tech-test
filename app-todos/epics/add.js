@@ -2,21 +2,22 @@ import { Observable } from 'rxjs/Observable';
 import { mergeMap } from 'rxjs/operators/mergeMap';
 import { filter } from 'rxjs/operators/filter';
 
+
 import {
-    TODOS_FETCH,
-    TODOS_FETCH_ASYNC,
+    TODOS_ADD,
+    TODOS_ADD_ASYNC,
     TODOS_FAILED
 } from '../constants';
 
-export default function fetchTodosAsync$(action$) {
+export default function addTodoAsync$(action$, todo) {
     return action$
         .pipe(
-            filter(action => action.type === TODOS_FETCH_ASYNC),
+            filter(action => action.type === TODOS_ADD_ASYNC),
             mergeMap(() => {
-                return Observable.ajax.getJSON('http://localhost:9001/tasks')
+                return Observable.ajax.post(`http://localhost:9001/task/create/${todo.title}/${todo.description}`)
                     .map(data => ({
-                        type: TODOS_FETCH,
-                        response: data.tasks,
+                        type: TODOS_ADD,
+                        id: data.id
                     }))
                     .catch(error => [
                         {
