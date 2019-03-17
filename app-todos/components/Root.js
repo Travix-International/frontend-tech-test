@@ -1,11 +1,7 @@
 import React from 'react';
 import { observe } from 'frint-react';
-import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators/map';
-import { merge } from 'rxjs/operators/merge';
 import { scan } from 'rxjs/operators/scan';
-
-import { getTodosAsync } from '../actions/todos';
 
 import Item from './Item';
 
@@ -37,12 +33,7 @@ export default observe((app) => {
       })
     );
 
-  const actions$ = of({
-    getTodosAsync: () => store.dispatch(getTodosAsync())
-  });
-
   return stateProps$.pipe(
-    merge(actions$),
     scan((props, emitted) => ({
       ...props,
       ...emitted,

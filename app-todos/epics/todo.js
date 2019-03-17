@@ -2,14 +2,14 @@ import { filter } from 'rxjs/operator/filter';
 import { map } from 'rxjs/operator/map';
 
 import {
-    TODOS_GET_ASYNC
+    TODOS_FETCH_ASYNC
 } from '../constants';
-import { getTodos } from '../actions/todos';
+import { fetchTodos } from '../actions/todos';
 
 export default function fetchTodos$(action$) {
     return action$
-        :: filter(action => action.type === TODOS_GET_ASYNC)
-        :: map(action => getTodos([
+        :: filter(action => action.type === TODOS_FETCH_ASYNC)
+        :: map(action => fetchTodos([
         {
             id: 123,
             title: 'vara todo',

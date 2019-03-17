@@ -2,8 +2,8 @@ import {
   TODOS_ADD,
   TODOS_DELETE,
   TODOS_UPDATE,
-  TODOS_GET,
-  TODOS_GET_ASYNC,
+  TODOS_FETCH,
+  TODOS_FETCH_ASYNC,
 } from '../constants';
 
 export function addTodo(title, description) {
@@ -30,16 +30,16 @@ export function updateTodo(id, title, description) {
   };
 }
 
-export function getTodos(records) {
+export function fetchTodos(records) {
   return {
-    type: TODOS_GET,
+    type: TODOS_FETCH,
     records
   };
 }
 
-export function getTodosAsync() {
+export function fetchTodosAsync() {
   return {
-    type: TODOS_GET_ASYNC,
+    type: TODOS_FETCH_ASYNC,
   };
 }
 

@@ -4,7 +4,7 @@ import {
   TODOS_ADD,
   TODOS_DELETE,
   TODOS_UPDATE,
-  TODOS_GET,
+  TODOS_FETCH,
 } from '../constants';
 
 const INITIAL_STATE = {
@@ -45,7 +45,7 @@ export default function todos(state = INITIAL_STATE, action) {
           })
       });
 
-    case TODOS_GET:
+    case TODOS_FETCH:
       return Object.assign({}, {
         records: action.records
       });
