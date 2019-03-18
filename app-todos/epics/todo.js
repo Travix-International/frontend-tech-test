@@ -79,3 +79,26 @@ export function deleteTodoAsync$(action$) {
             })
         )
 }
+
+export function updateTodoAsync$(action$) {
+    return action$
+        .pipe(
+            filter(action => action.type === TODOS_UPDATE_ASYNC),
+            mergeMap((parameters) => {
+                return Observable.ajax.put(`${urlApi}/task/update/${parameters.id}/${parameters.title}/${parameters.description}`)
+                    .map(() => ({
+                        type: TODOS_UPDATE,
+                        id: parameters.id,
+                        title: parameters.title,
+                        description: parameters.description
+                    }))
+                    .catch(error => [
+                        {
+                            type: TODOS_FAILED,
+                            response: { message: error.message, status: error.status },
+                            error: true,
+                        },
+                    ])
+            })
+        )
+}

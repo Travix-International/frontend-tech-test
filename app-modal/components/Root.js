@@ -160,7 +160,7 @@ export default observe((app) => { // eslint-disable-line func-names
           description
         }),
         updateTodo: (id, title, description) => todosAppStore.dispatch({
-          type: 'TODOS_UPDATE',
+          type: 'TODOS_UPDATE_ASYNC',
           id,
           title,
           description
