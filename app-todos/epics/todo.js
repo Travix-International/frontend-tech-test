@@ -42,8 +42,8 @@ export function addTodoAsync$(action$) {
     return action$
         .pipe(
             filter(action => action.type === TODOS_ADD_ASYNC),
-            mergeMap((todo) => {
-                return Observable.ajax.post(`${urlApi}/task/create/${todo.title}/${todo.description}`)
+            mergeMap((parameters) => {
+                return Observable.ajax.post(`${urlApi}/task/create/${parameters.title}/${parameters.description}`)
                     .map(data => ({
                         type: TODOS_ADD,
                         todo: data.response.task
@@ -63,10 +63,11 @@ export function deleteTodoAsync$(action$) {
     return action$
         .pipe(
             filter(action => action.type === TODOS_DELETE_ASYNC),
-            mergeMap((id) => {
-                return Observable.ajax.post(`${urlApi}/task/delete/${id}`)
+            mergeMap((parameters) => {
+                return Observable.ajax.delete(`${urlApi}/task/delete/${parameters.id}`)
                     .map(() => ({
-                        type: TODOS_DELETE
+                        type: TODOS_DELETE,
+                        id: parameters.id
                     }))
                     .catch(error => [
                         {
