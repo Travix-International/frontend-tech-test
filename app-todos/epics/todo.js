@@ -10,12 +10,15 @@ import {
     TODOS_FAILED
 } from '../constants';
 
+//TODO: Change to enviroment variable
+const urlApi = "http://localhost:9001";
+
 export function fetchTodosAsync$(action$) {
     return action$
         .pipe(
             filter(action => action.type === TODOS_FETCH_ASYNC),
             mergeMap(() => {
-                return Observable.ajax.getJSON('http://localhost:9001/tasks')
+                return Observable.ajax.getJSON(`${urlApi}/tasks`)
                     .map(data => ({
                         type: TODOS_FETCH,
                         response: data.tasks,
@@ -36,7 +39,7 @@ export function addTodoAsync$(action$) {
         .pipe(
             filter(action => action.type === TODOS_ADD_ASYNC),
             mergeMap((todo) => {
-                return Observable.ajax.post(`http://localhost:9001/task/create/${todo.title}/${todo.description}`)
+                return Observable.ajax.post(`${urlApi}/task/create/${todo.title}/${todo.description}`)
                     .map(data => ({
                         type: TODOS_ADD,
                         todo: data.response.task
