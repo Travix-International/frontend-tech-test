@@ -90,7 +90,7 @@ class Root extends React.Component {
   }
 }
 
-export default observe((app) => { // eslint-disable-line func-names
+export default observe((app) => {
   const showEditMode$ = new BehaviorSubject(false);
   const formTitleInput$ = new BehaviorSubject('');
   const formDescriptionInput$ = new BehaviorSubject('');

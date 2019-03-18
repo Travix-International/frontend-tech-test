@@ -1,22 +1,9 @@
 import React from 'react';
-import { observe } from 'frint-react';
-import { concatMap } from 'rxjs/operator/concatMap';
-import { map } from 'rxjs/operator/map';
-import { merge } from 'rxjs/operator/merge';
-import { scan } from 'rxjs/operator/scan';
-import PropTypes from 'prop-types';
+import { observe, streamProps } from 'frint-react';
 
 import { Add } from './Icons';
 
 class Root extends React.Component {
-  static propTypes = {
-    color: PropTypes.string,
-    modal: PropTypes.bool,
-    openModal: PropTypes.func,
-    closeModal: PropTypes.func,
-    regionProps: PropTypes.object
-  };
-
   render() {
     return (
       <div className="top-bar">
@@ -40,57 +27,30 @@ class Root extends React.Component {
   }
 }
 
-
-export default observe(function (app) { // eslint-disable-line func-names
-  // self
-  const store = app.get('store');
-  const region = app.get('region');
-
-  const state$ = store.getState$();
-
-  const regionProps$ = region.getProps$()
-    :: map((regionProps) => {
-    return {
-      regionProps,
-    };
-  });
-
-  // other app: ModalApp
-  const modalApp$ = app.getAppOnceAvailable$('ModalApp');
-  const modalAppState$ = modalApp$
-    :: concatMap((modalApp) => {
-    return modalApp
-      .get('store')
-      .getState$();
-  })
-    :: map((modelState) => {
-    return {
-      modal: modelState.modal.value
-    };
-  });
-
-  const modalAppActions$ = modalApp$
-    :: map((modalApp) => {
-    const modalStore = modalApp.get('store');
-    return {
-      openModal: (showEditMode) => {
-        return modalStore.dispatch({ type: 'OPEN_MODAL', showEditMode });
-      }
-    };
-  });
-
-  // combine them all into props
-  return state$
-    :: merge(regionProps$)
-    :: merge(modalAppState$)
-    :: merge(modalAppActions$)
-    :: scan((props, emitted) => {
-    return {
-      ...props,
-      ...emitted,
-    };
-  }, {
-      // default props to start with
-      modal: false,
-    });
+export default observe((app) => {
+  return streamProps()
+    //Self
+    .set(
+      app.get('store').getState$()
+    )
+    .set({
+      logger: app.get('logger')
+    })
+    // other app: TodosApp
+    .set(
+      app.getAppOnceAvailable$('ModalApp'),
+      modalApp => modalApp.get('store').getState$(),
+      modalAppStore => ({ modal: modalAppStore.modal.value })
+    )
+    .set(
+      app.getAppOnceAvailable$('ModalApp'),
+      modalApp => modalApp.get('store'),
+      modalAppStore => ({
+        openModal: showEditMode => modalAppStore.dispatch({
+          type: 'OPEN_MODAL',
+          showEditMode
+        })
+      })
+    )
+    .get$();
 })(Root);
