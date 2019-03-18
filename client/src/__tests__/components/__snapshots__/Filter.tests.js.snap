@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Filter /> render() renders the component 1`] = `
+<div
+  id="filters"
+>
+  <Connect(Filter)
+    filter="SHOW_ALL"
+  >
+    Show All
+  </Connect(Filter)>
+  <Connect(Filter)
+    filter="SHOW_ACTIVE"
+  >
+    Hide completed
+  </Connect(Filter)>
+</div>
+`;

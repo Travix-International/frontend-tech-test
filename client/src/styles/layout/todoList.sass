@@ -1,0 +1,46 @@
+
+
+#todos-list li
+  padding: .75em .5em .75em .5em
+  position: relative
+  transition: .5s
+  list-style-type: none
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+  border-bottom: 1px solid $color-brown-light
+  &:hover
+    background-color: $color-brown-dark
+    color: $color-brown-extradark
+  .todo-field
+    display: block
+    margin-right: 3.5em
+    margin-left: 1.75em
+  .todo-field.hidden
+    display: none
+
+.scroll-container
+  height: 500px;
+  overflow-y: scroll;
+  position: relative;
+
+.icon.delete
+    right: 0
+
+.icon.edit
+    right: 1.8em
+
+.done
+  text-decoration: line-through
+  color: $color-brown-light
+
+.editable
+  color: $color-orange-dark
+  background-color: $color-white-dark
+
+span#description-field
+  font-style: italic
+
+span#title-field
+  font-weight: bold

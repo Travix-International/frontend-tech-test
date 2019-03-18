@@ -1,38 +1,58 @@
 # Travix test
 
-Travix Front-End Tech Interview Test 
+This project includes the server and client.
 
-# Introduction
+# Server
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+## Available Scripts
 
-Using your application we must be able to create, modify and delete a task.
+From the root path the following scripts are available:
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
+### `npm start`
 
-However this server is not perfect. It could be improved and tested as well.
+Starts the server [http://localhost:9001](http://localhost:9001)<br>
 
-So your mission is to develop the front-end from scratch using a front-end framework.
+## Modifications:
 
-We are also expecting from you a usable, responsive UI.
+- Fixed failed calls
+- Added pagination to getall call.   (`/tasks/:page`)
 
-# Process
+## To improve:
 
-Fork the repository into your account. Once your code is ready, send a pull-request to this repository and we will review it.
+- Change task.id to accept uuids instead of integer.
+- Return an offset with the total number of items when get tasks
+- Unit tests
 
-# Requirements
+# Client
 
-* React 15+
-* Redux or Flux or [FrintJS](https://frint.js.org) or other alternatives that implement a unidirectional data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
+## Available Scripts
 
-# Bonus
+From the `/client` path the following scripts are available:
 
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us!
+### `npm start`
+
+Starts the client in [http://localhost:3000](http://localhost:3000)
+
+### `npm run test`
+
+Runs all the tests.<br>
+
+### `npm run test:watch`
+
+Launches the test runner in the interactive watch mode.<br>
+
+### `npm run cypress:open`
+
+Open cypress to run integrations tests. It will run against To-Do app in [http://localhost:3000](http://localhost:3000)
+
+## To improve:
+
+- Change todo.id to accept uuid instead of number.
+- Add more unit and integration tests
+- Show errors in the UI
+- Show loading in the UI when save, edit or get To-Do's
+- Use config file to store environment variables and use it to get the server url
+
+### Notes
+Plase take into consideration that it has been the first time for me using redux, sass, jez, enzyme, babel and unit testing in javascript. 
+I have used Reactjs and Nodejs before but just in a very small projects. 

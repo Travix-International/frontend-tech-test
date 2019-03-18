@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> render() renders the component 1`] = `
+<header>
+  <h1>
+     To-Do list
+  </h1>
+</header>
+`;
