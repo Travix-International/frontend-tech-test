@@ -1,7 +1,5 @@
 import React from 'react';
 import { observe, streamProps } from 'frint-react';
-import { map } from 'rxjs/operators/map';
-import { scan } from 'rxjs/operators/scan';
 
 import Item from './Item';
 

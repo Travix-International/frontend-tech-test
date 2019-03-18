@@ -1,6 +1,7 @@
 import {
   TODOS_ADD,
   TODOS_DELETE,
+  TODOS_DELETE_ASYMC,
   TODOS_UPDATE,
   TODOS_FETCH,
   TODOS_FETCH_ASYNC,
@@ -42,4 +43,12 @@ export function fetchTodosAsync() {
     type: TODOS_FETCH_ASYNC,
   };
 }
+
+export function deleteTodoAsync(id) {
+  return {
+    type: TODOS_DELETE_ASYMC,
+    id
+  };
+}
+
 

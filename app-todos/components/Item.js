@@ -1,7 +1,7 @@
 import React from 'react';
 import { observe, streamProps } from 'frint-react';
 
-import { removeTodo } from '../actions/todos';
+import { deleteTodoAsync } from '../actions/todos';
 import { Edit, Remove } from './Icons';
 
 class Item extends React.Component {
@@ -16,7 +16,7 @@ class Item extends React.Component {
             <span className="icons" onClick={() => this.props.openModal(true, todo)}>
               <Edit />
             </span>
-            <span className="icons" onClick={() => this.props.removeTodo(todo.id)}>
+            <span className="icons" onClick={() => this.props.deleteTodoAsync(todo.id)}>
               <Remove />
             </span>
           </div>
@@ -35,10 +35,9 @@ export default observe(function (app) {
   return streamProps()
     // self
     .setDispatch(
-      { removeTodo },
+      { deleteTodoAsync },
       store
     )
-
     // other app: TodosApp
     .set(
       app.getAppOnceAvailable$('ModalApp'),
