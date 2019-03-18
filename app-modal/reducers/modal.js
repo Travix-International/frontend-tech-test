@@ -13,7 +13,7 @@ export default function modal(state = INITIAL_STATE, action) {
       return Object.assign({}, {
         value: true,
         showEditMode: action.showEditMode,
-        todo: action.todo
+        todo: action.todo || {}
       });
 
     case CLOSE_MODAL:

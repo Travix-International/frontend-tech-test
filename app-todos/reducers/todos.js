@@ -4,6 +4,7 @@ import {
   TODOS_DELETE,
   TODOS_UPDATE,
   TODOS_FETCH,
+  TODOS_FAILED
 } from '../constants';
 
 const INITIAL_STATE = {
@@ -17,9 +18,9 @@ export default function todos(state = INITIAL_STATE, action) {
         records: [
           ...state.records,
           {
-            id: action.todo.id,
-            title: action.todo.title,
-            description: action.todo.description
+            id: action.id,
+            title: action.title,
+            description: action.description
           }
         ]
       });
@@ -49,6 +50,7 @@ export default function todos(state = INITIAL_STATE, action) {
         records: action.response
       });
 
+    case TODOS_FAILED:
     default:
       return state;
   }

@@ -100,7 +100,7 @@ app.post('/task/create/:title/:description', (req, res) => {
 
   return res.status(201).json({
     message: 'Resource created',
-    id: task.id
+    task
   });
 });
 

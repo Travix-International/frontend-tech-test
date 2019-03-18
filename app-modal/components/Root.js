@@ -8,67 +8,81 @@ import {
 } from '../actions/modal';
 
 class Root extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.logger.info("User clicked on Save button",
+      {
+        id: this.props.todo.id,
+        title: this.props.titleValue,
+        description: this.props.descriptionValue
+      }
+    );
+
+    if (this.props.showEditMode) {
+      this.props.updateTodo(
+        this.props.todo.id,
+        this.props.titleValue.trim(),
+        this.props.descriptionValue.trim()
+      );
+    } else {
+      this.props.addTodo(
+        this.props.titleValue.trim(),
+        this.props.descriptionValue.trim()
+      );
+    }
+
+    this.props.clearInputs();
+    this.props.closeModal();
+  };
+
   render() {
     return (
       <div className={`modal modal-overlay ${this.props.modal ? 'is-opened' : ''}`}>
         <div className="modal-window">
           <div className="modal-content">
-            {!this.props.showEditMode && (
-              <h4>Add new task</h4>
-            )}
+            <form onSubmit={this.handleSubmit}>
+              {!this.props.showEditMode && (
+                <h4>Add new task</h4>
+              )}
 
-            {this.props.showEditMode && (
-              <h4>Edit new task</h4>
-            )}
+              {this.props.showEditMode && (
+                <h4>Edit new task</h4>
+              )}
 
-            <label>Title</label>
-            <input
-              type="text"
-              id="todoInput"
-              value={this.props.titleValue}
-              onChange={(e) => this.props.changeTitleInput(e.target.value)}
-            />
+              <label>Title</label>
+              <input
+                type="text"
+                id="todoInput"
+                value={this.props.titleValue}
+                onChange={(e) => this.props.changeTitleInput(e.target.value)}
+              />
 
-            <label>Description</label>
-            <textarea
-              type="text"
-              rows="6"
-              value={this.props.descriptionValue}
-              onChange={(e) => this.props.changeDescriptionInput(e.target.value)}
-            ></textarea>
+              <label>Description</label>
+              <textarea
+                type="text"
+                rows="6"
+                value={this.props.descriptionValue}
+                onChange={(e) => this.props.changeDescriptionInput(e.target.value)}
+              ></textarea>
 
-            {!this.props.showEditMode && (
-              <a
+              <input
                 className="button"
-                onClick={() => {
-                  this.props.addTodo(this.props.titleValue, this.props.descriptionValue);
-                  this.props.closeModal();
-                }}
-              >
-                Add Todo
-            </a>
-            )}
+                type="submit"
+                value="Save" />
 
-            {this.props.showEditMode && (
-              <a
-                className="button"
-                onClick={() => {
-                  this.props.updateTodo(this.props.todo.id, this.props.titleValue, this.props.descriptionValue);
-                  this.props.closeModal();
-                }}
+              <button
+                className="close-button"
+                aria-label="Close modal"
+                type="button"
+                onClick={() => this.props.closeModal()}
               >
-                Edit Todo
-            </a>
-            )}
-
-            <button
-              className="close-button"
-              aria-label="Close modal"
-              type="button"
-              onClick={() => this.props.closeModal()}
-            >
-              <span aria-hidden="true">×</span>
-            </button>
+                <span aria-hidden="true">×</span>
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -76,16 +90,10 @@ class Root extends React.Component {
   }
 }
 
-export default observe(function (app) { // eslint-disable-line func-names
+export default observe((app) => { // eslint-disable-line func-names
   const showEditMode$ = new BehaviorSubject(false);
   const formTitleInput$ = new BehaviorSubject('');
   const formDescriptionInput$ = new BehaviorSubject('');
-
-  const clearInputs = () => {
-    formTitleInput$.next('');
-    formDescriptionInput$.next('');
-    showEditMode$.next(false);
-  };
 
   return streamProps()
     //Self
@@ -120,6 +128,11 @@ export default observe(function (app) { // eslint-disable-line func-names
       changeDescriptionInput: (value) => {
         formDescriptionInput$.next(value);
       },
+      clearInputs: () => {
+        formTitleInput$.next('');
+        formDescriptionInput$.next('');
+        showEditMode$.next(false);
+      }
     })
     .setDispatch({
       openModal,
