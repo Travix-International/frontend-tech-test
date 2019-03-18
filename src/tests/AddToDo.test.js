@@ -5,22 +5,74 @@ import { Provider } from "react-redux";
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme, { shallow, mount } from "enzyme";
-import AddToDo from "../components/AddToDo";
+import { AddToDo } from "../components/AddToDo";
 configure({ adapter: new Adapter() });
 
-describe("ToDoList", () => {
+describe("AddToDo", () => {
   const props = {
     addToDoItem: jest.fn()
   };
+
+  const actions = {
+    handleClick: jest.fn()
+  };
+
+  const handleChangeMock = jest.fn();
+
   it("should render correctly with no props", () => {
     const component = shallow(<AddToDo />);
     expect(component).toMatchSnapshot();
   });
 
-  it("test delete button", () => {
+  it("test add button", () => {
     const wrapper = shallow(<AddToDo {...props} />);
-    console.log(wrapper.debug());
-    wrapper.find("btn btn-info btn-md").simulate("click");
-    console.log(wrapper.debug());
+    const addButton = wrapper.find(".btn");
+    expect(addButton).toBeTruthy();
   });
+
+  it("test add button", () => {
+    const wrapper = shallow(<AddToDo {...props} />);
+    const addButton = wrapper.find(".btn");
+    expect(addButton).toHaveLength(1);
+  });
+
+  it("test input state", () => {
+    const wrapper = shallow(<AddToDo {...props} />);
+    wrapper.setState({ inputValue: "input text" });
+    expect(wrapper.state("inputValue")).toEqual("input text");
+    expect("inputValue" in wrapper.state()).toEqual(true);
+  });
+
+  it("test title state", () => {
+    const wrapper = shallow(<AddToDo />);
+    wrapper.setState({ titleValue: "title text" });
+    expect(wrapper.state("titleValue")).toEqual("title text");
+    expect("titleValue" in wrapper.state()).toEqual(true);
+  });
+
+  it("if only title is entered and button is pressed", () => {
+    const wrapper = shallow(<AddToDo {...props} />);
+    wrapper.setState({ titleValue: "title text" });
+    const addButton = wrapper.find(".btn");
+    addButton.simulate("click");
+    expect(wrapper.state("titleValue")).toEqual("");
+  });
+
+  it("if only text is entered and button is pressed", () => {
+    const wrapper = shallow(<AddToDo {...props} />);
+    wrapper.setState({ inputValue: "text" });
+    const addButton = wrapper.find(".btn");
+    addButton.simulate("click");
+    expect(wrapper.state("inputValue")).toEqual("");
+  });
+
+  ///check again
+  // it("check if the function is called", () => {
+  //   const wrapper = shallow(<AddToDo {...props} />);
+  //   const addButton = wrapper.find(".btn");
+  //   wrapper.setState({ inputValue: "text" });
+  //   wrapper.setState({ titleValue: "text" });
+  //   addButton.simulate("click", event);
+  //   expect(actions.handleClick).toBeCalled();
+  // });
 });

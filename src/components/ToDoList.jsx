@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ToDoItem from "./ToDoItem";
-import "./../styles/styles.css";
 import { deleteToDoItem, getToDoItems } from "./../dispatchers/dispatcher";
 
 class ToDoList extends Component {

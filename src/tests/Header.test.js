@@ -6,15 +6,18 @@ import Header from "../components/Header";
 import AddToDo from "../components/AddToDo";
 configure({ adapter: new Adapter() });
 
+const props = {
+  headerTitle: "title text"
+};
+
 describe("Header", () => {
-  // it("should render correctly with no props", () => {
-  //   const component = shallow(<Header />);
-  //   expect(component).toMatchSnapshot();
-  // });
+  it("should render correctly with no props", () => {
+    const component = shallow(<Header />);
+    expect(component).toMatchSnapshot();
+  });
 
   it("test title props", () => {
-    const wrap = shallow(<Header />);
-    wrap.setProps({ headerTitle: "titleText" });
-    expect(wrap.props("headerTitle")).toEqual("titleText");
+    const wrapper = shallow(<Header {...props} />);
+    expect(wrapper.contains(<h4>title text</h4>)).toEqual(true);
   });
 });

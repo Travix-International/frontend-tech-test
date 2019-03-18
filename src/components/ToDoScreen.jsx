@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import ToDoList from "./ToDoList";
 import AddToDo from "./AddToDo";
 import Header from "./Header";
 import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.css";
+import "./../styles/styles.css";
 
 class ToDoScreen extends Component {
   render() {

@@ -1,20 +1,15 @@
 import React, { Component } from "react";
-//import "bootstrap/dist/css/bootstrap.css";
 import { connect } from "react-redux";
 import { addToDoItem } from "./../dispatchers/dispatcher";
-import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 
-class AddToDo extends Component {
+export class AddToDo extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       inputValue: "",
       titleValue: ""
-    };
-    this.propTypes = {
-      addTodoItem: PropTypes.func.isRequired
     };
   }
 
@@ -51,7 +46,7 @@ class AddToDo extends Component {
               value={this.state.titleValue}
             />
             <textarea
-              class="form-control"
+              className="form-control"
               rows="4"
               placeholder="Enter task here"
               id="inputTodo"

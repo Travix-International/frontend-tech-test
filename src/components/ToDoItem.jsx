@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import "./../styles/styles.css";
 import { editToDoItem } from "./../dispatchers/dispatcher";
 import { bindActionCreators } from "redux";
+
 const ENTER_KEY_CODE = 13;
 
-class ToDoItem extends Component {
+export class ToDoItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,10 +46,10 @@ class ToDoItem extends Component {
       todoElement = (
         <>
           <div className="division-group">
-            <h5 onChange={this.handleTitleChange} className="sik-style">
+            <h5 onChange={this.handleTitleChange} className="responsive-style">
               {task.title}
             </h5>
-            <div className="label-group">
+            <div className="label-input-group ">
               <input
                 className="editable-input"
                 hidden={false}
@@ -74,9 +73,12 @@ class ToDoItem extends Component {
     } else {
       todoElement = (
         <div className="division-group">
-          <h5 className="sik-style">{task.title}</h5>
-          <div className="label-group">
-            <label className="sik-style" onDoubleClick={this.handleDoubleClick}>
+          <h5 className="responsive-style">{task.title}</h5>
+          <div className="label-input-group ">
+            <label
+              className="responsive-style"
+              onDoubleClick={this.handleDoubleClick}
+            >
               {task.description}
             </label>
             <button
