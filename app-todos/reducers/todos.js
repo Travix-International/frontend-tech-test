@@ -18,9 +18,9 @@ export default function todos(state = INITIAL_STATE, action) {
         records: [
           ...state.records,
           {
-            id: action.id,
-            title: action.title,
-            description: action.description
+            id: action.todo.id,
+            title: action.todo.title,
+            description: action.todo.description
           }
         ]
       });

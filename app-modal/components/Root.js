@@ -155,7 +155,7 @@ export default observe((app) => { // eslint-disable-line func-names
       todosApp => todosApp.get('store'),
       todosAppStore => ({
         addTodo: (title, description) => todosAppStore.dispatch({
-          type: 'TODOS_ADD',
+          type: 'TODOS_ADD_ASYNC',
           title,
           description
         }),
