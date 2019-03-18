@@ -65,14 +65,4 @@ describe("AddToDo", () => {
     addButton.simulate("click");
     expect(wrapper.state("inputValue")).toEqual("");
   });
-
-  ///check again
-  // it("check if the function is called", () => {
-  //   const wrapper = shallow(<AddToDo {...props} />);
-  //   const addButton = wrapper.find(".btn");
-  //   wrapper.setState({ inputValue: "text" });
-  //   wrapper.setState({ titleValue: "text" });
-  //   addButton.simulate("click", event);
-  //   expect(actions.handleClick).toBeCalled();
-  // });
 });

@@ -21,10 +21,4 @@ describe("Footer", () => {
       wrapper.contains(<div className="text-center">footer text</div>)
     ).toEqual(true);
   });
-
-  // it("test title props", () => {
-  //   const wrap = shallow(<Footer />);
-  //   wrap.setProps({ headerTitle: "titleText" });
-  //   expect(wrap.props("headerTitle")).toEqual("titleText");
-  // });
 });

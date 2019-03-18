@@ -50,8 +50,4 @@ const ToDoReducer = (state = initial, action) => {
   }
 };
 
-// const rootReducer = combineReducers({
-//   ToDoReducer
-// });
-
 export default ToDoReducer;

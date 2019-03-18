@@ -1,5 +1,8 @@
+$alignCenter: center;
+$inputWidth: 30rem;
+
 .todo-item {
-  text-align: center;
+  text-align: $alignCenter;
   white-space: nowrap;
   overflow: hidden !important;
   white-space: nowrap;
@@ -7,26 +10,30 @@
   text-overflow: ellipsis;
 }
 
+.empty-list {
+  text-align: $alignCenter;
+}
+
 .editable-input {
-  width: 30rem;
+  width: $inputWidth;
 }
 .division-group {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: $alignCenter;
+  align-items: $alignCenter;
 }
 
 .responsive-style {
   text-overflow: ellipsis;
   overflow: hidden;
-  max-width: 29rem;
+  max-width: $inputWidth + 4rem;
 }
 
 .label-input-group {
   display: flex;
-  width: 30rem;
-  align-items: center;
+  width: $inputWidth + 5rem;
+  align-items: $alignCenter;
   justify-content: space-between;
 }
 
@@ -38,11 +45,10 @@
 
 .header-style {
   margin-bottom: 3rem;
-  text-align: center;
+  @extend .empty-list;
   overflow: hidden;
-
   box-sizing: border-box;
-  justify-content: center;
+  justify-content: $alignCenter;
 }
 
 .page-footer {
@@ -54,8 +60,4 @@
 
 .form-csontrol {
   visibility: hidden;
-}
-
-.empty-list {
-  text-align: center;
 }

@@ -20,12 +20,12 @@
 .responsive-style {
   text-overflow: ellipsis;
   overflow: hidden;
-  max-width: 29rem;
+  max-width: 34rem;
 }
 
 .label-input-group {
   display: flex;
-  width: 30rem;
+  width: 35rem;
   align-items: center;
   justify-content: space-between;
 }

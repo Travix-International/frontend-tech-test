@@ -1,13 +1,17 @@
 # Travix test
 
-Travix Front-End Tech Interview Test 
+Travix Front-End Tech Interview Test
+This is a to do application. 
+All the requirements are completed with bonuses.
+
 
 # Tecnologies
 
 * React 
 * Redux
 * React-Redux
-* LESS
+* Redux-Thunk
+* SASS
 * Enzyme
 * Jest
 * Bootstrap
@@ -15,14 +19,4 @@ Travix Front-End Tech Interview Test
 * Travix eslint
 * Babel
 
-# Project Structure
 
-
-# Bonus
-
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us!

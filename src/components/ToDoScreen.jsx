@@ -4,7 +4,7 @@ import AddToDo from "./AddToDo";
 import Header from "./Header";
 import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.css";
-import "./../styles/styles.css";
+import "./../styles/style.scss";
 
 class ToDoScreen extends Component {
   render() {

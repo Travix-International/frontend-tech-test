@@ -43,11 +43,4 @@ describe("ToDoItem", () => {
     deleteButton.simulate("click");
     expect(actions.deleteToDo).toBeCalled();
   });
-
-  // it("test toDoTitle state", () => {
-  //   const wrapper = shallow(<ToDoItem {...actions} task={task} />);
-  //   const deleteButton = wrapper.find(".sik-style").at(0);
-  //   deleteButton.simulate("DoubleClick");
-  //   expect(actions.handleDoubleClick).toBeCalled();
-  // });
 });
