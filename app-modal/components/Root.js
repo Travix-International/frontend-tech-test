@@ -167,6 +167,5 @@ export default observe((app) => { // eslint-disable-line func-names
         })
       })
     )
-
-    .get$(); // composed Observable
+    .get$();
 })(Root);

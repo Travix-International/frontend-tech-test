@@ -1,8 +1,11 @@
 export const TODOS_ADD = 'TODOS_ADD';
 export const TODOS_DELETE = 'TODOS_DELETE';
 export const TODOS_UPDATE = 'TODOS_UPDATE';
+export const TODOS_FETCH = 'TODOS_FETCH';
 
 export const TODOS_FETCH_ASYNC = 'TODOS_FETCH_ASYNC';
 export const TODOS_ADD_ASYNC = 'TODOS_ADD_ASYNC';
+export const TODOS_DELETE_ASYMC = 'TODOS_DELETE_ASYNC';
+export const TODOS_UPDATE_ASYNC = 'TODOS_UPDATE_ASYNC';
 
 export const TODOS_FAILED = 'TODOS_FAILED';

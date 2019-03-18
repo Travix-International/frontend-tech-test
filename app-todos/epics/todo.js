@@ -7,6 +7,10 @@ import {
     TODOS_FETCH_ASYNC,
     TODOS_ADD,
     TODOS_ADD_ASYNC,
+    TODOS_DELETE,
+    TODOS_DELETE_ASYNC,
+    TODOS_UPDATE,
+    TODOS_UPDATE_ASYNC,
     TODOS_FAILED
 } from '../constants';
 
@@ -43,6 +47,26 @@ export function addTodoAsync$(action$) {
                     .map(data => ({
                         type: TODOS_ADD,
                         todo: data.response.task
+                    }))
+                    .catch(error => [
+                        {
+                            type: TODOS_FAILED,
+                            response: { message: error.message, status: error.status },
+                            error: true,
+                        },
+                    ])
+            })
+        )
+}
+
+export function deleteTodoAsync$(action$) {
+    return action$
+        .pipe(
+            filter(action => action.type === TODOS_DELETE_ASYNC),
+            mergeMap((id) => {
+                return Observable.ajax.post(`${urlApi}/task/delete/${id}`)
+                    .map(() => ({
+                        type: TODOS_DELETE
                     }))
                     .catch(error => [
                         {

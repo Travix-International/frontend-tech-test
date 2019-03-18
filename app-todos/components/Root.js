@@ -1,5 +1,5 @@
 import React from 'react';
-import { observe } from 'frint-react';
+import { observe, streamProps } from 'frint-react';
 import { map } from 'rxjs/operators/map';
 import { scan } from 'rxjs/operators/scan';
 
@@ -21,22 +21,15 @@ class Root extends React.Component {
 }
 
 export default observe((app) => {
-  const store = app.get('store');
-  const state$ = store.getState$();
-
-  const stateProps$ = state$
-    .pipe(
-      map(state => {
-        return {
-          todos: state.todos.records,
-        };
+  return streamProps()
+    .set(
+      app.get('store').getState$(),
+      state => ({
+        todos: state.todos.records,
       })
-    );
-
-  return stateProps$.pipe(
-    scan((props, emitted) => ({
-      ...props,
-      ...emitted,
-    }))
-  );
+    )
+    .set({
+      logger: app.get('logger')
+    })
+    .get$();
 })(Root);

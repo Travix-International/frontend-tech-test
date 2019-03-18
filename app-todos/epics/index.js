@@ -1,7 +1,9 @@
 import { combineEpics } from 'frint-store';
 
-import { fetchTodosAsync$, addTodoAsync$ } from './todo';
+import { fetchTodosAsync$, addTodoAsync$, deleteTodoAsync$ } from './todo';
 
 export default combineEpics(
-    fetchTodosAsync$, addTodoAsync$
+    fetchTodosAsync$,
+    addTodoAsync$,
+    deleteTodoAsync$
 );

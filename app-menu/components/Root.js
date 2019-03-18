@@ -14,8 +14,6 @@ class Root extends React.Component {
     modal: PropTypes.bool,
     openModal: PropTypes.func,
     closeModal: PropTypes.func,
-    changeColor: PropTypes.func,
-    changeColorAsync: PropTypes.func,
     regionProps: PropTypes.object
   };
 
