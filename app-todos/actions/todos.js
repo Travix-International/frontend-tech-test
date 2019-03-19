@@ -4,6 +4,7 @@ import {
   TODOS_DELETE_ASYNC,
   TODOS_UPDATE,
   TODOS_FETCH_ASYNC,
+  TODOS_UPDATE_ASYNC,
 } from '../constants';
 
 export function addTodo(title, description) {
@@ -31,6 +32,15 @@ export function deleteTodoAsync(id) {
 export function updateTodo(id, title, description) {
   return {
     type: TODOS_UPDATE,
+    id,
+    title,
+    description
+  };
+}
+
+export function updateTodoAsync(id, title, description) {
+  return {
+    type: TODOS_UPDATE_ASYNC,
     id,
     title,
     description

@@ -3,11 +3,9 @@ import {
   CLOSE_MODAL
 } from '../constants';
 
-export function openModal(showEditMode) {
+export function openModal() {
   return {
-    type: OPEN_MODAL,
-    showEditMode,
-    todo
+    type: OPEN_MODAL
   };
 }
 

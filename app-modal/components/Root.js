@@ -7,7 +7,7 @@ import {
   closeModal
 } from '../actions/modal';
 
-class Root extends React.Component {
+class Root extends React.PureComponent {
   constructor(props) {
     super(props);
   }
@@ -22,18 +22,10 @@ class Root extends React.Component {
       }
     );
 
-    if (this.props.showEditMode) {
-      this.props.updateTodo(
-        this.props.todo.id,
-        this.props.titleValue.trim(),
-        this.props.descriptionValue.trim()
-      );
-    } else {
-      this.props.addTodo(
-        this.props.titleValue.trim(),
-        this.props.descriptionValue.trim()
-      );
-    }
+    this.props.addTodo(
+      this.props.titleValue.trim(),
+      this.props.descriptionValue.trim()
+    );
 
     this.props.clearInputs();
     this.props.closeModal();
@@ -47,10 +39,6 @@ class Root extends React.Component {
             <form onSubmit={this.handleSubmit}>
               {!this.props.showEditMode && (
                 <h4>Add new task</h4>
-              )}
-
-              {this.props.showEditMode && (
-                <h4>Edit new task</h4>
               )}
 
               <label>Title</label>
@@ -90,7 +78,7 @@ class Root extends React.Component {
   }
 }
 
-export default observe((app, param$) => {
+export default observe((app) => {
   const showEditMode$ = new BehaviorSubject(false);
   const formTitleInput$ = new BehaviorSubject('');
   const formDescriptionInput$ = new BehaviorSubject('');
@@ -156,12 +144,6 @@ export default observe((app, param$) => {
       todosAppStore => ({
         addTodo: (title, description) => todosAppStore.dispatch({
           type: 'TODOS_ADD_ASYNC',
-          title,
-          description
-        }),
-        updateTodo: (id, title, description) => todosAppStore.dispatch({
-          type: 'TODOS_UPDATE_ASYNC',
-          id,
           title,
           description
         })
