@@ -1,38 +1,32 @@
 # Travix test
 
-Travix Front-End Tech Interview Test 
+### Run app
 
-# Introduction
+1. Install package dependencies
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+```
+npm i 
+```
 
-Using your application we must be able to create, modify and delete a task.
+2. Execute start command 
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
+```
+npm start
+```
 
-However this server is not perfect. It could be improved and tested as well.
+### Tech Stack
 
-So your mission is to develop the front-end from scratch using a front-end framework.
+|  Technologies  |
+| ------------- |
+| Frint         |
+| React         |
+| less          |
+| babel         |
+| logger-travis |
 
-We are also expecting from you a usable, responsive UI.
+### Things not done
 
-# Process
-
-Fork the repository into your account. Once your code is ready, send a pull-request to this repository and we will review it.
-
-# Requirements
-
-* React 15+
-* Redux or Flux or [FrintJS](https://frint.js.org) or other alternatives that implement a unidirectional data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
-
-# Bonus
-
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us!
+ - Unit tests
+ - Integration tests
+ - WebSocket
+ - Enhance performance with loader, infinity scroll
