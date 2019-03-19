@@ -2,7 +2,10 @@
 
 const express = require('express');
 const app = express();
+const helper = require('./helper');
 const tasksContainer = require('./tasks.json');
+
+const incrementor = new helper.Incrementor(tasksContainer.tasks.length);
 
 // enable CORS
 app.use((req, res, next) => {
@@ -106,7 +109,7 @@ app.put('/tasks/:id', (req, res) => {
  */
 app.post('/tasks', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length + 1,
+    id: incrementor.next(),
     title: req.body.title,
     description: req.body.description,
   };
