@@ -6,11 +6,9 @@
     "bundle:vendors:prod": "webpack --config ./vendors/webpack.config.prod.js",
     "bundle:apps:prod": "webpack --config ./webpack.config.prod.js",
     "build": "npm run bundle:vendors:prod && npm run bundle:apps:prod",
-
     "bundle:vendors": "webpack --config ./vendors/webpack.config.js",
     "bundle:apps": "webpack --config ./webpack.config.js",
-    "build:test": "npm run bundle:vendors && npm run bundle:apps",
-
+    "build:test": "npm run bundle:vendors:prod && npm run bundle:apps:prod",
     "start:client": "npm run build:test && live-server build",
     "start:server": "node server/index.js",
     "start": "concurrently --kill-others \"npm run start:client\" \"npm run start:server\""
