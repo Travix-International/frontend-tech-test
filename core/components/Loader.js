@@ -1,7 +1,7 @@
 import React from 'react';
 import { observe } from 'frint-react';
 
-import { Spinner } from './Icons';
+import { Spinner } from './components/Icons';
 
 class Loader extends React.PureComponent {
     render() {

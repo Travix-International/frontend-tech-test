@@ -5,10 +5,6 @@ import { deleteTodoAsync } from '../actions/todos';
 import { Edit, Remove } from './Icons';
 
 class Item extends React.Component {
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return false;
-  // }
-
   render() {
     const { todo } = this.props;
 

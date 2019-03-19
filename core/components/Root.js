@@ -34,6 +34,6 @@ class Root extends React.Component {
   }
 }
 
-export default observe(function (app) {
+export default observe((app) => {
 
 })(Root);

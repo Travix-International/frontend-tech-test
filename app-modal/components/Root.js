@@ -7,7 +7,7 @@ import {
   closeModal
 } from '../actions/modal';
 
-class Root extends React.PureComponent {
+class Root extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -90,7 +90,7 @@ class Root extends React.PureComponent {
   }
 }
 
-export default observe((app) => {
+export default observe((app, param$) => {
   const showEditMode$ = new BehaviorSubject(false);
   const formTitleInput$ = new BehaviorSubject('');
   const formDescriptionInput$ = new BehaviorSubject('');
@@ -136,7 +136,7 @@ export default observe((app) => {
     })
     .setDispatch({
       openModal,
-      closeModal
+      closeModal,
     },
       app.get('store')
     )
