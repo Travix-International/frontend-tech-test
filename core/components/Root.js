@@ -11,8 +11,7 @@ class Root extends React.Component {
         <Region
           name="header"
           data={{
-            hi: `data from 'header' region here`,
-            showSidebar: this.props.showSidebar
+            hi: 'data from "header" region here',
           }}
         />
 
@@ -22,8 +21,7 @@ class Root extends React.Component {
             <Region
               name="main"
               data={{
-                hi: `available from props of 'main' region`,
-                showSidebar: this.props.showSidebar
+                hi: 'available from props of "main" region',
               }}
             />
 
@@ -34,6 +32,4 @@ class Root extends React.Component {
   }
 }
 
-export default observe((app) => {
-
-})(Root);
+export default observe()(Root);

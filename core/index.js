@@ -6,5 +6,5 @@ window.app = new App();
 
 render(
   window.app,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

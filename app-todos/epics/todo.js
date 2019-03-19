@@ -11,7 +11,7 @@ import {
     TODOS_DELETE_ASYNC,
     TODOS_UPDATE,
     TODOS_UPDATE_ASYNC,
-    TODOS_FAILED
+    TODOS_FAILED,
 } from '../constants';
 
 //TODO: Change to enviroment variable
@@ -47,7 +47,7 @@ export function addTodoAsync$(action$) {
                     JSON.stringify({
                         title: parameters.title,
                         description: parameters.description
-                    }), { 'Content-Type': 'application/json'})
+                    }), { 'Content-Type': 'application/json' })
                     .map(data => ({
                         type: TODOS_ADD,
                         todo: data.response.task
@@ -93,7 +93,7 @@ export function updateTodoAsync$(action$) {
                     JSON.stringify({
                         title: parameters.title,
                         description: parameters.description
-                    }), { 'Content-Type': 'application/json'})
+                    }), { 'Content-Type': 'application/json' })
                     .map(() => ({
                         type: TODOS_UPDATE,
                         id: parameters.id,

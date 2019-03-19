@@ -2,8 +2,8 @@ import { Logger, configureConsoleTransport } from 'travix-logger';
 
 const logger = new Logger({
   transports: [
-    configureConsoleTransport()
-  ]
+    configureConsoleTransport(),
+  ],
 });
 
 export default logger;

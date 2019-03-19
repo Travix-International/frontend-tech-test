@@ -1,0 +1,12 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "travix"
+  ],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "linebreak-style": "off"
+   }
+}
