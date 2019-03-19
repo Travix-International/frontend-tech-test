@@ -3,7 +3,7 @@ import { observe, streamProps } from 'frint-react';
 
 import Item from './Item';
 
-class Root extends React.Component {
+class Root extends React.PureComponent {
   render() {
     return (
       <div className="row-columns">

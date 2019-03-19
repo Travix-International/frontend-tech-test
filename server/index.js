@@ -27,7 +27,7 @@ app.get('/tasks', (req, res) => {
 });
 
 /**
- * Get /task/:id
+ * Get /tasks/:id
  * 
  * id: Number
  * 
@@ -60,7 +60,7 @@ app.get('/tasks/:id', (req, res) => {
 });
 
 /**
- * PUT /task/update/:id/:title/:description
+ * PUT /tasks/:id
  * 
  * id: Number
  * title: string
@@ -99,7 +99,7 @@ app.put('/tasks/:id', (req, res) => {
 });
 
 /**
- * POST /task/create/:title/:description
+ * POST /tasks
  * 
  * title: string
  * description: string
@@ -123,7 +123,7 @@ app.post('/tasks', (req, res) => {
 });
 
 /**
- * DELETE /task/delete/:id
+ * DELETE /tasks/:id
  * 
  * id: Number
  * 
