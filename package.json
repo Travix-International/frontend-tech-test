@@ -2,12 +2,16 @@
   "name": "test-candidates",
   "version": "0.0.1",
   "description": "test back - front",
-  "main": "server.js",
   "scripts": {
+    "bundle:vendors:prod": "webpack --config ./vendors/webpack.config.prod.js",
+    "bundle:apps:prod": "webpack --config ./webpack.config.prod.js",
+    "build": "npm run bundle:vendors:prod && npm run bundle:apps:prod",
+
     "bundle:vendors": "webpack --config ./vendors/webpack.config.js",
-    "bundle:apps": "webpack",
-    "build": "npm run bundle:vendors && npm run bundle:apps",
-    "start:client": "npm run build && live-server build",
+    "bundle:apps": "webpack --config ./webpack.config.js",
+    "build:test": "npm run bundle:vendors && npm run bundle:apps",
+
+    "start:client": "npm run build:test && live-server build",
     "start:server": "node server/index.js",
     "start": "concurrently --kill-others \"npm run start:client\" \"npm run start:server\""
   },

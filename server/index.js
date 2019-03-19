@@ -7,7 +7,6 @@ const tasksContainer = require('./tasks.json');
 
 const incrementor = new helper.Incrementor(tasksContainer.tasks.length);
 
-// enable CORS
 app.use((req, res, next) => {
   res.set('Access-Control-Allow-Methods', 'DELETE, GET, POST, PUT');
   res.set('Access-Control-Allow-Origin', '*');

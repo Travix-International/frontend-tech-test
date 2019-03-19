@@ -1,14 +1,20 @@
 
-
+/**
+ * Simple incrementor
+ */
 class Incrementor {
-
     /**
-     * @param {Number} startingIndex length of list
+     * Constructor
+     * @param {Number} startingIndex length of the list
      */
     constructor(startingIndex) {
         this.startingIndex = startingIndex;
     }
 
+    /**
+     * Increment from last index
+     * @returns {Number}
+     */
     next() {
         return this.startingIndex++;
     }

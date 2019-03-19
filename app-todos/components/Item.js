@@ -33,7 +33,7 @@ class Item extends React.Component {
   }
 }
 
-export default observe(function (app) {
+export default observe((app) => {
   const store = app.get('store');
 
   return streamProps()
