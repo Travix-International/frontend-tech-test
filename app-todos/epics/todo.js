@@ -15,14 +15,14 @@ import {
 } from '../constants';
 
 //TODO: Change to enviroment variable
-const urlApi = "http://localhost:9001";
+const urlApi = "http://localhost:9001/tasks";
 
 export function fetchTodosAsync$(action$) {
     return action$
         .pipe(
             filter(action => action.type === TODOS_FETCH_ASYNC),
             mergeMap(() => {
-                return Observable.ajax.getJSON(`${urlApi}/tasks`)
+                return Observable.ajax.getJSON(urlApi)
                     .map(data => ({
                         type: TODOS_FETCH,
                         response: data.tasks,
@@ -43,7 +43,11 @@ export function addTodoAsync$(action$) {
         .pipe(
             filter(action => action.type === TODOS_ADD_ASYNC),
             mergeMap((parameters) => {
-                return Observable.ajax.post(`${urlApi}/task/create/${parameters.title}/${parameters.description}`)
+                return Observable.ajax.post(urlApi,
+                    JSON.stringify({
+                        title: parameters.title,
+                        description: parameters.description
+                    }), { 'Content-Type': 'application/json'})
                     .map(data => ({
                         type: TODOS_ADD,
                         todo: data.response.task
@@ -64,7 +68,7 @@ export function deleteTodoAsync$(action$) {
         .pipe(
             filter(action => action.type === TODOS_DELETE_ASYNC),
             mergeMap((parameters) => {
-                return Observable.ajax.delete(`${urlApi}/task/delete/${parameters.id}`)
+                return Observable.ajax.delete(`${urlApi}/${parameters.id}`)
                     .map(() => ({
                         type: TODOS_DELETE,
                         id: parameters.id
@@ -85,7 +89,11 @@ export function updateTodoAsync$(action$) {
         .pipe(
             filter(action => action.type === TODOS_UPDATE_ASYNC),
             mergeMap((parameters) => {
-                return Observable.ajax.put(`${urlApi}/task/update/${parameters.id}/${parameters.title}/${parameters.description}`)
+                return Observable.ajax.put(`${urlApi}/${parameters.id}`,
+                    JSON.stringify({
+                        title: parameters.title,
+                        description: parameters.description
+                    }), { 'Content-Type': 'application/json'})
                     .map(() => ({
                         type: TODOS_UPDATE,
                         id: parameters.id,

@@ -1,8 +1,18 @@
 'use strict';
 
-const app = require('express')();
 const express = require('express');
+const app = express();
 const tasksContainer = require('./tasks.json');
+
+// enable CORS
+app.use((req, res, next) => {
+  res.set('Access-Control-Allow-Methods', 'DELETE, GET, POST, PUT');
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers")
+  next();
+});
+
+app.use(express.json());
 
 /**
  * GET /tasks
@@ -24,7 +34,7 @@ app.get('/tasks', (req, res) => {
  * If not found return status code 404.
  * If id is not valid number return status code 400.
  */
-app.get('/task/:id', (req, res) => {
+app.get('/tasks/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -58,15 +68,20 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
+app.put('/tasks/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    const newTasks = tasksContainer.tasks.map(item => {
+      if (item.id === req.params.id) {
+        item.title = req.body.title;
+        item.description = req.body.description;
+      }
+      return item;
+    });
 
-    if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
+    if (newTasks !== tasksContainer.tasks) {
+      tasksContainer.tasks = newTasks;
       return res.status(204).json({});
     } else {
       return res.status(404).json({
@@ -89,11 +104,11 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/tasks', (req, res) => {
   const task = {
     id: tasksContainer.tasks.length + 1,
-    title: req.params.title,
-    description: req.params.description,
+    title: req.body.title,
+    description: req.body.description,
   };
 
   tasksContainer.tasks.push(task);
@@ -114,17 +129,17 @@ app.post('/task/create/:title/:description', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/task/delete/:id', (req, res) => {
+app.delete('/tasks/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-  
+
     if (task !== null) {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
-        message: 'Updated successfully',
+        message: 'Deleted successfully',
       });
     } else {
       return es.status(404).json({
@@ -138,9 +153,6 @@ app.delete('/task/delete/:id', (req, res) => {
   }
 });
 
-//Client and API in the same route so I don't need to deal with CORS
-const http = require('http').Server(app);
-app.use(express.static('build'));
-http.listen(9001, () => {
+app.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });

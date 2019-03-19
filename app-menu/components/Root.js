@@ -3,7 +3,7 @@ import { observe, streamProps } from 'frint-react';
 
 import { Add } from './Icons';
 
-class Root extends React.Component {
+class Root extends React.PureComponent {
   render() {
     return (
       <div className="top-bar">
