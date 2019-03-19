@@ -1,5 +1,5 @@
 .button {
-    background-color: @secondary;
+    background-color: lighten(@secondary, 5%);
     color: @light-white;
     border: 1px solid transparent;
     font-weight: bold;
@@ -10,6 +10,11 @@
     text-decoration: none;
     text-align: center;
     width: 100px;
+    cursor: pointer;
+    &:hover,
+    &:focus {
+        background-color: @secondary;
+    }
 }
 
 .close-button {
@@ -18,9 +23,18 @@
     right: 1rem;
     top: 0.5rem;
     font-size: 2em;
-    color: lighten(@primary, 40%);;
+    color: lighten(@primary, 40%);
     &:hover,
     &:focus {
+        color: @primary;
+    }
+}
+
+.link-button {
+    margin-left: 20px;
+    color: lighten(@primary, 40%);
+    text-decoration: none;
+    &:hover {
         color: @primary;
     }
 }

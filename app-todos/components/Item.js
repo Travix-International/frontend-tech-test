@@ -82,6 +82,14 @@ class Item extends React.Component {
                   className="button"
                   type="submit"
                   value="Save" />
+
+                <a
+                  className="link-button"
+                  href="#"
+                  onClick={() => this.props.clearInputs()}
+                >
+                  Cancel
+                </a>
               </div>
             </form>
 
