@@ -26,6 +26,20 @@ app.get('/tasks', (req, res) => {
 });
 
 /**
+ * GET /tasks
+ * 
+ * Return the list of tasks with status code 200.
+ */
+app.get('/tasks/:pageIndex/:pageSize', (req, res) => {
+  const pageIndex = parseInt(req.params.pageIndex, 10);
+  const pageSize = parseInt(req.params.pageSize, 10);
+
+  const taskContainerPaginated = tasksContainer.tasks.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize);
+
+  return res.status(200).json(taskContainerPaginated);
+});
+
+/**
  * Get /tasks/:id
  * 
  * id: Number
