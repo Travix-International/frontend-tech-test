@@ -5,6 +5,7 @@ import {
   TODOS_UPDATE,
   TODOS_FETCH_ASYNC,
   TODOS_UPDATE_ASYNC,
+  TODOS_LOAD_MORE_ASYNC
 } from '../constants';
 
 export function addTodo(title, description) {
@@ -50,5 +51,13 @@ export function updateTodoAsync(id, title, description) {
 export function fetchTodosAsync() {
   return {
     type: TODOS_FETCH_ASYNC,
+  };
+}
+
+export function loadMoreAsync(pageIndex, pageSize) {
+  return {
+    type: TODOS_LOAD_MORE_ASYNC,
+    pageIndex,
+    pageSize
   };
 }

@@ -4,12 +4,14 @@ import {
     fetchTodosAsync$,
     addTodoAsync$,
     deleteTodoAsync$,
-    updateTodoAsync$
+    updateTodoAsync$,
+    loadMoreAsync$
 } from './todo';
 
 export default combineEpics(
     fetchTodosAsync$,
     addTodoAsync$,
     deleteTodoAsync$,
-    updateTodoAsync$
+    updateTodoAsync$,
+    loadMoreAsync$,
 );

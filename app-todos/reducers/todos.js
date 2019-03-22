@@ -4,6 +4,7 @@ import {
   TODOS_DELETE,
   TODOS_UPDATE,
   TODOS_FETCH,
+  TODOS_LOAD_MORE_ASYNC,
   TODOS_FAILED
 } from '../constants';
 
@@ -48,6 +49,15 @@ export default function todos(state = INITIAL_STATE, action) {
     case TODOS_FETCH:
       return Object.assign({}, {
         records: action.response
+      });
+
+    case TODOS_LOAD_MORE_ASYNC:
+      return Object.assign({}, {
+        records: [{
+          id: 1,
+          title: "asdf",
+          description: "asfasf"
+        }]
       });
 
     case TODOS_FAILED:

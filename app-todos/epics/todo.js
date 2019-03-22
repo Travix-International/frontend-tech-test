@@ -11,6 +11,7 @@ import {
     TODOS_DELETE_ASYNC,
     TODOS_UPDATE,
     TODOS_UPDATE_ASYNC,
+    TODOS_LOAD_MORE_ASYNC,
     TODOS_FAILED,
 } from '../constants';
 
@@ -99,6 +100,28 @@ export function updateTodoAsync$(action$) {
                         id: parameters.id,
                         title: parameters.title,
                         description: parameters.description
+                    }))
+                    .catch(error => [
+                        {
+                            type: TODOS_FAILED,
+                            response: { message: error.message, status: error.status },
+                            error: true,
+                        },
+                    ])
+            })
+        )
+}
+
+
+export function loadMoreAsync$(action$) {
+    return action$
+        .pipe(
+            filter(action => action.type === TODOS_LOAD_MORE_ASYNC),
+            mergeMap(() => {
+                return Observable.ajax.getJSON(urlApi)
+                    .map(data => ({
+                        type: TODOS_FETCH,
+                        response: data.tasks,
                     }))
                     .catch(error => [
                         {
