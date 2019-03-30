@@ -1,4 +1,22 @@
+# dependency directories
 node_modules/
+
+# build
+dist/
+
+# temporary files
 *~
+
 #*
-.vs_code/
+.vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+
+
+# misc
+.DS_Store
+npm-debug.log*

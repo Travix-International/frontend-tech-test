@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "paths": {
+            "@components/*": ["components/*"],
+            "@common/*": ["common/*"],
+            "@services/*": ["services/*"]
+        },
+        "outDir": "./dist/",
+        "module": "es6",
+        "target": "es5",
+        "lib": ["es6", "dom"],
+        "jsx": "react",
+        "allowJs": true,
+        "sourceMap": true,
+        "strict": true,
+        "rootDir": ".",
+        "esModuleInterop": true,
+        "skipLibCheck": true,   // needed to work with jest
+        "noUnusedLocals": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "exclude": [
+        "node_modules",
+        "config",
+        "public",
+        "typings",
+        "dist",
+    ],
+}
