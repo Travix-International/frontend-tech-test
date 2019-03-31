@@ -1,4 +1,5 @@
 const path = require('path');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
     entry: './src/index.tsx',
@@ -21,7 +22,12 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 exclude: /(node_modules)/,
-                use: 'ts-loader',
+                use: [{
+                    loader: 'ts-loader',
+                    options: {
+                        transpileOnly: true,
+                    },
+                }],
             },
             {
                 test: /\.(js|jsx)$/,
@@ -33,6 +39,11 @@ module.exports = {
     resolve: {
         // allow importing modules without explicitly mentioning the extension
         extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
+        plugins: [
+            new TsconfigPathsPlugin({
+                configFile: path.join(__dirname, './../', 'tsconfig.json')
+            })
+        ],
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

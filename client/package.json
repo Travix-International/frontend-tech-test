@@ -18,8 +18,13 @@
   "dependencies": {
     "@types/react": "^16.8.10",
     "@types/react-dom": "^16.8.3",
+    "axios": "^0.18.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "tslint-react": "^4.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -29,6 +34,7 @@
     "@types/enzyme": "^3.9.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^24.0.11",
+    "@types/react-redux": "^7.0.6",
     "babel-jest": "^24.5.0",
     "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^2.0.0",
@@ -49,6 +55,9 @@
     "terser": "^3.14.1",
     "ts-jest": "^24.0.0",
     "ts-loader": "^5.3.3",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "tslint": "^5.14.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.3.3333",
     "typings-for-css-modules-loader": "^1.7.0",
     "webpack": "^4.29.0",
@@ -82,6 +91,8 @@
     "modulePaths": [
       "<rootDir>"
     ],
-    "setupFilesAfterEnv": ["<rootDir>src/setupTests.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>src/setupTests.js"
+    ]
   }
 }

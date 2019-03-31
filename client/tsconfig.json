@@ -1,20 +1,24 @@
 {
     "compilerOptions": {
-        "baseUrl": "./src",
+        "baseUrl": "./src/",
         "paths": {
             "@components/*": ["components/*"],
-            "@common/*": ["common/*"],
-            "@services/*": ["services/*"]
+            "@utils/*": ["utils/*"],
+            "@services/*": ["services/*"],
+            "@models/*": ["models/*"],
+            "@store/*": ["store/*"],
+            "@containers/*": ["containers/*"],
         },
         "outDir": "./dist/",
-        "module": "es6",
-        "target": "es5",
+        "module": "esnext",
+        "target": "es6",
         "lib": ["es6", "dom"],
         "jsx": "react",
         "allowJs": true,
         "sourceMap": true,
         "strict": true,
         "rootDir": ".",
+        "moduleResolution": "node",
         "esModuleInterop": true,
         "skipLibCheck": true,   // needed to work with jest
         "noUnusedLocals": true,

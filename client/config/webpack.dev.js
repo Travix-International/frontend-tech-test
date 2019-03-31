@@ -39,7 +39,7 @@ module.exports = merge(common, {
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         port: 3000,
-        publicPath: '/',
+        publicPath: common.output.publicPath,
         hot: true,
     },
 });

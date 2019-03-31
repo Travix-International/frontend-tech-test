@@ -1,0 +1,13 @@
+{
+  "tasks": [{
+    "id": 0,
+    "title": "buy milk",
+    "description": "in s market",
+    "done": false
+  }, {
+    "id": 1,
+    "title": "call John",
+    "description": "for the meeting on Friday",
+    "done": true
+  }]
+}

@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.title {
+    font-size: 1.2rem;
+}
+
+.done {
+    opacity: .5;
+}
