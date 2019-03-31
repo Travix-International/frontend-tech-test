@@ -1,0 +1,5 @@
+$border-style : 2px solid gold;
+
+:placeholder-shown {
+    border : $border-style;
+}

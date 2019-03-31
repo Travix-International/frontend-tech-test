@@ -2,6 +2,13 @@
 
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: false }))
+
+
+
+app.use(bodyParser.json())
 
 /**
  * GET /tasks
@@ -9,7 +16,7 @@ const tasksContainer = require('./tasks.json');
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
+ // return res.status(200).json(tasksContainer);
 });
 
 /**
@@ -23,11 +30,13 @@ app.get('/tasks', (req, res) => {
  * If not found return status code 404.
  * If id is not valid number return status code 400.
  */
+
+
 app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find((item) => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
@@ -88,15 +97,22 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task/', (req, res) => {
+ 
+  console.log(req.body);
+  const error = validateTask(req.body);
+
+  if(error){
+    res.status(400).send(error);
+  }
   const task = {
     id: tasksContainer.tasks.length,
-    title: req.params.title,
-    description: req.params.description,
+    title: req.body.title,
+    description: req.body.description,
   };
 
   tasksContainer.tasks.push(task);
-
+  
   return res.status(201).json({
     message: 'Resource created',
   });
@@ -136,6 +152,15 @@ app.delete('/task/delete/:id', (req, res) => {
   }
 });
 
-app.listen(9001, () => {
-  process.stdout.write('the server is available on http://localhost:9001/\n');
+app.listen(9003, () => {
+  process.stdout.write('the server is available on http://localhost:9003/\n');
 });
+
+
+//Validate task Function
+function validateTask(task) {
+  if (!task.title) return "Task Title is required";
+  if (!task.description) return "Description is required.";
+  if(task.title == task.description) return "Title and Description should be unique.";
+  return "";
+}
