@@ -20,7 +20,7 @@ export function saveTask(task) {
 
 
 export function updateTask(task) {
-  return fetch(baseUrl + (task.id || ""), {
+  return fetch(baseUrl + task.id, {
     method: "PUT", // POST for create, PUT to update when id already exists.
     headers: { "content-type": "application/json" },
     body: JSON.stringify(task)

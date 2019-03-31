@@ -36,7 +36,7 @@ class TodoForm extends React.Component{
     saveTodoItem = event => {
         event.preventDefault();
         console.log(this.state.todoItem)
-        if(!this.props.todoItem.id)
+        if(!this.state.todoItem.id && (this.state.todoItem.id !== 0))
         {
             this.props.actions.createTodo(this.state.todoItem)
             toast.success("Added ("+ this.state.todoItem.title + ") in the the list")

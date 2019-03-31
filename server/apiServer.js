@@ -14,15 +14,15 @@ server.use(function(req, res, next) {
   setTimeout(next, 0);
 });
 
-server.use((req, res, next) => {
-  if (req.method === "POST") {
-    req.body.createdAt = Date.now();
-  }
-  next();
-});
+// server.use((req, res, next) => {
+//   if (req.method === "POST") {
+//     req.body.createdAt = Date.now();
+//   }
+//   next();
+// });
 
 server.post("/task/", function(req, res, next) {
-  const error = validateCourse(req.body);
+  const error = validateTask(req.body);
   if (error) {
     res.status(400).send(error);
   } else {
