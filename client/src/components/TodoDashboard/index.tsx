@@ -13,7 +13,7 @@ interface Props {
     addTodo: (title: string, description: string) => void;
     editTodo: (id: Todo['id'], data: { title: string, description: string }) => void;
     deleteTodo: (id: Todo['id']) => void;
-    toggleTodo: (id: Todo['id'], done: boolean) => void;
+    toggleTodo: (id: Todo['id']) => void;
 }
 
 interface State {
@@ -34,7 +34,7 @@ class TodoDashboard extends React.PureComponent<Props, State> {
 
     render() {
         const { addTodoFormOpen } = this.state;
-        const { todos, pending, error, editTodo, deleteTodo, addTodo } = this.props;
+        const { todos, pending, error, editTodo, deleteTodo, addTodo, toggleTodo } = this.props;
         return (
             <div>
                 <div className="header">
