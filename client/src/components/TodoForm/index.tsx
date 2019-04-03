@@ -6,8 +6,8 @@ import styles from './index.scss';
 interface Props {
     title?: Todo['title'];
     description?: Todo['description'];
-    okText?: string;
-    cancelText?: string;
+    okText?: React.ReactNode;
+    cancelText?: React.ReactNode;
     onOk?: (title: string, description: string) => void;
     onCancel?: () => void;
 }
@@ -30,20 +30,20 @@ class TodoForm extends React.PureComponent<Props, State> {
         const { okText = 'Ok', cancelText = 'Cancel' } = this.props;
         const { title, description } = this.state;
         return (
-            <>
-                <div>
+            <div className={styles.container}>
+                <div className={styles.content}>
                     <div className={styles.field}>
-                        <input name="title" type="text" placeholder="Title" value={title} onChange={this.handleFieldChange} />
+                        <input name="title" type="text" placeholder="Write your title here" value={title} onChange={this.handleFieldChange} />
                     </div>
                     <div className={styles.field}>
-                        <input name="description" type="text" placeholder="Description" value={description} onChange={this.handleFieldChange} />
+                        <input name="description" type="text" placeholder="Description..." value={description} onChange={this.handleFieldChange} />
                     </div>
                 </div>
-                <div>
-                    <Button onClick={this.handleOkClick}>{okText}</Button>
-                    <Button onClick={this.handleCancelClick}>{cancelText}</Button>
+                <div className={styles.actions}>
+                    <Button type="icon" onClick={this.handleOkClick}>{okText}</Button>
+                    <Button type="icon" onClick={this.handleCancelClick}>{cancelText}</Button>
                 </div>
-            </>
+            </div>
         );
     }
 

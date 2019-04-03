@@ -1,4 +1,35 @@
-.title {
-    font-size: 3rem;
-    color: red;
+@import './styles/default.scss';
+@import './styles/theme.scss';
+
+.app {
+    height: 100%;
+    background-color: $color-body-bg;
+    padding: 3rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.bgText {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // text-align: center;
+    
+    p {
+        margin: 0;
+        font-size: 30vw;
+        font-family: Arial, Helvetica, sans-serif;
+        font-style: italic;
+        color: $color-body-text;
+    }
 }

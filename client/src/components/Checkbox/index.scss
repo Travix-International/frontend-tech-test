@@ -1,0 +1,11 @@
+@import "../../styles/theme.scss";
+
+.checkbox {
+  color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all .3s;
+
+  &.checked {
+    color: $color-primary;
+  }
+}

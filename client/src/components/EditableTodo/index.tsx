@@ -2,6 +2,7 @@ import React from 'react';
 import Todo from '@models/Todo';
 import TodoItem from '@components/TodoItem';
 import EditTodoForm from '@components/EditTodoForm';
+import Card from '@components/Card';
 
 interface Props {
     id: Todo['id'];
@@ -28,28 +29,28 @@ class EditableTodo extends React.PureComponent<Props, State> {
     render() {
         const { id, title, description, done } = this.props;
         const { editFormOpen } = this.state;
-
-        if (editFormOpen) {
-            return (
-                <EditTodoForm
-                    title={title}
-                    description={description}
-                    onEdit={this.handleEdit}
-                    onCancel={this.toggleEdit}
-                />
-            );
-        }
-
-        return (
-            <TodoItem
-                id={id}
+        const content = editFormOpen ? (
+            <EditTodoForm
                 title={title}
                 description={description}
-                done={done}
-                onEdit={this.toggleEdit}
-                onDelete={this.handleDelete}
-                onToggle={this.handleToggle}
+                onEdit={this.handleEdit}
+                onCancel={this.toggleEdit}
             />
+        ) : (
+        <TodoItem
+            id={id}
+            title={title}
+            description={description}
+            done={done}
+            onEdit={this.toggleEdit}
+            onDelete={this.handleDelete}
+            onToggle={this.handleToggle}
+        />);
+
+        return (
+            <Card>
+                {content}
+            </Card>
         );
     }
 

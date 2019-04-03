@@ -1,0 +1,22 @@
+@import '../../styles/mixin.scss';
+@import '../../styles/theme.scss';
+
+.container{
+    position: relative; // needed for z-index
+    width: 100%; // mobile
+    min-height: 500px;
+    z-index: 2;
+    background-color: $color-app-bg;
+    
+    @include screen(sm) {
+        width: 80%; // tablet
+        border-radius: 3rem;
+        box-shadow: 0 10px 30px 15px rgba(0, 0, 0, .1);
+    }
+
+    @include screen(md) {
+        width: 40%; // desktop
+        border-radius: 3rem;
+        box-shadow: 0 10px 30px 15px rgba(0, 0, 0, .1);
+    }
+}

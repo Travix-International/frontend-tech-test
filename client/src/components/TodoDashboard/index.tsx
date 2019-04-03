@@ -3,7 +3,8 @@ import Todo from '@models/Todo';
 import Button from '@components/Button';
 import TodoList from '@components/TodoList';
 import AddTodoForm from '@components/AddTodoForm';
-import { toggleTodo } from '@services/todoApi';
+import Card from '@components/Card';
+import styles from './index.scss';
 
 interface Props {
     todos: Todo[];
@@ -34,19 +35,32 @@ class TodoDashboard extends React.PureComponent<Props, State> {
 
     render() {
         const { addTodoFormOpen } = this.state;
-        const { todos, pending, error, editTodo, deleteTodo, addTodo, toggleTodo } = this.props;
+        const { todos, pending, error, editTodo, deleteTodo, toggleTodo } = this.props;
         return (
-            <div>
-                <div className="header">
-                    <Button onClick={this.toggleAddTodoForm}>add</Button>
+            <div className={styles.container}>
+                <div className={styles.header}>
+                    <Button type="primary" onClick={this.toggleAddTodoForm}>add</Button>
                 </div>
-                {error && <p>{error}</p>}
-                {pending && <div>loading...</div>}
-                {!error && !pending && <TodoList todos={todos} onToggle={toggleTodo} onEdit={editTodo} onDelete={deleteTodo} />}
-                {addTodoFormOpen && <AddTodoForm onAdd={addTodo} onCancel={this.toggleAddTodoForm} />}
+                <div className={styles.content}>
+                    <div className={styles.scrollBox}>
+                        {error && <p>{error}</p>}
+                        {pending && <div>loading...</div>}
+                        {!error && !pending && <TodoList todos={todos} onToggle={toggleTodo} onEdit={editTodo} onDelete={deleteTodo} />}
+                        {addTodoFormOpen && (
+                            <Card>
+                                <AddTodoForm onAdd={this.handleAdd} onCancel={this.toggleAddTodoForm} />
+                            </Card>
+                        )}
+                    </div>
+                </div>
             </div>
         );
     }
+
+    private handleAdd = (title: string, description: string) => {
+        this.props.addTodo(title, description);
+        this.toggleAddTodoForm();
+    };
 
     private toggleAddTodoForm = () => {
         this.setState((prevState) => ({ addTodoFormOpen: !prevState.addTodoFormOpen }));
