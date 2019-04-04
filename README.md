@@ -1,38 +1,31 @@
-# Travix test
+# Todo App
+A simple todo app using React. Supports add/edit/delete/toggle todos.
 
-Travix Front-End Tech Interview Test 
+## Usage
+The repo contains both the frontend and a simple backend in Node.
 
-# Introduction
+### Client
+To start the client:
+1. `cd client`
+2. `npm i`: install dependencies.
+3. `npm start`: launch the dev server by default on [http://localhost:3000](http://localhost:3000).
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+Run tests: `npm test`.
 
-Using your application we must be able to create, modify and delete a task.
+Generate builds: `npm build`.
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
+### Server
+To start the server:
+1. `cd server`
+2. `npm i`: install dependecies.
+3. `npm start`: start server.
 
-However this server is not perfect. It could be improved and tested as well.
+Run tests: `npm test`.
 
-So your mission is to develop the front-end from scratch using a front-end framework.
-
-We are also expecting from you a usable, responsive UI.
-
-# Process
-
-Fork the repository into your account. Once your code is ready, send a pull-request to this repository and we will review it.
-
-# Requirements
-
-* React 15+
-* Redux or Flux or [FrintJS](https://frint.js.org) or other alternatives that implement a unidirectional data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
-
-# Bonus
-
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us!
+## Stack
+For the frontend:
+* [React](https://reactjs.org/)
+* [TypeScript](https://www.typescriptlang.org/) for static type checking.
+* [Redux](https://redux.js.org/) as a global state container.
+* [Sass](https://sass-lang.com/) CSS preprocessor
+* [Jest](https://jestjs.io/) and [Enzyme](https://airbnb.io/enzyme/) for tests.
