@@ -9,9 +9,9 @@ interface Props {
     title: Todo['title'];
     description: Todo['description'];
     done: Todo['done'];
-    onEdit: (id: Todo['id'], data: { title: Todo['title'], description: Todo['description'] }) => void;
-    onDelete: (id: Todo['id']) => void;
-    onToggle: (id: Todo['id']) => void;
+    onEdit?: (id: Todo['id'], data: { title: Todo['title'], description: Todo['description'] }) => void;
+    onDelete?: (id: Todo['id']) => void;
+    onToggle?: (id: Todo['id']) => void;
 }
 
 interface State {
@@ -37,15 +37,15 @@ class EditableTodo extends React.PureComponent<Props, State> {
                 onCancel={this.toggleEdit}
             />
         ) : (
-        <TodoItem
-            id={id}
-            title={title}
-            description={description}
-            done={done}
-            onEdit={this.toggleEdit}
-            onDelete={this.handleDelete}
-            onToggle={this.handleToggle}
-        />);
+                <TodoItem
+                    id={id}
+                    title={title}
+                    description={description}
+                    done={done}
+                    onEdit={this.toggleEdit}
+                    onDelete={this.handleDelete}
+                    onToggle={this.handleToggle}
+                />);
 
         return (
             <Card>
@@ -59,16 +59,22 @@ class EditableTodo extends React.PureComponent<Props, State> {
     };
 
     private handleEdit = (title: string, description: string) => {
-        this.props.onEdit(this.props.id, { title, description });
-        this.toggleEdit();
+        if (this.props.onEdit) {
+            this.props.onEdit(this.props.id, { title, description });
+            this.toggleEdit();
+        }
     };
 
     private handleDelete = () => {
-        this.props.onDelete(this.props.id);
+        if (this.props.onDelete) {
+            this.props.onDelete(this.props.id);
+        }
     }
 
     private handleToggle = () => {
-        this.props.onToggle(this.props.id);
+        if (this.props.onToggle) {
+            this.props.onToggle(this.props.id);
+        }
     };
 }
 

@@ -1,5 +1,7 @@
+@import '../../styles/theme.scss';
+
 .container {
-  padding: .5rem;
+  padding: .5rem; // for showing the box shadow
   height: 95%;
   box-sizing: border-box;
   display: flex;
@@ -8,22 +10,41 @@
 
 .header {
   height: 15%;
+  padding: 2rem 3rem 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
-.content {
-  padding: 1rem;
+.date {
+  flex: auto;
+  h3 {
+    font-family: 'Lato', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0 0 5px;
+  }
+
+  p{
+    margin: 0;
+    color: $color-secondary-text;
+  }
+}
+
+.actions {
+  // flex: 1;
+}
+
+.scrollBox {
+  position: relative; // set as offsetParent
+  padding: 1.5rem;
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
 }
 
-.scrollBox {
-  min-height: min-content;
+.content {
+  flex: 1;
   display: flex;
   flex-direction: column;
 }

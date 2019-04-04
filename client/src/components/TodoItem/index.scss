@@ -5,7 +5,12 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   transition: all 0.3s;
+
+  // Needed to fix texts movement during opacity transition in chrome
+  // see: https://stackoverflow.com/questions/12980153/image-moves-on-hover-chrome-opacity-issue
+  -webkit-backface-visibility: hidden;
 }
 
 .status {
@@ -21,7 +26,7 @@
 
   .title {
     font-size: 1.2rem;
-    margin: 1rem 0 .5rem 0;
+    margin: 0 0 .5rem;
   }
 
   .desc {
@@ -39,5 +44,6 @@
 }
 
 .done {
-  opacity: 0.5;
+  opacity: 0.4;
+  text-decoration: line-through;
 }

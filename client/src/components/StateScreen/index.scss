@@ -1,0 +1,17 @@
+@import '../../styles/theme.scss';
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    color: $color-accent;
+}
+
+.text {
+    color: $color-secondary-text;
+}

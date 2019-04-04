@@ -40,4 +40,8 @@
     border-radius: none;
     border: none;
     background-color: transparent;
+    color: lighten($color-accent, 20%);
+    &:hover{
+        color: $color-accent;
+    }
 }

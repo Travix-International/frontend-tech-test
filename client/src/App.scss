@@ -1,15 +1,20 @@
+@import './styles/mixin.scss';
 @import './styles/default.scss';
 @import './styles/theme.scss';
 
 .app {
     height: 100%;
     background-color: $color-body-bg;
-    padding: 3rem;
+    padding: 0;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @include screen(sm) {
+        padding: 3rem;
+    }
 }
 
 
@@ -23,7 +28,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    // text-align: center;
     
     p {
         margin: 0;

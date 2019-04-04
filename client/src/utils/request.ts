@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-type Dict = {
+interface Dict {
     [key: string]: string;
 };
 

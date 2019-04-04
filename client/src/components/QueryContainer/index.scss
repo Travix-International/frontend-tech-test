@@ -3,6 +3,7 @@
 
 .container{
     position: relative; // needed for z-index
+    flex: 1; // still takes up all available height
     width: 100%; // mobile
     min-height: 500px;
     z-index: 2;

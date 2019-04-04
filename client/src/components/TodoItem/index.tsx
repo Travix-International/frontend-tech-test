@@ -16,7 +16,7 @@ interface Props {
     onToggle: () => void;
 }
 
-const TodoItem: React.FC<Props> = ({id, title, description, done, onToggle, onEdit, onDelete}) => {
+const TodoItem: React.FC<Props> = ({title, description, done, onToggle, onEdit, onDelete}) => {
     return(
         <div className={`${styles.container} ${done ? styles.done : ''}`}>
             <div className={styles.status} onClick={onToggle}>
@@ -27,10 +27,10 @@ const TodoItem: React.FC<Props> = ({id, title, description, done, onToggle, onEd
                 <p className={styles.desc}>{description}</p>
             </div>
             <div className={styles.actions}>
-                <Button type="icon" onClick={onEdit}>
+                <Button type="icon" title="edit" onClick={onEdit}>
                     <FontAwesomeIcon icon={faEdit} />
                 </Button>
-                <Button type="icon" onClick={onDelete}>
+                <Button type="icon" title="delete" onClick={onDelete}>
                     <FontAwesomeIcon icon={faTrashAlt} />
                 </Button>
             </div>

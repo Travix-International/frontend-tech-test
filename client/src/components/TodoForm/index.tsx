@@ -30,7 +30,7 @@ class TodoForm extends React.PureComponent<Props, State> {
         const { okText = 'Ok', cancelText = 'Cancel' } = this.props;
         const { title, description } = this.state;
         return (
-            <div className={styles.container}>
+            <form onSubmit={this.handleSubmit} className={styles.container}>
                 <div className={styles.content}>
                     <div className={styles.field}>
                         <input name="title" type="text" placeholder="Write your title here" value={title} onChange={this.handleFieldChange} />
@@ -40,10 +40,10 @@ class TodoForm extends React.PureComponent<Props, State> {
                     </div>
                 </div>
                 <div className={styles.actions}>
-                    <Button type="icon" onClick={this.handleOkClick}>{okText}</Button>
+                    <Button type="icon">{okText}</Button>
                     <Button type="icon" onClick={this.handleCancelClick}>{cancelText}</Button>
                 </div>
-            </div>
+            </form>
         );
     }
 
@@ -55,7 +55,9 @@ class TodoForm extends React.PureComponent<Props, State> {
         this.setState((prevState) => ({ ...prevState, [name]: value }));
     };
 
-    private handleOkClick = () => {
+    private handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        
         const { title, description } = this.state;
         if (!title) {
             // @TODO: handle form validation UI

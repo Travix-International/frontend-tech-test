@@ -5,6 +5,9 @@ import TodoList from '@components/TodoList';
 import AddTodoForm from '@components/AddTodoForm';
 import Card from '@components/Card';
 import styles from './index.scss';
+import Empty from '@components/Empty';
+import Spin from '@components/Spin';
+import Error from '@components/Error';
 
 interface Props {
     todos: Todo[];
@@ -22,6 +25,9 @@ interface State {
 }
 
 class TodoDashboard extends React.PureComponent<Props, State> {
+    private addFormRef = React.createRef<HTMLDivElement>();
+    private scrollBoxRef = React.createRef<HTMLDivElement>();
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -33,29 +39,71 @@ class TodoDashboard extends React.PureComponent<Props, State> {
         this.props.fetchTodos();
     }
 
+    componentDidUpdate(prevProps: Props, prevState: State) {
+        // When toggling on the addTodoForm,
+        // wait after its DOM is updated, get its position and scroll to it. 
+        if (this.state.addTodoFormOpen && !prevState.addTodoFormOpen) {
+            this.scrollToAddTodoForm();
+        }
+    }
+
     render() {
         const { addTodoFormOpen } = this.state;
-        const { todos, pending, error, editTodo, deleteTodo, toggleTodo } = this.props;
         return (
             <div className={styles.container}>
                 <div className={styles.header}>
+                    <div className={styles.date}>
+                        <h3>{this.getDate()}</h3>
+                        <p>{this.getWeekday()}</p>
+                    </div>
                     <Button type="primary" onClick={this.toggleAddTodoForm}>add</Button>
                 </div>
-                <div className={styles.content}>
-                    <div className={styles.scrollBox}>
-                        {error && <p>{error}</p>}
-                        {pending && <div>loading...</div>}
-                        {!error && !pending && <TodoList todos={todos} onToggle={toggleTodo} onEdit={editTodo} onDelete={deleteTodo} />}
-                        {addTodoFormOpen && (
-                            <Card>
-                                <AddTodoForm onAdd={this.handleAdd} onCancel={this.toggleAddTodoForm} />
-                            </Card>
-                        )}
+                <div className={styles.scrollBox} ref={this.scrollBoxRef}>
+                    <div className={styles.content}>
+                        {this.renderContent()}
+                        <div ref={this.addFormRef}>
+                            {addTodoFormOpen && (
+                                <Card>
+                                    <AddTodoForm onAdd={this.handleAdd} onCancel={this.toggleAddTodoForm} />
+                                </Card>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
         );
     }
+
+    private getDate = () => {
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const today = new Date();
+        const d = today.getDate();
+        const month = monthNames[today.getMonth()];
+        const yyyy = today.getFullYear();
+
+        return `${d} ${month} ${yyyy}`;
+    };
+
+    private getWeekday = () => {
+        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        const today = new Date();
+        return dayNames[today.getDay()];
+    };
+
+    private renderContent = () => {
+        const { error, pending, todos, toggleTodo, editTodo, deleteTodo } = this.props;
+        if (error) {
+            return <Error />;
+        }
+        if (pending) {
+            return <Spin />;
+        }
+        if (!todos.length) {
+            return <Empty />;
+        }
+
+        return <TodoList todos={todos} onToggle={toggleTodo} onEdit={editTodo} onDelete={deleteTodo} />;
+    };
 
     private handleAdd = (title: string, description: string) => {
         this.props.addTodo(title, description);
@@ -64,6 +112,15 @@ class TodoDashboard extends React.PureComponent<Props, State> {
 
     private toggleAddTodoForm = () => {
         this.setState((prevState) => ({ addTodoFormOpen: !prevState.addTodoFormOpen }));
+    };
+
+    private scrollToAddTodoForm = () => {
+        const scrollBoxDOM = this.scrollBoxRef.current;
+        const formDOM = this.addFormRef.current;
+        if (scrollBoxDOM && formDOM) {
+            scrollBoxDOM.scrollTo(0, formDOM.offsetTop + formDOM.offsetHeight);
+            formDOM.focus();
+        }
     };
 }
 
