@@ -18,7 +18,7 @@ Generate builds: `npm build`.
 To start the server:
 1. `cd server`
 2. `npm i`: install dependecies.
-3. `npm start`: start server.
+3. `npm start`: start server; by default run on port 5000.
 
 Run tests: `npm test`.
 
@@ -29,3 +29,8 @@ For the frontend:
 * [Redux](https://redux.js.org/) as a global state container.
 * [Sass](https://sass-lang.com/) CSS preprocessor
 * [Jest](https://jestjs.io/) and [Enzyme](https://airbnb.io/enzyme/) for tests.
+
+For the backend:
+* [Node](https://nodejs.org/)
+* [Express](https://expressjs.com/)
+* [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com/) for tests.

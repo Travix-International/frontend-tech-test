@@ -13,7 +13,7 @@ const errorMsg: Dict = {
 };
 
 const client = axios.create({
-    baseURL: 'http://localhost:9001', // better put in local .env file
+    baseURL: 'http://localhost:5000', // better put in local .env file
 });
 
 const request = (url: string, options: object = {}) => {
