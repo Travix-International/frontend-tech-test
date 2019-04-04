@@ -33,9 +33,8 @@ app.get('/tasks/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
-
-    if (task !== null) {
+    const task = tasksContainer.tasks.find((item) => item.id === id);
+    if (task) {
       return res.status(200).json({
         task,
       });
@@ -68,9 +67,9 @@ app.get('/tasks/:id', (req, res) => {
 app.put('/tasks/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
-  if (!Number.isNaN(id)) {
+  if (!Number.isNaN(id) && req.body.title) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-    if (task !== null) {
+    if (task) {
       task.title = req.body.title;
       task.description = req.body.description;
       return res.status(204).send();
@@ -104,7 +103,7 @@ app.put('/tasks/:id/toggle', (req, res) => {
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    if (task) {
       task.done = !task.done;
       return res.status(204).send();
     } else {
@@ -129,10 +128,15 @@ app.put('/tasks/:id/toggle', (req, res) => {
  * Return status code 201 and the newly created resource.
  */
 app.post('/tasks', (req, res) => {
+  if(!req.body.title) {
+    return res.status(400).json({message: 'Bad request'});
+  }
+
   const task = {
     id: tasksContainer.tasks.length,
     title: req.body.title,
     description: req.body.description,
+    done: false,
   };
 
   tasksContainer.tasks.push(task);
@@ -173,6 +177,4 @@ app.delete('/tasks/:id', (req, res) => {
   }
 });
 
-app.listen(9001, () => {
-  process.stdout.write('the server is available on http://localhost:9001/\n');
-});
+module.exports = app;
