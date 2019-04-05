@@ -1,13 +1,14 @@
 import React from 'react';
 import Todo from '@models/Todo';
+import { getDate, getWeekday } from '@utils/time';
 import Button from '@components/Button';
 import TodoList from '@components/TodoList';
 import AddTodoForm from '@components/AddTodoForm';
 import Card from '@components/Card';
-import styles from './index.scss';
 import Empty from '@components/Empty';
 import Spin from '@components/Spin';
 import Error from '@components/Error';
+import styles from './index.scss';
 
 interface Props {
     todos: Todo[];
@@ -53,8 +54,8 @@ class TodoDashboard extends React.PureComponent<Props, State> {
             <div className={styles.container}>
                 <div className={styles.header}>
                     <div className={styles.date}>
-                        <h3>{this.getDate()}</h3>
-                        <p>{this.getWeekday()}</p>
+                        <h3>{getDate()}</h3>
+                        <p>{getWeekday()}</p>
                     </div>
                     <Button type="primary" onClick={this.toggleAddTodoForm}>add</Button>
                 </div>
@@ -73,22 +74,6 @@ class TodoDashboard extends React.PureComponent<Props, State> {
             </div>
         );
     }
-
-    private getDate = () => {
-        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        const today = new Date();
-        const d = today.getDate();
-        const month = monthNames[today.getMonth()];
-        const yyyy = today.getFullYear();
-
-        return `${d} ${month} ${yyyy}`;
-    };
-
-    private getWeekday = () => {
-        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        const today = new Date();
-        return dayNames[today.getDay()];
-    };
 
     private renderContent = () => {
         const { error, pending, todos, toggleTodo, editTodo, deleteTodo } = this.props;

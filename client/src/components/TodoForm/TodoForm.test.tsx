@@ -29,7 +29,7 @@ describe('TodoForm', () => {
 
         wrapper.find('input[name="title"]').simulate('change', { target: { name: 'title', value: 'new title' } });
         expect(wrapper.find('input[name="title"]').props().value).toEqual('new title');
-        wrapper.find('Button').first().simulate('click');
+        wrapper.find('Button').first().simulate('submit');
         expect(handleOk).toHaveBeenCalledWith('new title', '');
         wrapper.find('Button').last().simulate('click');
         expect(handleCancel).toHaveBeenCalled();

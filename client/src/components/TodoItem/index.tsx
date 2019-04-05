@@ -6,11 +6,7 @@ import Checkbox from '@components/Checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
-interface Props {
-    id: Todo['id'];
-    title: Todo['title'];
-    description: Todo['description'];
-    done: Todo['done'];
+interface Props extends Todo{
     onEdit: () => void;
     onDelete: () => void;
     onToggle: () => void;

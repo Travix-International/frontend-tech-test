@@ -4,11 +4,7 @@ import TodoItem from '@components/TodoItem';
 import EditTodoForm from '@components/EditTodoForm';
 import Card from '@components/Card';
 
-interface Props {
-    id: Todo['id'];
-    title: Todo['title'];
-    description: Todo['description'];
-    done: Todo['done'];
+interface Props extends Todo{
     onEdit?: (id: Todo['id'], data: { title: Todo['title'], description: Todo['description'] }) => void;
     onDelete?: (id: Todo['id']) => void;
     onToggle?: (id: Todo['id']) => void;

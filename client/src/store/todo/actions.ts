@@ -32,10 +32,10 @@ export const fetchTodos = () =>
 export const addTodo = (title: Todo['title'], description: Todo['description']) =>
     (dispatch: ThunkDispatch<ApplicationState, {}, TodoAction>) => {
         TodoAPI.addTodo({ title, description })
-            .then(todo => {
+            .then(data => {
                 dispatch({
                     type: TodoActionTypes.ADD_TODO,
-                    payload: { todo },
+                    payload: { todo: data.task },
                 } as AddTodoAction)
             })
             .catch(err => { return; });

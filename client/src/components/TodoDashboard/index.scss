@@ -30,17 +30,13 @@
   }
 }
 
-.actions {
-  // flex: 1;
-}
-
 .scrollBox {
   position: relative; // set as offsetParent
   padding: 1.5rem;
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .content {

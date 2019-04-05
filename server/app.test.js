@@ -28,40 +28,37 @@ describe('TODO api tests', () => {
     });
 
     describe('GET: /tasks/:id', () => {
-        it('should return the task with id 1', async () => {
+        it('should return the task with the given id', async () => {
             const res = await request(app)
-                .get('/tasks/1');
+                .get('/tasks/d5a01ade-5771-11e9-8647-d663bd873d93');
 
             expect(res).to.have.status(200);
-            expect(res.body.task).to.have.property('id', 1);
+            expect(res.body.task).to.have.property('id', 'd5a01ade-5771-11e9-8647-d663bd873d93');
         });
 
         it('should return 404 if the request task does not exist', async () => {
             const res = await request(app)
-                .get('/tasks/99');
+                .get('/tasks/ed329564-5771-11e9-8647-d663bd873d93');
 
             expect(res).to.have.status(404);
-        });
-
-        it('should return 400 if the requesting id is not a number', async () => {
-            const res = await request(app)
-                .get('/tasks/one');
-
-            expect(res).to.have.status(400);
         });
     });
 
     describe('POST: /tasks', () => {
-        it('should create a new task with id 2, and return the newly created task', async () => {
-            const data = { title: 'task 2', description: 'a new task' };
+        it('should create a new task, and return the newly created task', async () => {
+            const oldRes = await request(app).get('/tasks');
+            const oldLength = oldRes.body.tasks.length;
+            const data = { title: 'new task title', description: 'a new task' };
             const res = await request(app)
                 .post('/tasks')
                 .send(data);
 
             expect(res).to.have.status(201);
-            expect(res.body).to.have.property('id', 2);
-            expect(res.body).to.have.property('title', 'task 2');
-            expect(res.body).to.have.property('description', 'a new task');
+            expect(res.body.task).to.have.property('title', 'new task title');
+            expect(res.body.task).to.have.property('description', 'a new task');
+
+            const newRes = await request(app).get('/tasks');
+            expect(newRes.body.tasks).to.have.length(oldLength + 1);
         });
 
         it('should return 400 when sending an empty title', async () => {
@@ -78,12 +75,12 @@ describe('TODO api tests', () => {
         it('should update the task title and description', async () => {
             const data = { title: 'edited title', description: 'edited description' };
             const res = await request(app)
-                .put('/tasks/1')
+                .put('/tasks/d5a01ade-5771-11e9-8647-d663bd873d93')
                 .send(data);
 
             expect(res).to.have.status(204);
 
-            const taskRes = await request(app).get('/tasks/1');
+            const taskRes = await request(app).get('/tasks/d5a01ade-5771-11e9-8647-d663bd873d93');
             expect(taskRes.body.task).to.have.property('title', 'edited title');
             expect(taskRes.body.task).to.have.property('description', 'edited description');
         });
@@ -91,7 +88,7 @@ describe('TODO api tests', () => {
         it('should return 400 when trying to update the title to empty', async () => {
             const data = { title: '', description: '' };
             const res = await request(app)
-                .put('/tasks/1')
+                .put('/tasks/d5a01ade-5771-11e9-8647-d663bd873d93')
                 .set(data);
 
             expect(res).to.have.status(400);
@@ -100,25 +97,18 @@ describe('TODO api tests', () => {
 
     describe('PUT: /tasks/:id/toggle', () => {
         it('should toggle the "done" status of the task', async () => {
-            const oldRes = await request(app).get('/tasks/1');
+            const oldRes = await request(app).get('/tasks/d5a01ade-5771-11e9-8647-d663bd873d93');
             const task = oldRes.body.task;
-            await request(app).put('/tasks/1/toggle');
-            const res = await request(app).get('/tasks/1');
+            await request(app).put('/tasks/d5a01ade-5771-11e9-8647-d663bd873d93/toggle');
+            const res = await request(app).get('/tasks/d5a01ade-5771-11e9-8647-d663bd873d93');
             expect(res.body.task.done).to.equal(!task.done);
         });
 
         it('should return 404 if the request task does not exist', async () => {
             const res = await request(app)
-                .put('/tasks/99/toggle');
+                .put('/tasks/ed329564-5771-11e9-8647-d663bd873d93/toggle');
 
             expect(res).to.have.status(404);
-        });
-
-        it('should return 400 if the requesting id is not a number', async () => {
-            const res = await request(app)
-                .put('/tasks/one/toggle');
-
-            expect(res).to.have.status(400);
         });
     });
 
@@ -127,28 +117,21 @@ describe('TODO api tests', () => {
             const oldRes = await request(app).get('/tasks');
             const oldLength = oldRes.body.tasks.length;
 
-            const res = await request(app).del('/tasks/1');
+            const res = await request(app).del('/tasks/d5a01ade-5771-11e9-8647-d663bd873d93');
             expect(res).to.have.status(200);
 
             const tasksRes = await request(app).get('/tasks');
             expect(tasksRes.body.tasks).to.have.length(oldLength - 1);
 
-            const taskRes = await request(app).get('/tasks/1');
+            const taskRes = await request(app).get('/tasks/d5a01ade-5771-11e9-8647-d663bd873d93');
             expect(taskRes).to.have.status(404);
         });
 
         it('should return 404 if the request task does not exist', async () => {
             const res = await request(app)
-                .del('/tasks/99');
+                .del('/tasks/ed329564-5771-11e9-8647-d663bd873d93');
 
             expect(res).to.have.status(404);
-        });
-
-        it('should return 400 if the requesting id is not a number', async () => {
-            const res = await request(app)
-                .del('/tasks/one');
-
-            expect(res).to.have.status(400);
         });
     });
 });
