@@ -10,7 +10,6 @@ const cssModuleLoaderDev = {
         modules: true,
         namedExport: true,
         camelCase: true,
-        sass: true,
     }
 };
 
@@ -23,8 +22,7 @@ module.exports = merge(common, {
                 test: /.scss$/,
                 use: [
                     'style-loader', // inject styles into DOM
-                    // 'css-loader',   // convert css to js
-                    cssModuleLoaderDev,
+                    cssModuleLoaderDev, // generate typings for css modules, convert css to js
                     'sass-loader',  // convert sass to css
                 ]
             },

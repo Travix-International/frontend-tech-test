@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:700|Open+Sans');
+@import './theme.scss';
 
 body, html, :global(#root) {
     margin: 0;
     height: 100%;
     font-size: 16px;
     font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    color: $color-text;
 }

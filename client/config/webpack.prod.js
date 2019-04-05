@@ -7,14 +7,13 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
-// @TODO: fix config
+
 const cssModuleLoaderProd = {
     loader: require.resolve('typings-for-css-modules-loader'),
     options: {
         modules: true,
         namedExport: true,
         camelCase: true,
-        sass: true,
         minimize: true,
         sourceMap: process.env.GENERATE_SOURCEMAP !== 'false',
     }
@@ -38,7 +37,7 @@ module.exports = merge(common, {
                 test: /.scss$/,
                 use: [
                     MiniCssExtractPlugin.loader, // extract css to a file and inject into html
-                    cssModuleLoaderProd,  // convert css to js
+                    cssModuleLoaderProd,  // generate typings for css modules, convert css to js
                     'sass-loader',  // convert sass to css
                 ]
             }
