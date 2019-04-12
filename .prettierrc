@@ -1,0 +1,12 @@
+{
+  "trailingComma": "es5",
+  "proseWrap": "always",
+  "overrides": [
+    {
+      "files": ".babelrc",
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
+}
