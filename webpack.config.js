@@ -1,3 +1,4 @@
+/* eslint-env node */
 const path = require("path");
 const webpack = require("webpack");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
@@ -18,7 +19,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.(css|scss)$/,
         use: [
           "style-loader",
           {
@@ -31,6 +32,13 @@ module.exports = {
             },
           },
           "postcss-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              data: "@import 'variables';",
+              includePaths: [path.resolve(__dirname, "src")],
+            },
+          },
         ],
       },
       {
@@ -39,6 +47,15 @@ module.exports = {
         use: {
           loader: "babel-loader",
         },
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "babel-loader",
+          },
+          "svg-react-loader",
+        ],
       },
     ],
   },

@@ -1,0 +1,15 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  font: 400 13px/20px "Source Sans Pro", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+body {
+  color: $body-text-color;
+}

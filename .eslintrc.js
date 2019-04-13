@@ -29,11 +29,6 @@ module.exports = {
     "no-array-constructor": "error",
     "no-console": "warn",
     "array-callback-return": "error",
-    "prefer-destructuring": [
-      "error",
-      { array: true, object: true },
-      { enforceForRenamedProperties: false },
-    ],
     "prefer-template": "error",
     "template-curly-spacing": "error",
     "no-eval": "error",

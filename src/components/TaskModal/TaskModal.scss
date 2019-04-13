@@ -1,0 +1,59 @@
+.TaskModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(9, 15, 41, 0.7);
+}
+
+.modal {
+  position: relative;
+  width: 500px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 4px 16px rgba(9, 15, 41, 0.4);
+}
+
+.header {
+  height: 20px;
+  padding: 20px;
+  text-align: left;
+}
+
+.title {
+  font-weight: 600;
+  display: inline;
+}
+
+.closeButton {
+  float: right;
+  cursor: pointer;
+}
+
+.body {
+  padding: 20px;
+  text-align: left;
+}
+
+.footer {
+  background: $main-bg-color;
+  border: 1px solid $border-color;
+  text-align: right;
+  padding: 20px;
+  user-select: none;
+}

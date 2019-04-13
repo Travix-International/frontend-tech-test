@@ -1,16 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
 import { hot } from "react-hot-loader";
 
-import styles from "./App.css";
+import Form from "./Form";
+import TaskList from "./TaskList";
 
-class App extends Component {
-  render() {
-    return (
-      <main className={styles.main}>
-        <div>Hello</div>
-      </main>
-    );
-  }
-}
+import styles from "./App.scss";
+
+const App = () => {
+  return (
+    <main className={styles.main}>
+      <header>
+        <h1>Todo tasks</h1>
+      </header>
+      <div className={styles.underline} />
+      <div className={styles.formContainer}>
+        <Form />
+      </div>
+      <TaskList />
+    </main>
+  );
+};
 
 export default hot(module)(App);

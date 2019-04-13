@@ -1,5 +1,5 @@
 import "normalize.css/normalize.css";
-import "./initial.css";
+import "./initial.scss";
 
 import React from "react";
 import ReactDOM from "react-dom";

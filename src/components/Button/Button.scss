@@ -1,0 +1,18 @@
+.button {
+  display: block;
+  padding: 10px 30px;
+  margin: 20px auto 0 auto;
+  border: 0;
+  border-radius: 4px;
+  outline: 0;
+  background-color: $button-primary-color;
+  font-weight: 600;
+  line-height: 20px;
+  color: #fff;
+  user-select: none;
+  overflow: hidden;
+
+  &:hover {
+    background: $button-hover-color;
+  }
+}
