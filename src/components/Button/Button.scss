@@ -1,5 +1,6 @@
-.button {
+.Button {
   display: block;
+  width: 140px;
   padding: 10px 30px;
   margin: 20px auto 0 auto;
   border: 0;
@@ -14,5 +15,10 @@
 
   &:hover {
     background: $button-hover-color;
+  }
+
+  &:disabled {
+    background: $icon-color;
+    padding: 9px 30px;
   }
 }

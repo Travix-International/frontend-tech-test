@@ -1,66 +1,75 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { array, func } from "prop-types";
+
+import {
+  fetchTasks,
+  getTasks,
+  updateTask,
+  deleteTask,
+} from "../../services/redux/tasks";
 
 import TaskModal from "../TaskModal";
-import Icon from "../Icon";
+import Task from "./Task";
 
 import styles from "./TaskList.scss";
 
 class TaskList extends Component {
+  static propTypes = {
+    updateTask: func.isRequired,
+    fetchTasks: func.isRequired,
+    tasks: array.isRequired,
+  };
+
   state = {
     showModal: false,
-    edit: false,
+    task: null,
   };
 
-  openEditModal = () => this.setState({ showModal: true, edit: true });
+  componentDidMount() {
+    this.props.fetchTasks();
+  }
 
-  openViewModal = () => this.setState({ showModal: true, edit: false });
+  openEditModal = task => this.setState({ showModal: true, task: task });
 
-  closeModal = () => this.setState({ showModal: false, edit: false });
+  closeModal = () => this.setState({ showModal: false, task: null });
 
-  onEdit = () => {
-    console.log("edit Task");
+  editTask = values => {
+    this.props.updateTask({ ...values, id: this.state.task.id });
+    this.closeModal();
   };
 
-  onDelete = () => {
-    console.log("delete Task");
-  };
+  deleteTask = id => this.props.deleteTask({ id });
 
   render() {
-    const { showModal, edit } = this.state;
+    const { showModal, task } = this.state;
+    const { tasks } = this.props;
 
     return (
-      <div className={styles.taskList}>
-        <div className={styles.taskContainer}>
-          <section className={styles.task} onClick={this.openViewModal}>
-            <h4 className={styles.title}>Something here as a title</h4>
-            <p className={styles.description}>
-              Whatever description for task, whatever description for task,
-              whatever description for task, whatever description for task,
-              dsafsagfagasf ,sa gdasgf, asdg,sa gd,sdg, asdg, asdg, as,dg sdg
-              ,sa,dg s,dg ,sad g,sdg ,sad g,s dg, sd,agas,dgsadgsadgsadg, sdg,
-              sadg, sdg, sagd, dasfasdgasgasgg sgdas gd sagd sadg, sdg, sagd,
-              dasfasdgasgasgg sgdas gd sagd
-            </p>
-          </section>
-          <div className={styles.actions}>
-            <button className={styles.iconButton} onClick={this.onDelete}>
-              <Icon glyph="trash" />
-            </button>
-            <button className={styles.iconButton} onClick={this.openEditModal}>
-              <Icon glyph="pencil" />
-            </button>
-            <TaskModal
-              isOpen={showModal}
-              onClose={this.closeModal}
-              onSuccess={this.onEdit}
-              edit={edit}
-              changeView={this.openEditModal}
-            />
-          </div>
-        </div>
+      <div className={styles.TaskList}>
+        {tasks.map(task => (
+          <Task
+            key={task.id}
+            task={task}
+            openEditModal={this.openEditModal}
+            deleteTask={this.deleteTask}
+          />
+        ))}
+        <TaskModal
+          isOpen={showModal}
+          onClose={this.closeModal}
+          editTask={this.editTask}
+          task={task}
+        />
       </div>
     );
   }
 }
 
-export default TaskList;
+const stateToProps = state => getTasks(state);
+const dispatchToProps = { fetchTasks, updateTask, deleteTask };
+
+export default connect(
+  stateToProps,
+  dispatchToProps
+)(TaskList);

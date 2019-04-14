@@ -1,0 +1,25 @@
+.Notification {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  min-width: 50%;
+  padding: 16px 22px 14px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  color: #fff;
+  line-height: 18px;
+  transition: width 3s linear;
+}
+
+.success {
+  background: $success-color;
+}
+
+.error {
+  background: $error-color;
+}
+
+.dismiss {
+  margin: 0 0 0 16px;
+  text-align: center;
+}

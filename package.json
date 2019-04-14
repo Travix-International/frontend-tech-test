@@ -20,12 +20,17 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.4.3",
+    "body-parser": "^1.18.3",
+    "classnames": "^2.2.6",
     "express": "^4.14.0",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "npm:@hot-loader/react-dom",
-    "react-overlays": "0.8.3"
+    "react-overlays": "0.8.3",
+    "react-redux": "^7.0.2",
+    "redux": "^4.0.1",
+    "redux-saga": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -33,6 +38,7 @@
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
+    "@babel/plugin-transform-regenerator": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.5.1",
@@ -51,6 +57,7 @@
     "prettier": "^1.16.4",
     "progress-bar-webpack-plugin": "^1.12.1",
     "react-hot-loader": "^4.8.3",
+    "redux-devtools-extension": "^2.13.8",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "stylelint": "^9.10.1",

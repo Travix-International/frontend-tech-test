@@ -25,7 +25,6 @@ module.exports = {
     ],
     "no-var": "error",
     "no-new-object": "error",
-    "object-shorthand": ["error", "always", { avoidQuotes: true }],
     "no-array-constructor": "error",
     "no-console": "warn",
     "array-callback-return": "error",

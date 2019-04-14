@@ -1,52 +1,8 @@
-.taskList {
+.TaskList {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
-}
-
-.taskContainer {
-  background: #fff;
-  box-shadow: 0 1px 5px $shadow-color;
-  margin: 10px;
-}
-
-.task {
-  display: flex;
-  flex-direction: column;
-  padding: 0 20px;
-  width: 300px;
-  height: 210px;
-  cursor: pointer;
-}
-
-.title {
-  margin-block-end: 10px;
-}
-
-.description {
-  overflow: hidden;
-  margin: 0;
-}
-
-.iconButton {
-  display: inline-block;
-  padding: 4px;
-  border: 0;
-  outline: 0;
-  margin-left: 10px;
-
-  &:hover {
-    svg {
-      fill: $icon-hover-color;
-    }
-  }
-}
-
-.actions {
-  display: flex;
-  flex-direction: row-reverse;
-  padding: 10px;
-  background-color: #fff;
-  border-top: 1px dashed $border-color;
+  padding: 0 10px 20px 10px;
 }

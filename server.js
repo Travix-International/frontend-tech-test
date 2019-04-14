@@ -2,6 +2,7 @@
 
 const path = require("path");
 const app = require("express")();
+const bodyParser = require("body-parser");
 const tasksContainer = require("./tasks.json");
 
 const chalk = require("chalk");
@@ -32,7 +33,10 @@ app.use(
 
 app.use(webpackHotMiddleware(compiler));
 
-app.get("/*", (req, res) => {
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
@@ -88,16 +92,37 @@ app.get("/task/:id", (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put("/task/update/:id/:title/:description", (req, res) => {
-  const id = parseInt(req.params.id, 10);
+app.put("/task/update", (req, res) => {
+  if (!req.body.title && !req.body.description) {
+    return res.status(400).send({
+      message: "Please complete at least one of the fields",
+    });
+  }
+
+  if (req.body.title.length > 40) {
+    return res.status(400).send({
+      message: "Amount of charachters for field 'title' is more than 40",
+    });
+  }
+
+  if (req.body.description.length > 300) {
+    return res.status(400).send({
+      message: "Amount of charachters for field 'description' is more than 300",
+    });
+  }
+  const id = parseInt(req.body.id, 10);
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
-      return res.status(204);
+      task.title = req.body.title;
+      task.description = req.body.description;
+
+      return res.status(201).send({
+        message: "Task updated",
+        ...tasksContainer,
+      });
     }
     return res.status(404).json({
       message: "Not found",
@@ -117,17 +142,36 @@ app.put("/task/update/:id/:title/:description", (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post("/task/create/:title/:description", (req, res) => {
+app.post("/task/create", (req, res) => {
+  if (!req.body.title && !req.body.description) {
+    return res.status(400).send({
+      message: "Please complete at least one of the fields",
+    });
+  }
+
+  if (req.body.title.length > 40) {
+    return res.status(400).send({
+      message: "Amount of charachters for field 'title' is more than 40",
+    });
+  }
+
+  if (req.body.description.length > 300) {
+    return res.status(400).send({
+      message: "Amount of charachters for field 'description' is more than 300",
+    });
+  }
+
   const task = {
     id: tasksContainer.tasks.length,
-    title: req.params.title,
-    description: req.params.description,
+    title: req.body.title,
+    description: req.body.description,
   };
 
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
-    message: "Resource created",
+    message: "Task created",
+    ...tasksContainer,
   });
 });
 
@@ -141,8 +185,8 @@ app.post("/task/create/:title/:description", (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete("/task/delete/:id", (req, res) => {
-  const id = parseInt(req.params.id, 10);
+app.delete("/task/delete", (req, res) => {
+  const id = parseInt(req.body.id, 10);
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
@@ -151,7 +195,8 @@ app.delete("/task/delete/:id", (req, res) => {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
-        message: "Updated successfully",
+        ...tasksContainer,
+        message: "Deleted successfully",
       });
     }
     return res.status(404).json({
