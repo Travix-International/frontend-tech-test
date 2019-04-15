@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button renders 1`] = `
+<button
+  className="Button"
+>
+  Name
+</button>
+`;
+
+exports[`Button renders in a loading mode 1`] = `
+<button
+  className="Button"
+  disabled={true}
+>
+  <Spinner />
+</button>
+`;

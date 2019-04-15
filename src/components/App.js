@@ -10,7 +10,7 @@ import TaskList from "./TaskList";
 
 import styles from "./App.scss";
 
-class App extends Component {
+export class App extends Component {
   static propTypes = {
     loading: bool,
     createTask: func,
@@ -21,15 +21,13 @@ class App extends Component {
   };
 
   componentDidUpdate() {
-    const { loading } = this.props;
-    if (!loading && this.state.loading) {
+    if (!this.props.loading && this.state.loading) {
       this.setState({ loading: false });
     }
   }
 
   createTask = values => {
-    const { createTask } = this.props;
-    createTask(values);
+    this.props.createTask(values);
     this.setState({ loading: true });
   };
 

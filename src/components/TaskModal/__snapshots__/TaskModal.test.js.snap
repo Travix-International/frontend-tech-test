@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskModal renders 1`] = `
+<Modal
+  autoFocus={true}
+  backdrop={true}
+  backdropClassName="backdrop"
+  className="TaskModal"
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[Function]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <div
+    className="modal"
+  >
+    <div
+      className="header"
+    >
+      <h2
+        className="title"
+      >
+        Edit task
+      </h2>
+      <span
+        className="closeButton"
+      >
+        <Icon
+          glyph="x"
+          onClick={[Function]}
+        />
+      </span>
+    </div>
+    <div
+      className="body"
+    >
+      <TaskForm
+        onSubmit={[Function]}
+        onSubmitName="Edit task"
+      />
+    </div>
+  </div>
+</Modal>
+`;

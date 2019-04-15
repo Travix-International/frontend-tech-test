@@ -83,6 +83,18 @@ class TaskForm extends Component {
     });
   };
 
+  renderCount = (value, maxLength) => {
+    return (
+      <span
+        className={
+          value.length >= maxLength ? styles.counterWarning : styles.counter
+        }
+      >
+        {value.length}/{maxLength}
+      </span>
+    );
+  };
+
   render() {
     const { loading, headerName, onSubmitName } = this.props;
     const { title, description, validationError } = this.state;
@@ -102,15 +114,7 @@ class TaskForm extends Component {
         ) : null}
         <form acceptCharset="utf-8" onSubmit={this.onSubmit}>
           <label className={styles.field}>
-            <span
-              className={
-                title.length >= maxLengths.title
-                  ? styles.counterWarning
-                  : styles.counter
-              }
-            >
-              {title.length}/{maxLengths.title}
-            </span>
+            {this.renderCount(title, maxLengths.title)}
             Title:
             <input
               type="text"
@@ -122,15 +126,7 @@ class TaskForm extends Component {
             />
           </label>
           <label className={styles.field}>
-            <span
-              className={
-                description.length >= maxLengths.description
-                  ? styles.counterWarning
-                  : styles.counter
-              }
-            >
-              {description.length}/{maxLengths.description}
-            </span>
+            {this.renderCount(description, maxLengths.description)}
             Description:
             <textarea
               name="description"

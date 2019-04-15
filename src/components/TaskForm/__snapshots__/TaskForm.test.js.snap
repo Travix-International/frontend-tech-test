@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskForm renders 1`] = `
+<div
+  className="TaskForm"
+>
+  <div
+    className="header"
+  >
+    <h2
+      className="name"
+    >
+      Create Task
+    </h2>
+  </div>
+  <form
+    acceptCharset="utf-8"
+    onSubmit={[Function]}
+  >
+    <label
+      className="field"
+    >
+      <span
+        className="counter"
+      >
+        0
+        /
+        40
+      </span>
+      Title:
+      <input
+        className="input"
+        maxLength={40}
+        name="title"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </label>
+    <label
+      className="field"
+    >
+      <span
+        className="counter"
+      >
+        0
+        /
+        300
+      </span>
+      Description:
+      <textarea
+        className="textarea"
+        maxLength={300}
+        name="description"
+        onChange={[Function]}
+        rows="3"
+        value=""
+      />
+    </label>
+    <Button>
+      Create task
+    </Button>
+  </form>
+</div>
+`;
+
+exports[`TaskForm renders the error notification when the values are empty 1`] = `
+<div
+  className="TaskForm"
+>
+  <div
+    className="header"
+  >
+    <h2
+      className="name"
+    >
+      Create Task
+    </h2>
+  </div>
+  <Notification
+    onDismiss={[Function]}
+    type="error"
+  >
+    Please complete at least one of the fields
+  </Notification>
+  <form
+    acceptCharset="utf-8"
+    onSubmit={[Function]}
+  >
+    <label
+      className="field"
+    >
+      <span
+        className="counter"
+      >
+        0
+        /
+        40
+      </span>
+      Title:
+      <input
+        className="input"
+        maxLength={40}
+        name="title"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </label>
+    <label
+      className="field"
+    >
+      <span
+        className="counter"
+      >
+        0
+        /
+        300
+      </span>
+      Description:
+      <textarea
+        className="textarea"
+        maxLength={300}
+        name="description"
+        onChange={[Function]}
+        rows="3"
+        value=""
+      />
+    </label>
+    <Button>
+      Create task
+    </Button>
+  </form>
+</div>
+`;
+
+exports[`TaskForm renders with initial values when the 'task' is passed in 1`] = `
+<div
+  className="TaskForm"
+>
+  <div
+    className="header"
+  >
+    <h2
+      className="name"
+    >
+      Create Task
+    </h2>
+  </div>
+  <form
+    acceptCharset="utf-8"
+    onSubmit={[Function]}
+  >
+    <label
+      className="field"
+    >
+      <span
+        className="counter"
+      >
+        9
+        /
+        40
+      </span>
+      Title:
+      <input
+        className="input"
+        maxLength={40}
+        name="title"
+        onChange={[Function]}
+        type="text"
+        value="__TITLE__"
+      />
+    </label>
+    <label
+      className="field"
+    >
+      <span
+        className="counter"
+      >
+        15
+        /
+        300
+      </span>
+      Description:
+      <textarea
+        className="textarea"
+        maxLength={300}
+        name="description"
+        onChange={[Function]}
+        rows="3"
+        value="__DESCRIPTION__"
+      />
+    </label>
+    <Button>
+      Create task
+    </Button>
+  </form>
+</div>
+`;

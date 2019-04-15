@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notification renders 1`] = `
+<div
+  className="Notification success"
+>
+  <span />
+</div>
+`;
+
+exports[`Notification renders with children 1`] = `
+<div
+  className="Notification success"
+>
+  <span>
+    <span>
+      Some Text
+    </span>
+  </span>
+</div>
+`;
+
+exports[`Notification renders with onDismiss Icon and triggers the onDismiss 1`] = `
+<div
+  className="Notification success"
+>
+  <span>
+    <span>
+      Some Text
+    </span>
+  </span>
+  <div
+    className="dismiss"
+  >
+    <Icon
+      color="white"
+      glyph="x"
+      onClick={[Function]}
+    />
+  </div>
+</div>
+`;

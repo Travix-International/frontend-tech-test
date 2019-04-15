@@ -14,7 +14,7 @@ import Task from "./Task";
 
 import styles from "./TaskList.scss";
 
-class TaskList extends Component {
+export class TaskList extends Component {
   static propTypes = {
     updateTask: func.isRequired,
     fetchTasks: func.isRequired,

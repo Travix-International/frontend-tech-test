@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskList renders 1`] = `
+<div
+  className="TaskList"
+>
+  <Task
+    deleteTask={[Function]}
+    key="2"
+    openEditModal={[Function]}
+    task={
+      Object {
+        "description": "__DESCRIPTION__",
+        "id": 2,
+        "title": "__TITLE__",
+      }
+    }
+  />
+  <TaskModal
+    editTask={[Function]}
+    isOpen={false}
+    onClose={[Function]}
+    task={null}
+  />
+</div>
+`;

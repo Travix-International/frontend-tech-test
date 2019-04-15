@@ -32,7 +32,7 @@ export const deleteTask = ({ id }) => ({
 
 // Reducers
 
-const defaultState = {
+export const defaultState = {
   tasks: [],
   loading: false,
 };

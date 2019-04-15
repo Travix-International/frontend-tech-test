@@ -1,7 +1,13 @@
 import { put, takeLatest, all } from "redux-saga/effects";
 import { FETCH, CREATE, UPDATE, RECEIVED, DELETE } from "./tasks";
 
-function* deleteTask(action) {
+function parseJson(response) {
+  return response.text().then(function(text) {
+    return text ? JSON.parse(text) : {};
+  });
+}
+
+export function* deleteTask(action) {
   const { id } = action;
   const json = yield fetch("http://localhost:9001/task/delete", {
     method: "DELETE",
@@ -9,11 +15,13 @@ function* deleteTask(action) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ id }),
-  }).then(response => response.json());
+  })
+    .then(response => parseJson(response))
+    .catch(error => console.log("ERROR", error));
   yield put({ type: RECEIVED, tasks: json.tasks });
 }
 
-function* updateTask(action) {
+export function* updateTask(action) {
   const { id, title, description } = action;
   const json = yield fetch("http://localhost:9001/task/update", {
     method: "PUT",
@@ -21,11 +29,13 @@ function* updateTask(action) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ id, title, description }),
-  }).then(response => response.json());
+  })
+    .then(response => parseJson(response))
+    .catch(error => console.log("ERROR", error));
   yield put({ type: RECEIVED, tasks: json.tasks });
 }
 
-function* createTask(action) {
+export function* createTask(action) {
   const { title, description } = action;
   const json = yield fetch("http://localhost:9001/task/create", {
     method: "POST",
@@ -33,18 +43,20 @@ function* createTask(action) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ title, description }),
-  }).then(response => response.json());
+  })
+    .then(response => parseJson(response))
+    .catch(error => console.log("ERROR", error));
   yield put({ type: RECEIVED, tasks: json.tasks });
 }
 
-function* fetchTasks() {
-  const json = yield fetch("http://localhost:9001/tasks").then(response => {
-    return response.json();
-  });
+export function* fetchTasks() {
+  const json = yield fetch("http://localhost:9001/tasks")
+    .then(response => parseJson(response))
+    .catch(error => console.log("ERROR", error));
   yield put({ type: RECEIVED, tasks: json.tasks });
 }
 
-function* actionWatcher() {
+export function* actionWatcher() {
   yield takeLatest(FETCH, fetchTasks);
   yield takeLatest(CREATE, createTask);
   yield takeLatest(UPDATE, updateTask);

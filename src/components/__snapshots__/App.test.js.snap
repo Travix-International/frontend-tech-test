@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders 1`] = `
+<main
+  className="main"
+>
+  <header
+    className="header"
+  >
+    <h1>
+      Todo tasks
+    </h1>
+  </header>
+  <div
+    className="underline"
+  />
+  <div
+    className="formContainer"
+  >
+    <TaskForm
+      headerName="Create task"
+      loading={false}
+      onSubmit={[Function]}
+      onSubmitName="Create task"
+    />
+  </div>
+  <ConnectFunction />
+</main>
+`;
