@@ -3,8 +3,9 @@ import { shallow } from "enzyme";
 
 import TaskForm from "./TaskForm";
 
+const noop = () => {};
 const task = {
-  id: 2,
+  id: "2",
   title: "__TITLE__",
   description: "__DESCRIPTION__",
 };
@@ -15,7 +16,8 @@ describe("TaskForm", () => {
       <TaskForm
         onSubmitName="Create task"
         headerName="Create Task"
-        onSubmit={() => {}}
+        onSubmit={noop}
+        validate={noop}
       />
     );
 
@@ -27,7 +29,7 @@ describe("TaskForm", () => {
       <TaskForm
         onSubmitName="Create task"
         headerName="Create Task"
-        onSubmit={() => {}}
+        onSubmit={noop}
         task={task}
       />
     );
@@ -40,7 +42,7 @@ describe("TaskForm", () => {
 
   it("renders the error notification when the values are empty", () => {
     const task = {
-      id: 2,
+      id: "2",
       title: "",
       description: "",
     };
@@ -48,7 +50,7 @@ describe("TaskForm", () => {
       <TaskForm
         onSubmitName="Create task"
         headerName="Create Task"
-        onSubmit={() => {}}
+        onSubmit={noop}
         task={task}
       />
     );

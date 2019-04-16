@@ -1,8 +1,15 @@
 .TaskList {
+  position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
   padding: 0 10px 20px 10px;
+}
+
+.counterWrapper {
+  position: absolute;
+  top: -20px;
+  font-weight: 600;
 }

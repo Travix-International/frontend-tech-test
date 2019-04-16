@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter renders 1`] = `
+<span
+  className="counter"
+>
+  8
+  /
+  10
+</span>
+`;

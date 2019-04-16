@@ -6,7 +6,7 @@ import { TaskList } from "./TaskList";
 const noop = () => {};
 const tasks = [
   {
-    id: 2,
+    id: "2",
     title: "__TITLE__",
     description: "__DESCRIPTION__",
   },
@@ -15,7 +15,13 @@ const tasks = [
 describe("TaskList", () => {
   it("renders", () => {
     const component = shallow(
-      <TaskList updateTask={noop} fetchTasks={noop} tasks={tasks} />
+      <TaskList
+        updateTask={noop}
+        fetchTasks={noop}
+        clearError={noop}
+        deleteTask={noop}
+        tasks={tasks}
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -31,6 +37,8 @@ describe("TaskList", () => {
       <TaskList
         updateTask={updateTaskSpy}
         fetchTasks={fetchTasksSpy}
+        clearError={noop}
+        deleteTask={noop}
         tasks={tasks}
       />
     );
@@ -47,7 +55,13 @@ describe("TaskList", () => {
 
   it("tests the state when the 'openEditModal' and 'closeModal' are triggered", () => {
     const component = shallow(
-      <TaskList updateTask={noop} fetchTasks={noop} tasks={tasks} />
+      <TaskList
+        updateTask={noop}
+        fetchTasks={noop}
+        clearError={noop}
+        deleteTask={noop}
+        tasks={tasks}
+      />
     );
 
     component.instance().openEditModal(tasks[0]);

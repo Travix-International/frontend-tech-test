@@ -4,14 +4,23 @@ exports[`TaskList renders 1`] = `
 <div
   className="TaskList"
 >
+  <span
+    className="counterWrapper"
+  >
+    <Counter
+      maxLength={50}
+      valueLength={1}
+    />
+  </span>
   <Task
+    clearError={[Function]}
     deleteTask={[Function]}
     key="2"
     openEditModal={[Function]}
     task={
       Object {
         "description": "__DESCRIPTION__",
-        "id": 2,
+        "id": "2",
         "title": "__TITLE__",
       }
     }

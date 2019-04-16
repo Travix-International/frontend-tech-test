@@ -1,5 +1,5 @@
 import React from "react";
-import { shape, number, string, func } from "prop-types";
+import { shape, string, func } from "prop-types";
 
 import Icon from "../Icon";
 
@@ -12,8 +12,9 @@ const Task = props => {
   };
 
   const onDelete = () => {
-    const { task, deleteTask } = props;
-    deleteTask(task.id);
+    const { task, deleteTask, clearError } = props;
+    clearError();
+    deleteTask({ id: task.id });
   };
 
   const { task } = props;
@@ -38,12 +39,13 @@ const Task = props => {
 
 Task.propTypes = {
   task: shape({
-    id: number.isRequired,
+    id: string.isRequired,
     title: string,
     description: string,
-  }),
+  }).isRequired,
   openEditModal: func.isRequired,
   deleteTask: func.isRequired,
+  clearError: func.isRequired,
 };
 
 export default Task;

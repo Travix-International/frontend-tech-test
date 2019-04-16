@@ -33,23 +33,27 @@ describe("Actions", () => {
   it("tests updateTask", () => {
     const expectedAction = {
       type: UPDATE,
-      id: 2,
+      id: "2",
       title: "__TITLE__",
       description: "__DESCRIPTION__",
     };
 
     expect(
-      updateTask({ id: 2, title: "__TITLE__", description: "__DESCRIPTION__" })
+      updateTask({
+        id: "2",
+        title: "__TITLE__",
+        description: "__DESCRIPTION__",
+      })
     ).toEqual(expectedAction);
   });
 
   it("tests deleteTask", () => {
     const expectedAction = {
       type: DELETE,
-      id: 2,
+      id: "2",
     };
 
-    expect(deleteTask({ id: 2 })).toEqual(expectedAction);
+    expect(deleteTask({ id: "2" })).toEqual(expectedAction);
   });
 });
 

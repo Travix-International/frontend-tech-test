@@ -20,13 +20,10 @@ exports[`TaskForm renders 1`] = `
     <label
       className="field"
     >
-      <span
-        className="counter"
-      >
-        0
-        /
-        40
-      </span>
+      <Counter
+        maxLength={40}
+        valueLength={0}
+      />
       Title:
       <input
         className="input"
@@ -40,13 +37,10 @@ exports[`TaskForm renders 1`] = `
     <label
       className="field"
     >
-      <span
-        className="counter"
-      >
-        0
-        /
-        300
-      </span>
+      <Counter
+        maxLength={300}
+        valueLength={0}
+      />
       Description:
       <textarea
         className="textarea"
@@ -90,13 +84,10 @@ exports[`TaskForm renders the error notification when the values are empty 1`] =
     <label
       className="field"
     >
-      <span
-        className="counter"
-      >
-        0
-        /
-        40
-      </span>
+      <Counter
+        maxLength={40}
+        valueLength={0}
+      />
       Title:
       <input
         className="input"
@@ -110,13 +101,10 @@ exports[`TaskForm renders the error notification when the values are empty 1`] =
     <label
       className="field"
     >
-      <span
-        className="counter"
-      >
-        0
-        /
-        300
-      </span>
+      <Counter
+        maxLength={300}
+        valueLength={0}
+      />
       Description:
       <textarea
         className="textarea"
@@ -154,13 +142,10 @@ exports[`TaskForm renders with initial values when the 'task' is passed in 1`] =
     <label
       className="field"
     >
-      <span
-        className="counter"
-      >
-        9
-        /
-        40
-      </span>
+      <Counter
+        maxLength={40}
+        valueLength={9}
+      />
       Title:
       <input
         className="input"
@@ -174,13 +159,10 @@ exports[`TaskForm renders with initial values when the 'task' is passed in 1`] =
     <label
       className="field"
     >
-      <span
-        className="counter"
-      >
-        15
-        /
-        300
-      </span>
+      <Counter
+        maxLength={300}
+        valueLength={15}
+      />
       Description:
       <textarea
         className="textarea"

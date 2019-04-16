@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Task renders 1`] = `
+<div
+  className="taskContainer"
+>
+  <section
+    className="task"
+  >
+    <h4
+      className="title"
+    >
+      __TITLE__
+    </h4>
+    <p
+      className="description"
+    >
+      __DESCRIPTION__
+    </p>
+  </section>
+  <div
+    className="actions"
+  >
+    <button
+      className="iconButton"
+      onClick={[Function]}
+    >
+      <Icon
+        glyph="trash"
+      />
+    </button>
+    <button
+      className="iconButton"
+      onClick={[Function]}
+    >
+      <Icon
+        glyph="pencil"
+      />
+    </button>
+  </div>
+</div>
+`;

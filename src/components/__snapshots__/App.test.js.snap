@@ -22,8 +22,11 @@ exports[`App renders 1`] = `
       loading={false}
       onSubmit={[Function]}
       onSubmitName="Create task"
+      validate={[Function]}
     />
   </div>
-  <ConnectFunction />
+  <ConnectFunction
+    clearError={[Function]}
+  />
 </main>
 `;

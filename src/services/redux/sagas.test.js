@@ -65,7 +65,7 @@ describe("SAGAS", () => {
 
   it("should dispatch action 'RECEIVED' with result from 'deleteTask'  API", () => {
     const generator = deleteTask({
-      id: 1,
+      id: "1",
     });
     generator.next();
 

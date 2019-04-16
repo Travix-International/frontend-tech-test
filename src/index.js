@@ -1,6 +1,5 @@
 import "normalize.css/normalize.css";
 import "./initial.scss";
-// import "./images/favicon-32x32.png";
 
 import React from "react";
 import ReactDOM from "react-dom";

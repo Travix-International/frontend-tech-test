@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "react-overlays";
-import { bool, func, string, shape, number } from "prop-types";
+import { bool, func, string, shape } from "prop-types";
 
 import Icon from "../Icon";
 import TaskForm from "../TaskForm";
@@ -37,7 +37,7 @@ TaskModal.propTypes = {
   onClose: func.isRequired,
   editTask: func.isRequired,
   task: shape({
-    id: number.isRequired,
+    id: string.isRequired,
     title: string,
     description: string,
   }),

@@ -1,20 +1,17 @@
 import React, { Component } from "react";
-import { shape, string, number, bool, func } from "prop-types";
+import { shape, string, bool, func } from "prop-types";
 
+import { errorMessages, maxLengths } from "../../utilities/utilities";
 import Button from "../Button";
+import Counter from "../Counter";
 import Notification from "../Notification";
 
 import styles from "./TaskForm.scss";
 
-const maxLengths = {
-  title: 40,
-  description: 300,
-};
-
 class TaskForm extends Component {
   static propTypes = {
     task: shape({
-      id: number.isRequired,
+      id: string.isRequired,
       title: string,
       description: string,
     }),
@@ -22,6 +19,7 @@ class TaskForm extends Component {
     onSubmitName: string.isRequired,
     onSubmit: func.isRequired,
     loading: bool,
+    validate: func,
   };
 
   state = {
@@ -37,11 +35,21 @@ class TaskForm extends Component {
     }
   }
 
+  setErrorMessage = message => this.setState({ validationError: message });
+
   validate = ({ title, description }) => {
+    const { validate } = this.props;
+
+    if (validate) {
+      const errorMessage = validate();
+      if (errorMessage) {
+        this.setErrorMessage(errorMessage);
+        return;
+      }
+    }
+
     if (title === "" && description === "") {
-      this.setState({
-        validationError: "Please complete at least one of the fields",
-      });
+      this.setErrorMessage(errorMessages.emptyFields);
       return;
     }
     return {
@@ -83,18 +91,6 @@ class TaskForm extends Component {
     });
   };
 
-  renderCount = (value, maxLength) => {
-    return (
-      <span
-        className={
-          value.length >= maxLength ? styles.counterWarning : styles.counter
-        }
-      >
-        {value.length}/{maxLength}
-      </span>
-    );
-  };
-
   render() {
     const { loading, headerName, onSubmitName } = this.props;
     const { title, description, validationError } = this.state;
@@ -114,7 +110,7 @@ class TaskForm extends Component {
         ) : null}
         <form acceptCharset="utf-8" onSubmit={this.onSubmit}>
           <label className={styles.field}>
-            {this.renderCount(title, maxLengths.title)}
+            <Counter valueLength={title.length} maxLength={maxLengths.title} />
             Title:
             <input
               type="text"
@@ -126,7 +122,10 @@ class TaskForm extends Component {
             />
           </label>
           <label className={styles.field}>
-            {this.renderCount(description, maxLengths.description)}
+            <Counter
+              valueLength={description.length}
+              maxLength={maxLengths.description}
+            />
             Description:
             <textarea
               name="description"

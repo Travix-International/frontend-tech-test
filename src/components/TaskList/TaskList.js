@@ -8,7 +8,9 @@ import {
   updateTask,
   deleteTask,
 } from "../../services/redux/tasks";
+import { maxLengths } from "../../utilities/utilities";
 
+import Counter from "../Counter";
 import TaskModal from "../TaskModal";
 import Task from "./Task";
 
@@ -19,6 +21,8 @@ export class TaskList extends Component {
     updateTask: func.isRequired,
     fetchTasks: func.isRequired,
     tasks: array.isRequired,
+    clearError: func.isRequired,
+    deleteTask: func.isRequired,
   };
 
   state = {
@@ -47,20 +51,22 @@ export class TaskList extends Component {
     this.closeModal();
   };
 
-  deleteTask = id => this.props.deleteTask({ id });
-
   render() {
     const { showModal, task } = this.state;
-    const { tasks } = this.props;
+    const { tasks, deleteTask, clearError } = this.props;
 
     return (
       <div className={styles.TaskList}>
+        <span className={styles.counterWrapper}>
+          <Counter valueLength={tasks.length} maxLength={maxLengths.tasks} />
+        </span>
         {tasks.map(task => (
           <Task
             key={task.id}
             task={task}
             openEditModal={this.openEditModal}
-            deleteTask={this.deleteTask}
+            deleteTask={deleteTask}
+            clearError={clearError}
           />
         ))}
         <TaskModal

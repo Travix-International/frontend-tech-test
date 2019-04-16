@@ -40,6 +40,12 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
+const generateID = () => {
+  return `_${Math.random()
+    .toString(36)
+    .substr(2, 9)}`;
+};
+
 /**
  * GET /tasks
  *
@@ -85,7 +91,7 @@ app.get("/task/:id", (req, res) => {
 /**
  * PUT /task/update/:id/:title/:description
  *
- * id: Number
+ * id: string
  * title: string
  * description: string
  *
@@ -112,9 +118,9 @@ app.put("/task/update", (req, res) => {
       message: "Amount of charachters for field 'description' is more than 300",
     });
   }
-  const id = parseInt(req.body.id, 10);
+  const id = req.body.id;
 
-  if (!Number.isNaN(id)) {
+  if (id) {
     const tasksContainer = fs.readJsonSync("./tasks.json");
     const task = tasksContainer.tasks.find(item => item.id === id);
 
@@ -168,8 +174,15 @@ app.post("/task/create", (req, res) => {
 
   const tasksContainer = fs.readJsonSync("./tasks.json");
 
+  if (tasksContainer.tasks.length >= 50) {
+    return res.status(400).send({
+      message:
+        "You reached a maximum amount of available tasks that you can create.",
+    });
+  }
+
   const task = {
-    id: tasksContainer.tasks.length,
+    id: generateID(),
     title: req.body.title,
     description: req.body.description,
   };
@@ -187,7 +200,7 @@ app.post("/task/create", (req, res) => {
 /**
  * DELETE /task/delete/:id
  *
- * id: Number
+ * id: string
  *
  * Delete the task linked to the  given id.
  * If the task is found and deleted as well, return a status code 204.
@@ -195,9 +208,9 @@ app.post("/task/create", (req, res) => {
  * If the provided id is not a valid number return a status code 400.
  */
 app.delete("/task/delete", (req, res) => {
-  const id = parseInt(req.body.id, 10);
+  const id = req.body.id;
 
-  if (!Number.isNaN(id)) {
+  if (id) {
     const tasksContainer = fs.readJsonSync("./tasks.json");
     const task = tasksContainer.tasks.find(item => item.id === id);
 

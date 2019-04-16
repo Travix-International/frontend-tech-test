@@ -40,13 +40,3 @@
   composes: input;
   resize: vertical;
 }
-
-.counter {
-  float: right;
-  color: $border-dark-color;
-}
-
-.counterWarning {
-  composes: counter;
-  color: $error-color;
-}
