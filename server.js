@@ -3,7 +3,7 @@
 const path = require("path");
 const app = require("express")();
 const bodyParser = require("body-parser");
-const tasksContainer = require("./tasks.json");
+const fs = require("fs-extra");
 
 const chalk = require("chalk");
 
@@ -46,6 +46,7 @@ app.get("/", (req, res) => {
  * Return the list of tasks with status code 200.
  */
 app.get("/tasks", (req, res) => {
+  const tasksContainer = fs.readJsonSync("./tasks.json");
   return res.status(200).json(tasksContainer);
 });
 
@@ -64,6 +65,7 @@ app.get("/task/:id", (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
+    const tasksContainer = fs.readJsonSync("./tasks.json");
     const task = tasksContainer.find(item => item.id === id);
 
     if (task !== null) {
@@ -113,11 +115,14 @@ app.put("/task/update", (req, res) => {
   const id = parseInt(req.body.id, 10);
 
   if (!Number.isNaN(id)) {
+    const tasksContainer = fs.readJsonSync("./tasks.json");
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
       task.title = req.body.title;
       task.description = req.body.description;
+
+      fs.writeJsonSync("./tasks.json", tasksContainer);
 
       return res.status(201).send({
         message: "Task updated",
@@ -161,6 +166,8 @@ app.post("/task/create", (req, res) => {
     });
   }
 
+  const tasksContainer = fs.readJsonSync("./tasks.json");
+
   const task = {
     id: tasksContainer.tasks.length,
     title: req.body.title,
@@ -168,6 +175,8 @@ app.post("/task/create", (req, res) => {
   };
 
   tasksContainer.tasks.push(task);
+
+  fs.writeJsonSync("./tasks.json", tasksContainer);
 
   return res.status(201).json({
     message: "Task created",
@@ -189,11 +198,14 @@ app.delete("/task/delete", (req, res) => {
   const id = parseInt(req.body.id, 10);
 
   if (!Number.isNaN(id)) {
+    const tasksContainer = fs.readJsonSync("./tasks.json");
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
+      fs.writeJsonSync("./tasks.json", tasksContainer);
+
       return res.status(200).json({
         ...tasksContainer,
         message: "Deleted successfully",

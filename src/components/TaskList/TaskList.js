@@ -35,7 +35,15 @@ export class TaskList extends Component {
   closeModal = () => this.setState({ showModal: false, task: null });
 
   editTask = values => {
-    this.props.updateTask({ ...values, id: this.state.task.id });
+    const { task } = this.state;
+    if (
+      values.title === task.title &&
+      values.description === task.description
+    ) {
+      this.closeModal();
+      return;
+    }
+    this.props.updateTask({ ...values, id: task.id });
     this.closeModal();
   };
 
