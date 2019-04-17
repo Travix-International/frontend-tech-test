@@ -3,6 +3,9 @@
 exports[`Button renders 1`] = `
 <button
   className="Button"
+  disabled={false}
+  onClick={[Function]}
+  type="submit"
 >
   Name
 </button>
@@ -12,6 +15,8 @@ exports[`Button renders in a loading mode 1`] = `
 <button
   className="Button"
   disabled={true}
+  onClick={[Function]}
+  type="submit"
 >
   <Spinner />
 </button>

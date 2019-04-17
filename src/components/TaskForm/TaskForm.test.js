@@ -5,7 +5,6 @@ import TaskForm from "./TaskForm";
 
 const noop = () => {};
 const task = {
-  id: "2",
   title: "__TITLE__",
   description: "__DESCRIPTION__",
 };
@@ -14,9 +13,9 @@ describe("TaskForm", () => {
   it("renders", () => {
     const component = shallow(
       <TaskForm
-        onSubmitName="Create task"
         headerName="Create Task"
         onSubmit={noop}
+        onSubmitName="Create task"
         validate={noop}
       />
     );
@@ -27,9 +26,9 @@ describe("TaskForm", () => {
   it("renders with initial values when the 'task' is passed in", () => {
     const component = shallow(
       <TaskForm
-        onSubmitName="Create task"
         headerName="Create Task"
         onSubmit={noop}
+        onSubmitName="Create task"
         task={task}
       />
     );
@@ -41,17 +40,11 @@ describe("TaskForm", () => {
   });
 
   it("renders the error notification when the values are empty", () => {
-    const task = {
-      id: "2",
-      title: "",
-      description: "",
-    };
     const component = shallow(
       <TaskForm
-        onSubmitName="Create task"
         headerName="Create Task"
         onSubmit={noop}
-        task={task}
+        onSubmitName="Create task"
       />
     );
 
@@ -65,9 +58,9 @@ describe("TaskForm", () => {
     const onSubmitSpy = jest.fn();
     const component = shallow(
       <TaskForm
-        onSubmitName="Create task"
         headerName="Create Task"
         onSubmit={onSubmitSpy}
+        onSubmitName="Create task"
         task={task}
       />
     );

@@ -40,6 +40,7 @@ exports[`TaskModal renders 1`] = `
         className="closeButton"
       >
         <Icon
+          color="blue"
           glyph="x"
           onClick={[Function]}
         />
@@ -49,8 +50,17 @@ exports[`TaskModal renders 1`] = `
       className="body"
     >
       <TaskForm
+        headerName=""
+        loading={false}
         onSubmit={[Function]}
         onSubmitName="Edit task"
+        task={
+          Object {
+            "description": "",
+            "title": "",
+          }
+        }
+        validate={[Function]}
       />
     </div>
   </div>

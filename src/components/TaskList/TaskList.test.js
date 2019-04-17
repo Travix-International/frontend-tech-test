@@ -16,11 +16,11 @@ describe("TaskList", () => {
   it("renders", () => {
     const component = shallow(
       <TaskList
-        updateTask={noop}
-        fetchTasks={noop}
         clearError={noop}
         deleteTask={noop}
+        fetchTasks={noop}
         tasks={tasks}
+        updateTask={noop}
       />
     );
     expect(component).toMatchSnapshot();
@@ -35,11 +35,11 @@ describe("TaskList", () => {
     };
     const component = shallow(
       <TaskList
-        updateTask={updateTaskSpy}
-        fetchTasks={fetchTasksSpy}
         clearError={noop}
         deleteTask={noop}
+        fetchTasks={fetchTasksSpy}
         tasks={tasks}
+        updateTask={updateTaskSpy}
       />
     );
 
@@ -56,11 +56,11 @@ describe("TaskList", () => {
   it("tests the state when the 'openEditModal' and 'closeModal' are triggered", () => {
     const component = shallow(
       <TaskList
-        updateTask={noop}
-        fetchTasks={noop}
         clearError={noop}
         deleteTask={noop}
+        fetchTasks={noop}
         tasks={tasks}
+        updateTask={noop}
       />
     );
 

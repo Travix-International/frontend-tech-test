@@ -24,17 +24,23 @@ exports[`Task renders 1`] = `
     <button
       className="iconButton"
       onClick={[Function]}
+      type="button"
     >
       <Icon
+        color="blue"
         glyph="trash"
+        onClick={[Function]}
       />
     </button>
     <button
       className="iconButton"
       onClick={[Function]}
+      type="button"
     >
       <Icon
+        color="blue"
         glyph="pencil"
+        onClick={[Function]}
       />
     </button>
   </div>

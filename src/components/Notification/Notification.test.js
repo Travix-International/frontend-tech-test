@@ -23,7 +23,7 @@ describe("Notification", () => {
   it("renders with onDismiss Icon and triggers the onDismiss", () => {
     const onDismiss = () => {};
     const component = shallow(
-      <Notification type="success" onDismiss={onDismiss}>
+      <Notification onDismiss={onDismiss} type="success">
         <span>Some Text</span>
       </Notification>
     );

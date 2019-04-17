@@ -1,20 +1,25 @@
-import React, { Component, createRef } from "react";
 import { hot } from "react-hot-loader";
+import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
-import { bool, func } from "prop-types";
+import { bool, func, string, arrayOf, shape } from "prop-types";
 
 import { createTask, getTasks } from "../services/redux/tasks";
 import { errorMessages, maxLengths } from "../utilities/utilities";
-
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
-
 import styles from "./App.scss";
 
 export class App extends Component {
   static propTypes = {
-    loading: bool,
-    createTask: func,
+    loading: bool.isRequired,
+    createTask: func.isRequired,
+    tasks: arrayOf(
+      shape({ id: string.isRequired, title: string, description: string })
+    ),
+  };
+
+  static defaultProps = {
+    tasks: [],
   };
 
   state = {
@@ -23,10 +28,13 @@ export class App extends Component {
 
   taskForm = createRef();
 
-  componentDidUpdate() {
-    if (!this.props.loading && this.state.loading) {
-      this.setState({ loading: false });
+  static getDerivedStateFromProps(props, state) {
+    const { loading } = props;
+    const { loading: loadingState } = state;
+    if (!loading && loadingState) {
+      return { loading: false };
     }
+    return null;
   }
 
   createTask = values => {
@@ -38,6 +46,7 @@ export class App extends Component {
     if (this.props.tasks.length === maxLengths.tasks) {
       return errorMessages.maxTasksAmount;
     }
+    return null;
   };
 
   clearError = () => this.taskForm.current.hideNotification();
@@ -55,9 +64,9 @@ export class App extends Component {
           <TaskForm
             ref={this.taskForm}
             headerName="Create task"
-            onSubmitName="Create task"
-            onSubmit={this.createTask}
             loading={loading}
+            onSubmit={this.createTask}
+            onSubmitName="Create task"
             validate={this.validate}
           />
         </div>

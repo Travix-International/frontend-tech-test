@@ -5,7 +5,7 @@ import Counter from "./Counter";
 
 describe("Counter", () => {
   it("renders", () => {
-    const component = shallow(<Counter valueLength={8} maxLength={10} />);
+    const component = shallow(<Counter maxLength={10} valueLength={8} />);
 
     expect(component).toMatchSnapshot();
   });

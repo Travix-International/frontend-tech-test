@@ -5,13 +5,11 @@ import { errorMessages, maxLengths } from "../../utilities/utilities";
 import Button from "../Button";
 import Counter from "../Counter";
 import Notification from "../Notification";
-
 import styles from "./TaskForm.scss";
 
 class TaskForm extends Component {
   static propTypes = {
     task: shape({
-      id: string.isRequired,
       title: string,
       description: string,
     }),
@@ -20,6 +18,13 @@ class TaskForm extends Component {
     onSubmit: func.isRequired,
     loading: bool,
     validate: func,
+  };
+
+  static defaultProps = {
+    task: { title: "", description: "" },
+    headerName: "",
+    loading: false,
+    validate: () => {},
   };
 
   state = {
@@ -44,17 +49,21 @@ class TaskForm extends Component {
       const errorMessage = validate();
       if (errorMessage) {
         this.setErrorMessage(errorMessage);
-        return;
+        return null;
       }
     }
 
-    if (title === "" && description === "") {
+    const cleanTitle = title.trim();
+    const cleanDescription = description.trim();
+
+    if (cleanTitle === "" && cleanDescription === "") {
       this.setErrorMessage(errorMessages.emptyFields);
-      return;
+      return null;
     }
+
     return {
-      title: title.trim(),
-      description: description.trim(),
+      title: cleanTitle,
+      description: cleanDescription,
     };
   };
 
@@ -104,36 +113,36 @@ class TaskForm extends Component {
         ) : null}
 
         {validationError ? (
-          <Notification type="error" onDismiss={this.hideNotification}>
+          <Notification onDismiss={this.hideNotification} type="error">
             {validationError}
           </Notification>
         ) : null}
         <form acceptCharset="utf-8" onSubmit={this.onSubmit}>
           <label className={styles.field}>
-            <Counter valueLength={title.length} maxLength={maxLengths.title} />
+            <Counter maxLength={maxLengths.title} valueLength={title.length} />
             Title:
             <input
-              type="text"
-              name="title"
-              value={title}
               className={styles.input}
-              onChange={this.onChange}
               maxLength={maxLengths.title}
+              name="title"
+              onChange={this.onChange}
+              type="text"
+              value={title}
             />
           </label>
           <label className={styles.field}>
             <Counter
-              valueLength={description.length}
               maxLength={maxLengths.description}
+              valueLength={description.length}
             />
             Description:
             <textarea
-              name="description"
-              value={description}
               className={styles.textarea}
-              onChange={this.onChange}
               maxLength={maxLengths.description}
+              name="description"
+              onChange={this.onChange}
               rows="3"
+              value={description}
             />
           </label>
           <Button loading={loading}>{onSubmitName}</Button>

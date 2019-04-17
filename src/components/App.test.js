@@ -14,9 +14,7 @@ describe("App", () => {
   it("tests the 'createTask'", () => {
     const createTaskSpy = jest.fn();
     const values = { title: "__TITLE__", description: "__DESCRIPTION__" };
-    const component = shallow(
-      <App createTask={createTaskSpy} loading={true} />
-    );
+    const component = shallow(<App createTask={createTaskSpy} loading />);
 
     component.instance().createTask(values);
     expect(createTaskSpy).toHaveBeenCalledWith(values);
@@ -25,7 +23,9 @@ describe("App", () => {
 
   it("tests the 'componentDidUpdate'", () => {
     const createTaskSpy = jest.fn();
-    const component = shallow(<App createTask={createTaskSpy} />);
+    const component = shallow(
+      <App createTask={createTaskSpy} loading={false} />
+    );
 
     component.state().loading = true;
     component.setProps({ loading: false });

@@ -1,20 +1,19 @@
-"use strict";
-
+/* eslint-disable import/no-extraneous-dependencies */
+// the project is configured only for development mode
 const path = require("path");
 const app = require("express")();
 const bodyParser = require("body-parser");
-const fs = require("fs-extra");
-
 const chalk = require("chalk");
+const fs = require("fs-extra");
+const webpack = require("webpack");
+const webpackDevMiddleware = require("webpack-dev-middleware");
+const webpackHotMiddleware = require("webpack-hot-middleware");
 
 process.stdout.write(`
  ${chalk.bgHex("#224dff").white("--- frontend-tech-test ---")}
  The server is available on ${chalk.hex("#f7c132")("http://localhost:9001/")}
 \n`);
 
-const webpack = require("webpack");
-const webpackDevMiddleware = require("webpack-dev-middleware");
-const webpackHotMiddleware = require("webpack-hot-middleware");
 const config = require("./webpack.config");
 
 const compiler = webpack(config);
@@ -118,7 +117,7 @@ app.put("/task/update", (req, res) => {
       message: "Amount of charachters for field 'description' is more than 300",
     });
   }
-  const id = req.body.id;
+  const { id } = req.body;
 
   if (id) {
     const tasksContainer = fs.readJsonSync("./tasks.json");
@@ -208,7 +207,7 @@ app.post("/task/create", (req, res) => {
  * If the provided id is not a valid number return a status code 400.
  */
 app.delete("/task/delete", (req, res) => {
-  const id = req.body.id;
+  const { id } = req.body;
 
   if (id) {
     const tasksContainer = fs.readJsonSync("./tasks.json");

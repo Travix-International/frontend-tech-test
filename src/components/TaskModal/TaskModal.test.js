@@ -8,7 +8,7 @@ const noop = () => {};
 describe("TaskModal", () => {
   it("renders", () => {
     const component = shallow(
-      <TaskModal isOpen={true} onClose={noop} editTask={noop} />
+      <TaskModal editTask={noop} isOpen onClose={noop} />
     );
     expect(component).toMatchSnapshot();
   });

@@ -3,7 +3,6 @@ import { oneOf, func, node } from "prop-types";
 import cn from "classnames";
 
 import Icon from "../Icon";
-
 import styles from "./Notification.scss";
 
 const Notification = props => {
@@ -13,14 +12,19 @@ const Notification = props => {
 
   return (
     <div className={className}>
-      <span>{children}</span>
+      {children}
       {onDismiss ? (
         <div className={styles.dismiss}>
-          <Icon glyph="x" color="white" onClick={onDismiss} />
+          <Icon color="white" glyph="x" onClick={onDismiss} />
         </div>
       ) : null}
     </div>
   );
+};
+
+Notification.defaultProps = {
+  onDismiss: () => {},
+  children: <span />,
 };
 
 Notification.propTypes = {

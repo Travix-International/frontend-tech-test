@@ -1,12 +1,17 @@
 module.exports = {
-  extends: ["eslint:recommended", "plugin:prettier/recommended"],
+  extends: ["travix", "plugin:prettier/recommended"],
   parser: "babel-eslint",
-  plugins: ["babel", "react"],
+  plugins: ["react-hooks", "babel", "react"],
   env: {
     browser: true,
     es6: true,
     node: true,
     jest: true,
+  },
+  settings: {
+    react: {
+      version: "16.8",
+    },
   },
   parserOptions: {
     sourceType: "module",
@@ -15,43 +20,13 @@ module.exports = {
     },
   },
   rules: {
-    "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error",
-    "prefer-const": [
-      "error",
+    "jsx-a11y/label-has-associated-control": [
+      2,
       {
-        destructuring: "any",
-        ignoreReadBeforeAssign: false,
+        assert: "either",
+        depth: 3,
       },
     ],
-    "no-var": "error",
-    "no-new-object": "error",
-    "no-array-constructor": "error",
-    "no-console": "warn",
-    "array-callback-return": "error",
-    "prefer-template": "error",
-    "template-curly-spacing": "error",
-    "no-eval": "error",
-    "space-before-blocks": [
-      "error",
-      { functions: "always", keywords: "always", classes: "always" },
-    ],
-    "no-param-reassign": ["error", { props: true }],
-    "arrow-parens": ["error", "as-needed"],
-    "no-restricted-syntax": [
-      "error",
-      "WithStatement",
-      "BinaryExpression[operator='in']",
-    ],
-    "dot-notation": "error",
-    "no-duplicate-imports": ["error", { includeExports: true }],
-    "nonblock-statement-body-position": ["error", "beside"],
-    "no-else-return": "error",
-    "babel/new-cap": 1,
-    "babel/no-invalid-this": 1,
-    "babel/quotes": 1,
-    "babel/semi": 1,
-    "babel/no-unused-expressions": 1,
   },
   globals: {
     window: true,

@@ -5,6 +5,15 @@ exports[`Notification renders 1`] = `
   className="Notification success"
 >
   <span />
+  <div
+    className="dismiss"
+  >
+    <Icon
+      color="white"
+      glyph="x"
+      onClick={[Function]}
+    />
+  </div>
 </div>
 `;
 
@@ -13,10 +22,17 @@ exports[`Notification renders with children 1`] = `
   className="Notification success"
 >
   <span>
-    <span>
-      Some Text
-    </span>
+    Some Text
   </span>
+  <div
+    className="dismiss"
+  >
+    <Icon
+      color="white"
+      glyph="x"
+      onClick={[Function]}
+    />
+  </div>
 </div>
 `;
 
@@ -25,9 +41,7 @@ exports[`Notification renders with onDismiss Icon and triggers the onDismiss 1`]
   className="Notification success"
 >
   <span>
-    <span>
-      Some Text
-    </span>
+    Some Text
   </span>
   <div
     className="dismiss"

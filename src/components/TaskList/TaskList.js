@@ -9,11 +9,9 @@ import {
   deleteTask,
 } from "../../services/redux/tasks";
 import { maxLengths } from "../../utilities/utilities";
-
 import Counter from "../Counter";
 import TaskModal from "../TaskModal";
 import Task from "./Task";
-
 import styles from "./TaskList.scss";
 
 export class TaskList extends Component {
@@ -31,10 +29,11 @@ export class TaskList extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchTasks();
+    const { fetchTasks: fetchTasksAction } = this.props;
+    fetchTasksAction();
   }
 
-  openEditModal = task => this.setState({ showModal: true, task: task });
+  openEditModal = task => this.setState({ showModal: true, task });
 
   closeModal = () => this.setState({ showModal: false, task: null });
 
@@ -53,26 +52,26 @@ export class TaskList extends Component {
 
   render() {
     const { showModal, task } = this.state;
-    const { tasks, deleteTask, clearError } = this.props;
+    const { tasks, deleteTask: deleteTaskAction, clearError } = this.props;
 
     return (
       <div className={styles.TaskList}>
         <span className={styles.counterWrapper}>
-          <Counter valueLength={tasks.length} maxLength={maxLengths.tasks} />
+          <Counter maxLength={maxLengths.tasks} valueLength={tasks.length} />
         </span>
-        {tasks.map(task => (
+        {tasks.map(item => (
           <Task
-            key={task.id}
-            task={task}
-            openEditModal={this.openEditModal}
-            deleteTask={deleteTask}
+            key={item.id}
             clearError={clearError}
+            deleteTask={deleteTaskAction}
+            openEditModal={this.openEditModal}
+            task={item}
           />
         ))}
         <TaskModal
+          editTask={this.editTask}
           isOpen={showModal}
           onClose={this.closeModal}
-          editTask={this.editTask}
           task={task}
         />
       </div>

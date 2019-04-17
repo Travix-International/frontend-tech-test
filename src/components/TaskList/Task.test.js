@@ -14,9 +14,9 @@ describe("Task", () => {
   it("renders", () => {
     const component = shallow(
       <Task
-        openEditModal={noop}
         clearError={noop}
         deleteTask={noop}
+        openEditModal={noop}
         task={task}
       />
     );
@@ -28,9 +28,9 @@ describe("Task", () => {
     const clearErrorSpy = jest.fn();
     const component = shallow(
       <Task
-        openEditModal={noop}
         clearError={clearErrorSpy}
         deleteTask={deleteTaskSpy}
+        openEditModal={noop}
         task={task}
       />
     );
@@ -47,9 +47,9 @@ describe("Task", () => {
     const openEditModalSpy = jest.fn();
     const component = shallow(
       <Task
-        openEditModal={openEditModalSpy}
         clearError={noop}
         deleteTask={noop}
+        openEditModal={openEditModalSpy}
         task={task}
       />
     );

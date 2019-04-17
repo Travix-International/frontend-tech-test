@@ -2,7 +2,6 @@ import React from "react";
 import { shape, string, func } from "prop-types";
 
 import Icon from "../Icon";
-
 import styles from "./Task.scss";
 
 const Task = props => {
@@ -26,10 +25,10 @@ const Task = props => {
         <p className={styles.description}>{task.description}</p>
       </section>
       <div className={styles.actions}>
-        <button className={styles.iconButton} onClick={onDelete}>
+        <button className={styles.iconButton} onClick={onDelete} type="button">
           <Icon glyph="trash" />
         </button>
-        <button className={styles.iconButton} onClick={onEdit}>
+        <button className={styles.iconButton} onClick={onEdit} type="button">
           <Icon glyph="pencil" />
         </button>
       </div>

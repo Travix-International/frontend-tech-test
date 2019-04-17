@@ -10,7 +10,7 @@ describe("Button", () => {
   });
 
   it("renders in a loading mode", () => {
-    const component = shallow(<Button loading={true}>Name</Button>);
+    const component = shallow(<Button loading>Name</Button>);
     expect(component).toMatchSnapshot();
   });
 

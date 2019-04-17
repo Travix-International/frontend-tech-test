@@ -22,6 +22,12 @@ exports[`App renders 1`] = `
       loading={false}
       onSubmit={[Function]}
       onSubmitName="Create task"
+      task={
+        Object {
+          "description": "",
+          "title": "",
+        }
+      }
       validate={[Function]}
     />
   </div>

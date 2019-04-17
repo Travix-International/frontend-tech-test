@@ -1,8 +1,9 @@
 import { put, takeLatest, all } from "redux-saga/effects";
+
 import { FETCH, CREATE, UPDATE, DELETE, RECEIVED } from "./tasks";
 
 function parseJson(response) {
-  return response.text().then(function(text) {
+  return response.text().then(text => {
     return text ? JSON.parse(text) : {};
   });
 }

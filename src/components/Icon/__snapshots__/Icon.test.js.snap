@@ -4,5 +4,6 @@ exports[`Icon renders 1`] = `
 <test-file-stub
   className="Icon white"
   focusable="false"
+  onClick={[Function]}
 />
 `;

@@ -4,7 +4,6 @@ import { bool, func, string, shape } from "prop-types";
 
 import Icon from "../Icon";
 import TaskForm from "../TaskForm";
-
 import styles from "./TaskModal.scss";
 
 const TaskModal = props => {
@@ -12,10 +11,10 @@ const TaskModal = props => {
 
   return (
     <Modal
-      className={styles.TaskModal}
       backdropClassName={styles.backdrop}
-      show={isOpen}
+      className={styles.TaskModal}
       onHide={onClose}
+      show={isOpen}
     >
       <div className={styles.modal}>
         <div className={styles.header}>
@@ -25,11 +24,15 @@ const TaskModal = props => {
           </span>
         </div>
         <div className={styles.body}>
-          <TaskForm task={task} onSubmit={editTask} onSubmitName="Edit task" />
+          <TaskForm onSubmit={editTask} onSubmitName="Edit task" task={task} />
         </div>
       </div>
     </Modal>
   );
+};
+
+TaskModal.defaultProps = {
+  task: { title: "", description: "" },
 };
 
 TaskModal.propTypes = {
@@ -37,7 +40,6 @@ TaskModal.propTypes = {
   onClose: func.isRequired,
   editTask: func.isRequired,
   task: shape({
-    id: string.isRequired,
     title: string,
     description: string,
   }),
