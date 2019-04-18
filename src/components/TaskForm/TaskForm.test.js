@@ -71,8 +71,10 @@ describe("TaskForm", () => {
       description: task.description,
     });
 
-    expect(component.state().title).toBe("");
-    expect(component.state().description).toBe("");
-    expect(component.state().validationError).toBe("");
+    expect(component.state()).toEqual({
+      title: "",
+      description: "",
+      validationError: "",
+    });
   });
 });

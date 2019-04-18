@@ -1,1 +1,1 @@
-export default from "./TaskList";
+export default, { TaskList } from "./TaskList";
