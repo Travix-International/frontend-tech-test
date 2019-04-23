@@ -2,13 +2,14 @@
 
 const path = require("path");
 const app = require("express")();
+const bodyParser = require('body-parser');
 const tasksContainer = require("./tasks.json");
 app.disable('etag'); //don't send 304 in json response
 
 const webpack = require("webpack");
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const config = require("./webpack.config");
-
+app.use(bodyParser.json());
 const compiler = webpack(config);
 
 app.use(
@@ -22,8 +23,6 @@ app.use(
     },
   })
 );
-
-app.use(require('webpack-hot-middleware')(compiler));
 
 
 
@@ -160,3 +159,5 @@ app.delete("/task/delete/:id", (req, res) => {
 
 const port = 9001;
 app.listen(port, () => console.log(`TODO app started on port ${port}`));
+// Exporting the app module
+module.exports = app;

@@ -1,0 +1,44 @@
+//variables
+
+$color-black: #000;
+$color-white: #fff;
+
+// mixins
+
+@mixin for-phone-only {
+  @media (max-width: 599px) { @content; }
+}
+@mixin for-tablet-portrait-up {
+  @media (min-width: 600px) { @content; }
+}
+@mixin for-tablet-landscape-up {
+  @media (min-width: 900px) { @content; }
+}
+@mixin for-desktop-up {
+  @media (min-width: 1200px) { @content; }
+}
+@mixin for-big-desktop-up {
+  @media (min-width: 1800px) { @content; }
+}
+
+//common styles
+
+button {
+    padding: 0;
+    margin: 0;
+    background: 0 0;
+    border: 0;
+    outline: transparent;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-appearance: none;
+    &:focus {
+        outline: none;
+    }
+}
+
+.form-group {
+  .invalid-feedback {
+    font-size: 14px;
+  }
+}

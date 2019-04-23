@@ -1,0 +1,30 @@
+@import './styles/common.scss';
+@import './styles/header.scss';
+
+.main-container {
+    box-sizing: border-box;
+    @include for-phone-only {
+        nav {
+            ul {
+                flex-direction: row;
+                .nav-link {
+                    padding-right: .5rem;
+                    padding-left: .5rem;
+                }
+            }
+        }
+    }
+
+    .card {
+        &.small {
+            width: 100%;
+            @include for-tablet-landscape-up {
+                max-width: 70%;
+                margin: auto;
+            }
+            @include for-desktop-up {
+                max-width: 60%;
+            }
+        }
+    }
+}
