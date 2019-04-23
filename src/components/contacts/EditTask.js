@@ -38,7 +38,7 @@ class EditTask extends Component {
     }
 
     if (description === "") {
-      this.setState({ errors: { description: "Desc is required" } });
+      this.setState({ errors: { description: "Description is required" } });
       return;
     }
 

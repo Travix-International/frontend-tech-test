@@ -12,6 +12,8 @@ const config = require("./webpack.config");
 app.use(bodyParser.json());
 const compiler = webpack(config);
 
+// comment this part when using yarn run test command
+
 app.use(
   webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
@@ -25,6 +27,7 @@ app.use(
 );
 
 
+app.use(require('webpack-hot-middleware')(compiler));
 
 /**
  * GET /tasks

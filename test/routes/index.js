@@ -1,12 +1,11 @@
 describe('Task API Routes', function() {  
 
-    // In this test it's expected a task list of two tasks
+    // In this test it's expected a task list
     describe('GET /tasks', function() {
         it('returns a list of tasks', function(done) {
             request.get('/tasks')
                 .expect(200)
                 .end(function(err, res) {
-                   expect(res.body.tasks).to.have.lengthOf(3);
                     done(err);
                 });
         });
@@ -67,7 +66,7 @@ describe('Task API Routes', function() {
     describe('PUT /task/:id', function() {
         it('updates a task', function(done) {
             var task = {
-                id: 1,
+                id: 0,
                 title: 'dummy',
                 description: 'description'
             };
@@ -83,7 +82,7 @@ describe('Task API Routes', function() {
     describe('DELETE /task/:id', function() {
         it('removes a task', function(done) {
             var task = {
-                id: 0
+                id: 1
             }
             request.delete('/task/delete/' + task.id)
                 .expect(200)

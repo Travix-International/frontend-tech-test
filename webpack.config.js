@@ -5,9 +5,6 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   mode: "development",
   devtool: "inline-source-map",
-  // entry: [
-  //   "./src/index.js",
-  // ],
   entry : {
     'todo.js': './src/index.js',
     'App.css': './src/App.scss'
