@@ -1,0 +1,14 @@
+{
+  "parser": "babel-eslint",
+  "extends": "travix",
+  "plugins": ["react-hooks"],
+  "rules": {
+    "no-else-return": 0,
+    "padded-blocks": 0,
+    "quote-props": "as-needed",
+	  "arrow-parens": ["error", "as-needed"],
+    "react-hooks/exhaustive-deps": "warn", 
+    "comma-dangle": ["error", "never"],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+  }
+}
