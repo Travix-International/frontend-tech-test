@@ -51,6 +51,32 @@ app.get('/task/:id', (req, res) => {
 });
 
 /**
+ * PUT /task/update/:id/complete
+ * id: string,
+ * complete bool
+ * 
+ * Make task completed or active
+ */
+app.put('/task/update/:id/complete', (req, res) => {
+  const id = req.params.id;
+  if (typeof id !== 'undefined') {
+    const task = tasksContainer.tasks.find(item => item.id === id);
+    if (typeof task !== 'undefined') {
+      task.complete = req.params.complete === 'true';
+      return res.status(204).send();
+    } else {
+      return res.status(404).json({
+        message: 'Not found'
+      });
+    }
+  } else {
+    return res.status(400).json({
+      message: 'Bad request'
+    });
+  }
+});
+
+/**
  * PUT /task/update/:id/:title/:description
  *
  * id: Number
@@ -62,16 +88,17 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description/:complete', (req, res) => {
+app.put('/task/update/:id/:title/:description', (req, res) => {
   const id = req.params.id;
   if (typeof id !== 'undefined') {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    if (typeof task !== 'undefined') {
       task.title = req.params.title;
       task.description = req.params.description;
-      task.complete = req.params.complete === 'true';
-      return res.status(204).send();
+      return res.status(204).send({
+        task
+      });
     } else {
       return res.status(404).json({
         message: 'Not found'
@@ -104,7 +131,7 @@ app.post('/task/create/:title/:description', (req, res) => {
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
-    message: 'Resource created'
+    task
   });
 });
 

@@ -15,7 +15,9 @@ mock
 
 mock.onPost('/task/create/todo_1/todo').reply(200);
 
-mock.onPut('/task/update/td_1/todo_1/todo/false').reply(200);
+mock.onPut('/task/update/td_1/true').reply(200);
+
+mock.onPut('/task/update/td_1/todo_1/todo').reply(200);
 
 mock.onDelete('/task/delete/td_1').reply(200);
 

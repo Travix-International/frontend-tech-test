@@ -45,6 +45,9 @@ describe('todo api tests', () => {
   it('should update td_1 successfully ', async () => {
     const res = await api.updateTask('td_1', 'todo_1', 'todo');
     expect(res.status).toBe(200);
+
+    const res2 = await api.toggleTask('td_1', true);
+    expect(res2.status).toBe(200);
   });
 
   it('should delete td_1 successfully ', async () => {

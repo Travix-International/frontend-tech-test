@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const _api = axios.create({
+const _api = axios.create({
   baseURL: 'http://localhost:9001'
 });
 
@@ -22,14 +22,18 @@ export const addTask = async (title = 'todo', description = 'todo') => {
   return await _api.post(`/task/create/${title}/${description}`);
 };
 
+export const toggleTask = async (id, completed = false) => {
+  if (!validateId(id)) throw new Error('The value of id is invalid.');
+  return await _api.put(`/task/update/${id}/${completed}`);
+}; 
+
 export const updateTask = async (
   id, 
   title = 'todo', 
-  description = 'todo', 
-  complete = false 
+  description = 'todo'
 ) => {
   if (!validateId(id)) throw new Error('The value of id is invalid.');
-  return await _api.put(`/task/update/${id}/${title}/${description}/${complete}`);
+  return await _api.put(`/task/update/${id}/${title}/${description}`);
 };
 
 export const deleteTask = async (id) => {
