@@ -50,6 +50,11 @@ describe('todo api tests', () => {
     expect(res2.status).toBe(200);
   });
 
+  it('should toggle td_1 successfully', async () => {
+    const res = await api.toggleTask('td_1');
+    expect(res.status).toBe(200);
+  });
+
   it('should delete td_1 successfully ', async () => {
     const res = await api.deleteTask('td_1');
     expect(res.status).toBe(200);

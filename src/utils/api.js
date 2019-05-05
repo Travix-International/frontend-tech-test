@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const _api = axios.create({
+export const requester = axios.create({
   baseURL: 'http://localhost:9001'
 });
 
@@ -9,22 +9,21 @@ export const validateId = id => {
 }
 
 export const getTasks = async () => {
-  return await _api.get('/tasks');
+  return await requester.get('/tasks');
 };
 
 export const getTaskById = async (id) => {
   if (!validateId(id)) throw new Error('The value of id is invalid.');
-  return await _api.get(`/task/${id}`);
+  return await requester.get(`/task/${id}`);
 }
 
 export const addTask = async (title = 'todo', description = 'todo') => {
-  console.log(`/task/create/${title}/${description}`)
-  return await _api.post(`/task/create/${title}/${description}`);
+  return await requester.post(`/task/create/${title}/${description}`);
 };
 
-export const toggleTask = async (id, completed = false) => {
+export const toggleTask = async id => {
   if (!validateId(id)) throw new Error('The value of id is invalid.');
-  return await _api.put(`/task/update/${id}/${completed}`);
+  return await requester.put(`/task/toggle/${id}`);
 }; 
 
 export const updateTask = async (
@@ -33,10 +32,10 @@ export const updateTask = async (
   description = 'todo'
 ) => {
   if (!validateId(id)) throw new Error('The value of id is invalid.');
-  return await _api.put(`/task/update/${id}/${title}/${description}`);
+  return await requester.put(`/task/update/${id}/${title}/${description}`);
 };
 
 export const deleteTask = async (id) => {
   if (!validateId(id)) throw new Error('The value of id is invalid.');
-  return await _api.delete(`/task/delete/${id}`);
+  return await requester.delete(`/task/delete/${id}`);
 };

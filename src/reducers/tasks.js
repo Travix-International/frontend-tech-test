@@ -14,14 +14,14 @@ const tasks = (state = {}, action) => {
     case at.EDIT_TASK_SUCCESS:
       return {
         ...state,
-        payload
+        [payload.id]: payload
       };
     case at.TOGGLE_TASK_SUCCESS:
       const task = state[payload];
       const newTask = Object.assign({}, task, { completed: !task.completed });
       return {
         ...state,
-        newTask
+        [newTask.id]: newTask
       };
     case at.DELETE_TASK_SUCCESS:
       delete state[payload];

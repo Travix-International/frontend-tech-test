@@ -51,18 +51,18 @@ app.get('/task/:id', (req, res) => {
 });
 
 /**
- * PUT /task/update/:id/complete
+ * PUT /task/toggle/:id
  * id: string,
- * complete bool
+ * completed bool
  * 
  * Make task completed or active
  */
-app.put('/task/update/:id/complete', (req, res) => {
+app.put('/task/toggle/:id', (req, res) => {
   const id = req.params.id;
   if (typeof id !== 'undefined') {
     const task = tasksContainer.tasks.find(item => item.id === id);
     if (typeof task !== 'undefined') {
-      task.complete = req.params.complete === 'true';
+      task.completed = !task.completed
       return res.status(204).send();
     } else {
       return res.status(404).json({
@@ -96,9 +96,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (typeof task !== 'undefined') {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204).send({
-        task
-      });
+      return res.status(204).send();
     } else {
       return res.status(404).json({
         message: 'Not found'
@@ -125,7 +123,7 @@ app.post('/task/create/:title/:description', (req, res) => {
     id: helper.uniqueId('td'),
     title: req.params.title,
     description: req.params.description,
-    complete: false
+    completed: false
   };
 
   tasksContainer.tasks.push(task);
