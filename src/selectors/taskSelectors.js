@@ -10,7 +10,6 @@ export const getVisibleTasks = createSelector(
   getFilter,
   getAllTasks,
   (filter, tasks) => {
-    console.log(filter)
     if (filter === TASK_FILTER.SHOW_ALL) return tasks;
     if (filter === TASK_FILTER.SHOW_ACTIVE) {
       return pickBy(tasks, task => !task.completed);
