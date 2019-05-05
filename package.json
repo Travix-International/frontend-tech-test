@@ -10,6 +10,9 @@
   "author": "Kai Wang(kwrush)",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.14.0",
     "install": "^0.12.2",
     "lodash": "^4.17.11",
@@ -44,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.16.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "eslint-config-airbnb": "^17.1.0",

@@ -1,3 +1,10 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": "td_gvo4747ws",
+      "title": "the first todo",
+      "description": "something to do",
+      "complete": false
+    }
+  ]
 }

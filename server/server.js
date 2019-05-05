@@ -1,7 +1,14 @@
 
 const app = require('express')();
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const helper = require('./utils/helper');
 
 const tasksContainer = require('./tasks.json');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors());
 
 /**
  * GET /tasks
@@ -22,10 +29,10 @@ app.get('/tasks', (req, res) => res.status(200).json(tasksContainer));
  * If id is not valid number return status code 400.
  */
 app.get('/task/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+  const id = req.params.id;
 
-  if (!Number.isNaN(id)) {
-    const task = tasksContainer.find(item => item.id === id);
+  if (typeof id !== 'undefined') {
+    const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
@@ -55,16 +62,16 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
-  const id = parseInt(req.params.id, 10);
-
-  if (!Number.isNaN(id)) {
+app.put('/task/update/:id/:title/:description/:complete', (req, res) => {
+  const id = req.params.id;
+  if (typeof id !== 'undefined') {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      task.complete = req.params.complete === 'true';
+      return res.status(204).send();
     } else {
       return res.status(404).json({
         message: 'Not found'
@@ -88,9 +95,10 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: helper.uniqueId('td'),
     title: req.params.title,
-    description: req.params.description
+    description: req.params.description,
+    complete: false
   };
 
   tasksContainer.tasks.push(task);
@@ -111,9 +119,9 @@ app.post('/task/create/:title/:description', (req, res) => {
  * If the provided id is not a valid number return a status code 400.
  */
 app.delete('/task/delete/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+  const id = req.params.id;
 
-  if (!Number.isNaN(id)) {
+  if (typeof id !== 'undefined') {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
