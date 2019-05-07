@@ -1,5 +1,28 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+.task-item,
 .task-item-title {
+  display: flex;
+  align-items: center;
+}
+
+.task-item {
+  padding: 0 12px;
+  height: 52px;
+  box-shadow: 0 1px 0 0 $gray-200;
+  &:hover {
+    background-color: $gray-100;
+  }
+}
+
+.task-item-title {
+  width: 100%;
+  height: 100%;
+  padding-left: 6px;
   &.completed {
     text-decoration: line-through;
+  }
+  &:hover {
+    cursor: pointer;
   }
 }

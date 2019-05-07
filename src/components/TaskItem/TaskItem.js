@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { 
-  Input,
-  ListGroupItem
-} from 'reactstrap';
+import { CustomInput } from 'reactstrap';
 import classNames from 'classnames';
 import styles from './TaskItem.module.scss';
 
@@ -15,7 +12,7 @@ class TaskItem extends React.PureComponent {
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       completed: PropTypes.bool.isRequired
-    }).isRequired,
+    }),
     style: PropTypes.object,
     onToggleTask: PropTypes.func,
     onClickTask: PropTypes.func,
@@ -34,20 +31,30 @@ class TaskItem extends React.PureComponent {
 
   toggleTask = e => {
     e.preventDefault();
-    this.props.onToggleTask(this.props.task.id);
+    const { task } = this.props;
+    this.props.onToggleTask(task.id);
   }
 
   render () {
     const { task, style } = this.props;
+    if (!task) return null;
+
     const itemClasses = classNames({
-      [styles['task-title-item']]: true,
-      [styles['completed']]: task.completed
+      [styles['task-item-title']]: true,
+      [styles['completed']]: task.completed,
+      'text-muted': task.completed
     });
+    const itemId = `taskcheckbox_${task.id}`;
 
     return (
-      <ListGroupItem>
-        <Input 
+      <div
+        style={style}
+        className={styles['task-item']}
+      >
+        <CustomInput 
           type="checkbox" 
+          id={itemId}
+          name={itemId}
           checked={task.completed}
           onChange={this.toggleTask}
         />
@@ -57,7 +64,7 @@ class TaskItem extends React.PureComponent {
         >
           {task.title}
         </div>
-      </ListGroupItem>
+      </div>
     );
   }
 }

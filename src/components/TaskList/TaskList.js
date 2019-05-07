@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListGroup } from 'reactstrap';
+import { FixedSizeList } from 'react-window';
 import { TaskItem } from '../TaskItem'; 
 import { TaskEditor } from '../TaskEditor';
 
@@ -45,11 +45,24 @@ class TaskList extends React.PureComponent {
   toggleTaskEditor = e => {
     this.setState(prevState => ({
       openTaskEditor: !prevState.openTaskEditor
-    }))
+    }));
   }
 
   toggleTask = id => {
     this.props.onToggleTask(id);
+  }
+
+  renderTaskItem = (args) => {
+    const { index, style } = args;
+    const task = this.props.tasks[index];
+    return (
+      <TaskItem
+        task={task}
+        style={style}
+        onToggleTask={this.toggleTask}
+        onClickTask={this.editTask}
+      />
+    );
   }
 
   render () {
@@ -57,21 +70,14 @@ class TaskList extends React.PureComponent {
     const { activeTask, openTaskEditor } = this.state;
     return (
       <React.Fragment>
-        <ListGroup flush>
-          {
-            tasks.map((task, ind) => {
-              const key = `task_${task.id}_${ind}`;
-              return (
-                <TaskItem
-                  key={key}
-                  task={task}
-                  onToggleTask={this.toggleTask}
-                  onClickTask={this.editTask}
-                />
-              );
-            })
-          }
-        </ListGroup>
+        <FixedSizeList
+          height={400}
+          width={'100%'}
+          itemCount={tasks.length}
+          itemSize={52}
+        >
+          { props => this.renderTaskItem(props) }
+        </FixedSizeList>
         <TaskEditor 
           task={activeTask}
           open={openTaskEditor}

@@ -4,24 +4,17 @@ import {
 } from 'reactstrap';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
+import HeaderContainer from './containers/HeaderContainer';
 import TaskListContainer from './containers/TaskListContainer';
-import VisibilityFilterContainer from './containers/VisibilityFilterContainer';
-import { TASK_FILTER } from './constants';
-import { startCase } from 'lodash';
-
-const filters = Object.keys(TASK_FILTER).map(key => ({
-  title: startCase(key.toLowerCase()),
-  value: key
-}));
+import FooterContainer from './containers/FooterContainer';
 
 function App() {
   return (
     <Provider store={configureStore()}>
       <Container>
-      <div>
-        <VisibilityFilterContainer filters={filters} />
+        <HeaderContainer />
         <TaskListContainer />
-      </div>
+        <FooterContainer />
     </Container>
     </Provider>
   );

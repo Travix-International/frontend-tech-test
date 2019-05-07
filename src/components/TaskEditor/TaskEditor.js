@@ -9,8 +9,10 @@ import {
   FormGroup,
   Input,
   Label,
-  Button
+  Button,
+  FormFeedback
 } from 'reactstrap';
+import { debounce } from 'lodash';
 
 class TaskEditor extends React.PureComponent {
   static propTypes = {
@@ -35,8 +37,14 @@ class TaskEditor extends React.PureComponent {
 
   constructor (props) {
     super(props);
+    this.state = {
+      // Don't show error message initially when creates a new task
+      validTitle: this.props.task === null || !!this.props.task.title
+    };
     this.titleRef = createRef();
     this.decriptionRef = createRef();
+
+    this.validateTitle = debounce(this.validateTitle, 300);
   }
 
   deleteTask = e => {
@@ -47,8 +55,9 @@ class TaskEditor extends React.PureComponent {
   }
 
   submit = e => {
-    //TODO: verify input
     e.preventDefault();
+    if (!this.state.validTitle) return;
+
     const { task, onSubmit, onToggle } = this.props;
     const title = this.titleRef.current.value;
     const description = this.decriptionRef.current.value;
@@ -60,14 +69,32 @@ class TaskEditor extends React.PureComponent {
     onToggle();
   }
 
+  validateTitle = title => {
+    let valid = this.state.validTitle;
+
+    if (title.length === 0) {
+      valid = false;
+    } else if (!valid) {
+      valid = true;
+    }
+
+    console.log('######validatetitle')
+
+    this.setState(prevState => ({
+      validTitle: valid
+    }));
+  }
+
+  onEditTitle = e => {
+    
+    this.validateTitle(this.titleRef.current.value);
+  }
+
   render () {
-    const {
-      open,
-      task,
-      onToggle,
-    } = this.props;
+    const { open, task, onToggle } = this.props;
+    const { validTitle } = this.state;
   
-    const title = task === null ? 'Create new task' : task.title;
+    const title = task === null ? 'Add task' : task.title;
   
     return (
       <Modal isOpen={open} toggle={onToggle}>
@@ -77,11 +104,14 @@ class TaskEditor extends React.PureComponent {
             <FormGroup>
               <Label>Title</Label>
               <Input 
+                invalid={!validTitle}
                 type="text" 
                 placeholder="Enter task title" 
                 innerRef={this.titleRef}
                 defaultValue={task && task.title}
+                onChange={this.onEditTitle}
               />
+              { !validTitle && <FormFeedback>Task title is not valid</FormFeedback> }
             </FormGroup>
             <FormGroup>
               <Label>Description</Label>
