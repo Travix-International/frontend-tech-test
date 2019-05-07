@@ -20,6 +20,17 @@ export const getVisibleTasks = createSelector(
   }
 );
 
+export const getVisibleTasksArray = createSelector(
+  getVisibleTasks,
+  tasks => {
+    if (tasks) {
+      return Object.keys(tasks).map(key => tasks[key]);
+    }
+
+    return [];
+  }
+);
+
 export const getTask = id => createSelector(
   getAllTasks,
   tasks => tasks[id]

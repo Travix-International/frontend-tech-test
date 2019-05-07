@@ -1,26 +1,29 @@
 import React from 'react';
+import { 
+  Container
+} from 'reactstrap';
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
+import TaskListContainer from './containers/TaskListContainer';
+import VisibilityFilterContainer from './containers/VisibilityFilterContainer';
+import { TASK_FILTER } from './constants';
+import { startCase } from 'lodash';
 
-import logo from './logo.svg';
-import './App.css';
+const filters = Object.keys(TASK_FILTER).map(key => ({
+  title: startCase(key.toLowerCase()),
+  value: key
+}));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img alt="logo" className="App-logo" src={logo} />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={configureStore()}>
+      <Container>
+      <div>
+        <VisibilityFilterContainer filters={filters} />
+        <TaskListContainer />
+      </div>
+    </Container>
+    </Provider>
   );
 }
 

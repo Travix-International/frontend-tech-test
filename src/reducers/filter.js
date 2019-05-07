@@ -4,9 +4,7 @@ import { filterActionTypes as ft } from '../actions/actionTypes';
 const taskFilter = (state = TASK_FILTER.SHOW_ALL, action) => {
   const { type, payload } = action;
   if (type === ft.SET_TASK_VISIBILITY) {
-    return {
-      filter: payload
-    };
+    return payload;
   }
 
   return state;
