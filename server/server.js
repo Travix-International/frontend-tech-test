@@ -148,8 +148,7 @@ app.delete('/task/delete/:id', (req, res) => {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
+      tasksContainer.tasks = tasksContainer.tasks.filter(t => task.id !== t.id);
       return res.status(200).json({
         message: 'Updated successfully'
       });
@@ -165,6 +164,13 @@ app.delete('/task/delete/:id', (req, res) => {
   }
 });
 
+/**
+ * GET /task/search/:query
+ * 
+ * query: string
+ * 
+ * Search task by titles
+ */
 app.get('/task/search/:query', (req, res) => {
   const query = req.params.query.replace(/\s+/, '.*');
   if (!query) return res.status(200).json({ results: [] });
