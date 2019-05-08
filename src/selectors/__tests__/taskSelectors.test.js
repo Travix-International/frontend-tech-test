@@ -3,14 +3,15 @@ import { TASK_FILTER } from '../../constants';
 
 const initState = (filter = TASK_FILTER.SHOW_ALL) => ({
   tasks: {
-    'td_1': { id: 'td_1', title: 'todo_1', completed: false },
-    'td_2': { id: 'td_2', title: 'todo_2', completed: false },
-    'td_3': { id: 'td_3', title: 'todo_3', completed: true },
-    'td_4': { id: 'td_4', title: 'todo_4', completed: false },
-    'td_5': { id: 'td_5', title: 'todo_5', completed: true },
-    'td_6': { id: 'td_6', title: 'todo_6', completed: false }
+    't_1': { id: 't_1', title: 'todo_1', completed: false },
+    't_2': { id: 't_2', title: 'todo_2', completed: false },
+    't_3': { id: 't_3', title: 'todo_3', completed: true },
+    't_4': { id: 't_4', title: 'todo_4', completed: false },
+    't_5': { id: 't_5', title: 'todo_5', completed: true },
+    't_6': { id: 't_6', title: 'todo_6', completed: false }
   },
-  filter
+  filter,
+  search: { query: 'anything', results: ['t_2', 't_5'] }
 });
 
 describe('tasks selectors test', () => {
@@ -25,21 +26,47 @@ describe('tasks selectors test', () => {
   });
 
   it('should return task with the specified id', () => {
-    expect(selectors.getTask('td_3')(initState())).toEqual({ 
-      id: 'td_3', title: 'todo_3', completed: true
+    expect(selectors.getTask('t_3')(initState())).toEqual({ 
+      id: 't_3', title: 'todo_3', completed: true
     });
   });
 
   it('should return the filtered tasks entities', () => {
     expect(selectors.getVisibleTasks(initState(TASK_FILTER.SHOW_ACTIVE))).toEqual({
-      'td_1': { id: 'td_1', title: 'todo_1', completed: false },
-      'td_2': { id: 'td_2', title: 'todo_2', completed: false },
-      'td_4': { id: 'td_4', title: 'todo_4', completed: false },
-      'td_6': { id: 'td_6', title: 'todo_6', completed: false }
+      't_1': { id: 't_1', title: 'todo_1', completed: false },
+      't_2': { id: 't_2', title: 'todo_2', completed: false },
+      't_4': { id: 't_4', title: 'todo_4', completed: false },
+      't_6': { id: 't_6', title: 'todo_6', completed: false }
     });
     expect(selectors.getVisibleTasks(initState(TASK_FILTER.SHOW_COMPLETED))).toEqual({
-      'td_3': { id: 'td_3', title: 'todo_3', completed: true },
-      'td_5': { id: 'td_5', title: 'todo_5', completed: true }
+      't_3': { id: 't_3', title: 'todo_3', completed: true },
+      't_5': { id: 't_5', title: 'todo_5', completed: true }
     });
   });
+
+  it('should return tasks array', () => {
+    expect(selectors.getVisibleTasksArray(initState(TASK_FILTER.SHOW_ACTIVE))).toEqual([
+      { id: 't_1', title: 'todo_1', completed: false },
+      { id: 't_2', title: 'todo_2', completed: false },
+      { id: 't_4', title: 'todo_4', completed: false },
+      { id: 't_6', title: 'todo_6', completed: false }
+    ]);
+  });
+
+  it('should return search query', () => {
+    const state = initState();
+    expect(selectors.getSearchQuery(state)).toBe('anything');
+  })
+
+  it('should return search results', () => {
+    const state = initState();
+    expect(selectors.getSearchTasks(state)).toEqual([
+      {
+        id: 't_2', title: 'todo_2', completed: false
+      },
+      {
+        id: 't_5', title: 'todo_5', completed: true
+      },
+    ]);
+  })
 });

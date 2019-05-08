@@ -1,5 +1,9 @@
 import { connect } from 'react-redux';
-import { getVisibleTasksArray } from '../selectors/taskSelectors';
+import { 
+  getVisibleTasksArray, 
+  getSearchQuery, 
+  getSearchTasks 
+} from '../selectors/taskSelectors';
 import { 
   fetchAllTasks, 
   editTaskAction, 
@@ -10,7 +14,9 @@ import { TaskList } from '../components/TaskList';
 
 
 const mapStateToProps = state => ({
-  tasks: getVisibleTasksArray(state)
+  tasks:  !!getSearchQuery(state) 
+    ? getSearchTasks(state)
+    : getVisibleTasksArray(state)
 });
 
 const mapDispatchToProps = dispatch => ({

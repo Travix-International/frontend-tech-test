@@ -26,7 +26,8 @@ const api = (state = {}, action) => {
     }
   };
 
-  if (error) apiState[apiEntity].error = error;
+  if (error) 
+    apiState[apiEntity].error = error.message || 'Error occurs';
 
   return {
     ...state,

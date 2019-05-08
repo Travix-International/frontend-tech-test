@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Navbar,
-  NavbarBrand
+  NavbarBrand,
+  Container
 } from 'reactstrap';
 import { VisibilityFilter } from '../VisibilityFilter';
 import { TASK_FILTER } from '../../constants';
 import { startCase } from 'lodash';
+import { FiCheckSquare } from 'react-icons/fi';
+import styles from './Header.module.scss';
+import flexCenter from '../flexCenter';
 
 const filters = Object.keys(TASK_FILTER).map(key => ({
   title: startCase(key.toLowerCase()),
@@ -15,21 +19,28 @@ const filters = Object.keys(TASK_FILTER).map(key => ({
 
 const propTypes = {
   currentFilter: PropTypes.oneOf(filters.map(f => f.value)),
-  setFilter: PropTypes.func
+  setFilter: PropTypes.func,
+  query: PropTypes.string
 };
 
 const defaultProps = {
   currentFilter: TASK_FILTER.SHOW_ALL,
-  setFilter: () => {}
+  setFilter: () => {},
+  query: ''
 };
 
+const NavBrand = flexCenter(NavbarBrand);
+
 const Header = props => {
-  const { currentFilter, setFilter } = props;
+  const { currentFilter, setFilter, query, children } = props;
 
   return (
-    <div>
+    <div className={styles['header']}>
       <Navbar>
-        <NavbarBrand href="/">To-Do</NavbarBrand>
+        <NavBrand href="/">
+          <FiCheckSquare /> To-Do
+        </NavBrand>
+        { children }
         <div>
           <VisibilityFilter
             filters={filters}
@@ -38,6 +49,9 @@ const Header = props => {
           />
         </div>
       </Navbar>
+      {
+        query.length > 0 && <Container>{`Searching for "${query}"`}</Container>
+      }
     </div>
   );
 };

@@ -8,7 +8,7 @@ describe('filter reducers test', () => {
   });
 
   it('should change filter type when action is dispatched', () => {
-    const initState = { filter: TASK_FILTER.SHOW_ALL };
+    const initState = TASK_FILTER.SHOW_ALL;
     const action = setTaskVisibility(TASK_FILTER.SHOW_ACTIVE);
     expect(filterReducer(initState, action)).toEqual(TASK_FILTER.SHOW_ACTIVE);
   });

@@ -9,11 +9,13 @@ import {
   FormGroup,
   Input,
   Label,
-  Button,
-  FormFeedback
+  Button
 } from 'reactstrap';
-import { debounce } from 'lodash';
+import { FiTrash2 } from 'react-icons/fi';
+import flexCenter from '../flexCenter';
+import styles from './TaskEditor.module.scss';
 
+const DeleteButton = flexCenter(Button);
 class TaskEditor extends React.PureComponent {
   static propTypes = {
     open: PropTypes.bool,
@@ -37,14 +39,8 @@ class TaskEditor extends React.PureComponent {
 
   constructor (props) {
     super(props);
-    this.state = {
-      // Don't show error message initially when creates a new task
-      validTitle: this.props.task === null || !!this.props.task.title
-    };
     this.titleRef = createRef();
     this.decriptionRef = createRef();
-
-    this.validateTitle = debounce(this.validateTitle, 300);
   }
 
   deleteTask = e => {
@@ -56,7 +52,6 @@ class TaskEditor extends React.PureComponent {
 
   submit = e => {
     e.preventDefault();
-    if (!this.state.validTitle) return;
 
     const { task, onSubmit, onToggle } = this.props;
     const title = this.titleRef.current.value;
@@ -69,31 +64,8 @@ class TaskEditor extends React.PureComponent {
     onToggle();
   }
 
-  validateTitle = title => {
-    let valid = this.state.validTitle;
-
-    if (title.length === 0) {
-      valid = false;
-    } else if (!valid) {
-      valid = true;
-    }
-
-    console.log('######validatetitle')
-
-    this.setState(prevState => ({
-      validTitle: valid
-    }));
-  }
-
-  onEditTitle = e => {
-    
-    this.validateTitle(this.titleRef.current.value);
-  }
-
   render () {
     const { open, task, onToggle } = this.props;
-    const { validTitle } = this.state;
-  
     const title = task === null ? 'Add task' : task.title;
   
     return (
@@ -103,19 +75,18 @@ class TaskEditor extends React.PureComponent {
           <Form>
             <FormGroup>
               <Label>Title</Label>
-              <Input 
-                invalid={!validTitle}
+              <Input
+                bsSize="sm" 
                 type="text" 
                 placeholder="Enter task title" 
                 innerRef={this.titleRef}
                 defaultValue={task && task.title}
-                onChange={this.onEditTitle}
               />
-              { !validTitle && <FormFeedback>Task title is not valid</FormFeedback> }
             </FormGroup>
             <FormGroup>
               <Label>Description</Label>
               <Input 
+                bsSize="sm"
                 type="textarea" 
                 placeholder="Give a description here"
                 innerRef={this.decriptionRef}
@@ -125,9 +96,21 @@ class TaskEditor extends React.PureComponent {
           </Form>
         </ModalBody>
         <ModalFooter>
-          { task !== null && <Button color="danger" onClick={this.deleteTask}>Delete</Button> }
-          <Button color="primary" onClick={this.submit}>Save</Button>
-          <Button color="secondary" onClick={onToggle}>Cancel</Button>
+          { 
+            task !== null && 
+            <DeleteButton
+              className={styles['delete-btn']}
+              size="sm"
+              color="danger"
+              onClick={this.deleteTask}
+            >
+              <FiTrash2 /> Delete
+            </DeleteButton>
+          }
+          <div className={styles['btn-group']}>
+            <Button size="sm" color="primary" onClick={this.submit}>Save</Button>
+            <Button size="sm" color="secondary" onClick={onToggle}>Cancel</Button>
+          </div>
         </ModalFooter>
       </Modal>
     );

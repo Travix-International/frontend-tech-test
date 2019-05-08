@@ -1,15 +1,23 @@
+import React from 'react';
 import { connect } from 'react-redux';
-import { getFilter } from '../selectors/taskSelectors';
+import { getFilter, getSearchQuery } from '../selectors/taskSelectors';
 import { setTaskVisibility } from '../actions/filterActions';
 import { Header } from '../components/Header';
+import SearchContainer from './SearchContainer';
 
 const mapStateToProps = state => ({
-  currentFilter: getFilter(state)
+  currentFilter: getFilter(state),
+  query: getSearchQuery(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   setFilter: filter => dispatch(setTaskVisibility(filter)),
-  
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+const HeaderContainer = props => (
+  <Header { ...props }>
+    <SearchContainer />
+  </Header>
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);

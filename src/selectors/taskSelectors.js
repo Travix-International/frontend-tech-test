@@ -2,9 +2,14 @@ import { createSelector } from "reselect";
 import { TASK_FILTER } from "../constants";
 import { pickBy } from 'lodash';
 
+
 export const getFilter = state => state.filter;
 
 export const getAllTasks = state => state.tasks;
+
+export const getSearchQuery = state => state.search.query;
+
+export const getSearchResults = state => state.search.results
 
 export const getVisibleTasks = createSelector(
   getFilter,
@@ -26,7 +31,17 @@ export const getVisibleTasksArray = createSelector(
     if (tasks) {
       return Object.keys(tasks).map(key => tasks[key]);
     }
+    return [];
+  }
+);
 
+export const getSearchTasks = createSelector(
+  getSearchResults,
+  getAllTasks,
+  (results, tasks) => {
+    if (results) {
+      return results.map(id => tasks[id]);
+    }
     return [];
   }
 );

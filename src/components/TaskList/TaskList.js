@@ -64,20 +64,22 @@ class TaskList extends React.PureComponent {
       />
     );
   }
-
+  // TODO: dynamic height
   render () {
     const { tasks } = this.props;
     const { activeTask, openTaskEditor } = this.state;
     return (
       <React.Fragment>
-        <FixedSizeList
-          height={400}
-          width={'100%'}
-          itemCount={tasks.length}
-          itemSize={52}
-        >
-          { props => this.renderTaskItem(props) }
-        </FixedSizeList>
+        <div>
+          <FixedSizeList
+            height={52*8}
+            width={'100%'}
+            itemCount={tasks.length}
+            itemSize={52}
+          >
+            {props => this.renderTaskItem(props)}
+          </FixedSizeList>
+        </div>
         <TaskEditor 
           task={activeTask}
           open={openTaskEditor}

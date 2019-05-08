@@ -63,7 +63,7 @@ app.put('/task/toggle/:id', (req, res) => {
     const task = tasksContainer.tasks.find(item => item.id === id);
     if (typeof task !== 'undefined') {
       task.completed = !task.completed
-      return res.status(204).send();
+      return res.status(204).json({ task });
     } else {
       return res.status(404).json({
         message: 'Not found'
@@ -88,15 +88,15 @@ app.put('/task/toggle/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
+app.put('/task/update/:id', (req, res) => {
   const id = req.params.id;
   if (typeof id !== 'undefined') {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (typeof task !== 'undefined') {
-      task.title = req.params.title;
-      task.description = req.params.description;
-      return res.status(204).send();
+      task.title = req.body.title;
+      task.description = req.body.description;
+      return res.status(204).json({ task });
     } else {
       return res.status(404).json({
         message: 'Not found'
@@ -118,19 +118,17 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task/create/', (req, res) => {
   const task = {
-    id: helper.uniqueId('td'),
-    title: req.params.title,
-    description: req.params.description,
+    id: helper.uniqueId('t'),
+    title: req.body.title,
+    description: req.body.description,
     completed: false
   };
 
-  tasksContainer.tasks.push(task);
+  tasksContainer.tasks.unshift(task);
 
-  return res.status(201).json({
-    task
-  });
+  return res.status(201).json({ task });
 });
 
 /**
@@ -167,6 +165,18 @@ app.delete('/task/delete/:id', (req, res) => {
   }
 });
 
-app.listen(9001, () => {
-  process.stdout.write('the server is available on http://localhost:9001/\n');
+app.get('/task/search/:query', (req, res) => {
+  const query = req.params.query.replace(/\s+/, '.*');
+  if (!query) return res.status(200).json({ results: [] });
+
+  const re = new RegExp(`${query}`);
+  const results = tasksContainer.tasks
+    .filter(task => re.test(task.title))
+    .map(task => task.id);
+    
+  return res.status(200).json({ results });
+});
+
+app.listen(3001, () => {
+  process.stdout.write('the server is available on http://localhost:3001/\n');
 });

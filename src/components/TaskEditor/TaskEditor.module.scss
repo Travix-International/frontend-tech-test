@@ -1,0 +1,13 @@
+.delete-btn {
+  margin-right: auto !important;
+}
+
+.btn-group {
+  justify-content: flex-end;
+  & > :not(firs-child) {
+    margin-left: 0.25rem;
+  }
+  & > :not(last-child) {
+    margin-right: 0.25rem;
+  }
+}

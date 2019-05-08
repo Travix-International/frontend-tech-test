@@ -6,6 +6,7 @@ import {
   DropdownToggle,
   DropdownItem
 } from 'reactstrap';
+import { FiFilter } from 'react-icons/fi';
 
 class VisibilityFilter extends React.PureComponent {
   static propTypes = {
@@ -61,8 +62,8 @@ class VisibilityFilter extends React.PureComponent {
         isOpen={this.state.filterOpen}
         toggle={this.toggleFilterMenu}
       >
-        <DropdownToggle caret nav>
-          Filter
+        <DropdownToggle nav>
+          <FiFilter /> Filter
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem header>Show Tasks</DropdownItem>

@@ -2,9 +2,8 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import { requester } from '../../utils/api';
-import { TASK_FILTER } from '../../constants';
 import { taskActionTypes as actionTypes } from '../actionTypes';
-import * as actionCreaters from '../apiActions';
+import * as actionCreators from '../apiActions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -20,8 +19,8 @@ describe('Async actions test', () => {
 
   it('should create FETCH_ALL_TASKS_SUCCESS action when loading is done', async () => {
     const tasks = [
-      { id: 'td_1', title: 'todo_1', description: 'todo1', completed: false },
-      { id: 'td_2', title: 'todo_2', description: 'todo2', completed: true },
+      { id: 't_1', title: 'todo_1', description: 'todo1', completed: false },
+      { id: 't_2', title: 'todo_2', description: 'todo2', completed: true },
     ];
     mockApi
       .onGet('/tasks')
@@ -35,19 +34,19 @@ describe('Async actions test', () => {
       }
     ];
 
-    await store.dispatch(actionCreaters.fetchAllTasks());
+    await store.dispatch(actionCreators.fetchAllTasks());
     expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('should create ADD_TASK_SUCCESS action when task is added', async () => {
     const newTask = { 
-      id: 'td_3', 
+      id: 't_3', 
       title: 'todo_3', 
       description: 'todo3', 
       completed: false 
     };
     mockApi
-      .onPost('/task/create/todo_3/todo3')
+      .onPost('/task/create')
       .reply(201, { task: newTask });
 
     const expectedActions = [
@@ -57,18 +56,18 @@ describe('Async actions test', () => {
         payload: newTask
       }
     ];
-    await store.dispatch(actionCreaters.addTaskAction('todo_3', 'todo3'));
+    await store.dispatch(actionCreators.addTaskAction('todo_3', 'todo3'));
     expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('should create EDIT_TASK_SUCCESS action when edit is committed', async () => {
     const task = { 
-      id: 'td_2', 
+      id: 't_2', 
       title: 'todo_2', 
       description: 'todo2'
     };
     mockApi
-      .onPut('/task/update/td_2/todo_2/todo2')
+      .onPut('/task/update/t_2')
       .reply(204);
 
     const expectedActions = [
@@ -78,39 +77,39 @@ describe('Async actions test', () => {
         payload: task
       }
     ];
-    await store.dispatch(actionCreaters.editTaskAction('td_2', 'todo_2', 'todo2'));
+    await store.dispatch(actionCreators.editTaskAction('t_2', 'todo_2', 'todo2'));
     expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('should create TOGGLE_TASK_SUCCESS action when task has been toggled', async () => {
     mockApi
-      .onPut('/task/toggle/td_2')
+      .onPut('/task/toggle/t_2')
       .reply(204);
 
     const expectedActions = [
       { type: actionTypes.TOGGLE_TASK_REQUEST },
       { 
         type: actionTypes.TOGGLE_TASK_SUCCESS,
-        payload: 'td_2'
+        payload: 't_2'
       }
     ];
-    await store.dispatch(actionCreaters.toggleTaskAction('td_2'));
+    await store.dispatch(actionCreators.toggleTaskAction('t_2'));
     expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('should create DELETE_TASK_SUCCESS action when deleting is done', async () => {
     mockApi
-      .onDelete('/task/delete/td_3')
+      .onDelete('/task/delete/t_3')
       .reply(200);
 
     const expectedActions = [
       { type: actionTypes.DELETE_TASK_REQUEST },
       { 
         type: actionTypes.DELETE_TASK_SUCCESS,
-        payload: 'td_3'
+        payload: 't_3'
       }
     ];
-    await store.dispatch(actionCreaters.deleteTaskAction('td_3'));
+    await store.dispatch(actionCreators.deleteTaskAction('t_3'));
     expect(store.getActions()).toEqual(expectedActions);
   });
 
@@ -128,14 +127,14 @@ describe('Async actions test', () => {
       }
     ];
 
-    await store.dispatch(actionCreaters.fetchAllTasks());
+    await store.dispatch(actionCreators.fetchAllTasks());
     expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('should create ADD_TASK_FAIL action when creation failed', async () => {
     const e = new Error('Network Error');
     mockApi
-      .onPost('/task/create/todo_3/todo3')
+      .onPost('/task/create')
       .networkError();
 
     const expectedActions = [
@@ -145,14 +144,14 @@ describe('Async actions test', () => {
         error: e
       }
     ];
-    await store.dispatch(actionCreaters.addTaskAction('todo_3', 'todo3'));
+    await store.dispatch(actionCreators.addTaskAction('todo_3', 'todo3'));
     expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('should create EDIT_TASK_FAIL action when editing failed', async () => {
     const e = new Error('Network Error');
     mockApi
-      .onPut('/task/update/td_2/todo_2/todo2')
+      .onPut('/task/update/t_2')
       .networkError();
 
     const expectedActions = [
@@ -162,14 +161,14 @@ describe('Async actions test', () => {
         error: e
       }
     ];
-    await store.dispatch(actionCreaters.editTaskAction('td_2', 'todo_2', 'todo2'));
+    await store.dispatch(actionCreators.editTaskAction('t_2', 'todo_2', 'todo2'));
     expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('should create TOGGLE_TASK_FAIL action when toggling failed', async () => {
     const e = new Error('Network Error');
     mockApi
-      .onPut('/task/toggle/td_2')
+      .onPut('/task/toggle/t_2')
       .networkError();
 
     const expectedActions = [
@@ -179,14 +178,14 @@ describe('Async actions test', () => {
         error: e
       }
     ];
-    await store.dispatch(actionCreaters.toggleTaskAction('td_2'));
+    await store.dispatch(actionCreators.toggleTaskAction('t_2'));
     expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('should create DELETE_TASK_SUCCESS action when deleting failed', async () => {
     const e = new Error('Network Error');
     mockApi
-      .onDelete('/task/delete/td_3')
+      .onDelete('/task/delete/t_3')
       .networkError();
 
     const expectedActions = [
@@ -196,7 +195,7 @@ describe('Async actions test', () => {
         error: e
       }
     ];
-    await store.dispatch(actionCreaters.deleteTaskAction('td_3'));
+    await store.dispatch(actionCreators.deleteTaskAction('t_3'));
     expect(store.getActions()).toEqual(expectedActions);
   });
 }); 

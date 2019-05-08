@@ -67,7 +67,6 @@ describe('TaskEditor test', () => {
     const submit = t => item = t;
     const wrapper = mount(<TaskEditor open={true} task={task} onSubmit={submit} />);
     jest.runTimersToTime(300);
-    wrapper.setState({ validTitle: true });
     wrapper.find('button.btn-primary').simulate('click');
     expect(item).toEqual(task);
   });

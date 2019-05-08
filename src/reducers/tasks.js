@@ -11,8 +11,8 @@ const tasks = (state = {}, action) => {
       };
     case at.ADD_TASK_SUCCESS:
       return {
-        ...state,
-        [payload.id]: payload
+        [payload.id]: payload,
+        ...state
       };
     case at.EDIT_TASK_SUCCESS:
       const updatedTask = Object.assign({}, state[payload.id], payload);

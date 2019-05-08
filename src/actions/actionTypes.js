@@ -27,7 +27,10 @@ const filterActions = [
 ];
 
 const searchActions = [
-  'SEARCH_TASK'
+  'SEARCH_TASK_REQUEST',
+  'SEARCH_TASK_SUCCESS',
+  'SEARCH_TASK_FAIL',
+  'CLEAR_SEARCH'
 ];
 
 export const taskActionTypes = createActionTypes(taskActions);
