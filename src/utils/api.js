@@ -21,7 +21,7 @@ export const addTask = async (title, description) => {
   return await requester.post('/task/create', { title, description });
 };
 
-export const toggleTask = async id => {
+export const toggleTask = async (id) => {
   if (!validateId(id)) throw new Error('The value of id is invalid.');
   return await requester.put(`/task/toggle/${id}`);
 }; 

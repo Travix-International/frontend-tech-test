@@ -48,7 +48,9 @@ class SearchBar extends React.PureComponent {
 
   onClearSearch = e => {
     this.inputRef.current.value = '';
-
+    this.setState(prevState => ({
+      inputValue: ''
+    }));
     this.props.onClear();
   }
 

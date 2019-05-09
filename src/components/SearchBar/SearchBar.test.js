@@ -5,6 +5,7 @@ import {
   FiX,
   FiSearch 
 } from 'react-icons/fi';
+import { InputGroupAddon } from 'reactstrap';
 
 describe('SearchBar test', () => {
   beforeEach(() => {
@@ -15,14 +16,19 @@ describe('SearchBar test', () => {
     jest.clearAllTimers();
   });
 
-  it('should do searching while typing', () => {
+  it('should do searching while typing', async () => {
     const search = jest.fn();
+    //see https://github.com/facebook/jest/issues/3465#issuecomment-335160011
+    jest.useRealTimers();
     const wrapper = mount(<SearchBar onSearch={search} />);
     wrapper.find('input').simulate('change');
     wrapper.find('input').simulate('change');
-    expect(search).not.toBeCalled();
-    jest.runAllTimers();
-    expect(search).toBeCalled();
+    await new Promise(resolve => (
+      setTimeout(() => {
+        expect(search).toBeCalledTimes(1);
+        resolve();
+      }, 500)
+    ));
   });
 
   it('should change focus state the input gets clicked or loses focus', () => {
@@ -40,12 +46,21 @@ describe('SearchBar test', () => {
     expect(wrapper.find(FiX)).toHaveLength(1);
 
     input.simulate('click');
-    wrapper.setState({ inputValue: 'something' });
+    input.instance().value = 'something';
+    input.simulate('change');
     input.simulate('blur');
-    expect(wrapper.update().find(FiX)).toHaveLength(1);
+    expect(wrapper.update().find(FiX)).toHaveLength(1)
 
-    wrapper.setState({ inputValue: '' });
+    input.instance().value = '';
+    input.simulate('change');
     input.simulate('blur');
+    expect(wrapper.update().find(FiSearch)).toHaveLength(1);
+
+    input.simulate('click');
+    input.instance().value = 'something';
+    expect(wrapper.update().find(FiX)).toHaveLength(1);
+    input.simulate('blur');
+    wrapper.find(InputGroupAddon).simulate('click');
     expect(wrapper.update().find(FiSearch)).toHaveLength(1);
   });
 });

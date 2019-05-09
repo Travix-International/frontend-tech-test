@@ -20,6 +20,8 @@
   height: 100%;
   padding-left: 6px;
   text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   &.completed {
     text-decoration: line-through;
   }

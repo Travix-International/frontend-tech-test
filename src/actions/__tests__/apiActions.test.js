@@ -11,7 +11,6 @@ const store = mockStore({});
 
 const mockApi = new MockAdapter(requester);
 
-
 describe('Async actions test', () => {
   afterEach(() => {
     store.clearActions();

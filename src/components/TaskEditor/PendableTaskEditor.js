@@ -2,6 +2,9 @@ import React from 'react';
 import { PendingApiContext } from '../../containers/PendingApiContainer';
 import TaskEditor from './TaskEditor';
 
+/**
+ * Shows a spinner on button when submitting changes
+ */
 const PendableTaskEditor = props => (
   <PendingApiContext.Consumer>
     {
