@@ -5,6 +5,10 @@ import { setTaskVisibility } from '../actions/filterActions';
 import { Header } from '../components/Header';
 import SearchContainer from './SearchContainer';
 
+/**
+ * Connects visibility filter with app state
+ */
+
 const mapStateToProps = state => ({
   currentFilter: getFilter(state),
   query: getSearchQuery(state)

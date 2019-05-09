@@ -3,3 +3,5 @@ export const TASK_FILTER = {
   SHOW_ACTIVE: 'SHOW_ACTIVE',
   SHOW_COMPLETED: 'SHOW_COMPLETED'
 };
+
+export const TASK_ITEM_HEIGHT = 52;

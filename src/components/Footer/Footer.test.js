@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Footer from './Footer';
 import { Button } from 'reactstrap';
 import { TaskEditor } from '../TaskEditor';
@@ -11,7 +11,7 @@ describe('Footer test', () => {
   });
 
   afterEach(() => {
-    jest.runTimersToTime(300);
+    jest.advanceTimersByTime(300);
     jest.clearAllTimers();
   });
 
@@ -21,12 +21,10 @@ describe('Footer test', () => {
   });
 
   it('should toggle modal editor when clicks button', () => {
-    const wrapper = shallow(<Footer />);
-    wrapper.find(Button).simulate('click');
-    jest.runTimersToTime(300);
-    expect(wrapper.find(TaskEditor).props().open).toBe(true);
-    wrapper.find(Button).simulate('click');
-    jest.runTimersToTime(300);
+    const wrapper = mount(<Footer />);
     expect(wrapper.find(TaskEditor).props().open).toBe(false);
+    wrapper.find(Button).simulate('click');
+    jest.advanceTimersByTime(300);
+    expect(wrapper.find(TaskEditor).props().open).toBe(true);
   });
 });

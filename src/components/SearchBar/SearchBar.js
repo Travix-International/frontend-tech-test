@@ -27,19 +27,28 @@ class SearchBar extends React.PureComponent {
   constructor (props) {
     super(props);
     this.state = {
-      focus: false
+      focus: false,
+      inputValue: ''
     };
     this.inputRef = React.createRef();
     this.onSearchTask = debounce(this.onSearchTask, 300);
   }
 
-  onSearchTask = e => {
+  onUpdateInput = e => {
     const value = this.inputRef.current.value;
+    this.setState(prevState => ({
+      inputValue: value
+    }));
+    this.onSearchTask(value);
+  }
+
+  onSearchTask = value => {
     this.props.onSearch(value);
   }
 
   onClearSearch = e => {
     this.inputRef.current.value = '';
+
     this.props.onClear();
   }
 
@@ -60,7 +69,8 @@ class SearchBar extends React.PureComponent {
   }
 
   render () {
-    const { focus } = this.state;
+    const { focus, inputValue } = this.state;
+
     return (
       <div className={styles.searchbar}>
         <InputGroup size="sm">
@@ -68,7 +78,7 @@ class SearchBar extends React.PureComponent {
             type="text"
             placeholder="Search task title"
             innerRef={this.inputRef}
-            onChange={this.onSearchTask}
+            onChange={this.onUpdateInput}
             onBlur={this.onInputBlur}
             onClick={this.onInputClick}
           />
@@ -78,7 +88,7 @@ class SearchBar extends React.PureComponent {
             onMouseDown={this.onClearSearch}
           >
             <InputGroupText>
-              { focus ? <FiX /> : <FiSearch /> }
+              { !!inputValue || focus ? <FiX /> : <FiSearch /> }
             </InputGroupText>
           </InputGroupAddon>
         </InputGroup>

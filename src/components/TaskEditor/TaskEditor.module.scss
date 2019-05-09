@@ -1,4 +1,10 @@
+.editor-btn {
+  width: 72px;
+  height: 32px;
+}
+
 .delete-btn {
+  @extend .editor-btn;
   margin-right: auto !important;
 }
 

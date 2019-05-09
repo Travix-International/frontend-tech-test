@@ -5,6 +5,10 @@ import {
 } from '../actions/searchActions';
 import { SearchBar } from '../components/SearchBar';
 
+/**
+ * Maps asynchronous search actions to Searchbar
+ */
+
 const mapDispatchToProps = dispatch => ({
   onSearch: query => dispatch(searchTaskAction(query)),
   onClear: () => dispatch(clearSearch)

@@ -4,10 +4,10 @@ import {
   Button,
   Container
 } from 'reactstrap';
-import { TaskEditor } from '../TaskEditor';
+import { PendableTaskEditor } from '../TaskEditor';
 import { FiPlus } from 'react-icons/fi';
 import styles from './Footer.module.scss';
-import flexCenter from '../flexCenter';
+import { flexCenter } from '../flexCenter';
 
 const propTypes = {
   createTask: PropTypes.func
@@ -19,6 +19,9 @@ const defaultProps = {
 
 const AddButton = flexCenter(Button);
 
+/**
+ * App footer contains a "Add task" button
+ */
 const Footer = props => {
   const { createTask } = props;
   const [taskEditorOpen, toggleTaskEditor] = useState(false);
@@ -37,7 +40,7 @@ const Footer = props => {
           </AddButton>
         </div>
       </Container>
-      <TaskEditor
+      <PendableTaskEditor
         open={taskEditorOpen}
         onToggle={() => toggleTaskEditor(!taskEditorOpen)}
         onSubmit={createTask}

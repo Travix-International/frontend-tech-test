@@ -10,7 +10,7 @@ import { TASK_FILTER } from '../../constants';
 import { startCase } from 'lodash';
 import { FiCheckSquare } from 'react-icons/fi';
 import styles from './Header.module.scss';
-import flexCenter from '../flexCenter';
+import { flexCenter } from '../flexCenter';
 
 const filters = Object.keys(TASK_FILTER).map(key => ({
   title: startCase(key.toLowerCase()),
@@ -31,6 +31,9 @@ const defaultProps = {
 
 const NavBrand = flexCenter(NavbarBrand);
 
+/**
+ * Header component
+ */
 const Header = props => {
   const { currentFilter, setFilter, query, children } = props;
 

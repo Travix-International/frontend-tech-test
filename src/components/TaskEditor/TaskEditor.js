@@ -12,10 +12,13 @@ import {
   Button
 } from 'reactstrap';
 import { FiTrash2 } from 'react-icons/fi';
-import flexCenter from '../flexCenter';
+import { flexCenter } from '../flexCenter';
+import { withSpinner } from '../withSpinner';
 import styles from './TaskEditor.module.scss';
 
-const DeleteButton = flexCenter(Button);
+const DeleteButton = flexCenter(withSpinner(Button));
+const SaveButton = withSpinner(Button);
+
 class TaskEditor extends React.PureComponent {
   static propTypes = {
     open: PropTypes.bool,
@@ -24,6 +27,8 @@ class TaskEditor extends React.PureComponent {
       title: PropTypes.string,
       description: PropTypes.string
     }),
+    savingTask: PropTypes.bool,
+    deletingTask: PropTypes.bool,
     onToggle: PropTypes.func,
     onSubmit: PropTypes.func,
     onDelete: PropTypes.func
@@ -32,28 +37,65 @@ class TaskEditor extends React.PureComponent {
   static defaultProps = {
     open: false,
     task: null,
+    savingTask: false,
+    deletingTask: false,
     onToggle: () => {},
     onSubmit: () => {},
     onDelete: () => {}
   };
 
+  static getDerivedStateFromProps (nextProps, prevState) {
+    const pending = nextProps.savingTask || nextProps.deletingTask;
+    const submitting = prevState.saving || prevState.deleting;
+
+    // if state changed from submitting to resolved
+    if (submitting && !pending) {
+      return {
+        saving: false,
+        deleting: false,
+        shouldClose: true
+      };
+    } else if (prevState.shouldClose) {
+      // set shouldClose back to false to avoid
+      // infinite rerender
+      return {
+        shouldClose: false
+      }
+    }
+
+    return null;
+  }
+
   constructor (props) {
     super(props);
     this.titleRef = createRef();
     this.decriptionRef = createRef();
+    this.state = {
+      saving: false,
+      deleting: false,
+      shouldClose: false
+    };
+  }
+
+  componentDidUpdate () {
+    if (this.state.shouldClose) {
+      this.props.onToggle();
+    }
   }
 
   deleteTask = e => {
     e.preventDefault();
-    const { task, onDelete, onToggle } = this.props;
+    const { task, onDelete } = this.props;
     onDelete(task.id);
-    onToggle();
+    this.setState(prevState => ({
+      deleting: true
+    }));
   }
 
   submit = e => {
     e.preventDefault();
 
-    const { task, onSubmit, onToggle } = this.props;
+    const { task, onSubmit } = this.props;
     const title = this.titleRef.current.value;
     const description = this.decriptionRef.current.value;
 
@@ -61,12 +103,15 @@ class TaskEditor extends React.PureComponent {
     if (task !== null) newTask['id'] = task.id;
 
     onSubmit(newTask);
-    onToggle();
+    this.setState(prevState => ({
+      saving: true
+    }));
   }
 
   render () {
     const { open, task, onToggle } = this.props;
     const title = task === null ? 'Add task' : task.title;
+    const { saving, deleting } = this.state;
   
     return (
       <Modal isOpen={open} toggle={onToggle}>
@@ -101,21 +146,40 @@ class TaskEditor extends React.PureComponent {
             <DeleteButton
               className={styles['delete-btn']}
               size="sm"
+              spinnerSize="sm"
+              spinnerColor="light"
               color="danger"
+              isPending={deleting}
               onClick={this.deleteTask}
             >
               <FiTrash2 /> Delete
             </DeleteButton>
           }
           <div className={styles['btn-group']}>
-            <Button size="sm" color="primary" onClick={this.submit}>Save</Button>
-            <Button size="sm" color="secondary" onClick={onToggle}>Cancel</Button>
+            <SaveButton 
+              className={styles['editor-btn']}
+              size="sm"
+              spinnerSize="sm" 
+              spinnerColor="light"
+              color="primary" 
+              isPending={saving}
+              onClick={this.submit}
+            >
+              Save
+            </SaveButton>
+            <Button
+              className={styles['editor-btn']} 
+              size="sm" 
+              color="secondary" 
+              onClick={onToggle}
+            >
+              Cancel
+            </Button>
           </div>
         </ModalFooter>
       </Modal>
     );
   }
 }
-
 
 export default TaskEditor;

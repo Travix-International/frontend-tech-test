@@ -20,27 +20,27 @@ describe('TaskEditor test', () => {
 
   afterEach(() => {
     // forward time to fade out modal
-    jest.runTimersToTime(300);
+    jest.advanceTimersByTime(300);
     jest.clearAllTimers();
   });
 
   it('should render a new task editor', () => {
     const wrapper = mount(<TaskEditor open={true} />);
-    jest.runTimersToTime(300);
+    jest.advanceTimersByTime(300);
     expect(wrapper.find(ModalHeader).text()).toMatch('Add task');
     expect(wrapper.find(Button)).toHaveLength(2);
   });
 
   it('should render a editing task editor', () => {
     const wrapper = mount(<TaskEditor open={true} task={task} />);
-    jest.runTimersToTime(300);
+    jest.advanceTimersByTime(300);
     expect(wrapper.find(ModalHeader).text()).toMatch(task.title);
     expect(wrapper.find(Button)).toHaveLength(3);
   });
 
   it('should display title and description in input field', () => {
     const wrapper = mount(<TaskEditor open={true} task={task} />);
-    jest.runTimersToTime(300);
+    jest.advanceTimersByTime(300);
     expect(wrapper.find('input').instance().value).toBe(task.title);
     expect(wrapper.find('textarea').instance().value).toBe(task.description);
   });
@@ -48,7 +48,7 @@ describe('TaskEditor test', () => {
   it('should call onToggle when clicked close button', () => {
     const toggle = jest.fn();
     const wrapper = mount(<TaskEditor open={true} onToggle={toggle} />);
-    jest.runTimersToTime(300);
+    jest.advanceTimersByTime(300);
     wrapper.find('button.close').simulate('click');
     expect(toggle).toBeCalled();
   });
@@ -57,7 +57,7 @@ describe('TaskEditor test', () => {
     let itemId;
     const deleteFunc = id => itemId = id;
     const wrapper = mount(<TaskEditor open={true} task={task} onDelete={deleteFunc} />);
-    jest.runTimersToTime(300);
+    jest.advanceTimersByTime(300);
     wrapper.find('button.btn-danger').simulate('click');
     expect(itemId).toBe(task.id);
   });
@@ -66,7 +66,7 @@ describe('TaskEditor test', () => {
     let item;
     const submit = t => item = t;
     const wrapper = mount(<TaskEditor open={true} task={task} onSubmit={submit} />);
-    jest.runTimersToTime(300);
+    jest.advanceTimersByTime(300);
     wrapper.find('button.btn-primary').simulate('click');
     expect(item).toEqual(task);
   });

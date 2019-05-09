@@ -7,6 +7,7 @@ import configureStore from './store/configureStore';
 import HeaderContainer from './containers/HeaderContainer';
 import TaskListContainer from './containers/TaskListContainer';
 import FooterContainer from './containers/FooterContainer';
+import PendingApiContainer from './containers/PendingApiContainer';
 import styles from './App.module.scss';
 
 function App() {
@@ -14,9 +15,11 @@ function App() {
     <Provider store={configureStore()}>
       <Container className={styles['app']}>
         <HeaderContainer className={styles['app-header']} />
-        <TaskListContainer />
-        <FooterContainer />
-    </Container>
+        <PendingApiContainer>
+          <TaskListContainer />
+          <FooterContainer />
+        </PendingApiContainer>
+      </Container>
     </Provider>
   );
 }
