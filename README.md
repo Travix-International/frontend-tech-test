@@ -66,7 +66,7 @@ node clientServer.js
 
 ## Future Improvements
 
-- Inifite scrolling to load data by chunk
+- Infinite scrolling to load data by chunk
 
 - Asynchronous filter actions
 
