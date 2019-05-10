@@ -25,15 +25,17 @@ const tasks = (state = initialState, action) => {
                 tasks: state.tasks.concat(action.payload)
             });
         case 'EDIT_TASK':
-            return state.map(task =>
-            (task.id === action.payload.id)
-                ? {...task, title:action.payload.title, description:action.payload.description}
-                : task
-            )
+            console.log(action);
+            let newState = {...state};
+            let editedTask = {...action.payload};
+            console.log(editedTask);
+            newState.tasks.splice(action.payload.id, 1, action.payload);
+            console.log(newState);
+            return newState;
         case 'DELETE_TASK':
-            return state.filter(task =>
-                (task.id !== action.payload.id)
-            )
+            return Object.assign({}, state, {
+                tasks: state.tasks.filter((task)=>task.id!==parseInt(action.payload.id, 10))
+            });
         default:
             return state
     }

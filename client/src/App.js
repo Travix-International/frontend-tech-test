@@ -2,6 +2,10 @@ import React from 'react';
 import './App.css';
 import TaskList from './components/task-list';
 import AddTask from './components/add-task';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faSearch, faSort, faTimes } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faSearch, faSort, faTimes);
 
 class App extends React.Component {
   constructor(props) {
