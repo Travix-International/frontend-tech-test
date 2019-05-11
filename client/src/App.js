@@ -3,9 +3,13 @@ import './App.css';
 import TaskList from './components/task-list';
 import AddTask from './components/add-task';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSearch, faSort, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faSort, faTimes, faSave, faEdit } from '@fortawesome/free-solid-svg-icons';
+import InfoMessage from './components/info-message';
+import SortFilter from './components/sort-filter';
 
-library.add(faSearch, faSort, faTimes);
+library.add(faSearch, faSort, faTimes, faSave, faEdit);
+
+const sortOptions = ['Sort By', 'Title', 'Description'];
 
 class App extends React.Component {
   constructor(props) {
@@ -14,7 +18,8 @@ class App extends React.Component {
     this.state = {
        tasks: [],
        title:'',
-       description:''
+       description:'',
+       message:""
     }
     this.fetchTasks = this.fetchTasks.bind(this);
     this.getJSONData = this.getJSONData.bind(this);
@@ -77,15 +82,26 @@ class App extends React.Component {
   
   render() {
     return (
-      <div className="row mt-5">
-          <div className="col-md-4 offset-md-1">
-              <h2>Add a new Task</h2>
-              <AddTask />
+      <div className="container appContainer">
+        <div className="row mt-2 alertContainer">
+          <InfoMessage/>
+        </div>
+        <div className="row mt-2 mb-2 addTaskContainer">
+            <div className="col-md-12">
+                <AddTask />
+            </div>
+        </div>
+        <div className="row mt-2 mb-2 sortFilterContainer">
+          <div className="col-md-12">
+              <SortFilter sortOptions={sortOptions}/>
           </div>
-          <div className="col-md-4 offset-md-1">
-              <h2>Tasks</h2>
-              <TaskList />
-          </div>
+        </div>
+        <div className="row mt-2 mb-2 taskListContainer">
+            <div className="col-md-12">
+                <h2>Tasks</h2>
+                <TaskList />
+            </div>
+        </div>
       </div>
     )
   }

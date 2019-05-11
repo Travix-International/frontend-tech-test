@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createTask } from "../actions/index";
+import './add-task.css';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -29,29 +30,35 @@ class AddTaskForm extends Component {
   render() {
     const { title, description } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            className="form-control"
-            id="title"
-            value={title}
-            onChange={this.handleChange}
-          />
+      <form className="addTaskForm form-row" onSubmit={this.handleSubmit}>
+        <div className="col-sm-4 my-1">
+            <div className="input-group">
+                {/* <label htmlFor="title">Title</label> */}
+                <input
+                    type="text"
+                    className="form-control"
+                    id="title"
+                    value={title}
+                    placeholder="Title"
+                    onChange={this.handleChange}
+                />
+            </div>
         </div>
-        <div className="form-group">
-        <label htmlFor="description">Description</label>
-          <input
-            type="text"
-            className="form-control"
-            id="description"
-            value={description}
-            onChange={this.handleChange}
-          />
+        <div className="col-sm-4 my-1">
+            <div className="input-group">
+            {/* <label htmlFor="description">Description</label> */}
+                <input
+                    type="text"
+                    className="form-control"
+                    id="description"
+                    value={description}
+                    placeholder="Description"
+                    onChange={this.handleChange}
+                />
+            </div>
         </div>
-        <button type="submit" className="btn btn-success btn-lg">
-          SAVE
+        <button type="submit" className="btn btn-success">
+          Create Task
         </button>
       </form>
     );

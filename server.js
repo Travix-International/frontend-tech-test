@@ -62,11 +62,16 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
+    const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
 
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      tasksContainer.tasks.splice(taskIndex, 1, task);
+
+      return res.status(200).json({
+        message: 'Task Edited Successfully',
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -98,7 +103,7 @@ app.post('/task/create/:title/:description', (req, res) => {
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
-    message: 'Resource created',
+    message: 'Task Created',
   });
 });
 
@@ -122,7 +127,7 @@ app.delete('/task/delete/:id', (req, res) => {
       const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
-        message: 'Updated successfully',
+        message: 'Task Deleted Successfully',
       });
     } else {
       return es.status(404).json({

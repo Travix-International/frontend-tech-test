@@ -6,7 +6,7 @@ import { getTasks } from '../actions/index';
 
 const mapStateToProps = state => {
   console.log(state);
-  return { tasks: [...state.tasks] };
+  return { tasks: [...state.filteredTasks] };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -61,14 +61,37 @@ class ConnectedList extends React.Component {
     
     render() {
       return (
-        <div>
-            <ul className="list-group list-group-flush">
+        <div className="tableContainer table-responsive">
+            {/* <ul className="list-group list-group-flush">
               {this.props.tasks.map((task)=>{
                 return (
                   <Task key={task.id} task={task}/>
                 );
               })}
-            </ul>
+            </ul> */}
+            <table className="dataTable table table-bordered table-hover">
+                <thead className="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody className="dataTable-body">
+                  {this.props.tasks.map((task, index)=>{
+                    return (
+                      // <tr key={task.id}>
+                      //     <td className="cell-text">{index}</td>
+                      //     <td colSpan="2" className="cell-text" title={task.title}>{task.title}</td>
+                      //     <td colSpan="2" className="cell-text" title={task.description}>{task.description}</td>
+                      //     <td className="cell-text"><FontAwesomeIcon onClick = {this.delete} icon="times" aria-hidden="true"/></td>
+                      // </tr>
+                        <Task key={task.id} task={task} index={index}/>
+                    );
+                  })}
+                </tbody>
+            </table>
         </div>
       )
     }

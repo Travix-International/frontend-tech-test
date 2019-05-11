@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -30,4 +30,47 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.alertContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.alertContainer .alert {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.addTaskContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 5vh
+}
+
+.sortFilterContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 5vh
+}
+
+.taskListContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 80vh
 }

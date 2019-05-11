@@ -9,13 +9,19 @@ class TaskInput extends React.Component {
       }
     }
     handleSubmit = e => {
+        console.log(typeof e.key);
         const text = e.target.value.trim();
-        if (e.which === 13) {
-            this.props.onSave(text);
+        if (e.key === "Enter") {
+            //this.props.onSave(text);
+            this.save(text);
             // if (this.props.newTodo) {
             //     this.setState({ text: '' });
             // }
         }
+    }
+
+    save = (text) => {
+        this.props.onSave(text);
     }
     
     handleChange = e => {
@@ -23,9 +29,12 @@ class TaskInput extends React.Component {
     }
     
     handleBlur = e => {
-        if (!this.props.newTodo) {
-            this.props.onSave(e.target.value);
-        }
+        console.log("ON BLUR called!");
+        // if (!this.props.newTodo) {
+        //     this.props.onSave(e.target.value);
+        // }
+        //const text = e.target.value;
+        //this.save(text);
     }
     
     render() {

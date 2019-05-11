@@ -1,5 +1,6 @@
 import { CREATE_TASK, DELETE_TASK, EDIT_TASK, GET_TASKS_SUCCESS, GET_TASKS_FAILURE,
-     DELETE_TASK_SUCCESS, DELETE_TASK_FAILURE, CREATE_TASK_SUCCESS, CREATE_TASK_FAILURE } from '../constants/action-types';
+     DELETE_TASK_SUCCESS, DELETE_TASK_FAILURE, CREATE_TASK_SUCCESS, CREATE_TASK_FAILURE,
+    EDIT_TASK_SUCCESS, EDIT_TASK_FAILURE, FILTER_TASKS } from '../constants/action-types';
 
 
 export function createTask (payload) {
@@ -75,8 +76,41 @@ export function deleteTaskFailure (error) {
 
 
 export function editTask (payload) {
-    return { type: EDIT_TASK, payload }
+    //return { type: EDIT_TASK, payload }
+    return (dispatch) => {
+        return fetch(`/task/update/${payload.id}/${payload.title}/${payload.description}`, {
+            method:'PUT',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+            .then((response)=>{
+                console.log(response);
+                if (!response.status === 200) {
+                    throw new Error(`error updating task with id ${payload.id}`);
+                } else {
+                    //console.log(response.json()); 
+                    return response.json();
+                }
+            })
+            .then((data)=> {
+                console.log(data);
+                dispatch(editTaskSuccess(data));
+                dispatch(getTasks());
+            })
+            .catch((error)=>dispatch(editTaskFailure(error)))
+    };
 };
+
+export function editTaskSuccess (editMessage) {
+    console.log(editMessage);
+    return { type : EDIT_TASK_SUCCESS, payload: editMessage}
+}
+
+export function editTaskFailure (error) {
+    console.log(error);
+    return { type: EDIT_TASK_FAILURE, payload: error }
+}
 
 export const getTasks = () => {
     return (dispatch) => {
@@ -90,7 +124,7 @@ export const getTasks = () => {
             })
             .then((response)=>response.json())
             .then((data)=> dispatch(getTasksSuccess(data)))
-            .catch((error)=>dispatch(GetTasksFailure(error)))
+            .catch((error)=>dispatch(getTasksFailure(error)))
     };
 }
 
@@ -99,7 +133,12 @@ export function getTasksSuccess (taskData) {
     return { type : GET_TASKS_SUCCESS, payload: taskData}
 }
 
-export function GetTasksFailure (error) {
+export function getTasksFailure (error) {
     console.log(error);
     return { type: GET_TASKS_FAILURE, payload: error }
+}
+
+export function filterTasks (query) {
+    console.log("Filter query: ", query);
+    return { type: FILTER_TASKS, payload: query }
 }
