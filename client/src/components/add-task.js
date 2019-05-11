@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addTask } from "../actions/index";
+import { createTask } from "../actions/index";
 
 function mapDispatchToProps(dispatch) {
   return {
-    addTask: task => dispatch(addTask(task))
+    createTask: task => dispatch(createTask(task))
   };
 }
 class AddTaskForm extends Component {
@@ -23,7 +23,7 @@ class AddTaskForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { title, description } = this.state;
-    this.props.addTask({ title, description });
+    this.props.createTask({ title, description });
     this.setState({ title: "", description:"" });
   }
   render() {

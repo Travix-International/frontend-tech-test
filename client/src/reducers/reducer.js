@@ -1,24 +1,22 @@
 
 const initialState = {
-    tasks:[
-        {id:0, title:'Task 1', description: 'wake up and shower!'}
-    ]
+    tasks:[]
 };
+// {id:0, title:'Task 1', description: 'wake up and shower!'}
+// (
+//     async () => {
+//         const rawResponse = await fetch('/tasks', {
+//         method: 'GET'
+//         });
+//         const content = await rawResponse.json();
 
-(
-    async () => {
-        const rawResponse = await fetch('/tasks', {
-        method: 'GET'
-        });
-        const content = await rawResponse.json();
-
-        console.log(content);
-    }
-)();
+//         console.log(content);
+//     }
+// )();
 
 const tasks = (state = initialState, action) => {
     switch (action.type) {
-        case 'ADD_TASK':
+        case 'CREATE_TASK':
             console.log(state);
             action.payload.id = state.tasks.length;
             return Object.assign({}, state, {
@@ -35,6 +33,11 @@ const tasks = (state = initialState, action) => {
         case 'DELETE_TASK':
             return Object.assign({}, state, {
                 tasks: state.tasks.filter((task)=>task.id!==parseInt(action.payload.id, 10))
+            });
+        case 'GET_TASKS_SUCCESS':
+            console.log(action);
+            return Object.assign({}, state, {
+                tasks: [...action.payload.tasks]
             });
         default:
             return state

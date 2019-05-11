@@ -32,7 +32,7 @@ class connectedTask extends React.Component {
         console.log(e.currentTarget.parentNode.parentNode.parentNode);
         console.log(e.currentTarget.previousSibling);
         let taskId = e.currentTarget.parentNode.parentNode.parentNode.id;
-        this.props.deleteTask({id:taskId});
+        this.props.deleteTask({id:parseInt(taskId, 10)});
     }
 
     handleDoubleClick = () => {

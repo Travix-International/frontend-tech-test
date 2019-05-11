@@ -1,16 +1,19 @@
 import React from 'react';
 import './task-list.css';
 import { connect } from "react-redux";
-import { deleteTask } from '../actions/index';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Task from './task';
+import { getTasks } from '../actions/index';
 
 const mapStateToProps = state => {
   console.log(state);
   return { tasks: [...state.tasks] };
 };
 
-
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchTasks: () => dispatch(getTasks())
+  }
+}
 
 // const ConnectedList = ({ tasks }) => {
 //   console.log(tasks);
@@ -40,16 +43,21 @@ class ConnectedList extends React.Component {
       }
     }
 
+    componentDidMount() {
+      console.log(this.props);
+      this.props.fetchTasks();
+    }
+
     componentDidUpdate() {
       console.log("TASK LIST NEW PROPS = ",this.props)
     }
 
-    delete = (e) => {
-      e.preventDefault();
-      console.log(e.currentTarget.parentNode.parentNode.id);
-      let taskId = e.currentTarget.parentNode.parentNode.id;
-      this.props.deleteTask({id:taskId});
-    }
+    // delete = (e) => {
+    //   e.preventDefault();
+    //   console.log(e.currentTarget.parentNode.parentNode.id);
+    //   let taskId = e.currentTarget.parentNode.parentNode.id;
+    //   this.props.deleteTask({id:taskId});
+    // } //deprecated - delete method inside task component
     
     render() {
       return (
@@ -57,13 +65,6 @@ class ConnectedList extends React.Component {
             <ul className="list-group list-group-flush">
               {this.props.tasks.map((task)=>{
                 return (
-                  // <li className="list-group-item" key={todo.id} id={todo.id}>
-                  //    <div className="taskHeading">
-                  //       <div>{todo.title}</div>
-                  //       <FontAwesomeIcon onClick = {this.delete} icon="times" aria-hidden="true"/>
-                  //     </div>
-                  //   <div>{todo.description}</div>
-                  // </li>
                   <Task key={task.id} task={task}/>
                 );
               })}
@@ -72,6 +73,6 @@ class ConnectedList extends React.Component {
       )
     }
 }
-const TaskList = connect(mapStateToProps)(ConnectedList);
+const TaskList = connect(mapStateToProps, mapDispatchToProps)(ConnectedList);
 
 export default TaskList
