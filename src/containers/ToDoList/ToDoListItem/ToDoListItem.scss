@@ -12,6 +12,7 @@
       top: 15px;
       left: 20px;
       margin: auto 0;
+      cursor: pointer;
     }
   
     .title {
@@ -29,7 +30,8 @@
       font-size: 30px;
       color: #cc9a9a;
       transition: color 0.2s ease-out;
-  
+      cursor: pointer;
+
       &:after {
         content: '×';
       }
