@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from '../../store/actions/index';
+import * as actions from '../../../store/actions/index';
+import './ToDoListItem.scss';
 
 class ToDoListitem extends Component {
     state = {
@@ -30,30 +31,30 @@ class ToDoListitem extends Component {
     render() {
         const { toDo, toggleToDo, deleteToDo } = this.props;
         return (
-            <li>
+            <li className={`toDo ${toDo.completed ? 'completed' : ''}`}>
                 {this.state.editing ?
                     <input
                         type="text"
                         ref={el => el && el.focus()}
+                        className="editing"
                         onChange={this.changeHandler}
                         value={this.state.value}
                         onKeyDown={this.saveHandler}
-                        onBlur={() => this.setState({ editing: false })}
-                    /> :
+                        onBlur={() => this.setState({ editing: false })} /> :
                     <Fragment>
                         <input
                             type="checkbox"
+                            className="toggle"
                             checked={toDo.completed}
-                            onChange={toggleToDo}
-                        />
+                            onChange={toggleToDo} />
                         <div
-                            onDoubleClick={this.doubleClickHandler}
-                        >
+                            className="title"
+                            onDoubleClick={this.doubleClickHandler} >
                             {toDo.title}
                         </div>
                         <button
-                            onClick={deleteToDo}
-                        />
+                            className="delete"
+                            onClick={deleteToDo} />
                     </Fragment>
                 }
             </li>

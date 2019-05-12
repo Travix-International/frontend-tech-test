@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions/index';
-import * as styles from './AddToDo.scss';
+import './AddToDo.scss';
 
 class AddToDo extends Component {
     
@@ -24,16 +24,16 @@ class AddToDo extends Component {
     render() {
         return (
             <form
-                className={styles.toDoForm}
+                className="toDoForm"
                 onSubmit={e => e.preventDefault()} >
                 <input
                     type="text"
-                    className={styles.toDoInput}
+                    className="toDoInput"
                     placeholder="I want to..."
                     value={this.state.value}
                     onChange={this.changehandler} />
                 <button
-                    className={styles.addToDo}
+                    className="addToDo"
                     onClick={this.clickHandler} >
                     Add ToDo
                 </button>

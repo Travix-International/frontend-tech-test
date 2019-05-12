@@ -1,10 +1,10 @@
 import React from 'react';
 
-import * as styles from './ToDoHeader.scss';
+import './ToDoHeader.scss';
 
 const toDoHeader = (props) => {
     return (
-        <h1 className={styles.title}>{props.title}</h1>
+        <h1 className="appTitle">{props.title}</h1>
     )
 }
 

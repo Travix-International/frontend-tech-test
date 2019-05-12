@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ToDoListItem from '../ToDoListItem/ToDoListItem';
+import ToDoListItem from './ToDoListItem/ToDoListItem';
 import * as actions from '../../store/actions/index';
+import './ToDoList.scss';
 
 class ToDoList extends Component {
     componentWillMount() {
@@ -10,7 +11,7 @@ class ToDoList extends Component {
     }
     render() {
         return (
-            <ul>
+            <ul className="toDoList">
                 {this.props.toDoList.map(toDo =>
                     (<ToDoListItem
                         key={toDo.id}
