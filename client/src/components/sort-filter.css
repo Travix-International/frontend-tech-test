@@ -5,3 +5,8 @@
     margin-bottom: 1rem;
     height:5vh;
 }
+
+.input-group-text {
+    background-color: #343A40 !important;
+    color: white !important;
+}

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './sort-filter.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { filterTasks, getTasks } from '../actions/index';
+import { filterTasks, getTasks, sortTasks } from '../actions/index';
 import { connect } from "react-redux";
 
 function mapDispatchToProps(dispatch) {
     return {
       filterTasks: (query) => dispatch(filterTasks(query)),
-      fetchTasks: () => dispatch(getTasks())
+      fetchTasks: () => dispatch(getTasks()),
+      sortTasks: (sort) => dispatch(sortTasks(sort))
     };
 }
 
@@ -40,6 +41,12 @@ class SortFilterForm extends Component {
         e.preventDefault();
         let value = e.currentTarget.value;
         this.setState({sortBy:value}, ()=>{
+            // if (this.state.sortBy === 'Title') {
+            //     this.props.sortTasksByTitle();
+            // } else if (this.state.sortBy === 'Description') {
+            //     this.props.sortTasksByDescription();
+            // }
+            this.props.sortTasks(this.state.sortBy);
             //this.props.sortCandidates(this.state.sortBy);
         });
     }

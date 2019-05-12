@@ -1,0 +1,16 @@
+.titleContainer {
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #1C2331; */
+    background-color: #343A40;
+    margin-bottom:1rem;
+}
+  
+.title {
+    display: flex;
+    color:white;
+    font-size: 3rem;
+}

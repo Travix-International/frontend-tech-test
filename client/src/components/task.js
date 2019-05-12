@@ -74,7 +74,7 @@ class connectedTask extends React.Component {
         let element;
         if (this.state.editing) {
             // element = (
-            //     <div>
+            //     <div className="taskContainer">
             //         <div className="taskHeading">
             //             <TaskInput text={title}
             //                     name="title"
@@ -103,14 +103,14 @@ class connectedTask extends React.Component {
                                 editing={this.state.editing}
                                 onSave={(text) => this.saveDescription(id, text)} />
                     </td>
-                    <td className="cell-text">
+                    <td className="action-text">
                         <FontAwesomeIcon onClick = {this.saveTask} icon="edit" aria-hidden="true"/>
                     </td>
                 </tr>
             )
         } else {
             // element = (
-            //     <div>
+            //     <div className="taskContainer">
             //         <div className="taskHeading">
             //             <label onDoubleClick={this.handleDoubleClick}>
             //                 {title}
@@ -125,10 +125,18 @@ class connectedTask extends React.Component {
             element = (
                 <tr key={id} id={id}>
                     <td className="cell-text">{index}</td>
-                    <td className="cell-text" title={title} onDoubleClick={this.handleDoubleClick}>{title}</td>
-                    <td className="cell-text" title={description} onDoubleClick={this.handleDoubleClick}>{description}</td>
-                    <td className="cell-text">
-                        <FontAwesomeIcon onClick = {this.delete} icon="times" aria-hidden="true"/>
+                    <td className="cell-text" title={title}>
+                        <label className="cell-text-data" onDoubleClick={this.handleDoubleClick}>
+                             {title}
+                        </label>
+                    </td>
+                    <td className="cell-text" title={description}>
+                        <label className="cell-text-data" onDoubleClick={this.handleDoubleClick}>
+                            {description}
+                        </label>
+                    </td>
+                    <td className="action-text">
+                        <FontAwesomeIcon id="fa-icon" onClick = {this.delete} icon="times" aria-hidden="true"/>
                     </td>
                 </tr>
             )

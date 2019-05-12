@@ -9,7 +9,7 @@ class TaskInput extends React.Component {
       }
     }
     handleSubmit = e => {
-        console.log(typeof e.key);
+        console.log(e.key);
         const text = e.target.value.trim();
         if (e.key === "Enter") {
             //this.props.onSave(text);
@@ -29,19 +29,18 @@ class TaskInput extends React.Component {
     }
     
     handleBlur = e => {
-        console.log("ON BLUR called!");
+        console.log("ON BLUR called!", e.currentTarget);
         // if (!this.props.newTodo) {
         //     this.props.onSave(e.target.value);
         // }
-        //const text = e.target.value;
-        //this.save(text);
+        const text = e.target.value;
+        this.save(text);
     }
     
     render() {
       return (
         <input
             type="text"
-            autoFocus={true}
             value={this.state.text}
             onBlur={this.handleBlur}
             onChange={this.handleChange}

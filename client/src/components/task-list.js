@@ -52,12 +52,6 @@ class ConnectedList extends React.Component {
       console.log("TASK LIST NEW PROPS = ",this.props)
     }
 
-    // delete = (e) => {
-    //   e.preventDefault();
-    //   console.log(e.currentTarget.parentNode.parentNode.id);
-    //   let taskId = e.currentTarget.parentNode.parentNode.id;
-    //   this.props.deleteTask({id:taskId});
-    // } //deprecated - delete method inside task component
     
     render() {
       return (
@@ -69,8 +63,8 @@ class ConnectedList extends React.Component {
                 );
               })}
             </ul> */}
-            <table className="dataTable table table-bordered table-hover">
-                <thead className="thead-light">
+            <table className="dataTable table table-dark table-bordered table-hover">
+                <thead className="thead-dark">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Title</th>
@@ -81,12 +75,6 @@ class ConnectedList extends React.Component {
                 <tbody className="dataTable-body">
                   {this.props.tasks.map((task, index)=>{
                     return (
-                      // <tr key={task.id}>
-                      //     <td className="cell-text">{index}</td>
-                      //     <td colSpan="2" className="cell-text" title={task.title}>{task.title}</td>
-                      //     <td colSpan="2" className="cell-text" title={task.description}>{task.description}</td>
-                      //     <td className="cell-text"><FontAwesomeIcon onClick = {this.delete} icon="times" aria-hidden="true"/></td>
-                      // </tr>
                         <Task key={task.id} task={task} index={index}/>
                     );
                   })}

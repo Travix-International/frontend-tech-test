@@ -1,8 +1,9 @@
-import { GET_TASKS_SUCCESS, FILTER_TASKS, SORT_TASKS_BY_DESCRIPTION, SORT_TASKS_BY_TITLE } from '../constants/action-types';
+import { GET_TASKS_SUCCESS, FILTER_TASKS, SORT_TASKS} from '../constants/action-types';
 const initialState = {
     tasks:[],
     filteredTasks:[],
-    filter:""
+    filter:"",
+    sort:""
 };
 // {id:0, title:'Task 1', description: 'wake up and shower!'}
 // (
@@ -60,34 +61,30 @@ const tasks = (state = initialState, action) => {
                     filter: action.payload
                 });
             }
-        case SORT_TASKS_BY_DESCRIPTION:
-            let allTasks = [...state.tasks];
-            allTasks.sort((a, b)=>{
-                if (a.description < b.description) {
-                    return -1;
-                } else if (a.description > b.description) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            })
-            return Object.assign({}, state, {
-                tasks: allTasks
-            });
-        case SORT_TASKS_BY_TITLE:
-            let preSortedTasks = [...state.tasks];
-            preSortedTasks.sort((a, b)=>{
-                if (a.title < b.title) {
-                    return -1;
-                } else if (a.title > b.title) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            })
-            return Object.assign({}, state, {
-                tasks: preSortedTasks
-            });
+        case SORT_TASKS:
+            console.log(action);
+            if (action.payload !== 'Sort By') {
+                let preTasks = (state.filter)? [...state.filteredTasks] : [...state.tasks];
+                preTasks.sort((a,b)=>{
+                    if (a[action.payload.toLowerCase()] < b[action.payload.toLowerCase()]) {
+                        return -1;
+                    } else if (a[action.payload] > b[action.payload]) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                });
+                console.log(preTasks);
+                return Object.assign({}, state, {
+                    filteredTasks: preTasks,
+                    sort:action.payload
+                });
+            } else {
+                return Object.assign({}, state, {
+                    filteredTasks: (state.filter)? [...state.filteredTasks] : [...state.tasks],
+                    sort:action.payload
+                });
+            }
         default:
             return state
     }

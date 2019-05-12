@@ -6,6 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch, faSort, faTimes, faSave, faEdit } from '@fortawesome/free-solid-svg-icons';
 import InfoMessage from './components/info-message';
 import SortFilter from './components/sort-filter';
+import Cockpit from './components/cockpit';
 
 library.add(faSearch, faSort, faTimes, faSave, faEdit);
 
@@ -83,8 +84,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="container appContainer">
-        <div className="row mt-2 alertContainer">
+        {/* <div className="row mt-2 alertContainer">
           <InfoMessage/>
+        </div> */}
+        <div className="row">
+            <Cockpit title={'Task Manager'}/>
         </div>
         <div className="row mt-2 mb-2 addTaskContainer">
             <div className="col-md-12">
@@ -98,7 +102,6 @@ class App extends React.Component {
         </div>
         <div className="row mt-2 mb-2 taskListContainer">
             <div className="col-md-12">
-                <h2>Tasks</h2>
                 <TaskList />
             </div>
         </div>

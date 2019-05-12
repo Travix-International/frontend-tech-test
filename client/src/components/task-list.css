@@ -1,6 +1,29 @@
-.taskHeading {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
+.tableContainer {
+    height: 70vh;
+    max-height: 70vh;
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+}
+
+.tableContainer::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+.tableContainer th {
+    position: sticky; top: 0;
+}
+
+.dataTable {
+    overflow-y: hidden;
+    max-height: inherit;
+    position: relative;
+}
+
+.dataTable-body {
+    /* height: 700px;
+    max-height: 700px; */
+    overflow-y: scroll;
+    position: relative;
 }

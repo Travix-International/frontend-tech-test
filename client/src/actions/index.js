@@ -1,6 +1,6 @@
 import { CREATE_TASK, DELETE_TASK, EDIT_TASK, GET_TASKS_SUCCESS, GET_TASKS_FAILURE,
      DELETE_TASK_SUCCESS, DELETE_TASK_FAILURE, CREATE_TASK_SUCCESS, CREATE_TASK_FAILURE,
-    EDIT_TASK_SUCCESS, EDIT_TASK_FAILURE, FILTER_TASKS } from '../constants/action-types';
+    EDIT_TASK_SUCCESS, EDIT_TASK_FAILURE, FILTER_TASKS, SORT_TASKS_BY_TITLE, SORT_TASKS_BY_DESCRIPTION, SORT_TASKS } from '../constants/action-types';
 
 
 export function createTask (payload) {
@@ -141,4 +141,9 @@ export function getTasksFailure (error) {
 export function filterTasks (query) {
     console.log("Filter query: ", query);
     return { type: FILTER_TASKS, payload: query }
+}
+
+export function sortTasks (sort) {
+    
+    return { type: SORT_TASKS, payload: sort }
 }
