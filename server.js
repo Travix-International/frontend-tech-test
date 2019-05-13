@@ -57,7 +57,7 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
+app.put('/task/update/:id/:title/:description/:completed', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
@@ -67,6 +67,7 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
+      task.completed = req.params.completed === "false"? false : true;
       tasksContainer.tasks.splice(taskIndex, 1, task);
 
       return res.status(200).json({
@@ -98,12 +99,14 @@ app.post('/task/create/:title/:description', (req, res) => {
     id: tasksContainer.tasks.length,
     title: req.params.title,
     description: req.params.description,
+    completed: false
   };
 
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
-    message: 'Task Created',
+    message: `Task with id ${task.id} Created`,
+    id: task.id
   });
 });
 
@@ -127,7 +130,7 @@ app.delete('/task/delete/:id', (req, res) => {
       const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
-        message: 'Task Deleted Successfully',
+        message: `Task with id ${id} Deleted Successfully`,
       });
     } else {
       return es.status(404).json({

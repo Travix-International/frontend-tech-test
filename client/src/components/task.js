@@ -16,11 +16,11 @@ function mapDispatchToProps(dispatch) {
 class connectedTask extends React.Component {
     constructor(props) {
         super(props)
-        console.log(props);
         this.state = {
             editing: false,
             title:this.props.task.title,
-            description:this.props.task.description
+            description:this.props.task.description,
+            completed:this.props.task.completed
         }
         this.delete = this.delete.bind(this);
         this.saveTitle = this.saveTitle.bind(this);
@@ -28,14 +28,14 @@ class connectedTask extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log("TASK NEW PROPS = ",this.props);
+        //console.log("TASK NEW PROPS = ",this.props);
     }
 
     delete = (e) => {
         e.preventDefault();
-        console.log(e.currentTarget.parentNode.parentNode);
+        console.log(e.currentTarget.parentNode.parentNode.parentNode);
         //console.log(e.currentTarget.previousSibling);
-        let taskId = e.currentTarget.parentNode.parentNode.id;
+        let taskId = e.currentTarget.parentNode.parentNode.parentNode.id;
         this.props.deleteTask({id:parseInt(taskId, 10)});
     }
 
@@ -48,7 +48,7 @@ class connectedTask extends React.Component {
         if (title.length === 0) {
             return;
         } else {
-            this.props.editTask({id:id, title:title, description:this.props.task.description});
+            this.props.editTask({id:id, title:title, description:this.props.task.description, completed:this.props.task.completed});
             this.setState({ editing: false });
         }
     }
@@ -57,7 +57,7 @@ class connectedTask extends React.Component {
         if (description.length === 0) {
             return;
         } else {
-            this.props.editTask({id:id, title:this.props.task.title, description:description});
+            this.props.editTask({id:id, title:this.props.task.title, description:description, completed:this.props.task.completed});
             this.setState({ editing: false });
         }
     }
@@ -67,10 +67,16 @@ class connectedTask extends React.Component {
         this.setState({ editing: false });
     }
 
+    toggleTaskCompletion = () => {
+        this.setState((prevState)=>({ completed: !prevState.completed }),()=>{
+            this.props.editTask({id:this.props.task.id, title:this.props.task.title, description:this.props.task.description, completed:this.state.completed});
+        });
+        
+    }
+
     render() {
         const { title, description, id} = this.props.task;
         const index  = this.props.index;
-        console.log(index);
         let element;
         if (this.state.editing) {
             // element = (
@@ -89,7 +95,7 @@ class connectedTask extends React.Component {
             //     </div>
             //     )
             element = (
-                <tr key={id}>
+                <tr key={id} id={id}>
                     <td className="cell-text">{index}</td>
                     <td className="cell-text" title={title}>
                         <TaskInput text={this.state.title}
@@ -104,7 +110,9 @@ class connectedTask extends React.Component {
                                 onSave={(text) => this.saveDescription(id, text)} />
                     </td>
                     <td className="action-text">
-                        <FontAwesomeIcon onClick = {this.saveTask} icon="edit" aria-hidden="true"/>
+                        <div className="actionContainer">
+                            <FontAwesomeIcon id="fa-icon" onClick = {this.delete} icon="trash-alt" aria-hidden="true"/>
+                        </div>
                     </td>
                 </tr>
             )
@@ -123,7 +131,7 @@ class connectedTask extends React.Component {
             //     </div>
             // )
             element = (
-                <tr key={id} id={id}>
+                <tr key={id} id={id} className={this.props.task.completed? 'completed' : null}>
                     <td className="cell-text">{index}</td>
                     <td className="cell-text" title={title}>
                         <label className="cell-text-data" onDoubleClick={this.handleDoubleClick}>
@@ -136,7 +144,15 @@ class connectedTask extends React.Component {
                         </label>
                     </td>
                     <td className="action-text">
-                        <FontAwesomeIcon id="fa-icon" onClick = {this.delete} icon="times" aria-hidden="true"/>
+                        <div className="actionContainer">
+                            <FontAwesomeIcon className="fa-icon" onClick = {this.delete} icon="trash-alt" aria-hidden="true" title="delete task"/>
+                            { !this.state.completed &&
+                                <FontAwesomeIcon 
+                                    className="fa-icon" title="complete task" onClick = {this.toggleTaskCompletion} icon="check" aria-hidden="true" />}
+                            { this.state.completed &&
+                                <FontAwesomeIcon 
+                                    className="fa-icon" title="undo complete-task" onClick = {this.toggleTaskCompletion} icon="times" aria-hidden="true"/>}
+                        </div>
                     </td>
                 </tr>
             )

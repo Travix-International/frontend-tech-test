@@ -49,7 +49,7 @@ class ConnectedList extends React.Component {
     }
 
     componentDidUpdate() {
-      console.log("TASK LIST NEW PROPS = ",this.props)
+      //console.log("TASK LIST NEW PROPS = ",this.props)
     }
 
     

@@ -1,6 +1,6 @@
-import { CREATE_TASK, DELETE_TASK, EDIT_TASK, GET_TASKS_SUCCESS, GET_TASKS_FAILURE,
+import { GET_TASKS_SUCCESS, GET_TASKS_FAILURE,
      DELETE_TASK_SUCCESS, DELETE_TASK_FAILURE, CREATE_TASK_SUCCESS, CREATE_TASK_FAILURE,
-    EDIT_TASK_SUCCESS, EDIT_TASK_FAILURE, FILTER_TASKS, SORT_TASKS_BY_TITLE, SORT_TASKS_BY_DESCRIPTION, SORT_TASKS } from '../constants/action-types';
+    EDIT_TASK_SUCCESS, EDIT_TASK_FAILURE, FILTER_TASKS, SORT_TASKS } from '../constants/action-types';
 
 
 export function createTask (payload) {
@@ -77,8 +77,9 @@ export function deleteTaskFailure (error) {
 
 export function editTask (payload) {
     //return { type: EDIT_TASK, payload }
+    console.log(payload);
     return (dispatch) => {
-        return fetch(`/task/update/${payload.id}/${payload.title}/${payload.description}`, {
+        return fetch(`/task/update/${payload.id}/${payload.title}/${payload.description}/${payload.completed}`, {
             method:'PUT',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -96,7 +97,7 @@ export function editTask (payload) {
             .then((data)=> {
                 console.log(data);
                 dispatch(editTaskSuccess(data));
-                dispatch(getTasks());
+                dispatch(getTasks()); //get single task
             })
             .catch((error)=>dispatch(editTaskFailure(error)))
     };

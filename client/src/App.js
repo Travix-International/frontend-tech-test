@@ -3,12 +3,12 @@ import './App.css';
 import TaskList from './components/task-list';
 import AddTask from './components/add-task';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSearch, faSort, faTimes, faSave, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faSort, faTimes, faSave, faEdit, faCheck, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import InfoMessage from './components/info-message';
 import SortFilter from './components/sort-filter';
 import Cockpit from './components/cockpit';
 
-library.add(faSearch, faSort, faTimes, faSave, faEdit);
+library.add(faSearch, faSort, faTimes, faSave, faEdit, faCheck, faTrashAlt);
 
 const sortOptions = ['Sort By', 'Title', 'Description'];
 
