@@ -27,3 +27,24 @@
     overflow-y: scroll;
     position: relative;
 }
+
+@media (max-width: 575.98px) {
+    .tableContainer {
+        height: 45vh;
+        max-height: 45vh;
+    }
+}
+
+@media (max-height: 830px) {
+    .tableContainer {
+        height: 35vh;
+        max-height: 35vh;
+    }
+}
+
+@media (max-height: 720px) {
+    .tableContainer {
+        height: 30vh;
+        max-height: 30vh;
+    }
+}

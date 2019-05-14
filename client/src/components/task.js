@@ -27,14 +27,9 @@ class connectedTask extends React.Component {
         this.saveDescription = this.saveDescription.bind(this);
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        //console.log("TASK NEW PROPS = ",this.props);
-    }
 
     delete = (e) => {
         e.preventDefault();
-        console.log(e.currentTarget.parentNode.parentNode.parentNode);
-        //console.log(e.currentTarget.previousSibling);
         let taskId = e.currentTarget.parentNode.parentNode.parentNode.id;
         this.props.deleteTask({id:parseInt(taskId, 10)});
     }
@@ -62,11 +57,6 @@ class connectedTask extends React.Component {
         }
     }
 
-    saveTask = () => {
-        this.props.editTask({id:this.props.task.id, title:this.state.title, description:this.state.description});
-        this.setState({ editing: false });
-    }
-
     toggleTaskCompletion = () => {
         this.setState((prevState)=>({ completed: !prevState.completed }),()=>{
             this.props.editTask({id:this.props.task.id, title:this.props.task.title, description:this.props.task.description, completed:this.state.completed});
@@ -79,21 +69,6 @@ class connectedTask extends React.Component {
         const index  = this.props.index;
         let element;
         if (this.state.editing) {
-            // element = (
-            //     <div className="taskContainer">
-            //         <div className="taskHeading">
-            //             <TaskInput text={title}
-            //                     name="title"
-            //                     editing={this.state.editing}
-            //                     onSave={(text) => this.saveTitle(id, text)} />
-            //             <FontAwesomeIcon onClick = {this.delete} icon="times" aria-hidden="true"/>
-            //         </div>
-            //         <TaskInput text={description}
-            //                     name="description"
-            //                     editing={this.state.editing}
-            //                     onSave={(text) => this.saveDescription(id, text)} />
-            //     </div>
-            //     )
             element = (
                 <tr key={id} id={id}>
                     <td className="cell-text">{index}</td>
@@ -117,19 +92,6 @@ class connectedTask extends React.Component {
                 </tr>
             )
         } else {
-            // element = (
-            //     <div className="taskContainer">
-            //         <div className="taskHeading">
-            //             <label onDoubleClick={this.handleDoubleClick}>
-            //                 {title}
-            //             </label>
-            //             <FontAwesomeIcon onClick = {this.delete} icon="times" aria-hidden="true"/>
-            //         </div>
-            //         <label onDoubleClick={this.handleDoubleClick}>
-            //             {description}
-            //         </label>
-            //     </div>
-            // )
             element = (
                 <tr key={id} id={id} className={this.props.task.completed? 'completed' : null}>
                     <td className="cell-text">{index}</td>
@@ -158,9 +120,6 @@ class connectedTask extends React.Component {
             )
         }
         return (
-            // <li className="list-group-item" key={id} id={id}>
-            //     {element}
-            // </li>
             <Aux>
                 {element}
             </Aux>

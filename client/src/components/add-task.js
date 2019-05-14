@@ -33,8 +33,8 @@ class AddTaskForm extends Component {
     isFormValid = () => {
         const { title, description } = this.state;
         if (
-        (title.length > 0) &&
-        (description.length > 0)
+        (title.trim().length > 0) &&
+        (description.trim().length > 0)
         ) {
             return true;
         }
@@ -44,9 +44,8 @@ class AddTaskForm extends Component {
         const isValid = this.isFormValid();
         return (
         <form className="addTaskForm form-row" onSubmit={this.handleSubmit}>
-            <div className="col-sm-4 my-1">
+            <div className="form-group col-xs-6 col-sm-4 my-1">
                 <div className="input-group">
-                    {/* <label htmlFor="title">Title</label> */}
                     <input
                         type="text"
                         className="form-control"
@@ -57,9 +56,8 @@ class AddTaskForm extends Component {
                     />
                 </div>
             </div>
-            <div className="col-sm-4 my-1">
+            <div className="form-group col-xs-6 col-sm-4 my-1">
                 <div className="input-group">
-                {/* <label htmlFor="description">Description</label> */}
                     <input
                         type="text"
                         className="form-control"

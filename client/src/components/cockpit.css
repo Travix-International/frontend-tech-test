@@ -14,3 +14,15 @@
     color:white;
     font-size: 3rem;
 }
+
+@media (max-width: 575.98px) {
+    .title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-height: 720px) {
+    .title {
+        font-size: 2rem;
+    }
+}

@@ -24,12 +24,10 @@
 }
 
 tr .fa-icon {
-    /* display: none; */
     opacity: 0;
 }
 
 tr:hover .fa-icon {
-    /* display: block; */
     opacity: 1;
 }
 
@@ -61,4 +59,13 @@ tr:hover .fa-icon {
 .completed {
     text-decoration: line-through;
     color:#CCCCC7;
+}
+
+@media (max-width: 575.98px) {
+    tr .fa-icon {
+        opacity: 1;
+    }
+    .cell-text {
+        font-size: 0.8rem;
+    }
 }

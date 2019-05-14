@@ -79,3 +79,33 @@
   justify-content: center;
   height: 65vh
 }
+
+/*Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) { 
+  .addTaskContainer{
+    height:unset;
+  }
+  
+  .sortFilterContainer {
+    height: unset;
+  }
+
+  .taskListContainer {
+    height: 45vh;
+  }
+
+}
+
+@media (max-height: 720px) {
+  .taskListContainer {
+      height: 30vh;
+      max-height: 30vh;
+  }
+}
+
+@media (max-height: 830px) {
+  .taskListContainer {
+      height: 35vh;
+      max-height: 35vh;
+  }
+}
