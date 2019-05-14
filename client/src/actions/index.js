@@ -29,7 +29,6 @@ export function createTaskSuccess (createMessage) {
 }
 
 export function createTaskFailure (error) {
-    console.log(error);
     return { type: CREATE_TASK_FAILURE, payload: error }
 }
 

@@ -99,27 +99,19 @@ app.put('/task/update/:id/:title/:description/:completed', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
-  
-  console.log(req.params.title, req.params.description);
-  if ((req.params.title !== null && req.params.title !== undefined) && (req.params.description !== null && req.params.description !== undefined)) {
-    const task = {
-      id: tasksContainer.tasks.length,
-      title: req.params.title,
-      description: req.params.description,
-      completed: false
-    };
-    tasksContainer.tasks.push(task);
+  const task = {
+    id: tasksContainer.tasks.length,
+    title: req.params.title,
+    description: req.params.description,
+    completed: false
+  };
 
-    return res.status(201).json({
-      message: `Task with id ${task.id} created successfully!`,
-      messageId: uuidv4()
-    });
-  } else {
-    return res.status(400).json({
-      message: `Bad Request`,
-      messageId: uuidv4()
-    });
-  }
+  tasksContainer.tasks.push(task);
+
+  return res.status(201).json({
+    message: `Task with id ${task.id} created successfully!`,
+    messageId: uuidv4()
+  });
 });
 
 /**

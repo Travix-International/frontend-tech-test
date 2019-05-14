@@ -58,7 +58,6 @@ const sort = (tasks, property) => {
 }
 
 const getTasksSuccess = (state, action) => {
-    console.log(state,action);
     let tasks = [...action.payload.tasks];
     if (state.filter !== "") {
         tasks = [...filter(tasks, state.filter)];
@@ -85,21 +84,18 @@ const tasks = (state = initialState, action) => {
                 message:action.payload
             });
         case GET_TASKS_SUCCESS:
-            console.log(state, action);
             let transformedTasks = getTasksSuccess(state, action);
             return Object.assign({}, state, {
                 tasks: [...action.payload.tasks],
                 filteredTasks: transformedTasks
             });
         case FILTER_TASKS:
-            console.log(action);
             let filteredTasks = filterTasks(state, action);
             return Object.assign({}, state, {
                 filteredTasks: filteredTasks,
                 filter: action.payload
             });
         case SORT_TASKS:
-            console.log(action);
             let sortedTasks = sortTasks(state, action);
             return Object.assign({}, state, {
                 filteredTasks: sortedTasks,
