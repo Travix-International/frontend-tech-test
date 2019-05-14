@@ -16,7 +16,8 @@
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "concurrently": "^4.1.0"

@@ -2,6 +2,7 @@
 
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
+const uuidv4 = require('uuid');
 
 /**
  * GET /tasks
@@ -71,16 +72,19 @@ app.put('/task/update/:id/:title/:description/:completed', (req, res) => {
       tasksContainer.tasks.splice(taskIndex, 1, task);
 
       return res.status(200).json({
-        message: 'Task Edited Successfully',
+        message: `Task with ${id} edited successfully`,
+        messageId: uuidv4()
       });
     } else {
       return res.status(404).json({
         message: 'Not found',
+        messageId: uuidv4()
       });
     }
   } else {
     return res.status(400).json({
       message: 'Bad request',
+      messageId: uuidv4()
     });
   }
 });
@@ -95,19 +99,27 @@ app.put('/task/update/:id/:title/:description/:completed', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
-  const task = {
-    id: tasksContainer.tasks.length,
-    title: req.params.title,
-    description: req.params.description,
-    completed: false
-  };
+  
+  console.log(req.params.title, req.params.description);
+  if ((req.params.title !== null && req.params.title !== undefined) && (req.params.description !== null && req.params.description !== undefined)) {
+    const task = {
+      id: tasksContainer.tasks.length,
+      title: req.params.title,
+      description: req.params.description,
+      completed: false
+    };
+    tasksContainer.tasks.push(task);
 
-  tasksContainer.tasks.push(task);
-
-  return res.status(201).json({
-    message: `Task with id ${task.id} Created`,
-    id: task.id
-  });
+    return res.status(201).json({
+      message: `Task with id ${task.id} created successfully!`,
+      messageId: uuidv4()
+    });
+  } else {
+    return res.status(400).json({
+      message: `Bad Request`,
+      messageId: uuidv4()
+    });
+  }
 });
 
 /**
@@ -130,16 +142,19 @@ app.delete('/task/delete/:id', (req, res) => {
       const taskIndex = tasksContainer.tasks.findIndex(item => item.id === id);
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
-        message: `Task with id ${id} Deleted Successfully`,
+        message: `Task with id ${id} deleted successfully`,
+        messageId: uuidv4()
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
+        messageId: uuidv4()
       });
     }
   } else {
     return res.status(400).json({
       message: 'Bad request',
+      messageId: uuidv4()
     });
   }
 });

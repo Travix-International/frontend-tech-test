@@ -48,6 +48,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  height: 5vh
 }
 
 .alertContainer .alert {
@@ -76,5 +77,5 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  height: 70vh
+  height: 65vh
 }

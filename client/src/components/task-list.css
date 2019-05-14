@@ -1,6 +1,6 @@
 .tableContainer {
-    height: 70vh;
-    max-height: 70vh;
+    height: 65vh;
+    max-height: 65vh;
     overflow-y: auto;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* IE 10+ */

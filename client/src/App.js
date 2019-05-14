@@ -84,9 +84,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="container appContainer">
-        {/* <div className="row mt-2 alertContainer">
-          <InfoMessage/>
-        </div> */}
         <div className="row">
             <Cockpit title={'Task Manager'}/>
         </div>
@@ -105,6 +102,11 @@ class App extends React.Component {
                 <TaskList />
             </div>
         </div>
+        {/* <div className="row"> */}
+          <div className="row mt-2 alertContainer">
+            <InfoMessage/>
+          </div>
+        {/* </div> */}
       </div>
     )
   }
