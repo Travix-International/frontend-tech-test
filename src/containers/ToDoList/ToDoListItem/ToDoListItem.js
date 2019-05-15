@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from '../../../store/actions/index';
 import './ToDoListItem.scss';
 
-class ToDoListitem extends Component {
+export class ToDoListItem extends Component {
     state = {
         editing: false,
         value: '',
@@ -41,7 +41,7 @@ class ToDoListitem extends Component {
                         value={this.state.value}
                         onKeyDown={this.saveHandler}
                         onBlur={() => this.setState({ editing: false })} /> :
-                    <Fragment>
+                    <div>
                         <input
                             type="checkbox"
                             className="toggle"
@@ -55,7 +55,7 @@ class ToDoListitem extends Component {
                         <button
                             className="delete"
                             onClick={deleteToDo} />
-                    </Fragment>
+                    </div>
                 }
             </li>
         );
@@ -66,4 +66,4 @@ const mapDispatchToProps = dispatch => ({
     editToDoItem: (id, title) => dispatch(actions.editToDoItem(id, title)),
 })
 
-export default connect(null, mapDispatchToProps)(ToDoListitem);
+export default connect(null, mapDispatchToProps)(ToDoListItem);

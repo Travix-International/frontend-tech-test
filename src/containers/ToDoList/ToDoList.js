@@ -5,7 +5,7 @@ import ToDoListItem from './ToDoListItem/ToDoListItem';
 import * as actions from '../../store/actions/index';
 import './ToDoList.scss';
 
-class ToDoList extends Component {
+export class ToDoList extends Component {
     componentWillMount() {
         this.props.getToDoItems();
     }

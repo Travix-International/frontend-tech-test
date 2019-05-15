@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import './AddToDo.scss';
 
-class AddToDo extends Component {
+export class AddToDo extends Component {
     
     state = {
         value: ''
