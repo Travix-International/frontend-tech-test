@@ -1,14 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import Container from '@material-ui/core/Container';
 
-function App() {
-  return (
-    <div>
-      Starting
-    </div>
-  );
-}
+import Tasks from './containers/Tasks';
 
-const mapStateToProps = state => ({ tasks: state.tasks });
+const App = () => (
+  <Container maxWidth="sm">
+    <Tasks />
+  </Container>
+);
 
-export default connect(mapStateToProps, null)(App);
+export default App;

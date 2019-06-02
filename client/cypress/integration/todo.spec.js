@@ -1,3 +1,4 @@
+/* eslint-disable */
 /// <reference types="Cypress" />
 
 context('TODO APP', () => {
@@ -7,7 +8,9 @@ context('TODO APP', () => {
 
   describe('Listing Tasks', () => {
     it('should list tasks', () => {
-      expect(true).to.equal(false);
+      cy.get('ul')
+      .children()
+      .should('have.length', 3);
     });
 
     it('should list completed tasks only', () => {
@@ -54,3 +57,4 @@ context('TODO APP', () => {
   });
 
 });
+/* eslint-enable */

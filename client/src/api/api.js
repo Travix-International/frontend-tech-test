@@ -8,6 +8,10 @@ let socket;
 export const startConnection = (store) => {
   socket = openSocket('http://localhost:9001');
 
+  socket.on(storeActions.ALL_TASKS, (tasks) => {
+    store.dispatch({ type: storeActions.ALL_TASKS, tasks });
+  });
+
   socket.on(storeActions.TASK_ADDED, (task) => {
     store.dispatch({ type: storeActions.TASK_ADDED, task });
   });

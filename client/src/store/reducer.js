@@ -6,6 +6,12 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.ALL_TASKS: {
+      return {
+        tasks: action.tasks.map(task => task),
+      };
+    }
+
     case actionTypes.TASK_ADDED: {
       return {
         tasks: [
@@ -20,7 +26,7 @@ const reducer = (state = initialState, action) => {
         if (task.id !== action.task.id) {
           return task;
         }
-        return { ...action.tasks };
+        return { ...action.task };
       });
       return {
         tasks,
