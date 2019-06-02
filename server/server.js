@@ -88,7 +88,7 @@ io.on('connection', (socket) => {
 
   socket.on(actionTypes.ADD_TASK, (data) => {
     try {
-      socket.emit(actionTypes.TASK_ADDED, addTask(data));
+      io.emit(actionTypes.TASK_ADDED, addTask(data));
       logger.info(actionTypes.TASK_ADDED, 'task added to container successfully', { data });
     } catch (error) {
       socket.emit(actionTypes.ERROR, error.message);
@@ -98,7 +98,7 @@ io.on('connection', (socket) => {
 
   socket.on(actionTypes.DELETE_TASK, (id) => {
     try {
-      socket.emit(actionTypes.TASK_DELETED, deleteTask(id));
+      io.emit(actionTypes.TASK_DELETED, deleteTask(id));
       logger.info(actionTypes.TASK_DELETED, 'task deleted from container successfully', { id });
     } catch (error) {
       socket.emit(actionTypes.ERROR, error.message);
@@ -108,7 +108,7 @@ io.on('connection', (socket) => {
 
   socket.on(actionTypes.UPDATE_TASK, (data) => {
     try {
-      socket.emit(actionTypes.TASK_UPDATED, updateTask(data));
+      io.emit(actionTypes.TASK_UPDATED, updateTask(data));
       logger.info(actionTypes.TASK_UPDATED, 'task updated successfully', { data });
     } catch (error) {
       socket.emit(actionTypes.ERROR, error.message);

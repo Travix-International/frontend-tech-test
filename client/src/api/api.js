@@ -1,28 +1,39 @@
 import openSocket from 'socket.io-client';
 
-import * as actionTypes from '../store/actions';
+import * as apiActions from './actions';
+import * as storeActions from '../store/actions';
 
 let socket;
 
 export const startConnection = (store) => {
   socket = openSocket('http://localhost:9001');
 
-  socket.on('new task added', (task) => {
-    store.dispatch({ type: actionTypes.ADD_TASK, task });
+  socket.on(storeActions.TASK_ADDED, (task) => {
+    store.dispatch({ type: storeActions.TASK_ADDED, task });
   });
 
-  socket.on('task removed', (id) => {
-    store.dispatch({ type: actionTypes.REMOVE_TASK, id });
+  socket.on(storeActions.TASK_UPDATED, (task) => {
+    store.dispatch({ type: storeActions.TASK_UPDATED, task });
+  });
+
+  socket.on(storeActions.TASK_DELETED, (id) => {
+    store.dispatch({ type: storeActions.TASK_DELETED, id });
   });
 };
 
 const api = () => ({
-  addTask: (title, description) => {
-    socket.emit('add task', { title, description });
+  getTasks: () => {
+    socket.emit(apiActions.GET_TASKS, {});
   },
-  removeTask: (id) => {
-    socket.emit('remove task', id);
+  addTask: (title, description) => {
+    socket.emit(apiActions.ADD_TASK, { title, description });
+  },
+  updateTask: (updatedTask) => {
+    socket.emit(apiActions.UPDATE_TASK, updatedTask);
+  },
+  deleteTask: (id) => {
+    socket.emit(apiActions.DELETE_TASK, id);
   },
 });
 
-export const taskService = api();
+export const taskApi = api();

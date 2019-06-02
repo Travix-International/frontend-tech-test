@@ -4,21 +4,35 @@ const initialState = {
   tasks: [],
 };
 
-let id = 0;
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.ADD_TASK:
+    case actionTypes.TASK_ADDED: {
       return {
         tasks: [
           ...state.tasks,
           action.task,
-        ]
+        ],
       };
-    case actionTypes.REMOVE_TASK:
+    }
+
+    case actionTypes.TASK_UPDATED: {
+      const tasks = state.tasks.map((task) => {
+        if (task.id !== action.task.id) {
+          return task;
+        }
+        return { ...action.tasks };
+      });
       return {
-        tasks: [...state.tasks.filter(task => task.id !== action.id)]
+        tasks,
       };
+    }
+
+    case actionTypes.TASK_DELETED: {
+      return {
+        tasks: [...state.tasks.filter(task => task.id !== action.id)],
+      };
+    }
+
     default:
       return state;
   }

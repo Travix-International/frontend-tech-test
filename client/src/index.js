@@ -7,7 +7,13 @@ import reducer from './store/reducer';
 import { startConnection } from './api/api';
 import App from './App';
 
-const store = createStore(reducer);
+/* eslint-disable no-underscore-dangle */
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
+/* eslint-enable */
+
 startConnection(store);
 
 ReactDOM.render(
