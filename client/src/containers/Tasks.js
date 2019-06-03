@@ -1,59 +1,77 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import IconButton from '@material-ui/core/IconButton';
-import Checkbox from '@material-ui/core/Checkbox';
-import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
-import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 import { taskApi } from '../api/api';
+import * as actionTypes from '../store/actionTypes';
+import TaskItem from '../components/TaskItem/TaskItem';
+import TaskDetailsDialog from '../components/TaskDetailsDialog/TaskDetailsDialog';
 
-const Tasks = ({ tasks }) => {
+const Tasks = ({ tasks, selectedTask, setSelectedTask }) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   useEffect(() => {
     taskApi.getTasks();
   }, []);
 
+  useEffect(() => {
+    if (selectedTask) {
+      setDialogOpen(true);
+    } else {
+      setDialogOpen(false);
+    }
+  }, [selectedTask]);
+
+  const onTaskDetailsDialogClose = (task) => {
+    if (task) {
+      if (task.id) {
+        taskApi.updateTask(task);
+      } else {
+        taskApi.addTask(task.title, task.description);
+      }
+    }
+    setSelectedTask(null);
+  };
+
   return (
-    <Box component={Paper} height="100vh">
-      <List>
+    <Box display="flex" flexDirection="column" height="100vh" py={2}>
+      <Box m="auto" mb="-28px">
+        <Fab aria-label="Add Task" color="primary" id="add-task" onClick={() => setSelectedTask({})}>
+          <AddIcon />
+        </Fab>
+      </Box>
+      <Box component={Paper} flexGrow={1} p={2} style={{ overflow: 'scroll' }}>
+        <List>
+          {
+            tasks.map(task => (<TaskItem key={task.id} task={task} />))
+          }
+        </List>
         {
-          tasks.map(task => (
-            <ListItem key={task.id} button>
-              <ListItemIcon>
-                <Checkbox
-                  checked={task.completed}
-                  edge="start"
-                  onClick={() => taskApi.updateTask({ ...task, completed: !task.completed })}
-                  tabIndex={-1}
-                />
-              </ListItemIcon>
-              <ListItemText primary={task.title} secondary={task.description} />
-              <ListItemSecondaryAction>
-                <IconButton aria-label="Delete Task" edge="end" onClick={() => taskApi.deleteTask(task.id)}>
-                  <DeleteRoundedIcon />
-                </IconButton>
-                <IconButton aria-label="Update Task" edge="end">
-                  <CreateRoundedIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))
+          selectedTask ? <TaskDetailsDialog onClose={onTaskDetailsDialogClose} open={dialogOpen} task={selectedTask} /> : ''
         }
-      </List>
-    </Box>
+      </Box>
+    </Box >
   );
 };
 
 Tasks.propTypes = {
   tasks: PropTypes.array.isRequired,
+  selectedTask: PropTypes.object,
+  setSelectedTask: PropTypes.func.isRequired,
 };
-const mapStateToProps = state => ({ tasks: state.tasks });
 
-export default connect(mapStateToProps, null)(Tasks);
+Tasks.defaultProps = {
+  selectedTask: null,
+};
+
+const mapStateToProps = state => ({ tasks: state.tasks, selectedTask: state.selectedTask });
+const mapDispatchToProps = dispatch => ({
+  setSelectedTask: selectedTask => dispatch({ type: actionTypes.SET_SELECT_TASK, selectedTask }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tasks);

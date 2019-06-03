@@ -1,7 +1,7 @@
 import openSocket from 'socket.io-client';
 
 import * as apiActions from './actions';
-import * as storeActions from '../store/actions';
+import * as storeActions from '../store/actionTypes';
 
 let socket;
 
