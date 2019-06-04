@@ -1,19 +1,28 @@
 {
-  "name": "test-candidates",
+  "name": "todo-app",
   "version": "0.0.1",
-  "description": "test back - front",
-  "main": "server.js",
+  "description": "todo application",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "concurrently \"yarn start\" \"cd client && ./node_modules/.bin/cypress open\"",
+    "test:client": "cd client && yarn test",
+    "install": "concurrently \"cd server && yarn\" \"cd client && yarn\"",
+    "start": "concurrently \"yarn start:server\" \"yarn start:client\"",
+    "start:server": "cd server && yarn start",
+    "start:client": "cd client && yarn start"
   },
   "keywords": [
     "test",
-    "travix"
+    "travix",
+    "todo",
+    "react",
+    "express",
+    "socket.io"
   ],
-  "author": "spartans",
+  "author": "Poyraz Yilmaz",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
-  }
+    "concurrently": "^4.1.0"
+  },
+  "peerDependencies": {},
+  "devDependencies": {}
 }

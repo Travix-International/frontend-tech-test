@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "7afd4b00-850d-11e9-a5d6-53d60bc40551",
+      "completed": true,
+      "title": "Completed Task",
+      "description": "Task is completed by default"
+    },
+    {
+      "id": "8256b3a0-850d-11e9-a5d6-53d60bc40551",
+      "completed": false,
+      "title": "Pending Task",
+      "description": "Task is pending by default"
+    },
+    {
+      "id": "42527f90-850e-11e9-a5d6-53d60bc40551",
+      "completed": false,
+      "title": "Another Task's Title",
+      "description": "Another Task's description"
+    }
+  ]
+}

@@ -1,38 +1,47 @@
-# Travix test
+# Tasks App
 
-Travix Front-End Tech Interview Test 
+Simple todo application
 
-# Introduction
+## Usage
+To install dependencies for both server and client:
+`yarn`
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+To start server and client together:
+`yarn start`
 
-Using your application we must be able to create, modify and delete a task.
+To start them alone:
+`yarn start:server` or `yarn start:client`
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
+To run E2E tests:
+`yarn test`
 
-However this server is not perfect. It could be improved and tested as well.
+To run client tests:
+`yarn test:client`
 
-So your mission is to develop the front-end from scratch using a front-end framework.
+## Introduction
+You can simply add, update, delete or complete tasks. 
+This application using socket.io for dynamic ui so you can open two client and see they are effecting each other on real time.
+To listing task it uses react-window for better performance with a lot of data.
 
-We are also expecting from you a usable, responsive UI.
 
-# Process
+## Tech Stack
+For Client:
+* React
+* Redux
+* Socket.io-Client
+* Material-ui
+* React-Window
+* Cypress
+* React-Testing-Library
+* Jest
+* Travix-Eslint
 
-Fork the repository into your account. Once your code is ready, send a pull-request to this repository and we will review it.
+For Server:
+* Node.js
+* Express.js
+* Socket.io
+* Travix-Logger
 
-# Requirements
+# Conclusion
 
-* React 15+
-* Redux or Flux or [FrintJS](https://frint.js.org) or other alternatives that implement a unidirectional data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
-
-# Bonus
-
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us!
+Thank you for reviewing this application. Hope you like it.
