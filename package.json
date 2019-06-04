@@ -4,6 +4,7 @@
   "description": "todo application",
   "scripts": {
     "test": "concurrently \"yarn start\" \"cd client && ./node_modules/.bin/cypress open\"",
+    "test:client": "cd client && yarn test",
     "install": "concurrently \"cd server && yarn\" \"cd client && yarn\"",
     "start": "concurrently \"yarn start:server\" \"yarn start:client\"",
     "start:server": "cd server && yarn start",
