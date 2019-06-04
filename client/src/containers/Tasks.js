@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 
 import { taskApi } from '../api/api';
 import * as actionTypes from '../store/actionTypes';
-import TaskItem from '../components/TaskItem/TaskItem';
+import TasksHeader from '../components/TasksHeader/TasksHeader';
+import TasksList from '../components/TasksList/TasksList';
 import TaskDetailsDialog from '../components/TaskDetailsDialog/TaskDetailsDialog';
 
 const Tasks = ({ tasks, selectedTask, setSelectedTask }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [height, setHeight] = useState(0);
 
+  // get tasks on mount
   useEffect(() => {
     taskApi.getTasks();
   }, []);
 
+  // close or open task detail diolog when selected task is changed
   useEffect(() => {
     if (selectedTask) {
       setDialogOpen(true);
@@ -27,35 +28,27 @@ const Tasks = ({ tasks, selectedTask, setSelectedTask }) => {
     }
   }, [selectedTask]);
 
-  const onTaskDetailsDialogClose = (task) => {
-    if (task) {
-      if (task.id) {
-        taskApi.updateTask(task);
-      } else {
-        taskApi.addTask(task.title, task.description);
-      }
+  // get height of list wrapper for react-window
+  const measuredRef = useCallback((node) => {
+    if (node !== null) {
+      setHeight(node.getBoundingClientRect().height);
     }
-    setSelectedTask(null);
-  };
+  }, []);
 
   return (
     <Box display="flex" flexDirection="column" height="100vh" py={2}>
-      <Box m="auto" mb="-28px">
-        <Fab aria-label="Add Task" color="primary" id="add-task" onClick={() => setSelectedTask({})}>
-          <AddIcon />
-        </Fab>
-      </Box>
-      <Box component={Paper} flexGrow={1} p={2} style={{ overflow: 'scroll' }}>
-        <List>
-          {
-            tasks.map(task => (<TaskItem key={task.id} task={task} />))
-          }
-        </List>
+      <TasksHeader onAddTask={setSelectedTask} />
+      <Box
+        ref={measuredRef}
+        component={Paper}
+        flexGrow={1}
+      >
+        <TasksList height={height} tasks={tasks} />
         {
-          selectedTask ? <TaskDetailsDialog onClose={onTaskDetailsDialogClose} open={dialogOpen} task={selectedTask} /> : ''
+          selectedTask ? <TaskDetailsDialog open={dialogOpen} task={selectedTask} /> : ''
         }
       </Box>
-    </Box >
+    </Box>
   );
 };
 

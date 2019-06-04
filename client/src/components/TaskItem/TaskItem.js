@@ -1,51 +1,48 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Checkbox from '@material-ui/core/Checkbox';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Typography from '@material-ui/core/Typography';
 
 import { taskApi } from '../../api/api';
-import TaskItemActions from '../TaskItemActions/TaskItemActions';
+import * as actionTypes from '../../store/actionTypes';
 
-const TaskItem = ({ task }) => {
-  const [showActions, setShowActions] = useState(false);
+// return some styles if if task is completed
+const typographyStyle = isCompleted => (isCompleted ? { textDecoration: 'line-through' } : {});
 
-  return (
-    <ListItem
-      key={task.id}
-      button
-      ContainerProps={{
-        onMouseEnter: () => setShowActions(true),
-        onMouseLeave: () => setShowActions(false),
-      }}
-    >
-      <ListItemIcon>
-        <Checkbox
-          checked={task.completed}
-          edge="start"
-          onClick={() => taskApi.updateTask({ ...task, completed: !task.completed })}
-          tabIndex={-1}
-        />
-      </ListItemIcon>
-      <ListItemText
-        primary={task.title}
-        primaryTypographyProps={task.completed ? { style: { textDecoration: 'line-through' } } : {}}
-        secondary={task.description}
-        secondaryTypographyProps={task.completed ? { style: { textDecoration: 'line-through' } } : {}}
+export const TaskItem = ({ task, setSelectedTask, style }) => (
+  <ListItem
+    key={task.id}
+    button
+    onDoubleClick={() => setSelectedTask(task)}
+    style={style}
+  >
+    <ListItemIcon>
+      <Checkbox
+        checked={task.completed}
+        edge="start"
+        onClick={() => taskApi.updateTask({ ...task, completed: !task.completed })}
+        tabIndex={-1}
       />
-      <ListItemSecondaryAction>
-        {
-          showActions ? <TaskItemActions task={task} /> : ''
-        }
-      </ListItemSecondaryAction>
-    </ListItem>
-  );
-};
+    </ListItemIcon>
+    <ListItemText
+      primary={<Typography noWrap style={typographyStyle(task.completed)} variant="h6">{task.title}</Typography>}
+      secondary={<Typography color="textSecondary" noWrap style={typographyStyle(task.completed)} variant="body2">{task.description}</Typography>}
+    />
+  </ListItem>
+);
 
 TaskItem.propTypes = {
   task: PropTypes.object.isRequired,
+  setSelectedTask: PropTypes.func.isRequired,
+  style: PropTypes.object.isRequired,
 };
 
-export default TaskItem;
+const mapDispatchToProps = dispatch => ({
+  setSelectedTask: selectedTask => dispatch({ type: actionTypes.SET_SELECT_TASK, selectedTask }),
+});
+
+export default connect(null, mapDispatchToProps)(TaskItem);

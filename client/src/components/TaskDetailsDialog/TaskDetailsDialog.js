@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -7,17 +8,37 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteRoundedIcon from '@material-ui/icons/DeleteOutline';
 
-const TaskDetailsDialog = ({
-  fullScreen, onClose, open, task,
+import { taskApi } from '../../api/api';
+import * as actionTypes from '../../store/actionTypes';
+
+export const TaskDetailsDialog = ({
+  fullScreen, open, task, setSelectedTask,
 }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
+  // anytime task is changed set title and description with new data
   useEffect(() => {
     setTitle(task.title || '');
     setDescription(task.description || '');
   }, [task]);
+
+  // on task detail dialog is closed either create, update or delete task and selected task as null
+  const onCloseHandler = (editedTask, isDelete) => {
+    if (editedTask) {
+      if (isDelete) {
+        taskApi.deleteTask(editedTask.id);
+      } else if (task.id) {
+        taskApi.updateTask(editedTask);
+      } else {
+        taskApi.addTask(editedTask.title, editedTask.description);
+      }
+    }
+    setSelectedTask(null);
+  };
 
   return (
     <Dialog
@@ -25,7 +46,7 @@ const TaskDetailsDialog = ({
       fullScreen={fullScreen}
       fullWidth
       maxWidth="sm"
-      onClose={() => onClose()}
+      onClose={() => onCloseHandler()}
       open={open}
     >
       <DialogTitle id="task-details-dialog">{task.id ? 'Update Task' : 'Create Task'}</DialogTitle>
@@ -52,17 +73,25 @@ const TaskDetailsDialog = ({
         />
       </DialogContent>
       <DialogActions>
+        {task.id
+          ? (
+            <IconButton aria-label="Delete Task" id="delete-task" onClick={() => onCloseHandler({ ...task }, true)}>
+              <DeleteRoundedIcon color="error" fontSize="small" />
+            </IconButton>
+          ) : ''
+        }
         <Button
           id="cancel-save-task"
-          onClick={() => onClose()}
+          onClick={() => onCloseHandler()}
         >
           Cancel
         </Button>
         <Button
-          color="primary"
+          color="secondary"
           disabled={!title || !description}
           id="save-task"
-          onClick={() => onClose({ ...task, title, description })}
+          onClick={() => onCloseHandler({ ...task, title, description })}
+          variant="outlined"
         >
           Save
         </Button>
@@ -73,9 +102,12 @@ const TaskDetailsDialog = ({
 
 TaskDetailsDialog.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
   task: PropTypes.object.isRequired,
+  setSelectedTask: PropTypes.func.isRequired,
 };
 
-export default withMobileDialog({ breakpoint: 'xs' })(TaskDetailsDialog);
+const mapDispatchToProps = dispatch => ({
+  setSelectedTask: selectedTask => dispatch({ type: actionTypes.SET_SELECT_TASK, selectedTask }),
+});
+export default connect(null, mapDispatchToProps)(withMobileDialog({ breakpoint: 'xs' })(TaskDetailsDialog));

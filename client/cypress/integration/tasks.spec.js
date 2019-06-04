@@ -9,17 +9,8 @@ context('TODO APP', () => {
 
   describe('Listing Tasks', () => {
     it('should list tasks', () => {
-      cy.get('ul')
-        .children()
+      cy.get('[role="button"]')
         .should('have.length', 3);
-    });
-
-    it('should list completed tasks only', () => {
-      expect(true).to.equal(false);
-    });
-
-    it('should list pending tasks only', () => {
-      expect(true).to.equal(false);
     });
   });
 
@@ -38,8 +29,7 @@ context('TODO APP', () => {
         .click()
         .wait(1000);
 
-      cy.get('ul')
-        .children()
+      cy.get('[role="button"]')
         .last()
         .should('contain', 'Example title')
         .should('contain', 'Example description');
@@ -59,13 +49,9 @@ context('TODO APP', () => {
 
   describe('Updating Task', () => {
     it('should update task with new data', () => {
-      cy.get('ul')
-        .children()
+      cy.get('[role="button"]')
         .last()
-        .within(() => {
-          cy.get('[aria-label="Update Task"]')
-            .click();
-        });
+        .dblclick();
 
       cy.get('#task-title')
         .type('{selectall}{backspace}Updated title');
@@ -77,21 +63,16 @@ context('TODO APP', () => {
         .click()
         .wait(1000);
 
-      cy.get('ul')
-        .children()
+      cy.get('[role="button"]')
         .last()
         .should('contain', 'Updated title')
         .should('contain', 'Updated description');
     });
 
     it('should not let user to update task if user does not fill title or description', () => {
-      cy.get('ul')
-        .children()
+      cy.get('[role="button"]')
         .last()
-        .within(() => {
-          cy.get('[aria-label="Update Task"]')
-            .click();
-        });
+        .dblclick();
 
       cy.get('#task-title')
         .type('{selectall}{backspace}');
@@ -107,25 +88,35 @@ context('TODO APP', () => {
     });
 
     it('should complete task', () => {
-      cy.get('ul')
-        .children()
+      cy.get('[role="button"]')
         .last()
         .within(() => {
           cy.get('[type="checkbox"]')
             .click()
-            .wait(1000)
+            .wait(1000);
+        });
+
+      cy.get('[role="button"]')
+        .last()
+        .within(() => {
+          cy.get('[type="checkbox"]')
             .should('have.checked');
         });
     });
 
     it('should uncomplete task', () => {
-      cy.get('ul')
-        .children()
+      cy.get('[role="button"]')
         .last()
         .within(() => {
           cy.get('[type="checkbox"]')
             .click()
-            .wait(1000)
+            .wait(1000);
+        });
+
+      cy.get('[role="button"]')
+        .last()
+        .within(() => {
+          cy.get('[type="checkbox"]')
             .should('not.have.checked');
         });
     });
@@ -133,26 +124,16 @@ context('TODO APP', () => {
 
   describe('Deleting Task', () => {
     it('should delete task', () => {
-      cy.get('ul')
-        .children()
+      cy.get('[role="button"]')
         .last()
-        .within(() => {
-          cy.get('[aria-label="Delete Task"]')
-            .click()
-            .wait(1000);
-        });
+        .dblclick();
 
-      cy.get('ul')
-        .children()
+      cy.get('#delete-task')
+        .click()
+        .wait(1000);
+
+      cy.get('[role="button"]')
         .should('have.length', 3);
-    });
-
-    it('should delete all completed tasks', () => {
-      expect(true).to.equal(false);
-    });
-
-    it('should clear all tasks', () => {
-      expect(true).to.equal(false);
     });
   });
 
