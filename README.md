@@ -10,7 +10,7 @@ To start server and client together:
 `yarn start`
 
 To start them alone:
-`yarn start:server` or `yarn start:client``
+`yarn start:server` or `yarn start:client`
 
 To run E2E tests:
 `yarn test`
