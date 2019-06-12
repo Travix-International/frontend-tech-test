@@ -1,14 +1,20 @@
-'use strict';
 
+const port = 3000;
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const uniqid = require('uniqid');
+
+app.use(cors());
+app.use(bodyParser.json());
 
 /**
  * GET /tasks
  * 
  * Return the list of tasks with status code 200.
  */
-app.get('/tasks', (req, res) => {
+app.get('/api/tasks', (req, res) => {
   return res.status(200).json(tasksContainer);
 });
 
@@ -23,13 +29,13 @@ app.get('/tasks', (req, res) => {
  * If not found return status code 404.
  * If id is not valid number return status code 400.
  */
-app.get('/task/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+app.get('/api/tasks/:id', (req, res) => {
+  const id = req.params.id;
 
-  if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+  if (id) {
+    const task = tasksContainer.tasks.find((item) => item.id === id);
 
-    if (task !== null) {
+    if (task) {
       return res.status(200).json({
         task,
       });
@@ -57,16 +63,20 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+app.put('/api/tasks/:id', (req, res) => {
+  const id = req.params.id;
 
-  if (!Number.isNaN(id)) {
+  if (id) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
     if (task !== null) {
-      task.title = req.params.title;
-      task.description = req.params.description;
-      return res.status(204);
+      const { title, description, completed } = req.body;
+      task.title = title;
+      task.description = description;
+      task.completed = completed;
+      return res.status(201).json({
+        task,
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -88,17 +98,20 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/api/tasks', (req, res) => {
+  const { title, description, completed } = req.body;
   const task = {
-    id: tasksContainer.tasks.length,
-    title: req.params.title,
-    description: req.params.description,
+    id: uniqid(),
+    title,
+    description,
+    completed,
   };
 
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
     message: 'Resource created',
+    task,
   });
 });
 
@@ -112,20 +125,21 @@ app.post('/task/create/:title/:description', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.delete('/task/delete/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+app.delete('/api/tasks/:id', (req, res) => {
+  const id = req.params.id;
 
-  if (!Number.isNaN(id)) {
+  if (id) {
     const task = tasksContainer.tasks.find(item => item.id === id);
   
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
-      return res.status(200).json({
-        message: 'Updated successfully',
+      const taskIndex = tasksContainer.tasks.indexOf(task);
+      tasksContainer.tasks.splice(taskIndex, 1)
+
+      return res.status(201).json({
+        message: 'Deleted',
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
       });
     }
@@ -136,6 +150,8 @@ app.delete('/task/delete/:id', (req, res) => {
   }
 });
 
-app.listen(9001, () => {
-  process.stdout.write('the server is available on http://localhost:9001/\n');
+app.listen(port, () => {
+  process.stdout.write(`the server is available on http://localhost:${port}\n`);
 });
+
+module.exports = app;

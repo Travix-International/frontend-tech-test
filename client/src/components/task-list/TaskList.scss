@@ -1,0 +1,48 @@
+.ReactTable {
+  margin-top: 20px;
+  font-weight: 500;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  padding: 10px;
+  color:#333; 
+}
+
+.ReactTable .rt-tr-group {
+  height: 50px;
+}
+
+.ReactTable .rt-th, .ReactTable .rt-td {
+  padding-top: 15px !important;
+}
+
+.checkbox {
+  margin-top: -13px !important;
+}
+
+.not-found {
+  margin-top: 20px !important;
+}
+
+th { 
+  background: #333; 
+  color: #fff !important; 
+  font-weight: bold; 
+}
+
+td, th {
+  padding-left: 0 !important;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+  table {
+    display: block !important;
+  }
+}

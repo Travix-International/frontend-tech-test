@@ -1,0 +1,3 @@
+--timeout 75000
+--recursive test/**/*.js
+test/**/*.js
