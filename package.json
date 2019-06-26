@@ -4,8 +4,12 @@
   "description": "test back - front",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "client-install": "npm install --prefix client",
+    "test": "./node_modules/.bin/mocha",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [
     "test",
@@ -14,6 +18,14 @@
   "author": "spartans",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "concurrently": "^4.1.1",
+    "express": "^4.14.0",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2"
   }
 }

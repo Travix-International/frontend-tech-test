@@ -1,3 +1,19 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": 0,
+      "title": "eat",
+      "description" : "Always eat well!"
+    },
+    {
+      "id": 1,
+      "title": "sleep",
+      "description" : "Always sleep well!"
+    },
+    {
+      "id": 2,
+      "title": "Learn",
+      "description" : "Learn new things!!"
+    }
+  ]
 }

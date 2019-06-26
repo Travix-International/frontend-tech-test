@@ -36,3 +36,13 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 * dynamic-ui (web-sockets...?)
 * using the `made in Travix` technologies
 * ... Impress us!
+
+# client folder consists front-end code
+
+# steps to run
+1>npm install
+2>npm run client-install
+3>npm run dev
+
+#steps to test code
+1> npm test

@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Create Component renders without crashing 1`] = `
+Array [
+  <div
+    className="item"
+  >
+    <div
+      className="details"
+    >
+      <div
+        className="title"
+      >
+        test title
+      </div>
+      <div
+        className="description"
+      >
+        test desc
+      </div>
+    </div>
+    <div
+      className="actions"
+    >
+      <div
+        className="edit"
+      >
+        <a
+          className="btn"
+          href="/edit/1"
+          onClick={[Function]}
+        >
+          <i
+            aria-hidden="true"
+            className="fa fa-pencil"
+          />
+        </a>
+      </div>
+      <div
+        className="delete"
+      >
+        <button
+          className="btn"
+          onClick={[Function]}
+        >
+          <i
+            className="fa fa-trash"
+          />
+        </button>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="actions create"
+  >
+    <a
+      className="btn"
+      href="/create"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="fa fa-plus"
+      />
+    </a>
+  </div>,
+]
+`;

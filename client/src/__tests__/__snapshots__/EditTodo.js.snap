@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Edit Component renders without crashing 1`] = `
+<div>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      name="id"
+      required={true}
+      type="hidden"
+      value=""
+    />
+    <h4
+      className="other-title"
+    >
+      Update task
+    </h4>
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="title"
+      >
+        Title
+      </label>
+      <input
+        className="form-control"
+        name="title"
+        onChange={[Function]}
+        required={true}
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="description"
+      >
+        Description
+      </label>
+      <input
+        className="form-control"
+        name="description"
+        onChange={[Function]}
+        required={true}
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="text-center"
+    >
+      <div
+        className="btn-group"
+        role="group"
+      >
+        <a
+          className="btn btn-light mr-4"
+          href="/"
+          onClick={[Function]}
+        >
+          Back
+        </a>
+        <button
+          className="btn btn-primary"
+          type="submit"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+`;
