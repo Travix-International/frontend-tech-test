@@ -1,6 +1,6 @@
-function checkExistence(tasks) {
+function checkExistence(tasksMap) {
   return function(req, res, next) {
-    const task = tasks.find(item => item.id === res.locals.id);
+    const task = tasksMap[res.locals.id];
 
     if (!task) {
       return res.status(404).json({ message: "Not found" });
