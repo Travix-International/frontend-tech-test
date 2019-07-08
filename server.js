@@ -10,7 +10,7 @@ const checkExistence = require("./middlewares/check-existence");
 const app = express();
 app.use(express.json());
 
-const staticDir = path.join(__dirname, "client", "public");
+const staticDir = path.join(__dirname, "client", "build");
 app.use(express.static(staticDir));
 
 const tasksMap = loadTasks("./tasks.json");
