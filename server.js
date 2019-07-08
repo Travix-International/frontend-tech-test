@@ -31,9 +31,7 @@ app.post("/tasks", checkTitle, (req, res) => {
 
   tasksMap[id] = task;
 
-  return res.status(201).json({
-    message: "Resource created",
-  });
+  return res.status(201).json(task);
 });
 
 app.put(
@@ -46,16 +44,14 @@ app.put(
     currentTask.title = title;
     currentTask.description = description;
 
-    return res.status(204).send();
+    return res.status(200).json(currentTask);
   }
 );
 
 app.delete("/tasks/:id", [checkID, checkExistence(tasksMap)], (req, res) => {
   delete tasksMap[res.locals.currentTask.id];
 
-  return res.status(200).json({
-    message: "Deleted successfully",
-  });
+  return res.status(204).send();
 });
 
 app.listen(9001, () => {
