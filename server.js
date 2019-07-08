@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const loadTasks = require("./load-tasks");
 
@@ -8,6 +9,9 @@ const checkExistence = require("./middlewares/check-existence");
 
 const app = express();
 app.use(express.json());
+
+const staticDir = path.join(__dirname, "client", "public");
+app.use(express.static(staticDir));
 
 const tasksMap = loadTasks("./tasks.json");
 
