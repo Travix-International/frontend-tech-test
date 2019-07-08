@@ -3,6 +3,7 @@ const loadTasks = require("./load-tasks");
 
 // middlewares
 const checkID = require("./middlewares/check-id");
+const checkTitle = require("./middlewares/check-title");
 const checkExistence = require("./middlewares/check-existence");
 
 const app = express();
@@ -18,33 +19,36 @@ app.get("/tasks/:id", [checkID, checkExistence(tasksMap)], (req, res) => {
   return res.status(200).json(res.locals.currentTask);
 });
 
-app.put(
-  "/tasks/:id/:title/:description",
-  [checkID, checkExistence(tasksMap)],
-  (req, res) => {
-    const { currentTask } = res.locals;
-    currentTask.title = req.params.title;
-    currentTask.description = req.params.description;
-
-    return res.status(204).send();
-  }
-);
-
-app.post("/tasks/:title/:description", (req, res) => {
-  const newID = Object.keys(tasksMap).length;
+app.post("/tasks", checkTitle, (req, res) => {
+  const id = Object.keys(tasksMap).length;
+  const { title, description } = req.body;
 
   const task = {
-    id: newID,
-    title: req.params.title,
-    description: req.params.description,
+    id,
+    title,
+    description,
   };
 
-  tasksMap[newID] = task;
+  tasksMap[id] = task;
 
   return res.status(201).json({
     message: "Resource created",
   });
 });
+
+app.put(
+  "/tasks/:id",
+  [checkID, checkExistence(tasksMap), checkTitle],
+  (req, res) => {
+    const { currentTask } = res.locals;
+    const { title, description } = req.body;
+
+    currentTask.title = title;
+    currentTask.description = description;
+
+    return res.status(204).send();
+  }
+);
 
 app.delete("/tasks/:id", [checkID, checkExistence(tasksMap)], (req, res) => {
   delete tasksMap[res.locals.currentTask.id];
