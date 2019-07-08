@@ -15,15 +15,15 @@ app.use(express.static(staticDir));
 
 const tasksMap = loadTasks("./tasks.json");
 
-app.get("/tasks", (req, res) => {
+app.get("/api/tasks", (req, res) => {
   return res.status(200).json(Object.values(tasksMap));
 });
 
-app.get("/tasks/:id", [checkID, checkExistence(tasksMap)], (req, res) => {
+app.get("/api/tasks/:id", [checkID, checkExistence(tasksMap)], (req, res) => {
   return res.status(200).json(res.locals.currentTask);
 });
 
-app.post("/tasks", checkTitle, (req, res) => {
+app.post("/api/tasks", checkTitle, (req, res) => {
   const id = Object.keys(tasksMap).length;
   const { title, description } = req.body;
 
@@ -39,7 +39,7 @@ app.post("/tasks", checkTitle, (req, res) => {
 });
 
 app.put(
-  "/tasks/:id",
+  "/api/tasks/:id",
   [checkID, checkExistence(tasksMap), checkTitle],
   (req, res) => {
     const { currentTask } = res.locals;
@@ -52,11 +52,15 @@ app.put(
   }
 );
 
-app.delete("/tasks/:id", [checkID, checkExistence(tasksMap)], (req, res) => {
-  delete tasksMap[res.locals.currentTask.id];
+app.delete(
+  "/api/tasks/:id",
+  [checkID, checkExistence(tasksMap)],
+  (req, res) => {
+    delete tasksMap[res.locals.currentTask.id];
 
-  return res.status(204).send();
-});
+    return res.status(204).send();
+  }
+);
 
 app.listen(9001, () => {
   process.stdout.write("the server is available on http://localhost:9001/\n");
