@@ -14,3 +14,10 @@ export const fetchList = createAction(types.fetchList, null, () => ({
   [async]: true,
   method: api.fetchList,
 }));
+
+export const change = createAction(types.change, null, () => ({
+  [async]: true,
+  method: ({ payload }) => {
+    return api.change(payload);
+  },
+}));

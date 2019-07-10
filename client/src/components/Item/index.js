@@ -1,14 +1,38 @@
-import React from "react";
+import React, { Component } from "react";
 import enhance from "./enhance";
-const TaskItem = ({ task }) => {
-  const { title, description } = task;
+import Form from "./Form";
 
-  return (
-    <div>
-      <h3>{title}</h3>
-      <small>{description}</small>
-    </div>
-  );
-};
+class TaskItem extends Component {
+  checkHandler = e => {
+    this.changeHandler({ done: e.target.checked });
+  };
+
+  changeHandler = patch => {
+    this.props.change({
+      ...this.props.task,
+      ...patch,
+    });
+  };
+  render() {
+    const { done, title, description } = this.props.task;
+
+    return (
+      <div>
+        <input
+          type="checkbox"
+          name="done"
+          checked={done}
+          onChange={this.checkHandler}
+        />
+
+        <Form
+          title={title}
+          description={description}
+          onSubmit={this.changeHandler}
+        />
+      </div>
+    );
+  }
+}
 
 export default enhance(TaskItem);

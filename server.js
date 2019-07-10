@@ -43,10 +43,11 @@ app.put(
   [checkID, checkExistence(tasksMap), checkTitle],
   (req, res) => {
     const { currentTask } = res.locals;
-    const { title, description } = req.body;
+    const { title, description, done } = req.body;
 
     currentTask.title = title;
     currentTask.description = description;
+    currentTask.done = done;
 
     return res.status(200).json(currentTask);
   }

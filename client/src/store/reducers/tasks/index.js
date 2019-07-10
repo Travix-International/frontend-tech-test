@@ -26,6 +26,9 @@ export default handleActions(
     [getSuccessType(types.fetchList)]: (state, action) => {
       return state.set("tasks", mapTasksByID(action.payload));
     },
+    [getSuccessType(types.change)]: (state, { payload }) => {
+      return state.setIn(["tasks", payload.id], payload);
+    },
   },
   initialState
 );
