@@ -1,6 +1,14 @@
+import "./global.scss";
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import { Provider } from "react-redux";
+import { getStore } from "./store";
+import TasksList from "components/List";
+
+ReactDOM.render(
+  <Provider store={getStore()}>
+    <TasksList />
+  </Provider>,
+  document.getElementById("root")
+);
