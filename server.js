@@ -24,7 +24,7 @@ app.get("/api/tasks/:id", [checkID, checkExistence(tasksMap)], (req, res) => {
 });
 
 app.post("/api/tasks", checkTitle, (req, res) => {
-  const id = Object.keys(tasksMap).length;
+  const id = Math.max(...Object.keys(tasksMap)) + 1;
   const { title, description } = req.body;
 
   const task = {
