@@ -1,0 +1,44 @@
+@import "theme.scss";
+
+.tasks-list {
+  padding: spacing(4) spacing(4) spacing(22) spacing(4);
+  margin: 0;
+  list-style: none;
+
+  &__item {
+    margin-bottom: spacing(4);
+  }
+}
+
+.actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding: spacing(4);
+  background: linear-gradient(to top, rgba(9, 30, 66, 0.16), rgba(0, 0, 0, 0));
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  &__btn {
+    border-radius: 50%;
+    padding: spacing(4);
+    box-shadow: $shadow-large;
+    background: white;
+    border: none;
+    outline: none;
+    line-height: 0;
+
+    transition: all map-get($durations, "standard");
+
+    &:active {
+      box-shadow: $shadow-small;
+    }
+
+    &_add {
+      color: $primaryColor;
+    }
+  }
+}

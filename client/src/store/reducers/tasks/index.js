@@ -5,7 +5,7 @@ import { types } from "./actions";
 
 const initialState = Immutable({
   tasks: {},
-  filter: "",
+  filter: "undone",
   uiState: "idle",
 });
 
@@ -31,6 +31,12 @@ export default handleActions(
     },
     [getSuccessType(types.remove)]: (state, { payload }) => {
       return state.update("tasks", tasks => tasks.without(payload));
+    },
+    [getSuccessType(types.create)]: (state, { payload }) => {
+      return state.update("tasks", tasks => tasks.set(payload.id, payload));
+    },
+    [types.changeFilter]: (state, { payload }) => {
+      return state.set("filter", payload);
     },
   },
   initialState

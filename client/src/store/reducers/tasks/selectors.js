@@ -1,14 +1,21 @@
 import Immutable from "seamless-immutable";
 import { createSelector } from "reselect";
 
-const getTasks = state => {
+export const getTasks = state => {
   return state.tasks;
 };
 
+export const getFilter = state => {
+  return state.filter;
+};
+
 export const getTasksList = createSelector(
-  [getTasks],
-  tasks => {
-    return Immutable(Object.values(tasks));
+  [getTasks, getFilter],
+  (tasks, filter) => {
+    const list = Object.values(tasks).filter(task => {
+      return task.done === (filter === "done");
+    });
+    return Immutable(list);
   }
 );
 

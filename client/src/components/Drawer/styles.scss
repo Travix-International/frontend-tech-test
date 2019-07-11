@@ -1,0 +1,149 @@
+@import "theme.scss";
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: -999999px;
+  width: 100vw;
+  height: 100vh;
+  z-index: $zIndexDrawer - 1;
+
+  transition: left map-get($durations, "instant")
+    map-get($durations, "leaveWaiting");
+
+  &_open {
+    left: 0;
+    transition: left map-get($durations, "instant");
+
+    .drawer__overlay {
+      opacity: 1;
+      transition: opacity map-get($durations, "enteringScreen");
+    }
+
+    .drawer__container {
+      transform: translateX(0);
+      transition: transform map-get($durations, "enteringScreen");
+    }
+  }
+
+  &__close-icon {
+    cursor: pointer;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(9, 30, 66, 0.86);
+
+    opacity: 0;
+    transition: opacity map-get($durations, "leavingScreen");
+  }
+
+  &__container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: $zIndexDrawer;
+    height: 100vh;
+    min-width: spacing(80);
+    padding: spacing(6) spacing(4);
+    background-color: white;
+    box-shadow: $shadow-large;
+
+    transform: translateX(150%);
+    transition: transform map-get($durations, "leavingScreen");
+  }
+}
+
+.form {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 2rem;
+    margin-bottom: spacing(6);
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+}
+
+.text-field {
+  width: 100%;
+  margin-bottom: spacing(4);
+
+  &__label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: spacing(1);
+  }
+
+  &__input {
+    width: 100%;
+    min-height: spacing(10);
+    padding: spacing(2);
+
+    border-radius: 3px;
+    background-color: #ebecf0;
+    border: none;
+    outline: none;
+    resize: none;
+
+    font-size: 1rem;
+    font-family: $font;
+
+    transition: all 0.3s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #f4f5f7;
+    }
+
+    &:focus {
+      background-color: white;
+      box-shadow: 0 0 0 2px $primaryColor;
+    }
+  }
+}
+
+.button {
+  min-height: spacing(10);
+  padding: spacing(2) spacing(4);
+
+  border-radius: 3px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  resize: none;
+
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: $primaryFontColor;
+
+  transition: all 0.3s;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    background-color: #f4f5f7;
+  }
+
+  &_primary {
+    color: $invertFontColor;
+    background-color: $primaryColor;
+
+    &:hover,
+    &:focus {
+      background-color: darken($primaryColor, 5%);
+    }
+  }
+}

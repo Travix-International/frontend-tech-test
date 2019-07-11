@@ -1,0 +1,42 @@
+$unit: 4px;
+
+@function spacing($multiplier) {
+  @return $unit * $multiplier;
+}
+
+$shadow-small: 0 0 1px rgba(9, 30, 66, 0.31),
+  0 4px 8px -2px rgba(9, 30, 66, 0.25);
+$shadow-medium: 0 0 1px rgba(9, 30, 66, 0.31),
+  0 8px 12px -4px rgba(9, 30, 66, 0.25);
+$shadow-large: 0 0 1px rgba(9, 30, 66, 0.31),
+  0 20px 32px -8px rgba(9, 30, 66, 0.25);
+
+$accents: #ffbdad, #ffebe6, #fff0b3, #fffae6, #abf5d1, #e3fcef, #b3f5ff, #e6fcff,
+  #b3d4ff, #deebff, #c0b6f2, #eae6ff;
+
+@function randomAccent($elements) {
+  @return nth($elements, random(length($elements)));
+}
+
+$primaryColor: #0052cc;
+
+$primaryFontColor: #091e42;
+$invertFontColor: #ffffff;
+
+$font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu,
+  Droid Sans, Helvetica Neue, sans-serif;
+
+$zIndexDrawer: 10;
+$zIndexPopup: 100;
+
+$durations: (
+  "instant": 0ms,
+  "shortest": 150ms,
+  "shorter": 200ms,
+  "short": 250ms,
+  "standard": 300ms,
+  "complex": 375ms,
+  "enteringScreen": 225ms,
+  "leavingScreen": 195ms,
+  "leaveWaiting": 195ms + 10ms,
+);

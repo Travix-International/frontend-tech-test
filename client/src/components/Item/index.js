@@ -1,41 +1,30 @@
+import "./styles.scss";
 import React, { Component } from "react";
+import { Circle, CheckCircle } from "react-feather";
 import enhance from "./enhance";
-import Form from "./Form";
+
+const ACCENT_COLORS_COUNT = 11;
 
 class TaskItem extends Component {
+  color = Math.round(Math.random() * ACCENT_COLORS_COUNT) + 1;
+
   checkHandler = e => {
-    this.changeHandler({ done: e.target.checked });
+    e.stopPropagation();
+
+    const { task, change } = this.props;
+    change({ ...task, done: !task.done });
   };
 
-  changeHandler = patch => {
-    this.props.change({
-      ...this.props.task,
-      ...patch,
-    });
-  };
-
-  removeHandler = () => {
-    this.props.remove(this.props.task.id);
-  };
   render() {
-    const { done, title, description } = this.props.task;
+    const { done, title } = this.props.task;
 
     return (
-      <div>
-        <input
-          type="checkbox"
-          name="done"
-          checked={done}
-          onChange={this.checkHandler}
-        />
+      <div className={`item item_color-${this.color} ${done && "item_done"}`}>
+        <div className="item__icon" onClick={this.checkHandler}>
+          {done ? <CheckCircle /> : <Circle />}
+        </div>
 
-        <Form
-          title={title}
-          description={description}
-          onSubmit={this.changeHandler}
-        />
-
-        <button onClick={this.removeHandler}>remove</button>
+        <div className="item__title">{title}</div>
       </div>
     );
   }

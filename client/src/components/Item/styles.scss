@@ -1,0 +1,42 @@
+@import "theme.scss";
+
+$accentsCount: length($accents);
+
+.item {
+  display: flex;
+  align-items: center;
+
+  background-color: white;
+  border-radius: 3px;
+  padding: spacing(2);
+
+  transition: transform map-get($durations, "short");
+
+  @for $i from 1 through $accentsCount {
+    &_color-#{$i} {
+      box-shadow: $shadow-small, inset spacing(1) 0 nth($accents, $i);
+    }
+  }
+
+  &_done {
+    opacity: 0.5;
+
+    .item__title {
+      text-decoration: line-through;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+  }
+
+  &__icon {
+    margin: 0 spacing(2);
+    line-height: 0;
+  }
+
+  &__title {
+    font-weight: 500;
+  }
+}

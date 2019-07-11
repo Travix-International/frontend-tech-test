@@ -15,12 +15,21 @@ const change = task => {
     .pipe(pluck("response"));
 };
 
-const remove = taskID => {
-  return ajax.delete(`${apiUrl}/tasks/${taskID}`).pipe(mapTo(taskID));
+const remove = task => {
+  return ajax.delete(`${apiUrl}/tasks/${task.id}`).pipe(mapTo(task.id));
+};
+
+const create = task => {
+  return ajax
+    .post(`${apiUrl}/tasks`, task, {
+      "Content-Type": "application/json",
+    })
+    .pipe(pluck("response"));
 };
 
 export default {
   fetchList,
   change,
   remove,
+  create,
 };

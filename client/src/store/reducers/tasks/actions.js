@@ -8,6 +8,7 @@ export const types = {
   change: "tasks/change",
   create: "tasks/create",
   remove: "tasks/remove",
+  changeFilter: "tasks/changeFilter",
 };
 
 export const fetchList = createAction(types.fetchList, null, () => ({
@@ -24,7 +25,16 @@ export const change = createAction(types.change, null, () => ({
 
 export const remove = createAction(types.remove, null, () => ({
   [async]: true,
-  method: ({payload}) => {
+  method: ({ payload }) => {
     return api.remove(payload);
-  }
-}))
+  },
+}));
+
+export const create = createAction(types.create, null, () => ({
+  [async]: true,
+  method: ({ payload }) => {
+    return api.create(payload);
+  },
+}));
+
+export const changeFilter = createAction(types.changeFilter);

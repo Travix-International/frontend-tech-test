@@ -5,10 +5,17 @@ class Form extends Component {
     super(props);
 
     this.state = {
-      title: props.title,
-      description: props.description,
+      title: "",
+      description: "",
     };
   }
+
+  clearForm = () => {
+    this.setState({
+      title: "",
+      description: "",
+    });
+  };
 
   changeHandler = e => {
     const { name, value } = e.target;
@@ -19,6 +26,7 @@ class Form extends Component {
     e.preventDefault();
 
     this.props.onSubmit(this.state);
+    this.clearForm();
   };
 
   render() {
