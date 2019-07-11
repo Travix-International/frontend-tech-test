@@ -4,7 +4,9 @@
   "description": "test back - front",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-server": "NODE_ENV=test jest",
+    "test-client": "cd client && npm test",
+    "test": "npm run test-server & npm run test-client",
     "client": "cd client && npm start",
     "predev": "node scripts/prepare-tasks.js ./tasks.json",
     "dev": "nodemon --ignore ./client server.js",
@@ -20,8 +22,22 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "babel-jest": "^24.8.0",
     "faker": "^4.1.0",
+    "jest": "^24.8.0",
     "nodemon": "^1.19.1",
     "prettier": "1.18.2"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/client/",
+      "/build/"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/build/",
+      "/client/"
+    ]
   }
 }

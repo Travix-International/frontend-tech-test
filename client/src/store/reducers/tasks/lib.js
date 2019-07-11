@@ -7,8 +7,8 @@ export const mapTasksByID = tasks => {
   }, {});
 };
 
-export const fulfillList = (state, action) => {
-  return state.set("tasks", mapTasksByID(action.payload));
+export const fulfillList = (state, { payload }) => {
+  return state.set("tasks", mapTasksByID(payload));
 };
 
 export const changeTask = (state, { payload }) => {
