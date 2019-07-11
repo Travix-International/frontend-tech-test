@@ -29,6 +29,9 @@ export default handleActions(
     [getSuccessType(types.change)]: (state, { payload }) => {
       return state.setIn(["tasks", payload.id], payload);
     },
+    [getSuccessType(types.remove)]: (state, { payload }) => {
+      return state.update("tasks", tasks => tasks.without(payload));
+    },
   },
   initialState
 );

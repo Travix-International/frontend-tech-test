@@ -1,5 +1,5 @@
 import { ajax } from "rxjs/ajax";
-import { pluck } from "rxjs/operators";
+import { pluck, mapTo } from "rxjs/operators";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -15,7 +15,12 @@ const change = task => {
     .pipe(pluck("response"));
 };
 
+const remove = taskID => {
+  return ajax.delete(`${apiUrl}/tasks/${taskID}`).pipe(mapTo(taskID));
+};
+
 export default {
   fetchList,
   change,
+  remove,
 };

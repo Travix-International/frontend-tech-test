@@ -21,3 +21,10 @@ export const change = createAction(types.change, null, () => ({
     return api.change(payload);
   },
 }));
+
+export const remove = createAction(types.remove, null, () => ({
+  [async]: true,
+  method: ({payload}) => {
+    return api.remove(payload);
+  }
+}))

@@ -13,6 +13,10 @@ class TaskItem extends Component {
       ...patch,
     });
   };
+
+  removeHandler = () => {
+    this.props.remove(this.props.task.id);
+  };
   render() {
     const { done, title, description } = this.props.task;
 
@@ -30,6 +34,8 @@ class TaskItem extends Component {
           description={description}
           onSubmit={this.changeHandler}
         />
+
+        <button onClick={this.removeHandler}>remove</button>
       </div>
     );
   }

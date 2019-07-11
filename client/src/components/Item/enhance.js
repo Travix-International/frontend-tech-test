@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { getTaskItem } from "store/reducers/tasks/selectors";
-import { change } from "store/reducers/tasks/actions";
+import { change, remove } from "store/reducers/tasks/actions";
 
 export default connect(
   (state, props) => {
@@ -10,5 +10,6 @@ export default connect(
   },
   {
     change,
+    remove,
   }
 );
