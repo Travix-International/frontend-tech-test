@@ -21,24 +21,4 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-
-  &__btn {
-    border-radius: 50%;
-    padding: spacing(4);
-    box-shadow: $shadow-large;
-    background: white;
-    border: none;
-    outline: none;
-    line-height: 0;
-
-    transition: all map-get($durations, "standard");
-
-    &:active {
-      box-shadow: $shadow-small;
-    }
-
-    &_add {
-      color: $primaryColor;
-    }
-  }
 }

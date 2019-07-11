@@ -1,6 +1,8 @@
 import "./styles.scss";
 import React, { Component } from "react";
 import { X } from "react-feather";
+import TextField from "components/TextField";
+import Button from "components/Button";
 import enhance from "./enhance";
 
 class Drawer extends Component {
@@ -69,54 +71,38 @@ class Drawer extends Component {
         <div className="drawer__container">
           <form className="form">
             <header className="form__header">
-              <div>{mode === "create" ? "Create" : "Change"} task</div>
+              <div>{mode === "create" ? "Create a" : "Change the"} task</div>
 
               <X className="drawer__close-icon" onClick={this.handleClose} />
             </header>
 
-            <div className="text-field">
-              <label>
-                <div className="text-field__label">Title</div>
-                <input
-                  ref={el => (this.title = el)}
-                  className="text-field__input"
-                  type="text"
-                  name="title"
-                  value={title}
-                  onChange={this.changeHandler}
-                />
-              </label>
-            </div>
+            <TextField
+              label="Title"
+              innerRef={el => (this.title = el)}
+              type="text"
+              name="title"
+              value={title}
+              onChange={this.changeHandler}
+            />
 
-            <div className="text-field">
-              <label>
-                <div className="text-field__label">Description</div>
-                <textarea
-                  className="text-field__input"
-                  name="description"
-                  value={description}
-                  rows={10}
-                  onChange={this.changeHandler}
-                />
-              </label>
-            </div>
+            <TextField
+              label="Description"
+              component="textarea"
+              name="description"
+              value={description}
+              rows={10}
+              onChange={this.changeHandler}
+            />
 
             <footer className="form__footer">
-              <button
-                value={mode}
-                className="button button_primary"
-                onClick={this.handleSubmit}
-              >
+              <Button primary={true} value={mode} onClick={this.handleSubmit}>
                 Save
-              </button>
+              </Button>
+
               {mode === "change" && (
-                <button
-                  value="remove"
-                  className="button"
-                  onClick={this.handleSubmit}
-                >
+                <Button value="remove" onClick={this.handleSubmit}>
                   Remove
-                </button>
+                </Button>
               )}
             </footer>
           </form>

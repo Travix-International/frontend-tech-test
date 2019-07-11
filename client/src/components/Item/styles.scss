@@ -14,7 +14,8 @@ $accentsCount: length($accents);
 
   @for $i from 1 through $accentsCount {
     &_color-#{$i} {
-      box-shadow: $shadow-small, inset spacing(1) 0 nth($accents, $i);
+      box-shadow: map-get($shadows, "small"),
+        inset spacing(1) 0 nth($accents, $i);
     }
   }
 

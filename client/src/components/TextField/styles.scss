@@ -1,0 +1,40 @@
+@import "theme.scss";
+
+.text-field {
+  width: 100%;
+  margin-bottom: spacing(4);
+
+  &__label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: spacing(1);
+  }
+
+  &__input {
+    width: 100%;
+    min-height: spacing(10);
+    padding: spacing(2);
+
+    border-radius: 3px;
+    background-color: #ebecf0;
+    border: none;
+    outline: none;
+    resize: none;
+
+    font-size: 1rem;
+    font-family: $font;
+
+    transition: all 0.3s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #f4f5f7;
+    }
+
+    &:focus {
+      background-color: white;
+      box-shadow: 0 0 0 2px $primaryColor;
+    }
+  }
+}

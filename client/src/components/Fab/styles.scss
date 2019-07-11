@@ -1,0 +1,21 @@
+@import "theme.scss";
+
+.fab {
+  border-radius: 50%;
+  padding: spacing(4);
+  box-shadow: map-get($shadows, "large");
+  background: white;
+  border: none;
+  outline: none;
+  line-height: 0;
+
+  transition: all map-get($durations, "standard");
+
+  &:active {
+    box-shadow: map-get($shadows, "small");
+  }
+
+  &_primary {
+    color: $primaryColor;
+  }
+}

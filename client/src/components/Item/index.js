@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Circle, CheckCircle } from "react-feather";
 import enhance from "./enhance";
 
+// magic number
 const ACCENT_COLORS_COUNT = 11;
 
 class TaskItem extends Component {

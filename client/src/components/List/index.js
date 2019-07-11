@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Circle, CheckCircle, PlusCircle } from "react-feather";
 import TaskItem from "components/Item";
 import Drawer from "components/Drawer";
+import Fab from "components/Fab";
 import enhance from "./enhance";
 
 class TasksList extends Component {
@@ -28,15 +29,12 @@ class TasksList extends Component {
   };
 
   render() {
+    const { open, currentTask } = this.state;
     const { tasks, filter } = this.props;
 
     return (
       <div>
-        <Drawer
-          open={this.state.open}
-          taskID={this.state.currentTask}
-          onClose={this.closeDrawer}
-        />
+        <Drawer open={open} taskID={currentTask} onClose={this.closeDrawer} />
 
         <ul className="tasks-list">
           {tasks.map(({ id }) => (
@@ -51,8 +49,7 @@ class TasksList extends Component {
         </ul>
 
         <footer className="actions">
-          <button
-            className="actions__btn"
+          <Fab
             value={filter === "done" ? "undone" : "done"}
             onClick={this.handleFilter}
           >
@@ -61,13 +58,10 @@ class TasksList extends Component {
             ) : (
               <CheckCircle size={32} />
             )}
-          </button>
-          <button
-            className="actions__btn actions__btn_add"
-            onClick={() => this.openDrawer()}
-          >
+          </Fab>
+          <Fab primary={true} onClick={() => this.openDrawer()}>
             <PlusCircle size={32} />
-          </button>
+          </Fab>
         </footer>
       </div>
     );
