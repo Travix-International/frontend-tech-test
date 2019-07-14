@@ -7,3 +7,13 @@
 - add `checkTitle` middleware to check passed params in
   request body. If there is no `title` param (which is required I belive) then 400 status code is returned.
 - change response status codes and response body due to the REST.
+
+## Writing tests
+
+- add unit tests for the tasks reducer (client side)
+- add integration tests for the Drawer and TasksList components.
+
+### Tradeoffs
+
+- I know that it should be a mock server to test API calls, but for simplicity I've decided to keep my main server for that purpose.
+- I've added only one test for the server side just to show how it works

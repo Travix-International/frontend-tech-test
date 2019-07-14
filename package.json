@@ -5,11 +5,12 @@
   "main": "server.js",
   "scripts": {
     "test-server": "NODE_ENV=test jest",
-    "test-client": "cd client && npm test",
-    "test": "npm run test-server & npm run test-client",
-    "client": "cd client && npm start",
+    "test-client": "cd client && npm run test-ci",
+    "test": "concurrently \"npm:test-server\" \"npm:test-client\"",
     "predev": "node scripts/prepare-tasks.js ./tasks.json",
-    "dev": "nodemon --ignore ./client server.js",
+    "dev-client": "cd client && npm start",
+    "dev-server": "nodemon --ignore ./client server.js",
+    "dev": "concurrently \"npm:dev-server\" \"npm:dev-client\"",
     "start": "node server.js"
   },
   "keywords": [
@@ -23,8 +24,10 @@
   },
   "devDependencies": {
     "babel-jest": "^24.8.0",
+    "concurrently": "^4.1.1",
     "faker": "^4.1.0",
     "jest": "^24.8.0",
+    "node-mocks-http": "^1.7.6",
     "nodemon": "^1.19.1",
     "prettier": "1.18.2"
   },
