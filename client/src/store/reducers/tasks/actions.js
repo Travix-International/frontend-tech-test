@@ -9,6 +9,12 @@ export const types = {
   create: "tasks/create",
   remove: "tasks/remove",
   changeFilter: "tasks/change-filter",
+
+  socketConnect: "tasks/socket-connect",
+  socketDisconnect: "tasks/socket-disconnect",
+  externalCreate: "tasks/external-create",
+  externalChange: "tasks/external-change",
+  externalRemove: "tasks/external-remove",
 };
 
 export const fetchList = createAction(types.fetchList, null, () => ({
@@ -38,3 +44,9 @@ export const create = createAction(types.create, null, () => ({
 }));
 
 export const changeFilter = createAction(types.changeFilter);
+
+export const socketConnect = createAction(types.socketConnect);
+export const socketDisconnect = createAction(types.socketDisconnect);
+export const externalCreate = createAction(types.externalCreate);
+export const externalChange = createAction(types.externalChange);
+export const externalRemove = createAction(types.externalRemove);

@@ -1,7 +1,10 @@
 import { ajax } from "rxjs/ajax";
 import { pluck, mapTo } from "rxjs/operators";
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiHost = process.env.REACT_APP_API_HOST;
+const apiPath = process.env.REACT_APP_API_PATH;
+
+const apiUrl = apiHost + apiPath;
 
 const fetchList = () => {
   return ajax.get(`${apiUrl}/tasks`).pipe(pluck("response"));
@@ -16,7 +19,7 @@ const change = task => {
 };
 
 const remove = task => {
-  return ajax.delete(`${apiUrl}/tasks/${task.id}`).pipe(mapTo(task.id));
+  return ajax.delete(`${apiUrl}/tasks/${task.id}`).pipe(mapTo(task));
 };
 
 const create = task => {

@@ -13,7 +13,14 @@
 - add unit tests for the tasks reducer (client side)
 - add integration tests for the Drawer and TasksList components.
 
+## Socket
+
+- add socket connection between the client and the server
+- add broadcasting events about creation, changing and removing test
+- subscribe to the socket events and respond correctly by changin the client state
+
 ### Tradeoffs
 
 - I know that it should be a mock server to test API calls, but for simplicity I've decided to keep my main server for that purpose.
 - I've added only one test for the server side just to show how it works
+- there should be a filtering function to remove self-sended socket events. Eg. when the client is changing the task it will register `external-change` event as well. So, it should be a client ID into the socket event and the client should filter self-maded events.

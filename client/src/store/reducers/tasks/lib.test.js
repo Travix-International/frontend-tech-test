@@ -70,7 +70,7 @@ describe("Tasks reducer action handlers", () => {
     });
 
     const newState = lib.removeTask(state, {
-      payload: 0,
+      payload: { id: 0 },
     });
 
     expect(Object.values(newState.tasks).length).toEqual(0);

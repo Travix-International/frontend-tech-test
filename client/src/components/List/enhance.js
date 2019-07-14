@@ -1,5 +1,10 @@
 import { connect } from "react-redux";
-import { fetchList, changeFilter } from "store/reducers/tasks/actions";
+import {
+  fetchList,
+  changeFilter,
+  socketConnect,
+  socketDisconnect,
+} from "store/reducers/tasks/actions";
 import { getFilter, getTasksList } from "store/reducers/tasks/selectors";
 
 export default connect(
@@ -9,5 +14,5 @@ export default connect(
       tasks: getTasksList(state.tasks),
     };
   },
-  { fetchList, changeFilter }
+  { fetchList, changeFilter, socketConnect, socketDisconnect }
 );

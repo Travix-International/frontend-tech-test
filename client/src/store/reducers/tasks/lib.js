@@ -16,7 +16,7 @@ export const changeTask = (state, { payload }) => {
 };
 
 export const removeTask = (state, { payload }) => {
-  return state.update("tasks", tasks => tasks.without(payload));
+  return state.update("tasks", tasks => tasks.without(payload.id));
 };
 
 export const createTask = (state, { payload }) => {

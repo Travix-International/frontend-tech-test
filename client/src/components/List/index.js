@@ -21,7 +21,12 @@ class TasksList extends Component {
   };
 
   componentDidMount() {
+    this.props.socketConnect();
     this.props.fetchList();
+  }
+
+  componentWillUnmount() {
+    this.props.socketDisconnect();
   }
 
   handleFilter = e => {
