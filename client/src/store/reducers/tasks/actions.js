@@ -8,7 +8,7 @@ export const types = {
   change: "tasks/change",
   create: "tasks/create",
   remove: "tasks/remove",
-  changeFilter: "tasks/changeFilter",
+  changeFilter: "tasks/change-filter",
 };
 
 export const fetchList = createAction(types.fetchList, null, () => ({

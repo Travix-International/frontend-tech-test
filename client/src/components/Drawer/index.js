@@ -5,12 +5,18 @@ import TextField from "components/TextField";
 import Button from "components/Button";
 import enhance from "./enhance";
 
-class Drawer extends Component {
+export class Drawer extends Component {
   state = {
     title: "",
     description: "",
     mode: "create",
   };
+
+  componentDidMount() {
+    this.setState({
+      mode: !!this.props.task ? "change" : "create",
+    });
+  }
 
   componentDidUpdate(oldProps) {
     const { task, open } = this.props;
