@@ -40,4 +40,9 @@ $accentsCount: length($accents);
   &__title {
     font-weight: 500;
   }
+
+  @include breakpoint("sm") {
+    max-width: spacing(80);
+    // margin-right: spacing(4);
+  }
 }

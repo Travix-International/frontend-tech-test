@@ -7,6 +7,17 @@
 
   &__item {
     margin-bottom: spacing(4);
+
+    @include breakpoint("sm") {
+      break-inside: avoid;
+      margin: 0;
+      padding: spacing(2) 0;
+    }
+  }
+
+  @include breakpoint("sm") {
+    column-count: 3;
+    column-gap: spacing(4);
   }
 }
 
