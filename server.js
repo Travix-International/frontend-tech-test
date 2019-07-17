@@ -2,6 +2,10 @@
 
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
+const cors = require('cors')
+
+// Cross-origin middleware
+app.use(cors());
 
 /**
  * GET /tasks
@@ -27,7 +31,7 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find((item) => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
@@ -66,7 +70,9 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(204).json({
+        message: 'Update is successful'
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -99,6 +105,7 @@ app.post('/task/create/:title/:description', (req, res) => {
 
   return res.status(201).json({
     message: 'Resource created',
+    id: task.id
   });
 });
 
@@ -119,13 +126,13 @@ app.delete('/task/delete/:id', (req, res) => {
     const task = tasksContainer.tasks.find(item => item.id === id);
   
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
+      const tasks = tasksContainer.tasks;
+      tasksContainer.tasks = tasks.filter(task => task.id !== id)
       return res.status(200).json({
-        message: 'Updated successfully',
+        message: 'Deleted successfully',
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
       });
     }

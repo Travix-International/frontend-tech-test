@@ -1,0 +1,35 @@
+.Task {
+  flex: auto;
+  margin: 0 8px 8px 0;
+  
+  @media(min-width: 768px) {
+    width: 31%;
+  }
+
+  .Title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .Description {
+    overflow-y: auto;
+    max-height: 380px;
+  }
+
+  h1 {
+    color: #004b94;
+    font-family: Khand,sans-serif;
+
+    a {
+      color: #004b94;
+      font-family: Khand,sans-serif;
+      text-decoration: none;
+    }
+  }
+
+  .Actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
