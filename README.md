@@ -17,6 +17,10 @@ Runs the app in the development mode.
 
 Runs the test runner.
 
+### `yarn lint`
+
+Runs the linter.
+
 ### `yarn build`
 
 Builds the app for production to the `dist` folder.
