@@ -1,0 +1,19 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ htmlWebpackPlugin.options.title }}</title>
+
+    {{#each htmlWebpackPlugin.files.css}}
+    <link rel="stylesheet" href="{{this}}" preload /> {{/each}}
+</head>
+
+<body>
+    <div id="root"></div>
+    {{#each htmlWebpackPlugin.files.js}}
+    <script src="{{this}}" defer></script> {{/each}}
+</body>
+
+</html>
