@@ -1,8 +1,20 @@
 import React from 'react';
-import './App.css';
+import loadable from '@loadable/component';
+import Loading from './components/Loading';
+import Header from './components/Header';
+import './assets/stylesheets/app.scss';
 
-function App() {
-  return <div>Hi</div>;
-}
+const MainComponents = loadable(() => import('./Routes'), {
+  fallback: <Loading />
+});
+
+const App = () => {
+  return (
+    <main className="main-wrapper">
+      <Header />
+      <MainComponents />
+    </main>
+  );
+};
 
 export default App;
