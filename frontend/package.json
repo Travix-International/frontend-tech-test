@@ -12,20 +12,21 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "precommit": "lint-staged"
+    "oncommit": "lint-staged"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn precommit"
+      "pre-commit": "yarn oncommit"
     }
   },
   "lint-staged": {
     "*{js,jsx}": [
       "pretty-quick --staged",
-      "eslint ./src/ --fix"
+      "eslint ./src/ --fix",
+      "git add"
     ]
   },
   "browserslist": {
