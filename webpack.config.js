@@ -1,6 +1,12 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+
+const PROD = process.env.NODE_ENV === 'production';
+const DEV = !PROD;
 
 const config = {
     entry: './client/src/index.js',
@@ -11,6 +17,18 @@ const config = {
     },
     module: {
         rules: [
+            {
+                test: /\.scss$/,
+                use: [
+                    "style-loader", // creates style nodes from JS strings
+                    "css-loader", // translates CSS into CommonJS
+                    "sass-loader" // compiles Sass to CSS, using Node Sass by default
+                ]
+            },
+            {
+                test:/\.css$/,
+                use:['style-loader','css-loader']
+            },
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
@@ -39,13 +57,25 @@ const config = {
             inject: false,
             filename: 'index.html'
         }),
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css'
+        }),
+        new webpack.DefinePlugin({
+            __DEV__: DEV,
+            __PROD__: PROD,
+            'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`
+        })
     ],
     resolve: {
         modules: [
             path.resolve(__dirname),
             'node_modules'
         ],
+        extensions: ['.js', '.jsx', '.scss'],
         alias: {
+            'styled-components$': 'styled-components/lib/index.js',
+            'utils': path.resolve('./client/src/utils')
         }
     }
 };

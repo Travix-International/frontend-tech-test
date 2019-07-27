@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from 'travix-ui-kit';
+import { Provider } from 'react-redux';
+
+import store from './store/index.js';
+import Root from './apps/Root';
 
 class App extends React.Component {
     onClick = () => {
@@ -8,10 +11,9 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                Rohit
-                <Button size='s' onClick={this.onClick}>Click Me 123</Button>
-            </div>
+            <Provider store={store}>
+                <Root/>
+            </Provider>
         );
     }
 }

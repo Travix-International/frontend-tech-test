@@ -1,7 +1,21 @@
 'use strict';
 
 const app = require('express')();
-const tasksContainer = require('./tasks.json');
+let tasksContainer = require('./tasks.json');
+
+
+app.use((req, res, next) => {
+  res.set('Access-Control-Allow-Headers', '*');
+  res.set('Access-Control-Allow-Methods', 'DELETE, GET, POST, PUT');
+  res.set('Access-Control-Allow-Origin', '*');
+  next();
+});
+/**
+ *  Modified the structure of storing tasks.
+ * Earlier it was an array of tasks. Any CRUD operation resulted in O(n) complexitry for searching the tasks.
+ * Moved tasks data structure from array to hashmap with keys of the map being the id of the task.
+ * Any lookup on the task is now done in O(1) complexity.
+ * */ 
 
 /**
  * GET /tasks
@@ -9,7 +23,7 @@ const tasksContainer = require('./tasks.json');
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
+  return res.status(200).json(tasksContainer[req.query.type]);
 });
 
 /**
@@ -57,16 +71,16 @@ app.get('/task/:id', (req, res) => {
  * If the task is not found, return a status code 404.
  * If the provided id is not a valid number return a status code 400.
  */
-app.put('/task/update/:id/:title/:description', (req, res) => {
+app.put('/task/update/:id/:title', (req, res) => {
   const id = parseInt(req.params.id, 10);
-
+  const type = req.query.type;
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
-
+    const task = tasksContainer[type] && tasksContainer[type][id];
     if (task !== null) {
       task.title = req.params.title;
-      task.description = req.params.description;
-      return res.status(204);
+      return res.status(204).json({
+        task,
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -90,12 +104,19 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  */
 app.post('/task/create/:title/:description', (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: new Date().getTime(),
     title: req.params.title,
     description: req.params.description,
   };
 
-  tasksContainer.tasks.push(task);
+  const type = req.query.type || 'DRAFT';
+  tasksContainer = {
+    ...tasksContainer,
+    [type]: {
+      ...tasksContainer[type],
+      [task.id]: task
+    }
+  }
 
   return res.status(201).json({
     message: 'Resource created',
@@ -115,12 +136,12 @@ app.post('/task/create/:title/:description', (req, res) => {
 app.delete('/task/delete/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
+  const type = req.query.type;
   if (!Number.isNaN(id)) {
-    const task = tasksContainer.tasks.find(item => item.id === id);
+    const task = tasksContainer[type] && tasksContainer[type][id];
   
     if (task !== null) {
-      const taskIndex = tasksContainer.tasks;
-      tasksContainer.tasks.splice(taskIndex, 1);
+      delete tasksContainer[type][id];
       return res.status(200).json({
         message: 'Updated successfully',
       });
