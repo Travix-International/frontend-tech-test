@@ -6,28 +6,35 @@ import Tooltip from 'sleek-ui/Tooltip';
 import styled from 'styled-components';
 import Notification, { NOTIFICATION_POSITION } from 'sleek-ui/Notification';
 import { FixedSizeList as List } from "react-window";
-import InfiniteLoader from "react-window-infinite-loader";
 
+const TopLabel = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #0077CC;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 40px;
+    color: white;
+    line-height: 2.5;
+    text-transform: uppercase;
+`;
 
 const TodoListBlock = styled.div`
+    position: relative;
     padding: 20px;
     flex: 1;
-    border: 1px solid red;
+    border: 1px solid #0077CC;;
     border-radius: 10px;
     margin: 5px;
-
-    &.DRAFT {
-        border: 1px solid blue;
-    }
-
-    &.IN_PROGRESS {
-        border: 1px solid green;
-    }
+    min-width: 320px;
+    box-shadow: 0 0 2px 2px #0077CC;
 `;
 
 const Title = styled.div`
     font-size: 18px;
-    color: blue;
+    color: #0077CC;
 
     &.striked {
         text-decoration: line-through;
@@ -59,6 +66,15 @@ const Task = styled.div`
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
+    border: 1px solid #0077CC;
+
+    &.striked {
+        border: 1px solid red;
+    }
+
+    &.in_progress {
+        border: 1px solid green;
+    }
 `;
 
 class TodoList extends React.PureComponent {
@@ -141,6 +157,9 @@ class TodoList extends React.PureComponent {
 
     renderTask = ({index, style}) => {
         const task = Object.values(this.props.tasks)[index];
+        const className = this.props.type === 'COMPLETED' ? 
+        'striked' : this.props.type === 'IN_PROGRESS' ? 
+        'in_progress' : '';
         return (
             <div
                 style={style}
@@ -149,7 +168,7 @@ class TodoList extends React.PureComponent {
             >
                 {
                     this.state.toBeEdited === task.id ?
-                    <Task>
+                    <Task className={className}>
                         <TextField 
                             hintText='Update title'
                             onChange={this.onChange}
@@ -172,9 +191,7 @@ class TodoList extends React.PureComponent {
                     </Task> :
                     <Task>
                         <div>
-                            <Title className={this.props.type === 'COMPLETED' ? 
-                            'striked' : this.props.type === 'IN_PROGRESS' ? 
-                            'in_progress' : ''}>{task.title}</Title>
+                            <Title className={className}>{task.title}</Title>
                             <Desc>{task.description}</Desc>
                         </div>
                         <ActionBlock>
@@ -208,14 +225,16 @@ class TodoList extends React.PureComponent {
             tasks,
             label,
             type
-        } = this.props
+        } = this.props;
+        const taskHeight = Object.values(this.props.tasks).length * 50;
+        const height = taskHeight > 400 ? 400 : taskHeight;
         return (
             <TodoListBlock
                     onDragOver={(event) => event.preventDefault()}
                     onDrop={this.props.attachDragEnd(type)}
                     className={type}
                 >
-                    {`${label} ${Object.values(tasks).length}`}
+                    <TopLabel>{`${label} (${Object.values(tasks).length})`}</TopLabel>
                     {
                         fetchInProgress ?
                         <Loader/> :
@@ -223,14 +242,16 @@ class TodoList extends React.PureComponent {
                             direction="vertical"
                             className={`List-${this.props.type}`}
                             itemCount={Object.values(this.props.tasks).length}
+                            style={{
+                                marginTop: '20px'
+                            }}
                             itemSize={50}
-                            width={350}
-                            height={400}
+                            width={320}
+                            height={height}
                             itemData={{
                                 tobeEdited: this.state.toBeEdited,
                                 updatedTitle: this.state.updatedTitle
                             }}
-                            // overscanCount={3}
                         >
                                 {this.renderTask}
                         </List>

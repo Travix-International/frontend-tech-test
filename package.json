@@ -28,7 +28,6 @@
     "react-dom": "^15.4.0",
     "react-redux": "^4.4.9",
     "react-window": "^1.8.5",
-    "react-window-infinite-loader": "^1.0.3",
     "redux": "^3.5.2",
     "redux-thunk": "^2.3.0",
     "sleek-ui": "^3.0.118",

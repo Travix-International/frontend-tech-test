@@ -35,7 +35,11 @@ const TodoBoard = styled.div`
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    width: 100vw;
+    width: 99vw;
+`;
+const Note = styled.div`
+    color: red;
+    margin: 5px;
 `;
 class Root extends React.Component {
     
@@ -121,6 +125,7 @@ class Root extends React.Component {
                         addToDo={addToDo}
                         taskCreateInProgress={taskCreateInProgress}
                     />
+                    <Note>*Tasks can be dragged and dropped from one state to another</Note>
                     <TodoBoard>
                         {this.renderToDoList('draft', 'DRAFT', 'Draft', true, true, true)}
                         {this.renderToDoList('inprogress', 'IN_PROGRESS', 'In Progress', false, true, true)}
