@@ -77,6 +77,11 @@ const Task = styled.div`
     }
 `;
 
+const Note = styled.div`
+    margin-top: 40px;
+    padding: 10px;
+`;
+
 class TodoList extends React.PureComponent {
     
     constructor(props) {
@@ -238,10 +243,12 @@ class TodoList extends React.PureComponent {
                     {
                         fetchInProgress ?
                         <Loader/> :
+                        Object.values(tasks).length === 0 ?
+                        <Note>No Todos Yet</Note> :
                         <List
                             direction="vertical"
-                            className={`List-${this.props.type}`}
-                            itemCount={Object.values(this.props.tasks).length}
+                            className={`List-${type}`}
+                            itemCount={Object.values(tasks).length}
                             style={{
                                 marginTop: '20px'
                             }}
