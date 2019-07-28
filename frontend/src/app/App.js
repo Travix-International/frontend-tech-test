@@ -5,7 +5,7 @@ import Header from './components/Header';
 import './assets/stylesheets/app.scss';
 
 const MainComponents = loadable(() => import('./Routes'), {
-  fallback: <Loading />
+  fallback: <Loading text="Loading Tasks..." />
 });
 
 const App = () => {
