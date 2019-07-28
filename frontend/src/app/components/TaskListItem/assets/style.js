@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Item = styled.li`
+export const TaskItem = styled.li`
   margin-bottom: 10px;
   background-color: #fff;
   transition: all 200ms;
