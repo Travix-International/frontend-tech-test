@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Item = styled.li`
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   background-color: #fff;
   transition: all 200ms;
 
@@ -16,11 +16,12 @@ export const Item = styled.li`
     -o-transform: scale(1.02);
     -ms-transform: scale(1.02);
     transform: scale(1.02);
-`;
+  }
 
-export const Link = styled.a`
-  padding: 15px;
-  display: block;
+  a.link {
+    padding: 15px;
+    display: block;
+  }
 `;
 
 export const Title = styled.h2`
