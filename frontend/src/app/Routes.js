@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { routes } from './config';
 
-/*
- * Define main routes of the app here.
+/**
+ * Dynamic components loading
+ * Routes are defined in config folder
  */
 const Routes = () => {
   return (
