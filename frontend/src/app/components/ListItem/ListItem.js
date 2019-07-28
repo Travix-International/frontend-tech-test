@@ -1,10 +1,11 @@
 import React from 'react';
-import { Item, Link, Title, Description } from './assets/style';
+import { Link } from 'react-router-dom';
+import { Item, Title, Description } from './assets/style';
 
-const ListItem = ({ title, description }) => {
+const ListItem = ({ id, title, description }) => {
   return (
     <Item>
-      <Link href="/">
+      <Link to={`/task/${id}`} className="link">
         <Title>{title}</Title>
         <Description>{description}</Description>
       </Link>
