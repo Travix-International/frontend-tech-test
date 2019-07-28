@@ -1,35 +1,36 @@
 import TaskList from '../components/TaskList';
+import TaskView from '../components/TaskView';
 
 // Default routes
 export const routes = {
   tasks: {
     path: '/',
     component: TaskList,
-    excat: true,
+    exact: true,
     description: 'Task List'
   },
   viewTask: {
     path: '/tasks/:id',
-    component: TaskList,
-    excat: false,
+    component: TaskView,
+    exact: true,
     description: 'View Task'
   },
   newTask: {
     path: '/tasks/add',
     component: TaskList,
-    excat: false,
+    exact: false,
     description: 'New Task'
   },
   editTask: {
     path: '/tasks/:id/edit',
     component: TaskList,
-    excat: false,
+    exact: false,
     description: 'Edit Task'
   },
   deleteTask: {
     path: '/tasks/:id/delete',
     component: TaskList,
-    excat: false,
+    exact: false,
     description: 'Delete Task'
   }
 };

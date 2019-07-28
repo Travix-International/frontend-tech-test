@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { routes } from './config';
 
 /**
@@ -8,18 +8,16 @@ import { routes } from './config';
  */
 const Routes = () => {
   return (
-    <Router>
-      <Switch>
-        {Object.keys(routes).map(route => (
-          <Route
-            path={routes[route].path}
-            render={routes[route].component}
-            exact={routes[route].exact}
-            key={routes[route].path}
-          />
-        ))}
-      </Switch>
-    </Router>
+    <Switch>
+      {Object.keys(routes).map(route => (
+        <Route
+          path={routes[route].path}
+          render={routes[route].component}
+          exact={routes[route].exact}
+          key={routes[route].path}
+        />
+      ))}
+    </Switch>
   );
 };
 

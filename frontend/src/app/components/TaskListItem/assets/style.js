@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const TaskItem = styled.li`
-  margin-bottom: 10px;
-  background-color: #fff;
   transition: all 200ms;
 
   &:last-child {
@@ -19,7 +17,6 @@ export const TaskItem = styled.li`
   }
 
   a.link {
-    padding: 15px;
     display: block;
   }
 `;

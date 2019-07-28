@@ -1,10 +1,9 @@
 import React from 'react';
-import Wrapper from './assets/style';
 import TaskListItem from '../TaskListItem';
 
 const TaskList = () => {
   return (
-    <Wrapper>
+    <ul>
       <TaskListItem
         key={1}
         id={1}
@@ -16,7 +15,7 @@ const TaskList = () => {
       <TaskListItem key={4} id={4} title="Buy pizza" description="Your turn to cook" />
       <TaskListItem key={5} id={5} title="Buy pizza" description="Your turn to cook" />
       <TaskListItem key={6} id={6} title="Buy pizza" description="Your turn to cook" />
-    </Wrapper>
+    </ul>
   );
 };
 
