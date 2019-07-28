@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.header`
   padding: 10px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ddd;
   display: flex;
   justify-content: space-between;
 `;
@@ -11,7 +9,7 @@ export const Wrapper = styled.header`
 export const Title = styled.h1`
   font-size: 1.6em;
   margin: 0;
-  color: ${props => props.theme.colors.secondary};
+  color: ${props => props.theme.colors.primary};
 `;
 
 export const AddIcon = styled.a`
