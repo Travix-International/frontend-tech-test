@@ -1,7 +1,6 @@
 @import './mixins.scss';
 
-*,
-:not(i) {
+* {
   font-family: 'Ubuntu', sans-serif;
   margin: 0;
   padding: 0;
