@@ -2,6 +2,9 @@ import React from 'react';
 import TaskListItem from '../TaskListItem';
 
 const TaskList = () => {
+  // const task = (new Task()).getTask();
+  // const [username, setUsername] = useState('siamak');
+
   return (
     <ul>
       <TaskListItem

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { api } from '../config';
+import api from '../config';
 
 /**
  * Base API class. This Class is not for direct usage.

@@ -1,24 +1,38 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { routes } from './config';
+import TaskList from './components/TaskList';
+import TaskView from './components/TaskView';
 
-/**
- * Dynamic components loading
- * Routes are defined in config folder
- */
-const Routes = () => {
-  return (
-    <Switch>
-      {Object.keys(routes).map(route => (
-        <Route
-          path={routes[route].path}
-          render={routes[route].component}
-          exact={routes[route].exact}
-          key={routes[route].path}
-        />
-      ))}
-    </Switch>
-  );
+// Default routes
+const routes = {
+  tasks: {
+    path: '/',
+    component: TaskList,
+    exact: true,
+    description: 'Task List'
+  },
+  newTask: {
+    path: '/tasks/add',
+    component: TaskList,
+    exact: true,
+    description: 'Add New Task'
+  },
+  viewTask: {
+    path: '/tasks/:id',
+    component: TaskView,
+    exact: false,
+    description: 'View Task'
+  },
+  editTask: {
+    path: '/tasks/:id/edit',
+    component: TaskList,
+    exact: false,
+    description: 'Edit Task'
+  },
+  deleteTask: {
+    path: '/tasks/:id/delete',
+    component: TaskList,
+    exact: false,
+    description: 'Delete Task'
+  }
 };
 
-export default Routes;
+export default routes;
