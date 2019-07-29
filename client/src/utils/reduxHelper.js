@@ -3,7 +3,7 @@ import apiUtil from './apiUtil';
 function dispatchAction(action, dispatch, payload, error) {
     if (Array.isArray(action)) {
         return Promise.all(action.map(a => dispatchAction(a, dispatch, payload, error)));
-    } else if (action instanceof Function) {
+    } if (action instanceof Function) {
         return dispatch(action(payload, error));
     }
     return dispatch({

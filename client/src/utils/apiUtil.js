@@ -41,7 +41,6 @@ function constructQuery(obj) {
  * Class for making API calls.
  */
 class ApiUtil {
-
     get(config, req) {
         return this.request({
             ...baseConfig,
@@ -94,7 +93,7 @@ class ApiUtil {
             queryString = `?${queryString}`;
         }
 
-        let configPath = config.url;
+        const configPath = config.url;
 
         const protocol = 'http';
         const host = 'localhost';
@@ -114,8 +113,7 @@ class ApiUtil {
      * @return {Promise}         A promise that resolves/rejects once the
      *                             call is done.
      */
-    request(config, reqBody, req) {
-
+    request(config, reqBody) {
         const accepts = typeof config.accepts !== 'undefined'
             ? config.accepts
             : 'json';
@@ -134,7 +132,7 @@ class ApiUtil {
 
         const fetchOptions = {};
 
-        extracts.forEach(key => {
+        extracts.forEach((key) => {
             if (typeof config[key] !== 'undefined') {
                 fetchOptions[key] = config[key];
             }
@@ -149,22 +147,22 @@ class ApiUtil {
             }
             fetchOptions.body = reqBody;
         } else {
-            fetchOptions.body = typeof fetchOptions.body === 'string' ?
-                fetchOptions.body : JSON.stringify(fetchOptions.body);
+            fetchOptions.body = typeof fetchOptions.body === 'string'
+                ? fetchOptions.body : JSON.stringify(fetchOptions.body);
         }
 
         const getResult = (response) => {
             let result = null;
             const contentType = response.headers && response.headers.get('Content-Type');
             if (accepts === 'json' && contentType && contentType.startsWith('application/json')) {
-                return response.text().then(res => {
+                return response.text().then((res) => {
                     try {
                         return JSON.parse(res);
                     } catch (e) {
                         return res;
                     }
                 });
-            } else if (accepts === 'blob') {
+            } if (accepts === 'blob') {
                 result = response.blob();
             } else {
                 result = response.text();
@@ -174,7 +172,7 @@ class ApiUtil {
         };
 
         return fetch(this.formatUrl(config), fetchOptions)
-            .then(response => {
+            .then((response) => {
                 const result = getResult(response);
                 if (response.ok) {
                     return result;
@@ -183,15 +181,11 @@ class ApiUtil {
                 return result && result.then
                     ? result.then(res => Promise.reject({ output: res, response }))
                     : result;
-            }, response => {
+            }, (response) => {
                 const result = getResult(response);
 
                 return Promise.reject({ output: result, response });
-            }).then(result => {
-                return result;
-            }, result => {
-                return Promise.reject(result.output);
-            });
+            }).then(result => result, result => Promise.reject(result.output));
     }
 }
 

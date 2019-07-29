@@ -1,11 +1,19 @@
 {
   "DRAFT": {
-
+    "1": {
+      "id": 1,
+      "title": "t1",
+      "description": "d1"
+    }
   },
   "IN_PROGRESS": {
 
   },
   "COMPLETED": {
-
+    "2": {
+      "id": 2,
+      "title": "completed",
+      "description": "completed"
+    }
   }
 }

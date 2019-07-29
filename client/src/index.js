@@ -2,13 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import store from './store/index.js';
-import Root from './apps/Root';
+import store from './store';
+import Root from './apps/Root.jsx';
 
 class App extends React.Component {
-    onClick = () => {
-    }
-
     render() {
         return (
             <Provider store={store}>

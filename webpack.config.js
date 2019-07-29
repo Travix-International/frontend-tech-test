@@ -4,17 +4,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-
-const PROD = process.env.NODE_ENV === 'production';
-const DEV = !PROD;
-
 const config = {
     entry: './client/src/index.js',
-    mode: 'development',
+    mode: 'production',
     output: {
         path: path.resolve(`${__dirname}/dist`),
         filename: 'bundle.js'
     },
+    devtool: 'cheap-source-map',
     module: {
         rules: [
             {
@@ -45,6 +42,9 @@ const config = {
             }
         ]
     },
+    stats: {
+        warnings: false
+    },
     plugins: [
         new CleanWebpackPlugin(['dist'], {
             root: path.join(__dirname),
@@ -62,9 +62,13 @@ const config = {
             chunkFilename: '[id].css'
         }),
         new webpack.DefinePlugin({
-            __DEV__: DEV,
-            __PROD__: PROD,
-            'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`
+            __DEV__: JSON.stringify(false),
+            __PROD__: JSON.stringify(true),
+            'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+        new webpack.ProvidePlugin({
+            React: 'react',
+            ReactDOM: 'react-dom'
         })
     ],
     resolve: {
@@ -75,8 +79,12 @@ const config = {
         extensions: ['.js', '.jsx', '.scss'],
         alias: {
             'styled-components$': 'styled-components/lib/index.js',
-            'utils': path.resolve('./client/src/utils')
+            'utils': path.resolve('./client/src/utils'),
+            'client': path.resolve('./client'),
         }
+    },
+    externals: {
+        'react-addons-test-utils': 'react-dom'
     }
 };
 

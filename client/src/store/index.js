@@ -9,7 +9,7 @@ const middlewares = [thunkMiddleware];
 
 const store = createStore(rootReducer, {}, compose(
     applyMiddleware(...middlewares),
-    /* eslint no-undef: 0*/
+    /* eslint no-undef: 0 */
     (__DEV__ && window.devToolsExtension) ? window.devToolsExtension() : f => f
 ));
 

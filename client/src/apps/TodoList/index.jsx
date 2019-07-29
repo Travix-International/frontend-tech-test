@@ -7,29 +7,30 @@ import styled from 'styled-components';
 import Notification, { NOTIFICATION_POSITION } from 'sleek-ui/Notification';
 import { FixedSizeList as List } from "react-window";
 
-const TopLabel = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    background-color: #0077CC;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 40px;
-    color: white;
-    line-height: 2.5;
-    text-transform: uppercase;
-`;
 
 const TodoListBlock = styled.div`
     position: relative;
     padding: 20px;
     flex: 1;
-    border: 1px solid #0077CC;;
+    border: 1px solid #0077CC;
     border-radius: 10px;
     margin: 5px;
     min-width: 320px;
     box-shadow: 0 0 2px 2px #0077CC;
+
+    & > div:first-child {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: #0077CC;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 40px;
+        color: white;
+        line-height: 2.5;
+        text-transform: uppercase;
+    }
 `;
 
 const Title = styled.div`
@@ -239,7 +240,7 @@ class TodoList extends React.PureComponent {
                     onDrop={this.props.attachDragEnd(type)}
                     className={type}
                 >
-                    <TopLabel>{`${label} (${Object.values(tasks).length})`}</TopLabel>
+                    <div>{`${label} (${Object.values(tasks).length})`}</div>
                     {
                         fetchInProgress ?
                         <Loader/> :
