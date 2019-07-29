@@ -96,6 +96,7 @@ class TodoList extends React.PureComponent {
     }
 
 
+    // Memoized event handlers to prevent return of new event handlers on every render
     attachEdit = (id) => {
         if (!this.editMemo[id]) {
             this.editMemo[id] = this.handleEdit.bind(null, id);
