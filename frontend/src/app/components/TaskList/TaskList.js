@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TaskListItem from '../TaskListItem';
+import Task from '../../api/Task';
+import Message from '../Message';
+import Loading from '../Loading';
 
 const TaskList = () => {
-  // const task = (new Task()).getTask();
-  // const [username, setUsername] = useState('siamak');
+  const [tasks, setTasks] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const fetchTask = async () => {
+    const response = await new Task().getTasks();
+    setTasks(response.data.tasks);
+    setIsLoaded(true);
+  };
+
+  useEffect(() => {
+    fetchTask();
+  }, []);
+
+  if (!isLoaded) {
+    return <Loading title="Loading tasks" />;
+  }
+
+  if (tasks.length < 1) {
+    return <Message title="No Task" description="Let's do something new :)" />;
+  }
 
   return (
     <ul>
-      <TaskListItem
-        key={1}
-        id={1}
-        title="Go home"
-        description="Go home soon you need to wait for Atefeh. Go home soon you need to wait for. Go home soon you need."
-      />
-      <TaskListItem key={2} id={2} title="Buy pizza" description="Your turn to cook" />
-      <TaskListItem key={3} id={3} title="Buy pizza" description="Your turn to cook" />
-      <TaskListItem key={4} id={4} title="Buy pizza" description="Your turn to cook" />
-      <TaskListItem key={5} id={5} title="Buy pizza" description="Your turn to cook" />
-      <TaskListItem key={6} id={6} title="Buy pizza" description="Your turn to cook" />
+      {tasks.map(task => (
+        <TaskListItem key={task.id} id={task.id} title={task.title} description={task.description} />
+      ))}
     </ul>
   );
 };
