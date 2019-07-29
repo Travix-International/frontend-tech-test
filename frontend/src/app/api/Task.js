@@ -14,7 +14,7 @@ class Task extends API {
    *
    * @return {object} - Response array of task object
    */
-  async getTask(params = {}) {
+  async getTasks(params = {}) {
     const tasks = await this.request('/tasks', 'GET', params);
     return tasks;
   }
