@@ -19,7 +19,7 @@ const TaskList = () => {
   }, []);
 
   if (!isLoaded) {
-    return <Loading title="Loading tasks" />;
+    return <Loading text="Loading tasks" />;
   }
 
   if (tasks.length < 1) {
