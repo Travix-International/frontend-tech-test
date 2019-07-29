@@ -1,0 +1,46 @@
+@import './mixins.scss';
+
+* {
+  font-family: 'Ubuntu', sans-serif;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  background-color: #f9f9f9;
+  padding: 0 10px;
+}
+
+ul {
+  list-style: none;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+.main-wrapper {
+  width: 100%;
+  margin: 0 auto;
+
+  @include breakpoint-between(mobile-landscape, tablet-portrait) {
+    width: 80%;
+  }
+
+  @include breakpoint-between(tablet-portrait, tablet-landscape) {
+    width: 65%;
+  }
+
+  @include breakpoint-between(tablet-landscape, laptop) {
+    width: 50%;
+  }
+
+  @include breakpoint-above(laptop) {
+    width: 40%;
+  }
+}
