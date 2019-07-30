@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import {
     fetchTasks
 } from '../actions';
@@ -11,6 +11,21 @@ import { connect } from 'react-redux';
  */
 export const withList = (Component) => {
     class WithList extends React.Component {
+
+        static propTypes = {
+            fetchInProgress: PropTypes.bool,
+            /**
+             * The function to add todo task
+             * @type {[function]}
+             */
+            fetchTasks: PropTypes.func.isRequired,
+            /**
+             * The function to delete todo task
+             * @type {[function]}
+             */
+            todoItems: PropTypes.object.isRequired
+        }
+
         state = {
             tasks: []
         };

@@ -8,7 +8,7 @@
     "buildDev": "webpack --watch --progress",
     "prod": "rm -rf ./dist | webpack -p && cd ./dist &&  http-server | npm run start",
     "eslint": "eslint client",
-    "test": "find ./tests/client/src/utils -name *.test.js | xargs node node_modules/.bin/jest --coverage -u"
+    "test": "find ./tests -name *.test.js | xargs node node_modules/.bin/jest --coverage -u"
   },
   "keywords": [
     "test",

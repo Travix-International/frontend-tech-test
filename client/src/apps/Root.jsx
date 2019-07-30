@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import AddToDo from './AddToDo';
@@ -41,7 +41,31 @@ const Note = styled.div`
     color: red;
     margin: 5px;
 `;
-class Root extends React.Component {
+export class Root extends React.Component {
+
+    static propTypes = {
+        taskCreateInProgress: PropTypes.bool,
+        /**
+         * The function to add todo task
+         * @type {[function]}
+         */
+        addToDo: PropTypes.func.isRequired,
+        /**
+         * The function to delete todo task
+         * @type {[function]}
+         */
+        deleteToDo: PropTypes.func.isRequired,
+        /**
+         * The function to update todo task
+         * @type {[function]}
+         */
+        updateTask: PropTypes.func.isRequired,
+        /**
+         * The function to transfer task from one state to another
+         * @type {[function]}
+         */
+        transferTask: PropTypes.func.isRequired
+    }
     
     constructor(props) {
         super(props);

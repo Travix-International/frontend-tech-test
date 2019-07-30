@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { withList } from './withListHoc';
 import TextField from 'sleek-ui/Input';
 import Loader from 'sleek-ui/Loader';
@@ -83,8 +83,33 @@ const Note = styled.div`
     padding: 10px;
 `;
 
-class TodoList extends React.PureComponent {
+export class TodoList extends React.PureComponent {
     
+    static propTypes = {
+        fetchInProgress: PropTypes.bool,
+        /**
+         * The function to add todo task
+         * @type {[function]}
+         */
+        attachDragEnd: PropTypes.func.isRequired,
+        /**
+         * The function to delete todo task
+         * @type {[function]}
+         */
+        tasks: PropTypes.object.isRequired,
+        /**
+         * The function to update todo task
+         * @type {[function]}
+         */
+        updateTask: PropTypes.func.isRequired,
+        /**
+         * The function to transfer task from one state to another
+         * @type {[function]}
+         */
+        type: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired
+    }
+
     constructor(props) {
         super(props);
         this.editMemo = {};
@@ -116,8 +141,6 @@ class TodoList extends React.PureComponent {
         this.setState({
             toBeEdited: id,
             updatedTitle: currentTask && currentTask.title
-        }, () => {
-            this.forceUpdate();
         });
     }
 

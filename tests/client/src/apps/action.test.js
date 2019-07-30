@@ -21,7 +21,7 @@ describe('Actions Test Suite', () => {
         expect.restoreSpies();
     });
 
-    it('P_Should_TestFetchDraft_Tasks', () => {
+    it('P_Should_TestFetchDraft_Tasks', async () => {
         const store = mockStore({});
         const apiMeta = {
             url: '/tasks',
@@ -29,6 +29,9 @@ describe('Actions Test Suite', () => {
                 type: 'DRAFT'
             }
         };
+        await store.dispatch(fetchTasks('DRAFT'));
+        expect(store.getActions()[0]).toEqual({ type: 'FETCH_TASKS_INIT', payload: null, error: null });
+        expect(store.getActions()[1]).toEqual({ type: 'FETCH_TASKS_SUCCESS', payload: { tasks: '', type: 'DRAFT' }});
         validateReduxGet(
             apiMeta,
             fetchTasks('DRAFT'),
@@ -38,7 +41,7 @@ describe('Actions Test Suite', () => {
             store
         );
     });
-    it('P_Should_TestAddTasks', () => {
+    it('P_Should_TestAddTasks', async () => {
         const store = mockStore({});
         const apiMeta = {
             url: '/task/create/t1/d1',
@@ -46,6 +49,10 @@ describe('Actions Test Suite', () => {
                 type: 'DRAFT'
             }
         };
+
+        await store.dispatch(addToDo('t1', 'd1'));
+        expect(store.getActions()[0]).toEqual({ type: 'TASK_CREATE_INIT', payload: null, error: null });
+
         validateReduxPost(
             apiMeta,
             addToDo('t1', 'd1'),

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import TextField from 'sleek-ui/Input';
 import Button from 'sleek-ui/Button';
 import styled from 'styled-components';
@@ -15,6 +15,15 @@ const TodoBlock = styled.div`
 
 export default class AddToDo extends React.Component {
     
+    static propTypes = {
+        taskCreateInProgress: PropTypes.bool,
+        /**
+         * The function to add todo task
+         * @type {[function]}
+         */
+        addToDo: PropTypes.func.isRequired
+    }
+
     state = {
         todoTitle: '',
         todoDesc: ''

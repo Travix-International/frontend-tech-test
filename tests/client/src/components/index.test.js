@@ -6,7 +6,12 @@ import { initialState } from 'client/src/apps/reducers';
 import { shallow , mount } from 'enzyme';
 const expect = require('expect');
 import thunk from 'redux-thunk';
-
+import {
+    Root as RootComponent
+} from 'client/src/apps/Root';
+import {
+    TodoList as TodoListComponent
+} from 'client/src/apps/TodoList';
 import Root from 'client/src/apps/Root';
 import AddToDo from 'client/src/apps/AddToDo';
 import TodoList from 'client/src/apps/TodoList';
@@ -28,6 +33,19 @@ describe('Test Todo Dashboard component', () => {
         expect(component.exists()).toBe(true);
         expect(component.find(AddToDo).length).toEqual(1);
         expect(component.find(TodoList).length).toEqual(3);
+    });
+
+    it('Should test onDragStart Function of the root component', () => {
+        
+        const wrapper2 = shallow(<RootComponent transferTask={jest.fn()} store={store} />);
+
+        const instance = wrapper2.instance();
+        
+        instance.onDragStart(1, 'DRAFT');
+
+        expect(wrapper2.state('itemDraggedId')).toEqual(1);
+        expect(wrapper2.state('itemDraggedType')).toEqual('DRAFT');
+
     });
 
     it('Should render the AddToDo component', async () => {
@@ -52,5 +70,31 @@ describe('Test Todo Dashboard component', () => {
 
         const component = wrapper.dive();
         expect(component.exists()).toBe(true);
+    });
+
+    it('Should test handleEdit/discardEdit/onChange Function of the TodoList component', () => {
+        
+        const wrapper2 = shallow(<TodoListComponent tasks={{
+            1: {
+                title: 't1',
+                description: 'd1'
+            }
+        }} attachDragEnd={jest.fn()} store={store} />);
+
+        const instance = wrapper2.instance();
+        
+        instance.handleEdit(1);
+
+        expect(wrapper2.state('toBeEdited')).toEqual(1);
+
+        instance.discardEdit();
+
+        expect(wrapper2.state('toBeEdited')).toEqual(null);
+
+
+        instance.onChange('title');
+
+        expect(wrapper2.state('updatedTitle')).toEqual('title');
+
     });
 });
