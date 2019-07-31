@@ -5,6 +5,7 @@ const tasksContainer = require("./tasks.json");
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
@@ -71,7 +72,9 @@ app.put("/task/update/:id/:title/:description", (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(204).json({
+        message: "Updated"
+      });
     } else {
       return res.status(404).json({
         message: "Not found"
