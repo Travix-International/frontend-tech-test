@@ -25,7 +25,7 @@ const TaskView = ({ match }) => {
 
   useEffect(() => {
     fetchTask();
-  }, [fetchTask]);
+  }, []);
 
   if (!isLoaded) {
     return <Loading text="Loading task" />;
