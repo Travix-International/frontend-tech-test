@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Title, Description } from './assets/style';
+import { NavLink } from 'react-router-dom';
+import { MdEdit, MdDelete } from 'react-icons/md';
+import { Title, Description, Wrapper, ActionBar } from './assets/style';
 import Section from '../Section';
 import Task from '../../api/Task';
 import Message from '../Message';
@@ -37,8 +39,18 @@ const TaskView = ({ match }) => {
 
   return (
     <Section>
-      <Title>{task.title}</Title>
-      <Description>{task.description}</Description>
+      <Wrapper>
+        <Title>{task.title}</Title>
+        <Description>{task.description}</Description>
+      </Wrapper>
+      <ActionBar>
+        <NavLink to={`/tasks/${taskId}/edit`} title="Edit" className="task-edit">
+          <MdEdit />
+        </NavLink>
+        <NavLink to={`/tasks/${taskId}/delete`} title="Delete" className="task-delete">
+          <MdDelete />
+        </NavLink>
+      </ActionBar>
     </Section>
   );
 };
