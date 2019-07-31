@@ -12,12 +12,13 @@ const Button = ({ type, id, isSubmiting, children, onClick, disabled }) => (
 );
 
 Button.defaultProps = {
+  onClick: () => {},
   isSubmiting: false,
   disabled: false
 };
 
 Button.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
