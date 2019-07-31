@@ -1,20 +1,33 @@
 import React, { useState, useEffect } from 'react';
+import Task from '../../api/Task';
 import Section from '../Section';
-import Input from '../Form';
+import { Input, Button } from '../Form';
 
-const TaskAdd = () => {
+const TaskAdd = ({ history }) => {
   const [title, setTitle] = useState({ value: '', error: '' });
   const [description, setDescription] = useState({ value: '', error: '' });
+  const [isSubmiting, setIsSubmiting] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  const isValid = input => input.value.trim() !== '';
 
   useEffect(() => {
-    if (title.value.trim() === '') {
-      setTitle({ value: title.value, error: 'Title cannot be empty.' });
-    } else {
-      setTitle({ value: title.value, error: '' });
-    }
-  }, [title.value]);
+    setTitle({ value: title.value, error: isValid(title) ? '' : 'Title cannot be empty.' });
+    setDescription({ value: description.value, error: isValid(description) ? '' : 'Description cannot be empty.' });
+    setIsDisabled(!isValid(title) || !isValid(description));
+  }, [description, title]);
 
-  console.log(description);
+  const submitTask = async () => {
+    setIsSubmiting(true);
+
+    const response = await new Task().createTask(title.value, description.value);
+    if (response.status === 201) {
+      setIsSubmiting(false);
+      history.push('/');
+    }
+
+    return true;
+  };
 
   return (
     <Section>
@@ -28,10 +41,20 @@ const TaskAdd = () => {
       <Input
         type="textarea"
         onChange={value => setDescription({ value, error: '' })}
+        error={description.error}
         id="task-description"
         label="Description"
         placeholder="Write task description here"
       />
+      <Button
+        type="primary"
+        id="task-save"
+        onClick={() => submitTask()}
+        isSubmiting={isSubmiting}
+        disabled={isDisabled}
+      >
+        Save Task
+      </Button>
     </Section>
   );
 };
