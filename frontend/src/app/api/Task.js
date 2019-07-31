@@ -40,6 +40,20 @@ class Task extends API {
     const response = await this.request(`/task/create/${title}/${description}`, 'POST');
     return response;
   }
+
+  /**
+   * [PUT] Update task by the given id
+   *
+   * @param {number} id - Task id
+   * @param {string} title - Task title
+   * @param {string} description - Task description
+   *
+   * @return {object} - Response object with updated message
+   */
+  async updateTask(id, title, description) {
+    const response = await this.request(`/task/update/${id}/${title}/${description}`, 'PUT');
+    return response;
+  }
 }
 
 export default Task;
