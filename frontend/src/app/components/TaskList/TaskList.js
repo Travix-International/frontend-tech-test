@@ -12,7 +12,7 @@ const TaskList = () => {
   const fetchTask = async () => {
     const response = await new Task().getTasks();
     if (response.status === 200) {
-      setTasks(response.data);
+      setTasks(response.data.tasks);
       setIsLoaded(true);
     } else {
       setErorr(true);
