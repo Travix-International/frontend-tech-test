@@ -73,7 +73,7 @@ app.put("/task/update/:id/:title/:description", (req, res) => {
       task.title = req.params.title;
       task.description = req.params.description;
       return res.status(204).json({
-        message: "Updated"
+        message: "Updated successfully"
       });
     } else {
       return res.status(404).json({
@@ -130,7 +130,7 @@ app.delete("/task/delete/:id", (req, res) => {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
-        message: "Updated successfully"
+        message: "Deleted successfully"
       });
     } else {
       return res.status(404).json({
