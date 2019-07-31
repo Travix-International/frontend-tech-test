@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { InputWrapper, TextInput as StyledTextInput, TextArea as StyledTextArea, Label, Error } from './assets/style';
 
-const Input = ({ type, id, label, placeholder, onChange, error }) => {
-  const [value, setValue] = useState('');
+const Input = ({ type, id, label, placeholder, onChange, error, defaultValue }) => {
+  const [value, setValue] = useState(defaultValue);
   const [dirty, setDirty] = useState(false);
+
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
 
   const onChangeHandler = e => {
     setDirty(true);
@@ -42,7 +46,8 @@ Input.defaultProps = {
   label: null,
   placeholder: null,
   error: null,
-  type: 'text'
+  type: 'text',
+  defaultValue: ''
 };
 
 Input.propTypes = {
@@ -51,7 +56,8 @@ Input.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string,
   placeholder: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  defaultValue: PropTypes.string
 };
 
 export default Input;
