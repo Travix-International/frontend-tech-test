@@ -9,14 +9,23 @@ class Task extends API {
   /**
    * Fetch tasks list
    *
-   * @param {string} path - Request route (/{resource})
-   * @param {object} [params={}] - Query params
-   *
-   * @return {object} - Response array of task object
+   * @return {object} - Response object with data as array of tasks
    */
-  async getTasks(params = {}) {
-    const tasks = await this.request('/tasks', 'GET', params);
+  async getTasks() {
+    const tasks = await this.request('/tasks');
     return tasks;
+  }
+
+  /**
+   * Fetch a task by given id
+   *
+   * @param {number} id - Task id
+   *
+   * @return {object} - Response object with data as task
+   */
+  async getTask(id) {
+    const task = await this.request(`/task/${id}`);
+    return task;
   }
 }
 
