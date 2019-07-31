@@ -7,11 +7,17 @@ import Loading from '../Loading';
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setErorr] = useState(null);
 
   const fetchTask = async () => {
     const response = await new Task().getTasks();
-    setTasks(response.data.tasks);
-    setIsLoaded(true);
+    if (response.status === 200) {
+      setTasks(response.data.tasks);
+      setIsLoaded(true);
+    } else {
+      setErorr(true);
+      setIsLoaded(true);
+    }
   };
 
   useEffect(() => {
@@ -19,11 +25,15 @@ const TaskList = () => {
   }, []);
 
   if (!isLoaded) {
-    return <Loading title="Loading tasks" />;
+    return <Loading text="Loading tasks" />;
+  }
+
+  if (error !== null) {
+    return <Message title="Error" description={error} type="error" />;
   }
 
   if (tasks.length < 1) {
-    return <Message title="No Task" description="Let's do something new :)" />;
+    return <Message title="No Task" description="Let's do something new :)" type="success" />;
   }
 
   return (

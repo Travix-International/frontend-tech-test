@@ -70,18 +70,7 @@ class API {
         url: path,
         params
       })
-      .then(
-        response => ({
-          status: 'success',
-          data: response.data,
-          response
-        }),
-        error => ({
-          status: 'success',
-          data: error.response,
-          response: error.response
-        })
-      );
+      .then(response => response, error => error.response);
 
     return result;
   }

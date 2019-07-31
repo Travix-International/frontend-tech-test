@@ -16,6 +16,10 @@ export const Wrapper = styled.header`
     &:hover {
       color: ${props => props.theme.colors.secondary};
     }
+
+    &.active {
+      display: none;
+    }
   }
 `;
 

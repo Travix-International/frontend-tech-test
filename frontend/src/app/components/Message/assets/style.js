@@ -2,16 +2,16 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   color: ${props => {
-    if (props.success) {
+    if (props.type === 'success') {
       return '#1a531b';
     }
-    if (props.error) {
+    if (props.type === 'error') {
       return '#912d2b';
     }
-    if (props.warning) {
+    if (props.type === 'warning') {
       return '#b58105';
     }
-    if (props.info) {
+    if (props.type === 'info') {
       return '#2185d0';
     }
     return '#000000';

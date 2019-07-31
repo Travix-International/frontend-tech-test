@@ -5,6 +5,7 @@ const tasksContainer = require("./tasks.json");
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
@@ -31,11 +32,10 @@ app.get("/tasks", (req, res) => {
  */
 app.get("/task/:id", (req, res) => {
   const id = parseInt(req.params.id, 10);
-
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find(item => item.id === id);
+    const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    if (task !== null && task !== undefined) {
       return res.status(200).json({
         task
       });
@@ -72,7 +72,9 @@ app.put("/task/update/:id/:title/:description", (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(204).json({
+        message: "Updated"
+      });
     } else {
       return res.status(404).json({
         message: "Not found"
@@ -96,7 +98,7 @@ app.put("/task/update/:id/:title/:description", (req, res) => {
  */
 app.post("/task/create/:title/:description", (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length,
+    id: tasksContainer.tasks.length + 1,
     title: req.params.title,
     description: req.params.description
   };
@@ -131,7 +133,7 @@ app.delete("/task/delete/:id", (req, res) => {
         message: "Updated successfully"
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: "Not found"
       });
     }

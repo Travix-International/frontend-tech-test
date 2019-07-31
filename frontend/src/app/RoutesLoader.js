@@ -11,10 +11,10 @@ const Routes = () => {
       {Object.keys(routes).map(route => (
         <Route
           path={routes[route].path}
-          render={() => {
+          render={({ history, match }) => {
             document.title = routes[route].description;
             const Component = routes[route].component;
-            return <Component />;
+            return <Component history={history} match={match} />;
           }}
           exact={routes[route].exact}
           key={routes[route].path}
