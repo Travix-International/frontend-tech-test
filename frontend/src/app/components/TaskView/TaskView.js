@@ -6,26 +6,26 @@ import Message from '../Message';
 import Loading from '../Loading';
 
 const TaskView = ({ match }) => {
+  const taskId = match.params.id || null;
+
   const [task, setTask] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setErorr] = useState(null);
 
-  const fetchTask = async () => {
-    const taskId = match.params.id || null;
-
-    const response = await new Task().getTask(taskId);
-    if (response.status === 200) {
-      setTask(response.data.task);
-      setIsLoaded(true);
-    } else {
-      setErorr(response.statusText);
-      setIsLoaded(true);
-    }
-  };
-
   useEffect(() => {
+    const fetchTask = async () => {
+      const response = await new Task().getTask(taskId);
+
+      if (response.status === 200) {
+        setTask(response.data.task);
+        setIsLoaded(true);
+      } else {
+        setErorr(response.statusText);
+        setIsLoaded(true);
+      }
+    };
     fetchTask();
-  }, []);
+  }, [taskId]);
 
   if (!isLoaded) {
     return <Loading text="Loading task" />;
