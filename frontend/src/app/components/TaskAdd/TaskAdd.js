@@ -9,13 +9,9 @@ const TaskAdd = ({ history }) => {
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
-  const isValid = input => input.value.trim() !== '';
-
   useEffect(() => {
-    setTitle({ value: title.value, error: isValid(title) ? '' : 'Title cannot be empty.' });
-    setDescription({ value: description.value, error: isValid(description) ? '' : 'Description cannot be empty.' });
-    setIsDisabled(!isValid(title) || !isValid(description));
-  }, [description, title]);
+    setIsDisabled(title.value === '' || description.value === '');
+  }, [title, description]);
 
   const submitTask = async () => {
     setIsSubmiting(true);
@@ -32,7 +28,7 @@ const TaskAdd = ({ history }) => {
   return (
     <Section>
       <Input
-        onChange={value => setTitle({ value, error: '' })}
+        onChange={value => setTitle({ value, error: value !== '' ? '' : 'Title cannot be empty.' })}
         error={title.error}
         id="task-title"
         label="Title"
@@ -40,7 +36,7 @@ const TaskAdd = ({ history }) => {
       />
       <Input
         type="textarea"
-        onChange={value => setDescription({ value, error: '' })}
+        onChange={value => setDescription({ value, error: value !== '' ? '' : 'Description cannot be empty.' })}
         error={description.error}
         id="task-description"
         label="Description"
