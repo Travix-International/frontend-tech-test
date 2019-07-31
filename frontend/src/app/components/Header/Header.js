@@ -9,7 +9,7 @@ const Header = () => {
       <NavLink to="/" title="Task list">
         <Title>Twodo</Title>
       </NavLink>
-      <NavLink to="/tasks/add" title="Add new task" className="add-task">
+      <NavLink to="/tasks/add" title="Add new task" className="add-task" activeClassName="active">
         <MdAddCircleOutline />
       </NavLink>
     </Wrapper>
