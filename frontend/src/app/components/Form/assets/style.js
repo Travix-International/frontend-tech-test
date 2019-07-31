@@ -44,3 +44,52 @@ export const TextArea = styled.textarea`
     color: ${props => props.theme.colors.lighter};
   }
 `;
+
+export const Button = styled.button`
+  font-size: 1em;
+  padding: 10px;
+  background-color: #fff;
+  transition: all 200ms;
+  .icon {
+    vertical-align: middle;
+    margin: -3px 5px 0 0;
+    animation: spin 500ms linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  ${props => {
+    const { primary, secondary, lighter } = props.theme.colors;
+    let color;
+
+    if (props.disabled === false) {
+      if (props.type === 'primary') {
+        color = primary;
+      } else if (props.type === 'secondary') {
+        color = secondary;
+      } else {
+        color = primary;
+      }
+    } else {
+      color = lighter;
+    }
+
+    return `
+      border: 1px solid ${color};
+      color: ${color};
+
+      &:hover,
+      &:focus {
+        background-color: ${props.disabled ? '#fff' : color};
+        color:  ${props.disabled ? color : '#fff'};
+      }
+    `;
+  }}
+`;
