@@ -25,7 +25,13 @@ const Input = ({ type, id, label, placeholder, onChange, error }) => {
         />
       ) : null}
       {type === 'textarea' ? (
-        <StyledTextArea error={error} value={value} onChange={onChangeHandler} id={id} placeholder={placeholder} />
+        <StyledTextArea
+          error={error && dirty}
+          value={value}
+          onChange={onChangeHandler}
+          id={id}
+          placeholder={placeholder}
+        />
       ) : null}
       {error && dirty ? <Error>{error}</Error> : null}
     </InputWrapper>
