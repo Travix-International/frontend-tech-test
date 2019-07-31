@@ -1,24 +1,46 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { Title, Description } from './assets/style';
 import Section from '../Section';
+import Task from '../../api/Task';
+import Message from '../Message';
+import Loading from '../Loading';
 
-const TaskView = ({ id, title, description }) => {
+const TaskView = ({ match }) => {
+  const [task, setTask] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setErorr] = useState(null);
+
+  const fetchTask = async () => {
+    const taskId = match.params.id || null;
+
+    const response = await new Task().getTask(taskId);
+    if (response.status === 200) {
+      setTask(response.data.task);
+      setIsLoaded(true);
+    } else {
+      setErorr(response.statusText);
+      setIsLoaded(true);
+    }
+  };
+
+  useEffect(() => {
+    fetchTask();
+  }, [fetchTask]);
+
+  if (!isLoaded) {
+    return <Loading text="Loading task" />;
+  }
+
+  if (error !== null) {
+    return <Message title="Error" description={error} type="error" />;
+  }
+
   return (
     <Section>
-      <Title>
-        {title} - {id}
-      </Title>
-      <Description>{description}</Description>
+      <Title>{task.title}</Title>
+      <Description>{task.description}</Description>
     </Section>
   );
-};
-
-TaskView.propTypes = {
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  description: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 };
 
 export default TaskView;
