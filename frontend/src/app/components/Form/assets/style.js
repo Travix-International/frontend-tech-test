@@ -74,6 +74,8 @@ export const Button = styled.button`
         color = primary;
       } else if (props.type === 'secondary') {
         color = secondary;
+      } else if (props.type === 'danger') {
+        color = '#c43d3b';
       } else {
         color = primary;
       }
