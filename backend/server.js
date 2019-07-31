@@ -31,11 +31,10 @@ app.get("/tasks", (req, res) => {
  */
 app.get("/task/:id", (req, res) => {
   const id = parseInt(req.params.id, 10);
-
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find(item => item.id === id);
+    const task = tasksContainer.find(item => item.id === id);
 
-    if (task !== null) {
+    if (task !== null && task !== undefined) {
       return res.status(200).json({
         task
       });
@@ -131,7 +130,7 @@ app.delete("/task/delete/:id", (req, res) => {
         message: "Updated successfully"
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: "Not found"
       });
     }
