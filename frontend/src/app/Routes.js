@@ -1,4 +1,5 @@
 import TaskList from './components/TaskList';
+import TaskAdd from './components/TaskAdd';
 import TaskView from './components/TaskView';
 
 // Default routes
@@ -11,7 +12,7 @@ const routes = {
   },
   newTask: {
     path: '/tasks/add',
-    component: TaskList,
+    component: TaskAdd,
     exact: true,
     description: 'Add New Task'
   },
@@ -32,6 +33,12 @@ const routes = {
     component: TaskList,
     exact: false,
     description: 'Delete Task'
+  },
+  NotFound: {
+    path: null,
+    component: TaskList,
+    exact: false,
+    description: 'Route not found'
   }
 };
 
