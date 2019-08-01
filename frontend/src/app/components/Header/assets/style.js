@@ -29,6 +29,24 @@ export const Wrapper = styled.header`
       right: -1px;
     }
   }
+
+  .back {
+    display: none;
+
+    font-size: 2em;
+    float: right;
+    line-height: 20px;
+    transition: all 300ms;
+    color: ${props => props.theme.colors.primary};
+
+    &:hover {
+      color: ${props => props.theme.colors.secondary};
+    }
+
+    &.active {
+      display: block;
+    }
+  }
 `;
 
 export const Title = styled.h1`
