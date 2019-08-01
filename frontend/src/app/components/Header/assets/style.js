@@ -8,7 +8,7 @@ export const Wrapper = styled.header`
 
   a.add-task {
     position: relative;
-    font-size: 2em;
+    font-size: 2.1em;
     float: right;
     line-height: 20px;
     transition: all 300ms;
@@ -24,9 +24,10 @@ export const Wrapper = styled.header`
 
     .task-draft {
       color: #912d2b;
-      font-size: 0.5em;
+      font-size: 0.2em;
       position absolute;
-      right: -1px;
+      right: 2px;
+      top: 2px;
     }
   }
 

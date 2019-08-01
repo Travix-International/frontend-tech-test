@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { MdAddCircleOutline, MdArrowBack, MdLens } from 'react-icons/md';
+import { MdAdd, MdArrowBack, MdLens } from 'react-icons/md';
 import { hasDraft } from '../../utils';
 import { Wrapper, Title } from './assets/style';
 
@@ -20,7 +20,7 @@ const Header = ({ task }) => {
         <MdArrowBack />
       </NavLink>
       <NavLink to="/tasks/add" title="Add new task" className="add-task" activeClassName="active">
-        <MdAddCircleOutline />
+        <MdAdd />
         {hasDraft(task) ? <MdLens className="task-draft" title="Unsaved" /> : null}
       </NavLink>
     </Wrapper>
