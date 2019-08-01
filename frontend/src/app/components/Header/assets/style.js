@@ -7,6 +7,7 @@ export const Wrapper = styled.header`
   justify-content: space-between;
 
   a.add-task {
+    position: relative;
     font-size: 2em;
     float: right;
     line-height: 20px;
@@ -19,6 +20,13 @@ export const Wrapper = styled.header`
 
     &.active {
       display: none;
+    }
+
+    .task-draft {
+      color: #912d2b;
+      font-size: 0.5em;
+      position absolute;
+      right: -1px;
     }
   }
 `;
