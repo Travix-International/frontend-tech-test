@@ -1,5 +1,4 @@
 "use strict";
-
 const app = require("express")();
 const tasksContainer = require("./tasks.json");
 
@@ -98,7 +97,11 @@ app.put("/task/update/:id/:title/:description", (req, res) => {
  */
 app.post("/task/create/:title/:description", (req, res) => {
   const task = {
-    id: tasksContainer.tasks.length + 1,
+    // This is not proper way to generate id what if we delete some tasks so the ids will be duplicated 
+    // on next addition and it throws expeptions in frontend because of the key attribute inside mapping 
+    // through the tasks. So, I will change the code a little bit.
+    // id: tasksContainer.tasks.length,
+    id: tasksContainer.tasks[tasksContainer.tasks.length - 1].id + 1,
     title: req.params.title,
     description: req.params.description
   };
