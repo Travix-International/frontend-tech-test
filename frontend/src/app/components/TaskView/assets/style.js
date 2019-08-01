@@ -28,7 +28,7 @@ export const ActionBar = styled.div`
   }
 
   .task-delete {
-    float: left;
+    float: right;
     color: #c43d3b;
   }
 `;

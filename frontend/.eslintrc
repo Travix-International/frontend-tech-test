@@ -1,8 +1,9 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
-  "plugins": ["prettier", "react-hooks"],
+  "extends": ["airbnb", "prettier", "prettier/react", "plugin:cypress/recommended"],
+  "plugins": ["prettier", "react-hooks", "cypress"],
   "env": {
-    "jest": true
+    "jest": true,
+    "cypress/globals": true
   },
   "rules": {
     "react/jsx-filename-extension": [

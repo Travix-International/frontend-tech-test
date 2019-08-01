@@ -54,6 +54,18 @@ class Task extends API {
     const response = await this.request(`/task/update/${id}/${title}/${description}`, 'PUT');
     return response;
   }
+
+  /**
+   * [DELETE] Delete task by the given id
+   *
+   * @param {number} id - Task id
+   *
+   * @return {object} - Response object with deleted message
+   */
+  async deleteTask(id) {
+    const response = await this.request(`/task/delete/${id}`, 'DELETE');
+    return response;
+  }
 }
 
 export default Task;

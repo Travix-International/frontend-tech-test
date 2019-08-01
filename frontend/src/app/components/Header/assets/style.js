@@ -7,7 +7,8 @@ export const Wrapper = styled.header`
   justify-content: space-between;
 
   a.add-task {
-    font-size: 2em;
+    position: relative;
+    font-size: 2.1em;
     float: right;
     line-height: 20px;
     transition: all 300ms;
@@ -19,6 +20,32 @@ export const Wrapper = styled.header`
 
     &.active {
       display: none;
+    }
+
+    .task-draft {
+      color: #912d2b;
+      font-size: 0.2em;
+      position absolute;
+      right: 2px;
+      top: 2px;
+    }
+  }
+
+  .back {
+    display: none;
+
+    font-size: 2em;
+    float: right;
+    line-height: 20px;
+    transition: all 300ms;
+    color: ${props => props.theme.colors.primary};
+
+    &:hover {
+      color: ${props => props.theme.colors.secondary};
+    }
+
+    &.active {
+      display: block;
     }
   }
 `;

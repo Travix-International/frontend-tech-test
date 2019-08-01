@@ -2,6 +2,7 @@ import TaskList from './components/TaskList';
 import TaskAdd from './components/TaskAdd';
 import TaskView from './components/TaskView';
 import TaskEdit from './components/TaskEdit';
+import TaskDelete from './components/TaskDelete';
 
 // Default routes
 const routes = {
@@ -31,7 +32,7 @@ const routes = {
   },
   deleteTask: {
     path: '/tasks/:id/delete',
-    component: TaskList,
+    component: TaskDelete,
     exact: false,
     description: 'Delete Task'
   },
