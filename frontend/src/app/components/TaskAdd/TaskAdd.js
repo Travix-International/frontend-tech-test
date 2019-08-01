@@ -4,8 +4,8 @@ import Section from '../Section';
 import { Input, Button } from '../Form';
 
 const TaskAdd = ({ history, setDraft, clearDraft, task }) => {
-  const [title, setTitle] = useState({ value: task.title, error: '' });
-  const [description, setDescription] = useState({ value: task.description, error: '' });
+  const [title, setTitle] = useState({ value: task.title || '', error: '' });
+  const [description, setDescription] = useState({ value: task.description || '', error: '' });
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -18,6 +18,10 @@ const TaskAdd = ({ history, setDraft, clearDraft, task }) => {
   }, [title, description, setDraft]);
 
   const submitTask = async () => {
+    if (title.value === '' || description.value === '') {
+      return false;
+    }
+
     setIsSubmiting(true);
 
     const response = await new Task().createTask(title.value, description.value);
