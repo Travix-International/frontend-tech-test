@@ -1,38 +1,124 @@
-# Travix test
+# Twodo
 
-Travix Front-End Tech Interview Test 
+A simple task manager app.
 
-# Introduction
+# Installation Guide
 
-The aim of the test is to develop a mini-application for managing TODO tasks.
+Clone the project.
 
-Using your application we must be able to create, modify and delete a task.
+## Backend
 
-A really simple server has been implemented with Express. It offers the minimum of expected functionalities (get the list of tasks, update a task, delete a task, save a task).
+1. Open `backend` directory and install dependencies by the command below:
+```sh
+$ npm install
+```
 
-However this server is not perfect. It could be improved and tested as well.
+2. Open `server.js` file and change the line below to any domain you are going to run the frontend app:
+```js
+$ const frontendOrigin = "http://localhost:3001";
+```
+> It's because of CORS issue. It can be done by setting proxy as well.
 
-So your mission is to develop the front-end from scratch using a front-end framework.
+3. Run the nodejs server: 
+```sh
+$ node server.js
+```
 
-We are also expecting from you a usable, responsive UI.
+3. It will start the server on [http://localhost:9001](http://localhost:9001)
 
-# Process
+## Frontend
+1. Open `frontend` directory.
 
-Fork the repository into your account. Once your code is ready, send a pull-request to this repository and we will review it.
+2. Install dependencies.
+```sh
+$ yarn install
+```
 
-# Requirements
+3. Rename `.env.development.local.example` file to `.env.development.local`. Then open the renamed file and add your environment variables:
 
-* React 15+
-* Redux or Flux or [FrintJS](https://frint.js.org) or other alternatives that implement a unidirectional data flow
-* SASS or LESS
-* Must be responsive
-* We have big tasks files for testing the application (very huge)
+```env
+PORT=<Application running port: 3001>
+REACT_APP_API_HOST=<API host: http://localhost>
+REACT_APP_API_PORT=<API port: 9001>
+REACT_APP_API_VERSION=<API version: v1> #Leave it empty because backend does not have any versioning yet
+```
+It will be look like something like this:
+```env
+PORT=3001
+REACT_APP_API_HOST=http://localhost
+REACT_APP_API_PORT=9001
+REACT_APP_API_VERSION=
+```
 
-# Bonus
+4. Run project in a development mode.
+```sh
+$ yarn start
+```
 
-* unit-tests for the UI 
-* integration-test (one (or more) just in order to show that you know what is it (: )
-* evolution - unit-tests for the server
-* dynamic-ui (web-sockets...?)
-* using the `made in Travix` technologies
-* ... Impress us!
+## Tests
+
+### Cypress tests
+1. Rename `cypress.env.json.example` file to `cypress.env.json`. Then open the renamed file and add your environment variables:
+
+```json
+{
+  "HOST": "Frontend running domain",
+  "PORT": "Frontend running port"
+}
+```
+It will be look like something like this:
+```json
+{
+  "HOST": "http://localhost",
+  "PORT": 3001
+}
+```
+2. Run tests.
+```sh
+$ yarn cy:open
+```
+### Unit tests
+
+1. Rename `.env.test.local.example` file to `.env.test.local`. Then open the renamed file and add your environment variables:
+
+```env
+PORT=<Application running port: 3001>
+REACT_APP_API_HOST=<API host: http://localhost>
+REACT_APP_API_PORT=<API port: 9001>
+REACT_APP_API_VERSION=<API version: v1> #Leave it empty because backend does not have any versioning yet
+```
+It will be look like something like this:
+```env
+PORT=3001
+REACT_APP_API_HOST=http://localhost
+REACT_APP_API_PORT=9001
+REACT_APP_API_VERSION=
+```
+2. To run unit test.
+```sh
+$ yarn test
+```
+And press key `a` to run all test.
+
+## Stories
+To see components documentation via [Storybook](https://storybook.js.org/) run the command below:
+```sh
+$ yarn storybook
+```
+
+# Todo
+- [X] eslint and prittier precommit git hook.
+- [X] API class.
+- [X] Add Task.
+- [X] List Tasks.
+- [X] Edit Tasks.
+- [X] Delete Taksk.
+- [X] Add Redux.
+- [X] Draft Task (via Redux).
+- [X] Responsiveness.
+- [X] Create component visiual documantation (Storybook).
+- [X] Unit test.
+- [X] Cypress.
+- [X] Review inline code comments.
+- [ ] Localization.
+- [ ] Dockerizing.

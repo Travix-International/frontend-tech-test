@@ -1,0 +1,69 @@
+@mixin disabled($opacity: 0.6) {
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+  filter: gray;
+  opacity: $opacity;
+}
+
+@mixin no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin border-radius($radius...) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+$breakpoints: (
+  mobile-portrait: 320px,
+  mobile-landscape: 568px,
+  tablet-portrait: 768px,
+  tablet-landscape: 1024px,
+  laptop: 1366px,
+  descktop: 1680px
+);
+
+@mixin breakpoint-above($min) {
+  $value: map-get($breakpoints, $min);
+  @media (min-width: $value) {
+    @content;
+  }
+}
+
+@mixin breakpoint-below($max) {
+  $value: map-get($breakpoints, $max);
+  @media (max-width: ($value - 1)) {
+    @content;
+  }
+}
+
+@mixin breakpoint-between($min, $max) {
+  $min-value: map-get($breakpoints, $min);
+  $max-value: map-get($breakpoints, $max);
+  @media (min-width: $min-value) and (max-width: ($max-value - 1)) {
+    @content;
+  }
+}
