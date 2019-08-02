@@ -144,7 +144,8 @@ app.delete("/task/delete/:id", (req, res) => {
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    console.log(task);
+    if (task !== undefined) {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
