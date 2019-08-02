@@ -58,7 +58,7 @@ $ yarn start
 ## Tests
 
 ### Cypress tests
-1. Rename `cypress.env.example` file to `cypress.env`. Then open the renamed file and add your environment variables:
+1. Rename `cypress.env.json.example` file to `cypress.env.json`. Then open the renamed file and add your environment variables:
 
 ```json
 {
