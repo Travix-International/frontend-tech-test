@@ -118,7 +118,7 @@ $ yarn storybook
 - [X] Responsiveness.
 - [X] Create component visiual documantation (Storybook).
 - [X] Unit test.
-- [X] e2e test (via Cypress).
+- [X] Cypress.
 - [X] Review inline code comments.
 - [ ] Localization.
 - [ ] Dockerizing.
