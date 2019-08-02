@@ -104,5 +104,5 @@ $ yarn storybook
 - [X] Unit test.
 - [X] e2e test (via Cypress).
 - [X] Review inline code comments.
-- [] Localization.
-- [] Dockerizing.
+- [ ] Localization.
+- [ ] Dockerizing.
