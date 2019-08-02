@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Task from '../../api/Task';
 import Section from '../Section';
 import { Input, Button } from '../Form';
+import Message from '../Message';
 
 const TaskEdit = ({ match, history }) => {
   const taskId = match.params.id || null;
@@ -10,6 +11,7 @@ const TaskEdit = ({ match, history }) => {
   const [description, setDescription] = useState({ value: '', error: '' });
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [error, setErorr] = useState(null);
 
   useEffect(() => {
     const fetchTask = async () => {
@@ -18,6 +20,8 @@ const TaskEdit = ({ match, history }) => {
       if (response.status === 200) {
         setTitle({ value: response.data.task.title, error: '' });
         setDescription({ value: response.data.task.description, error: '' });
+      } else {
+        setErorr(response.statusText);
       }
     };
     fetchTask();
@@ -38,6 +42,10 @@ const TaskEdit = ({ match, history }) => {
 
     return true;
   };
+
+  if (error !== null) {
+    return <Message title="Error" description={error} type="error" />;
+  }
 
   return (
     <Section>
