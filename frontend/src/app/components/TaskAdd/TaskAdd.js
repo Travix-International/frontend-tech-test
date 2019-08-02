@@ -3,6 +3,13 @@ import Task from '../../api/Task';
 import Section from '../Section';
 import { Input, Button } from '../Form';
 
+/**
+ * Button component
+ *
+ * @param {function} setDraft - Redux action which save task to draft
+ * @param {setDraft} clearDraft - Redux action which clears draft
+ * @param {object} task - The task saved in state
+ */
 const TaskAdd = ({ history, setDraft, clearDraft, task }) => {
   const [title, setTitle] = useState({ value: task.title || '', error: '' });
   const [description, setDescription] = useState({ value: task.description || '', error: '' });
@@ -10,7 +17,10 @@ const TaskAdd = ({ history, setDraft, clearDraft, task }) => {
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
+    // Disable Save button if title or description are empty
     setIsDisabled(title.value === '' || description.value === '');
+
+    // Set the task in draft while user is typing
     setDraft({
       title: title.value,
       description: description.value
@@ -18,15 +28,19 @@ const TaskAdd = ({ history, setDraft, clearDraft, task }) => {
   }, [title, description, setDraft]);
 
   const submitTask = async () => {
+    // Prevent from submission while title or description are empty
     if (title.value === '' || description.value === '') {
       return false;
     }
 
     setIsSubmiting(true);
 
+    // Make http request to create task
     const response = await new Task().createTask(title.value, description.value);
     if (response.status === 201) {
       setIsSubmiting(false);
+
+      // Clear draft and redirect to task pages after submission
       clearDraft();
       history.push('/');
     }

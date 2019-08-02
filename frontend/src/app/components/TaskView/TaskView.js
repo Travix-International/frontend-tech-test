@@ -7,6 +7,9 @@ import Task from '../../api/Task';
 import Message from '../Message';
 import Loading from '../Loading';
 
+/**
+ * Viewing a simple task
+ */
 const TaskView = ({ match }) => {
   const taskId = match.params.id || null;
 

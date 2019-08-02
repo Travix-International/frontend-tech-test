@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import routes from './Routes';
 
 /**
- * Dynamic components loading
+ * Dynamic components loading depends on the selected route
  */
 const Routes = () => {
   return (

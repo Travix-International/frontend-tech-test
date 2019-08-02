@@ -4,6 +4,9 @@ import { NavLink } from 'react-router-dom';
 import { TaskItem, Title, Description } from './assets/style';
 import Section from '../Section';
 
+/**
+ * Task list item. This is imported in TaskList component
+ */
 const TaskListItem = ({ id, title, description }) => {
   return (
     <Section>

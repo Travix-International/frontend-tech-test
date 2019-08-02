@@ -4,6 +4,9 @@ import Task from '../../api/Task';
 import Message from '../Message';
 import Loading from '../Loading';
 
+/**
+ * Showing task list
+ */
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
