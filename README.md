@@ -77,8 +77,24 @@ It will be look like something like this:
 ```sh
 $ yarn cy:open
 ```
-And press key `a` to run all test.
 ### Unit tests
+
+1. Rename `.env.test.local.example` file to `.env.test.local`. Then open the renamed file and add your environment variables:
+
+```env
+PORT=<Application running port: 3001>
+REACT_APP_API_HOST=<API host: http://localhost>
+REACT_APP_API_PORT=<API port: 9001>
+REACT_APP_API_VERSION=<API version: v1> #Leave it empty because backend does not have any versioning yet
+```
+It will be look like something like this:
+```env
+PORT=3001
+REACT_APP_API_HOST=http://localhost
+REACT_APP_API_PORT=9001
+REACT_APP_API_VERSION=
+```
+2. To run unit test.
 ```sh
 $ yarn test
 ```
