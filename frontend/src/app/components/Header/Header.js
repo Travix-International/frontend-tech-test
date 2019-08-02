@@ -4,6 +4,11 @@ import { MdAdd, MdArrowBack, MdLens } from 'react-icons/md';
 import { hasDraft } from '../../utils';
 import { Wrapper, Title } from './assets/style';
 
+/**
+ * Main header component
+ *
+ * @param {object} task - The task saved in state
+ */
 const Header = ({ task }) => {
   return (
     <Wrapper>

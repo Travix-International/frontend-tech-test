@@ -3,12 +3,22 @@ const app = require("express")();
 const tasksContainer = require("./tasks.json");
 const frontendOrigin = "http://localhost:3001";
 
+/**
+ * This is added in order to handle CORS issue in development
+ * It also can be handled via setting proxy in frontend
+ */
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", frontendOrigin);
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, DELETE"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   next();
-})
+});
 
 /**
  * GET /tasks
@@ -97,10 +107,13 @@ app.put("/task/update/:id/:title/:description", (req, res) => {
  * Return status code 201.
  */
 app.post("/task/create/:title/:description", (req, res) => {
-  const taskId = tasksContainer.tasks.length == 0 ? 1 : tasksContainer.tasks[tasksContainer.tasks.length - 1].id + 1;
+  const taskId =
+    tasksContainer.tasks.length == 0
+      ? 1
+      : tasksContainer.tasks[tasksContainer.tasks.length - 1].id + 1;
   const task = {
-    // This is not proper way to generate id what if we delete some tasks so the ids will be duplicated 
-    // on next addition and it throws expeptions in frontend because of the key attribute inside mapping 
+    // This is not proper way to generate id what if we delete some tasks so the ids will be duplicated
+    // on next addition and it throws expeptions in frontend because of the key attribute inside mapping
     // through the tasks. So, I will change the code a little bit.
     // id: tasksContainer.tasks.length,
     id: taskId,
@@ -131,7 +144,8 @@ app.delete("/task/delete/:id", (req, res) => {
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
 
-    if (task !== null) {
+    console.log(task);
+    if (task !== undefined) {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({

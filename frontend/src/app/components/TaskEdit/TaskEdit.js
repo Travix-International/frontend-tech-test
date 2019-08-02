@@ -4,6 +4,9 @@ import Section from '../Section';
 import { Input, Button } from '../Form';
 import Message from '../Message';
 
+/**
+ * Edit task component for editing a single task
+ */
 const TaskEdit = ({ match, history }) => {
   const taskId = match.params.id || null;
 
@@ -15,8 +18,8 @@ const TaskEdit = ({ match, history }) => {
 
   useEffect(() => {
     const fetchTask = async () => {
+      // Fetch current task from server to fill the inputs value
       const response = await new Task().getTask(taskId);
-
       if (response.status === 200) {
         setTitle({ value: response.data.task.title, error: '' });
         setDescription({ value: response.data.task.description, error: '' });
@@ -27,6 +30,7 @@ const TaskEdit = ({ match, history }) => {
     fetchTask();
   }, [taskId]);
 
+  // Check if submit button should be disabled or not depending on the tile and description
   useEffect(() => {
     setIsDisabled(title.value === '' || description.value === '');
   }, [title, description]);
@@ -34,9 +38,12 @@ const TaskEdit = ({ match, history }) => {
   const submitTask = async () => {
     setIsSubmiting(true);
 
+    // Update task by making http request
     const response = await new Task().updateTask(taskId, title.value, description.value);
     if (response.status === 204) {
       setIsSubmiting(false);
+
+      // Redirect to task view page
       history.push(`/tasks/${taskId}`);
     }
 

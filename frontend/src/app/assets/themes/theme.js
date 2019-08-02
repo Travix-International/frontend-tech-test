@@ -1,3 +1,4 @@
+// Default theme of the application
 const theme = {
   colors: {
     primary: '#b58f32',

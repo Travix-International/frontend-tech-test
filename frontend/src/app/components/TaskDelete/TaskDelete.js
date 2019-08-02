@@ -6,6 +6,9 @@ import Section from '../Section';
 import Task from '../../api/Task';
 import Loading from '../Loading';
 
+/**
+ * Delete task component to confirm deletion
+ */
 const TaskView = ({ match, history }) => {
   const taskId = match.params.id || null;
 
@@ -18,11 +21,14 @@ const TaskView = ({ match, history }) => {
 
   const submitDeletion = async () => {
     setIsSubmiting(true);
-    const response = await new Task().deleteTask(taskId);
 
+    // Make http request to delete task
+    const response = await new Task().deleteTask(taskId);
     if (response.status === 200) {
       setIsSubmiting(false);
-      history.push(`/tasks`);
+
+      // Redirect to task page
+      history.push(`/`);
     } else {
       setIsSubmiting(false);
     }

@@ -4,6 +4,7 @@ import Loading from './components/Loading';
 import Header from './components/Header';
 import './assets/stylesheets/app.scss';
 
+// This is do to lazy loading effect while components are mounting in react router
 const MainComponents = loadable(() => import('./RoutesLoader'), {
   fallback: <Loading />
 });
