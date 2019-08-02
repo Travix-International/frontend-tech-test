@@ -34,14 +34,16 @@ describe('Test Form', () => {
     expect(SectionSnapshot).toMatchSnapshot();
   });
 
-  it('Submitting', () => {
+  it('Disabled', () => {
     const disabledButton = shallow(
       <Button type="primary" id="id" disabled>
         Submit
       </Button>
     );
     expect(disabledButton.find('#id').props().disabled).toBeTruthy();
+  });
 
+  it('Submitting', () => {
     const submittingButton = shallow(
       <Button type="primary" id="id" isSubmiting>
         Submit
