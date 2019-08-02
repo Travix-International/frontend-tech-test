@@ -1,9 +1,10 @@
 "use strict";
 const app = require("express")();
 const tasksContainer = require("./tasks.json");
+const frontendOrigin = "http://localhost:3001";
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+  res.header("Access-Control-Allow-Origin", frontendOrigin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
