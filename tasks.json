@@ -1,7 +1,7 @@
 {
   "tasks": [
     {
-      "id": 1,
+      "id": 0,
       "completed": false,
       "deleted": false,
       "important": false,
@@ -16,7 +16,7 @@
       "user": 1
     },
     {
-      "id": 2,
+      "id": 1,
       "completed": false,
       "deleted": false,
       "labels": [
@@ -30,7 +30,7 @@
       "user": 1
     },
     {
-      "id": 3,
+      "id": 2,
       "completed": true,
       "deleted": false,
       "labels": [
