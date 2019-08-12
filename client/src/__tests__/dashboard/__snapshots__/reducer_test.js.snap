@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard Reducer Should handle FETCH_STATS_SUCCESS 1`] = `
+Object {
+  "stats": null,
+  "tasksPerStatus": Object {
+    "done": 0,
+    "starred": 0,
+    "todo": 0,
+  },
+}
+`;

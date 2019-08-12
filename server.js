@@ -1,6 +1,14 @@
 'use strict';
 
 const app = require('express')();
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const _ = require('lodash');
+const moment = require('moment')
+
+app.use(bodyParser.json({ type: 'application/json' }))
+app.use(cors());
+
 const tasksContainer = require('./tasks.json');
 
 /**
@@ -27,7 +35,7 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
+    const task = tasksContainer.tasks.find((item) => item.id === id);
 
     if (task !== null) {
       return res.status(200).json({
@@ -89,15 +97,25 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
+
   const task = {
     id: tasksContainer.tasks.length,
     title: req.params.title,
-    description: req.params.description,
+    notes: req.params.description,
+    completed: false,
+    deleted: false,
+    labels: [],
+    selected: false,
+    starred: false,
+    startDate: moment().format("LLLL"),
+    user: 1
   };
 
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
+    id: task.id,
+    task: task,
     message: 'Resource created',
   });
 });
@@ -117,7 +135,7 @@ app.delete('/task/delete/:id', (req, res) => {
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-  
+
     if (task !== null) {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
@@ -136,6 +154,95 @@ app.delete('/task/delete/:id', (req, res) => {
   }
 });
 
+
+/**
+ * Get /tasks/stats
+ * 
+ * 
+ * Return statitics report for all tasks
+ * 
+ * If found return status code 200 and the report.
+ *
+ */
+app.get('/tasks/stats', (req, res) => {
+
+  const done = (tasksContainer.tasks.filter((item) => item.completed === true)).length;
+  const all = tasksContainer.tasks.length;
+  const todo = (tasksContainer.tasks.filter((item) => item.completed === false)).length;
+  const starred = (tasksContainer.tasks.filter((item) => item.starred === true)).length;
+
+
+  const stats = {
+    done: done,
+    all: all,
+    todo: todo,
+    starred: starred,
+    tasksPerStatus: {
+      done: ((done * 100) / all).toFixed(2),
+      todo: ((todo * 100) / all).toFixed(2),
+      starred: ((starred * 100) / all).toFixed(2)
+    },
+    recent: {
+      all: tasksContainer.tasks.slice(0, 3),
+      starred: (tasksContainer.tasks.filter((item) => item.starred === true)).slice(0, 3)
+    }
+  }
+  return res.status(200).json({
+    stats: stats,
+  });
+
+});
+
+
+/**
+ * PUT /tasks/update
+ * 
+ * 
+ * Update given tasks by properties
+ * 
+ */
+
+app.put('/tasks/update', (req, res) => {
+
+  const tasks = req.body;
+
+  var updatedTasks = _.map(tasks, function (task) {
+    var original = (tasksContainer.tasks.find((item) => item.id === task.id));
+    return mergeDeep(original, task);
+  })
+
+  return res.status(204).json({
+    updatedTasks: updatedTasks,
+    message: 'All Tasks Update Done',
+  });
+
+});
+
+
 app.listen(9001, () => {
   process.stdout.write('the server is available on http://localhost:9001/\n');
 });
+
+
+function isObject(item) {
+  return (item && typeof item === 'object' && !Array.isArray(item));
+}
+
+function mergeDeep(target, ...sources) {
+
+  if (!sources.length) return target;
+  const source = sources.shift();
+
+  if (isObject(target) && isObject(source)) {
+    for (const key in source) {
+      if (isObject(source[key])) {
+        if (!target[key]) Object.assign(target, { [key]: {} });
+        mergeDeep(target[key], source[key]);
+      } else {
+        Object.assign(target, { [key]: source[key] });
+      }
+    }
+  }
+
+  return mergeDeep(target, ...sources);
+}

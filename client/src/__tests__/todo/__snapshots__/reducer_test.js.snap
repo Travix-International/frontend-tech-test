@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToDo Reducer Should handle DELETE_TODO_SUCCESS 1`] = `
+Object {
+  "alertMessage": "",
+  "allToDos": Array [],
+  "currentTodo": null,
+  "drawerState": false,
+  "filter": -1,
+  "labelMenuState": false,
+  "loader": true,
+  "optionMenuState": false,
+  "optionName": "None",
+  "searchTodo": "",
+  "selectedToDos": 0,
+  "showMessage": false,
+  "toDos": Array [],
+}
+`;
+
+exports[`ToDo Reducer Should handle FETCH_ALL_TODO_SUCCESS 1`] = `
+Object {
+  "alertMessage": "",
+  "allToDos": Array [],
+  "currentTodo": null,
+  "drawerState": false,
+  "filter": -1,
+  "labelMenuState": false,
+  "loader": true,
+  "optionMenuState": false,
+  "optionName": "None",
+  "searchTodo": "",
+  "selectedToDos": 0,
+  "showMessage": false,
+  "toDos": Array [],
+}
+`;
+
+exports[`ToDo Reducer Should handle GET_ALL_TODO 1`] = `
+Object {
+  "alertMessage": "",
+  "allToDos": Array [],
+  "currentTodo": null,
+  "drawerState": false,
+  "filter": -1,
+  "labelMenuState": false,
+  "loader": true,
+  "optionMenuState": false,
+  "optionName": "None",
+  "searchTodo": "",
+  "selectedToDos": 0,
+  "showMessage": false,
+  "toDos": Array [],
+}
+`;
+
+exports[`ToDo Reducer Should handle INSERT_TODO_SUCCESS 1`] = `
+Object {
+  "alertMessage": "",
+  "allToDos": Array [],
+  "currentTodo": null,
+  "drawerState": false,
+  "filter": -1,
+  "labelMenuState": false,
+  "loader": true,
+  "optionMenuState": false,
+  "optionName": "None",
+  "searchTodo": "",
+  "selectedToDos": 0,
+  "showMessage": false,
+  "toDos": Array [],
+}
+`;
+
+exports[`ToDo Reducer Should handle ON_TODO_ADD 1`] = `
+Object {
+  "alertMessage": "",
+  "allToDos": Array [],
+  "currentTodo": null,
+  "drawerState": false,
+  "filter": -1,
+  "labelMenuState": false,
+  "loader": true,
+  "optionMenuState": false,
+  "optionName": "None",
+  "searchTodo": "",
+  "selectedToDos": 0,
+  "showMessage": false,
+  "toDos": Array [],
+}
+`;
+
+exports[`ToDo Reducer Should handle ON_TODO_UPDATE_SUCCESS 1`] = `
+Object {
+  "alertMessage": "",
+  "allToDos": Array [],
+  "currentTodo": null,
+  "drawerState": false,
+  "filter": -1,
+  "labelMenuState": false,
+  "loader": true,
+  "optionMenuState": false,
+  "optionName": "None",
+  "searchTodo": "",
+  "selectedToDos": 0,
+  "showMessage": false,
+  "toDos": Array [],
+}
+`;
+
+exports[`ToDo Reducer Should return the initial state 1`] = `
+Object {
+  "alertMessage": "",
+  "allToDos": Array [],
+  "currentTodo": null,
+  "drawerState": false,
+  "filter": -1,
+  "labelMenuState": false,
+  "loader": true,
+  "optionMenuState": false,
+  "optionName": "None",
+  "searchTodo": "",
+  "selectedToDos": 0,
+  "showMessage": false,
+  "toDos": Array [],
+}
+`;

@@ -1,0 +1,458 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+
+
+// Variables
+//
+
+// Color system
+
+$gray-500: #8A92A5;
+
+$app-primary:   #007bff !default;
+$primary:       $app-primary;
+$secondary:     #E91E63;
+$success:       #4caf50;
+$info:          #00bcd4;
+$warning:       #ff9800;
+$danger:        #f44336;
+$light:         #e8eaf6;
+$light-gray:    #808080;
+$dark:          $gray-800;
+$gray-default: #808080 !default;
+$sepia: #7c3535;
+$geekblue: #030852;
+
+$theme-colors: ();
+$theme-colors: map-merge(
+      (
+              "primary":    $primary,
+              "secondary":  $secondary,
+              "success":    $success,
+              "info":       $info,
+              "warning":    $warning,
+              "danger":     $danger,
+              "light":      $light,
+              "dark":       $dark,
+              "sepia":      $sepia,
+              "geekblue":   $geekblue
+      ),
+      $theme-colors
+);
+
+
+// Body
+//
+
+
+$body-bg:                   #f4f4f7;
+$body-color:                #575757;
+
+
+// Links
+//
+// Style anchor elements.
+
+$link-color:                              $app-primary;
+$link-hover-color:                        darken($app-primary, 10%);
+
+
+// Paragraphs
+//
+// Style p element.
+
+$paragraph-margin-bottom:   1rem;
+
+// Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+
+$grid-columns:                12;
+$grid-gutter-width:           30px;
+
+
+// Components
+//
+// Define common padding and border radius sizes and more.
+
+$border-color:                #daddf1;
+
+$border-radius:               0.375rem;
+$border-radius-lg:            0.5rem;
+$border-radius-sm:            0.125rem;
+$border-radius-xl:            0.625rem !default;
+$border-radius-xxl:           1.875rem !default;
+$border-radius-circle:        50% !default;
+
+
+//Default shadow
+
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+$shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+$shadow-lg: 0 1px 8px -1px rgba(0, 0, 0, 0.20);
+$shadow-xl: 0 0 16px 0px rgba(0, 0, 0, 0.20);
+$avatar-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.20);
+
+$box-shadow-sm:               $shadow-sm;
+$box-shadow:                  $shadow;
+$box-shadow-lg:               $shadow-lg;
+
+$component-active-color:      $white;
+$component-active-bg:         theme-color("primary");
+
+
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
+
+// stylelint-disable value-keyword-case
+$font-family-sans-serif: 'Roboto', sans-serif;
+$font-family-base:            $font-family-sans-serif;
+
+$font-size-base: 0.875rem; 
+$font-size-lg: ($font-size-base + 0.25); //18px
+$font-size-sm: ($font-size-base - 0.125); //12px
+
+$font-weight-lighter:         lighter;
+$font-weight-light:           300;
+$font-weight-normal:          400;
+$font-weight-bold:            700;
+$font-weight-bolder:          bolder;
+
+$font-weight-thin:            100 !default;
+$font-weight-medium:          500 !default;
+$font-weight-black:           900 !default;
+
+$h1-font-size:                1.5rem; //24px
+$h2-font-size:                1.25rem; //20px
+$h3-font-size:                1.125rem; //18px
+$h4-font-size:                1rem; //16px
+$h5-font-size:                0.875rem; //14px
+$h6-font-size:                0.75rem; //12px
+
+$headings-margin-bottom: ($h1-font-size / 2);
+$headings-font-family: inherit;
+$headings-font-weight: 400;
+$headings-line-height: 1.2;
+$headings-color: #252525;
+
+$display-line-height:           $headings-line-height;
+
+$lead-font-size:                1.25rem;
+
+// Tables
+//
+
+$table-color:                 $body-color;
+
+
+// Buttons + Forms
+//
+
+$input-btn-padding-y:         0.375rem;
+$input-btn-padding-x:         0.75rem;
+$input-btn-font-size:         $font-size-base;
+$input-btn-line-height:       $line-height-base;
+
+$input-btn-focus-width:       .1rem;
+$input-btn-focus-color:       rgba($component-active-bg, .25);
+$input-btn-focus-box-shadow:  0 0 0 $input-btn-focus-width $input-btn-focus-color;
+
+$input-btn-padding-y-sm:      0.25rem;
+$input-btn-padding-x-sm:      0.5rem;
+$input-btn-font-size-sm:      $font-size-sm;
+$input-btn-line-height-sm:    $line-height-sm;
+
+$input-btn-padding-y-lg:      0.6rem;
+$input-btn-padding-x-lg:      1.2rem;
+$input-btn-font-size-lg:      0.9375rem; //15px
+$input-btn-line-height-lg:    $line-height-lg;
+
+
+// Buttons
+//
+
+$btn-padding-y:               0.375rem;
+$btn-padding-x:               0.75rem;
+$btn-font-size:               $font-size-base;
+$btn-line-height:             1.2;
+
+$btn-padding-y-sm:            0.5rem;
+$btn-padding-x-sm:            0.9375rem;
+$btn-font-size-sm:            $font-size-sm;
+
+$btn-padding-y-lg:            0.6rem;
+$btn-padding-x-lg:            1.2rem;
+$btn-font-size-lg:            0.9375rem; //15px
+
+$btn-padding-y-xs:            0.375rem;
+$btn-padding-x-xs:            0.625rem;
+$btn-font-size-xs:            0.625rem;
+
+// Allows for customizing button radius independently from global border radius
+$btn-border-radius:           $border-radius;
+$btn-border-radius-lg:        $border-radius-lg;
+$btn-border-radius-sm:        $border-radius;
+$btn-border-radius-xs:        $border-radius-sm;
+
+$btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
+
+
+//Button Variables
+$btn-padding: $btn-padding-y $btn-padding-x !default;
+$btn-padding-lg: $btn-padding-y-lg $btn-padding-x-lg !default;
+$btn-padding-sm: $btn-padding-y-sm $btn-padding-x-sm !default;
+$btn-padding-xs: $btn-padding-y-xs $btn-padding-x-xs !default;
+
+//Fab Button Variables
+$btn-fab-size-lg: 70px !default;
+$btn-fab-size-sm: 46px !default;
+$btn-fab-size-xs: 40px !default;
+
+
+// Forms
+
+$label-margin-bottom:                   0.3125rem;
+
+$input-padding-y:                       $input-btn-padding-y;
+$input-padding-x:                       $input-btn-padding-x;
+$input-font-family:                     $input-btn-font-family;
+$input-font-size:                       $input-btn-font-size;
+$input-font-weight:                     $font-weight-base;
+$input-line-height:                     $input-btn-line-height;
+
+$input-padding-y-sm:                    $input-btn-padding-y-sm;
+$input-padding-x-sm:                    $input-btn-padding-x-sm;
+$input-font-size-sm:                    $input-btn-font-size-sm;
+$input-line-height-sm:                  $input-btn-line-height-sm;
+
+$input-padding-y-lg:                    $input-btn-padding-y-lg;
+$input-padding-x-lg:                    $input-btn-padding-x-lg;
+$input-font-size-lg:                    $input-btn-font-size-lg;
+$input-line-height-lg:                  $input-btn-line-height-lg;
+
+$input-border-radius:                   $border-radius;
+$input-border-radius-lg:                ($border-radius-lg - .2rem);
+$input-border-radius-sm:                $border-radius-sm;
+
+$input-focus-bg:                        $input-bg;
+$input-focus-border-color:              lighten($component-active-bg, 25%);
+$input-focus-color:                     $input-color;
+$input-focus-width:                     $input-btn-focus-width;
+$input-focus-box-shadow:                $input-btn-focus-box-shadow;
+
+$input-height-border:                   $input-border-width * 2;
+
+$input-height-inner:                    calc(#{$input-line-height * 1em} + #{$input-padding-y * 2});
+$input-height-inner-half:               calc(#{$input-line-height * .5em} + #{$input-padding-y});
+$input-height-inner-quarter:            calc(#{$input-line-height * .25em} + #{$input-padding-y / 2});
+
+$input-height:                          calc(#{$input-line-height * 1em} + #{$input-padding-y * 2} + #{$input-height-border});
+$input-height-sm:                       calc(#{$input-line-height-sm * 1em} + #{$input-btn-padding-y-sm * 2} + #{$input-height-border});
+$input-height-lg:                       calc(#{$input-line-height-lg * 1em} + #{$input-btn-padding-y-lg * 2} + #{$input-height-border});
+
+
+$form-text-margin-top:                  .35rem;
+
+$custom-control-gutter:                 .5rem !default;
+$custom-control-spacer-x:               1rem !default;
+
+$custom-control-indicator-size:         1rem !default;
+$custom-control-indicator-bg:           $input-bg;
+
+$custom-control-indicator-box-shadow:   $input-box-shadow;
+$custom-control-indicator-checked-color:        $component-active-color;
+$custom-control-indicator-checked-bg:           $component-active-bg;
+$custom-control-indicator-checked-box-shadow:   none;
+$custom-control-indicator-checked-border-color: $custom-control-indicator-checked-bg;
+$custom-control-indicator-focus-box-shadow:     $input-focus-box-shadow;
+$custom-control-indicator-focus-border-color:   $input-focus-border-color;
+$custom-control-indicator-active-color:         $component-active-color;
+$custom-control-indicator-active-bg:            lighten($component-active-bg, 35%);
+$custom-control-indicator-active-border-color:  $custom-control-indicator-active-bg;
+$custom-checkbox-indicator-border-radius:       $border-radius;
+$custom-checkbox-indicator-indeterminate-bg:           $component-active-bg;
+$custom-checkbox-indicator-indeterminate-color:        $custom-control-indicator-checked-color;
+$custom-checkbox-indicator-indeterminate-border-color: $custom-checkbox-indicator-indeterminate-bg !default;
+
+$custom-select-padding-y:           $input-padding-y;
+$custom-select-padding-x:           $input-padding-x;
+$custom-select-font-size:           $input-font-size;
+$custom-select-height:              $input-height;
+$custom-select-indicator-padding:   1.6rem !default; // Extra padding to account for the presence of the background-image based indicator
+$custom-select-font-weight:         $input-font-weight;
+$custom-select-line-height:         $input-line-height;
+$custom-select-color:               $input-color;
+$custom-select-bg:                  $input-bg;
+$custom-select-border-color:        $input-border-color;
+$custom-select-border-radius:       $border-radius;
+
+$custom-select-focus-border-color:  $input-focus-border-color;
+$custom-select-focus-width:         $input-focus-width;
+$custom-select-focus-box-shadow:    0 0 0 $custom-select-focus-width $input-btn-focus-color;
+
+$custom-select-padding-y-sm:        $input-padding-y-sm;
+$custom-select-padding-x-sm:        $input-padding-x-sm;
+$custom-select-font-size-sm:        $input-font-size-sm;
+$custom-select-height-sm:           $input-height-sm;
+
+$custom-select-padding-y-lg:        $input-padding-y-lg;
+$custom-select-padding-x-lg:        $input-padding-x-lg;
+$custom-select-font-size-lg:        $input-font-size-lg;
+$custom-select-height-lg:           $input-height-lg;
+
+// Form validation
+
+$form-feedback-margin-top:          $form-text-margin-top;
+$form-feedback-font-size:           $small-font-size;
+$form-feedback-valid-color:         theme-color("success");
+$form-feedback-invalid-color:       theme-color("danger");
+
+$form-feedback-icon-valid-color:    $form-feedback-valid-color;
+$form-feedback-icon-invalid-color:  $form-feedback-invalid-color;
+
+$form-validation-states: ();
+$form-validation-states: map-merge(
+                (
+                        "valid": (
+                                "color": $form-feedback-valid-color,
+                                "icon": $form-feedback-icon-valid
+                        ),
+                        "invalid": (
+                                "color": $form-feedback-invalid-color,
+                                "icon": $form-feedback-icon-invalid
+                        ),
+                ),
+                $form-validation-states
+);
+
+
+// Navs
+
+$nav-pills-link-active-color:       $component-active-color;
+$nav-pills-link-active-bg:          $component-active-bg;
+
+
+// Dropdowns
+//
+// Dropdown menu container and contents.
+
+$dropdown-min-width:                10rem;
+$dropdown-padding-y:                .5rem;
+$dropdown-font-size:                $font-size-base;
+$dropdown-color:                    $body-color;
+$dropdown-bg:                       $white;
+$dropdown-border-radius:            $border-radius;
+$dropdown-inner-border-radius:      calc(#{$dropdown-border-radius} - #{$dropdown-border-width});
+
+
+$dropdown-link-active-color:        $component-active-color;
+$dropdown-link-active-bg:           $component-active-bg;
+
+
+$dropdown-item-padding-y:           .25rem;
+$dropdown-item-padding-x:           1.5rem;
+
+
+
+// Pagination
+
+$pagination-color:                  $link-color;
+$pagination-bg:                     $white;
+$pagination-focus-box-shadow:       $input-btn-focus-box-shadow;
+$pagination-hover-color:            $link-hover-color;
+$pagination-active-color:           $component-active-color;
+$pagination-active-bg:              $component-active-bg;
+$pagination-active-border-color:    $pagination-active-bg;
+
+
+// Cards
+
+$card-spacer-y:                     1.25rem;
+$card-spacer-x:                     1.5rem;
+$card-border-radius:                $border-radius;
+$card-border-color:                 $gray-400;
+$card-inner-border-radius:          calc(#{$card-border-radius} - #{$card-border-width});
+$card-img-overlay-padding:          0.75rem;
+
+$card-group-margin:                 $grid-gutter-width / 2;
+$card-deck-margin:                  $card-group-margin;
+
+$card-columns-count:                3 !default;
+$card-columns-gap:                  1.25rem;
+$card-columns-margin:               1.875rem;
+
+//Custom Card Variables
+$jr-card-shadow: 0 2px 5px 0 rgba($black, 0.26) !default;
+$jr-card-margin: $card-columns-margin !default;
+$jr-card-padding: 30px !default;
+$jr-border: 1px solid $card-border-color !default;
+$sub-heading-color: $light-gray !default;
+
+// Tooltips
+
+$tooltip-font-size:                 $font-size-sm;
+
+// Popovers
+
+$popover-font-size:                 $font-size-sm;
+
+
+
+
+// Modals
+
+// Padding applied to the modal body
+$modal-inner-padding:               $card-spacer-y $card-spacer-x;
+$modal-header-padding-y:            $card-spacer-y;
+$modal-header-padding-x:            $card-spacer-x;
+$modal-header-padding:              $modal-header-padding-y $modal-header-padding-x; // Keep this for backwards compatibility
+$progress-bar-bg:                   theme-color("primary");
+$list-group-border-radius:          $border-radius;
+
+
+//App Bar Height
+$app-bar-height: 70px !default;
+
+//Footer Height
+$footer-height: 50px !default;
+
+//Side Nav Width
+$side-nav-width: 250px !default;
+$mini-drawer-width: 80px !default;
+$sidebar-bg: #252525 !default;
+$sidebar-text-color: #a1a1a1 !default;
+$sidebar-bg-darken: darken($sidebar-bg, 3%);
+$sidebar-hover-color: $white;
+$sidebar-bg-darken-highlight: $app-primary;
+
+//Default Image Location
+$image_path: "../assets/images" !default;
+
+// Motion
+// https://material.google.com/motion/duration-easing.html#duration-easing-natural-easing-curves
+$transition-bezier: .05, .74, .27, .99 !default; // for nav, quickview
+
+$transition-ease: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
+$transition-ease-out: cubic-bezier(0.0, 0.0, 0.2, 1) !default;
+$transition-ease-in: cubic-bezier(0.4, 0.0, 1, 1) !default;
+
+//latter Spacing variables
+$letter-spacing-base: 3px !default;
+$letter-spacing-lg: 6px !default;
+$letter-spacing-xl: 8px !default;
+
+//Sizes Variables
+$size-10: 10px !default;
+$size-20: 20px !default;
+$size-30: 30px !default;
+$size-40: 40px !default;
+$size-50: 50px !default;
+$size-60: 60px !default;
+$size-70: 70px !default;
+$size-80: 80px !default;
+$size-90: 90px !default;
+$size-100: 100px !default;
+$size-120: 120px !default;

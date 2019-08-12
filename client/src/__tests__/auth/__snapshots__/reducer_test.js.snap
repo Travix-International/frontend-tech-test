@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Auth Reducer Should handle INIT_URL 1`] = `
+Object {
+  "alertMessage": "",
+  "authUser": null,
+  "initURL": "",
+  "loader": false,
+  "showMessage": false,
+}
+`;
+
+exports[`Auth Reducer Should handle SIGNIN_GOOGLE_USER_SUCCESS 1`] = `
+Object {
+  "alertMessage": "",
+  "authUser": null,
+  "initURL": "",
+  "loader": false,
+  "showMessage": false,
+}
+`;
+
+exports[`Auth Reducer Should handle SIGNIN_USER_SUCCESS 1`] = `
+Object {
+  "alertMessage": "",
+  "authUser": null,
+  "initURL": "",
+  "loader": false,
+  "showMessage": false,
+}
+`;
