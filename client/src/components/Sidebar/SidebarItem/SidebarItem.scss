@@ -1,0 +1,8 @@
+aside ul li {
+  padding: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #eee;
+  }
+}
