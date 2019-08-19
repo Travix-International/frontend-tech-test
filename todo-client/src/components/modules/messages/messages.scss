@@ -1,0 +1,26 @@
+@import '../../../styles/general.scss';
+
+@media (min-width: $xxs) {
+  .statusMessage {
+    z-index: 15;
+    position: absolute;
+    padding: 0 10px;
+    height: 90px;
+    width: 300px;
+    margin: auto;
+    top: 0;
+    right: calc((100% - 300px)/2);
+    font-size: 17px;
+    border-radius: 10px;
+    opacity: 1;
+    transition: opacity 2s ease-in-out;
+  }
+  .statusMessage--error {
+    background-color: #f29a9a;
+    color: #000;
+  }
+  .statusMessage--successful {
+    background-color: #9bdd9e;
+    color: #000;
+  }
+}

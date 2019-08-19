@@ -1,7 +1,25 @@
 'use strict';
 
-const app = require('express')();
+const express = require('express');
+const cors = require('cors');
 const tasksContainer = require('./tasks.json');
+
+const app = express()
+app.use(express.json());
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+  next();
+});
+
+/**
+ * OPTIONS /*
+ * 
+ * Return the cors for listed requests type with status code 200.
+ */
+app.options('*', cors());
 
 /**
  * GET /tasks
@@ -9,8 +27,17 @@ const tasksContainer = require('./tasks.json');
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
+  const offset = req.query.offset;
+  const limit = req.query.limit;
+  const tasks = tasksContainer.tasks;
+  const resultTasks = {
+    tasks: tasks.slice(offset, limit),
+    totalTaskQuantity: tasks.length
+  };
+  
+  return res.status(200).json(resultTasks);
 });
+
 
 /**
  * Get /task/:id
@@ -66,7 +93,9 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
     if (task !== null) {
       task.title = req.params.title;
       task.description = req.params.description;
-      return res.status(204);
+      return res.status(204).json({
+        message: 'Updated',
+      });
     } else {
       return res.status(404).json({
         message: 'Not found',
@@ -88,17 +117,17 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Add a new task to the array tasksContainer.tasks with the given title and description.
  * Return status code 201.
  */
-app.post('/task/create/:title/:description', (req, res) => {
+app.post('/task/create', (req, res) => {
   const task = {
     id: tasksContainer.tasks.length,
-    title: req.params.title,
-    description: req.params.description,
+    ...req.body
   };
 
   tasksContainer.tasks.push(task);
 
   return res.status(201).json({
     message: 'Resource created',
+    id: task.id
   });
 });
 
@@ -122,10 +151,10 @@ app.delete('/task/delete/:id', (req, res) => {
       const taskIndex = tasksContainer.tasks;
       tasksContainer.tasks.splice(taskIndex, 1);
       return res.status(200).json({
-        message: 'Updated successfully',
+        message: 'Deleted successfully',
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
       });
     }
