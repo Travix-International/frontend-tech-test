@@ -8,7 +8,7 @@ Your mission is to develop the front-end from scratch using a front-end framewor
 
 ## Process
 
-Fork the repository into your account. Once your code is ready, send a pull request to this repository and we will review it.
+Please clone this project then create your own repository from it. Do not fork/branch this project when creating your solution as it will be visible to other applicants. Once your code is ready, please send us the link of your repository and we will review it.
 
 ## Requirements
 
