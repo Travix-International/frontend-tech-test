@@ -1,0 +1,29 @@
+.info {
+  padding: 1rem;
+  background-color: #fff;
+
+  h3 {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1rem;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+  }
+
+  [disabled] {
+    background-color: #fff;
+    font-size: 1rem;
+    color: #000;
+    border: 1px solid transparent;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  > div {
+    padding: 1rem 0;
+  }
+}

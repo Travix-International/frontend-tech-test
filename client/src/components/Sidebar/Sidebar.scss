@@ -1,0 +1,17 @@
+aside {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: #fff;
+
+  h2 {
+    margin-top: calc(52px);
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+@media (max-width: 666px) {
+  aside {
+    display: none;
+  }
+}
