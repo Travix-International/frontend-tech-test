@@ -1,0 +1,144 @@
+@import '../../../../styles/general.scss';
+
+@media (min-width: 320px) {
+  .taskContainer {
+    background-color: lightgoldenrodyellow;
+    .taskContainer__buffer {
+      z-index: 10;
+      position: fixed;
+      height: 90px;
+      width: 100%;
+      background-color: lightgoldenrodyellow;
+    }
+    .taskContainer__buffer--extended {
+      height: 150px;
+    }
+    .taskContainer__addTaskBtn {
+      position: fixed;
+      margin: 15px 30px 15px 30px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 10px;
+      width: 125px;
+      height: 30px;
+      background-color: #1fae2b;
+      color: #fff;
+      border-radius: 5px;
+      border: none;
+      text-decoration: none;
+      cursor: pointer;
+      vertical-align: baseline;
+      outline: none;
+      &:hover, &:focus {
+        background-color: #22d266;
+      }
+    }
+    .taskEditor {
+      position: fixed;
+      display: flex;
+      flex-direction: row;
+      background: lightgoldenrodyellow;
+      .taskItemView {
+        display: flex;
+        flex-direction: column;
+        margin: 0 5vw;
+        .taskItem__title {
+          margin-top: 3px;
+          height: 20px;
+          font-size: 13px;
+          font-weight: 700;
+          color: #808080;
+        }
+        .taskItem__title--edit {
+          background: transparent;
+          border: none;
+        }
+        .taskItem__description {
+          overflow: hidden;
+        }
+        .taskItem__description--edit {
+          width: calc(100vw - 10vw - 100px);
+          resize: none;
+          background: transparent;
+          overflow: initial;
+        }
+      }
+      .taskItemView--edit {
+        width: calc(100% - 10vw - 80px);
+        .taskItem__title--edit {
+          font-style: italic;
+          color: #222222;
+          background: transparent;
+          outline: none;
+        }
+        .taskItem__description--edit {
+          margin-bottom: 2px;
+          font-size: 15px;
+          font-weight: 700;
+          border: none;
+          font-style: italic;
+          color: #222222;
+          outline: none;
+        }
+      }
+      .taskItemControls {
+        display: flex;
+        flex-direction: column;
+        height: 30px;
+        justify-content: space-between;
+        padding: 10px 0;
+        .taskItemControls__button {
+          font-size: 12px;
+          font-weight: 700;
+          padding: 5px 10px;
+          width: 75px;
+          background-color: #176db7;
+          color: #fff;
+          border-radius: 5px;
+          border: none;
+          text-decoration: none;
+          cursor: pointer;
+          vertical-align: baseline;
+          outline: none;
+          &:hover, &:focus {
+            background-color: #0090ff;
+          }
+        }
+        .taskItemControls__button--cancel,
+        .taskItemControls__button--done {
+          margin-top: 7px;
+        }
+      }
+    }
+  }
+}
+@media (min-width: $md) {
+  .taskContainer {
+    position: absolute;
+    width: 100%;
+    margin: auto;
+  }
+}
+
+@media (min-width: $lg) {
+  .taskContainer {
+    width: 1024px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    .taskContainer__buffer, .taskEditor {
+      width: 1024px;
+    }
+    .taskEditor {
+      .taskItemView{
+        .taskItem__description--edit {
+          width: calc(1024px - 280px);
+        }
+      }
+      .taskItemView--edit {
+        width: calc(1024px - 230px);
+      }  
+    }
+  }
+}

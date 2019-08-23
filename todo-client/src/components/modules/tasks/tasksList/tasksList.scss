@@ -1,0 +1,18 @@
+@import '../../../../styles/general.scss';
+
+@media (min-width: 320px) {
+  .taskList {
+    .taskList__infiniteScroll {
+      margin-top: 100px;
+    }
+    .taskItem:nth-child(3n + 1) {
+      background: lightcyan;
+    }
+    .taskItem:nth-child(3n + 2) {
+      background: lightblue;
+    }
+    .taskItem:nth-child(3n + 3) {
+      background: lightgoldenrodyellow;
+    }
+  }
+}
